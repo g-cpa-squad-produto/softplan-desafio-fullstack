@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
@@ -19,14 +20,14 @@ public class UsuarioDTO  implements Serializable {
 
     private Long codigo;
 
-    @NotNull(message = "O campo nome é obrigatório")
+    @NotBlank(message = "O campo nome é obrigatório")
     private String nome;
 
-    @NotNull(message = "O campo e-mail é obrigatório")
+    @NotBlank(message = "O campo e-mail é obrigatório")
     private String email;
 
     private String observacao;
 
-    @NotNull(message = "É obrigatório a seleção de um perfil")
+    @NotBlank(message = "É obrigatório a seleção de um perfil")
     private List<PerfilDTO> perfis;
 }

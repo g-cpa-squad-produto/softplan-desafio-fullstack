@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
@@ -18,7 +19,7 @@ public class PerfilDTO implements Serializable {
 
     private Long codigo;
 
-    @NotNull(message = "O campo nome do perfil é obrigatório")
+    @NotBlank(message = "O campo nome do perfil não pode estar vazio.")
     private String nomePerfil;
 
     private String descricaoPerfil;
