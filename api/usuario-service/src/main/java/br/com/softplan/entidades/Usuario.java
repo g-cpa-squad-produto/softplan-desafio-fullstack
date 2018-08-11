@@ -2,7 +2,7 @@ package br.com.softplan.entidades;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 @Table(name = "usuario")
 @Builder
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Usuario implements Serializable {
@@ -21,9 +21,9 @@ public class Usuario implements Serializable {
 
     @Id
     @Column(name = "codigo")
-    @SequenceGenerator(name = "usuario_codigo_seq", sequenceName = "usuario_codigo_seq", initialValue = 1)
+    @SequenceGenerator(name = "usuario_codigo_seq", sequenceName = "usuario_codigo_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usuario_codigo_seq")
-    private Integer codigo;
+    private Long codigo;
 
     @Column(name = "nome")
     private String nome;
