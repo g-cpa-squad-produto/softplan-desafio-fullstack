@@ -1,17 +1,18 @@
 version: "3.1"
+
 services:
-   db:
+  db:
     restart: unless-stopped
     image: postgres:9.4
-    ports:
-      - "5432:5432"
-    volumes:
-      - ./tmp/dump.gz:/tmp/dump.gz
-      - ./tmp/dump.sh:/docker-entrypoint-initdb.d/dump.sh
     environment:
       POSTGRES_DB: postgres
       POSTGRES_USER: docker
       POSTGRES_PASSWORD: docker
+      PGDATA: /data/postgres
+    volumes:
+       - /data/postgres:/data/postgres
+    ports:
+      - "5432:5432"
     networks:
       - main
       
@@ -31,7 +32,7 @@ services:
       context: ./frontend/
       dockerfile: Dockerfile 
     ports:
-      - "8080:80"
+      - "3000:80"
     networks:
       - main
     depends_on:
@@ -39,4 +40,4 @@ services:
 
 networks:
   main:
-    driver: overlay
+    driver: bridge
