@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
@@ -28,6 +29,6 @@ public class UsuarioDTO  implements Serializable {
 
     private String observacao;
 
-    @NotBlank(message = "É obrigatório a seleção de um perfil")
+    @NotEmpty(message = "É obrigatório a seleção de um perfil")
     private List<PerfilDTO> perfis;
 }
