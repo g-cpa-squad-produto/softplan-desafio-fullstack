@@ -1,53 +1,56 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './compiled/App.css';
+import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './store';
+import jwt_decode from 'jwt-decode';
+import setAuthToken from './setAuthToken';
+import { setCurrentUser, logoutUser } from './actions/authentication';
+
+import Navbar from './components/Navbar';
+import Login from './components/Login';
+import Home from './components/Home';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+if (localStorage.jwtToken) {
+  setAuthToken(localStorage.jwtToken);
+  const decoded = jwt_decode(localStorage.jwtToken);
+  store.dispatch(setCurrentUser(decoded));
+  const currentTime = Date.now() / 1000;
+  if (decoded.exp < currentTime) {
+    store.dispatch(logoutUser());
+    window.location.href = '/login'
+  }
+}
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={props => (
+    store.getState().auth.isAuthenticated ? (
+      <Component {...props} />
+    ) : (
+        <Redirect to={{
+          pathname: '/login',
+          state: { from: props.location }
+        }} />
+      )
+  )} />
+)
 
 class App extends Component {
-  constructor() {
-    super();
-
-    this.state = {};
-  }
-
-  componentDidMount() {
-    this.callApi()
-      .then(res => this.setState(res))
-      .catch(console.error);
-  }
-
-  callApi = async () => {
-    const resp = await fetch('/api');
-
-    window._resp = resp;
-
-    let text = await resp.text();
-
-    let data = null;
-    try {
-      data = JSON.parse(text); // cannot call both .json and .text - await resp.json();
-    } catch (e) {
-      console.err(`Invalid json\n${e}`);
-    }
-
-    if (resp.status !== 200) {
-      throw Error(data ? data.message : 'No data');
-    }
-
-    return data;
-  };
-
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>{this.state.message || 'No message'}</p>
-      </div>
+      <Provider store={store}>
+        <Router>
+            <div>
+              <Navbar />
+              <div className="container">
+                <PrivateRoute exact path="/" component={Home} />
+                <Route exact path="/login" component={Login} />
+              </div>
+            </div>
+           
+        </Router>
+      </Provider>
     );
   }
 }

@@ -13,8 +13,10 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/admin/users")
 public class UsersController {
+
     @Autowired
     private UserService userService;
 
@@ -25,17 +27,17 @@ public class UsersController {
 
     @GetMapping()
     public Page<User> listUser(Pageable pageable) {
-            return userService.findAll(pageable);
+        return userService.findAll(pageable);
     }
 
     @PostMapping()
-    public User addAnswer(@Valid @RequestBody User user) {
+    public User addUser(@Valid @RequestBody User user) {
         return userService.save(user);
     }
 
     @PutMapping("/{userId}")
-    public User updateAnswer(@PathVariable Long userId,
-                             @Valid @RequestBody User user) {
+    public User updateUser(@PathVariable Long userId,
+                           @Valid @RequestBody User user) {
         Optional<User> rawUser = userService.findById(userId);
         if (!rawUser.isPresent()) {
             throw new ResourceNotFoundException("User not found with id " + userId);
@@ -50,7 +52,7 @@ public class UsersController {
     }
 
     @DeleteMapping("/{userId}")
-    public ResponseEntity<?> deleteAnswer(@PathVariable Long userId) {
+    public ResponseEntity<?> deleteUser(@PathVariable Long userId) {
         Optional<User> rawUser = userService.findById(userId);
         if (rawUser.isPresent()) {
             throw new ResourceNotFoundException("User not found with id " + userId);
@@ -59,7 +61,7 @@ public class UsersController {
                 .map(u -> {
                     userService.delete(userId);
                     return ResponseEntity.ok().build();
-                }).orElseThrow(() -> new ResourceNotFoundException("Answer not found with id " + userId));
+                }).orElseThrow(() -> new ResourceNotFoundException("User not found with id " + userId));
 
     }
 }

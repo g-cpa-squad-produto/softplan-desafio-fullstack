@@ -9,8 +9,6 @@ services:
       POSTGRES_USER: docker
       POSTGRES_PASSWORD: docker
       PGDATA: /data/postgres
-    volumes:
-       - /data/postgres:/data/postgres
     ports:
       - "5432:5432"
     networks:
@@ -32,7 +30,7 @@ services:
       context: ./frontend/
       dockerfile: Dockerfile 
     ports:
-      - "3000:80"
+      - "3000:3000"
     networks:
       - main
     depends_on:
@@ -40,4 +38,4 @@ services:
 
 networks:
   main:
-    driver: bridge
+    driver: overlay
