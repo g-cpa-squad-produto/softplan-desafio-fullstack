@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
-import {registerUser} from '../actions/authentication';
+import {postAction} from '../actions/userAction';
 import classnames from 'classnames';
+import {Button, ButtonGroup} from "reactstrap";
 
 class Register extends Component {
 
@@ -13,10 +14,18 @@ class Register extends Component {
             name: '',
             email: '',
             password: '',
+            role: '',
+            rSelected: 0,
             errors: {}
         }
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleBack = this.handleBack.bind(this);
+        this.onRadioBtnClick = this.onRadioBtnClick.bind(this);
+    }
+
+    handleBack() {
+        this.props.history.push("/")
     }
 
     handleInputChange(e) {
@@ -25,19 +34,27 @@ class Register extends Component {
         })
     }
 
+    onRadioBtnClick(roleId) {
+        this.setState({role: roleId})
+    }
+
     handleSubmit(e) {
         e.preventDefault();
         const user = {
             name: this.state.name,
             email: this.state.email,
-            password: this.state.password
+            password: this.state.password,
+            roleId: this.state.role,
         }
-        this.props.registerUser(user, this.props.history);
+        this.props.postAction(localStorage.getItem('role'), user);
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.auth.isAuthenticated) {
-            this.props.history.push('/')
+        if (nextProps.main.post.content) {
+            this.props.history.push("/")
+        }
+        if(nextProps.main){
+
         }
         if (nextProps.errors) {
             this.setState({
@@ -47,8 +64,9 @@ class Register extends Component {
     }
 
     componentDidMount() {
-        if (this.props.auth.isAuthenticated) {
-            this.props.history.push('/');
+        if (this.props.location.state) {
+            this.setState(this.props.location.state.user)
+            this.setState({rSelected: this.props.location.state.user.roleId})
         }
     }
 
@@ -56,12 +74,23 @@ class Register extends Component {
         const {errors} = this.state;
         return (
             <div className="container" style={{marginTop: '50px', width: '700px'}}>
-                <h2 style={{marginBottom: '40px'}}>Registration</h2>
+                <h3>
+                    {
+                        this.state.id && ('Editar ')
+                    }
+                    {
+                        this.state.id === undefined && ('Cadastrar ')
+                    }
+                    usuário
+                </h3>
                 <form onSubmit={this.handleSubmit}>
+                    <div className="form-group">
+                        <Button outline onClick={this.handleBack}>Voltar</Button>
+                    </div>
                     <div className="form-group">
                         <input
                             type="text"
-                            placeholder="Name"
+                            placeholder="Nome"
                             className={classnames('form-control form-control-lg', {
                                 'is-invalid': errors.name
                             })}
@@ -87,9 +116,9 @@ class Register extends Component {
                     <div className="form-group">
                         <input
                             type="password"
-                            placeholder="Password"
+                            placeholder="Senha"
                             className={classnames('form-control form-control-lg', {
-                                'is-invalid': errors.password
+                                'is-invalid': errors.password,
                             })}
                             name="password"
                             onChange={this.handleInputChange}
@@ -98,9 +127,26 @@ class Register extends Component {
                         {errors.password && (<div className="invalid-feedback">{errors.password}</div>)}
                     </div>
                     <div className="form-group">
+                        <ButtonGroup>
+                            <Button outline color="secondary" onClick={() => this.onRadioBtnClick(1)}
+                                    active={this.state.rSelected === 1}>Administrador</Button>
+                            <Button outline color="secondary" onClick={() => this.onRadioBtnClick(2)}
+                                    active={this.state.rSelected === 2}>Triador</Button>
+                            <Button outline color="secondary" onClick={() => this.onRadioBtnClick(3)}
+                                    active={this.state.rSelected === 3}>Finalizador</Button>
+                        </ButtonGroup>
+                    </div>
+                    <div className="form-group">
                         <button type="submit" className="btn btn-primary">
-                            Register User
+                            {
+                                this.state.id && ('Editar')
+                            }
+                            {
+                                this.state.id === undefined && ('Cadastrar')
+                            }
                         </button>
+
+
                     </div>
                 </form>
             </div>
@@ -109,13 +155,13 @@ class Register extends Component {
 }
 
 Register.propTypes = {
-    registerUser: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired
+    postAction: PropTypes.func.isRequired,
+    main: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-    auth: state.auth,
+    main: state.main,
     errors: state.errors
 });
 
-export default connect(mapStateToProps, {registerUser})(withRouter(Register))
+export default connect(mapStateToProps, {postAction})(withRouter(Register))

@@ -1,11 +1,25 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { logoutUser } from '../actions/authentication';
-import { withRouter } from 'react-router-dom';
+import {connect} from 'react-redux';
+import {logoutUser} from '../actions/authentication';
+import {withRouter} from 'react-router-dom';
+import {Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink} from 'reactstrap';
 
-class Navbar extends Component {
+class Header extends Component {
+    constructor(props) {
+        super(props);
+
+        this.toggleNavbar = this.toggleNavbar.bind(this);
+        this.state = {
+            collapsed: true
+        };
+    }
+
+    toggleNavbar() {
+        this.setState({
+            collapsed: !this.state.collapsed
+        });
+    }
 
     onLogout(e) {
         e.preventDefault();
@@ -13,33 +27,34 @@ class Navbar extends Component {
     }
 
     render() {
-        const { isAuthenticated, user } = this.props.auth;
-        const authLinks = (
-            <ul className="navbar-nav ml-auto">
-                <a className="nav-link" >{user.sub}</a>
-                <a href="" className="nav-link" onClick={this.onLogout.bind(this)}>
-                    Logout
-                </a>
-            </ul>
-        )
+        const {isAuthenticated, user} = this.props.auth;
         return (
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <Link className="navbar-brand" to="/">Controle de Processos</Link>
+            <div>
+                <Navbar color="light" light>
+                    <NavbarBrand href="/" className="mr-auto">Controle de Processos</NavbarBrand>
+                    <NavbarToggler onClick={this.toggleNavbar} className="mr-2"/>
+                    <Collapse isOpen={!this.state.collapsed} navbar>
+                        {
+                            isAuthenticated
+                            &&
+                            <Nav navbar>
+                                <NavItem>
+                                    <NavLink href="">{user.sub}</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink href="" onClick={this.onLogout.bind(this)}> Logout </NavLink>
+                                </NavItem>
+                            </Nav>
+                        }
 
-                {isAuthenticated &&
-                (
-                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        {authLinks}
-                    </div>
-                )
-                }
-
-            </nav>
-        )
+                    </Collapse>
+                </Navbar>
+            </div>)
     }
 }
 
-Navbar.propTypes = {
+
+Header.propTypes = {
     logoutUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired
 }
@@ -48,4 +63,5 @@ const mapStateToProps = (state) => ({
     auth: state.auth
 })
 
-export default connect(mapStateToProps, { logoutUser })(withRouter(Navbar));
+export default connect(mapStateToProps, {logoutUser})(withRouter(Header));
+

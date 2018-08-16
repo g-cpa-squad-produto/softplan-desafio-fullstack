@@ -11,7 +11,6 @@ export const getAction = (role) => dispatch => {
             });
         })
         .catch(err => {
-            console.log(err)
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response
@@ -21,7 +20,6 @@ export const getAction = (role) => dispatch => {
 
 export const postAction = (role, data) => dispatch => {
     axios.post(API_URL + getRoute('POST:', role), data, config)
-        .then(res => res.json())
         .then(json => {
             dispatch({
                 type: POST_ACTION,
@@ -55,11 +53,10 @@ export const putAction = (role, data, id) => dispatch => {
 
 export const deleteAction = (role, id) => dispatch => {
     axios.delete(API_URL + getRoute('DELETE:', role, id), config)
-        .then(res => res.json())
-        .then(json => {
+        .then(res => {
             dispatch({
                 type: DELETE_ACTION,
-                payload: json
+                payload: res
             });
         })
         .catch(err => {

@@ -22,6 +22,12 @@
   font-size: large;
 }
 
+.table thead th {
+  vertical-align: middle;
+  border-bottom: 2px solid #dee2e6;
+  text-align: center;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
