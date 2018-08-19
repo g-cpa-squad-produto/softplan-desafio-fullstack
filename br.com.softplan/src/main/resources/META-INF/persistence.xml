@@ -1,0 +1,29 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
+
+	<persistence-unit name="sample">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<class>br.com.softplan.modelo.Usuario</class>
+		<class>br.com.softplan.modelo.Grupo</class>
+		<class>br.com.softplan.modelo.Permissao</class>
+		<class>br.com.softplan.modelo.Processo</class>
+		<class>br.com.softplan.modelo.UsuarioProcesso</class>
+
+		<properties>
+			<property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC" />
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:sqlite:E:/Projetos/pocs/softplan_git/softplan-desafio-fullstack/softplan.db" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.SQLiteDialect" />
+			<!-- <property name="javax.persistence.jdbc.url" value="jdbc:sqlite::memory:" /> -->
+				
+			<property name="javax.persistence.jdbc.user" value="" />
+			<property name="javax.persistence.jdbc.password" value="" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="format_sql" value="true" />
+			<property name="hibernate.connection.charSet" value="UTF-8" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+		</properties>
+	</persistence-unit>
+</persistence>
