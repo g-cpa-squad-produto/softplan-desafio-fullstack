@@ -1,4 +1,4 @@
-package br.com.damilopaixao.ws.core;
+package br.com.danilopaixao.ws.core;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

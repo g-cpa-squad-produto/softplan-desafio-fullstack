@@ -1,4 +1,4 @@
-package br.com.damilopaixao.ws.core;
+package br.com.danilopaixao.ws.core;
 
 import java.sql.Date;
 import java.time.LocalDate;

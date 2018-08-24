@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import br.com.damilopaixao.ws.core.ResourceNotFoundException;
+import br.com.danilopaixao.ws.core.ResourceNotFoundException;
 import br.com.danilopaixao.ws.core.http.HttpRestClientException;
 
 @RestControllerAdvice

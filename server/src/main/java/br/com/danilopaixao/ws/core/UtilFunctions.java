@@ -1,4 +1,4 @@
-package br.com.damilopaixao.ws.core;
+package br.com.danilopaixao.ws.core;
 
 import java.math.BigDecimal;
 import java.time.Instant;

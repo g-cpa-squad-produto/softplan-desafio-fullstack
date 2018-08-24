@@ -10,7 +10,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import br.com.damilopaixao.ws.core.MoreInfo;
+import br.com.danilopaixao.ws.core.MoreInfo;
 import br.com.danilopaixao.ws.core.http.HttpRestClient;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
