@@ -1,5 +1,4 @@
-/***
- package br.com.damilopaixao.ws.core;
+package br.com.damilopaixao.ws.core;
 
 
 import java.io.Serializable;
@@ -111,4 +110,3 @@ public abstract class BaseEntity<I> implements Serializable {
 	}
 
 }
-***/

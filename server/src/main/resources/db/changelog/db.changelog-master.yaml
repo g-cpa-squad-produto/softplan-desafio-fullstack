@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-hibernate-seq-0001
+      author: paulo.sales
+      changes:
+        - createSequence:
+            - sequenceName: hibernate_sequence
+            - startValue: 1
+            - incrementBy: 1 
+  - include:
+      relativeToChangelogFile: true
+      file: v1/01-changelog-create-user.yaml
+      
