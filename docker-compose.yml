@@ -6,14 +6,17 @@ services:
             - POSTGRES_USER=postgres
             - POSTGRES_PASSWORD=postgres
             - POSTGRES_DB=sistemaprocessodb
+        container_name: postgres
         ports:
             - '5432:5432'
+        networks:
+            - sistemaprocesso-network
 
-    nginx:
+    web-nginx:
         build:
             dockerfile: ./docker/nginx.dockerfile
             context: .
-        container_name: nginx
+        container_name: web-nginx
         ports:
             - "80:80"
             - "443:443"
