@@ -1,0 +1,36 @@
+<div>
+  <mat-card>
+    <mat-card-content >
+        <mat-card-title >
+          User
+        </mat-card-title>
+    </mat-card-content>
+
+    <mat-card-content>
+      <div fxLayout="row" fxLayout="column">
+        <mat-form-field>
+          <input matInput placeholder="User" id="user" required>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayout="column">
+        <mat-form-field>
+          <input matInput placeholder="Login" id="login" required>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayout="column">
+        <mat-form-field>
+          <input matInput type="password" placeholder="Password" id="password" required>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="end">
+        <span class="send">
+          <button mat-fab> 
+            <mat-icon>send</mat-icon>
+          </button>
+        </span>
+      </div>
+    </mat-card-content>
+
+  </mat-card>
+</div>
