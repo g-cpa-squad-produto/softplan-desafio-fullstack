@@ -24,10 +24,13 @@ services:
 
     springboot-api:
         build:
-            context: .
             dockerfile: ./docker/java8.dockerfile
+            context: .
+        environment:
+            - SPRING_DATA_POSTGRES_URI=postgres://postgres:5432/sistemaprocessodb
+        container_name: springboot-api
         ports:
-            - 8080
+            - 8080:8080
         networks:
             - sistemaprocesso-network
         depends_on: 
