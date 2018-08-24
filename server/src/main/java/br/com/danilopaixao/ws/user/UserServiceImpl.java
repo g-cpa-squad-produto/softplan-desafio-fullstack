@@ -12,11 +12,11 @@ import lombok.extern.slf4j.Slf4j;
 @Transactional
 class UserServiceImpl implements UserService {
 
-	@Value("${br.com.danilopaixao.ws.variavel}")
-	private String processDefinitionKey;
+	//@Value("${br.com.danilopaixao.ws.variavel}")
+	//private String processDefinitionKey;
 
-	@Value("${br.com.danilopaixao.ws.variavel}")
-	private String subProcesses;
+	//@Value("${br.com.danilopaixao.ws.variavel}")
+	//private String subProcesses;
 	
 	@Override
 	public String save(String user) {

@@ -3,20 +3,12 @@ package br.com.danilopaixao.ws.user;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
-import br.com.damilopaixao.ws.core.BaseEntity;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+//import br.com.damilopaixao.ws.core.BaseEntity;
+import lombok.Data;
 
-@Getter
-@Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 @Entity
-public class User extends BaseEntity<Long> {
+public class User{// extends BaseEntity<Long> {
 
 	private static final long serialVersionUID = 6661098931687966006L;
 

@@ -6,5 +6,3 @@
 |_____||_____| |_____| |_____|\____| |____||____| |____| |____|          |____| |____| |_____|    |_____|               \/  \/      \______.' 
                                                                                                                                               
                                                                        
- V0.0.1 # 2018-06                                   www.interfile.com.br
-generated banner https://devops.datenkollektiv.de/banner.txt/index.html

@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: create-user-v001
+      id: create-user-20180824
       author: danilo.paixao
       changes:
         - createTable: 
-            tableName: User
+            tableName: user
             columns:
               - column:
                   name: id
@@ -25,7 +25,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: password
-                  type: varchar(200)
+                  type: varchar(255)
                   constraints:
                     nullable: false
               - column:
