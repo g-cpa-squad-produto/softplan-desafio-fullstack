@@ -1,9 +1,13 @@
 package br.com.danilopaixao.ws.user;
 
-import org.springframework.beans.factory.annotation.Value;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.danilopaixao.ws.user.api.request.UserRequest;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -12,24 +16,54 @@ import lombok.extern.slf4j.Slf4j;
 @Transactional
 class UserServiceImpl implements UserService {
 
-	//@Value("${br.com.danilopaixao.ws.variavel}")
-	//private String processDefinitionKey;
-
-	//@Value("${br.com.danilopaixao.ws.variavel}")
-	//private String subProcesses;
+	@Autowired
+    private UserRepository repository;
 	
 	@Override
-	public String save(String user) {
+	public UserResponse save(UserRequest userRequest) {
 		log.info("save user");
-		// TODO Auto-generated method stub
-		return user;
+		User user = User.builder()
+				.name(userRequest.getName())
+				.login(userRequest.getLogin())
+				.build();
+		this.repository.save(user);
+		return UserResponse
+					.builder()
+					.login(user.getLogin())
+					.name(user.getName())
+					.build();
 		
+	}
+	
+	@Override
+	public UserResponse inativeUser(Long id) {
+		User user = this.repository.findOne(id);
+		//update user to set active = false
+		return UserResponse.builder()
+				.name(user.getName())
+				.login(user.getLogin())
+				.build();
 	}
 
 	@Override
-	public String getById(String id) {
-		// TODO Auto-generated method stub
-		return id;
+	public UserResponse getById(Long id) {
+		User user = this.repository.findOne(id);
+		return UserResponse.builder()
+				.name(user.getName())
+				.login(user.getLogin())
+				.build();
+	}
+	
+	@Override
+	public List<UserResponse> getByAllUsers() {
+		return this.repository
+				.findAll()
+				.stream()
+				.map(u -> UserResponse.builder()
+								.name(u.getName())
+								.login(u.getLogin())
+								.build()
+				).collect(Collectors.toList());		
 	}
 	
 }

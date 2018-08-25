@@ -7,10 +7,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import br.com.danilopaixao.ws.core.BaseEntity;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
 @Entity
+@Builder
 public class User extends BaseEntity<Long> {
 
 	private static final long serialVersionUID = 6661098931687966006L;
