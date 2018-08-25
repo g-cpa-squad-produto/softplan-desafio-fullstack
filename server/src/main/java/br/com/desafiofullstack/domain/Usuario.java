@@ -42,6 +42,10 @@ public class Usuario implements Serializable {
 	@NotNull
 	private String sobrenomeUsuario;
 
+	@Column(name = "senha_usuario")
+	@NotNull
+	private String senhaUsuario;
+
 	@OneToMany(cascade = { CascadeType.MERGE })
 	private List<Permissao> permissoes;
 
