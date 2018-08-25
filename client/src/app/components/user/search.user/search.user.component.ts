@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user/user.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { User } from '../../../services/user/user.model'
 
 @Component({
   selector: 'app-search-user-component',
@@ -9,7 +10,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 })
 export class SearchUserComponent implements OnInit {
 
-  private users = [];
+  private users: User[];
 
   // exibicao de mensagem de erro na tela
   isError: Boolean = false;
@@ -35,10 +36,11 @@ export class SearchUserComponent implements OnInit {
   ngOnInit() {
     const isMobile = /Android|iPhone/i.test(window.navigator.userAgent);
     console.log(`Plataforma ${window.navigator.userAgent}`);
-    this.users =
-    this.userService.getUsers()
+    
+    this.userService.getAllUsers()
       .subscribe(res => {
         console.log('>>>> get users res=', res);
+        this.users = res;
         this.exibeProgress = false;
         // this.router.navigate(['/users'])
     },

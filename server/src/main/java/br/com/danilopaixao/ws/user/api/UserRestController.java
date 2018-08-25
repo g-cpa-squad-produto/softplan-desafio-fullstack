@@ -21,11 +21,11 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 public class UserRestController {
-//docker run --name postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -e POSTGRES_DB=sistemaprocessodb -p 5432:5432 -d postgres
+	
 	@Autowired
 	private UserService service;
 
-	@ApiOperation("EndPoint to get User by ID ")
+	@ApiOperation("EndPoint to get Test ")
 	@GetMapping(value = "/api/v1/teste", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody UserResponse teste() {
@@ -48,7 +48,7 @@ public class UserRestController {
     }
 	
 	@ApiOperation("Endpoint to create new User")
-	@PostMapping(value = "/api/v1/user", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@PostMapping(value = "/api/v1/users", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public @ResponseBody UserResponse saveUser(
     		@RequestBody(required = true) final UserRequest user) {
@@ -56,17 +56,16 @@ public class UserRestController {
     }
 	
 	@ApiOperation("Endpoint to update a User")
-	@PostMapping(value = "/api/v1/user/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@PostMapping(value = "/api/v1/users/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public @ResponseBody UserResponse upDateUser(
     		@PathVariable(value = "id", required = true) final Long id ,
     		@RequestBody(required = true) final UserRequest user) {
-		user.setId(id);
 		return this.service.save(user);
     }
 	
 	@ApiOperation("Endpoint to inative a User")
-	@DeleteMapping(value = "/api/v1/user/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@DeleteMapping(value = "/api/v1/users/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public @ResponseBody UserResponse cancelUser(
     		@PathVariable(value = "id", required = true) final Long id) {

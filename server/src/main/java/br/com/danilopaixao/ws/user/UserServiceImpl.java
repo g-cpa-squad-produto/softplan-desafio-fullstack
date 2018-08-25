@@ -21,14 +21,33 @@ class UserServiceImpl implements UserService {
 	
 	@Override
 	public UserResponse save(UserRequest userRequest) {
-		log.info("save user");
+		log.info("save user => " + userRequest);
 		User user = User.builder()
+				.name(userRequest.getName())
+				.login(userRequest.getLogin())
+				.password(userRequest.getPassword())
+				.build();
+		this.repository.save(user);
+		return UserResponse
+					.builder()
+					.login(user.getLogin())
+					.name(user.getName())
+					.build();
+		
+	}
+	
+	@Override
+	public UserResponse save(Long id, UserRequest userRequest) {
+		log.info("save user", userRequest);
+		User user = User.builder()
+				.id(id)
 				.name(userRequest.getName())
 				.login(userRequest.getLogin())
 				.build();
 		this.repository.save(user);
 		return UserResponse
 					.builder()
+					.id(user.getId())
 					.login(user.getLogin())
 					.name(user.getName())
 					.build();
@@ -49,6 +68,7 @@ class UserServiceImpl implements UserService {
 	public UserResponse getById(Long id) {
 		User user = this.repository.findOne(id);
 		return UserResponse.builder()
+				.id(user.getId())
 				.name(user.getName())
 				.login(user.getLogin())
 				.build();
@@ -60,6 +80,7 @@ class UserServiceImpl implements UserService {
 				.findAll()
 				.stream()
 				.map(u -> UserResponse.builder()
+								.id(u.getId())
 								.name(u.getName())
 								.login(u.getLogin())
 								.build()

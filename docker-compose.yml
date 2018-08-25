@@ -30,7 +30,7 @@ services:
             dockerfile: ./docker/java8.dockerfile
             context: .
         environment:
-            - SPRING_DATA_POSTGRES_URI=postgres://postgres:5432/sistemaprocessodb
+            - POSTGRES_HOST=postgres
         container_name: springboot-api
         ports:
             - 8080:8080

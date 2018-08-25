@@ -63,43 +63,8 @@ public final class UtilFunctions {
 		return LocalDate.parse(value, DateTimeFormatter.ofPattern(patternOf));
 	}
 	
-	// TXT Fixed Length File
-	public static final DateTimeFormatter TXT_DATE_FORMAT = DateTimeFormatter.ofPattern("ddMMyyyy");
-	public static final DateTimeFormatter TXT_TIME_FORMAT = DateTimeFormatter.ofPattern("HHmm");
-	public static final DateTimeFormatter TXT_DATETIME_FORMAT = DateTimeFormatter.ofPattern("ddMMyyyyHHmm");
-
 	public static final Function<BigDecimal, String> mapBigDecimalToFixedLengthCurrency = 
 			valor -> String.valueOf(valor.multiply(BIG_DECIMAL_100).toBigInteger());
-
-	// XML File
-	public static final DateTimeFormatter XML_DATETIME_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-
-	public static final Function<String, Long> mapXmlCodigoToLong = codigo ->
-		Optional.ofNullable(codigo)
-			.filter(StringUtils::isNotBlank)
-			.map(cod -> StringUtils.stripStart(cod, "0"))
-			.map(cod -> StringUtils.removeAll(cod, "\\-"))
-			.map(cod -> StringUtils.removeAll(cod, "\\."))
-			.filter(StringUtils::isNotBlank)
-			.map(mapStringToLong)
-			.orElse(null);
-		
-		public static final Function<String, BigDecimal> mapXmlCodigoToBigDecimal = codigo ->
-		Optional.ofNullable(codigo)
-			.filter(StringUtils::isNotBlank)
-			.map(cod -> StringUtils.stripStart(cod, "0"))
-			.map(cod -> StringUtils.removeAll(cod, "\\-"))
-			.map(cod -> StringUtils.removeAll(cod, "\\."))
-			.filter(StringUtils::isNotBlank)
-			.map(mapStringToBigDecimal
-					)
-			.orElse(null);
-	
-	public static final Function<String, BigDecimal> mapXmlCurrencyToBigDecimal = s -> 
-		Optional.ofNullable(s)
-			.map(value -> value.replaceAll(",", "."))
-			.map(BigDecimal::new)
-			.orElse(null);
 		
 	public UtilFunctions() {
 		throw new AssertionError();

@@ -4,7 +4,7 @@ databaseChangeLog:
       author: danilo.paixao
       changes:
         - createTable: 
-            tableName: user
+            tableName: users
             columns:
               - column:
                   name: id
@@ -28,21 +28,3 @@ databaseChangeLog:
                   type: varchar(255)
                   constraints:
                     nullable: false
-              - column:
-                  name: version
-                  type: bigint
-              - column:
-                  name: created_by
-                  type: varchar(50)
-              - column:
-                  name: updated_by
-                  type: varchar(50)
-              - column:
-                  name: created_at
-                  type: timestamp
-              - column:
-                  name: updated_at
-                  type: timestamp
-              - column:
-                  name: removed_at
-                  type: timestamp

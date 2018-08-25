@@ -7,6 +7,7 @@ import br.com.danilopaixao.ws.user.api.request.UserRequest;
 public interface UserService {
 
 	UserResponse save(UserRequest user);
+	UserResponse save(Long id, UserRequest user);
 	UserResponse getById(Long id);
 	List<UserResponse> getByAllUsers();
 	UserResponse inativeUser(Long id);
