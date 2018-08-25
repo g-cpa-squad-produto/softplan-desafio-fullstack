@@ -21,10 +21,17 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 public class UserRestController {
-
+//docker run --name postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -e POSTGRES_DB=sistemaprocessodb -p 5432:5432 -d postgres
 	@Autowired
 	private UserService service;
 
+	@ApiOperation("EndPoint to get User by ID ")
+	@GetMapping(value = "/api/v1/teste", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public @ResponseBody UserResponse teste() {
+		return UserResponse.builder().login("teste-login").name("teste-name").build();
+	}
+	
 	@ApiOperation("EndPoint to get User by ID ")
 	@GetMapping(value = "/api/v1/users/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(HttpStatus.OK)
