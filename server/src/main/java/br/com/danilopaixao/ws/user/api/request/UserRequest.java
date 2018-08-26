@@ -5,6 +5,7 @@ import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import br.com.danilopaixao.ws.user.ProfileEnum;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -21,14 +22,17 @@ public class UserRequest implements Serializable{
 	private String name;
 	private String login;
 	private String password;
+	private ProfileEnum profile;
 	
 	@JsonCreator
 	public UserRequest(
 			@JsonProperty("name") final String name,
 			@JsonProperty("login") final String login,
-			@JsonProperty("password") final String password) {
+			@JsonProperty("password") final String password,
+			@JsonProperty("profile") final ProfileEnum profile) {
 		this.name = name;		
 		this.login = login;
 		this.password = password;
+		this.profile = profile;
 	}
 }

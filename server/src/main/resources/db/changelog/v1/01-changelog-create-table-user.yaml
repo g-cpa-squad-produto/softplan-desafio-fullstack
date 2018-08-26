@@ -20,7 +20,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: login
-                  type: varchar(20)
+                  type: varchar(55)
                   constraints:
                     nullable: false
               - column:
@@ -30,7 +30,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: profile
-                  type: varchar(20)
+                  type: varchar(55)
                   constraints:
                     nullable: false
   - changeSet:

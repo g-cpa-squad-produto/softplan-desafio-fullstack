@@ -17,15 +17,18 @@ public class UserResponse implements Serializable{
 	private Long id;
 	private String name;
 	private String login;
+	private ProfileEnum profile;
 	
 	@JsonCreator
 	public UserResponse(
 			@JsonProperty("id") final Long id,
 			@JsonProperty("name") final String name,
-			@JsonProperty("login") final String login) {
+			@JsonProperty("login") final String login,
+			@JsonProperty("profile") final ProfileEnum profile) {
 		this.id = id;
 		this.name = name;		
 		this.login = login;
+		this.profile = profile;
 	}
 	
 }
