@@ -28,3 +28,18 @@ databaseChangeLog:
                   type: varchar(255)
                   constraints:
                     nullable: false
+              - column:
+                  name: profile
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: initLoad
+      author: danilo.paixao
+      changes:
+        - loadData:
+            encoding: UTF-8
+            file: db/changelog/v1/users.csv
+            schemaName: public
+            separator: ","
+            tableName: users

@@ -1,0 +1,4 @@
+id, name,login,password,profile
+1, "user admin","admin","admin","ADMINISTRADOR"
+2, "user triador","triador","triador","TRIADOR"
+3, "user finalizador","finalizador","finalizador","FINALIZADOR"
