@@ -5,9 +5,12 @@ package br.com.desafiofullstack.resource;
 
 import java.io.Serializable;
 
+import javax.ws.rs.core.MediaType;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +25,7 @@ import br.com.desafiofullstack.service.UsuarioService;
  * @author Delano Jr
  *
  */
+@CrossOrigin(value = "*")
 @RestController
 @RequestMapping(value = "/usuario")
 public class UsuarioResource implements Serializable {
@@ -34,7 +38,7 @@ public class UsuarioResource implements Serializable {
 	@Autowired
 	private UsuarioService usuarioService;
 
-	@PostMapping
+	@PostMapping(consumes = MediaType.APPLICATION_JSON)
 	private ResponseEntity<?> saveUsuario(@RequestBody Usuario usuario) {
 		try {
 			return ResponseEntity.ok(usuarioService.save(usuario).orElse(null));

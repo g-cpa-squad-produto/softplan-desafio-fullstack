@@ -30,6 +30,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public Optional<Usuario> save(Usuario usuario) {
+		usuario.setUsuarioAtivo(true);
 		return Optional.of(usuarioRepository.save(usuario));
 	}
 

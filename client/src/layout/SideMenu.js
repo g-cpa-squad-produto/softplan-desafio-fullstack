@@ -22,13 +22,13 @@ import classNames from 'classnames';
 
 import { Home } from '../home/Home'
 import { UsuarioList } from '../usuario/UsuarioList';
+import { NovoUsuarioComponent } from '../usuario/NovoUsuario'
 
 const drawerWidth = 240;
 
 const styles = theme => ({
     root: {
         flexGrow: 1,
-        height: 440,
         zIndex: 1,
         overflow: 'hidden',
         position: 'relative',
@@ -86,7 +86,7 @@ const styles = theme => ({
     content: {
         flexGrow: 1,
         backgroundColor: theme.palette.background.default,
-        padding: theme.spacing.unit * 3,
+        padding: 50,
     },
 });
 
@@ -157,7 +157,11 @@ class SideMenu extends Component {
                     <main className={classes.content}>
                         <div className={classes.toolbar} />
                         <Route exact path="/" component={Home} />
+
+
                         <Route path="/usuarios" component={UsuarioList} />
+                        <Route path="/usuario/novo" component={NovoUsuarioComponent} />
+
                     </main>
 
                 </div>
