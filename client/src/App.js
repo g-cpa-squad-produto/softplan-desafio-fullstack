@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-import { SideMenu } from './layout/SideMenu'
+import SideMenu from './layout/SideMenu'
 
 class App extends Component {
   render() {
