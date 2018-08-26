@@ -1,0 +1,115 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-user-20180824
+      author: danilo.paixao
+      changes:
+        - createTable: 
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    autoIncrement: true
+              - column:
+                  name: name
+                  type: varchar(55)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: login
+                  type: varchar(55)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: profile
+                  type: varchar(55)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: create-processes-20180826
+      author: danilo.paixao
+      changes:
+        - createTable: 
+            tableName: processes
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    autoIncrement: true
+              - column:
+                  name: name
+                  type: varchar(55)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_by
+                  type: bigint
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint: 
+            constraintName: fk_processes_users
+            baseColumnNames: created_by
+            baseTableName: processes
+            referencedColumnNames: id
+            referencedTableName: users
+  - changeSet:
+      id: create-processes-20180826
+      author: danilo.paixao
+      changes:
+        - createTable: 
+            tableName: legal_advices
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    autoIncrement: true
+              - column:
+                  name: name
+                  type: varchar(55)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_by
+                  type: bigint
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint: 
+            constraintName: fk_legal_advice_users
+            baseColumnNames: created_by
+            baseTableName: legal_advices
+            referencedColumnNames: id
+            referencedTableName: users
+  - changeSet:
+      id: initLoad
+      author: danilo.paixao
+      changes:
+        - loadData:
+            encoding: UTF-8
+            file: db/changelog/v1/users.csv
+            schemaName: public
+            separator: ","
+            tableName: users

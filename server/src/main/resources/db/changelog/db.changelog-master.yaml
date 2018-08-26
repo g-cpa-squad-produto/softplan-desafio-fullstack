@@ -9,4 +9,4 @@ databaseChangeLog:
             - incrementBy: 1 
   - include:
       relativeToChangelogFile: true
-      file: v1/01-changelog-create-table-user.yaml
+      file: v1/01-create-initial-tables.yaml
