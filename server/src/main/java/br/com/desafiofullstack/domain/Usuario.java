@@ -46,6 +46,9 @@ public class Usuario implements Serializable {
 	@NotNull
 	private String senhaUsuario;
 
+	@Column(name = "usuario_ativo")
+	private boolean usuarioAtivo;
+
 	@OneToMany(cascade = { CascadeType.MERGE })
 	private List<Permissao> permissoes;
 
@@ -53,11 +56,15 @@ public class Usuario implements Serializable {
 		super();
 	}
 
-	public Usuario(Long isnUsuario, String nomeUsuario, String sobrenomeUsuario) {
+	public Usuario(Long isnUsuario, @NotNull String nomeUsuario, @NotNull String sobrenomeUsuario,
+			@NotNull String senhaUsuario, boolean usuarioAtivo, List<Permissao> permissoes) {
 		super();
 		this.isnUsuario = isnUsuario;
 		this.nomeUsuario = nomeUsuario;
 		this.sobrenomeUsuario = sobrenomeUsuario;
+		this.senhaUsuario = senhaUsuario;
+		this.usuarioAtivo = usuarioAtivo;
+		this.permissoes = permissoes;
 	}
 
 	public Long getIsnUsuario() {
@@ -82,6 +89,30 @@ public class Usuario implements Serializable {
 
 	public void setSobrenomeUsuario(String sobrenomeUsuario) {
 		this.sobrenomeUsuario = sobrenomeUsuario;
+	}
+
+	public String getSenhaUsuario() {
+		return senhaUsuario;
+	}
+
+	public void setSenhaUsuario(String senhaUsuario) {
+		this.senhaUsuario = senhaUsuario;
+	}
+
+	public boolean isUsuarioAtivo() {
+		return usuarioAtivo;
+	}
+
+	public void setUsuarioAtivo(boolean usuarioAtivo) {
+		this.usuarioAtivo = usuarioAtivo;
+	}
+
+	public List<Permissao> getPermissoes() {
+		return permissoes;
+	}
+
+	public void setPermissoes(List<Permissao> permissoes) {
+		this.permissoes = permissoes;
 	}
 
 }
