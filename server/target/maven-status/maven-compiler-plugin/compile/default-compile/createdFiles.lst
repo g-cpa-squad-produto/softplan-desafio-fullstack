@@ -1,0 +1,17 @@
+br/com/danilopaixao/ws/user/UserException.class
+br/com/danilopaixao/ws/user/UserService.class
+br/com/danilopaixao/ws/user/api/UserRestController.class
+br/com/danilopaixao/ws/core/BaseEntity.class
+br/com/danilopaixao/ws/core/MoreInfo.class
+br/com/danilopaixao/ws/core/UtilFunctions.class
+br/com/danilopaixao/ws/core/LocalDateConverter.class
+br/com/danilopaixao/ws/core/LogAspect.class
+br/com/danilopaixao/ws/core/ZonedDateTimeConverter.class
+br/com/danilopaixao/ws/core/LocalTimeConverter.class
+br/com/danilopaixao/ws/core/LocalDateTimeConverter.class
+br/com/danilopaixao/ws/user/UserServiceImpl.class
+br/com/danilopaixao/ws/core/SupplierExceptions.class
+br/com/danilopaixao/ws/core/Log.class
+br/com/danilopaixao/ws/core/ResourceNotFoundException.class
+br/com/danilopaixao/ws/APIRestApplication.class
+br/com/danilopaixao/ws/user/User.class

@@ -3,13 +3,11 @@
 # compiled output
 /client/tmp
 /server/tmp
-/client/dist
 /out-tsc
 
 
 # dependencies
 /client/node_modules
-/server/target
 
 # data
 /data/*

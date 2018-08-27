@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-hibernate-seq-20180824
+      author: danilo.paixao
+      changes:
+        - createSequence:
+            - sequenceName: hibernate_sequence
+            - startValue: 1
+            - incrementBy: 1 
+  - include:
+      relativeToChangelogFile: true
+      file: v1/01-create-initial-tables.yaml
