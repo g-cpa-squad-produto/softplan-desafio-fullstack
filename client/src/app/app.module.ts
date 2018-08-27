@@ -10,7 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ImageViewerComponent } from './components/imageviewer/imageviewer.component';
 import { ImageViewerModule } from '@hallysonh/ngx-imageviewer';
 
-import { OnlyForDevComponent } from './components/only-for-dev/only-for-dev.component';
+import { CustomToolBarComponent } from './components/custom-toolbar/custom.toolbar.component';
 
 // Material UI
 import {
@@ -36,6 +36,8 @@ import {
   MatTreeModule
 } from '@angular/material';
 
+import {FlexLayoutModule} from '@angular/flex-layout';
+
 // Rotas
 import { AppRoutingModule } from './app-routing.module';
 
@@ -54,7 +56,7 @@ import { FormUserComponent } from './components/user/form.user/form.user.compone
     FormUserComponent,
 
     ImageViewerComponent,
-    OnlyForDevComponent
+    CustomToolBarComponent
   ],
   imports: [
     // ##CORE
@@ -84,6 +86,7 @@ import { FormUserComponent } from './components/user/form.user/form.user.compone
     MatSidenavModule,
     MatBadgeModule,
     MatDialogModule,
+    FlexLayoutModule,
     // ##MATERIAL
 
     // ##IMAGE VIEWER

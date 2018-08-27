@@ -18,23 +18,20 @@ public class ProcessRequest implements Serializable{
 	 */
 	private static final long serialVersionUID = -1517670884022709952L;
 	
-	private Long id;
 	private String summary;
 	private String description;
-	private Long createdBy;
-	private Long finishedBy;
+	private Long idUserCreatedBy;
+	private Long idUserFinishedBy;
 	
 	@JsonCreator
 	public ProcessRequest(
-			@JsonProperty("id") final Long id,
 			@JsonProperty("summary") final String summary,
 			@JsonProperty("description") final String description,
-			@JsonProperty("createdBy") final Long createdBy,
-			@JsonProperty("finishedBy") final Long finishedBy) {
-		this.id = id;		
+			@JsonProperty("idUserCreatedBy") final Long idUserCreatedBy,
+			@JsonProperty("idUserFinishedBy") final Long idUserFinishedBy) {
 		this.summary = summary;
 		this.description = description;
-		this.createdBy = createdBy;
-		this.finishedBy = finishedBy;
+		this.idUserCreatedBy = idUserCreatedBy;
+		this.idUserFinishedBy = idUserFinishedBy;
 	}
 }

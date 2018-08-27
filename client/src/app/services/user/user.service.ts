@@ -16,15 +16,25 @@ export class UserService {
   ) { }
 
   getAllUsers(){
-    return this.http.get<User[]>(`${URL}`)
+    console.log('getAllUsers URL=>', URL);
+    return this.http.get<User[]>(`${URL}`);
+  }
+
+  getUserById(id){
+    console.log('getAllUsers URL=>', URL);
+    return this.http.get<User>(`${URL}/${id}`);
   }
 
   createUser(user) {
-    return this.http.post(`${URL}`, user)
+    console.log('user=>', user);
+    console.log('createUser URL=>', URL);
+    return this.http.post(`${URL}`, user);
   }
 
-  updateUser(user, id) {
-    return this.http.post(`${URL}/${id}`, user)
+  updateUser(id, user) {
+    console.log('user=>', user);
+    console.log('updateUser URL=>', `${URL}/${id}`);
+    return this.http.post(`${URL}/${id}`, user);
   }
 
   getUsersMock(){

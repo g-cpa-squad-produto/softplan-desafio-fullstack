@@ -43,7 +43,7 @@ class UserServiceImpl implements UserService {
 	public UserResponse save(Long id, UserRequest userRequest) {
 		log.info("save user", userRequest);
 		User user = this.repository.findOne(id);
-		user.setLogin(userRequest.getName());
+		user.setName(userRequest.getName());
 		user.setLogin(userRequest.getLogin());
 		user.setProfile(userRequest.getProfile());
 		user.setStatus(userRequest.getStatus());

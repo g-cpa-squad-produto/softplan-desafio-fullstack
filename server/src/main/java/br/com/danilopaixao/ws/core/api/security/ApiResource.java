@@ -1,4 +1,4 @@
-package br.com.danilopaixao.ws.core.api;
+package br.com.danilopaixao.ws.core.api.security;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

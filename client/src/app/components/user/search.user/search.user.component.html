@@ -1,9 +1,10 @@
 <div>
+  <app-custom-tool-bar></app-custom-tool-bar>
   <mat-card>
     <mat-card-title>
         <button mat-icon-button color="accent" (click)="routeFormUser()">
             <mat-icon>person_add</mat-icon>
-            Add User
+            Adicionar Novo
         </button>
     </mat-card-title>
 
@@ -13,23 +14,14 @@
           <mat-chip style="margin-left: 30%" color="warn" selected="true"><mat-chip-avatar> <mat-icon>error</mat-icon></mat-chip-avatar> {{ error }}</mat-chip>
         </mat-chip-list>
       </div>
-      <form class="form">
-        <mat-form-field color="accent" style="width: 80%">
-          <input matInput type="text" placeholder="Search Users" style="width: 80%">
-        </mat-form-field>
-        <mat-spinner diameter="55" ></mat-spinner>
-        <button mat-fab color="primary" style="margin: 5px">
-          <mat-icon>search</mat-icon>
-        </button>
-      </form>
     </mat-card-content>
 
     <mat-card-content>
-      <!-- <mat-list-item *ngFor="let p of pessoas">
+      <mat-list-item *ngFor="let u of users">
         <mat-divider [inset]="true"></mat-divider>
-        <h4 mat-line (click)="routeCadastroPessoa()" >{{p.nome}}</h4>
+        <h4 mat-line (click)="routeFormUser(u.id)" ><mat-icon>account_circle</mat-icon> {{u.login}} | {{u.name}} | {{u.profile}}</h4>
         <mat-divider inset *ngIf="!last"></mat-divider>
-      </mat-list-item> -->
+      </mat-list-item>
     </mat-card-content>
   </mat-card>
 </div>

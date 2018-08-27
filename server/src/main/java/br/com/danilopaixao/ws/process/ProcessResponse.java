@@ -22,20 +22,26 @@ public class ProcessResponse implements Serializable{
 	private Long id;
 	private String summary;
 	private String description;
-	private Long createdBy;
-	private Long finishedBy;
+	private Long idCreatedBy;
+	private String loginCreatedBy;
+	private Long idFinishedBy;
+	private String loginFinishedBy;
 	
 	@JsonCreator
 	public ProcessResponse(
 			@JsonProperty("id") final Long id,
 			@JsonProperty("summary") final String summary,
 			@JsonProperty("description") final String description,
-			@JsonProperty("createdBy") final Long createdBy,
-			@JsonProperty("finishedBy") final Long finishedBy) {
+			@JsonProperty("idCreatedBy") final Long idCreatedBy,
+			@JsonProperty("loginCreatedBy") final String loginCreatedBy,
+			@JsonProperty("idFinishedBy") final Long idFinishedBy,
+			@JsonProperty("loginFinishedBy") final String loginFinishedBy) {
 		this.id = id;		
 		this.summary = summary;
 		this.description = description;
-		this.createdBy = createdBy;
-		this.finishedBy = finishedBy;
+		this.idCreatedBy = idCreatedBy;
+		this.loginCreatedBy = loginCreatedBy;
+		this.idFinishedBy = idFinishedBy;
+		this.loginFinishedBy = loginFinishedBy;
 	}
 }

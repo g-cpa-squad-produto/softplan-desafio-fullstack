@@ -1,4 +1,4 @@
-package br.com.danilopaixao.ws.core.api;
+package br.com.danilopaixao.ws.core.api.security;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 

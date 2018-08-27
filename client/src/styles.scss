@@ -1,5 +1,7 @@
 @import '~@angular/material/theming';
 @import url('//fonts.googleapis.com/icon?family=Material+Icons');
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
 
 @include mat-core();
 
@@ -19,6 +21,7 @@ $theme: mat-light-theme($primary, $accent, $warn);
 @include angular-material-theme($theme);
 
 body {
+  margin: 0;
   font-family: mat-font-family($config);
   font-weight: normal;
 }

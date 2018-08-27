@@ -1,11 +1,8 @@
-export class Profile {
-    id: string
-    nome: string
-}
-
 export class User {
     id: string
-    nome: string
+    name: string
     login: string
-    profile: Profile
+    password: string
+    profile: string
+    status: string
 }

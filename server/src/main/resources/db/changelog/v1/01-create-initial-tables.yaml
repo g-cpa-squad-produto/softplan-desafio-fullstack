@@ -71,7 +71,7 @@ databaseChangeLog:
                   name: finished_by
                   type: bigint
                   constraints:
-                    nullable: false
+                    nullable: true
         - addForeignKeyConstraint: 
             constraintName: fk_processes_users_created_by
             baseColumnNames: created_by

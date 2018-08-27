@@ -1,6 +1,5 @@
 package br.com.danilopaixao.ws;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -8,10 +7,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.client.RestTemplate;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import br.com.danilopaixao.ws.core.MoreInfo;
-import br.com.danilopaixao.ws.core.http.HttpRestClient;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -40,12 +36,6 @@ public class APIRestApplication {
 	@Bean
 	public RestTemplate restTemplate() {
 		return new RestTemplate();
-	}
-
-	@Bean
-	@Autowired
-	public HttpRestClient httpRestClient(RestTemplate restTemplate, ObjectMapper objectMapper) {
-		return new HttpRestClient(restTemplate, objectMapper);
 	}
 	
     @Bean

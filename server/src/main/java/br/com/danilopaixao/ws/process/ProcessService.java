@@ -4,8 +4,8 @@ import java.util.List;
 
 public interface ProcessService {
 
-	ProcessResponse save(ProcessRequest user);
-	ProcessResponse save(Long id, ProcessRequest user);
+	ProcessResponse save(ProcessRequest process);
+	ProcessResponse save(Long id, ProcessRequest process);
 	ProcessResponse getById(Long id);
 	List<ProcessResponse> getByAllProcesss();
 

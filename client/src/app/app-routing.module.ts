@@ -4,15 +4,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import {SearchUserComponent} from './components/user/search.user/search.user.component';
 import {FormUserComponent} from './components/user/form.user/form.user.component';
-import {LoginComponent} from './components/login/login.component';
-
-import { OnlyForDevComponent } from './components/only-for-dev/only-for-dev.component';
 
 const appRoutes: Routes = [
   {
     path: '',
-     component: LoginComponent
-    // component: OnlyForDevComponent
+    // component: LoginComponent
+     component: SearchUserComponent //OnlyForDevComponent
   },
   {
     path: 'user',
@@ -20,6 +17,10 @@ const appRoutes: Routes = [
   },
   {
     path: 'user/form',
+    component: FormUserComponent
+  },
+  {
+    path: 'user/form/:id',
     component: FormUserComponent
   }
 ];

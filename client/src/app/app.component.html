@@ -1,22 +1,3 @@
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <span class="header-spacer"></span>
-    <span>
-      <mat-chip-list>
-          <mat-chip color="accent" selected (click)="start.toggle()"><mat-icon>menu</mat-icon></mat-chip>
-      </mat-chip-list>
-    </span>
-  </mat-toolbar-row>
-</mat-toolbar>
-<mat-drawer-container class="demo-drawer-container">
-    <mat-drawer #start mode="over">
-    <mat-nav-list>
-      <a mat-list-item [routerLink]="['partner']" (click)="start.close()">Pessoa</a>
-      <a mat-list-item [routerLink]="['partner/form']" (click)="start.close()">Pessoa Cadastro</a>
-    </mat-nav-list>
-    </mat-drawer>
-
-    <div class="content-center" ngClass.lg="content-lg">
-      <router-outlet #o="outlet"></router-outlet>
-    </div>
-</mat-drawer-container>
+<div class="content-center" ngClass.lg="content-lg">
+  <router-outlet #o="outlet"></router-outlet>
+</div>
