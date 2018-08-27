@@ -936,8 +936,8 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 var environment = {
     production: false,
-    //apiUrl: 'http://springboot-api:8080'
-    apiUrl: 'http://localhost:8080'
+    apiUrl: 'http://206.81.2.32:3000'
+    //apiUrl: 'http://localhost:8080'
 };
 /*
  * In development mode, to ignore zone related error stack frames such as
