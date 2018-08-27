@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.danilopaixao.ws.user.api.request.UserRequest;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -27,6 +26,7 @@ class UserServiceImpl implements UserService {
 				.login(userRequest.getLogin())
 				.password(userRequest.getPassword())
 				.profile(userRequest.getProfile())
+				.status(userRequest.getStatus())
 				.build();
 		this.repository.save(user);
 		return UserResponse
@@ -34,6 +34,7 @@ class UserServiceImpl implements UserService {
 					.login(user.getLogin())
 					.name(user.getName())
 					.profile(user.getProfile())
+					.status(user.getStatus())
 					.build();
 		
 	}
@@ -45,6 +46,7 @@ class UserServiceImpl implements UserService {
 		user.setLogin(userRequest.getName());
 		user.setLogin(userRequest.getLogin());
 		user.setProfile(userRequest.getProfile());
+		user.setStatus(userRequest.getStatus());
 		this.repository.save(user);
 		return UserResponse
 					.builder()
@@ -52,6 +54,7 @@ class UserServiceImpl implements UserService {
 					.login(user.getLogin())
 					.name(user.getName())
 					.profile(user.getProfile())
+					.status(user.getStatus())
 					.build();
 		
 	}
@@ -74,6 +77,7 @@ class UserServiceImpl implements UserService {
 				.name(user.getName())
 				.login(user.getLogin())
 				.profile(user.getProfile())
+				.status(user.getStatus())
 				.build();
 	}
 	
@@ -87,6 +91,7 @@ class UserServiceImpl implements UserService {
 								.name(u.getName())
 								.login(u.getLogin())
 								.profile(u.getProfile())
+								.status(u.getStatus())
 								.build()
 				).collect(Collectors.toList());		
 	}

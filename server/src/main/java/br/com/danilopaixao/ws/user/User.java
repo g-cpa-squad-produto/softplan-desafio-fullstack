@@ -47,4 +47,8 @@ public class User implements Serializable{
 	@Column(name = "profile")
 	private ProfileEnum profile;
 	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status")
+	private UserStatusEnum status;
+	
 }

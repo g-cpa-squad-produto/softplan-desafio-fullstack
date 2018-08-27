@@ -33,6 +33,11 @@ databaseChangeLog:
                   type: varchar(55)
                   constraints:
                     nullable: false
+              - column:
+                  name: status
+                  type: varchar(55)
+                  constraints:
+                    nullable: false
   - changeSet:
       id: create-processes-20180826
       author: danilo.paixao
@@ -48,7 +53,7 @@ databaseChangeLog:
                     primaryKey: true
                     autoIncrement: true
               - column:
-                  name: name
+                  name: summary
                   type: varchar(55)
                   constraints:
                     nullable: false
@@ -62,14 +67,25 @@ databaseChangeLog:
                   type: bigint
                   constraints:
                     nullable: false
+              - column:
+                  name: finished_by
+                  type: bigint
+                  constraints:
+                    nullable: false
         - addForeignKeyConstraint: 
-            constraintName: fk_processes_users
+            constraintName: fk_processes_users_created_by
             baseColumnNames: created_by
             baseTableName: processes
             referencedColumnNames: id
             referencedTableName: users
+        - addForeignKeyConstraint: 
+            constraintName: fk_processes_users_finished_by
+            baseColumnNames: finished_by
+            baseTableName: processes
+            referencedColumnNames: id
+            referencedTableName: users
   - changeSet:
-      id: create-processes-20180826
+      id: create-legal-advices-20180826
       author: danilo.paixao
       changes:
         - createTable: 
@@ -83,11 +99,6 @@ databaseChangeLog:
                     primaryKey: true
                     autoIncrement: true
               - column:
-                  name: name
-                  type: varchar(55)
-                  constraints:
-                    nullable: false
-              - column:
                   name: description
                   type: varchar(255)
                   constraints:
@@ -97,9 +108,31 @@ databaseChangeLog:
                   type: bigint
                   constraints:
                     nullable: false
+              - column:
+                  name: finished_by
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: responsable_for
+                  type: bigint
+                  constraints:
+                    nullable: false
         - addForeignKeyConstraint: 
-            constraintName: fk_legal_advice_users
+            constraintName: fk_legal_advices_users_created_by
             baseColumnNames: created_by
+            baseTableName: legal_advices
+            referencedColumnNames: id
+            referencedTableName: users
+        - addForeignKeyConstraint: 
+            constraintName: fk_legal_advices_users_finished_by
+            baseColumnNames: finished_by
+            baseTableName: legal_advices
+            referencedColumnNames: id
+            referencedTableName: users
+        - addForeignKeyConstraint: 
+            constraintName: fk_legal_advices_users_responsable_for
+            baseColumnNames: responsable_for
             baseTableName: legal_advices
             referencedColumnNames: id
             referencedTableName: users

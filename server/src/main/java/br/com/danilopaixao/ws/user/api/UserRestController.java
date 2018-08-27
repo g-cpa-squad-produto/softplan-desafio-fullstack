@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.danilopaixao.ws.user.UserRequest;
 import br.com.danilopaixao.ws.user.UserResponse;
 import br.com.danilopaixao.ws.user.UserService;
-import br.com.danilopaixao.ws.user.api.request.UserRequest;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
