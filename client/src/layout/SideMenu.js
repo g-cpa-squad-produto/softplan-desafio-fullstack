@@ -16,7 +16,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import MenuIcon from '@material-ui/icons/Menu';
 
-import { Home as HomeIcon, People } from '@material-ui/icons'
+import { Home as HomeIcon, People, Assignment } from '@material-ui/icons'
 
 import classNames from 'classnames';
 
@@ -150,6 +150,12 @@ class SideMenu extends Component {
                                 <People />
                             </ListItemIcon>
                             <ListItemText inset primary="Usuários" />
+                        </ListItem>
+                        <ListItem button component={Link} to="/">
+                            <ListItemIcon>
+                                <Assignment />
+                            </ListItemIcon>
+                            <ListItemText inset primary="Processos" />
                         </ListItem>
 
                     </Drawer>

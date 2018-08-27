@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-
-import { TextField, Card, CardContent, Input, Typography, Divider, Button } from '@material-ui/core'
+import { Link } from 'react-router-dom'
+import { TextField, Card, CardContent, Input, Typography, Divider, Button, Grid } from '@material-ui/core'
 
 import { UsuarioFormComponent } from './UsuarioFormComponent'
 
@@ -13,9 +13,9 @@ export class NovoUsuarioComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            nomeUsuario: '',
-            sobrenomeUsuario: '',
-            senhaUsuario: ''
+            nomeUsuario: undefined,
+            sobrenomeUsuario: undefined,
+            senhaUsuario: undefined
         }
         this.onSave = this.onSave.bind(this);
     }
@@ -37,6 +37,7 @@ export class NovoUsuarioComponent extends Component {
         console.log(usuario)
         usuarioService.saveNovoUsuario(usuario)
             .then(data => {
+                this.props.history.push('/usuarios')
                 console.log(data)
             })
     }
@@ -60,6 +61,7 @@ export class NovoUsuarioComponent extends Component {
                             id='nome'
                             label='Nome do Usuário'
                             margin='normal'
+                            required
                             onChange={this.onChange('nomeUsuario')}
                             value={this.state.nomeUsuario}
                         />
@@ -70,6 +72,7 @@ export class NovoUsuarioComponent extends Component {
                             id='sobrenome'
                             label='Sobrenome do Usuário'
                             margin='normal'
+                            required
                             onChange={this.onChange('sobrenomeUsuario')}
                             value={this.state.sobrenomeUsuario}
                         />
@@ -80,6 +83,7 @@ export class NovoUsuarioComponent extends Component {
                             id="senha"
                             label="Senha"
                             type="password"
+                            required
                             autoComplete="current-password"
                             onChange={this.onChange('senhaUsuario')}
                             value={this.state.senha}
@@ -90,9 +94,18 @@ export class NovoUsuarioComponent extends Component {
 
                         <br />
 
-                        <Button variant="contained" color="primary" onClick={this.onSave}>
-                            Salvar
-                        </Button>
+                        <Grid container spacing={8}>
+                            <Grid item xs={4}>
+                                <Button variant="contained" color="secondary" component={Link} to='/usuarios'>
+                                    Voltar
+                                </Button>
+                            </Grid>
+                            <Grid item xs={4}>
+                                <Button variant="contained" color="primary" onClick={this.onSave}>
+                                    Salvar
+                                </Button>
+                            </Grid>
+                        </Grid>
 
                     </CardContent>
                 </Card>

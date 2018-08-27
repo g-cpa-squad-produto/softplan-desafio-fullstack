@@ -1,5 +1,14 @@
 import React, { Component } from 'react'
-import { Table, TableHead, TableBody, TableCell, TableRow, List } from '@material-ui/core'
+import { Table, TableHead, TableBody, TableCell, TableRow, Button } from '@material-ui/core'
+import { AddCircle, Edit, Search } from '@material-ui/icons'
+
+
+const usuarioAtivo = (ativo) => {
+    if (ativo)
+        return "Ativo"
+    return "Não Ativo"
+}
+
 
 export class UsuarioGridComponent extends Component {
 
@@ -16,6 +25,7 @@ export class UsuarioGridComponent extends Component {
                             <TableCell>Nome</TableCell>
                             <TableCell>Sobrenome</TableCell>
                             <TableCell>Status</TableCell>
+                            <TableCell># </TableCell>
                         </TableRow>
                     </TableHead>
 
@@ -28,6 +38,17 @@ export class UsuarioGridComponent extends Component {
                                     </TableCell>
                                     <TableCell>
                                         {usuario.sobrenomeUsuario}
+                                    </TableCell>
+                                    <TableCell>
+                                        {usuarioAtivo(usuario.usuarioAtivo)}
+                                    </TableCell>
+                                    <TableCell>
+                                        <Button variant="contained" size="small" color="primary">
+                                            Visualizar
+                                        </Button>
+                                        <Button variant="contained" size="small" color="primary">
+                                            Editar
+                                        </Button>
                                     </TableCell>
                                 </TableRow>
                             )
