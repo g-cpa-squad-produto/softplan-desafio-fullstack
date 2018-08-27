@@ -1,0 +1,44 @@
+version: '2'
+services:
+    postgres:
+        image: 'postgres:9.6'
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_DB=sistemaprocessodb
+        container_name: postgres
+        ports:
+            - '5432:5432'
+        networks:
+            - sistemaprocesso-network
+
+    web-nginx:
+        build:
+            dockerfile: ./docker/nginx.dockerfile
+            context: .
+        container_name: web-nginx
+        ports:
+            - "80:80"
+            - "443:443"
+        networks: 
+            - sistemaprocesso-network
+        depends_on: 
+            - "springboot-api"
+
+    springboot-api:
+        build:
+            dockerfile: ./docker/java8.dockerfile
+            context: .
+        environment:
+            - POSTGRES_HOST=postgres
+        container_name: springboot-api
+        ports:
+            - 8080:8080
+        networks:
+            - sistemaprocesso-network
+        depends_on: 
+            - "postgres"
+
+networks: 
+    sistemaprocesso-network:
+        driver: bridge

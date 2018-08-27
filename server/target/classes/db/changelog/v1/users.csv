@@ -1,0 +1,4 @@
+id, name,login,password,profile,status
+9999991, user admin,admin,admin,ADMINISTRADOR,ATIVO
+9999992, user triador,triador,triador,TRIADOR,ATIVO
+9999993, user finalizador,finalizador,finalizador,FINALIZADOR,INATIVO

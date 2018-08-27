@@ -1,3 +1,7 @@
+# Favor ler o arquivo "Leia-me.txt" na Raiz do Projeto.
+
+
+
 # Desafio implementador fullstack
 
 Seja parte da jornada de transformação digital no Brasil.

@@ -1,0 +1,50 @@
+<div>
+  <app-custom-tool-bar></app-custom-tool-bar>
+  <mat-card>
+    <mat-card-content >
+        <mat-card-title >
+          <button mat-icon-button color="accent" (click)="voltar()"><mat-icon>keyboard_backspace</mat-icon> </button>
+          &nbsp;Usuário
+        </mat-card-title>
+    </mat-card-content>
+
+    <mat-card-content>
+      <div fxLayout="row" fxLayout="column">
+        <mat-form-field>
+          <input matInput placeholder="Nome" id="name" [(ngModel)]="user.name" required>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayout="column">
+        <mat-form-field>
+          <input matInput placeholder="Login" id="login" [(ngModel)]="user.login" required>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayout="column">
+        <mat-form-field>
+          <input matInput type="password" placeholder="Password" id="password" [(ngModel)]="user.password" required>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayout="column">
+          <mat-form-field>
+            <input matInput placeholder="Perfil" id="profile" [(ngModel)]="user.profile" required>
+          </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayout="column">
+          <mat-form-field>
+            <input matInput placeholder="Ativo" id="status" [(ngModel)]="user.status" required>
+          </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="end">
+        <span class="send">
+          <button mat-fab (click)="save()"> 
+            <mat-icon>send</mat-icon>
+          </button>
+        </span>
+      </div>
+    </mat-card-content>
+
+  </mat-card>
+</div>

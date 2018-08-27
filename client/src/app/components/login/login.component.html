@@ -1,0 +1,35 @@
+  <div>
+  <mat-card>
+    <mat-card-title><mat-card-title><mat-icon>lock</mat-icon> Login  </mat-card-title></mat-card-title>
+
+    <mat-card-content>
+      <div fxLayout="row" fxLayout="column">
+        <mat-form-field>
+          <input matInput placeholder="User" id="user" [(ngModel)]="user" required>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayout="column">
+        <mat-form-field>
+          <input matInput placeholder="Password" type="password" id="password" [(ngModel)]="password" required>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayout="column" *ngIf="loginError">
+        <mat-chip-list>
+          <mat-chip selected="true" color="warn">
+            <mat-icon>warning</mat-icon>
+            {{ loginError }}
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="end">
+        <span class="send">
+          <button mat-fab type="submit" id="login" (click)="login(user, password)">
+            <mat-icon>send</mat-icon>
+          </button>
+        </span>
+      </div>
+    </mat-card-content>
+
+  </mat-card>
+</div>
+

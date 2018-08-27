@@ -1,0 +1,31 @@
+@import '~@angular/material/theming';
+@import url('//fonts.googleapis.com/icon?family=Material+Icons');
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+
+@include mat-core();
+
+//$primary: mat-palette($mat-lime, 500);
+//$accent:  mat-palette($mat-lime, 100, A200, A400);
+//$warn:    mat-palette($mat-red, 100);
+
+$primary: mat-palette($mat-indigo, 700, 300, 900);
+$accent: mat-palette($mat-light-blue);
+$warn: mat-palette($mat-deep-orange, A200);
+
+$config: mat-typography-config();
+
+
+$theme: mat-light-theme($primary, $accent, $warn);
+
+@include angular-material-theme($theme);
+
+body {
+  margin: 0;
+  font-family: mat-font-family($config);
+  font-weight: normal;
+}
+
+h1, h2, h3, h4 {
+  font-weight: normal;
+}
