@@ -12,7 +12,7 @@ export class CustomToolBarComponent {
     private router: Router
   ){}
 
-  routeFormUser(id) {
+  routeFormUser() {
     this.router.navigate([`/user`]);
   }
 

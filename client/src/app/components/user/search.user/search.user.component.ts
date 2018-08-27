@@ -10,7 +10,7 @@ import { User } from '../../../services/user/user.model'
 })
 export class SearchUserComponent implements OnInit {
 
-  private users: User[];
+  users: User[];
 
   // exibicao de mensagem de erro na tela
   isError: Boolean = false;
@@ -27,6 +27,10 @@ export class SearchUserComponent implements OnInit {
 
   routeFormUser(id) {
     this.router.navigate([`/user/form/${id}`]);
+  }
+
+  routeFormNewUser() {
+    this.router.navigate([`/user/form`]);
   }
 
   back() {
