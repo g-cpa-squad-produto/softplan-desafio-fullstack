@@ -33,7 +33,7 @@ services:
             - POSTGRES_HOST=postgres
         container_name: springboot-api
         ports:
-            - 3000:3000
+            - 8080:8080
         networks:
             - sistemaprocesso-network
         depends_on: 
