@@ -104,6 +104,11 @@ databaseChangeLog:
                     primaryKey: true
                     autoIncrement: true
               - column:
+                  name: id_process
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
                   name: description
                   type: varchar(255)
                   constraints:
@@ -141,6 +146,12 @@ databaseChangeLog:
             baseTableName: legal_advices
             referencedColumnNames: id
             referencedTableName: users
+        - addForeignKeyConstraint: 
+            constraintName: fk_legal_advices_processes_id_process
+            baseColumnNames: id_process
+            baseTableName: legal_advices
+            referencedColumnNames: id
+            referencedTableName: processes
   - changeSet:
       id: initLoad-user
       author: danilo.paixao

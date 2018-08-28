@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import br.com.danilopaixao.ws.process.Process;
 import br.com.danilopaixao.ws.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -53,6 +52,10 @@ public class LegalAdvice implements Serializable{
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "responsable_for")
 	private User userResponsableFor;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_process")
+	private Process process;
 	
 	
 }
