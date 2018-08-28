@@ -56,12 +56,12 @@ class ProcessController {
     }
 
     create(req, res, next) {
-        const { email, password, type } = req.body;
-        const hashedPassword = hashPassword(password);
+        const { name, description } = req.body;
         const data = {
-            email,
-            password: hashedPassword,
-            type
+            name,
+            description,
+            accounts: [],
+            type: 'pending'
         };
 
         this.model.create(data)
@@ -107,8 +107,10 @@ class ProcessController {
 
     edit(req, res, next) {
         const { id } = req.params;
+        const { name, description} = req.body;
+        const data = { name, description};
 
-        this.model.edit(id, req.body)
+        this.model.edit(id, data)
             .then((result) => {
                 if (result) res.status(200).json(result);
                 else {
