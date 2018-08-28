@@ -3,6 +3,8 @@ export class Process {
     code: string
     summary: string
     description: string
-    idUserCreatedBy: number
-	idUserFinishedBy:number
+    idCreatedBy: number
+    idFinishedBy:number
+    loginCreatedBy: string
+    loginFinishedBy: string
 }

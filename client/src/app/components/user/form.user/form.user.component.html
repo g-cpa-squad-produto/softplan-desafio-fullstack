@@ -26,13 +26,21 @@
 
       <div fxLayout="row" fxLayout="column">
           <mat-form-field>
-            <input matInput placeholder="Perfil" id="profile" [(ngModel)]="user.profile" required>
+              <mat-select placeholder="Perfil" [(ngModel)]="user.profile">
+                  <mat-option value="ADMINISTRADOR" >ADMINISTRADOR</mat-option>
+                  <mat-option value="TRIADOR">TRIADOR</mat-option>
+                  <mat-option value="FINALIZADOR">FINALIZADOR</mat-option>
+              </mat-select>
           </mat-form-field>
       </div>
 
+
       <div fxLayout="row" fxLayout="column">
           <mat-form-field>
-            <input matInput placeholder="Ativo" id="status" [(ngModel)]="user.status" required>
+              <mat-select placeholder="Status" [(ngModel)]="user.status">
+                  <mat-option value="ATIVO" >ATIVO</mat-option>
+                  <mat-option value="INATIVO">INATIVO</mat-option>
+              </mat-select>
           </mat-form-field>
       </div>
 

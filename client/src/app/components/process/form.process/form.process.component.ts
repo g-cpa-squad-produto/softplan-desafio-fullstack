@@ -20,6 +20,9 @@ export class FormProcessComponent implements OnInit {
   processId: number;
   process: Process = new Process();
 
+  user: string;
+  private users: string[] = ['asdasd', 'asdfasd', 'bhjfj', 'sdf sthd','asdasd', 'asdfasd', 'bhjfj', 'sdf sthd'];
+
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       if(params.get('id')){
@@ -44,6 +47,7 @@ export class FormProcessComponent implements OnInit {
   }
 
   createProcess(){
+    this.process.idCreatedBy = 9999991;
     this.processService.createProcess(this.process).subscribe(
       u =>{
         this.router.navigate(['/process'])

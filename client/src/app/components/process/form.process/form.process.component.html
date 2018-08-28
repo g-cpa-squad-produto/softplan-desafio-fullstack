@@ -23,14 +23,55 @@
           <input matInput placeholder="Descrição" id="description" [(ngModel)]="process.description" required>
         </mat-form-field>
       </div>
+      
+      <div fxLayout="row" fxLayout="column" *ngIf="process.idFinishedBy"> 
+          <div style="color: red"> 
+              <mat-icon>info</mat-icon>Processo Finalizado!
+          </div>
+    </div>
+      
+      <div fxLayout="row" fxLayout="column" *ngIf="process.id && !process.idFinishedBy">
+              <button mat-button> 
+                  <mat-icon>info</mat-icon> Finalizar Processo
+              </button>
+      </div>
 
-      <div fxLayout="row" fxLayoutAlign="end">
+      <div fxLayout="row" fxLayout="column" *ngIf="process.id && !process.idFinishedBy">
+          <button mat-button (click)="save()"> 
+              <mat-icon>save</mat-icon> Salvar
+          </button>
+      </div>
+
+
+      <!--
+      <div fxLayout="row" fxLayout="column">
+          <mat-form-field >
+              <input matInput type="text" 
+                        placeholder="Finalizador"  
+                        [matAutocomplete]="auto" 
+                        [(ngModel)]="user" 
+                        name="user" required>
+              <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let u of users" [value]="u">
+                      {{u}}
+                  </mat-option>
+
+                    <mat-error *ngIf="description">
+                      Campo obrigatório
+                    </mat-error>
+              </mat-autocomplete>
+          </mat-form-field>
+        </div>
+      -->
+    <!--
+      <div fxLayout="row" fxLayoutAlign="end" *ngIf="!process.idFinishedBy">
         <span class="send">
-          <button mat-fab (click)="save()"> 
+          <button mat-button (click)="save()"> 
             <mat-icon>send</mat-icon>
           </button>
         </span>
       </div>
+    -->
     </mat-card-content>
 
   </mat-card>
