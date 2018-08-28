@@ -6,6 +6,8 @@ import {SearchUserComponent} from './components/user/search.user/search.user.com
 import {FormUserComponent} from './components/user/form.user/form.user.component';
 import {SearchProcessComponent} from './components/process/search.process/search.process.component';
 import {FormProcessComponent} from './components/process/form.process/form.process.component';
+import {SearchLegalAdviceComponent} from './components/legal.advice/search.legal.advice/search.legal.advice.component';
+import {FormLegalAdviceComponent} from './components/legal.advice/form.legal.advice/form.legal.advice.component';
 
 const appRoutes: Routes = [
   {
@@ -25,6 +27,7 @@ const appRoutes: Routes = [
     path: 'user/form/:id',
     component: FormUserComponent
   },
+
   {
     path: 'process',
     component: SearchProcessComponent
@@ -36,6 +39,19 @@ const appRoutes: Routes = [
   {
     path: 'process/form/:id',
     component: FormProcessComponent
+  },
+
+  {
+    path: 'legalAdvice',
+    component: SearchLegalAdviceComponent
+  },
+  {
+    path: 'legalAdvice/form',
+    component: FormLegalAdviceComponent
+  },
+  {
+    path: 'legalAdvice/form/:id',
+    component: FormLegalAdviceComponent
   }
 ];
 

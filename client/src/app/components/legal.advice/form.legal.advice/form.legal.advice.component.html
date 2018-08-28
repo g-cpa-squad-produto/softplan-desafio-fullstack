@@ -1,0 +1,78 @@
+<div>
+  <mat-card>
+    <mat-card-content >
+        <mat-card-title >
+          <button mat-icon-button color="accent" (click)="voltar()"><mat-icon>keyboard_backspace</mat-icon> </button>
+          &nbsp;Parecer Jurídico
+        </mat-card-title>
+    </mat-card-content>
+
+    <mat-card-content>
+        <div fxLayout="row" fxLayout="column">
+            <mat-form-field>
+              <input matInput placeholder="Número" id="code" [(ngModel)]="legalAdvice.code" required>
+            </mat-form-field>
+        </div>
+      <div fxLayout="row" fxLayout="column">
+        <mat-form-field>
+          <input matInput placeholder="Resumo" id="summary" [(ngModel)]="legalAdvice.summary" required>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayout="column">
+        <mat-form-field>
+          <input matInput placeholder="Descrição" id="description" [(ngModel)]="legalAdvice.description" required>
+        </mat-form-field>
+      </div>
+      
+      <div fxLayout="row" fxLayout="column" *ngIf="legalAdvice.idFinishedBy"> 
+          <div style="color: red"> 
+              <mat-icon>info</mat-icon>Parecer Finalizado!
+          </div>
+    </div>
+      
+      <div fxLayout="row" fxLayout="column" *ngIf="legalAdvice.id && !legalAdvice.idFinishedBy">
+              <button mat-button> 
+                  <mat-icon>info</mat-icon> Finalizar Parecer
+              </button>
+      </div>
+
+      <div fxLayout="row" fxLayout="column" *ngIf="legalAdvice.id && !legalAdvice.idFinishedBy">
+          <button mat-button (click)="save()"> 
+              <mat-icon>save</mat-icon> Salvar
+          </button>
+      </div>
+
+
+      <!--
+      <div fxLayout="row" fxLayout="column">
+          <mat-form-field >
+              <input matInput type="text" 
+                        placeholder="Finalizador"  
+                        [matAutocomplete]="auto" 
+                        [(ngModel)]="user" 
+                        name="user" required>
+              <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let u of users" [value]="u">
+                      {{u}}
+                  </mat-option>
+
+                    <mat-error *ngIf="description">
+                      Campo obrigatório
+                    </mat-error>
+              </mat-autocomplete>
+          </mat-form-field>
+        </div>
+      -->
+    <!--
+      <div fxLayout="row" fxLayoutAlign="end" *ngIf="!legalAdvice.idFinishedBy">
+        <span class="send">
+          <button mat-button (click)="save()"> 
+            <mat-icon>send</mat-icon>
+          </button>
+        </span>
+      </div>
+    -->
+    </mat-card-content>
+
+  </mat-card>
+</div>

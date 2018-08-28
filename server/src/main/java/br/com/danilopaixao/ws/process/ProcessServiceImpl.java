@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.danilopaixao.ws.user.User;
+import br.com.danilopaixao.ws.user.UserService;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -18,6 +19,9 @@ class ProcessServiceImpl implements ProcessService {
 
 	@Autowired
     private ProcessRepository repository;
+	
+	@Autowired
+	private UserService userService;
 	
 	@Override
 	public ProcessResponse save(ProcessRequest processRequest) {
@@ -47,8 +51,14 @@ class ProcessServiceImpl implements ProcessService {
 		process.setSummary(processRequest.getSummary());
 		process.setCode(processRequest.getCode());
 		process.setDescription(processRequest.getDescription());
-		process.setUserCreatedBy(User.builder().id(processRequest.getIdUserCreatedBy()).build());
-		process.setUserFinishedBy(User.builder().id(processRequest.getIdUserFinishedBy()).build());
+		if(processRequest.getIdUserCreatedBy()!= null) {
+			User u = userService.getUserById(processRequest.getIdUserCreatedBy());
+			process.setUserCreatedBy(u);
+		}
+		if(processRequest.getIdUserFinishedBy()!= null) {
+			User u = userService.getUserById(processRequest.getIdUserFinishedBy());
+			process.setUserFinishedBy(u);
+		}
 		this.repository.save(process);
 		return ProcessResponse
 					.builder()

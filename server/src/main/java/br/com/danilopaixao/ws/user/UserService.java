@@ -9,5 +9,6 @@ public interface UserService {
 	UserResponse getById(Long id);
 	List<UserResponse> getByAllUsers();
 	UserResponse inativeUser(Long id);
+	User getUserById(Long id);
 
 }
