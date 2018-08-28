@@ -23,6 +23,8 @@ import classNames from 'classnames';
 import { Home } from '../home/Home'
 import { UsuarioList } from '../usuario/UsuarioList';
 import { NovoUsuarioComponent } from '../usuario/NovoUsuario'
+import { ProcessoList } from '../processo/ProcessoList'
+import { NovoProcesso } from '../processo/NovoProcesso';
 
 const drawerWidth = 240;
 
@@ -151,7 +153,7 @@ class SideMenu extends Component {
                             </ListItemIcon>
                             <ListItemText inset primary="Usuários" />
                         </ListItem>
-                        <ListItem button component={Link} to="/">
+                        <ListItem button component={Link} to="/processos">
                             <ListItemIcon>
                                 <Assignment />
                             </ListItemIcon>
@@ -168,6 +170,8 @@ class SideMenu extends Component {
                         <Route path="/usuarios" component={UsuarioList} />
                         <Route path="/usuario/novo" component={NovoUsuarioComponent} />
 
+                        <Route path="/processos" component={ProcessoList} />
+                        <Route path="/processo/novo" component={NovoProcesso} />
                     </main>
 
                 </div>

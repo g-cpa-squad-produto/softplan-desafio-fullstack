@@ -115,4 +115,56 @@ public class Usuario implements Serializable {
 		this.permissoes = permissoes;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((isnUsuario == null) ? 0 : isnUsuario.hashCode());
+		result = prime * result + ((nomeUsuario == null) ? 0 : nomeUsuario.hashCode());
+		result = prime * result + ((permissoes == null) ? 0 : permissoes.hashCode());
+		result = prime * result + ((senhaUsuario == null) ? 0 : senhaUsuario.hashCode());
+		result = prime * result + ((sobrenomeUsuario == null) ? 0 : sobrenomeUsuario.hashCode());
+		result = prime * result + (usuarioAtivo ? 1231 : 1237);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		if (isnUsuario == null) {
+			if (other.isnUsuario != null)
+				return false;
+		} else if (!isnUsuario.equals(other.isnUsuario))
+			return false;
+		if (nomeUsuario == null) {
+			if (other.nomeUsuario != null)
+				return false;
+		} else if (!nomeUsuario.equals(other.nomeUsuario))
+			return false;
+		if (permissoes == null) {
+			if (other.permissoes != null)
+				return false;
+		} else if (!permissoes.equals(other.permissoes))
+			return false;
+		if (senhaUsuario == null) {
+			if (other.senhaUsuario != null)
+				return false;
+		} else if (!senhaUsuario.equals(other.senhaUsuario))
+			return false;
+		if (sobrenomeUsuario == null) {
+			if (other.sobrenomeUsuario != null)
+				return false;
+		} else if (!sobrenomeUsuario.equals(other.sobrenomeUsuario))
+			return false;
+		if (usuarioAtivo != other.usuarioAtivo)
+			return false;
+		return true;
+	}
+
 }

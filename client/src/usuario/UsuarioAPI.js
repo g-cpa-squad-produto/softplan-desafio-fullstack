@@ -17,6 +17,18 @@ export class UsuarioAPI {
         }
     }
 
+    getAllUsuariosAtivos() {
+        try {
+            let usuarioRequest =
+                fetch(`${url}/ativos`)
+                    .then(response => response.json())
+            return usuarioRequest;
+        } catch (error) {
+            console.log('Erro ao buscar Usuarios Ativos da API' + error)
+            return undefined
+        }
+    }
+
     saveNovoUsuario(usuario) {
         try {
             let postRequest = fetch(url, {

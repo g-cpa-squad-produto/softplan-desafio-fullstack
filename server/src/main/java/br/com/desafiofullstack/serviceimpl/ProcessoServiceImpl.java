@@ -3,6 +3,7 @@
  */
 package br.com.desafiofullstack.serviceimpl;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,6 +36,10 @@ public class ProcessoServiceImpl implements ProcessoService {
 	 */
 	@Override
 	public Optional<Processo> save(Processo processo) {
+		processo.setDataPublicaocaoProcesso(LocalDate.now());
+		processo.getProcessosUsuario().forEach(p -> {
+			p.setProcesso(processo);
+		});
 		return Optional.of(processoRepository.save(processo));
 	}
 

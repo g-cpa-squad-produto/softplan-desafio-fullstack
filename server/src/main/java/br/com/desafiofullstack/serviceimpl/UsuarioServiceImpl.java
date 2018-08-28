@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import br.com.desafiofullstack.domain.Usuario;
@@ -62,6 +63,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public void deleteById(Long id) {
 		usuarioRepository.deleteById(id);
+	}
+
+	@Override
+	public Optional<List<Usuario>> consultaUsuariosAtivos() {
+		return Optional.of(usuarioRepository.findAll(Example.of(new Usuario(null, null, null, null, true, null))));
 	}
 
 }

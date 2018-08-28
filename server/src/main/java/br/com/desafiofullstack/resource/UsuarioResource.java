@@ -65,4 +65,13 @@ public class UsuarioResource implements Serializable {
 		}
 	}
 
+	@GetMapping(value = "/ativos")
+	private ResponseEntity<?> findUsuariosAtivos() {
+		try {
+			return ResponseEntity.ok(usuarioService.consultaUsuariosAtivos().orElse(null));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
+	}
+
 }
