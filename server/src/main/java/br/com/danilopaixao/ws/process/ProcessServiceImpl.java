@@ -23,6 +23,7 @@ class ProcessServiceImpl implements ProcessService {
 	public ProcessResponse save(ProcessRequest processRequest) {
 		log.info("save process => " + processRequest);
 		Process process = Process.builder()
+				.code(processRequest.getCode())
 				.summary(processRequest.getSummary())
 				.description(processRequest.getDescription())
 				.userCreatedBy(User.builder().id(processRequest.getIdUserCreatedBy()).build())
@@ -31,6 +32,7 @@ class ProcessServiceImpl implements ProcessService {
 		return ProcessResponse
 					.builder()
 					.id(process.getId())
+					.code(process.getCode())
 					.summary(process.getSummary())
 					.description(process.getDescription())
 					.idCreatedBy(process.getUserCreatedBy().getId())
@@ -43,6 +45,7 @@ class ProcessServiceImpl implements ProcessService {
 		log.info("save process", processRequest);
 		Process process = this.repository.findOne(id);
 		process.setSummary(processRequest.getSummary());
+		process.setCode(processRequest.getCode());
 		process.setDescription(processRequest.getDescription());
 		process.setUserCreatedBy(User.builder().id(processRequest.getIdUserCreatedBy()).build());
 		process.setUserFinishedBy(User.builder().id(processRequest.getIdUserFinishedBy()).build());
@@ -50,6 +53,7 @@ class ProcessServiceImpl implements ProcessService {
 		return ProcessResponse
 					.builder()
 					.id(process.getId())
+					.code(process.getCode())
 					.summary(process.getSummary())
 					.description(process.getDescription())
 					.idCreatedBy(process.getUserCreatedBy().getId())
@@ -63,6 +67,7 @@ class ProcessServiceImpl implements ProcessService {
 		Process process = this.repository.findOne(id);
 		return ProcessResponse.builder()
 				.id(process.getId())
+				.code(process.getCode())
 				.summary(process.getSummary())
 				.description(process.getDescription())
 				.idCreatedBy(process.getUserCreatedBy().getId())
@@ -79,6 +84,7 @@ class ProcessServiceImpl implements ProcessService {
 				.stream()
 				.map(p -> ProcessResponse.builder()
 								.id(p.getId())
+								.code(p.getCode())
 								.summary(p.getSummary())
 								.description(p.getDescription())
 								.idCreatedBy(p.getUserCreatedBy().getId())

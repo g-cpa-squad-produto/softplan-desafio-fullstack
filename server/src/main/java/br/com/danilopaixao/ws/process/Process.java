@@ -36,6 +36,9 @@ public class Process implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
+	@Column(name = "code")
+	private String code;
+	
 	@Column(name = "summary")
 	private String summary;
 	

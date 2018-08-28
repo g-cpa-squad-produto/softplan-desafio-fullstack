@@ -53,6 +53,11 @@ databaseChangeLog:
                     primaryKey: true
                     autoIncrement: true
               - column:
+                  name: code
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
                   name: summary
                   type: varchar(55)
                   constraints:
@@ -137,7 +142,7 @@ databaseChangeLog:
             referencedColumnNames: id
             referencedTableName: users
   - changeSet:
-      id: initLoad
+      id: initLoad-user
       author: danilo.paixao
       changes:
         - loadData:
@@ -146,3 +151,13 @@ databaseChangeLog:
             schemaName: public
             separator: ","
             tableName: users
+  - changeSet:
+      id: initLoad-process
+      author: danilo.paixao
+      changes:
+        - loadData:
+            encoding: UTF-8
+            file: db/changelog/v1/process.csv
+            schemaName: public
+            separator: ","
+            tableName: processes

@@ -1,0 +1,37 @@
+<div>
+  <mat-card>
+    <mat-card-content >
+        <mat-card-title >
+          <button mat-icon-button color="accent" (click)="voltar()"><mat-icon>keyboard_backspace</mat-icon> </button>
+          &nbsp;Processo
+        </mat-card-title>
+    </mat-card-content>
+
+    <mat-card-content>
+        <div fxLayout="row" fxLayout="column">
+            <mat-form-field>
+              <input matInput placeholder="Número" id="code" [(ngModel)]="process.code" required>
+            </mat-form-field>
+        </div>
+      <div fxLayout="row" fxLayout="column">
+        <mat-form-field>
+          <input matInput placeholder="Resumo" id="summary" [(ngModel)]="process.summary" required>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayout="column">
+        <mat-form-field>
+          <input matInput placeholder="Descrição" id="description" [(ngModel)]="process.description" required>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="end">
+        <span class="send">
+          <button mat-fab (click)="save()"> 
+            <mat-icon>send</mat-icon>
+          </button>
+        </span>
+      </div>
+    </mat-card-content>
+
+  </mat-card>
+</div>

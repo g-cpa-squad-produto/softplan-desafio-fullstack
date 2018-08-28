@@ -4,12 +4,12 @@
     <a mat-list-item
         routerLink="/user" (click)="sidenav.close()">
       <mat-icon class="icon">person</mat-icon>  
-        <span class="label">Usuário</span>
+      &nbsp;<span class="label">Usuário</span>
     </a>
     <a mat-list-item
-      routerLink="/dashboard" (click)="sidenav.close()">
+      routerLink="/process" (click)="sidenav.close()">
       <mat-icon class="icon">dashboard</mat-icon>  
-      <span class="label">Processo</span>
+      &nbsp;<span class="label">Processo</span>
     </a>
     </mat-nav-list>
   </mat-sidenav>
@@ -31,14 +31,14 @@
               <a
                 routerLink="/">
                   <mat-icon class="icon">person</mat-icon>
-                  <span class="label">Usuário</span>
+                  &nbsp;<span class="label">Usuário</span>
               </a>
             </li>
             <li>
                 <a
-                  routerLink="/dashboard">
+                  routerLink="/process">
                     <mat-icon class="icon">dashboard</mat-icon>
-                    <span class="label">Processo</span>
+                    &nbsp;<span class="label">Processo</span>
                 </a>
               </li>
         </ul>

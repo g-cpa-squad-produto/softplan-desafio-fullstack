@@ -20,6 +20,7 @@ public class ProcessResponse implements Serializable{
 	private static final long serialVersionUID = -1517670884022709952L;
 	
 	private Long id;
+	private String code;
 	private String summary;
 	private String description;
 	private Long idCreatedBy;
@@ -30,6 +31,7 @@ public class ProcessResponse implements Serializable{
 	@JsonCreator
 	public ProcessResponse(
 			@JsonProperty("id") final Long id,
+			@JsonProperty("code") final String code,
 			@JsonProperty("summary") final String summary,
 			@JsonProperty("description") final String description,
 			@JsonProperty("idCreatedBy") final Long idCreatedBy,
@@ -37,6 +39,7 @@ public class ProcessResponse implements Serializable{
 			@JsonProperty("idFinishedBy") final Long idFinishedBy,
 			@JsonProperty("loginFinishedBy") final String loginFinishedBy) {
 		this.id = id;		
+		this.code = code;
 		this.summary = summary;
 		this.description = description;
 		this.idCreatedBy = idCreatedBy;

@@ -43,10 +43,12 @@ import { AppRoutingModule } from './app-routing.module';
 
 // Components
 import { AppComponent} from './app.component';
-import {SearchUserComponent} from './components/user/search.user/search.user.component';
 import {LoginComponent} from './components/login/login.component';
+import {SearchUserComponent} from './components/user/search.user/search.user.component';
 import { FormUserComponent } from './components/user/form.user/form.user.component';
 
+import {SearchProcessComponent} from './components/process/search.process/search.process.component';
+import { FormProcessComponent } from './components/process/form.process/form.process.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,8 @@ import { FormUserComponent } from './components/user/form.user/form.user.compone
     LoginComponent,
     SearchUserComponent,
     FormUserComponent,
-
+    SearchProcessComponent,
+    FormProcessComponent,
     ImageViewerComponent,
     CustomToolBarComponent
   ],
