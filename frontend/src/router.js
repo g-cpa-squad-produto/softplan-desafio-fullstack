@@ -3,12 +3,14 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 import Master from './pages/Master';
 
 import Login from './pages/Login';
-import CreateProcess from './pages/CreateProcess';
 import CreateAccount from './pages/CreateAccount';
 import ListAccounts from './pages/ListAccounts';
-import ListProcesses from './pages/ListProcesses';
 import EditAccount from './pages/EditAccount';
+import ListProcesses from './pages/ListProcesses';
+import CreateProcess from './pages/CreateProcess';
 import EditProcess from './pages/EditProcess';
+import PendingProcesses from './pages/PendingProcesses';
+import UpdateFeedback from './pages/UpdateFeedback';
 import Home from './pages/Home';
 
 const routes = [
@@ -17,24 +19,32 @@ const routes = [
         component: Login
     },
     {
+        path: '/process/list',
+        component: ListProcesses
+    },
+    {
         path: '/process/create',
         component: CreateProcess
+    },
+    {
+        path: '/process/pending',
+        component: PendingProcesses
     },
     {
         path: '/process/:id',
         component: EditProcess
     },
     {
-        path: '/process/list',
-        component: ListProcesses
-    },
-    {
-        path: '/account/create',
-        component: CreateAccount
+        path: '/process/:id/feedback',
+        component: UpdateFeedback
     },
     {
         path: '/account/list',
         component: ListAccounts
+    },
+    {
+        path: '/account/create',
+        component: CreateAccount
     },
     {
         path: '/account/:id',

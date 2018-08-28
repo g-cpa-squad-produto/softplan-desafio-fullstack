@@ -41,6 +41,12 @@ export const put = (url, data, headers) => {
     return factory(axios.put(resolveUrl(url), data, { headers, cancelToken: source.token }), source.cancel);
 };
 
+export const patch = (url, data, headers) => {
+    const source = CancelToken.source();
+    headers = resolveHeaders(headers);
+    return factory(axios.patch(resolveUrl(url), data, { headers, cancelToken: source.token }), source.cancel);
+};
+
 function resolveHeaders(headers = {}) {
     const token = getToken();
 

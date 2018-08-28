@@ -20,12 +20,36 @@ class Home extends Page {
         );
     }
 
+    renderTriadorOptions() {
+        return (
+            <div>
+                <Link to={'/process/list'}>Processos</Link>
+            </div>
+        );
+    }
+
+    renderFinalizadorOptions() {
+        return (
+            <div>
+                <Link to={'/process/pending'}>Processos pendentes</Link>
+            </div>
+        );
+    }
+
     render() {
         if(!this.props.session.data) return null;
         return (
             <div className="Login">
                 {
                     this.props.session.data.type === 'administrator' && this.renderAdministratorOptions()
+                }
+
+                {
+                    this.props.session.data.type === 'triador' && this.renderTriadorOptions()
+                }
+
+                {
+                    this.props.session.data.type === 'finalizador' && this.renderFinalizadorOptions()
                 }
 
                 <button onClick={this.logout.bind(this)}>Logout</button>

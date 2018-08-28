@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { showProcess, editProcess, deleteProcess } from '../redux/actions';
+import { showProcess, editProcess, deleteProcess, listAccounts, addAccountToProcess, removeAccountFromProcess } from '../redux/actions';
 import { Link } from 'react-router-dom';
 import { errorMessage } from '../libs/helpers';
 import Page from './Page';
@@ -10,18 +10,21 @@ class EditProcess extends Page {
         super(props);
 
         this.state = {
-            email: '',
-            password: '',
-            type: ''
+            name: '',
+            accountId: '',
+            accounts: []
         };
     }
 
     componentDidMount() {
         const { id } = this.props.match.params;
         this.props.dispatch(showProcess(id))
-        .then(({payload}) => {
-            this.setState(payload.process);
-        })
+            .then(({ payload }) => {
+                this.setState(payload.process);
+            });
+
+
+        this.props.dispatch(listAccounts());
     }
 
     onChange(fieldName, e) {
@@ -33,70 +36,98 @@ class EditProcess extends Page {
 
     edit = () => {
         const { id } = this.props.match.params;
-        const { email, password, type } = this.state;
-        const data = { email, password, type };
+        const { name } = this.state;
+        const data = { name };
 
         this.props.dispatch(editProcess(id, data))
             .then(() => {
-                this.redirect('/home');
+                this.reload();
             })
             .catch(() => {
-                errorMessage('Houve um problema ao editar a conta');
+                errorMessage('Houve um problema ao editar o processo');
             })
     }
 
     delete = () => {
         const { id } = this.props.match.params;
-
         this.props.dispatch(deleteProcess(id))
             .then(() => {
-                this.redirect('/home');
+                this.redirect('/process/list');
             })
             .catch(() => {
-                errorMessage('Houve um problema ao deletar a conta');
+                errorMessage('Houve um problema ao deletar o processo');
+            })
+    }
+
+    addAccount = () => {
+        const { id } = this.props.match.params;
+        this.props.dispatch(addAccountToProcess(id, this.state.accountId))
+            .then(() => {
+                this.reload();
+            })
+            .catch(() => {
+                errorMessage('Houve um problema ao adicionar a conta');
+            })
+    }
+
+    removeAccount = (accountId) => {
+        const { id } = this.props.match.params;
+        this.props.dispatch(removeAccountFromProcess(id, accountId))
+            .then(() => {
+                this.reload();
+            })
+            .catch(() => {
+                errorMessage('Houve um problema ao remover a conta');
             })
     }
 
     render() {
         const { selected } = this.props.process;
 
-        const typesOptions = [
-            { id: 'administrador', name: 'Administrador' },
-            { id: 'triador', name: 'Triador' },
-            { id: 'finalizador', name: 'Ginalizador' },
-        ];
-
-        const options = typesOptions.map((option, i) => {
+        const options = this.props.account.list.map((option, i) => {
             const value = option.id || option._id;
-            const text = option.name;
+            const text = option.email;
 
             return <option key={i} value={value}>{text}</option>
+        });
+
+        const accounts = this.state.accounts.map((accountId, i) => {
+            const account = this.props.account.list.find((account) => {
+                return account._id === accountId
+            });
+
+            return account ? (
+                <div key={i}>
+                    {account.email}
+                    <button onClick={this.removeAccount.bind(this, account._id)}>Remover conta</button>
+                </div>
+            ) : null;
         });
 
         return (
             <div className="Login">
                 <div className="form">
-                    <label>E-mail</label>
-                    <input value={this.state.email} onChange={this.onChange.bind(this, 'email')} type='email' />
+                    <label>Nome</label>
+                    <input value={this.state.name} onChange={this.onChange.bind(this, 'name')} type='text' />
 
-                    <label>Senha</label>
-                    <input onChange={this.onChange.bind(this, 'password')} type='password' />
-
-                    <label>Tipo</label>
-                    <select value={this.state.type} onChange={this.onChange.bind(this, 'type')}>
+                    <label>Adicionar conta</label>
+                    <select value={this.state.accountId} onChange={this.onChange.bind(this, 'accountId')}>
                         {options}
                     </select>
+                    <button onClick={this.addAccount}>Adicionar conta</button>
 
-                    <button onClick={this.edit}>Enviar</button>
-                    <button onClick={this.delete}>Deletar</button>
+                    {accounts}
+
+                    <button onClick={this.delete}>Deletar este processo</button>
+                    <button onClick={this.edit}>Salvar</button>
                 </div>
             </div>
         );
     }
 }
 
-const mapStateToProps = ({ process, session }) => {
-    return { process, session };
+const mapStateToProps = ({ process, account, session }) => {
+    return { process, account, session };
 };
 
 export default connect(

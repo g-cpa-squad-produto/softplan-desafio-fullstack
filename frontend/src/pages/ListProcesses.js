@@ -27,6 +27,7 @@ class ListProcesses extends Page {
                         )
                     })
                 }
+                <Link to={'/process/create'}>Criar novo processo</Link>
             </div>
         );
     }

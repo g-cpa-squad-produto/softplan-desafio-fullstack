@@ -7,9 +7,8 @@ class ProcessController {
         this.model = model;
     }
 
-    addAccount(req, res, next) {
-        const { id, accountId } = req.params;
-        this.model.addArrayItem(id, 'users', accountId)
+    listPending(req, res, next) {
+        this.model.search({ feedback: null })
             .then((result) => {
                 res.status(200).json(result);
             })
@@ -20,11 +19,24 @@ class ProcessController {
             });
     }
 
-    updateStatus(req, res, next) {
+    addAccount(req, res, next) {
+        const { id, accountId } = req.params;
+        this.model.addArrayItem(id, 'accounts', accountId)
+            .then((result) => {
+                res.status(200).json(result);
+            })
+            .catch((err) => {
+                console.log(err);
+                err.statusCode = 500;
+                next(err);
+            });
+    }
+
+    updateFeedback(req, res, next) {
         const { id } = req.params;
-        const { status, description } = req.body;
-        
-        const data = {status, description};
+        const { feedback } = req.body;
+
+        const data = { feedback };
 
         this.model.edit(id, data)
             .then((result) => {
@@ -44,7 +56,7 @@ class ProcessController {
 
     removeAccount(req, res, next) {
         const { id, accountId } = req.params;
-        this.model.removeArrayItem(id, 'users', accountId)
+        this.model.removeArrayItem(id, 'accounts', accountId)
             .then((result) => {
                 res.status(200).json(result);
             })
@@ -56,10 +68,10 @@ class ProcessController {
     }
 
     create(req, res, next) {
-        const { name, description } = req.body;
+        const { name } = req.body;
         const data = {
             name,
-            description,
+            feedback: null,
             accounts: [],
             type: 'pending'
         };
@@ -107,8 +119,8 @@ class ProcessController {
 
     edit(req, res, next) {
         const { id } = req.params;
-        const { name, description} = req.body;
-        const data = { name, description};
+        const { name } = req.body;
+        const data = { name };
 
         this.model.edit(id, data)
             .then((result) => {

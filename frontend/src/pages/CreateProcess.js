@@ -9,16 +9,13 @@ class CreateProcess extends Page {
         super(props);
 
         this.state = {
-            name: '',
-            description: '',
-            status: '',
-            accounts: []
+            name: ''
         };
     }
 
     create =() => {
-        const { name, description, type } = this.state;
-        const data = { name, description, type };
+        const { name } = this.state;
+        const data = { name };
         this.props.dispatch(createProcess(data))
             .then(() => {
                 this.redirect('/home');
@@ -36,26 +33,11 @@ class CreateProcess extends Page {
     }
 
     render() {
-        const statusOptions = [
-            { id: 'pendente', name: 'pendente' },
-            { id: 'finalizado', name: 'Finalizado' }
-        ];
-
-        const options = statusOptions.map((option, i) => {
-            const value = option.id || option._id;
-            const text = option.name;
-
-            return <option key={i} value={value}>{text}</option>
-        });
-
         return (
             <div className="Login">
                 <div className="form">
                     <label>Nome</label>
                     <input value={this.state.name} onChange={this.onChange.bind(this, 'name')} type='text' />
-
-                    <label>Descrição</label>
-                    <textarea value={this.state.description} onChange={this.onChange.bind(this, 'description')} />
 
                     <button onClick={this.create}>Enviar</button>
                 </div>

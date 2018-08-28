@@ -27,6 +27,7 @@ class ListAccounts extends Page {
                         )
                     })
                 }
+                <Link to={'/account/create'}>Criar nova conta</Link>
             </div>
         );
     }
