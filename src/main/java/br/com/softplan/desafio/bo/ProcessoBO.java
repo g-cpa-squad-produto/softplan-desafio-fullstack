@@ -1,5 +1,6 @@
 package br.com.softplan.desafio.bo;
 
+import br.com.softplan.desafio.models.Perfil;
 import br.com.softplan.desafio.models.Processo;
 import br.com.softplan.desafio.models.Status;
 import br.com.softplan.desafio.models.Usuario;
@@ -37,9 +38,9 @@ public class ProcessoBO {
     }
 
     @Transactional
-    public Processo salva(@Valid Processo processo, @NotNull Long usuarioCodigo) {
+    public Processo criar(@Valid Processo processo, @NotNull Long usuarioCodigo) {
 
-        validaUsuarioPerfil(usuarioCodigo);
+        validaUsuarioPerfil(usuarioCodigo, Perfil.TRI);
 
         processo.setStatus(Status.PDT);
         processo.setDataCadastro(LocalDate.now());
@@ -48,11 +49,11 @@ public class ProcessoBO {
     }
 
     @Transactional
-    public Processo update(@Valid Processo processo, @NotNull Long usuarioCodigo) {
+    public Processo finalizar(@Valid Processo processo, @NotNull Long usuarioCodigo) {
 
         processoRepository.getByCodigo(processo.getCodigo()).orElseThrow(() -> new RuntimeException("Processo não encontrado"));
 
-        Usuario usuario = validaUsuarioPerfil(usuarioCodigo);
+        Usuario usuario = validaUsuarioPerfil(usuarioCodigo, Perfil.FIN);
 
         processo.setStatus(Status.FNL);
         processo.setDataFinalizacao(LocalDate.now());
@@ -61,9 +62,15 @@ public class ProcessoBO {
         return processoRepository.save(processo);
     }
 
-    private Usuario validaUsuarioPerfil(Long usuarioCodigo) {
+    private Usuario validaUsuarioPerfil(Long usuarioCodigo, Perfil perfil) {
 
-        Optional<Usuario> usuario = usuarioRepository.findByCodigoAndPerfilFinalizador(usuarioCodigo);
+        Optional<Usuario> usuario = Optional.ofNullable(null);
+
+        if (Perfil.FIN.equals(perfil)) {
+            usuario = usuarioRepository.findByCodigoAndPerfilFinalizador(usuarioCodigo);
+        } else if (Perfil.TRI.equals(perfil)) {
+            usuario = usuarioRepository.findByCodigoAndPerfilTriador(usuarioCodigo);
+        }
 
         usuario.orElseThrow(() -> new RuntimeException(USUARIO_NOT_PERFIL));
 

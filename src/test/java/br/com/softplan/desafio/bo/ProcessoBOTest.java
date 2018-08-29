@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.*;
 import static org.junit.Assert.*;
@@ -76,12 +75,12 @@ public class ProcessoBOTest {
         processo.setCodigo(12345L);
         processo.setStatus(Status.PDT);
 
-        Usuario usuario = new Usuario("Milton Jacomini", Perfil.FIN);
+        Usuario usuario = new Usuario("Milton Jacomini", Perfil.TRI);
 
         when(processoRepository.save(eq(processo))).thenReturn(processo);
-        when(usuarioRepository.findByCodigoAndPerfilFinalizador(eq(usuario.getCodigo()))).thenReturn(Optional.of(usuario));
+        when(usuarioRepository.findByCodigoAndPerfilTriador(eq(usuario.getCodigo()))).thenReturn(Optional.of(usuario));
 
-        Processo saved = processoBO.salva(processo, usuario.getCodigo());
+        Processo saved = processoBO.criar(processo, usuario.getCodigo());
 
         assertNotNull(saved);
         assertNotNull(saved.getDataCadastro());
@@ -101,7 +100,7 @@ public class ProcessoBOTest {
         when(usuarioRepository.findByCodigoAndPerfilFinalizador(eq(usuario.getCodigo()))).thenReturn(Optional.ofNullable(null));
         when(processoRepository.save(eq(processo))).thenReturn(processo);
 
-        Processo saved = processoBO.salva(processo, usuario.getCodigo());
+        Processo saved = processoBO.criar(processo, usuario.getCodigo());
 
         assertNotNull(saved);
         assertNotNull(saved.getDataCadastro());
@@ -122,7 +121,7 @@ public class ProcessoBOTest {
         when(processoRepository.getByCodigo(eq(processo.getCodigo()))).thenReturn(Optional.of(processo));
         when(processoRepository.save(eq(processo))).thenReturn(processo);
 
-        Processo updated = processoBO.update(processo, usuario.getCodigo());
+        Processo updated = processoBO.finalizar(processo, usuario.getCodigo());
 
         assertNotNull(updated);
         assertEquals(Status.FNL, updated.getStatus());
@@ -144,7 +143,7 @@ public class ProcessoBOTest {
         when(processoRepository.getByCodigo(eq(processo.getCodigo()))).thenReturn(Optional.of(processo));
         when(processoRepository.save(eq(processo))).thenReturn(processo);
 
-        processoBO.update(processo, usuario.getCodigo());
+        processoBO.finalizar(processo, usuario.getCodigo());
 
     }
 }

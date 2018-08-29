@@ -21,13 +21,13 @@ public class ProcessoController {
     }
 
     @PostMapping("/{usuarioCodigo}")
-    public Processo salva(@Valid @RequestBody Processo processo, @PathVariable("usuarioCodigo") Long usuarioCodigo) {
-        return processoBO.salva(processo, usuarioCodigo);
+    public Processo criar(@Valid @RequestBody Processo processo, @PathVariable("usuarioCodigo") Long usuarioCodigo) {
+        return processoBO.criar(processo, usuarioCodigo);
     }
 
     @PutMapping("/{usuarioCodigo}")
-    public Processo atualiza(@Valid @RequestBody Processo processo, @PathVariable(value = "usuarioCodigo") Long usuarioCodigo) {
-        return processoBO.update(processo, usuarioCodigo);
+    public Processo finalizar(@Valid @RequestBody Processo processo, @PathVariable(value = "usuarioCodigo") Long usuarioCodigo) {
+        return processoBO.finalizar(processo, usuarioCodigo);
     }
 
 }
