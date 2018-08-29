@@ -33,9 +33,10 @@
           </mat-card-content>
           <mat-card-content>
               <div fxLayout="row" fxLayoutAlign="center">
-                <mat-select style="margin-top: 30px" placeholder="Usuário Responsável pelo Parecer" [(ngModel)]="legalAdvice.loginResponsableFor">
-                    <mat-option value="DPJESUS" >DPJESUS</mat-option>
-                    <mat-option value="APAIXAO">APAIXAO</mat-option>
+                <mat-select style="margin-top: 30px" placeholder="Usuário Responsável pelo Parecer" [(ngModel)]="legalAdvice.idResponsableFor">
+                  <mat-option *ngFor="let u of users" [value]="u.id">
+                    {{u.login}}
+                </mat-option>
                 </mat-select>
                 <button style="margin-top: 30px" mat-button color="accent" fxLayoutAlign="end"  (click)="addLegalAdvice()"> 
                 Incluir 

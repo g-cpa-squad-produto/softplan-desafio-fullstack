@@ -5,6 +5,9 @@ import { ProcessService } from '../../../services/process/process.service';
 import { Process } from '../../../services/process/process.model';
 import { LegalAdvice } from '../../../services/legal.advice/legal.advice.model';
 
+import { UserService } from '../../../services/user/user.service';
+import { User } from '../../../services/user/user.model'
+
 @Component({
   selector: 'app-form-process',
   templateUrl: './form.process.component.html',
@@ -15,13 +18,16 @@ export class FormProcessComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private processService: ProcessService
+    private processService: ProcessService,
+    private userService: UserService
   ) { }
 
   processId: number;
   process: Process = new Process();
   legalAdvice: LegalAdvice = new LegalAdvice();
   listLegalAdvice: LegalAdvice[] = new Array<LegalAdvice>();
+
+  users: User[];
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -36,10 +42,20 @@ export class FormProcessComponent implements OnInit {
         this.process = new Process();
       }
     });
+
+    this.userService.getAllUsers()
+      .subscribe(res => {
+        console.log('>>>> get users res=', res);
+        this.users = res; 
+    },
+    error => {
+      console.log('error service get users ==>', error);
+    });
   }
 
   addLegalAdvice(){
-
+    let tempLegal:LegalAdvice = this.listLegalAdvice.find(l=> l.id == this.legalAdvice.id);
+    this.legalAdvice.loginResponsableFor = tempLegal.loginResponsableFor;
     let newListLegalAdvice = this.listLegalAdvice.slice(0);
     newListLegalAdvice.push(this.legalAdvice);
     this.listLegalAdvice = newListLegalAdvice;

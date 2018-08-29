@@ -44,6 +44,20 @@ class ProcessServiceImpl implements ProcessService {
 											.build()
 								).collect(Collectors.toList())
 				).build();
+		process = this.repository.save(process);
+		final Process idProcess = process;
+		List<LegalAdvice> legalAdvices = processRequest.getLegalAdvices()
+				.stream()
+				.map(
+					l->LegalAdvice
+							.builder()
+							.process(idProcess)
+							.description(l.getDescription())
+							.userCreatedBy(User.builder().id(l.getIdCreatedBy()).build())
+							.userResponsableFor(User.builder().id(l.getIdResponsableFor()).build())
+							.build()
+				).collect(Collectors.toList());
+		process.setLegalAdvices(legalAdvices);
 		this.repository.save(process);
 		return ProcessResponse
 					.builder()

@@ -17,11 +17,13 @@ import br.com.danilopaixao.ws.process.Process;
 import br.com.danilopaixao.ws.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
 @Builder
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -55,7 +57,7 @@ public class LegalAdvice implements Serializable{
 	private User userResponsableFor;
 	
 	@ManyToOne(cascade = {CascadeType.ALL})
-	@JoinColumn(name = "id_process", referencedColumnName="id")
+	@JoinColumn(name = "id_process", referencedColumnName="id", nullable = false, updatable = true, insertable = true)
 	private Process process;
 	
 	
