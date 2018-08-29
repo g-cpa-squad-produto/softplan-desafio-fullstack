@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -16,8 +18,13 @@ import java.util.List;
 public class Processo implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "cd_processo")
     private Long codigo;
+
+    @NotNull
+    @Size(min = 1)
+    private String numero;
 
     private String parecer;
 
@@ -25,6 +32,7 @@ public class Processo implements Serializable {
     private Status status;
 
     @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "cd_processo")
     private List<Usuario> usuarios = new ArrayList<>();
 
     private LocalDate dataCadastro;

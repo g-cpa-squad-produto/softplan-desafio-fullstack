@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -35,7 +37,7 @@ public class ProcessoBO {
     }
 
     @Transactional
-    public Processo salva(Processo processo, Long usuarioCodigo) {
+    public Processo salva(@Valid Processo processo, @NotNull Long usuarioCodigo) {
 
         validaUsuarioPerfil(usuarioCodigo);
 
@@ -46,7 +48,7 @@ public class ProcessoBO {
     }
 
     @Transactional
-    public Processo update(Processo processo, Long usuarioCodigo) {
+    public Processo update(@Valid Processo processo, @NotNull Long usuarioCodigo) {
 
         processoRepository.getByCodigo(processo.getCodigo()).orElseThrow(() -> new RuntimeException("Processo não encontrado"));
 
