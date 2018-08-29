@@ -54,9 +54,10 @@ export class FormProcessComponent implements OnInit {
   }
 
   addLegalAdvice(){
-    let tempLegal:LegalAdvice = this.listLegalAdvice.find(l=> l.id == this.legalAdvice.id);
-    this.legalAdvice.loginResponsableFor = tempLegal.loginResponsableFor;
-    let newListLegalAdvice = this.listLegalAdvice.slice(0);
+    let tempUser:User = this.users.find(l=> l.id == this.legalAdvice.idResponsableFor);
+    console.log('tempUser',tempUser);
+    this.legalAdvice.loginResponsableFor = tempUser.login;
+    let newListLegalAdvice: LegalAdvice[] = this.listLegalAdvice.slice(0);
     newListLegalAdvice.push(this.legalAdvice);
     this.listLegalAdvice = newListLegalAdvice;
     this.legalAdvice = new LegalAdvice();
