@@ -1,3 +1,4 @@
+import {LegalAdvice} from '../legal.advice/legal.advice.model'
 export class Process {
     id: string
     code: string
@@ -7,4 +8,5 @@ export class Process {
     idFinishedBy:number
     loginCreatedBy: string
     loginFinishedBy: string
+    legalAdvices: LegalAdvice[]
 }

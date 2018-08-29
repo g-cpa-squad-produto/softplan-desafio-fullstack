@@ -104,10 +104,15 @@ databaseChangeLog:
                     primaryKey: true
                     autoIncrement: true
               - column:
+                  name: id_process
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
                   name: description
                   type: varchar(255)
                   constraints:
-                    nullable: false
+                    nullable: true
               - column:
                   name: created_by
                   type: bigint
@@ -117,7 +122,7 @@ databaseChangeLog:
                   name: finished_by
                   type: bigint
                   constraints:
-                    nullable: false
+                    nullable: true
               - column:
                   name: responsable_for
                   type: bigint
@@ -141,6 +146,12 @@ databaseChangeLog:
             baseTableName: legal_advices
             referencedColumnNames: id
             referencedTableName: users
+        - addForeignKeyConstraint: 
+            constraintName: fk_legal_advices_processes_id_process
+            baseColumnNames: id_process
+            baseTableName: legal_advices
+            referencedColumnNames: id
+            referencedTableName: processes
   - changeSet:
       id: initLoad-user
       author: danilo.paixao
@@ -161,3 +172,13 @@ databaseChangeLog:
             schemaName: public
             separator: ","
             tableName: processes
+  - changeSet:
+      id: initLoad-legal-advice
+      author: danilo.paixao
+      changes:
+        - loadData:
+            encoding: UTF-8
+            file: db/changelog/v1/legaladvice.csv
+            schemaName: public
+            separator: ","
+            tableName: legal_advices

@@ -50,6 +50,10 @@ import { FormUserComponent } from './components/user/form.user/form.user.compone
 import {SearchProcessComponent} from './components/process/search.process/search.process.component';
 import { FormProcessComponent } from './components/process/form.process/form.process.component';
 
+import {SearchLegalAdviceComponent} from './components/legal.advice/search.legal.advice/search.legal.advice.component';
+import { FormLegalAdviceComponent } from './components/legal.advice/form.legal.advice/form.legal.advice.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,6 +62,8 @@ import { FormProcessComponent } from './components/process/form.process/form.pro
     FormUserComponent,
     SearchProcessComponent,
     FormProcessComponent,
+    SearchLegalAdviceComponent,
+    FormLegalAdviceComponent,
     ImageViewerComponent,
     CustomToolBarComponent
   ],

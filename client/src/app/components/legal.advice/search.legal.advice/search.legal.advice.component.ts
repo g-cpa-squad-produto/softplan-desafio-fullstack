@@ -4,9 +4,9 @@ import { LegalAdviceService } from '../../../services/legal.advice/legal.advice.
 import { LegalAdvice } from '../../../services/legal.advice/legal.advice.model'
 
 @Component({
-  selector: 'app-search-process-component',
-  templateUrl: './search.process.component.html',
-  styleUrls: ['./search.process.component.scss']
+  selector: 'app-search-legal-advice-component',
+  templateUrl: './search.legal.advice.component.html',
+  styleUrls: ['./search.legal.advice.component.scss']
 })
 export class SearchLegalAdviceComponent implements OnInit {
 

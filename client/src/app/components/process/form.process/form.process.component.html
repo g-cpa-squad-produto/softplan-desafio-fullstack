@@ -23,21 +23,40 @@
           <input matInput placeholder="Descrição" id="description" [(ngModel)]="process.description" required>
         </mat-form-field>
       </div>
-      
+      <div fxLayout="row" fxLayout="column">
+          <mat-card-content>
+              <mat-list-item *ngFor="let l of listLegalAdvice">
+                <mat-divider [inset]="true"></mat-divider>
+                <h4 mat-line ><mat-icon>dashboard</mat-icon> {{l.loginResponsableFor}}  </h4>
+                <mat-divider inset *ngIf="!last"></mat-divider>
+              </mat-list-item>
+          </mat-card-content>
+          <mat-card-content>
+              <div fxLayout="row" fxLayoutAlign="center">
+                <mat-select style="margin-top: 30px" placeholder="Usuário Responsável pelo Parecer" [(ngModel)]="legalAdvice.loginResponsableFor">
+                    <mat-option value="DPJESUS" >DPJESUS</mat-option>
+                    <mat-option value="APAIXAO">APAIXAO</mat-option>
+                </mat-select>
+                <button style="margin-top: 30px" mat-button color="accent" fxLayoutAlign="end"  (click)="addLegalAdvice()"> 
+                Incluir 
+                </button>
+              </div>
+          </mat-card-content>
+      </div>
       <div fxLayout="row" fxLayout="column" *ngIf="process.idFinishedBy"> 
           <div style="color: red"> 
               <mat-icon>info</mat-icon>Processo Finalizado!
           </div>
     </div>
       
-      <div fxLayout="row" fxLayout="column" *ngIf="process.id && !process.idFinishedBy">
-              <button mat-button> 
+      <div style="margin-top: 30px" fxLayout="row" fxLayout="column" *ngIf="process.id && !process.idFinishedBy">
+              <button mat-button color="warn"> 
                   <mat-icon>info</mat-icon> Finalizar Processo
               </button>
       </div>
 
       <div fxLayout="row" fxLayout="column" *ngIf="process.id && !process.idFinishedBy">
-          <button mat-button (click)="save()"> 
+          <button mat-button color="accent" (click)="save()"> 
               <mat-icon>save</mat-icon> Salvar
           </button>
       </div>

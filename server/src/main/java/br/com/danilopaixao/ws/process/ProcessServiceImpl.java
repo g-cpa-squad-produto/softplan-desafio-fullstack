@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.danilopaixao.ws.legal.advice.LegalAdvice;
+import br.com.danilopaixao.ws.legal.advice.LegalAdviceResponse;
 import br.com.danilopaixao.ws.user.User;
 import br.com.danilopaixao.ws.user.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +33,17 @@ class ProcessServiceImpl implements ProcessService {
 				.summary(processRequest.getSummary())
 				.description(processRequest.getDescription())
 				.userCreatedBy(User.builder().id(processRequest.getIdUserCreatedBy()).build())
-				.build();
+				.legalAdvices(processRequest.getLegalAdvices()
+								.stream()
+								.map(
+									l->LegalAdvice
+											.builder()
+											.description(l.getDescription())
+											.userCreatedBy(User.builder().id(l.getIdCreatedBy()).build())
+											.userResponsableFor(User.builder().id(l.getIdResponsableFor()).build())
+											.build()
+								).collect(Collectors.toList())
+				).build();
 		this.repository.save(process);
 		return ProcessResponse
 					.builder()
@@ -84,7 +96,21 @@ class ProcessServiceImpl implements ProcessService {
 				.loginCreatedBy(process.getUserCreatedBy().getLogin())
 				.idFinishedBy(process.getUserFinishedBy()!=null?process.getUserFinishedBy().getId():null)
 				.loginFinishedBy(process.getUserFinishedBy()!=null?process.getUserFinishedBy().getLogin():null)
-				.build();
+				.legalAdvices(process.getLegalAdvices()
+						.stream()
+						.map(
+							l->LegalAdviceResponse
+									.builder()
+									.description(l.getDescription())
+									.idCreatedBy(l.getUserCreatedBy().getId())
+									.loginCreatedBy(l.getUserCreatedBy().getLogin())
+									.idFinishedBy(l.getUserFinishedBy()!=null?l.getUserFinishedBy().getId():null)
+									.loginFinishedBy(l.getUserFinishedBy()!=null?l.getUserFinishedBy().getLogin():null)
+									.idResponsableFor(l.getUserResponsableFor()!=null?l.getUserResponsableFor().getId():null)
+									.loginResponsableFor(l.getUserResponsableFor()!=null?l.getUserResponsableFor().getLogin():null)
+									.build()
+						).collect(Collectors.toList())
+				).build();
 	}
 	
 	@Override
@@ -101,7 +127,21 @@ class ProcessServiceImpl implements ProcessService {
 								.loginCreatedBy(p.getUserCreatedBy().getLogin())
 								.idFinishedBy(p.getUserFinishedBy()!=null?p.getUserFinishedBy().getId():null)
 								.loginFinishedBy(p.getUserFinishedBy()!=null?p.getUserFinishedBy().getLogin():null)
-								.build()
+								.legalAdvices(p.getLegalAdvices()
+										.stream()
+										.map(
+											l->LegalAdviceResponse
+													.builder()
+													.description(l.getDescription())
+													.idCreatedBy(l.getUserCreatedBy().getId())
+													.loginCreatedBy(l.getUserCreatedBy().getLogin())
+													.idFinishedBy(l.getUserFinishedBy()!=null?l.getUserFinishedBy().getId():null)
+													.loginFinishedBy(l.getUserFinishedBy()!=null?l.getUserFinishedBy().getLogin():null)
+													.idResponsableFor(l.getUserResponsableFor()!=null?l.getUserResponsableFor().getId():null)
+													.loginResponsableFor(l.getUserResponsableFor()!=null?l.getUserResponsableFor().getLogin():null)
+													.build()
+										).collect(Collectors.toList())
+								).build()
 				).collect(Collectors.toList());		
 	}
 	

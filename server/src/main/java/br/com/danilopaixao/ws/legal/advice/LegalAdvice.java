@@ -2,6 +2,7 @@ package br.com.danilopaixao.ws.legal.advice;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -53,8 +54,8 @@ public class LegalAdvice implements Serializable{
 	@JoinColumn(name = "responsable_for")
 	private User userResponsableFor;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "id_process")
+	@ManyToOne(cascade = {CascadeType.ALL})
+	@JoinColumn(name = "id_process", referencedColumnName="id")
 	private Process process;
 	
 	

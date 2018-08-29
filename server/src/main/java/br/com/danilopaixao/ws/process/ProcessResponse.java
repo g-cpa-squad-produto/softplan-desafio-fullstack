@@ -1,10 +1,12 @@
 package br.com.danilopaixao.ws.process;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import br.com.danilopaixao.ws.legal.advice.LegalAdviceResponse;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -27,6 +29,7 @@ public class ProcessResponse implements Serializable{
 	private String loginCreatedBy;
 	private Long idFinishedBy;
 	private String loginFinishedBy;
+	private List<LegalAdviceResponse> legalAdvices;
 	
 	@JsonCreator
 	public ProcessResponse(
@@ -37,7 +40,8 @@ public class ProcessResponse implements Serializable{
 			@JsonProperty("idCreatedBy") final Long idCreatedBy,
 			@JsonProperty("loginCreatedBy") final String loginCreatedBy,
 			@JsonProperty("idFinishedBy") final Long idFinishedBy,
-			@JsonProperty("loginFinishedBy") final String loginFinishedBy) {
+			@JsonProperty("loginFinishedBy") final String loginFinishedBy,
+			@JsonProperty("legalAdvices") final List<LegalAdviceResponse> legalAdvices) {
 		this.id = id;		
 		this.code = code;
 		this.summary = summary;
@@ -46,5 +50,6 @@ public class ProcessResponse implements Serializable{
 		this.loginCreatedBy = loginCreatedBy;
 		this.idFinishedBy = idFinishedBy;
 		this.loginFinishedBy = loginFinishedBy;
+		this.legalAdvices = legalAdvices;
 	}
 }

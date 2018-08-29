@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { ProcessService } from '../../../services/process/process.service';
-import { Process } from '../../../services/process/process.model'
+import { Process } from '../../../services/process/process.model';
+import { LegalAdvice } from '../../../services/legal.advice/legal.advice.model';
 
 @Component({
   selector: 'app-form-process',
@@ -19,9 +20,8 @@ export class FormProcessComponent implements OnInit {
 
   processId: number;
   process: Process = new Process();
-
-  user: string;
-  private users: string[] = ['asdasd', 'asdfasd', 'bhjfj', 'sdf sthd','asdasd', 'asdfasd', 'bhjfj', 'sdf sthd'];
+  legalAdvice: LegalAdvice = new LegalAdvice();
+  listLegalAdvice: LegalAdvice[] = new Array<LegalAdvice>();
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -38,6 +38,14 @@ export class FormProcessComponent implements OnInit {
     });
   }
 
+  addLegalAdvice(){
+
+    let newListLegalAdvice = this.listLegalAdvice.slice(0);
+    newListLegalAdvice.push(this.legalAdvice);
+    this.listLegalAdvice = newListLegalAdvice;
+    this.legalAdvice = new LegalAdvice();
+  }
+
   save(){
     if(this.process.id){
       this.upDateProcess();
@@ -48,6 +56,7 @@ export class FormProcessComponent implements OnInit {
 
   createProcess(){
     this.process.idCreatedBy = 9999991;
+    this.process.legalAdvices = this.listLegalAdvice;
     this.processService.createProcess(this.process).subscribe(
       u =>{
         this.router.navigate(['/process'])
