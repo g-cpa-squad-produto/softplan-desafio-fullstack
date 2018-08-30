@@ -50,7 +50,7 @@ Procuramos desenvolvedor versátil para resolver os mais diversos problemas, que
 - Documentar todas suposições realizadas.
 - Desenvolver os módulos de frontend e backend de forma separada.
 - O desenvolvimento do backend deve ser feito em Java.
-- O desemvolvimento do frontend pode ser feito em JavaScript e qualquer framework ou ferramenta que suportem ou utilizem estas tecnologias.
+- O desemvolvimento do frontend pode utilizar JavaScript e qualquer framework ou ferramenta que suportem ou utilizem estas tecnologias.
 - Preferencialmente utilizar Spring Boot 1.5+ com toda sua stack para o desenvolvimento do backend.
 - Preferencialmente utilizar React para o desenvolvimento do frontend.
 - É aceitável utilizar algumas respostas estáticas em determinadas porções da aplicação.
