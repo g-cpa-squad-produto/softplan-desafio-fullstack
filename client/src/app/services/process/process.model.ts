@@ -4,8 +4,8 @@ export class Process {
     code: string
     summary: string
     description: string
-    idCreatedBy: number
-    idFinishedBy:number
+    idUserCreatedBy: number
+    idUserFinishedBy:number
     loginCreatedBy: string
     loginFinishedBy: string
     legalAdvices: LegalAdvice[]

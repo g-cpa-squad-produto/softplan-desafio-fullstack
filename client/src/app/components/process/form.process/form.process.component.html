@@ -31,7 +31,7 @@
                 <mat-divider inset *ngIf="!last"></mat-divider>
               </mat-list-item>
           </mat-card-content>
-          <mat-card-content>
+          <mat-card-content *ngIf="!process.id">
               <div fxLayout="row" fxLayoutAlign="center">
                 <mat-select style="margin-top: 30px" placeholder="Usuário Responsável pelo Parecer" [(ngModel)]="legalAdvice.idResponsableFor">
                   <mat-option *ngFor="let u of users" [value]="u.id">
@@ -56,7 +56,7 @@
               </button>
       </div>
 
-      <div fxLayout="row" fxLayout="column" *ngIf="process.id && !process.idFinishedBy">
+      <div fxLayout="row" fxLayout="column" *ngIf="!process.idFinishedBy">
           <button mat-button color="accent" (click)="save()"> 
               <mat-icon>save</mat-icon> Salvar
           </button>

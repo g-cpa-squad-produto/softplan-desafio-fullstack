@@ -70,6 +70,10 @@ class ProcessServiceImpl implements ProcessService {
 		
 	}
 	
+	private User getUser(Long id) {
+		return userService.getUserById(id);
+	}
+	
 	@Override
 	public ProcessResponse save(Long id, ProcessRequest processRequest) {
 		log.info("save process", processRequest);

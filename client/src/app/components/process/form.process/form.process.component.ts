@@ -35,7 +35,9 @@ export class FormProcessComponent implements OnInit {
         this.processId = Number(params.get('id'))
         this.processService.getProcessById(this.processId).subscribe(
           p =>{
-              this.process = p;
+            console.log('getProcessById==>', p)
+            this.process = p;
+            this.listLegalAdvice = p.legalAdvices;
           }
         )
       }else{
@@ -58,6 +60,7 @@ export class FormProcessComponent implements OnInit {
     console.log('tempUser',tempUser);
     this.legalAdvice.loginResponsableFor = tempUser.login;
     let newListLegalAdvice: LegalAdvice[] = this.listLegalAdvice.slice(0);
+    this.legalAdvice.idCreatedBy = 9999991;
     newListLegalAdvice.push(this.legalAdvice);
     this.listLegalAdvice = newListLegalAdvice;
     this.legalAdvice = new LegalAdvice();
@@ -72,7 +75,7 @@ export class FormProcessComponent implements OnInit {
   }
 
   createProcess(){
-    this.process.idCreatedBy = 9999991;
+    this.process.idUserCreatedBy = 9999991;
     this.process.legalAdvices = this.listLegalAdvice;
     this.processService.createProcess(this.process).subscribe(
       u =>{
