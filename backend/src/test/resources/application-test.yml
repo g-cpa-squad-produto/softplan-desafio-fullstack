@@ -1,0 +1,9 @@
+spring:
+   jpa:
+      hibernate.ddl-auto: create-drop
+      generate-ddl: false
+      show-sql: false
+      database: H2
+   datasource:
+      platform: h2
+      continueOnError: false
