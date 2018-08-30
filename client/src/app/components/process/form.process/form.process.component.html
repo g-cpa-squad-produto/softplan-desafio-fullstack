@@ -44,54 +44,23 @@
               </div>
           </mat-card-content>
       </div>
-      <div fxLayout="row" fxLayout="column" *ngIf="process.idFinishedBy"> 
+      <div fxLayout="row" fxLayout="column" *ngIf="process.idUserFinishedBy"> 
           <div style="color: red"> 
               <mat-icon>info</mat-icon>Processo Finalizado!
           </div>
     </div>
       
-      <div style="margin-top: 30px" fxLayout="row" fxLayout="column" *ngIf="process.id && !process.idFinishedBy">
+      <div style="margin-top: 30px" fxLayout="row" fxLayout="column" *ngIf="process.id && !process.idUserFinishedBy">
               <button mat-button color="warn"> 
                   <mat-icon>info</mat-icon> Finalizar Processo
               </button>
       </div>
 
-      <div fxLayout="row" fxLayout="column" *ngIf="!process.idFinishedBy">
+      <div fxLayout="row" fxLayout="column" *ngIf="!process.idUserFinishedBy">
           <button mat-button color="accent" (click)="save()"> 
               <mat-icon>save</mat-icon> Salvar
           </button>
       </div>
-
-
-      <!--
-      <div fxLayout="row" fxLayout="column">
-          <mat-form-field >
-              <input matInput type="text" 
-                        placeholder="Finalizador"  
-                        [matAutocomplete]="auto" 
-                        [(ngModel)]="user" 
-                        name="user" required>
-              <mat-autocomplete #auto="matAutocomplete">
-                  <mat-option *ngFor="let u of users" [value]="u">
-                      {{u}}
-                  </mat-option>
-
-                    <mat-error *ngIf="description">
-                      Campo obrigatório
-                    </mat-error>
-              </mat-autocomplete>
-          </mat-form-field>
-        </div>
-      -->
-    <!--
-      <div fxLayout="row" fxLayoutAlign="end" *ngIf="!process.idFinishedBy">
-        <span class="send">
-          <button mat-button (click)="save()"> 
-            <mat-icon>send</mat-icon>
-          </button>
-        </span>
-      </div>
-    -->
     </mat-card-content>
 
   </mat-card>
