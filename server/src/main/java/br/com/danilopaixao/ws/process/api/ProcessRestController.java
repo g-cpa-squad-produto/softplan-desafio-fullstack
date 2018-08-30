@@ -35,7 +35,7 @@ public class ProcessRestController {
 	@ApiOperation("Endpoint to get ALL Processes")
 	@GetMapping(value = "/api/v1/processes", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public @ResponseBody List<ProcessResponse> getAllUsers() {
+    public @ResponseBody List<ProcessResponse> getAllProcesses() {
 		return service.getByAllProcesss();
     }
 	

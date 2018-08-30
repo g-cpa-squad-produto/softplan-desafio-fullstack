@@ -56,7 +56,7 @@ public class LegalAdvice implements Serializable{
 	@JoinColumn(name = "responsable_for")
 	private User userResponsableFor;
 	
-	@ManyToOne(cascade = {CascadeType.ALL})
+	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
 	@JoinColumn(name = "id_process", referencedColumnName="id", nullable = false, updatable = true, insertable = true)
 	private Process process;
 	

@@ -21,6 +21,7 @@ public class LegalAdviceResponse implements Serializable{
 	private static final long serialVersionUID = -3471504460137480458L;
 	
 	private Long id;
+	private Long processId;
 	private String description;
 	private Long idCreatedBy;
 	private String loginCreatedBy;
@@ -32,6 +33,7 @@ public class LegalAdviceResponse implements Serializable{
 	@JsonCreator
 	public LegalAdviceResponse(
 			@JsonProperty("id") final Long id,
+			@JsonProperty("processId") final Long processId,
 			@JsonProperty("description") final String description,
 			@JsonProperty("idCreatedBy") final Long idCreatedBy,
 			@JsonProperty("loginCreatedBy") final String loginCreatedBy,
@@ -40,6 +42,7 @@ public class LegalAdviceResponse implements Serializable{
 			@JsonProperty("idResponsableFor") final Long idResponsableFor,
 			@JsonProperty("loginResponsableFor") final String loginResponsableFor) {
 		this.id = id;		
+		this.processId = processId;
 		this.description = description;
 		this.idCreatedBy = idCreatedBy;
 		this.loginCreatedBy = loginCreatedBy;

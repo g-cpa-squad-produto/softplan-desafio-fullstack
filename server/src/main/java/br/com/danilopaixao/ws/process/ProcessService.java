@@ -8,5 +8,6 @@ public interface ProcessService {
 	ProcessResponse save(Long id, ProcessRequest process);
 	ProcessResponse getById(Long id);
 	List<ProcessResponse> getByAllProcesss();
+	Process getProcessById(Long valueOf);
 
 }

@@ -162,5 +162,10 @@ class ProcessServiceImpl implements ProcessService {
 								).build()
 				).collect(Collectors.toList());		
 	}
+
+	@Override
+	public Process getProcessById(Long id) {
+		return repository.getOne(id);
+	}
 	
 }
