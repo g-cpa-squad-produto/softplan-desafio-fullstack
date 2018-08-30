@@ -1,11 +1,13 @@
 /Users/danilopaixao/repositorio-github/softplan-desafio-fullstack/server/src/main/java/br/com/danilopaixao/ws/user/ProfileEnum.java
 /Users/danilopaixao/repositorio-github/softplan-desafio-fullstack/server/src/main/java/br/com/danilopaixao/ws/core/MoreInfo.java
+/Users/danilopaixao/repositorio-github/softplan-desafio-fullstack/server/src/main/java/br/com/danilopaixao/ws/legal/advice/api/LegalAdviceRestController.java
 /Users/danilopaixao/repositorio-github/softplan-desafio-fullstack/server/src/main/java/br/com/danilopaixao/ws/core/ZonedDateTimeConverter.java
 /Users/danilopaixao/repositorio-github/softplan-desafio-fullstack/server/src/main/java/br/com/danilopaixao/ws/core/UtilFunctions.java
 /Users/danilopaixao/repositorio-github/softplan-desafio-fullstack/server/src/main/java/br/com/danilopaixao/ws/user/UserStatusEnum.java
 /Users/danilopaixao/repositorio-github/softplan-desafio-fullstack/server/src/main/java/br/com/danilopaixao/ws/process/ProcessServiceImpl.java
 /Users/danilopaixao/repositorio-github/softplan-desafio-fullstack/server/src/main/java/br/com/danilopaixao/ws/user/UserResponse.java
 /Users/danilopaixao/repositorio-github/softplan-desafio-fullstack/server/src/main/java/br/com/danilopaixao/ws/user/UserException.java
+/Users/danilopaixao/repositorio-github/softplan-desafio-fullstack/server/src/main/java/br/com/danilopaixao/ws/legal/advice/LegalAdviceServiceImpl.java
 /Users/danilopaixao/repositorio-github/softplan-desafio-fullstack/server/src/main/java/br/com/danilopaixao/ws/core/LocalDateConverter.java
 /Users/danilopaixao/repositorio-github/softplan-desafio-fullstack/server/src/main/java/br/com/danilopaixao/ws/legal/advice/LegalAdviceRequest.java
 /Users/danilopaixao/repositorio-github/softplan-desafio-fullstack/server/src/main/java/br/com/danilopaixao/ws/core/BaseEntity.java
@@ -15,6 +17,7 @@
 /Users/danilopaixao/repositorio-github/softplan-desafio-fullstack/server/src/main/java/br/com/danilopaixao/ws/process/ProcessRequest.java
 /Users/danilopaixao/repositorio-github/softplan-desafio-fullstack/server/src/main/java/br/com/danilopaixao/ws/core/api/security/WsApiConfig.java
 /Users/danilopaixao/repositorio-github/softplan-desafio-fullstack/server/src/main/java/br/com/danilopaixao/ws/process/Process.java
+/Users/danilopaixao/repositorio-github/softplan-desafio-fullstack/server/src/main/java/br/com/danilopaixao/ws/legal/advice/LegalAdviceService.java
 /Users/danilopaixao/repositorio-github/softplan-desafio-fullstack/server/src/main/java/br/com/danilopaixao/ws/legal/advice/LegalAdvice.java
 /Users/danilopaixao/repositorio-github/softplan-desafio-fullstack/server/src/main/java/br/com/danilopaixao/ws/core/LocalTimeConverter.java
 /Users/danilopaixao/repositorio-github/softplan-desafio-fullstack/server/src/main/java/br/com/danilopaixao/ws/user/UserService.java
@@ -23,6 +26,7 @@
 /Users/danilopaixao/repositorio-github/softplan-desafio-fullstack/server/src/main/java/br/com/danilopaixao/ws/legal/advice/LegalAdviceResponse.java
 /Users/danilopaixao/repositorio-github/softplan-desafio-fullstack/server/src/main/java/br/com/danilopaixao/ws/core/SupplierExceptions.java
 /Users/danilopaixao/repositorio-github/softplan-desafio-fullstack/server/src/main/java/br/com/danilopaixao/ws/user/UserRequest.java
+/Users/danilopaixao/repositorio-github/softplan-desafio-fullstack/server/src/main/java/br/com/danilopaixao/ws/legal/advice/LegalAdviceRepository.java
 /Users/danilopaixao/repositorio-github/softplan-desafio-fullstack/server/src/main/java/br/com/danilopaixao/ws/user/UserRepository.java
 /Users/danilopaixao/repositorio-github/softplan-desafio-fullstack/server/src/main/java/br/com/danilopaixao/ws/process/api/ProcessRestController.java
 /Users/danilopaixao/repositorio-github/softplan-desafio-fullstack/server/src/main/java/br/com/danilopaixao/ws/user/api/UserRestController.java
