@@ -22,5 +22,6 @@ hs_err_pid*
 /target/
 *bower_components/*
 *node_modules/*
+frontend/node_modules/*
 .vscode
 build/
