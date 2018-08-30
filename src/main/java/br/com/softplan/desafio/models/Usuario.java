@@ -22,15 +22,20 @@ public class Usuario implements Serializable {
     @Column(name = "cd_usuario")
     private Long codigo;
 
+    @Column(name="nm_usuario")
     private String nome;
 
     @Enumerated(EnumType.STRING)
+    @Column(name="in_perfil")
     private Perfil perfil;
 
+    @Column(name="dt_cadastro")
     private LocalDate dataCadastro;
 
+    @Column(name="dt_alteracao")
     private LocalDate dataAlteracao;
 
+    @Column(name="dt_exclusao")
     private LocalDate dataExclusao;
 
     public Usuario(String nome, Perfil perfil) {
@@ -38,4 +43,7 @@ public class Usuario implements Serializable {
         this.perfil = perfil;
     }
 
+    public static UsuarioDTO mapFrom(Usuario usuario) {
+        return new UsuarioDTO(usuario.getCodigo(), usuario.getNome(), usuario.getPerfil());
+    }
 }

@@ -18,4 +18,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     @Query(" SELECT u FROM Usuario u " +
             "  WHERE u.codigo = :codigo AND u.perfil = 'TRI' ")
     Optional<Usuario> findByCodigoAndPerfilTriador(@Param("codigo") Long codigo);
+
+    @Query(" SELECT u FROM Usuario u WHERE u.nome = :nome ")
+    Optional<Usuario> findByNome(@Param("nome") String nome);
 }

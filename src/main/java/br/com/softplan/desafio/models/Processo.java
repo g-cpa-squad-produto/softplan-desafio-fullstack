@@ -2,6 +2,7 @@ package br.com.softplan.desafio.models;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -24,22 +25,31 @@ public class Processo implements Serializable {
 
     @NotNull
     @Size(min = 1)
+    @Column(name="nr_processo")
     private String numero;
 
+    @Column(name="ds_parecer")
     private String parecer;
 
     @Enumerated(EnumType.STRING)
+    @Column(name="in_status")
     private Status status;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "cd_processo")
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name="processo_usuario",
+            joinColumns={@JoinColumn(name="cd_processo")},
+            inverseJoinColumns={@JoinColumn(name="cd_usuario")})
     private List<Usuario> usuarios = new ArrayList<>();
 
+    @OneToOne
+    @JoinColumn(name= "cd_usuario_finalizador")
+    private Usuario usuarioFinalizador;
+
+    @Column(name="dt_cadastro")
     private LocalDate dataCadastro;
 
-    private Usuario usuarioFinalizacao;
-
-    private LocalDate dataFinalizacao;
+    @Column(name="dt_finalizado")
+    private LocalDate dataFinalizado;
 
     public void adicionaUsuario(Usuario usuario) {
         usuarios.add(usuario);

@@ -1,11 +1,14 @@
 package br.com.softplan.desafio.controllers;
 
 import br.com.softplan.desafio.bo.UsuarioBO;
+import br.com.softplan.desafio.models.Perfil;
 import br.com.softplan.desafio.models.Usuario;
+import br.com.softplan.desafio.models.UsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -16,7 +19,7 @@ public class UsuarioController {
     private UsuarioBO usuarioBO;
 
     @GetMapping
-    public List<Usuario> search() {
+    public List<UsuarioDTO> search() {
         return usuarioBO.search();
     }
 
@@ -34,4 +37,10 @@ public class UsuarioController {
     public Usuario deleta(@PathVariable("codigo") Long codigo) {
         return usuarioBO.deleta(codigo);
     }
+
+    @GetMapping("/perfil")
+    public List<Perfil> getPerfis() {
+        return Arrays.asList(Perfil.values());
+    }
+
 }

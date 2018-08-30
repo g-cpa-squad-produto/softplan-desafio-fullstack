@@ -103,8 +103,8 @@ public class ProcessoControllerTest extends IntegrationTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.codigo", notNullValue()))
                 .andExpect(jsonPath("$.numero", is(processo.getNumero())))
-                .andExpect(jsonPath("$.dataFinalizacao", notNullValue()))
-                .andExpect(jsonPath("$.usuarioFinalizacao.nome", is(finalizador.getNome())));
+                .andExpect(jsonPath("$.dataFinalizado", notNullValue()))
+                .andExpect(jsonPath("$.usuarioFinalizador.nome", is(finalizador.getNome())));
 
     }
 

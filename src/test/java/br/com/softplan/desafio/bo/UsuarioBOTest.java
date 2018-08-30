@@ -2,6 +2,7 @@ package br.com.softplan.desafio.bo;
 
 import br.com.softplan.desafio.models.Perfil;
 import br.com.softplan.desafio.models.Usuario;
+import br.com.softplan.desafio.models.UsuarioDTO;
 import br.com.softplan.desafio.repository.UsuarioRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -40,7 +41,7 @@ public class UsuarioBOTest {
 
         when(usuarioRepository.findAll()).thenReturn(new ArrayList<>(Arrays.asList(milton_jacomini, gandalf, dart_vader)));
 
-        List<Usuario> usuarios = usuarioBO.search();
+        List<UsuarioDTO> usuarios = usuarioBO.search();
 
         assertNotNull(usuarios);
         assertFalse(usuarios.isEmpty());
@@ -60,10 +61,10 @@ public class UsuarioBOTest {
 
         when(usuarioRepository.save(eq(milton_jacomini))).thenReturn(milton_jacomini);
 
-        Usuario saved = usuarioBO.salva(milton_jacomini);
+        Usuario result = usuarioBO.salva(milton_jacomini);
 
-        assertNotNull(saved);
-        assertNotNull(saved.getDataCadastro());
+        assertNotNull(result);
+        assertNotNull(result.getDataCadastro());
 
     }
 

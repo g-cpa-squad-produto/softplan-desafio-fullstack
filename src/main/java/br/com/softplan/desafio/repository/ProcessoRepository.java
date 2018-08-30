@@ -13,7 +13,7 @@ import java.util.Optional;
 public interface ProcessoRepository extends JpaRepository<Processo, Long> {
 
     @Query(" SELECT p FROM Processo p " +
-           "  WHERE p.dataFinalizacao IS NULL ")
+           "  WHERE p.dataFinalizado IS NULL ")
     List<Processo> findAllPendentes();
 
     @Query(" SELECT p FROM Processo p " +

@@ -125,8 +125,8 @@ public class ProcessoBOTest {
 
         assertNotNull(updated);
         assertEquals(Status.FNL, updated.getStatus());
-        assertNotNull(updated.getDataFinalizacao());
-        assertEquals(usuario, updated.getUsuarioFinalizacao());
+        assertNotNull(updated.getDataFinalizado());
+        assertEquals(usuario, updated.getUsuarioFinalizador());
 
     }
 

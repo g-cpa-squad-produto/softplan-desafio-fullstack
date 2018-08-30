@@ -70,7 +70,7 @@ public class UsuarioControllerTest extends IntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.codigo", notNullValue()))
                 .andExpect(jsonPath("$.nome", is(usuarioADM.getNome())))
-                .andExpect(jsonPath("$.perfil", is(usuarioADM.getPerfil().name())));
+                .andExpect(jsonPath("$.perfil.name", is(usuarioADM.getPerfil().name())));
     }
 
     @Test
@@ -88,7 +88,7 @@ public class UsuarioControllerTest extends IntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.codigo", notNullValue()))
                 .andExpect(jsonPath("$.nome", is(usuarioADM.getNome())))
-                .andExpect(jsonPath("$.perfil", is(usuarioADM.getPerfil().name())));
+                .andExpect(jsonPath("$.perfil.name", is(usuarioADM.getPerfil().name())));
     }
 
     @Test

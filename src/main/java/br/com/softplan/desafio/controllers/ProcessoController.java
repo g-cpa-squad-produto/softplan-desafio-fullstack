@@ -2,6 +2,7 @@ package br.com.softplan.desafio.controllers;
 
 import br.com.softplan.desafio.bo.ProcessoBO;
 import br.com.softplan.desafio.models.Processo;
+import br.com.softplan.desafio.models.ProcessoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +17,7 @@ public class ProcessoController {
     private ProcessoBO processoBO;
 
     @GetMapping
-    public List<Processo> search() {
+    public List<ProcessoDTO> search() {
         return processoBO.findAllPendentes();
     }
 
@@ -29,5 +30,7 @@ public class ProcessoController {
     public Processo finalizar(@Valid @RequestBody Processo processo, @PathVariable(value = "usuarioCodigo") Long usuarioCodigo) {
         return processoBO.finalizar(processo, usuarioCodigo);
     }
+
+
 
 }

@@ -14,3 +14,13 @@ hs_err_pid*
 .project
 .settings
 .metadata
+
+# FRONT #
+/.classpath
+/.project
+/.settings/
+/target/
+*bower_components/*
+*node_modules/*
+.vscode
+build/
