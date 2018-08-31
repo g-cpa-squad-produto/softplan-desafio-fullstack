@@ -6,7 +6,7 @@ import { Process } from '../../../services/process/process.model';
 import { LegalAdvice } from '../../../services/legal.advice/legal.advice.model';
 
 import { UserService } from '../../../services/user/user.service';
-import { User } from '../../../services/user/user.model'
+import { User } from '../../../services/user/user.model';
 
 @Component({
   selector: 'app-form-process',
@@ -73,6 +73,10 @@ export class FormProcessComponent implements OnInit {
     }else{
       this.createProcess();
     }
+  }
+
+  redirectLegalAdvice(id){
+    this.router.navigate([`/legalAdvice/form/${id}`])
   }
 
   createProcess(){

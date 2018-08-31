@@ -38,7 +38,6 @@ export class SearchLegalAdviceComponent implements OnInit {
   }
 
   ngOnInit() {
-    /*
     this.legalAdviceService.getAllLegalAdvices()
       .subscribe(res => {
         console.log('>>>> get legal advices res=', res);
@@ -51,6 +50,5 @@ export class SearchLegalAdviceComponent implements OnInit {
       this.isError = true;
       this.error = `Não há legal advices para ser exibido`;
     });
-    */
   }
 }

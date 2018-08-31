@@ -57,8 +57,16 @@ class LegalAdviceServiceImpl implements LegalAdviceService {
 	@Override
 	public LegalAdviceResponse save(Long id, LegalAdviceRequest legalAdviceRequest) {
 		log.info("save legalAdvice", legalAdviceRequest);
+		final Process process = processService.getProcessById(Long.valueOf(legalAdviceRequest.getProcessId()));
+		
 		LegalAdvice legalAdvice = this.repository.findOne(id);
+		legalAdvice.setProcess(process);
 		legalAdvice.setDescription(legalAdviceRequest.getDescription());
+		
+		if(legalAdviceRequest.getIdResponsableFor()!= null) {
+			User u = userService.getUserById(legalAdviceRequest.getIdResponsableFor());
+			legalAdvice.setUserResponsableFor(u);
+		}
 		if(legalAdviceRequest.getIdCreatedBy()!= null) {
 			User u = userService.getUserById(legalAdviceRequest.getIdCreatedBy());
 			legalAdvice.setUserCreatedBy(u);
@@ -85,11 +93,15 @@ class LegalAdviceServiceImpl implements LegalAdviceService {
 		return LegalAdviceResponse.builder()
 				.id(legalAdvice.getId())
 				.processId(legalAdvice.getProcess().getId())
+				.processCode(legalAdvice.getProcess().getCode())
 				.description(legalAdvice.getDescription())
 				.idCreatedBy(legalAdvice.getUserCreatedBy().getId())
 				.loginCreatedBy(legalAdvice.getUserCreatedBy().getLogin())
 				.idFinishedBy(legalAdvice.getUserFinishedBy()!=null?legalAdvice.getUserFinishedBy().getId():null)
 				.loginFinishedBy(legalAdvice.getUserFinishedBy()!=null?legalAdvice.getUserFinishedBy().getLogin():null)
+				.idResponsableFor(legalAdvice.getUserResponsableFor()!=null?legalAdvice.getUserResponsableFor().getId():null)
+				.loginResponsableFor(legalAdvice.getUserResponsableFor()!=null?legalAdvice.getUserResponsableFor().getLogin():null)
+				.nameResponsableFor(legalAdvice.getUserResponsableFor()!=null?legalAdvice.getUserResponsableFor().getName():null)
 				.build();
 	}
 	
@@ -101,11 +113,15 @@ class LegalAdviceServiceImpl implements LegalAdviceService {
 				.map(l -> LegalAdviceResponse.builder()
 								.id(l.getId())
 								.processId(l.getProcess().getId())
+								.processCode(l.getProcess().getCode())
 								.description(l.getDescription())
 								.idCreatedBy(l.getUserCreatedBy().getId())
 								.loginCreatedBy(l.getUserCreatedBy().getLogin())
 								.idFinishedBy(l.getUserFinishedBy()!=null?l.getUserFinishedBy().getId():null)
 								.loginFinishedBy(l.getUserFinishedBy()!=null?l.getUserFinishedBy().getLogin():null)
+								.idResponsableFor(l.getUserResponsableFor()!=null?l.getUserResponsableFor().getId():null)
+								.loginResponsableFor(l.getUserResponsableFor()!=null?l.getUserResponsableFor().getLogin():null)
+								.nameResponsableFor(l.getUserResponsableFor()!=null?l.getUserResponsableFor().getName():null)
 								.build()
 				).collect(Collectors.toList());		
 	}

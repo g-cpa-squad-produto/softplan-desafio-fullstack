@@ -119,6 +119,7 @@ class ProcessServiceImpl implements ProcessService {
 						.map(
 							l->LegalAdviceResponse
 									.builder()
+									.id(l.getId())
 									.description(l.getDescription())
 									.idCreatedBy(l.getUserCreatedBy().getId())
 									.loginCreatedBy(l.getUserCreatedBy().getLogin())
@@ -151,6 +152,7 @@ class ProcessServiceImpl implements ProcessService {
 										.map(
 											l->LegalAdviceResponse
 													.builder()
+													.id(l.getId())
 													.description(l.getDescription())
 													.idCreatedBy(l.getUserCreatedBy().getId())
 													.loginCreatedBy(l.getUserCreatedBy().getLogin())

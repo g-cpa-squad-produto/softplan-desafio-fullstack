@@ -11,6 +11,11 @@
       <mat-icon class="icon">library_books</mat-icon>  
       &nbsp;<span class="label">Processo</span>
     </a>
+    <a mat-list-item
+      routerLink="/legalAdvice" (click)="sidenav.close()">
+      <mat-icon class="icon">playlist_add_check</mat-icon>  
+      &nbsp;<span class="label">Parecer</span>
+    </a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -40,7 +45,14 @@
                     <mat-icon class="icon">library_books</mat-icon>
                     &nbsp;<span class="label">Processo</span>
                 </a>
-              </li>
+            </li>
+            <li>
+                <a
+                  routerLink="/legalAdvice">
+                    <mat-icon class="icon">playlist_add_check</mat-icon>
+                    &nbsp;<span class="label">Parecer</span>
+                </a>
+            </li>
         </ul>
      </div>
     </mat-toolbar>

@@ -1,11 +1,5 @@
 <div>
   <mat-card>
-    <mat-card-title>
-        <button mat-icon-button color="accent" >
-            <mat-icon>dashboard</mat-icon>
-            Adicionar Novo
-        </button>
-    </mat-card-title>
 
     <mat-card-content>
       <div *ngIf="isError">
@@ -17,9 +11,28 @@
 
     <mat-card-content>
       <mat-list-item *ngFor="let l of legalAdvices">
-        <mat-divider [inset]="true"></mat-divider>
+
+
+
+        <!-- <mat-divider [inset]="true"></mat-divider>
         <h4 mat-line  ><mat-icon>dashboard</mat-icon> {{l.description}} </h4>
+        <mat-divider inset *ngIf="!last"></mat-divider> -->
+
+      <span (click)="routeFormLegalAdvice(l.id)">
+        <mat-divider [inset]="true"></mat-divider>
+        <h4 mat-line > <mat-icon matListIcon>person_outline</mat-icon>{{l.nameResponsableFor}}</h4>
+        <p matLine>
+            <span> <mat-icon >library_books</mat-icon> {{l.processCode}}</span>
+          </p>
+        <p matLine>
+            <span><mat-icon >playlist_add_check</mat-icon> {{l.description | slice:0:55}} ...</span>
+        </p>
         <mat-divider inset *ngIf="!last"></mat-divider>
+      </span>
+
+
+
+
       </mat-list-item>
     </mat-card-content>
   </mat-card>

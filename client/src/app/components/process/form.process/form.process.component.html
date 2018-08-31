@@ -35,14 +35,13 @@
                 <mat-divider [inset]="true"></mat-divider>
                 <h4 mat-line> <mat-icon matListIcon>person_outline</mat-icon>{{l.nameResponsableFor}}</h4>
                 <p matLine>
-                  <span> {{l.description | slice:0:55}} ...</span>
+                  <span> {{l.description | slice:0:55}} ... <mat-icon (click)="redirectLegalAdvice(l.id)">playlist_add_check</mat-icon></span>
                 </p>
                 <mat-divider inset *ngIf="!last"></mat-divider>
               </mat-list-item>
           </mat-card-content>
           <mat-card-content *ngIf="!process.id">
               <div fxLayout="row" fxLayoutAlign="center">
-                <div>Parecer:</div>
                 <mat-select style="margin-top: 30px" placeholder="Usuário Responsável pelo Parecer" [(ngModel)]="legalAdvice.idResponsableFor">
                   <mat-option *ngFor="let u of users" [value]="u.id">
                     {{u.name}}

@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: sistemaprocesso-api
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: user
+Built-By: danilopaixao
 Implementation-Vendor-Id: br.com.danilopaixao.sistemaprocesso.api
-Build-Jdk: 1.8.0_181
+Build-Jdk: 1.8.0_171
 Implementation-URL: http://projects.spring.io/spring-boot/sistemaproce
  sso-api/
 Created-By: Maven Integration for Eclipse

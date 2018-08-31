@@ -25,7 +25,7 @@ public class LegalAdviceRestController {
 	private LegalAdviceService service;
 	
 	@ApiOperation("EndPoint to get LegalAdvice by ID ")
-	@GetMapping(value = "/api/v1/legal-advice{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@GetMapping(value = "/api/v1/legal-advice/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody LegalAdviceResponse getLegalAdvice(
     		@PathVariable(value = "id", required = true) final Long id ) {
@@ -48,7 +48,7 @@ public class LegalAdviceRestController {
     }
 	
 	@ApiOperation("Endpoint to update a LegalAdvice")
-	@PostMapping(value = "/api/v1/legal-advice{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@PostMapping(value = "/api/v1/legal-advice/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public @ResponseBody LegalAdviceResponse upDateLegalAdvice(
     		@PathVariable(value = "id", required = true) final Long id ,

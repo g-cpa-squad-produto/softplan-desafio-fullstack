@@ -13,7 +13,7 @@ const appRoutes: Routes = [
   {
     path: '',
     // component: LoginComponent
-     component: SearchUserComponent //OnlyForDevComponent
+     component: SearchProcessComponent
   },
   {
     path: 'user',
