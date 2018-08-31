@@ -33,7 +33,7 @@
                 <mat-divider inset *ngIf="!last"></mat-divider>
                 -->
                 <mat-divider [inset]="true"></mat-divider>
-                <h4 mat-line> <mat-icon matListIcon>person_outline</mat-icon>l.nameResponsableFor</h4>
+                <h4 mat-line> <mat-icon matListIcon>person_outline</mat-icon>{{l.nameResponsableFor}}</h4>
                 <p matLine>
                   <span> {{l.description | slice:0:55}} ...</span>
                 </p>
