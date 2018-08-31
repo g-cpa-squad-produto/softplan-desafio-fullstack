@@ -1,6 +1,7 @@
 package com.luanrubensf.challenge.api;
 
 
+import com.luanrubensf.challenge.core.auth.IAuthentication;
 import com.luanrubensf.challenge.model.User;
 import com.luanrubensf.challenge.repository.UserRepository;
 import com.luanrubensf.challenge.representation.UserDto;
@@ -25,6 +26,15 @@ public class UserController {
 
     @Autowired
     private UserDto.Representation representation;
+
+    @Autowired
+    private IAuthentication authentication;
+
+    @GetMapping("/current")
+    public UserDto getCurrent() {
+        User user = (User) authentication.getAuthentication().getPrincipal();
+        return representation.toRepresentation(user);
+    }
 
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')")
