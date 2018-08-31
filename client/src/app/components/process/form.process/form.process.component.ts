@@ -59,6 +59,7 @@ export class FormProcessComponent implements OnInit {
     let tempUser:User = this.users.find(l=> l.id == this.legalAdvice.idResponsableFor);
     console.log('tempUser',tempUser);
     this.legalAdvice.loginResponsableFor = tempUser.login;
+    this.legalAdvice.nameResponsableFor = tempUser.name;
     let newListLegalAdvice: LegalAdvice[] = this.listLegalAdvice.slice(0);
     this.legalAdvice.idCreatedBy = 9999991;
     newListLegalAdvice.push(this.legalAdvice);

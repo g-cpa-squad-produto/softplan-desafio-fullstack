@@ -29,6 +29,7 @@ public class LegalAdviceResponse implements Serializable{
 	private String loginFinishedBy;
 	private Long idResponsableFor;
 	private String loginResponsableFor;
+	private String nameResponsableFor;
 	
 	@JsonCreator
 	public LegalAdviceResponse(
@@ -40,7 +41,8 @@ public class LegalAdviceResponse implements Serializable{
 			@JsonProperty("idFinishedBy") final Long idFinishedBy,
 			@JsonProperty("loginFinishedBy") final String loginFinishedBy,
 			@JsonProperty("idResponsableFor") final Long idResponsableFor,
-			@JsonProperty("loginResponsableFor") final String loginResponsableFor) {
+			@JsonProperty("loginResponsableFor") final String loginResponsableFor,
+			@JsonProperty("nameResponsableFor") final String nameResponsableFor) {
 		this.id = id;		
 		this.processId = processId;
 		this.description = description;
@@ -50,6 +52,7 @@ public class LegalAdviceResponse implements Serializable{
 		this.loginFinishedBy = loginFinishedBy;
 		this.idResponsableFor = idResponsableFor;
 		this.loginResponsableFor = loginResponsableFor;
+		this.nameResponsableFor = nameResponsableFor;
 	}
 	
 	

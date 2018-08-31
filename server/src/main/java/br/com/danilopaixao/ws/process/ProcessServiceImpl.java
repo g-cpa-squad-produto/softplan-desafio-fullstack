@@ -126,6 +126,7 @@ class ProcessServiceImpl implements ProcessService {
 									.loginFinishedBy(l.getUserFinishedBy()!=null?l.getUserFinishedBy().getLogin():null)
 									.idResponsableFor(l.getUserResponsableFor()!=null?l.getUserResponsableFor().getId():null)
 									.loginResponsableFor(l.getUserResponsableFor()!=null?l.getUserResponsableFor().getLogin():null)
+									.nameResponsableFor(l.getUserResponsableFor()!=null?l.getUserResponsableFor().getName():null)
 									.build()
 						).collect(Collectors.toList())
 				).build();
@@ -157,6 +158,7 @@ class ProcessServiceImpl implements ProcessService {
 													.loginFinishedBy(l.getUserFinishedBy()!=null?l.getUserFinishedBy().getLogin():null)
 													.idResponsableFor(l.getUserResponsableFor()!=null?l.getUserResponsableFor().getId():null)
 													.loginResponsableFor(l.getUserResponsableFor()!=null?l.getUserResponsableFor().getLogin():null)
+													.nameResponsableFor(l.getUserResponsableFor()!=null?l.getUserResponsableFor().getName():null)
 													.build()
 										).collect(Collectors.toList())
 								).build()

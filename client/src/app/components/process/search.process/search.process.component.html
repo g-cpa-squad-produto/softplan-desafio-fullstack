@@ -18,7 +18,7 @@
     <mat-card-content>
       <mat-list-item *ngFor="let p of processes">
         <mat-divider [inset]="true"></mat-divider>
-        <h4 mat-line (click)="routeFormProcess(p.id)" ><mat-icon>dashboard</mat-icon> {{p.code}}  |  {{p.summary}} </h4>
+        <h4 mat-line (click)="routeFormProcess(p.id)" ><mat-icon>library_books</mat-icon> {{p.code}}  |  {{p.summary}} </h4>
         <mat-divider inset *ngIf="!last"></mat-divider>
       </mat-list-item>
     </mat-card-content>

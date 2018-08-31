@@ -7,4 +7,5 @@ export class LegalAdvice {
     loginCreatedBy: string
     loginFinishedBy: string
     loginResponsableFor: string
+    nameResponsableFor: string
 }

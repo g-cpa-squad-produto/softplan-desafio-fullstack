@@ -1,4 +1,10 @@
 id, name,login,password,profile,status
-9999991, user admin,admin,admin,ADMINISTRADOR,ATIVO
-9999992, user triador,triador,triador,TRIADOR,ATIVO
-9999993, user finalizador,finalizador,finalizador,FINALIZADOR,INATIVO
+9999991,Danilo Paixao de Jesus,DPJESUS,senha,ADMINISTRADOR,ATIVO
+9999992,Amanda Cruz,ACRUZSILVA,senha,TRIADOR,ATIVO
+9999993,Rogerio Cardoso da Luz,ROGERLUZ,senha,FINALIZADOR,ATIVO
+9999994,Daniela da Silva,DANISILVA,senha,ADMINISTRADOR,ATIVO
+9999995,Patricia Cardoso,PCARDOSO,senha,TRIADOR,ATIVO
+9999996,Manoela Meira Neto,MANUNETO,senha,FINALIZADOR,ATIVO
+9999997,Vilma Silveira Cardoso,VILMASILCAR,senha,ADMINISTRADOR,ATIVO
+9999998,Edson Araujo Souza,EARASOUZA,senha,TRIADOR,ATIVO
+9999999,Carlos Edmilson de Jesus,CARLOSJESUS,senha,FINALIZADOR,ATIVO

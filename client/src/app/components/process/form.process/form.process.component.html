@@ -20,26 +20,37 @@
       </div>
       <div fxLayout="row" fxLayout="column">
         <mat-form-field>
-          <input matInput placeholder="Descrição" id="description" [(ngModel)]="process.description" required>
+            <textarea matInput placeholder="Descrição" id="description" [(ngModel)]="process.description" required></textarea>
         </mat-form-field>
       </div>
       <div fxLayout="row" fxLayout="column">
           <mat-card-content>
+            <div *ngIf="listLegalAdvice.length > 0">Parecer:</div>
               <mat-list-item *ngFor="let l of listLegalAdvice">
+                <!--
                 <mat-divider [inset]="true"></mat-divider>
-                <h4 mat-line ><mat-icon>dashboard</mat-icon> {{l.loginResponsableFor}}  </h4>
+                <h4 mat-line ></h4><mat-icon class="material-icons">person_outline</mat-icon> {{l.loginResponsableFor}}  </h4>
+                <mat-divider inset *ngIf="!last"></mat-divider>
+                -->
+                <mat-divider [inset]="true"></mat-divider>
+                <h4 mat-line> <mat-icon matListIcon>person_outline</mat-icon>l.nameResponsableFor</h4>
+                <p matLine>
+                  <span> {{l.description | slice:0:55}} ...</span>
+                </p>
                 <mat-divider inset *ngIf="!last"></mat-divider>
               </mat-list-item>
           </mat-card-content>
           <mat-card-content *ngIf="!process.id">
               <div fxLayout="row" fxLayoutAlign="center">
+                <div>Parecer:</div>
                 <mat-select style="margin-top: 30px" placeholder="Usuário Responsável pelo Parecer" [(ngModel)]="legalAdvice.idResponsableFor">
                   <mat-option *ngFor="let u of users" [value]="u.id">
-                    {{u.login}}
+                    {{u.name}}
                 </mat-option>
                 </mat-select>
                 <button style="margin-top: 30px" mat-button color="accent" fxLayoutAlign="end"  (click)="addLegalAdvice()"> 
-                Incluir 
+                    <mat-icon>person_add</mat-icon>
+                      Incluir 
                 </button>
               </div>
           </mat-card-content>
