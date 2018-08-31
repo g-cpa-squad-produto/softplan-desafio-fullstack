@@ -1,0 +1,34 @@
+<md-content class="small-content initial-form">
+    <md-card layout-padding class="md-default-theme">
+        <md-card-title>
+            <md-card-title-text layout="row" layout-align="center">
+                <span class="md-headline clh-title-bar">Challenge</span>
+            </md-card-title-text>
+        </md-card-title>
+        <form name="vm.loginForm">
+            <div layout="column" layout-align="center">
+                <div layout="row" ng-if="vm.errorMessage">
+                    <span md-colors="{color:'warn'}">{{vm.errorMessage}}</span>
+                </div>
+                <div layout="row">
+                    <md-input-container flex="100">
+                        <label>E-mail</label>
+                        <input name="usuario" ng-model="vm.login.usuario" required>
+                    </md-input-container>
+                </div>
+                <div layout="row">
+                    <md-input-container flex="100">
+                        <label>Senha</label>
+                        <input type="password" name="senha" ng-model="vm.login.senha" required>
+                    </md-input-container>
+                </div>
+            </div>
+            <div layout="column" layout-align="center" chl-loading="vm.tracker.login">
+
+            </div>
+            <md-card-actions ng-if="!vm.tracker.login.tracking()" layout="row" layout-align="end center">
+                <md-button class="md-raised md-primary" ng-click="vm.onClickLogin()" ng-disabled="vm.loginForm.$invalid">Entrar</md-button>
+            </md-card-actions>
+        </form>
+    </md-card>
+</md-content>

@@ -1,0 +1,17 @@
+
+/* TOASTS */
+.success .md-toast-content  {
+    background: #2E7D32;
+}
+
+.error .md-toast-content  {
+    background: #D32F2F;
+}
+
+.info .md-toast-content  {
+    background: #88b0b5;
+}
+
+md-icon.icon-white {
+    color: #FFF;
+}

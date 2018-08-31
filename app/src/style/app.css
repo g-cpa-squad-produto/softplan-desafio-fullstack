@@ -1,0 +1,81 @@
+html, body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+/* Primary content area */
+
+/*#content {*/
+    /*overflow: hidden;*/
+/*}*/
+
+/*#content {*/
+    /*padding-left: 40px;*/
+    /*padding-right: 40px;*/
+    /*padding-top: 5px;*/
+/*}*/
+
+.initial-form {
+    padding-top: 10px;
+}
+
+/* SCREEN CONTENT */
+
+.small-content {
+    position: relative;
+    max-width: 460px;
+    width: 100%;
+    margin: 0 auto 0px;
+}
+
+.medium-content {
+    position: relative;
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto 0px;
+}
+
+/* SUBHEADER */
+
+/*.md-subheader.subheader-white {*/
+    /*background-color: white;*/
+/*}*/
+
+/* ICONS  */
+.icon-text {
+    padding-right: 10px;
+}
+
+/* LOADING */
+.hide-next-elements~* {
+    display: none!important;
+}
+
+/* TOOLBAR TOOLS */
+.md-toolbar-tools.md-toolbar-tools-small {
+    height: 40px;
+    max-height: 40px;
+}
+
+md-toolbar.md-toolbar-small {
+    height: 48px;
+    min-height: 48px;
+}
+
+/* BUTTONS */
+.md-button.md-icon-button.list-button {
+    margin: 15px 6px;
+}
+
+.row-container {
+    margin: 18px 0;
+}
+
+.clh-title-bar {
+    border-right: 3px solid #2198F3;
+    padding-right: 8px;
+    font-weight: bold;
+}

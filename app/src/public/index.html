@@ -1,0 +1,29 @@
+<!doctype html>
+<html ng-app="app" lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Challenge</title>
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,700'>
+    <base href="/">
+</head>
+<body>
+<div>
+    <div ui-view="toolbar">
+
+    </div>
+</div>
+<main>
+    <div flex layout="row">
+        <div flex ui-view>
+        </div>
+    </div>
+</main>
+<footer>
+    <div layout="row" layout-align="center center">
+        <div>Challenge</div>
+    </div>
+</footer>
+
+</body>
+</html>
