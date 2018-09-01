@@ -4,6 +4,7 @@
  */
 const users = 'app.main.users';
 const processos = 'app.main.processos';
+const parecer = 'app.main.parecer';
 
 export default class TabsViewsController {
     constructor($state) {
@@ -20,6 +21,10 @@ export default class TabsViewsController {
 
     onClickProcessos() {
         this.redirectToState(processos);
+    }
+
+    onClickParecer() {
+        this.redirectToState(parecer);
     }
 
     redirectToState(targetState) {
