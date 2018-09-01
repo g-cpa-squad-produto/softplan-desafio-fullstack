@@ -22,8 +22,8 @@ VALUES
     'client_credentials,password,refresh_token',
     NULL,
     'USER',
-    900000,
-    1800000,
+    600,
+    1300,
     NULL,
     TRUE
   );

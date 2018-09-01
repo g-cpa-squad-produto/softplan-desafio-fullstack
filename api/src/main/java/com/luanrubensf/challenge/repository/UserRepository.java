@@ -5,7 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public interface UserRepository extends CrudRepository<User, Long> {
@@ -14,4 +13,8 @@ public interface UserRepository extends CrudRepository<User, Long> {
     List<User> findAllBy();
 
     User findUserById(Long id);
+
+    boolean existsByEmailAndIdIsNot(String email, Long id);
+
+    boolean existsByEmail(String email);
 }

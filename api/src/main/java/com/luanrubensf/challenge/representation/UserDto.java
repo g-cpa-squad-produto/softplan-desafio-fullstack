@@ -1,6 +1,8 @@
 package com.luanrubensf.challenge.representation;
 
 import com.luanrubensf.challenge.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 public class UserDto implements IEntityDto<Long> {
@@ -56,10 +58,14 @@ public class UserDto implements IEntityDto<Long> {
 
         @Override
         public User fromRepresentation(UserDto dto, User.Builder builder) {
-            return builder
-                    .email(dto.getEmail())
-                    .password(dto.getPassword())
-                    .matchPassword(dto.getMatchPassword())
+            User.Builder userBuilder = builder
+                    .email(dto.getEmail());
+
+            if (dto.getPassword() != null) {
+                userBuilder.password(dto.getPassword())
+                        .matchPassword(dto.getMatchPassword());
+            }
+            return userBuilder
                     .name(dto.getName())
                     .build();
         }

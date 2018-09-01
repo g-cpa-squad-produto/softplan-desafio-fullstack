@@ -21,7 +21,7 @@ public class ValidationConstraint {
         this.message = message;
     }
 
-    public Boolean getSatisfied() {
+    public Boolean isSatisfied() {
         return satisfied;
     }
 

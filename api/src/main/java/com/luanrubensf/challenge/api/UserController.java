@@ -63,7 +63,15 @@ public class UserController {
     public UserDto update(@PathVariable("id") Long id, @RequestBody UserDto dto) {
         User userById = userRepository.findUserById(id);
         User user = representation.fromRepresentation(dto, User.Builder.from(userById));
-        User saved = userService.save(user, dto.getRole());
-        return representation.toRepresentation(saved);
+        if (dto.getPassword() == null) {
+            return representation.toRepresentation(userService.saveWithoutPassword(user, dto.getRole()));
+        }
+        return representation.toRepresentation(userService.save(user, dto.getRole()));
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable("id") Long id) {
+        User userById = userRepository.findUserById(id);
+        userRepository.delete(userById);
     }
 }

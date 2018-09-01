@@ -51,13 +51,6 @@ public class User implements UserDetails, IEntity<Long> {
     @Column(name = "ENABLED")
     private Boolean enabled = Boolean.TRUE;
 
-//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinTable(name = "USERS_ROLES",
-//            schema = SCHEMA,
-//            joinColumns = {@JoinColumn(name = "I_USERS")},
-//            inverseJoinColumns = {@JoinColumn(name = "I_ROLES")})
-//    private List<Role> roles = new ArrayList<>();
-
     @ManyToOne
     @JoinColumn(name = "I_ROLES")
     @NotNull(message = "A role do usuário deve ser informada")
