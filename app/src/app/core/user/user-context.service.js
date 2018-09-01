@@ -5,8 +5,9 @@
  */
 
 export default class UserContextService {
-    constructor(Restangular) {
+    constructor(Restangular, $q) {
         this.Restangular = Restangular;
+        this.$q = $q;
 
         this.user = null;
     }
@@ -27,8 +28,24 @@ export default class UserContextService {
     setUserValue(value) {
         this.user = value;
     }
+
+    getUserState() {
+        let current = this.getUserValue();
+        if (!current) {
+            return this.getUser().then((user) => {
+                return STATE_ROLE_MAP[user.role];
+            })
+        }
+        return this.$q.resolve(STATE_ROLE_MAP[current.role]);
+    }
 }
 
+const STATE_ROLE_MAP = {
+    'ROLE_ADMIN': 'app.main.users',
+    'ROLE_TRIADOR': 'app.main.processos',
+    'ROLE_FINALIZADOR': 'app.main.parecer',
+};
+
 UserContextService.$inject = [
-    'Restangular'
+    'Restangular', '$q'
 ];

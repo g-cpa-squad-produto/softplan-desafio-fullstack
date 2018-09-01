@@ -1,8 +1,9 @@
 const INVALID_GRANT_STATES = ['invalid_grant', 'unauthorized'];
 
 export default class LoginController {
-    constructor($state, promiseTracker, LoginService) {
+    constructor($state, $userService, promiseTracker, LoginService) {
         this.$state = $state;
+        this.$userService = $userService;
         this.promiseTracker = promiseTracker;
         this.LoginSevice = LoginService;
 
@@ -14,9 +15,10 @@ export default class LoginController {
     onClickLogin() {
         const promise = this.LoginSevice.login(this.login)
             .then((data) => {
-                //Ao logar, sempre manda o usuário para a tela de usuários. Este comportamento deve ser revisto.
-                this.$state.go('app.main.users');
                 this.errorMessage = '';
+                return this.$userService.getUserState().then((state) => {
+                    this.$state.go(state);
+                });
             }, this.handleError.bind(this));
 
         this.tracker.login.addPromise(promise);
@@ -39,6 +41,7 @@ export default class LoginController {
 
 LoginController.$inject = [
     '$state',
+    '$userService',
     'promiseTracker',
     'app-login.LoginService'
 ];

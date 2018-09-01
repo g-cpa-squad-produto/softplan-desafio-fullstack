@@ -6,13 +6,20 @@ const users = 'app.main.users';
 const processos = 'app.main.processos';
 const parecer = 'app.main.parecer';
 
+const STATE_TAB = {
+  'app.main.users': 'users',
+  'app.main.processos': 'processos',
+  'app.main.parecer': 'parecer'
+};
+
 export default class TabsViewsController {
     constructor($state) {
         this.$state = $state;
     }
 
     $onInit() {
-        this.currentNavItem = 'users'
+        const currentState = this.$state.current.name;
+        this.currentNavItem = STATE_TAB[currentState];
     }
 
     onClickUsers() {

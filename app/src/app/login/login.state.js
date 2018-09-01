@@ -22,12 +22,15 @@ export default function loginStateConfig($stateProvider) {
 
 onEnterLoginState.$inject = [
     '$state',
-    'OAuth'
+    'OAuth',
+    '$userService'
 ];
 
-function onEnterLoginState($state, OAuth) {
+function onEnterLoginState($state, OAuth, $userService) {
     if (OAuth.isAuthenticated()) {
-        return $state.go('app.main.users');
+        return $userService.getUserState().then((state) => {
+            return $state.go(state);
+        })
     }
 }
 
