@@ -1,0 +1,20 @@
+<md-dialog flex-gt-xs="50" flex-xs="75">
+    <chl-dialog-header title="'Vinculando usuários'"></chl-dialog-header>
+    <md-dialog-content>
+        <md-list chl-loading="vm.tracker.list">
+            <md-list-item ng-repeat="user in vm.users">
+                <p>{{user.name}}</p>
+                <md-checkbox class="md-secondary" ng-model="user.$$selected"></md-checkbox>
+            </md-list-item>
+        </md-list>
+        <div layout="row" layout-padding layout-align="start" ng-if="!vm.users.length">
+            <span><md-icon md-svg-src="info"></md-icon>&nbsp;Não foram encontrados usuários finalizadores sem vínculo com este processo</span>
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row" chl-loading="vm.tracker.save">
+        <md-button class="md-accent" ng-click="vm.onClickCancel()">Cancelar</md-button>
+        <md-button class="md-raised md-primary" ng-disabled="!vm.hasSelected()" ng-click="vm.onClickSave()">
+            Salvar
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

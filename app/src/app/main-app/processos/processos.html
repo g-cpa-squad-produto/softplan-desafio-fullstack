@@ -10,6 +10,23 @@
                     Processo
                 </md-button>
             </md-card-title>
+            <md-card-content chl-loading="vm.tracker.list">
+                <md-list>
+                    <md-list-item class="md-3-line md-long-text" layout-xs="column" ng-repeat="processo in vm.processos">
+                        <div class="md-list-item-text">
+                            <h3>{{::processo.name}}</h3>
+                            <p>
+                                {{::processo.description}}
+                            </p>
+                        </div>
+                        <md-icon md-svg-icon="account-plus" ng-click="vm.onClickVinculo($event, processo)"
+                                 aria-label="Adicionar usuários" class="md-secondary md-hue-3"></md-icon>
+                    </md-list-item>
+                </md-list>
+                <div layout="row" layout-align="start" ng-if="!vm.processos.length">
+                    <span><md-icon md-svg-src="info"></md-icon>&nbsp;Ainda não processos por aqui</span>
+                </div>
+            </md-card-content>
         </md-card>
     </div>
 </div>

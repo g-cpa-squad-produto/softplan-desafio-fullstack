@@ -1,0 +1,31 @@
+<md-dialog flex-gt-xs="50" flex-xs="75">
+    <chl-dialog-header title="'Cadastro de processos'"></chl-dialog-header>
+    <md-dialog-content>
+        <form name="vm.processosForm">
+            <div layout-padding layout="column" layout-align="center">
+                <div layout="row">
+                    <md-input-container flex="100">
+                        <label>Nome</label>
+                        <input ng-model="vm.processo.name" maxlength="100" required>
+                    </md-input-container>
+                </div>
+                <div layout="row">
+                    <md-input-container flex="100">
+                        <label>Descrição do processo</label>
+                        <textarea ng-model="vm.processo.description"
+                                  autocomplete="off"
+                                  md-maxlength="1000"
+                                  required
+                                  rows="1"></textarea>
+                    </md-input-container>
+                </div>
+            </div>
+        </form>
+    </md-dialog-content>
+    <md-dialog-actions layout="row" chl-loading="vm.tracker">
+        <md-button class="md-accent" ng-click="vm.onClickCancel()">Cancelar</md-button>
+        <md-button class="md-raised md-primary" ng-disabled="vm.processosForm.$invalid" ng-click="vm.onClickSave()">
+            Salvar
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

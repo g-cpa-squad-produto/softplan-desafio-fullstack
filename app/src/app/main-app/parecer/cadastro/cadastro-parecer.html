@@ -1,0 +1,28 @@
+<md-dialog flex-gt-xs="50" flex-xs="75">
+    <chl-dialog-header title="'Cadastro de parecer'"></chl-dialog-header>
+    <md-dialog-content>
+        <form name="vm.parecerForm">
+            <div layout-padding layout="column" layout-align="center">
+                <div layout="row">
+                    <span><md-icon md-svg-src="doc"></md-icon>&nbsp;Parecer para o processo: {{::vm.parecer.processo.name}}</span>
+                </div>
+                <div layout="row">
+                    <md-input-container flex="100">
+                        <label>Parecer</label>
+                        <textarea ng-model="vm.parecer.parecer"
+                                  autocomplete="off"
+                                  md-maxlength="1000"
+                                  required
+                                  rows="1"></textarea>
+                    </md-input-container>
+                </div>
+            </div>
+        </form>
+    </md-dialog-content>
+    <md-dialog-actions layout="row" chl-loading="vm.tracker">
+        <md-button class="md-accent" ng-click="vm.onClickCancel()">Cancelar</md-button>
+        <md-button class="md-raised md-primary" ng-disabled="vm.parecerForm.$invalid" ng-click="vm.onClickSave()">
+            Salvar
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

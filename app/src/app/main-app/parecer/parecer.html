@@ -1,5 +1,29 @@
 <div>
-    <h2>
-        Parecer
-    </h2>
+    <div role="tabpanel" layout="row" layout-align="center center">
+        <md-card flex-gt-xs="70" flex-xs="90">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">Parecer sobre processos</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content chl-loading="vm.tracker">
+                <md-list>
+                    <md-list-item class="md-3-line md-long-text" layout-xs="column" ng-repeat="parecer in vm.pareceres">
+                        <div class="md-list-item-text">
+                            <h3>{{::parecer.processo.name}}</h3>
+                            <p>
+                                {{parecer.parecer || 'Parecer ainda não informado.'}}
+                            </p>
+                        </div>
+                        <md-icon md-svg-icon="doc" ng-click="vm.onClickInserirParecer($event, parecer)"
+                                 ng-if="!parecer.parecer"
+                                 aria-label="Inserir parecer" class="md-secondary md-hue-3"></md-icon>
+                    </md-list-item>
+                </md-list>
+                <div layout="row" layout-align="start" ng-if="!vm.pareceres.length">
+                    <span><md-icon md-svg-src="info"></md-icon>&nbsp;Ainda não processos que necessitam de parecer</span>
+                </div>
+            </md-card-content>
+        </md-card>
+    </div>
 </div>

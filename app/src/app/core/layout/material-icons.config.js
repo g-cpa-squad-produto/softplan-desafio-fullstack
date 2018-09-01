@@ -11,6 +11,9 @@ export default function materialIconsConfig($mdIconProvider) {
         .icon('close', '/icons/close.svg', 24)
         .icon('exit', '/icons/exit.svg', 24)
         .icon('info', '/icons/info.svg', 24)
+        .icon('doc', '/icons/doc.svg', 24)
+        .icon('eye', '/icons/eye.svg', 24)
+        .icon('account-plus', '/icons/account-plus.svg', 24)
         .icon('plus', '/icons/plus.svg', 24);
 }
 
