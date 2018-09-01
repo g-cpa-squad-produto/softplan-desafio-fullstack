@@ -1,0 +1,54 @@
+<md-dialog flex-gt-xs="55" flex-xs="75">
+    <chl-dialog-header title="'Cadastro de usuários'"></chl-dialog-header>
+    <md-dialog-content>
+        <form name="vm.userForm">
+            <div layout-padding layout="column" layout-align="center">
+                <div layout="row">
+                    <md-input-container flex="50">
+                        <label>Nome</label>
+                        <input ng-model="vm.user.name" maxlength="100" required>
+                    </md-input-container>
+                    <md-input-container flex="50">
+                        <label>E-mail</label>
+                        <input name="email" type="email" ng-model="vm.user.email" maxlength="100" required>
+                        <div ng-messages="vm.userForm.email.$error">
+                            <div ng-message="email">É necessário informar um e-mail válido</div>
+                        </div>
+                    </md-input-container>
+                </div>
+                <div layout="row">
+                    <md-input-container flex="30">
+                        <label>Perfil do usuário</label>
+                        <md-select-data ng-model="vm.user.role"
+                                        label="Perfil do usuário"
+                                        enum-options="vm.USER_PROFILE_ENUM"
+                                        ng-required="true"></md-select-data>
+                    </md-input-container>
+                    <md-input-container flex="35">
+                        <label>Senha</label>
+                        <input type="password" autocomplete="false" ng-model="vm.user.password" maxlength="30" ng-required="!vm.user.id">
+                    </md-input-container>
+                    <md-input-container flex="35">
+                        <label>Repetir senha</label>
+                        <input type="password" autocomplete="false" name="matchPassword" app-password-match
+                               password="vm.user.password" ng-model="vm.user.matchPassword" maxlength="30" ng-required="!vm.user.id">
+                        <div ng-messages="vm.userForm.matchPassword.$error">
+                            <div ng-message="matchPassword">As senhas não são iguais</div>
+                        </div>
+                    </md-input-container>
+                </div>
+            </div>
+            <div layout-padding layout="row" layout-align="start" ng-if="vm.user.id">
+                <div layout="row">
+                    <span><md-icon md-svg-src="info"></md-icon>&nbsp;Por questões de segurança, as senhas não são recuperadas, mas você pode editar o usuário ou redefinir a senha.</span>
+                </div>
+            </div>
+        </form>
+    </md-dialog-content>
+    <md-dialog-actions layout="row" chl-loading="vm.tracker">
+        <md-button class="md-accent" ng-click="vm.onClickCancel()">Cancelar</md-button>
+        <md-button class="md-raised md-primary" ng-disabled="vm.userForm.$invalid" ng-click="vm.onClickSave()">
+            Salvar
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

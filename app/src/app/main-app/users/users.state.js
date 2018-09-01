@@ -6,7 +6,7 @@ export default function userStateConfig($stateProvider) {
             views: {
                 'app-view': {
                     template: usersTemplate,
-                    contoller: 'chl.UsersController'
+                    controller: 'chl.UsersController as vm'
                 }
             },
             url: '/users'

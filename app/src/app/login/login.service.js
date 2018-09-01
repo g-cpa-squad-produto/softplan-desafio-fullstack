@@ -17,7 +17,6 @@ export default class LoginSevice {
         });
     }
 
-    //todo: funcao de logout implementada, mas hoje não é chamada. Arrumar meio de deslogar usuário.
     logout() {
         return this.OAuth.revokeTokens()
             .then(() => {

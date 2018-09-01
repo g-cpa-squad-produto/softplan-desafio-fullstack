@@ -4,8 +4,9 @@ import ngAria from 'angular-aria';
 import ngMaterial from 'angular-material';
 import ngMessages from 'angular-messages';
 import angularInputMasks from 'angular-input-masks/br';
-import mdDataTable from 'angular-material-data-table';
+// import mdDataTable from 'angular-material-data-table';
 import idfBrFilters from 'angular-br-filters';
+import mdSelectData from 'md-select-data';
 
 import materialThemeConfig from './material-theme.config';
 import materialIconsConfig from './material-icons.config';
@@ -20,8 +21,9 @@ angular.module(MODULE_NAME, [
     ngMaterial,
     ngMessages,
     angularInputMasks,
-    mdDataTable,
-    idfBrFilters
+    // mdDataTable,
+    idfBrFilters,
+    mdSelectData
 ])
     .config(materialThemeConfig)
     .config(materialIconsConfig);

@@ -1,9 +1,13 @@
 <md-toolbar>
     <div class="md-toolbar-tools">
         <h2 flex><span>Challenge</span></h2>
+        <div>
+            <md-button class="md-icon-button">
+                <md-tooltip md-direction="bottom">Logout</md-tooltip>
+                <md-icon ng-click="vm.onClickLogout()" md-svg-icon="exit"></md-icon>
+            </md-button>
+        </div>
     </div>
-
     <md-content layout="column" layout-fill>
     </md-content>
 </md-toolbar>
-<app-side-nav toggle-function="vm.toggleSideNav"></app-side-nav>

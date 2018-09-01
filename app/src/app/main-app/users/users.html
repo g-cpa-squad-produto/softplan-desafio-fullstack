@@ -1,3 +1,30 @@
 <div>
-    <h1>USERS</h1>
+    <div role="tabpanel" layout="row" layout-align="center center">
+        <md-card flex-gt-xs="70" flex-xs="90">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">Usuários</span>
+                </md-card-title-text>
+                <md-button class="md-raised md-primary" ng-click="vm.onClickCriar($event)">
+                    <md-icon md-svg-icon="plus"></md-icon>
+                    Usuário
+                </md-button>
+            </md-card-title>
+            <md-card-content>
+                <md-list>
+                    <md-list-item layout-xs="column" ng-repeat="user in vm.users">
+                        <p flex="40">{{::user.name}}</p>
+                        <p flex="40">{{::user.email}}</p>
+                        <p flex="20">{{::vm.USER_PROFILE[user.role]}}</p>
+                        <md-icon md-svg-icon="pencil" ng-click="vm.onClickEditar($event, user)"
+                                 ng-disabled="vm.currentUser.id === user.id"
+                                 aria-label="Editar item" class="md-secondary md-hue-3"></md-icon>
+                        <md-icon md-svg-icon="delete" ng-click="vm.onClickRemover($event, user)"
+                                 ng-disabled="vm.currentUser.id === user.id"
+                                 aria-label="Editar item" class="md-secondary md-hue-3"></md-icon>
+                    </md-list-item>
+                </md-list>
+            </md-card-content>
+        </md-card>
+    </div>
 </div>

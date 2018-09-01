@@ -43,7 +43,6 @@ function onEnterMainState($q, $state, $userService, OAuthToken, OAuth) {
 
     return $userService.getUser()
         .then((response) => {
-            console.log('response: ', response);
             $userService.setUserValue(response);
         })
         .catch(() => {
