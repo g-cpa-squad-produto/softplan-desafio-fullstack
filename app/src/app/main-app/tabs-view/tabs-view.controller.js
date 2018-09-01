@@ -3,6 +3,7 @@
  * o indicador das abas no local correto.
  */
 const users = 'app.main.users';
+const processos = 'app.main.processos';
 
 export default class TabsViewsController {
     constructor($state) {
@@ -15,6 +16,10 @@ export default class TabsViewsController {
 
     onClickUsers() {
         this.redirectToState(users);
+    }
+
+    onClickProcessos() {
+        this.redirectToState(processos);
     }
 
     redirectToState(targetState) {
