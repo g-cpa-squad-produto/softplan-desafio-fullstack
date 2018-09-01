@@ -4,6 +4,7 @@ import com.luanrubensf.challenge.core.ChallengeConstants;
 import com.luanrubensf.challenge.core.EntityBuilder;
 import com.luanrubensf.challenge.core.IEntity;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,14 +12,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.luanrubensf.challenge.core.ChallengeConstants.GENERATOR_SEQUENCE;
-import static com.luanrubensf.challenge.core.ChallengeConstants.SCHEMA;
 
 
 @Entity
@@ -34,10 +31,12 @@ public class User implements UserDetails, IEntity<Long> {
 
     @NotNull(message = "O nome do usuário não pode ser nulo")
     @Column(name = "NAME")
+    @Length(max = 100, message = "O nome deve ter no máximo 100 caracteres")
     private String name;
 
     @NotNull(message = "O e-mail do usuário não pode ser nulo")
     @Email(message = "Deve ser informado um e-mail válido")
+    @Length(max = 100, message = "O e-mail deve ter no máximo 100 caracteres")
     @Column(name = "EMAIL")
     private String email;
 

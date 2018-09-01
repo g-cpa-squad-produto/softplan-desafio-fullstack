@@ -1,8 +1,6 @@
 package com.luanrubensf.challenge.representation;
 
 import com.luanrubensf.challenge.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 public class UserDto implements IEntityDto<Long> {

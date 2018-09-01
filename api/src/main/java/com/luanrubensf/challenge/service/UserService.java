@@ -69,10 +69,20 @@ public class UserService {
         return roleRepository.findRoleByNameIs(role);
     }
 
+    /**
+     * Criptografa senha
+     * @param pass Senha a ser criptografada
+     * @return senha criptografada
+     */
     private String encryptPassword(String pass) {
         return passwordEncoder.encode(pass);
     }
 
+    /**
+     * Executa as validações para a entidade User
+     * Serão executadas as AbstractValidations e as anotações
+     * @param entity User a ser validado
+     */
     private void validate(User entity) {
         validator.validate(entity,
                 UserValidators.checkMatchPassword(),
