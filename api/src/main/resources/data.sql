@@ -7,9 +7,6 @@ INSERT INTO CHL_OWNER.ROLES VALUES (3, 'ROLE_FINALIZADOR');
 -- ======================================== DEFAULT USERS ========================================
 
 INSERT INTO CHL_OWNER.USERS VALUES (1, 'adm@challenge.com', '{noop}password', 'Admin', true, 1);
-INSERT INTO CHL_OWNER.USERS VALUES (2, 'processo@processo', '{noop}password', 'Processo', true, 2);
-INSERT INTO CHL_OWNER.USERS VALUES (3, 'fin@fin', '{noop}123', 'Fin 1', true, 3);
-INSERT INTO CHL_OWNER.USERS VALUES (4, 'fin2@fin', '{noop}123', 'Fin 2', true, 3);
 
 -- ======================================== DEFAULT OAUTH2 CLIENT ========================================
 
