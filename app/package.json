@@ -27,8 +27,6 @@
     "jquery": "^3.3.1",
     "lodash": "^4.17.5",
     "md-select-data": "0.0.1",
-    "md-select-scroll": "0.0.4",
-    "md-steppers": "^0.4.0",
     "moment": "^2.22.2",
     "restangular": "^1.6.1",
     "simple-password-validator": "0.0.8"
