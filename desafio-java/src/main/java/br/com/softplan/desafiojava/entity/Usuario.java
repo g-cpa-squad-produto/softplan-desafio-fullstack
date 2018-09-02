@@ -1,7 +1,17 @@
 package br.com.softplan.desafiojava.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+
+@Entity
+@NamedQuery(name="buscar_todos_usuarios", query="select U from Usuario U")
 public class Usuario {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private String matricula;
 	private String nome;
