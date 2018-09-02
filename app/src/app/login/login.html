@@ -27,7 +27,7 @@
 
             </div>
             <md-card-actions ng-if="!vm.tracker.login.tracking()" layout="row" layout-align="end center">
-                <md-button class="md-raised md-primary" ng-click="vm.onClickLogin()" ng-disabled="vm.loginForm.$invalid">Entrar</md-button>
+                <md-button type="submit" class="md-raised md-primary" ng-click="vm.onClickLogin()" ng-disabled="vm.loginForm.$invalid">Entrar</md-button>
             </md-card-actions>
         </form>
     </md-card>
