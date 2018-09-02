@@ -1,0 +1,25 @@
+## Como logar:
+
+Foi criado um usuário padrão diretamente na base de dados para que seja possível logar a primeira vez.
+Este usuário possui perfil de ADMINISTRADOR.
+
+* Usuário: adm@challenge.com
+* Senha: password
+
+## Executar back-end:
+
+Basta entrar na pasta api do projeto e utilizar o comando `mvn spring-boot:run`.
+
+Segunda opção: Também é possível gerar uma versão executável da aplicação, seguindo os passos abaixo (dentro da pasta api):
+1. Executar o comando `mvn clean package`
+2. Executar o comando `java -jar target/challenge-0.0.1-SNAPSHOT.jar`
+
+O back-end estará disponível no endereço `http://localhost:8080`.
+
+## Executar front-end:
+
+Basta entrar na pasta app do projeto e seguir os passos abaixo:
+1. Executar `npm install`
+2. Executar `npm start`
+
+A aplicação será executada no endereço `http://localhost:9001`

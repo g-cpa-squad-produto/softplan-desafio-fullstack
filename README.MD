@@ -1,3 +1,12 @@
+# IMPORTANTE
+
+Leia o arquivo `leia.txt` na raiz do projeto. Neste arquivo está o usuário padrão, bem como instruções
+para executar o projeto.
+
+As instruções de uso também se encotram [nesse link](https://github.com/luanrubensf/softplan-desafio-fullstack/wiki/Executar-o-projeto).
+
+Também foi criada uma [documentação aqui](https://github.com/luanrubensf/softplan-desafio-fullstack/wiki).
+
 # Desafio implementador fullstack
 
 Seja parte da jornada de transformação digital no Brasil.
