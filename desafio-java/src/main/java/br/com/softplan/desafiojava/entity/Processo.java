@@ -3,6 +3,7 @@ package br.com.softplan.desafiojava.entity;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,8 +13,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
-//@NamedQuery(name="processo_pendente_usuario", query="select P from Processo where P.id = 1")
 public class Processo {
 
 	@Id
@@ -24,10 +26,11 @@ public class Processo {
 	private String dados;
 	private String pendente = "N";
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "processo_usuario", 
 		joinColumns = @JoinColumn(name = "processo_id", referencedColumnName = "id"), 
 		inverseJoinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "id"))
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private List<Usuario> finalizadores;
 
 	public Processo() {
