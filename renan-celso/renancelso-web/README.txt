@@ -7,6 +7,7 @@
 2. Foi utilizado o Maven para gerenciar as dependências do projeto.
 
 3. Se necessário, seguir primeiramente o documento fornecido "01_Instalacao_MySql.docx"
+OBS: É necessário criar um novo schema no mysql com o nome "renancelso"
    
 4. É necessário baixar o servidor de aplicação "jboss-as-7.1.1.Final". Link utilizado: "http://jbossas.jboss.org/downloads"
 
