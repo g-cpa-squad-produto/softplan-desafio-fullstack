@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	
+	<persistence-unit transaction-type="JTA" name="renancelso-pu">		
+	
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<jta-data-source>java:/jdbc/renancelsoDS</jta-data-source>
+		<class>br.com.renancelso.service.model.Usuario</class>
+		<class>br.com.renancelso.service.model.Processo</class>
+		<class>br.com.renancelso.service.model.UsuarioProcesso</class>
+		<class>br.com.renancelso.service.model.Parecer</class>		
+		
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<shared-cache-mode>NONE</shared-cache-mode>			
+		<properties>		
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" /> 
+			<property name="hibernate.hbm2ddl.auto" value="update" /> 
+			<property name="hibernate.show_sql" value="true" /> 
+			<property name="hibernate.format_sql" value="false" />  
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>			
+			<property name="hibernate.connection.characterEncoding" value="UTF-8" />
+<!-- 			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/renancelso"/> -->
+<!-- 			<property name="hibernate.connection.username" value="root"/> 				 			 -->
+<!-- 			<property name="hibernate.connection.password" value="avebs4212"/>				 			 -->
+		</properties>
+		
+	</persistence-unit>	
+	
+</persistence>

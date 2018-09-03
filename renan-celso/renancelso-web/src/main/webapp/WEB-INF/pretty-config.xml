@@ -1,0 +1,46 @@
+<pretty-config xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
+                      http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
+
+    <url-mapping id="login">
+        <pattern value="/" />
+        <view-id value="/publico/login.jsf" />
+    </url-mapping>
+    
+    <url-mapping id="login">
+        <pattern value="/login" />
+        <view-id value="/publico/login.jsf" />
+    </url-mapping>
+    
+    <url-mapping id="crie_sua_conta">
+        <pattern value="/crie_sua_conta" />
+        <view-id value="/publico/crie_sua_conta.jsf" />
+    </url-mapping>
+           
+    <url-mapping id="inicio">
+        <pattern value="/inicio" />
+        <view-id value="/sistema/inicio.jsf" />
+    </url-mapping>      
+                
+    <url-mapping id="gerenciar-usuarios">
+        <pattern value="/gerenciar-usuarios" />
+        <view-id value="/sistema/administrador/gerenciar-usuarios.jsf" />
+    </url-mapping>           
+    
+    <url-mapping id="gerenciar-processos">
+        <pattern value="/gerenciar-processos" />
+        <view-id value="/sistema/triador/gerenciar-processos.jsf" />
+    </url-mapping>
+    
+    <url-mapping id="gerenciar-parecer">
+        <pattern value="/gerenciar-parecer" />
+        <view-id value="/sistema/finalizador/gerenciar-parecer.jsf" />
+    </url-mapping>
+              
+   	<url-mapping id="logoff">
+	  	<pattern value="/logoff" />
+	  	<view-id value="/logoff.jsp" />
+    </url-mapping>
+          
+</pretty-config>

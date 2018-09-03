@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:pt="http://java.sun.com/jsf/passthrough"
+	  xmlns:c="http://java.sun.com/jstl/core" class="gt-ie8 gt-ie9 not-ie">
+      
+<h:body>
+   
+	<ui:composition template="../template/padrao.xhtml">
+	
+	    <ui:define name="conteudo">
+	    
+		    <h:form id="formAjaxStatus">
+<!-- 		    	<p:ajaxStatus onstart="PF('dialogAguarde').show()" -->
+<!--                               onsuccess="PF('dialogAguarde').hide()" -->
+<!--                               onerror="PF('dialogAguarde').hide()"  -->
+<!--                               oncomplete="PF('dialogAguarde').hide()"/> -->
+	        
+	        	<p:dialog resizable="false" id="dialogAguarde"
+                          widgetVar="dialogAguarde" 
+                          draggable="false" closable="false" width="250" >                      
+	                <center>
+	                    <b>Por favor, aguarde...</b>
+	                    <br></br>
+	                    <br></br>
+	                    <p:graphicImage value="assets/images/ajax-loader.gif" />    
+	                </center>
+                </p:dialog>
+		    </h:form>
+	        
+	        <h:form id="formPrincipal">	        	
+	        	
+	        	<p:messages id="messages1" closable="true" showDetail="false"/>
+	        		        	
+	        	<p:commandButton value="Incluir Novo Usuário" update="@form" 
+								 id="btIniciarInclusaoNovoUsuario" styleClass="signin-btn"
+								 style="font-weight: bold;"
+								 action="#{adminControl.btNovoUsuario}" 
+								 onstart="PF('dialogAguarde').show();" 
+								 oncomplete="PF('dialogAguarde').hide();"									
+							     onsuccess="PF('dialogAguarde').hide();"
+						 		 onerror="PF('dialogAguarde').hide();"
+						 		 rendered="#{adminControl.novoUsuario == null and adminControl.usuarioSelecionado == null}"/> 
+						 		 
+				<p:spacer height="30" rendered="#{adminControl.novoUsuario == null and adminControl.usuarioSelecionado == null}"/> 
+								
+				<p:panel toggleable="true" toggleSpeed="300" style="min-width: 270px;"
+	            		 rendered="#{adminControl.novoUsuario != null}"
+	            		 header="Novo Usuário">	
+	            		 
+	            	<h:panelGrid columns="2" columnClasses="coluna1D,coluna2">
+	            		
+	            		<h:outputText value="Tipo de Usuário: " />						
+						<h:selectOneMenu value="#{adminControl.novoUsuario.tipoUsuario}">  
+							<f:selectItem itemValue="" itemLabel="SELECIONE..."/> 
+                            <f:selectItem itemValue="ADMINISTRADOR" itemLabel="Administrador"/>	   
+                            <f:selectItem itemValue="TRIADOR" itemLabel="Usuário-triador"/>
+                            <f:selectItem itemValue="FINALIZADOR" itemLabel="Usuário-finalizador"/>   
+                      	</h:selectOneMenu> 	            	
+	            		            		
+	            		<h:outputText value="Login: "/>	                				
+						<h:inputText value="#{adminControl.novoUsuario.login}" size="50"/>	
+						                      		            		            	
+	            		<h:outputText value="Senha: "/>						
+						<h:inputSecret size="30" value="#{adminControl.novoUsuario.senha}"/>									   
+																		            	
+	            	</h:panelGrid>	
+	            	
+	            	<p:panel style="border: 0px;">
+	           	
+		           		<p:commandButton value="Voltar" update="@form" 
+									 id="btIniciarInclusaoNovoVoltar" styleClass="signin-btn"
+									 style="font-weight: bold;"
+									 action="#{adminControl.btNovoUsuarioVoltar()}" 
+									 onstart="PF('dialogAguarde').show();" 
+									 oncomplete="PF('dialogAguarde').hide();"									
+								     onsuccess="PF('dialogAguarde').hide();"
+							 		 onerror="PF('dialogAguarde').hide();"/> 
+							 		 
+						<p:spacer width="20"/>	 		 
+							 		 
+						<p:commandButton value="Cadastrar" update="@form" 
+										 id="btCadastrarNovoUsuario" styleClass="signin-btn"
+										 style="font-weight: bold;"
+										 action="#{adminControl.btCadastrarNovoUsuario()}" 
+										 onstart="PF('dialogAguarde').show();" 
+										 oncomplete="PF('dialogAguarde').hide();"									
+									     onsuccess="PF('dialogAguarde').hide();"
+								 		 onerror="PF('dialogAguarde').hide();"/>
+							 		 
+					</p:panel>
+	           	
+	            </p:panel>  
+	            
+	            
+	            <p:panel toggleable="true" toggleSpeed="300" style="min-width: 270px;"
+	            		 rendered="#{adminControl.usuarioSelecionado != null}"
+	            		 header="Alterar Usuário #{adminControl.usuarioSelecionado.login}">	
+	            		 
+	            	<h:panelGrid columns="2" columnClasses="coluna1D,coluna2">
+	            		
+	            		<h:outputText value="Tipo de Usuário: " />						
+						<h:selectOneMenu value="#{adminControl.usuarioSelecionado.tipoUsuario}">  
+							<f:selectItem itemValue="" itemLabel="SELECIONE..."/> 
+                            <f:selectItem itemValue="ADMINISTRADOR" itemLabel="Administrador"/>	   
+                            <f:selectItem itemValue="TRIADOR" itemLabel="Usuário-triador"/>
+                            <f:selectItem itemValue="FINALIZADOR" itemLabel="Usuário-finalizador"/>   
+                      	</h:selectOneMenu> 	            	
+	            		            		
+	            		<h:outputText value="Login: "/>	                				
+						<h:inputText value="#{adminControl.usuarioSelecionado.login}" size="50"/>	
+						                      		            		            	
+	            		<h:outputText value="Senha: "/>						
+						<h:inputSecret size="30" value="#{adminControl.usuarioSelecionado.senha}"/>									   
+																		            	
+	            	</h:panelGrid>	
+	            	
+	            	<p:panel style="border: 0px;">
+	           	
+		           		<p:commandButton value="Voltar" update="@form" 
+								 id="btAlterarUsuarioVoltar" styleClass="signin-btn"
+								 style="font-weight: bold;"
+								 action="#{adminControl.btAlterarUsuarioVoltar()}" 
+								 onstart="PF('dialogAguarde').show();" 
+								 oncomplete="PF('dialogAguarde').hide();"									
+							     onsuccess="PF('dialogAguarde').hide();"
+						 		 onerror="PF('dialogAguarde').hide();"/> 
+						 		 
+						<p:spacer width="20"/>	 	
+							 
+				 		<p:commandButton value="Excluir" update="@form" 
+										 id="btExcluirNovoUsuario" styleClass="signin-btn"
+										 style="font-weight: bold;"
+										 action="#{adminControl.btExcluirNovoUsuario()}" 
+										 onstart="PF('dialogAguarde').show();" 
+										 oncomplete="PF('dialogAguarde').hide();"									
+									     onsuccess="PF('dialogAguarde').hide();"
+								 		 onerror="PF('dialogAguarde').hide();"/>
+						
+								 		 
+						<p:spacer width="20"/>	 	
+							 
+						<p:commandButton value="Atualizar" update="@form" 
+										 id="btAtualizarNovoUsuario" styleClass="signin-btn"
+										 style="font-weight: bold;"
+										 action="#{adminControl.btAtualizarUsuario()}" 
+										 onstart="PF('dialogAguarde').show();" 
+										 oncomplete="PF('dialogAguarde').hide();"									
+									     onsuccess="PF('dialogAguarde').hide();"
+								 		 onerror="PF('dialogAguarde').hide();"/> 
+						
+							 		 
+					</p:panel>	 	           		
+	           	
+	            </p:panel>        	
+	        	
+	            <p:panel toggleable="true" toggleSpeed="300" style="min-width: 270px;"
+	            		 rendered="#{adminControl.novoUsuario == null and adminControl.usuarioSelecionado == null}">
+	            	
+		            <p:dataTable  value="#{adminControl.listaUsuarios}" id="listaUsuariosCadastrados"									
+								 paginator="true" style="min-width: 760px; margin-top: 10px;" 			 			  
+	                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+	                             currentPageReportTemplate="Clique duas vezes no usuário desejado para alterar os dados."
+	                             emptyMessage="Nenhum registro a ser exibido" 
+	                             rowIndexVar="rowIndex" reflow="true" var="item" rows="30" 	                             
+	                             rowsPerPageTemplate="10,20,30,40,50" 
+	                             selectionMode="single" rowKey="#{item.id}">	
+		                        
+	                    <p:ajax event="rowDblselect" listener="#{adminControl.onRowSelect}" 
+	                    		update="@form"/>     
+	                    
+	                     <p:column style="text-align: center; width: 20px; font-size: 11px;">
+							<f:facet name="header">
+								<h:outputText value="#" />
+							</f:facet>
+							<h:outputText value="#{rowIndex+1}" />
+						</p:column>	  
+						
+						<p:column sortBy="#{item.login}" 
+	                    		  filterMatchMode="contains" filterBy="#{item.login}"		                    
+	                    		  style="text-align: center; width: 80px; font-size: 11px;">
+							<f:facet name="header">
+								<h:outputText value="Login" />
+							</f:facet>
+							<h:outputText value="#{item.login}" />
+						</p:column>		
+	                      	                      
+	                    <p:column sortBy="#{item.tipoUsuario}" 
+	                    		  filterMatchMode="contains" filterBy="#{item.tipoUsuario}"		                    
+	                    		  style="text-align: center; width: 80px; font-size: 11px;">
+							<f:facet name="header">
+								<h:outputText value="Tipo Usuário" />
+							</f:facet>
+							<h:outputText value="#{item.tipoUsuario}" />
+						</p:column>	
+	                             
+	                    		
+	                             
+	                </p:dataTable>	    
+	            		          	
+	          	
+	          	</p:panel>
+	          	
+	          	
+	            
+	        </h:form>	        	        
+	      	        
+	    </ui:define>
+	
+	</ui:composition>
+</h:body>
+
+</html>
