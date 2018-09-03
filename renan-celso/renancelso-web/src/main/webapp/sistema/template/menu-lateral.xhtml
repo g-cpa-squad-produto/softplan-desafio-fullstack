@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://java.sun.com/jsf/passthrough"
+	xmlns:c="http://java.sun.com/jstl/core" class="gt-ie8 gt-ie9 not-ie">
+
+<script type="text/javascript">
+ 
+</script>
+
+<h:body>
+
+	<h:form id="formMenuLateral">					
+		
+		<ul class="navigation">			
+			
+			<h:panelGroup rendered="#{sessionScope['usuarioLogado'].tipoUsuario == 'ADMINISTRADOR'}">
+				<li class="mm-dropdown">
+				
+					<a href="#">				
+						<i class="menu-icon fa fa-th"></i>
+						<span class="mm-text">Administrador</span>
+						<span class="label label-warning"></span>					
+					</a>
+					
+					<ul>				
+						<li>
+							<a tabindex="-1" href="gerenciar-usuarios">
+								<span class="mm-text">Gerenciar Usuários</span>
+							</a>
+						</li>			
+					</ul>
+				</li>			
+			</h:panelGroup>
+			
+			<h:panelGroup rendered="#{sessionScope['usuarioLogado'].tipoUsuario == 'TRIADOR'}">
+				<li class="mm-dropdown">
+				
+					<a href="#">				
+						<i class="menu-icon fa fa-th"></i>
+						<span class="mm-text">Triador</span>
+						<span class="label label-warning"></span>					
+					</a>
+					
+					<ul>				
+						<li>
+							<a tabindex="-1" href="gerenciar-processos">
+								<span class="mm-text">Gerenciar Processos</span>
+							</a>
+						</li>				
+					</ul>	
+									
+				</li>		
+					
+			</h:panelGroup>
+			
+			
+			<h:panelGroup rendered="#{sessionScope['usuarioLogado'].tipoUsuario == 'FINALIZADOR'}">
+				<li class="mm-dropdown">
+				
+					<a href="#">				
+						<i class="menu-icon fa fa-th"></i>
+						<span class="mm-text">Finalizador</span>
+						<span class="label label-warning"></span>					
+					</a>
+					
+					<ul>				
+						<li>
+							<a tabindex="-1" href="gerenciar-parecer">
+								<span class="mm-text">Gerenciar Parecer</span>
+							</a>
+						</li>				
+					</ul>	
+									
+				</li>		
+					
+			</h:panelGroup>
+			
+			
+		</ul> 		
+
+	</h:form>
+	
+</h:body>
+
+</html>

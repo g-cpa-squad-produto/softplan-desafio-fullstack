@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://java.sun.com/jsf/passthrough"
+	xmlns:c="http://java.sun.com/jstl/core" class="gt-ie8 gt-ie9 not-ie">
+
+<h:head>
+
+	<meta charset="utf-8"/>
+	
+	<link rel="shortcut icon" href="assets/images/logo.png" />
+	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<title>renancelso</title>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+	
+	<link href="assets/stylesheets/bootstrap.css" rel="stylesheet" type="text/css"/>
+	<link href="assets/stylesheets/pixel-admin.css" rel="stylesheet" type="text/css"/>
+	<link href="assets/stylesheets/pages.css" rel="stylesheet" type="text/css"/>
+	<link href="assets/stylesheets/rtl.css" rel="stylesheet" type="text/css"/>
+	<link href="assets/stylesheets/themes.css" rel="stylesheet" type="text/css"/>
+
+	<!--[if lt IE 9]>
+		<script src="assets/javascripts/ie.min.js"></script>
+	<![endif]-->
+
+</h:head>
+
+<h:body class="theme-default page-signin">
+	
+	<!-- Demo script --> 
+<!-- 	<script src="assets/demo/demo.js"></script>  -->
+	<!-- / Demo script -->
+
+	<!-- Page background -->
+	<div id="page-signin-bg">	
+		<!-- Background overlay -->		
+		<div class="overlay"></div>
+	</div>	
+	<!-- / Page background -->
+	
+	<br></br>
+	<!-- Container -->
+	<div class="signin-container" >		
+		<!-- Right side -->
+		<div class="signin-form">
+		
+			<h:form id="signin-form_id">
+				
+				<div class="signin-text">
+					<span style="font-size: 16px !important;">Crie sua conta</span>
+				</div> 
+				
+				<p:messages id="messages1" closable="true" showDetail="false"/>
+				
+				<center>
+				
+					<div class="form-group w-icon">
+						<h:panelGrid columns="4">	
+						
+							<h:outputText value="Tipo de Usuário " style="font-size: 16px !important; font-weight: bold !important;"/>						
+							<h:selectOneMenu id="selectTipos" styleClass="form-control" 											 
+										  	 style="padding-left: 3px !important; margin-left: 3px !important;"
+										  	 value="#{loginControl.novoUsuario.tipoUsuario}">  
+								<f:selectItem itemValue="" itemLabel="SELECIONE..."/> 
+	                            <f:selectItem itemValue="ADMINISTRADOR" itemLabel="Administrador"/>	   
+	                            <f:selectItem itemValue="TRIADOR" itemLabel="Usuário-triador"/>
+	                            <f:selectItem itemValue="FINALIZADOR" itemLabel="Usuário-finalizador"/>   
+                       		</h:selectOneMenu>		
+							<h:outputText value="*" style="font-size: 16px !important; font-weight: bolder !important; color: red; margin-left: 10px !important;"/>							
+							<p:spacer height="45"></p:spacer>			
+																				
+							<h:outputText value="Login " style="font-size: 16px !important; font-weight: bold !important;"/>						
+							<h:inputText styleClass="form-control" size="30"
+										 style="padding-left: 3px !important;  margin-left: 3px !important;"
+										 value="#{loginControl.novoUsuario.login}"/>
+							<h:outputText value="*" style="font-size: 16px !important; font-weight: bolder !important; color: red; margin-left: 10px !important;"/>							
+							<p:spacer height="45"></p:spacer>							
+							
+							<h:outputText value="Senha " style="font-size: 16px !important; font-weight: bold !important; "/>						
+							<h:inputSecret styleClass="form-control" size="30"
+										   style="padding-left: 3px !important; margin-left: 3px !important;"
+										   value="#{loginControl.novoUsuario.senha}"/>
+							<h:outputText value="*" style="font-size: 16px !important; font-weight: bolder !important; color: red; margin-left: 10px !important;"/>
+							<p:spacer height="45"></p:spacer>
+							
+							<h:outputText value="Confirme sua senha " style="font-size: 16px !important; font-weight: bold !important; "/>						
+							<h:inputSecret styleClass="form-control" size="30"
+										   style="padding-left: 3px !important; margin-left: 3px !important;"
+										   value="#{loginControl.senhaConfirmacao}"/>
+							<h:outputText value="*" style="font-size: 16px !important; font-weight: bolder !important; color: red; margin-left: 10px !important;"/>
+							<p:spacer height="45"></p:spacer>
+						
+						</h:panelGrid>	
+						
+					</div>
+					
+					<div class="form-actions">
+						<p:commandButton value="CADASTRAR" styleClass="signin-btn bg-primary"
+										 action="#{loginControl.cadastrarNovoUsuario}" update="@form"/>					
+					</div>
+					
+				</center>
+				
+			</h:form>
+			
+			<!-- / Form -->
+
+			<div class="signin-with">
+		
+			</div>				
+			
+		</div>
+		<!-- Right side -->
+	</div>
+	<!-- / Container -->
+
+	<div class="not-a-member">	
+		<a href="login" style="border: none; border-radius: 999999px;
+							   font-size: 13px;font-weight: 600;line-height: 20px;
+							   outline: 0 !important;padding: 10px 0;text-align: center;
+							   width: 100%;-webkit-transition: all 0.3s;
+							   transition: all 0.3s;padding-left: 40px;
+							   padding-right: 40px;width: auto; color: #2177AF;
+  							   background-color: #F4F4F4;">Acesse o Sistema   
+  							   				
+  				<img src="assets/images/logo.png" 
+  				 	 style="width: 20px; margin-left: 10px; margin-right: -20px;"/>  	  
+  				 	 							   
+ 		</a>	
+	</div>
+
+	<script src="assets/javascripts/bootstrap.min.js"></script>
+	<script src="assets/javascripts/pixel-admin.js"></script>
+	
+	<script type="text/javascript">			
+		var init = [];		
+		
+		window.PixelAdmin.start(init);
+	</script>
+
+</h:body>
+
+</html>

@@ -1,0 +1,41 @@
+.coluna1D {
+	/*font-family:Tahoma;
+	font-size:12px;*/
+	font-weight:bold;
+	color:#333333;
+	padding: 3px 3px;
+	text-align: right;
+	/*border:0px;
+	background:#e8e7e7;*/
+}
+
+.coluna1 {
+	/*font-family:Tahoma;
+	font-size:12px;*/
+	font-weight:bold;
+	color:#333333;
+	padding: 3px 3px;
+	/*border:0px;
+	background:#e8e7e7;*/
+}
+	
+.coluna2 {	
+	/*font-family:Tahoma;
+	font-size:12px;*/
+	color: #000000;
+	text-align:left;
+	padding: 3px 3px;
+}
+
+.ajax-loader{
+	margin-top: -20px;
+	margin-right: 10px;
+	text-align: right;	
+}
+
+.ui-growl {   
+    position:fixed;
+    top: 40%;
+    left: 37%;   
+    z-index:9999; 
+}

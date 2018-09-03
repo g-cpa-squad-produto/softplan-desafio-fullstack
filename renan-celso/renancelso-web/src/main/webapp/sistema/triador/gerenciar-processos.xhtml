@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:pt="http://java.sun.com/jsf/passthrough"
+	  xmlns:c="http://java.sun.com/jstl/core" class="gt-ie8 gt-ie9 not-ie">
+      
+<h:body>
+   
+	<ui:composition template="../template/padrao.xhtml">
+	
+	    <ui:define name="conteudo">
+	    
+		    <h:form id="formAjaxStatus">
+<!-- 		    	<p:ajaxStatus onstart="PF('dialogAguarde').show()" -->
+<!--                               onsuccess="PF('dialogAguarde').hide()" -->
+<!--                               onerror="PF('dialogAguarde').hide()"  -->
+<!--                               oncomplete="PF('dialogAguarde').hide()"/> -->
+	        
+	        	<p:dialog resizable="false" id="dialogAguarde"
+                          widgetVar="dialogAguarde" 
+                          draggable="false" closable="false" width="250" >                      
+	                <center>
+	                    <b>Por favor, aguarde...</b>
+	                    <br></br>
+	                    <br></br>
+	                    <p:graphicImage value="assets/images/ajax-loader.gif" />    
+	                </center>
+                </p:dialog>
+		    </h:form>
+	        
+	        <h:form id="formPrincipal">	        	
+	        	
+	           <p:messages id="messages1" closable="true" showDetail="false"/>
+	           
+	           <p:commandButton value="Incluir Novo Processo" update="@form" 
+								id="btIniciarInclusaoNovoProcesso" styleClass="signin-btn"
+								style="font-weight: bold;"
+								action="#{triadorControl.btNovoProcesso()}" 
+								onstart="PF('dialogAguarde').show();" 
+								oncomplete="PF('dialogAguarde').hide();"									
+							    onsuccess="PF('dialogAguarde').hide();"
+						 		onerror="PF('dialogAguarde').hide();"
+						 		rendered="#{triadorControl.novoProcesso == null and triadorControl.processoSelecionado == null}"/> 
+						 		 
+			   <p:spacer height="30" rendered="#{triadorControl.novoProcesso == null and triadorControl.processoSelecionado == null}"/>
+	           
+	           <p:panel toggleable="true" toggleSpeed="300" style="min-width: 270px;"
+	            		rendered="#{triadorControl.novoProcesso != null}"
+	            		header="Novo Processo">	
+	            		 
+	            	<h:panelGrid columns="2" columnClasses="coluna1D,coluna2">	            			            	         	
+	            		            		
+	            		<h:outputText value="Descrição do Processo: "/>	                				
+						<h:inputTextarea value="#{triadorControl.novoProcesso.descricaoProcesso}" 
+										 size="50" rows="4" cols="50"/>		
+	            	
+	            		<h:outputText value="Adicionar usuário para parecer: "/>						
+						<h:panelGrid columns="5">	  
+							<h:selectOneMenu id="selectUsuarios" styleClass="form-control" 
+											 converter="UsuarioConverter" value="#{triadorControl.usuarioAux}"									 
+										  	 style="padding-left: 3px !important; margin-left: 3px !important;">  	                            
+	                            <f:selectItem itemValue="" itemLabel="SELECIONE..."/>	                           
+	                            <f:selectItems value="#{triadorControl.listaUsuarios}" 
+	                            			   var="usuario" itemLabel="#{usuario.login}" 
+	                            			   itemValue="#{municipio.id}"/> 
+	                        </h:selectOneMenu>
+	                       
+	                        <p:spacer width="30"/>
+	                       
+	                        <p:commandButton value="Adicionar" update="@form" 
+											 id="btAdicionarNovoUsuarioParecer" 
+											 styleClass="signin-btn"
+											 style="font-weight: bold;"
+											 action="#{triadorControl.btAdicionarUsuarioParecerProcesso()}" 
+											 onstart="PF('dialogAguarde').show();" 
+											 oncomplete="PF('dialogAguarde').hide();"									
+										     onsuccess="PF('dialogAguarde').hide();"
+									 		 onerror="PF('dialogAguarde').hide();"/> 
+									
+							<p:spacer width="30"/>
+							
+							<p:commandButton value="Limpar" update="@form" 
+									 id="btLimparUsuariosAdicionados" 
+									 styleClass="signin-btn"
+									 style="font-weight: bold;"
+									 action="#{triadorControl.btLimparUsuarioAdicionados()}" 
+									 onstart="PF('dialogAguarde').show();" 
+									 oncomplete="PF('dialogAguarde').hide();"									
+								     onsuccess="PF('dialogAguarde').hide();"
+							 		 onerror="PF('dialogAguarde').hide();"/>
+	                        
+                        </h:panelGrid>
+                        
+                        <h:outputText value="Usuários que poderão dar parecer: "/>	   
+                        <h:outputText value="#{triadorControl.novoProcesso.usuariosAdicionadosParecer}"/>	
+	            	
+	            	</h:panelGrid>
+	            											 	
+	            	
+	            	<p:panel style="border: 0px;">
+	           	
+		           		<p:commandButton value="Voltar" update="@form" 
+									 id="btIniciarInclusaoNovoVoltar" styleClass="signin-btn"
+									 style="font-weight: bold;"
+									 action="#{triadorControl.btNovoProcessoVoltar()}" 
+									 onstart="PF('dialogAguarde').show();" 
+									 oncomplete="PF('dialogAguarde').hide();"									
+								     onsuccess="PF('dialogAguarde').hide();"
+							 		 onerror="PF('dialogAguarde').hide();"/> 
+							 		 
+						<p:spacer width="20"/>	 		 
+							 		 
+						<p:commandButton value="Cadastrar" update="@form" 
+										 id="btCadastrarNovoProcesso" styleClass="signin-btn"
+										 style="font-weight: bold;"
+										 action="#{triadorControl.btCadastrarNovoProcesso()}" 
+										 onstart="PF('dialogAguarde').show();" 
+										 oncomplete="PF('dialogAguarde').hide();"									
+									     onsuccess="PF('dialogAguarde').hide();"
+								 		 onerror="PF('dialogAguarde').hide();"/>
+							 		 
+					</p:panel>
+	           	
+	           </p:panel>  
+	           
+	           
+	           <p:panel toggleable="true" toggleSpeed="300" style="min-width: 270px;"
+	            		 rendered="#{triadorControl.processoSelecionado != null}"
+	            		 header="Processo #{triadorControl.processoSelecionado.id} selecionado">	
+	            		 
+	            	<h:panelGrid columns="2" columnClasses="coluna1D,coluna2">	            			            	         	
+	            		            		
+	            		<h:outputText value="Descrição do Processo: "/>	                				
+						<h:inputTextarea value="#{triadorControl.processoSelecionado.descricaoProcesso}" 
+										 size="50" rows="6" cols="40" readonly="true" disabled="true"/>		
+	            		            		                        
+                        <h:outputText value="Usuários que poderão dar parecer: "/>	   
+                        <h:outputText value="#{triadorControl.processoSelecionado.usuariosAdicionadosParecer}"/>	
+	            	
+	            	</h:panelGrid>
+	            											 	
+	            	
+	            	<p:panel style="border: 0px;">
+	           	
+		           		<p:commandButton value="Voltar" update="@form" 
+									 id="btIniciarVisualizaoNovoVoltar" 
+									 styleClass="signin-btn"
+									 style="font-weight: bold;"
+									 action="#{triadorControl.btVisualizarProcessoVoltar()}" 
+									 onstart="PF('dialogAguarde').show();" 
+									 oncomplete="PF('dialogAguarde').hide();"									
+								     onsuccess="PF('dialogAguarde').hide();"
+							 		 onerror="PF('dialogAguarde').hide();"/> 	
+					</p:panel>
+	           	
+	           </p:panel>  		        	
+	        		        	
+	        	
+	           <p:panel toggleable="true" toggleSpeed="300" style="min-width: 270px;"
+	            		 rendered="#{triadorControl.novoProcesso == null and triadorControl.processoSelecionado == null}">
+	            	
+		            <p:dataTable value="#{triadorControl.listaProcessos}" id="listaProcessoCadastrados"									
+								 paginator="true" style="min-width: 760px; margin-top: 10px;" 			 			  
+	                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+	                             currentPageReportTemplate="Clique duas vezes no processo desejado para visualizar."
+	                             emptyMessage="Nenhum registro a ser exibido" 
+	                             rowIndexVar="rowIndex" reflow="true" var="item" rows="30" 	                             
+	                             rowsPerPageTemplate="10,20,30,40,50" 
+	                             selectionMode="single" rowKey="#{item.id}">	
+		                        
+	                    <p:ajax event="rowDblselect" listener="#{triadorControl.onRowSelect}" 
+	                    		update="@form"/>     
+	                    	                   
+						<p:column sortBy="#{item.id}" 
+	                    		  style="text-align: center; width: 10px; font-size: 11px;">
+							<f:facet name="header">
+								<h:outputText value="ID Processo" />
+							</f:facet>
+							<h:outputText value="#{item.id}" />
+						</p:column>		
+	                      	                      
+	                    <p:column sortBy="#{item.descricaoProcesso}" 
+	                    		  filterMatchMode="contains" filterBy="#{item.descricaoProcesso}"		                    
+	                    		  style="text-align: center; width: 80px; font-size: 11px;">
+							<f:facet name="header">
+								<h:outputText value="Descrição" />
+							</f:facet>
+							<h:outputText value="#{item.descricaoProcesso}" />
+						</p:column>	
+	                             
+	                </p:dataTable>	    
+	            		          	
+	          	
+	          	</p:panel>
+	            
+	        </h:form>
+	        
+	    </ui:define>
+	
+	</ui:composition>
+</h:body>
+
+</html>

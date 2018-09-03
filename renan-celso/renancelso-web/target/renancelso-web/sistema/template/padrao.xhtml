@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://java.sun.com/jsf/passthrough"
+	xmlns:c="http://java.sun.com/jstl/core" class="gt-ie8 gt-ie9 not-ie">
+      
+<h:head>
+	<link rel="shortcut icon" href="assets/images/logo.png" />
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>	
+	<title>renancelso</title>	
+	<meta name="viewport" content="width=device-width, user-scalable=no"/>	
+
+	<!-- Pixel Admin's stylesheets -->
+	<link href="assets/stylesheets/bootstrap.css" rel="stylesheet" type="text/css"/>
+	<link href="assets/stylesheets/pixel-admin.css" rel="stylesheet" type="text/css"/>
+	<link href="assets/stylesheets/widgets.css" rel="stylesheet" type="text/css"/>
+	<link href="assets/stylesheets/rtl.css" rel="stylesheet" type="text/css"/>
+	<link href="assets/stylesheets/themes.css" rel="stylesheet" type="text/css"/>
+	<link href="assets/stylesheets/estilo.css" rel="stylesheet" type="text/css"/>
+
+	<!--[if lt IE 9]>
+		<script src="assets/javascripts/ie.js"></script>
+	<![endif]-->
+	
+	<script type="text/javascript">
+
+
+       /**
+        * Método usado no contador do tempo de sessão do usuário.
+        *
+        * @author Renan Celso
+        *
+        */
+        var sessionTimeout = ${sessionControl.sessionTimeout/1000};
+        var timeoutDate = Date.now();
+
+        resetTimerCounter();
+
+        function resetTimerCounter(){
+            sessionTimeout = ${sessionControl.sessionTimeout/1000};
+            timeoutDate = Date.now();
+            timeoutDate += sessionTimeout*1000;
+            timeoutDate = new Date(timeoutDate);
+            if(${sessionControl.usuarioLogado() != null}){
+                contarTempo();
+            }
+        }
+
+        function contarTempo(){
+            var expirou = false;
+            if(timeoutDate != null){
+                var currDateTimeout = timeoutDate - Date.now();
+                currDateTimeout = new Date(currDateTimeout);
+                var minutes = currDateTimeout.getMinutes();
+                var seconds = currDateTimeout.getSeconds();
+
+                if(minutes == 1) {
+                    if(seconds == 0) {
+                        PF('dialogSessaoVaiExpirar').show();
+                    }
+                }
+
+                if( Date.now() > timeoutDate){
+                    minutes = 0;
+                    seconds = 0;
+                    logout();
+                    expirou = true;
+                }
+                $('.sessionTimer').text("Sessão: "+(minutes>=10?minutes:'0'+minutes)+':'+(seconds>=10?seconds:'0'+seconds)+" ");
+            }
+
+            if(!expirou){
+                funcaoTimeout=setTimeout("contarTempo()",1000);
+            }
+        };
+
+        function logout(){
+            PF('dialogSessaoVaiExpirar').hide();
+            PF('dialogSessaoExpirada').show();
+        }
+    </script>
+	
+</h:head>
+
+
+<h:body class="theme-adminflare main-menu-animated dont-animate-mm-content-sm animate-mm-md animate-mm-lg dont-animate-mm-content-sm animate-mm-md animate-mm-lg">
+
+<script>var init = [];</script>
+
+
+<div id="main-wrapper">
+
+	<div id="main-navbar" class="navbar navbar-inverse" role="navigation">
+		<!-- Main menu toggle -->
+		<button type="button" id="main-menu-toggle"><i class="navbar-icon fa fa-bars icon"></i><span class="hide-menu-text">HIDE MENU</span></button>
+		
+		<div class="navbar-inner">
+		
+			<div class="navbar-h:header">
+				
+				<a href="inicio" class="navbar-brand" 
+				   style="color: #000000; font-weight: bold;">				
+					<div style="margin-left: 50px;">
+						<img alt="" src="assets/images/logo.png"/>						
+					</div>		
+					SISTEMA
+				</a>
+		
+				<button type="button" class="navbar-toggle collapsed"						
+						data-toggle="collapse" data-target="#main-navbar-collapse">					
+					<i class="navbar-icon fa fa-bars"></i>
+				</button>
+
+			</div> 			
+
+			<div id="main-navbar-collapse" class="collapse navbar-collapse main-navbar-collapse">
+				<div>					
+					<div class="right clearfix">
+						<ul class="nav navbar-nav pull-right right-navbar-nav">
+								
+							<li>
+								<form class="navbar-form pull-left">
+									<output class="sessionTimer form-control" 
+											style="width: 115px !important; 
+												   color: #FFFFFF !important;"/>
+								</form>
+							</li>	
+								
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle user-menu" data-toggle="dropdown">
+									<img src="assets/images/crieconta.png"/>
+									<span>#{sessionScope['usuarioLogado'].login}</span>
+<!-- 									<span>USUÁRIO</span> -->
+								</a>
+								<ul class="dropdown-menu">																	
+									<li class="divider"></li>
+									<li><a href="#" onclick="PF('dialogLogout').show();">Sair</a></li>
+								</ul>
+							</li>
+						</ul> 
+					</div> 
+				</div>
+			</div> 
+		</div> 
+	</div> 	
+		
+	<div id="main-menu" role="navigation">
+		<div id="main-menu-inner">					
+			<div class="menu-content top" id="menu-content-demo">					
+				<div>
+					<div class="text-bg">
+						<span class="text-slim">Olá,</span>
+						<span><h:outputText value="#{sessionScope['usuarioLogado'].login}"/></span>
+					</div>
+					
+					<img src="assets/images/user.png" alt="" class=""/>			
+								
+					<div class="btn-group">	
+					
+						<a href="inicio" class="btn btn-xs btn-primary btn-outline dark" title="Inicio">
+							<i class="fa fa-home"></i>							
+						</a>						
+						<a href="minha_conta" class="btn btn-xs btn-primary btn-outline dark" title="Minha Conta">
+							<i class="fa fa-user"></i>
+						</a>							
+						<a href="#" onclick="PF('dialogLogout').show();" class="btn btn-xs btn-danger btn-outline dark" title="Sair">
+							<i class="fa fa-power-off"></i>
+						</a>
+						
+					</div>
+					
+					<a href="#" class="close"></a>
+				</div>				
+			</div>		
+		
+			<ui:include src="menu-lateral.xhtml" />				
+			
+		</div>
+	</div>
+	
+	<h:form>
+		<p:dialog widgetVar="dialogLogout" 
+				  modal="true" draggable="false"  
+				  resizable="false;" closable="false"
+				  id="dialogLogout" style="z-index: 9999;">		
+				  
+<!-- 			<output class="sessionTimer" style="font-weight: bold; color: red;"/>	 -->
+						  
+			<center>					
+							
+				<h:outputText value="Deseja realmente sair do sistema?" 
+							  style="font-size: 14px; font-weight: bold;"/>
+				<br />						
+				<br />
+				<p:commandButton value="SIM" type="success" title="SIM"
+								 update="@(form)" styleClass="signin-btn bg-primary"
+								 onclick="PF('dialogLogout').hide(); location.href = '#{sessionControl.contexto}/logoff.jsp'" />	
+				<p:commandButton value="NÃO" type="success" title="NÃO"
+								 update="@(form)" styleClass="signin-btn bg-primary"
+								 style="margin-left: 30px;"
+								 onclick="PF('dialogLogout').hide();" />
+				<br />						
+				<br />
+			</center>
+	
+		</p:dialog>	
+					
+	</h:form>
+	
+	<div id="content-wrapper">	
+		<ui:insert name="conteudo" />	
+	</div> 
+	
+	<div id="main-menu-bg"></div>
+	
+</div>
+
+<!-- Pixel Admin's javascripts -->
+<script src="assets/javascripts/bootstrap.js"></script>
+<script src="assets/javascripts/pixel-admin.js"></script>
+
+
+<script type="text/javascript">
+	init.push(function () {
+		//Javascript code here
+		$('#main-menu, #main-navbar').on('touchend', 'a', function(){
+			$(this).trigger('click');
+			return false;
+		});
+		$('#main-menu, #main-navbar').on('touchend', 'button', function(){
+			$(this).trigger('click');
+			return false;
+		});
+	})
+	window.PixelAdmin.start(init);
+</script>
+
+</h:body>
+</html>

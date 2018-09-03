@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:pt="http://java.sun.com/jsf/passthrough"
+	  xmlns:c="http://java.sun.com/jstl/core" class="gt-ie8 gt-ie9 not-ie">
+      
+<h:body>
+   
+	<ui:composition template="../template/padrao.xhtml">
+	
+	    <ui:define name="conteudo">
+	    
+		    <h:form id="formAjaxStatus">
+<!-- 		    	<p:ajaxStatus onstart="PF('dialogAguarde').show()" -->
+<!--                               onsuccess="PF('dialogAguarde').hide()" -->
+<!--                               onerror="PF('dialogAguarde').hide()"  -->
+<!--                               oncomplete="PF('dialogAguarde').hide()"/> -->
+	        
+	        	<p:dialog resizable="false" id="dialogAguarde"
+                          widgetVar="dialogAguarde" 
+                          draggable="false" closable="false" width="250" >                      
+	                <center>
+	                    <b>Por favor, aguarde...</b>
+	                    <br></br>
+	                    <br></br>
+	                    <p:graphicImage value="assets/images/ajax-loader.gif" />    
+	                </center>
+                </p:dialog>
+		    </h:form>
+	        
+	        <h:form id="formPrincipal">	        	
+	        	
+	        	<p:messages id="messages1" closable="true" showDetail="false"/>
+	        	
+	            <p:panel toggleable="true" toggleSpeed="300" style="min-width: 270px;"
+	            		 rendered="#{finalizadorControl.processoSelecionado == null}">
+	            	
+		            <p:dataTable value="#{finalizadorControl.listaProcessos}" id="listaProcessoPendentesParecer"									
+								 paginator="true" style="min-width: 760px; margin-top: 10px;" 			 			  
+	                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+	                             currentPageReportTemplate="Clique duas vezes no processo desejado para vincular um parecer."
+	                             emptyMessage="Nenhum registro a ser exibido" 
+	                             rowIndexVar="rowIndex" reflow="true" var="item" rows="30" 	                             
+	                             rowsPerPageTemplate="10,20,30,40,50" 
+	                             selectionMode="single" rowKey="#{item.id}">	
+		                        
+	                    <p:ajax event="rowDblselect" listener="#{finalizadorControl.onRowSelect}" 
+	                    		update="@form"/>     
+	                    	                   
+						<p:column sortBy="#{item.id}" 
+	                    		  style="text-align: center; width: 10px; font-size: 11px;">
+							<f:facet name="header">
+								<h:outputText value="ID Processo" />
+							</f:facet>
+							<h:outputText value="#{item.id}" />
+						</p:column>		
+	                      	                      
+	                    <p:column sortBy="#{item.descricaoProcesso}" 
+	                    		  filterMatchMode="contains" filterBy="#{item.descricaoProcesso}"		                    
+	                    		  style="text-align: center; width: 80px; font-size: 11px;">
+							<f:facet name="header">
+								<h:outputText value="Descrição" />
+							</f:facet>
+							<h:outputText value="#{item.descricaoProcesso}" />
+						</p:column>	
+	                             
+	                </p:dataTable>	   
+	          	
+	          	</p:panel>
+	          	
+	          	
+	          	<p:panel toggleable="true" toggleSpeed="300" style="min-width: 270px;"
+	            		 rendered="#{finalizadorControl.processoSelecionado != null}"
+	            		 header="Processo #{finalizadorControl.processoSelecionado.id} selecionado">	
+	            		 
+	            	<h:panelGrid columns="2" columnClasses="coluna1D,coluna2">	            			            	         	
+	            		            		
+	            		<h:outputText value="Descrição do Processo: "/>	                				
+						<h:inputTextarea value="#{finalizadorControl.processoSelecionado.descricaoProcesso}" 
+										 size="50" rows="6" cols="40" readonly="true" disabled="true"/>	                        
+	            	
+	            	</h:panelGrid>
+	            	
+	            	<p:panel header="Incluir Parecer">
+	            		
+	            		<h:inputTextarea value="#{finalizadorControl.novoParecer.descricaoParecer}" 
+										 size="50" rows="6" cols="40"/>	   
+	            	
+	            	
+	            	</p:panel>
+	            											 	
+	            	
+	            	<p:panel style="border: 0px;">
+	           	
+		           		<p:commandButton value="Voltar" update="@form" 
+									 id="btIniciarVisualizaoNovoVoltar" 
+									 styleClass="signin-btn"
+									 style="font-weight: bold;"
+									 action="#{finalizadorControl.btVisualizarProcessoVoltar()}" 
+									 onstart="PF('dialogAguarde').show();" 
+									 oncomplete="PF('dialogAguarde').hide();"									
+								     onsuccess="PF('dialogAguarde').hide();"
+							 		 onerror="PF('dialogAguarde').hide();"/> 	
+							 		 
+						<p:spacer width="20"/>	 		 
+							 		 
+						<p:commandButton value="Cadastrar Parecer" update="@form" 
+										 id="btCadastrarNovoParecer" styleClass="signin-btn"
+										 style="font-weight: bold;"
+										 action="#{finalizadorControl.btCadastrarNovoParecer()}" 
+										 onstart="PF('dialogAguarde').show();" 
+										 oncomplete="PF('dialogAguarde').hide();"									
+									     onsuccess="PF('dialogAguarde').hide();"
+								 		 onerror="PF('dialogAguarde').hide();"/>
+							 		 	 		 
+							 		 
+							 		 
+					</p:panel>
+	           	
+	           </p:panel>  	
+	          	
+	            
+	        </h:form>
+	        
+	    </ui:define>
+	
+	</ui:composition>
+</h:body>
+
+</html>
