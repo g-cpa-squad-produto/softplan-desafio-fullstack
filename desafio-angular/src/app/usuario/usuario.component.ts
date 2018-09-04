@@ -1,4 +1,7 @@
+import { UsuarioService } from './usuario.service';
 import { Component, OnInit } from '@angular/core';
+
+import { Usuario } from './usuario.model';
 
 @Component({
   selector: 'app-usuario',
@@ -7,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsuarioComponent implements OnInit {
 
-  constructor() { }
+  listaUsuario: Usuario[];
+
+  constructor(private srv: UsuarioService) { }
 
   ngOnInit() {
+    this.srv.listar().subscribe((dados) => this.listaUsuario = dados);
   }
 
+  alterar(id: Number) {
+    console.log(id);
+  }
+
+  excluir(id: Number) {
+    this.srv.excluir(id).subscribe(
+      () => {},
+      (error) => { console.log(error); }
+    );
+  }
 }

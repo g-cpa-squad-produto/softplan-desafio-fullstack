@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { Usuario } from '../usuario.model';
 
@@ -9,15 +9,17 @@ import { Usuario } from '../usuario.model';
 })
 export class GridUsuarioComponent implements OnInit {
 
-  lista: Usuario[] = [
-    new Usuario(1, "123", "João", "ADMINISTRADOR"),
-    new Usuario(2, "456", "Bia", "TRIADOR"),
-  ];
+  @Input()
+  lista: Usuario[] = [];
+
+  @Output()
+  alterarUsuario = new EventEmitter();
+  @Output()
+  excluirUsuario = new EventEmitter();
 
   constructor() { }
 
   ngOnInit() {
-    console.log( this.lista );
   }
 
 }

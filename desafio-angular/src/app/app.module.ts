@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MaterializeModule } from 'angular2-materialize';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { ProcessoComponent } from './processo/processo.component';
@@ -22,6 +23,7 @@ import { UsuarioModule } from './usuario/usuario.module';
     MaterializeModule,
     RouterModule,
     AppRoutingModule,
+    HttpClientModule,
     UsuarioModule
   ],
   providers: [],

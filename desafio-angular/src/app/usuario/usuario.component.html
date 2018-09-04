@@ -4,12 +4,15 @@
       <div class="card-content black-text">
         <span class="card-title">Módulo de Usuário</span>
         
+        <app-grid-usuario [lista]="listaUsuario" 
+          (alterarUsuario)="alterar($event)"
+          (excluirUsuario)="excluir($event)">
+        </app-grid-usuario>
         <div class="row">
-          <app-grid-usuario></app-grid-usuario>
         </div>
       </div>
       <div class="card-action">
-        <a href="#">Ação 1</a>
+        <a href="#">Incluir</a>
         <a href="#">Ação 2</a>
       </div>
     </div>
