@@ -1,0 +1,1 @@
+export const PROCESS_ADMIN_API: string = 'http://localhost:8080';
