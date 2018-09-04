@@ -1,0 +1,22 @@
+<table>
+    <thead>
+      <tr>
+          <th>Ações</th>
+          <th>Nome</th>
+          <th>Matrícula</th>
+          <th>Tipo</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let item of lista" >
+        <td>
+          <a class="waves-effect waves-light btn-small"><i class="material-icons left">edit</i></a>
+          <a class="waves-effect waves-light btn-small"><i class="material-icons left">delete</i></a>
+        </td>
+        <td>{{ item.nome }}</td>
+        <td>{{ item.matricula }}</td>
+        <td>{{ item.tipo }}</td>
+      </tr>
+    </tbody>
+  </table>
