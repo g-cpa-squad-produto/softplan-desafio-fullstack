@@ -8,8 +8,8 @@ consegui fazer o mesmo endpoint redirecionar para o front.
 - mvn spring-boot:run -Dspring.profiles.active=prd
 - cd ..
 - cd frontend
-- npm start `<- 2* server`
-
+- http-server -p 8000 `<- 2* server`
+- acessar http://localhost:8000
 
 # Estrutura de modelagem
 **Usuario**

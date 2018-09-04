@@ -46,7 +46,7 @@ public class Boot {
         log.info("TEST::::Iniciando banco memória");
         return new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.H2)
-                .addScript("classpath:schema.sql")
+                .addScript("classpath:schema-test.sql")
                 .continueOnError(false)
                 .build();
     }
@@ -69,34 +69,6 @@ public class Boot {
                 .setType(EmbeddedDatabaseType.H2)
                 .continueOnError(false)
                 .build();
-
-//        DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
-//        dataSourceBuilder.type(org.apache.tomcat.jdbc.pool.DataSource.class);
-//        dataSourceBuilder.driverClassName("org.h2.Driver");
-//        dataSourceBuilder.url("jdbc\\:h2:~/desafio");
-//        dataSourceBuilder.username("sa");
-//        dataSourceBuilder.password("");
-//
-//        return dataSourceBuilder.build();
-
-//        LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
-//
-//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-//        dataSource.setDriverClassName();
-//        dataSource.setUrl();
-//        dataSource.setUsername("sa");
-//        dataSource.setPassword("");
-//
-//        Properties props = new Properties();
-//        props.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
-//        props.setProperty("hibernate.show_sql", "true");
-//        props.setProperty("hibernate.hbm2ddl.auto", "update");
-//
-//        factory.setDataSource(dataSource);
-//        factory.setJpaProperties(props);
-//        factory.setPackagesToScan("br.com.softplan.desafio.models");
-
-//        return dataSource;
     }
 
     @Bean
