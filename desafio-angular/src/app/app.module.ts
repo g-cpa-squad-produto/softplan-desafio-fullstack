@@ -4,16 +4,15 @@ import { MaterializeModule } from 'angular2-materialize';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { UsuarioComponent } from './usuario/usuario.component';
 import { ProcessoComponent } from './processo/processo.component';
-import { AppRoutingModule } from 'src/app/app.routing';
+import { AppRoutingModule } from './app.routing';
 import { HomeComponent } from './home/home.component';
 import { ParecerComponent } from './parecer/parecer.component';
+import { UsuarioModule } from './usuario/usuario.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UsuarioComponent,
     ProcessoComponent,
     HomeComponent,
     ParecerComponent
@@ -22,7 +21,8 @@ import { ParecerComponent } from './parecer/parecer.component';
     BrowserModule,
     MaterializeModule,
     RouterModule,
-    AppRoutingModule
+    AppRoutingModule,
+    UsuarioModule
   ],
   providers: [],
   bootstrap: [AppComponent]
