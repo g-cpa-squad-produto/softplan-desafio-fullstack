@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MaterializeModule } from 'angular2-materialize';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
@@ -23,6 +24,7 @@ import { ProcessoModule } from './processo/processo.module';
     RouterModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     UsuarioModule,
     ProcessoModule
   ],
