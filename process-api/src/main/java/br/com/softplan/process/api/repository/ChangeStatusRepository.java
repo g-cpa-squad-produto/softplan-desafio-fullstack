@@ -6,6 +6,6 @@ import br.com.softplan.process.api.entity.ChangeStatus;
 
 public interface ChangeStatusRepository extends MongoRepository<ChangeStatus, String> {
 
-	Iterable<ChangeStatus> findByProcessIdOrderByDateChangeStatusDesc (); 
-	
+	Iterable<ChangeStatus> findByProcessIdOrderByDateChangeStatusDesc(String processId);
+
 }

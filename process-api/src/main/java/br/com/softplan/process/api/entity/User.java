@@ -5,7 +5,6 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import br.com.softplan.process.api.enums.ProfileEnum;
@@ -16,7 +15,6 @@ public class User {
 	@Id
 	private String id;
 
-	@Indexed(unique = true)
 	@NotBlank(message = "Email required")
 	@Email(message = "Email invalid")
 	private String email;

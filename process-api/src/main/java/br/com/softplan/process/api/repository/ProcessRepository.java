@@ -11,13 +11,13 @@ public interface ProcessRepository extends MongoRepository<Process, String> {
 	Page<Process> findByUserIdOrderByDateDesc(Pageable pages, String userId);
 
 	Page<Process> findBySubjectIgnoreCaseContainingAndStatusAndPriorityOrderByDateDesc(
-			String subject, String Status, String priority, Pageable pages);
+			String subject, String status, String priority, Pageable pages);
 
 	Page<Process> findBySubjectIgnoreCaseContainingAndStatusAndPriorityAndUserIdOrderByDateDesc(
-			String subject, String Status, String priority, Pageable pages);
+			String subject, String status, String priority, Pageable pages);
 
 	Page<Process> findBySubjectIgnoreCaseContainingAndStatusAndPriorityAndAssignedUserIdOrderByDateDesc(
-			String subject, String Status, String priority, Pageable pages);
+			String subject, String status, String priority, Pageable pages);
 	
 	Page<Process> findByNumber(Integer number, Pageable pages);
 }

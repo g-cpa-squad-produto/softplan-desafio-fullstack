@@ -6,5 +6,5 @@ import br.com.softplan.process.api.entity.AnalysisProcess;
 
 public interface AnalysisProcessRepository extends MongoRepository<AnalysisProcess, String> {
 
-	Iterable<AnalysisProcess> findByProcessIdOrderByDateDesc ();
+	Iterable<AnalysisProcess> findByProcessIdOrderByDateDesc(String processId);
 }
