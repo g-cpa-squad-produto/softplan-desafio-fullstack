@@ -5,16 +5,15 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { ProcessoComponent } from './processo/processo.component';
 import { AppRoutingModule } from './app.routing';
 import { HomeComponent } from './home/home.component';
 import { ParecerComponent } from './parecer/parecer.component';
 import { UsuarioModule } from './usuario/usuario.module';
+import { ProcessoModule } from './processo/processo.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProcessoComponent,
     HomeComponent,
     ParecerComponent
   ],
@@ -24,7 +23,8 @@ import { UsuarioModule } from './usuario/usuario.module';
     RouterModule,
     AppRoutingModule,
     HttpClientModule,
-    UsuarioModule
+    UsuarioModule,
+    ProcessoModule
   ],
   providers: [],
   bootstrap: [AppComponent]

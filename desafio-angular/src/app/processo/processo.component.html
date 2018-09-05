@@ -5,7 +5,21 @@
         <span class="card-title">Módulo de Processo</span>
         
         <div class="row">
-          Dados do processo
+          <form (ngSubmit)="salvar()" >
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="inpNumero" type="text" class="validate">
+                <label for="inpNumero">Número do processo</label>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input-field col s12">
+                <textarea id="txaDados" class="materialize-textarea"></textarea>
+                <label for="txaDados">Dados do processo</label>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
       <div class="card-action">
