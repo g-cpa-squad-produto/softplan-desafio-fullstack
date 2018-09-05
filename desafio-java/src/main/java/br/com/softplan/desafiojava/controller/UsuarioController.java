@@ -48,9 +48,8 @@ public class UsuarioController {
 	}
 	
 	@DeleteMapping("/usuario/{id}")
-	public String excluir(@PathVariable Long id) {
+	public void excluir(@PathVariable Long id) {
 		repository.deleteById(id);
-		return "Usuario Excluido com sucesso"; 
 	}
 	
 }
