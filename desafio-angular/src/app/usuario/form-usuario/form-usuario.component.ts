@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MaterializeAction } from 'angular2-materialize';
 
 import { UsuarioService } from '../usuario.service';
 import { Usuario } from '../usuario.model';
@@ -13,6 +14,9 @@ export class FormUsuarioComponent implements OnInit {
 
   inclusao: boolean;
   usuario: Usuario = new Usuario();
+  modalActions = new EventEmitter<string|MaterializeAction>();
+  msgTitulo = 'Erro';
+  msgTexto = '';
 
   constructor(
     private srv: UsuarioService, 
@@ -27,7 +31,7 @@ export class FormUsuarioComponent implements OnInit {
       if (idUsuario) {
         this.srv.consultar(idUsuario).subscribe(
           (retorno: Usuario) => this.usuario = retorno,
-          (error) => console.log(error)
+          (error) => this.exibirMensagem(error.error.message)
         );
         this.inclusao = false;
       } else {
@@ -45,7 +49,7 @@ export class FormUsuarioComponent implements OnInit {
           console.log(retorno);
           this.retornarConsulta(); 
         },
-        (error) => console.log(error)
+        (error) => this.exibirMensagem(error.error.message)
       );
     } else {
       this.srv.alterar(this.usuario).subscribe(
@@ -53,7 +57,7 @@ export class FormUsuarioComponent implements OnInit {
           console.log(retorno);
           this.retornarConsulta();
         },
-        (error) => console.log(error)
+        (error) => this.exibirMensagem(error.error.message)
       );
     }
   }
@@ -65,4 +69,10 @@ export class FormUsuarioComponent implements OnInit {
   retornarConsulta() {
     this.router.navigate(['/usuario/consulta']);
   }
+
+  exibirMensagem(msg) {
+    this.msgTexto = msg;
+    this.modalActions.emit({action:"modal",params:['open']});
+  }
+
 }
