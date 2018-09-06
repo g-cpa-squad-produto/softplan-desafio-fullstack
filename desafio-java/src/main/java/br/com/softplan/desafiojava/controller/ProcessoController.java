@@ -1,11 +1,8 @@
 package br.com.softplan.desafiojava.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,28 +10,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.softplan.desafiojava.business.ProcessoBusiness;
 import br.com.softplan.desafiojava.entity.Processo;
 import br.com.softplan.desafiojava.entity.Usuario;
-import br.com.softplan.desafiojava.repository.ProcessoJpaRepository;
 
 @RestController
 public class ProcessoController {
 
 	@Autowired
-	ProcessoJpaRepository repository;
+	ProcessoBusiness business;
 	
 	@GetMapping("/processo")
 	public List<Processo> listarTodos() {
-		return repository.findAll();
+		return business.listarTodos();
 	}
 	
 	@GetMapping("/processo/{id}")
-	public ResponseEntity<Processo> consultar(@PathVariable Long id) {
-		Optional<Processo> op = repository.findById(id);
-		if (!op.isPresent()) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity<Processo>(op.get(), HttpStatus.OK);
+	public Processo consultar(@PathVariable Long id) {
+		return business.consultar(id);
 	}
 	
 	/**
@@ -44,12 +37,12 @@ public class ProcessoController {
 	 */
 	@GetMapping("/processo/usuario/{id}")
 	public List<Processo> listarPorUsuario(@PathVariable Long id) {
-		return repository.findByUsuario(id);
+		return business.listarPorUsuario(id);
 	}
 	
 	@PostMapping("/processo")
 	public void incluir(@RequestBody Processo processo) {
-		repository.save(processo);
+		business.incluir(processo);
 	}
 	
 	/**
@@ -58,14 +51,7 @@ public class ProcessoController {
 	 * @param id Identificador do processo.
 	 */
 	@PatchMapping("/processo/{id}")
-	public ResponseEntity<Processo> associarUsuarios(@RequestBody List<Usuario> listaUsuarios, @PathVariable Long id) {
-		Optional<Processo> op = repository.findById(id);
-		if (!op.isPresent()) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-		Processo p = op.get();
-		p.setFinalizadores(listaUsuarios);
-		repository.save(p);
-		return new ResponseEntity<>(p, HttpStatus.OK);
+	public Processo associarUsuarios(@RequestBody List<Usuario> listaUsuarios, @PathVariable Long id) {
+		return business.associarUsuarios(listaUsuarios, id);
 	}
 }
