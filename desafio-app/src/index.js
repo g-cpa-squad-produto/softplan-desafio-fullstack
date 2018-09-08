@@ -7,8 +7,7 @@ import './assets/index.css';
 import registerServiceWorker from './registerServiceWorker';
 import * as reducers from './store/reducers';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import {BrowserRouter as Router} from 'react-router-dom';
-import Routes from "./routes";
+import App from './app/App';
 
 const store = createStore(combineReducers(reducers), applyMiddleware(thunk));
 
@@ -16,9 +15,7 @@ ReactDOM.render(
     <Provider store={store}>
         <div>
             <CssBaseline/>
-            <Router>
-                <Routes/>
-            </Router>
+            <App/>
         </div>
     </Provider>,
     document.getElementById('root')
