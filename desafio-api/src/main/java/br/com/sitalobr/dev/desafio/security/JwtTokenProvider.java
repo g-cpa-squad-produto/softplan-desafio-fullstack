@@ -1,5 +1,7 @@
 package br.com.sitalobr.dev.desafio.security;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,11 +27,19 @@ public class JwtTokenProvider {
 
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + jwtExpirationInMs);
+        String subject = null;
+
+        try {
+            subject = new ObjectMapper().writeValueAsString(userPrincipal);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
 
         return Jwts.builder()
-                .setSubject(Long.toString(userPrincipal.getId()))
+                .setSubject(subject)
                 .setIssuedAt(new Date())
                 .setExpiration(expiryDate)
+                .setId(Long.toString(userPrincipal.getId()))
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
     }
@@ -40,7 +50,7 @@ public class JwtTokenProvider {
                 .parseClaimsJws(token)
                 .getBody();
 
-        return Long.parseLong(claims.getSubject());
+        return Long.parseLong(claims.getId());
     }
 
     public boolean validateToken(String authToken) {

@@ -1,5 +1,7 @@
 package br.com.sitalobr.dev.desafio.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -19,6 +21,7 @@ public class Usuario implements InterfaceEntity<Long> {
     @Column(name = "username", nullable = false, unique = true)
     private String username;
 
+    @JsonIgnore
     @Column(name = "password", nullable = false)
     private String password;
 

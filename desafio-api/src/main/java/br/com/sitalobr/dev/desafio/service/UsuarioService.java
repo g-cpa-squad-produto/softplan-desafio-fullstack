@@ -44,6 +44,14 @@ public class UsuarioService extends AbstractService<Usuario, Long> {
     }
 
     /**
+     * Função responsável por recuperar um usuário a partir de seu username
+     * @return Objeto {@link Usuario} encontrado
+     */
+    public Usuario findByUsername(String username) {
+        return this.getRepository().findByUsername(username).orElse(null);
+    }
+
+    /**
      * Função responsável por verificar existência de um usuário a partir de seu username
      * @param username String contendo o username a ser verificado
      * @return True caso exista, false caso contrário
