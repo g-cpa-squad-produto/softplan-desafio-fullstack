@@ -8,7 +8,7 @@ class App extends Component {
         return (
             <div className="App">
                 <Router>
-                    <GeneralRoutes/>
+                    <GeneralRoutes {...this.props}/>
                 </Router>
             </div>
         );

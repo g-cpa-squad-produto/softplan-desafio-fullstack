@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Paper, Avatar, Typography, FormControl, InputLabel, Input, Button, withStyles} from '@material-ui/core';
 import LockIcon from '@material-ui/icons/LockOutlined';
 import {styles} from './styles';
+import * as authActions from '../../store/auth/action';
 
 class Login extends Component {
     state = {
@@ -11,6 +12,18 @@ class Login extends Component {
 
     handlerChange = (e) => {
         this.setState({[e.target.name]: e.target.value});
+    };
+
+    onSubmit = (e) => {
+        e.preventDefault();
+
+        this.props.dispatch(
+            authActions.login(this.state.username, this.state.password, res => {
+                this.props.history.push('/');
+            }, error => {
+                console.log(error);
+            })
+        );
     };
 
     render() {
@@ -23,7 +36,7 @@ class Login extends Component {
                         <LockIcon/>
                     </Avatar>
                     <Typography variant="headline">Acesso Restrito</Typography>
-                    <form className={classes.form}>
+                    <form className={classes.form} onSubmit={this.onSubmit}>
                         <FormControl margin="normal" required fullWidth>
                             <InputLabel htmlFor="username">Username</InputLabel>
                             <Input id="username" name="username" autoFocus
