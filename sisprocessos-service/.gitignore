@@ -1,5 +1,5 @@
 /target/
-!.mvn/wrapper/maven-wrapper.jar
+softplan.log
 
 ### STS ###
 .apt_generated
