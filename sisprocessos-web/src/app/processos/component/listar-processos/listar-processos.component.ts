@@ -44,8 +44,11 @@ export class ListarProcessosComponent implements OnInit {
     this.router.navigate(['processos', 'atribuir-usuarios', processo.id]);
   }
 
+  incluirParecer(processo) {
+    this.router.navigate(['processos', 'incluir-parecer', processo.id]);
+  }
+
   setPage(pageInfo: PageInfo) {
     this.pesquisar(pageInfo.offset);
   }
-
 }

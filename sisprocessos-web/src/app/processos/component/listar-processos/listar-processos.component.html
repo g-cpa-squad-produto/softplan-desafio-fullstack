@@ -55,6 +55,10 @@
                   *ngIf="processo.status.codigo == 'NOVO' || processo.status.codigo == 'AGUARDANDO_PARECER'">
             <i class="fa fa-group"></i>
           </button>
+          <button type="button" class="btn btn-sm btn-dark" (click)="incluirParecer(processo)" title="Incluir Parecer"
+                  *ngIf="processo.status.codigo == 'AGUARDANDO_PARECER'">
+            <i class="fa fa-group"></i>
+          </button>
         </ng-template>
       </ngx-datatable-column>
     </ngx-datatable>

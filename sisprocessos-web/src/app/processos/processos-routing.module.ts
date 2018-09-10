@@ -4,6 +4,7 @@ import {ListarProcessosComponent} from './component/listar-processos/listar-proc
 import {ManterProcessosComponent} from './component/manter-processos/manter-processos.component';
 import {ConsultarProcessoResolve} from './resolve/consultar-processo.resolve';
 import {AtribuirUsuariosProcessosComponent} from './component/atribuir-usuarios-processos/atribuir-usuarios-processos.component';
+import {IncluirParecerProcessosComponent} from './component/incluir-parecer-processos/incluir-parecer-processos.component';
 
 const routes: Routes = [
   {path: 'listar', component: ListarProcessosComponent},
@@ -11,6 +12,12 @@ const routes: Routes = [
   {
     path: 'atribuir-usuarios/:idProcesso',
     component: AtribuirUsuariosProcessosComponent,
+    resolve: {'processo': ConsultarProcessoResolve},
+    runGuardsAndResolvers: 'always'
+  },
+  {
+    path: 'incluir-parecer/:idProcesso',
+    component: IncluirParecerProcessosComponent,
     resolve: {'processo': ConsultarProcessoResolve},
     runGuardsAndResolvers: 'always'
   },

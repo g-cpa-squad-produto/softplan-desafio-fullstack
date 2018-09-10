@@ -32,15 +32,17 @@ export class AtribuirUsuariosProcessosComponent implements OnInit {
   }
 
   salvar() {
-    this.processo.status.codigo = 'AGUARDANDO_PARECER';
-
-    this.service.editar(this.processo).subscribe(
+    this.service.atribuirUsuariosAProcesso(this.processo).subscribe(
       () => this.router.navigate(['processos']),
       error => alert(error));
   }
 
   selecionarUsuario(usuario: UsuarioResumido) {
-    if (this.processo.usuariosPermissao.indexOf(usuario) === -1) {
+    const usuarioEncontrado = this.processo.usuariosPermissao.find((usuarioAdicionado) => {
+      return usuario.id === usuarioAdicionado.id;
+    });
+
+    if (!usuarioEncontrado) {
       this.processo.usuariosPermissao.unshift(usuario);
     }
   }
