@@ -19,6 +19,11 @@ public class UsuarioController extends AbstractController<Usuario, UsuarioDTO, U
         super(service, mapper);
     }
 
+    @GetMapping(path = "/finalizadores")
+    public ResponseEntity<?> pesquisarUsuariosFinalizadores() {
+        return ResponseEntity.ok(service.pesquisarUsuariosFinalizadores());
+    }
+
     @PutMapping(path = "/{id}/bloquear")
     public ResponseEntity<?> bloquearUsuario(@PathVariable Long id) throws NegocioException {
         return ResponseEntity.ok(service.bloquearUsuario(id));

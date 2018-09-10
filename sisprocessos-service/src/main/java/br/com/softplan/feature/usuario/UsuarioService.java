@@ -2,9 +2,13 @@ package br.com.softplan.feature.usuario;
 
 import br.com.softplan.core.exception.NegocioException;
 import br.com.softplan.core.service.AbstractCrudService;
+import br.com.softplan.feature.usuario.dto.UsuarioResumidoDTO;
+import br.com.softplan.feature.usuario.model.PerfilUsuario;
 import br.com.softplan.feature.usuario.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UsuarioService extends AbstractCrudService<Usuario, Long, UsuarioRepository> {
@@ -47,4 +51,7 @@ public class UsuarioService extends AbstractCrudService<Usuario, Long, UsuarioRe
         return true;
     }
 
+    public List<UsuarioResumidoDTO> pesquisarUsuariosFinalizadores() {
+        return mapper.paraListaDTOResumido(repository.findByPerfil(PerfilUsuario.FINALIZADOR));
+    }
 }

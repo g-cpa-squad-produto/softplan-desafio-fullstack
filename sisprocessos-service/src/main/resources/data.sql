@@ -11,8 +11,8 @@ insert into usuario (id, nome, cpf, telefone, aniversario, endereco, ativo, logi
 
 -- Processos
 insert into processo (id, numero, data, descricao, parecer, id_usuario_parecer, status) values
-(1, 1001, '2018-01-01', 'Processo 1001', null, null, 'AGUARDANDO_PARECER'),
-(2, 2001, '2018-01-15', 'Processo 2001', null, null, 'AGUARDANDO_PARECER'),
+(1, 1001, '2018-01-01', 'Processo 1001', null, null, 'NOVO'),
+(2, 2001, '2018-01-15', 'Processo 2001', null, null, 'NOVO'),
 (3, 3001, '2018-01-17', 'Processo 3001', null, null, 'NOVO'),
-(4, 4001, '2018-01-22', 'Processo 4001', null, null, 'AGUARDANDO_PARECER'),
+(4, 4001, '2018-01-22', 'Processo 4001', null, null, 'NOVO'),
 (5, 5001, '2018-01-28', 'Processo 5001', null, null, 'NOVO');
