@@ -1,4 +1,4 @@
-# Desafio implementador fullstack
+# ProcessAdmin
 
 Sistema administrador de processos, com controle de usuários e perfil de acesso.
 
@@ -48,31 +48,31 @@ A API RESTful ProcessAdmin contém as seguintes características:
 
 #### Serviços do Usuário (UserService)
 ```bash
-POST	/api/auth						# Autenticação do usuário, retorna o token de autenticação
-GET		/api/user/{id}              	# Retorna o usuário do id informado
-GET		/api/user/{page}/{count}		# Retorna a lista de usuários com paginação
-GET		/api/user/reviews				# Retorna a lista de usuários que realiza revisão
-POST	/api/user						# Incluir um usuário
-PUT		/api/user						# Alterar um usuário
-DELETE	/api/user/{id}					# Remove um usuário
+POST    /api/auth                       # Autenticação do usuário, retorna o token de autenticação
+GET     /api/user/{id}                  # Retorna o usuário do id informado
+GET     /api/user/{page}/{count}        # Retorna a lista de usuários com paginação
+GET     /api/user/reviews               # Retorna a lista de usuários que realiza revisão
+POST    /api/user                       # Incluir um usuário
+PUT     /api/user                       # Alterar um usuário
+DELETE  /api/user/{id}                  # Remove um usuário
 ```
 
 #### Serviços do Processo (ProcessService)
-```
-GET		/api/process/{page}/{count}		# Retorna a lista de processos com paginação
-GET		/api/process/{page}/			# Retorna a lista de processos, de acordo com filtro informado	
-					 {count}/
+```bash
+GET     /api/process/{page}/{count}     # Retorna a lista de processos com paginação
+GET     /api/process/{page}/            # Retorna a lista de processos, de acordo com filtro informado	
+                     {count}/
                      {number}/
-					 {subject}/
-					 {status}/
-					 {priority}/
-					 {assigned} 		
-GET		/api/process/summary			# Retorna o resumo das operações
-GET		/api/process/{id}          		# Retorna o processo de acordo com id informado
-POST	/api/process					# Incluir um processo
-PUT		/api/process					# Alterar um processo
-PUT		/api/process/{id}/{description}	# Envia a análise de um processo
-DELETE	/api/process/{id}				# Remove um processo
+                     {subject}/
+                     {status}/
+                     {priority}/
+                     {assigned} 		
+GET     /api/process/summary            # Retorna o resumo das operações
+GET     /api/process/{id}               # Retorna o processo de acordo com id informado
+POST    /api/process                    # Incluir um processo
+PUT     /api/process                    # Alterar um processo
+PUT     /api/process/{id}/{description}	# Envia a análise de um processo
+DELETE  /api/process/{id}               # Remove um processo
 ```
 
 ### Testes da API
