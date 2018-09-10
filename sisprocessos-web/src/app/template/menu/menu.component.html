@@ -6,13 +6,13 @@
     </div>
     <div class="clearfix"></div>
 
-    <div class="profile clearfix">
+    <div class="profile clearfix" *ngIf="usuario">
       <div class="profile_pic">
         <img src="assets/img_profile.jpg" class="img-circle profile_img">
       </div>
       <div class="profile_info">
         <span>Bem Vindo,</span>
-        <h2>Samuel Correia Guimarães</h2>
+        <h2>{{usuario.nome}}</h2>
       </div>
     </div>
     <br />
@@ -20,7 +20,14 @@
     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
       <div class="menu_section">
         <h3>Menu</h3>
-        <ul class="nav side-menu">
+        <ul class="nav side-menu" *ngIf="!usuario">
+          <li>
+            <a routerLink="login" routerLinkActive="ativo">
+              <i class="fa fa-sign-in"></i> Login
+            </a>
+          </li>
+        </ul>
+        <ul class="nav side-menu" *ngIf="usuario">
           <li>
             <a routerLink="" routerLinkActive="ativo" [routerLinkActiveOptions]="{exact: true}">
               <i class="fa fa-home"></i> Início
@@ -31,7 +38,7 @@
               <i class="fa fa-files-o"></i> Processos
             </a>
           </li>
-          <li>
+          <li *ngIf="usuario.perfil.codigo == 'ADMINISTRADOR'">
             <a routerLink="/usuarios" routerLinkActive="ativo">
               <i class="fa fa-user"></i> Usuarios
             </a>
@@ -44,7 +51,7 @@
       <a data-toggle="tooltip" data-placement="top" title="Configurações">
         <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
       </a>
-      <a data-toggle="tooltip" data-placement="top" title="Sair">
+      <a data-toggle="tooltip" data-placement="top" title="Sair" (click)="logout()">
         <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
       </a>
     </div>

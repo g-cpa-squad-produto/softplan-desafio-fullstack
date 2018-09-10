@@ -22,6 +22,7 @@ export class ListarUsuariosComponent implements OnInit {
     {title: 'CPF', name: 'cpf'},
     {title: 'Aniversário', name: 'aniversario'},
     {title: 'Perfil', name: 'perfil'},
+    {title: 'Status', name: 'status'},
     {title: 'Ações', name: 'acoes'}
   ];
 

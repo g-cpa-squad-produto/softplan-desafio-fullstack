@@ -1,19 +1,22 @@
 // registrando "pt-BR" como localização padrão da aplicação
-import {registerLocaleData} from '@angular/common';
+import {CommonModule, registerLocaleData} from '@angular/common';
 import localePtBr from '@angular/common/locales/pt';
 import localePtBrExtra from '@angular/common/locales/extra/pt';
 
 import {BrowserModule} from '@angular/platform-browser';
 import {LOCALE_ID, NgModule} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import {AppComponent} from './app.component';
 import {MenuComponent} from './template/menu/menu.component';
 import {ContentComponent} from './template/content/content.component';
 import {FooterComponent} from './template/footer/footer.component';
-import {DashboardComponent} from './dashboard/dashboard.component';
 import {AppRoutingModule} from './app-routing.module';
+import {DashboardComponent} from './dashboard/dashboard.component';
+import {LoginComponent} from './login/login.component';
+import {AuthInterceptor} from './shared/auth/auth.interceptor';
+import {NgSelectModule} from '@ng-select/ng-select';
 
 registerLocaleData(localePtBr, 'pt-BR', localePtBrExtra);
 
@@ -23,16 +26,19 @@ registerLocaleData(localePtBr, 'pt-BR', localePtBrExtra);
     MenuComponent,
     ContentComponent,
     FooterComponent,
-    DashboardComponent
+    DashboardComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgSelectModule // Componente para criação de combos (select)
   ],
   providers: [
-    {provide: LOCALE_ID, useValue: 'pt-BR'}
+    {provide: LOCALE_ID, useValue: 'pt-BR'},
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

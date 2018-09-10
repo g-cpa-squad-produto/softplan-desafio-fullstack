@@ -46,6 +46,11 @@
           {{usuario?.perfil?.descricao}}
         </ng-template>
 
+        <!-- Ativo -->
+        <ng-template let-usuario="row" ngx-datatable-cell-template *ngIf="col.name == 'status'">
+          {{usuario.ativo | boolean:'Ativo':'Inativo'}}
+        </ng-template>
+
         <!-- Ações -->
         <ng-template let-usuario="row" ngx-datatable-cell-template *ngIf="col.name == 'acoes'">
           <button type="button" class="btn btn-sm btn-info" (click)="visualizar(usuario)" title="Visualizar">
