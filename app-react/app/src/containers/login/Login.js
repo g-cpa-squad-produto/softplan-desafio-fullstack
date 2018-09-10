@@ -62,7 +62,7 @@ class Login extends Component {
                     direction="column"
                     alignItems="center"
                     justify="center"
-                    style={{minHeight: '100vh'}}
+                    style={{minHeight: '50vh'}}
                 >
                     <Grid item xs={3}>
                         <Card className={classes.card}>

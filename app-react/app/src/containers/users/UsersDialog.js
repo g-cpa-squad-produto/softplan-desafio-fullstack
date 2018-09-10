@@ -14,7 +14,7 @@ import {
 import {withStyles} from '@material-ui/core/styles';
 import {connect} from 'react-redux';
 import * as actions from '../../redux/modules/user/saved-user';
-import {Field, reduxForm} from 'redux-form';
+import {validateField, validateForm} from '../../utils/validation-utils';
 
 const styles = {
     root: {
@@ -26,6 +26,8 @@ const styles = {
     }
 };
 
+const requiredFields = ['name', 'email', 'role', 'password', 'matchPassword'];
+
 class UsersDialog extends Component {
     state = {
         id: null,
@@ -33,7 +35,9 @@ class UsersDialog extends Component {
         email: '',
         role: '',
         password: '',
-        matchPassword: ''
+        matchPassword: '',
+        formValid: false,
+        invalids: []
     };
     handleSave = () => {
         this.props.saveUser(this.state, () => {
@@ -41,12 +45,23 @@ class UsersDialog extends Component {
         });
     };
     handleChange = prop => event => {
-        this.setState({[prop]: event.target.value});
+        this.setState({[prop]: event.target.value}, () => this.validateRequired(prop));
     };
 
     onEnter() {
         this.props.resetUser();
-        this.setState(_.extend(this.props.user, {password: '', matchPassword: ''}));
+        this.setState(_.extend(this.props.user, {password: '', matchPassword: ''}),
+            this.validateFormFields);
+    }
+
+    validateRequired(name) {
+        const result = validateField(name, this.state, requiredFields);
+        this.setState(result);
+    }
+
+    validateFormFields() {
+        const result = validateForm(this.state, requiredFields);
+        this.setState(result);
     }
 
     render() {
@@ -63,9 +78,6 @@ class UsersDialog extends Component {
             >
                 <DialogTitle id="alert-dialog-title">{'Cadastrando usuários'}</DialogTitle>
                 <DialogContent>
-                    <div>
-                        {this.props.current}
-                    </div>
                     <div>
                         {this.props.error ? <span style={styles.error}>{this.props.error}</span> : null}
                     </div>
@@ -147,7 +159,7 @@ class UsersDialog extends Component {
                             color="primary">
                             Cancelar
                         </Button>
-                        <Button onClick={this.handleSave.bind(this)} color="primary" autoFocus>
+                        <Button onClick={this.handleSave.bind(this)} disabled={!this.state.formValid} color="primary" autoFocus>
                             Salvar
                         </Button>
                     </DialogActions>)
@@ -173,22 +185,4 @@ function mapError({response}) {
     return response.data.message || 'Ocorreu um erro ao salvar o usuário';
 }
 
-function validate(values) {
-    const errors = {};
-    const requiredFields = [
-        'name',
-        'email'
-    ];
-    requiredFields.forEach(field => {
-        if (!values[field]) {
-            errors[field] = 'Required';
-        }
-    });
-    return errors;
-}
-
-export default connect(mapStateToProps, actions)
-    (reduxForm({
-        form: 'userForm',
-        validate,
-    })(withStyles(styles)(UsersDialog)));
+export default connect(mapStateToProps, actions)(withStyles(styles)(UsersDialog));

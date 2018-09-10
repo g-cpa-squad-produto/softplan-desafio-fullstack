@@ -124,10 +124,10 @@ class Users extends Component {
                 <TableCell>{user.role}</TableCell>
                 {user.id === _.get(this.user, 'id') ? null :
                     (<TableCell>
-                        <IconButton onClick={this.onClickEdit(user).bind(this)} aria-label="Add an alarm">
+                        <IconButton onClick={this.onClickEdit(user).bind(this)} aria-label="Editar usuário">
                             <Edit/>
                         </IconButton>
-                        <IconButton onClick={this.onHandleDelete(user).bind(this)} aria-label="Add an alarm">
+                        <IconButton onClick={this.onHandleDelete(user).bind(this)} aria-label="Remover usuário">
                             <DeleteIcon/>
                         </IconButton>
                     </TableCell>)
