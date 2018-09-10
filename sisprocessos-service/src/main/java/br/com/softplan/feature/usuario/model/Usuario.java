@@ -11,7 +11,7 @@ import java.time.LocalDate;
 public class Usuario extends AbstractEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private String cpf;
