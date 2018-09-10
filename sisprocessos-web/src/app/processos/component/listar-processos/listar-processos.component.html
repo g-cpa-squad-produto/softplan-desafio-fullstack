@@ -1,0 +1,62 @@
+<div class="page-title">
+  <div class="title_left">
+    <h3>Listar Processos</h3>
+  </div>
+</div>
+<div class="clearfix"></div>
+
+<div class="row">
+  <div class="col-12">
+    <button type="button" class="btn btn-success" routerLink="/processos/cadastrar">Cadastrar Processos</button>
+
+    <ngx-datatable
+      class="bootstrap"
+      [columnMode]="'force'"
+      [rows]="dados.content"
+      [footerHeight]="40"
+      [rowHeight]="'auto'"
+      [externalPaging]="true"
+      [count]="dados.totalElements"
+      [offset]="dados.number"
+      [limit]="dados.size"
+      (page)='setPage($event)'>
+
+      <ngx-datatable-column *ngFor="let col of columns">
+        <ng-template ngx-datatable-header-template>
+          <strong>{{col.title}}</strong>
+        </ng-template>
+
+        <!-- Número -->
+        <ng-template let-processo="row" ngx-datatable-cell-template *ngIf="col.name == 'numero'">
+          {{processo.numero}}
+        </ng-template>
+
+        <!-- Descrição -->
+        <ng-template let-processo="row" ngx-datatable-cell-template *ngIf="col.name == 'descricao'">
+          {{processo.descricao}}
+        </ng-template>
+
+        <!-- Data -->
+        <ng-template let-processo="row" ngx-datatable-cell-template *ngIf="col.name == 'data'">
+          {{processo.data | date:'dd/MM/yyyy'}}
+        </ng-template>
+
+        <!-- Status -->
+        <ng-template let-processo="row" ngx-datatable-cell-template *ngIf="col.name == 'status'">
+          {{processo?.status?.descricao}}
+        </ng-template>
+
+        <!-- Ações -->
+        <ng-template let-processo="row" ngx-datatable-cell-template *ngIf="col.name == 'acoes'">
+          <button type="button" class="btn btn-sm btn-info" (click)="visualizar(processo)" title="Visualizar">
+            <i class="fa fa-book"></i>
+          </button>
+          <button type="button" class="btn btn-sm btn-warning" (click)="atribuirUsuariosParecer(processo)" title="Atribuir Usuários"
+                  *ngIf="processo.status.codigo == 'NOVO' || processo.status.codigo == 'AGUARDANDO_PARECER'">
+            <i class="fa fa-group"></i>
+          </button>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+</div>

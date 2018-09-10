@@ -85,7 +85,7 @@
 
         <div class="ln_solid"></div>
         <div class="form-group col-md-12">
-          <button type="submit" class="btn btn-primary" (click)="salvar()">Salvar</button>
+          <button type="submit" class="btn btn-primary" (click)="salvar()" *ngIf="!readonly">Salvar</button>
           <button type="button" class="btn btn-default" routerLink="/usuarios">Voltar</button>
         </div>
 

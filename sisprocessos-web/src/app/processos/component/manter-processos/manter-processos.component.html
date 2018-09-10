@@ -1,0 +1,72 @@
+<div class="page-title">
+  <div class="title_left">
+    <h3>{{tituloPagina}}</h3>
+  </div>
+</div>
+<div class="clearfix"></div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="x_panel">
+      <div class="x_content">
+
+        <div class="row">
+          <div class="form-group col-md-3">
+            <label for="numero">Número</label>
+            <input type="text" id="numero" class="form-control" [(ngModel)]="processo.numero" placeholder="Número" mask="00.000/000" [readonly]="readonly">
+          </div>
+
+          <div class="form-group col-md-3">
+            <label for="descricao">Descrição</label>
+            <input type="text" id="descricao" class="form-control" [(ngModel)]="processo.descricao" placeholder="Descrição" [readonly]="readonly">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-3">
+            <label for="data">Data</label>
+            <my-date-picker id="data" placeholder="Data" locale="pt-br" [disabled]="readonly"
+                            [selDate]="dataSelecionada"
+                            (dateChanged)="onDateChanged($event)"
+                            [options]="{showClearDateBtn: false}"></my-date-picker>
+          </div>
+
+          <div class="form-group col-md-3">
+            <label for="status">Status</label>
+            <ng-select id="status" labelForId="status" [disabled]="readonly"
+                       [items]="status$ | async"
+                       [(ngModel)]="processo.status"
+                       bindLabel="descricao"
+                       [clearable]="false">
+            </ng-select>
+          </div>
+        </div>
+
+        <div class="row secao-usuarios-atribuidos" *ngIf="readonly">
+          <div class="form-group col-md-3">
+            <h4>Usuários Atribuídos</h4>
+          </div>
+        </div>
+
+        <div class="row" *ngFor="let usuario of processo.usuariosPermissao">
+          <div class="form-group col-md-3">
+            <span>{{usuario.nome}}</span>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="!processo.usuariosPermissao">
+          <div class="form-group col-md-3">
+            <span class="usuario-atribuido">Nenhum usuário está atribuido para esse processo</span>
+          </div>
+        </div>
+
+        <div class="ln_solid"></div>
+        <div class="form-group col-md-12">
+          <button type="submit" class="btn btn-primary" (click)="salvar()" *ngIf="!readonly">Cadastrar</button>
+          <button type="button" class="btn btn-default" routerLink="/processos">Voltar</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

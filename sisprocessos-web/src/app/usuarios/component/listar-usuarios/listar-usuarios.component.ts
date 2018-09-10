@@ -1,13 +1,10 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
-import {Observable} from 'rxjs';
 import {DatatableComponent} from '@swimlane/ngx-datatable';
 
 import {UsuariosService} from '../../service/usuarios.service';
 import {RetornoConsultaApi} from '../../../shared/model/retorno-consulta-api.model';
 import {UsuarioResumido} from '../../model/usuario-resumido';
-import {Enum} from '../../../shared/model/enum';
-import {Usuario} from '../../model/usuario';
 import {PageInfo} from '../../../shared/model/page-info';
 
 @Component({
@@ -17,11 +14,7 @@ import {PageInfo} from '../../../shared/model/page-info';
 })
 export class ListarUsuariosComponent implements OnInit {
 
-  // Lista de Usuários a ser apresentado na tabela (grid)
   dados: RetornoConsultaApi<UsuarioResumido> = new RetornoConsultaApi<UsuarioResumido>();
-  // Observable de Enums com os perfis de usuários
-  perfisUsuario: Observable<Enum[]>;
-  // Componente de Data Table
   @ViewChild(DatatableComponent) dataTable: DatatableComponent;
 
   columns = [
@@ -36,8 +29,6 @@ export class ListarUsuariosComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.perfisUsuario = this.service.pesquisarPerfis();
-    this.limpar();
     this.pesquisar(0);
   }
 
@@ -46,15 +37,15 @@ export class ListarUsuariosComponent implements OnInit {
       .subscribe(retorno => this.dados = retorno);
   }
 
-  visualizar(usuario: Usuario): void {
+  visualizar(usuario: UsuarioResumido): void {
     this.router.navigate(['usuarios', usuario.id]);
   }
 
-  editar(usuario: Usuario): void {
+  editar(usuario: UsuarioResumido): void {
     this.router.navigate(['usuarios', 'editar', usuario.id]);
   }
 
-  excluir(usuario: Usuario): void {
+  excluir(usuario: UsuarioResumido): void {
     this.service.deletar(usuario.id).subscribe(() => {
       this.pesquisar(this.dataTable.offset);
       alert('Usuário excluído!!!');
@@ -63,7 +54,7 @@ export class ListarUsuariosComponent implements OnInit {
     });
   }
 
-  toggleAtivar(usuario: Usuario): void {
+  toggleAtivar(usuario: UsuarioResumido): void {
     if (usuario.ativo) {
       this.inativar(usuario);
     } else {
@@ -72,7 +63,7 @@ export class ListarUsuariosComponent implements OnInit {
 
   }
 
-  private inativar(usuario: Usuario) {
+  private inativar(usuario: UsuarioResumido) {
     this.service.inativarUsuario(usuario.id).subscribe(() => {
       this.pesquisar(this.dataTable.offset);
       alert('Usuário bloqueado!!!');
@@ -81,17 +72,13 @@ export class ListarUsuariosComponent implements OnInit {
     });
   }
 
-  private ativar(usuario: Usuario) {
+  private ativar(usuario: UsuarioResumido) {
     this.service.ativarUsuario(usuario.id).subscribe(() => {
       this.pesquisar(this.dataTable.offset);
       alert('Usuário desbloqueado!!!');
     }, error => {
       alert(error);
     });
-  }
-
-  limpar(): void {
-
   }
 
   setPage(pageInfo: PageInfo) {

@@ -9,6 +9,10 @@ import {DashboardComponent} from './dashboard/dashboard.component';
         path: '', component: DashboardComponent
       },
       {
+        path: 'processos',
+        loadChildren: 'app/processos/processos.module#ProcessosModule'
+      },
+      {
         path: 'usuarios',
         loadChildren: 'app/usuarios/usuarios.module#UsuariosModule'
       }
