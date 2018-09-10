@@ -11,8 +11,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collections;
+import java.util.Set;
 
 /**
  * Classe responsável por tratar as regras de negócio relacionadas a entidade {@link Usuario}
@@ -41,6 +42,16 @@ public class UsuarioService extends AbstractService<Usuario, Long> {
      */
     public Iterable<Usuario> findAll() {
         return this.getRepository().findAll();
+    }
+
+    /**
+     * Função responsável por recuperar todos os Usuários cadastrados a partir de uma role
+     * @return Lista de Usuários registrados
+     */
+    public Iterable<Usuario> findAllByRoleName(String roleName) {
+        Role searchRole = this.roleService.findByName(RoleName.valueOf(roleName));
+        Set<Role> roles = Collections.singleton(searchRole);
+        return this.getRepository().findAllByRoles(roles);
     }
 
     /**
@@ -79,13 +90,13 @@ public class UsuarioService extends AbstractService<Usuario, Long> {
         if (this.getRepository().existsByUsername(request.getUsername()))
             throw new HttpClientErrorException(HttpStatus.CONFLICT, "O username informado já existe.");
 
-        Role role = this.roleService.findByName(RoleName.valueOf(request.getRoleName()));
+        Role role = this.roleService.findById(request.getRole());
 
         if (role == null)
             throw new HttpClientErrorException(HttpStatus.CONFLICT, "A role especificada não existe.");
 
         Usuario usuario = new Usuario(request.getUsername(), encoder.encode(request.getPassword()), request.getNome(),
-                LocalDate.now(), Collections.singleton(role));
+                LocalDateTime.now(), Collections.singleton(role));
 
         return this.save(usuario);
     }
@@ -109,7 +120,11 @@ public class UsuarioService extends AbstractService<Usuario, Long> {
      * Função responsável por excluir {@link Usuario}
      * @param id Long contendo o ID do {@link Usuario} a ser excluído
      */
-    public void delete(Long id) {
+    public void delete(Long id, String currentUsername) {
+        Usuario currentUser = this.findByUsername(currentUsername);
+        if (currentUser.getId().equals(id))
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Não é possível excluir a si mesmo...");
+
         this.getRepository().deleteById(id);
     }
 }

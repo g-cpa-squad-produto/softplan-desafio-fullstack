@@ -8,7 +8,7 @@ public class UsuarioCadastroDTO implements Serializable {
     private String nome;
     private String username;
     private String password;
-    private String roleName;
+    private Long role;
 
     public String getNome() {
         return nome;
@@ -34,11 +34,11 @@ public class UsuarioCadastroDTO implements Serializable {
         this.password = password;
     }
 
-    public String getRoleName() {
-        return roleName;
+    public Long getRole() {
+        return role;
     }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
+    public void setRole(Long role) {
+        this.role = role;
     }
 }

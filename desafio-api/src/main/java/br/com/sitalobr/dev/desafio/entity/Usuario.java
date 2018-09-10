@@ -3,7 +3,7 @@ package br.com.sitalobr.dev.desafio.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
 
@@ -29,7 +29,7 @@ public class Usuario implements InterfaceEntity<Long> {
     private String nome;
 
     @Column(name = "data_cadastro", nullable = false)
-    private LocalDate dataCriacao;
+    private LocalDateTime dataCriacao;
 
     @ManyToMany
     @JoinTable(name = "usuario_role",
@@ -43,7 +43,7 @@ public class Usuario implements InterfaceEntity<Long> {
     public Usuario() {
     }
 
-    public Usuario(String username, String password, String nome, LocalDate dataCriacao, Set<Role> roles) {
+    public Usuario(String username, String password, String nome, LocalDateTime dataCriacao, Set<Role> roles) {
         this.username = username;
         this.password = password;
         this.nome = nome;
@@ -85,11 +85,11 @@ public class Usuario implements InterfaceEntity<Long> {
         this.nome = nome;
     }
 
-    public LocalDate getDataCriacao() {
+    public LocalDateTime getDataCriacao() {
         return dataCriacao;
     }
 
-    public void setDataCriacao(LocalDate dataCriacao) {
+    public void setDataCriacao(LocalDateTime dataCriacao) {
         this.dataCriacao = dataCriacao;
     }
 

@@ -1,7 +1,7 @@
 package br.com.sitalobr.dev.desafio.entity;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
 
@@ -19,8 +19,11 @@ public class Processo implements InterfaceEntity<Long> {
     @Column(name = "descricao", nullable = false)
     private String descricao;
 
+    @Column(name = "parecer")
+    private String parecer;
+
     @Column(name = "data_criacao", nullable = false)
-    private LocalDate dataCriacao;
+    private LocalDateTime dataCriacao;
 
     @ManyToOne(optional = false)
     private Usuario responsavel;
@@ -32,6 +35,13 @@ public class Processo implements InterfaceEntity<Long> {
     private Set<Usuario> finalizadores;
 
     public Processo() {
+    }
+
+    public Processo(String descricao, LocalDateTime dataCriacao, Usuario responsavel, Set<Usuario> finalizadores) {
+        this.descricao = descricao;
+        this.dataCriacao = dataCriacao;
+        this.responsavel = responsavel;
+        this.finalizadores = finalizadores;
     }
 
     @Override
@@ -52,11 +62,19 @@ public class Processo implements InterfaceEntity<Long> {
         this.descricao = descricao;
     }
 
-    public LocalDate getDataCriacao() {
+    public String getParecer() {
+        return parecer;
+    }
+
+    public void setParecer(String parecer) {
+        this.parecer = parecer;
+    }
+
+    public LocalDateTime getDataCriacao() {
         return dataCriacao;
     }
 
-    public void setDataCriacao(LocalDate dataCriacao) {
+    public void setDataCriacao(LocalDateTime dataCriacao) {
         this.dataCriacao = dataCriacao;
     }
 
