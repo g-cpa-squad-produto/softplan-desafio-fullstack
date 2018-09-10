@@ -34,7 +34,7 @@ class AppBarCustom extends Component {
                         </Typography>
                     </Toolbar>
                 </AppBar>,
-                <DrawerCustom key={1} open={this.state.open} handleDrawerClose={this.handleDrawerClose.bind(this)}/>
+                <DrawerCustom key={1} open={this.state.open} handleDrawerClose={this.handleDrawerClose.bind(this)} {...this.props} />
             ]
         );
     }

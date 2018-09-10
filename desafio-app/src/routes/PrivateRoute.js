@@ -13,7 +13,7 @@ class PrivateRoute extends Component {
     render() {
         return this.state.isAuthenticated ?
             <div style={{display: 'flex'}}>
-                <AppBarCustom />
+                <AppBarCustom {...this.props} />
                 <Route {...this.props} />
             </div> :
             <Redirect to="/login"/>;

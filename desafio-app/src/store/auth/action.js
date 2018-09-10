@@ -7,14 +7,13 @@ export const actionTypes = {
 
 export function login(username, password, onSuccess, onError) {
     authService.login(username, password, onSuccess, onError);
-    return load(onSuccess, onError);
+    return load(null, onError);
 }
 
 export function logout(onSuccess) {
+    authService.logout(onSuccess); // remove user details do cookie
     return dispatch => {
-        authService.logout();
-        dispatch({type: actionTypes.LOGOUT});
-        onSuccess();
+        dispatch({type: actionTypes.LOGOUT}); // "reseta" user details do redux
     };
 }
 
@@ -23,7 +22,7 @@ export function load(onSuccess, onError) {
         let auth = authService.getUserDetails();
         return dispatch => {
             dispatch({type: actionTypes.LOAD, auth: auth});
-            onSuccess();
+            if (onSuccess) onSuccess();
         };
     } catch (e) {
         onError(e);

@@ -10,6 +10,11 @@ class Login extends Component {
         password: ''
     };
 
+    componentDidMount() {
+        if (this.props.auth.loggedIn)
+            this.props.history.push('/');
+    }
+
     handlerChange = (e) => {
         this.setState({[e.target.name]: e.target.value});
     };
@@ -21,7 +26,7 @@ class Login extends Component {
             authActions.login(this.state.username, this.state.password, res => {
                 this.props.history.push('/');
             }, error => {
-                console.log(error);
+                this.props.notify(error.message);
             })
         );
     };

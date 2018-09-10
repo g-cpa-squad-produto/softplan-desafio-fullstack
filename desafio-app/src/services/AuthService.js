@@ -13,7 +13,7 @@ export default class AuthService {
             .then(res => {
                 const token = res.data.accessToken;
                 cookie.save(ACCESS_TOKEN, token, {path: '/'});
-                res.data = this.getUserDetails(token);
+                res.data = this.getUserDetails();
 
                 if (onSuccess) onSuccess(res);
             }).catch(onError);
@@ -27,7 +27,9 @@ export default class AuthService {
     getUserDetails() {
         const token = cookie.load(ACCESS_TOKEN); //pegar user details do login
 
-        if (!token) return {loggedIn: false, roles: ['ROLE_ANONYMOUS']};
+        if (!token) {
+            return {loggedIn: false, roles: ['ROLE_ANONYMOUS']};
+        }
 
         const user = JSON.parse(jwt_decode(token).sub);
 
