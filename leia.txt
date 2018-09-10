@@ -23,3 +23,11 @@ Basta entrar na pasta app do projeto e seguir os passos abaixo:
 2. Executar `npm start`
 
 A aplicação será executada no endereço `http://localhost:9001`
+
+## Executar front-end REACT:
+
+Basta entrar na pasta app-react/app do projeto e seguir os passos abaixo:
+1. Executar `npm install`
+2. Executar `npm start`
+
+A aplicação será executada no endereço `http://localhost:3000`

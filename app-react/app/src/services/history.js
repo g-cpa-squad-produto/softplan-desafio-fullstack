@@ -6,6 +6,6 @@ export const history = createBrowserHistory({
     keyLength: 6
 });
 
-const unlisten = history.listen((location, action) => {
-    console.log(action, location.pathname, location.state)
-});
+// const unlisten = history.listen((location, action) => {
+//     console.log(action, location.pathname, location.state)
+// });
