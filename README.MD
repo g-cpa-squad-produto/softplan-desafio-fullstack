@@ -62,15 +62,14 @@ Procuramos desenvolvedor versátil para resolver os mais diversos problemas, que
 - O histórico no `git` também está avaliado.
 - Não esqueça de documentar o processo necessário para rodar a aplicação.
 - Se necessário explique as decisões técnicas tomadas, as escolhas por bibliotecas e ferrramentas, o uso de patterns etc.
-- Apesar de não ter uma limitação de tempo, recomendamos não investir mais de 24 horas de trabalho nesse desafio.
 
 
 ### Diferenciais
 - Adaptar a página para dispositivos móveis (torná-la responsiva).
 - Liberação da aplicação utilizando Docker.
 - Utilização de boas práticas de UX na solução.
-- Boa documentação.
-- Teste do código.
+- Boa documentação de código e de serviços.
+- Testes do código.
 
 ---
 Em caso de dúvidas, envie um email para [g_cpa_squad_produto@softplan.com.br](mailto:g_cpa_squad_produto@softplan.com.br).
