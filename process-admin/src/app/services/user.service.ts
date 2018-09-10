@@ -35,4 +35,7 @@ export class UserService {
     return this.http.delete(`${PROCESS_ADMIN_API}/api/user/${id}`);
   }
 
+  findAllReviews() {
+    return this.http.get(`${PROCESS_ADMIN_API}/api/user/reviews`);
+  }
 }

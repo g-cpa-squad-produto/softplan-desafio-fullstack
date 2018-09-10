@@ -24,9 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.softplan.process.api.dto.Summary;
-import br.com.softplan.process.api.entity.AnalysisProcess;
-import br.com.softplan.process.api.entity.ChangeStatus;
 import br.com.softplan.process.api.entity.Process;
+import br.com.softplan.process.api.entity.ProcessReview;
 import br.com.softplan.process.api.entity.User;
 import br.com.softplan.process.api.enums.ProfileEnum;
 import br.com.softplan.process.api.enums.StatusEnum;
@@ -53,12 +52,7 @@ public class ProcessController {
 		if (process.getSubject() == null) {
 			result.addError(new ObjectError("Process", "Assunto não informado"));
 			return;
-		}
-		
-		/*if(process.getAssignedUser() == null ) {
-			result.addError(new ObjectError("Process", "Usuário avaliador não informado"));
-			return;		
-		}*/
+		}	
 	}
 
 	public User userFromRequest(HttpServletRequest request) {
@@ -85,7 +79,10 @@ public class ProcessController {
 			process.setUser(userFromRequest(request));
 			process.setDate(new Date());
 			process.setNumber(generateNumber());
-					
+			//process.getAssignedUser()
+			
+			System.out.println(process);
+			
 			Process processPersisted = (Process) processService.createOrUpdate(process);
 			response.setData(processPersisted);
 
@@ -148,7 +145,7 @@ public class ProcessController {
 
 		return ResponseEntity.ok(response);
 	}
-
+	
 	@GetMapping(value = "{id}")
 	@PreAuthorize("hasAnyRole('ROLE_PROCESS_STARTER', 'ROLE_PROCESS_END')")
 	public ResponseEntity<Response<Process>> findById(@PathVariable("id") String id) {
@@ -161,27 +158,16 @@ public class ProcessController {
 			return ResponseEntity.badRequest().body(response);
 		}
 
-		List<ChangeStatus> changes = new ArrayList<ChangeStatus>();
-		Iterable<ChangeStatus> changesCurrent = processService.listChangeStatus(process.getId());
+		List<ProcessReview> reviews = new ArrayList<ProcessReview>();
+		Iterable<ProcessReview> reviewCurrent = processService.listProcessReview(process.getId());
 
-		for (Iterator<ChangeStatus> iterator = changesCurrent.iterator(); iterator.hasNext();) {
-			ChangeStatus changeStatus = (ChangeStatus) iterator.next();
-			changeStatus.setProcess(null);
-			changes.add(changeStatus);
+		for (Iterator<ProcessReview> iterator = reviewCurrent.iterator(); iterator.hasNext();) {
+			ProcessReview review = (ProcessReview) iterator.next();
+			review.setProcess(null);
+			reviews.add(review);
 		}
 
-		process.setChanges(changes);
-
-		List<AnalysisProcess> analyzes = new ArrayList<AnalysisProcess>();
-		Iterable<AnalysisProcess> analysisCurrent = processService.listAnalysisProcess(process.getId());
-
-		for (Iterator<AnalysisProcess> iterator = analysisCurrent.iterator(); iterator.hasNext();) {
-			AnalysisProcess analysisProcess = (AnalysisProcess) iterator.next();
-			analysisProcess.setProcess(null);
-			analyzes.add(analysisProcess);
-		}
-
-		process.setAnalyzes(analyzes);
+		process.setReviews(reviews);
 
 		response.setData(process);
 
@@ -243,6 +229,7 @@ public class ProcessController {
 			processes = processService.findByNumber(page, count, number);
 		} else {
 			User userRequest = userFromRequest(request);
+			System.out.println(userRequest.getId());
 
 			if (userRequest.getProfile().equals(ProfileEnum.ROLE_PROCESS_STARTER)) {
 				processes = processService.findByParametersAndCurrentUser(page, count, subject, status, priority,
@@ -261,7 +248,7 @@ public class ProcessController {
 		return ResponseEntity.ok(response);
 	}
 
-	private void validateSubmitAnalisys(String id, String description, BindingResult result) {
+	private void validateSubmitReview(String id, String description, BindingResult result) {
 		if (id == null || id.equals("")) {
 			result.addError(new ObjectError("Process", "Id não informado"));
 			return;
@@ -275,13 +262,13 @@ public class ProcessController {
 
 	@PutMapping(value="{id}/{description}")
 	@PreAuthorize("hasAnyRole('ROLE_PROCESS_STARTER', 'ROLE_PROCESS_END')")
-	public ResponseEntity<Response<Process>> submitAnalysis(HttpServletRequest request, @PathVariable("id") String id,
+	public ResponseEntity<Response<Process>> submitReview(HttpServletRequest request, @PathVariable("id") String id,
 			@PathVariable("description") String description, @RequestBody Process process, BindingResult result) {
 
 		Response<Process> response = new Response<Process>();
 
 		try {
-			validateSubmitAnalisys(id, description, result);
+			validateSubmitReview(id, description, result);
 			if (result.hasErrors()) {
 				result.getAllErrors().forEach(error -> response.getErrors().add(error.getDefaultMessage()));
 				return ResponseEntity.badRequest().body(response);
@@ -289,16 +276,15 @@ public class ProcessController {
 
 			Process processCurrent = processService.findById(id);
 			processCurrent.setStatus(StatusEnum.Closed);
-
 			Process processPersisted = (Process) processService.createOrUpdate(processCurrent);
 
-			AnalysisProcess analysis = new AnalysisProcess();
-			analysis.setUserAnalysis(userFromRequest(request));
-			analysis.setDate(new Date());
-			analysis.setDescription(description);
-			analysis.setProcess(processCurrent);
+			ProcessReview review = new ProcessReview();
+			review.setProcess(processPersisted);
+			review.setUser(userFromRequest(request));
+			review.setDateReview(new Date());
+			review.setDescription(description);
 
-			processService.createAnalysisProcess(analysis);
+			processService.createProcessReview(review);
 
 			response.setData(processPersisted);
 		} catch (Exception e) {

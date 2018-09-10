@@ -3,9 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Process } from './../model/process.model';
 import { PROCESS_ADMIN_API } from './process-admin.api';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ProcessService {
 
   constructor(private http: HttpClient) { }
@@ -15,7 +13,7 @@ export class ProcessService {
       return this.http.put(`${PROCESS_ADMIN_API}/api/process`, process);
     } else {
       process.id = null;
-      process.status = 'New'
+      process.status = 'Pending'
       return this.http.post(`${PROCESS_ADMIN_API}/api/process`, process);
     }
   }
@@ -37,11 +35,11 @@ export class ProcessService {
     p.subject = p.subject == '' ? 'uninformed' : p.subject;
     p.status = p.status == '' ? 'uninformed' : p.status;
     p.priority = p.priority == '' ? 'uninformed' : p.priority;
-    return this.http.get(`${PROCESS_ADMIN_API}/api/process/${page}/${count}/${p.subject}/${p.status}/${p.priority}/${assignedToMe}`);
+    return this.http.get(`${PROCESS_ADMIN_API}/api/process/${page}/${count}/${p.number}/${p.subject}/${p.status}/${p.priority}/${assignedToMe}/`);
   }
 
-  changeStatus(status: string, process: Process) {
-    return this.http.put(`${PROCESS_ADMIN_API}/api/process/${process.id}/${process.status}`, process);
+  sendReview(process: Process, review: string) {
+    return this.http.put(`${PROCESS_ADMIN_API}/api/process/${process.id}/${review}`, process);
   }
 
   summary() {

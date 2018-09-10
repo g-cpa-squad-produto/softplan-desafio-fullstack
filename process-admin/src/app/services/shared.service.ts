@@ -4,6 +4,7 @@ import { User } from '../model/user.model';
 @Injectable({
   providedIn: 'root'
 })
+
 export class SharedService {
 
   public static instance: SharedService = null;
@@ -15,17 +16,19 @@ export class SharedService {
     return SharedService.instance = SharedService.instance || this;
   }
 
-  public static getInstance() {
+  public static getInstance() {    
     if (this.instance == null) {
       this.instance = new SharedService();
-    }
+    } 
     return this.instance;
   }
-
+  
   isLoggedIn(): boolean {
     if (this.user == null) {
+      console.log('Usuário não logado');
       return false;
-    }
+    } 
+    console.log('Usuário logado');
     return this.user.email != '';
   }
 

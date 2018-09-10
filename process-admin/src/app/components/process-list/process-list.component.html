@@ -1,0 +1,122 @@
+<section class="content-header">
+  <h1>
+    Lista de Processos
+  </h1>
+  <ol class="breadcrumb">
+    <li><a [routerLink]="['/']"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li class="active">Processos</li>
+  </ol>
+</section>
+<section class="content">
+
+  <div [ngClass]="classCss" role="alert" *ngIf="message">
+    <strong>{{ message.text }}</strong>
+  </div>
+
+  <div class="row">
+    <div class="col-md-10">
+      <div class="box">
+
+        <div class="box-header with-border">
+          <h3 class="box-title">Lista de Processos</h3>
+        </div>
+        <div class="box-body">
+
+          <div class="form-group" *ngIf="shared.user.profile == 'PROCESS_END'">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" [(ngModel)]="assignedToMe" name="assignedToMe" id="assignedToMe">
+                <b>Processos marcados para mim</b>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputNumber" class="col-sm-2 control-label">Número</label>
+            <div class="col-sm-10">
+              <input type="text" [(ngModel)]="processFilter.number" class="form-control" name="number" id="inputNumber">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputSubject" class="col-sm-2 control-label">Assunto</label>
+            <div class="col-sm-10">
+              <input type="text" [(ngModel)]="processFilter.subject" class="form-control" name="subject" id="inputSubject">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputStatus" class="col-sm-2 control-label">Status</label>
+            <div class="col-sm-10">
+              <select [(ngModel)]="processFilter.status" class="form-control" name="status" id="inputStatus" style="width: 100%">
+                <option value=""> </option>
+                <option value="Pending">Pendente</option>
+                <option value="Analyzing">Em Análise</option>
+                <option value="Canceled">Cancelado</option>
+                <option value="Close">Fechado</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputPriority" class="col-sm-2 control-label">Prioridade</label>
+            <div class="col-sm-10">
+              <select [(ngModel)]="processFilter.priority" class="form-control" name="priority" id="inputPriority" style="width: 100%">
+                <option value=""></option>
+                <option value="High">Alta</option>
+                <option value="Normal">Normal</option>
+                <option value="Low">Baixa</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="box-footer">
+          <button class="btn btn-info pull-left" (click)="cleanFilter()">Limpar Filtro</button>
+          <button style="margin-left: 10px" class="btn btn-info pull-right" (click)="filter()">Filtro</button>
+        </div>
+
+        <div class="box-body">
+          <table class="table table-bordered">
+            <tr>
+              <th>Número</th>
+              <th>Assunto</th>
+              <th>Prioridade</th>
+              <th>Status</th>
+              <th>Usuário Abertura</th>
+              <th>Avaliador</th>
+              <th style="width: 10px" *ngIf="shared.user.profile == 'PROCESS_STARTER'">&nbsp;</th>
+              <th style="width: 10px" *ngIf="shared.user.profile == 'PROCESS_STARTER'">&nbsp;</th>
+              <th style="width: 10px">&nbsp;</th>
+            </tr>
+            <tr *ngFor="let process of processes">
+              <td>{{process.number}}</td>
+              <td>{{process.subject}}</td>
+              <td>{{process.priority}}</td>
+              <td>{{process.status}}</td>
+              <td>{{process.user.email}}</td>
+              <td>{{process.assignedUser}}</td>
+              <td *ngIf="shared.user.profile == 'PROCESS_STARTER' && process.status=='Pending'">
+                <button class="btn btn-primary" (click)="edit(process.id)">Editar</button>
+              </td>
+              <td *ngIf="shared.user.profile == 'PROCESS_STARTER' && process.status=='Pending'">
+                <button class="btn btn-danger" (click)="delete(process.id)">Excluir</button>
+              </td>
+              <td><button class="btn btn-success" (click)="detail(process.id)">Detalhe</button></td>
+            </tr>
+          </table>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer clearfix">
+          <ul class="pagination pagination-sm no-margin pull-right">
+            <li><a href="#" (click)="setPreviousPage($event)">&laquo;</a></li>
+            <li *ngFor="let p of pages; let i=index">
+              <a [ngClass]="{'pagination-focus' : i == page}" href="#" (click)="setPage(i, $event)"> {{i+1}}</a>
+            </li>
+            <li><a href="#" (click)="setNextPage($event)">&raquo;</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

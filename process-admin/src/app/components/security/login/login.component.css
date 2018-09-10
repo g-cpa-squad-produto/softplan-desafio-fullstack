@@ -1,0 +1,47 @@
+.form-background {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background: rgba(41,184,229,1);
+  background: -moz-radial-gradient(center, ellipse cover, rgba(41,184,229,1) 0%, rgba(41,184,229,1) 16%, rgba(120,205,234,1) 61%, rgba(188,224,238,1) 100%);
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(41,184,229,1)), color-stop(16%, rgba(41,184,229,1)), color-stop(61%, rgba(120,205,234,1)), color-stop(100%, rgba(188,224,238,1)));
+  background: -webkit-radial-gradient(center, ellipse cover, rgba(41,184,229,1) 0%, rgba(41,184,229,1) 16%, rgba(120,205,234,1) 61%, rgba(188,224,238,1) 100%);
+  background: -o-radial-gradient(center, ellipse cover, rgba(41,184,229,1) 0%, rgba(41,184,229,1) 16%, rgba(120,205,234,1) 61%, rgba(188,224,238,1) 100%);
+  background: -ms-radial-gradient(center, ellipse cover, rgba(41,184,229,1) 0%, rgba(41,184,229,1) 16%, rgba(120,205,234,1) 61%, rgba(188,224,238,1) 100%);
+  background: radial-gradient(ellipse at center, rgba(41,184,229,1) 0%, rgba(41,184,229,1) 16%, rgba(120,205,234,1) 61%, rgba(188,224,238,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#29b8e5', endColorstr='#bce0ee', GradientType=1 );
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}

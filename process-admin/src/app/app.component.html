@@ -1,21 +1,12 @@
-<app-header [hidden]="!showTemplate"></app-header>
-<app-menu></app-menu>
-<div class="content-wrapper">
-  <!-- Content Header (Page header) -->
-  <section class="content-header">
-    <h1>
-      Dashboard
-      <small>Version 2.0</small>
-    </h1>
-    <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active">Dashboard</li>
-    </ol>
-  </section>
+<ng-template [ngIf]="isLoggedIn" [ngIfElse]="loggedOut">
+  <app-header></app-header>
+  <app-menu></app-menu>
+  <div class="content-wrapper">
+      <router-outlet></router-outlet>
+  </div>
+  <app-footer></app-footer>
+</ng-template>
 
-  <!-- Main content -->
-  <section class="content">
-    <router-outlet></router-outlet>
-  </section>
-</div>
-<app-footer></app-footer>
+<ng-template #loggedOut>
+  <router-outlet></router-outlet>
+</ng-template>

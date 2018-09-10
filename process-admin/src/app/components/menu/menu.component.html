@@ -1,43 +1,34 @@
 <aside class="main-sidebar">
   <section class="sidebar">
     <ul class="sidebar-menu" data-widget="tree">
+
+      <li class="header">MENU PRINCIPAL</li>
+
       <li class="treeview">
-        <a href="#">
-          <i class="fa fa-edit"></i> <span>Usuários</span>
-          <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-          </span>
+        <a [routerLink]="['/dashboard']">
+          <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+        </a>
+      </li>
+
+      <li class="active treeview menu-open" *ngIf="shared.user.profile =='ADMIN'">
+        <a>
+          <i class="fa fa-users"></i> <span>Usuários</span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="pages/forms/general.html"><i class="fa fa-circle-o"></i> Lista</a></li>
-          <li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i> Adicionar Usuários</a></li>
+          <li><a [routerLink]="['/user-list']"><i class="fa fa-circle-o"></i> Listar</a></li>
+          <li><a [routerLink]="['/user-new']"><i class="fa fa-circle-o"></i> Novo</a></li>
         </ul>
       </li>
 
-      <li class="treeview">
-        <a href="#">
-          <i class="fa fa-edit"></i> <span>Processos</span>
-          <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-          </span>
+      <li class="active treeview menu-open" *ngIf="shared.user.profile !='ADMIN'">
+        <a>
+          <i class="fa fa-file-o"></i> <span>Processos</span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="pages/forms/general.html"><i class="fa fa-circle-o"></i> Lista</a></li>
-          <li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i> Novo Processo</a></li>
+          <li><a [routerLink]="['/process-list']"><i class="fa fa-circle-o"></i> Listar</a></li>
+          <li *ngIf="shared.user.profile =='PROCESS_STARTER'" ><a [routerLink]="['/process-new']"><i class="fa fa-circle-o"></i> Novo</a></li>
         </ul>
-      </li>
-
-      <li class="treeview">
-        <a href="#">
-          <i class="fa fa-edit"></i> <span>Resumo</span>
-          <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-          </span>
-        </a>
-        <ul class="treeview-menu">
-          <li><a href="pages/forms/general.html"><i class="fa fa-circle-o"></i> Visualizar</a></li>
-        </ul>
-      </li>
+      </li>      
     </ul>
   </section>
 </aside>

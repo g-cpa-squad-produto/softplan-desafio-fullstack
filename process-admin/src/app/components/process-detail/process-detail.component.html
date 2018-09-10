@@ -1,0 +1,63 @@
+<section class="content-header">
+  <h1>
+    Detalhes do Processo
+  </h1>
+  <ol class="breadcrumb">
+    <li><a [routerLink]="['/']"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li class="active">Processos</li>
+  </ol>
+</section>
+<section class="content">
+
+  <div class="col-md-10" style="margin-left: 0%">
+    <div class="box box-info">
+      <div class="box-header with-border">
+        <h3>Detalhes do Processo</h3>
+      </div>
+
+      <form class="form-horizontal">
+        <div [ngClass]="classCss" role="alert" *ngIf="message">
+          <strong>{{message.text}}</strong>
+        </div>
+        <div class="box-body">
+          <ul class="list-group list-group-unbordered">
+            <li class="list-group-item">
+              <b>Número</b> <span> {{ process.number }} </span>
+              <span class="pull-right"><b>Assunto</b><span> {{process.subject}} </span> </span>
+            </li>
+
+            <li class="list-group-item">
+              <b>Prioridade</b> <span> {{ process.priority }} </span>
+              <span class="pull-right"><b>Criado por :</b><span> {{process?.user?.email}} </span> </span>
+            </li>
+
+            <li class="list-group-item">
+              <b>Status</b> <span> {{ process.status }} </span>
+              <span class="pull-right"><b>Atribuído à :</b><span> {{process?.assignedUser}} </span> </span>
+            </li>
+
+            <li class="list-group-item">
+              <b>Data</b> <span> {{ process.date | date:'dd/MM/yyyy' }} </span>
+              <span class="pull-right"><b>Descrição</b><span> {{process.description}} </span> </span>
+            </li>
+
+            <li class="list-group-item">
+                <b>Data Análise</b> <span> {{ review.dateReview | date:'dd/MM/yyyy' }} </span>
+                <span class="pull-right"><b>Descrição</b><span> {{process.review.description}} </span> </span>
+            </li>
+          </ul>
+        </div>
+        <div class="box-footer">
+            <div class="form-group" *ngIf="shared.user.profile == 'PROCESS_END' && process.status == 'Pending' || process.status == 'Analyzing'">
+              <div>
+                <textarea rows="3" name="review" [(ngModel)]="review" class="form-control" id="inputReview" placeholder="Descrição"></textarea>
+              </div>
+              <div>                
+                <button (click)="sendReview()" class="btn btn-primary">Enviar Análise</button>
+              </div>
+            </div> 
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

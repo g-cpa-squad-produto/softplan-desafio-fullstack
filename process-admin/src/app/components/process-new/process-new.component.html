@@ -1,0 +1,76 @@
+<section class="content-header">
+  <h1>
+    Processos
+  </h1>
+  <ol class="breadcrumb">
+    <li><a [routerLink]="['/']"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li class="active">Processos</li>
+  </ol>
+</section>
+<section class="content">
+
+  <div class="col-md-6">
+    <div class="box box-info">
+      <div class="box-header with-border">
+        <h3 class="box-title"> {{ operation }} </h3>
+      </div>
+
+      <div [ngClass]="classCss" role="alert" *ngIf="message">
+        <strong>{{ message.text }}</strong>
+      </div>
+
+      <div class="box-body">
+        <form class="form-horizontal" #form="ngForm" (ngSubmit)="register()">
+
+          <div [ngClass]="getFromGroupClass(subject.invalid, subject.dirty)">
+            <label for="inputSubject" class="col-sm-2 control-label">Assunto</label>
+
+            <div class="col-sm-9">
+              <input type="text" name="subject" [(ngModel)]="process.subject" class="form-control" id="inputSubject" #subject="ngModel"
+                placeholder="Assunto" required>
+              <span class="help-block" *ngIf="subject.invalid && subject.dirty">Assunto é requerido</span>
+            </div>
+          </div>
+
+          <div [ngClass]="getFromGroupClass(priority.invalid, priority.dirty)">
+            <label for="inputPriority" class="col-sm-2 control-label">Prioridade</label>
+
+            <div class="col-sm-9">
+              <select [(ngModel)]="process.priority" class="form-control select" id="inputPriority" name="priority" #priority="ngModel"
+                style="width: 100%" required>
+                <option value="High">Alta</option>
+                <option value="Normal">Normal</option>
+                <option value="Low">Baixa</option>
+              </select>
+              <span class="help-block" *ngIf="priority.invalid && priority.dirty">Prioridade é requerida</span>
+            </div>
+          </div>
+
+          <div [ngClass]="getFromGroupClass(description.invalid, description.dirty)">
+            <label for="inputDescription" class="col-sm-2 control-label">Descrição</label>
+
+            <div class="col-sm-9">
+              <textarea rows="3" name="description" [(ngModel)]="process.description" class="form-control" id="inputDescription" #description="ngModel"
+                placeholder="Descrição" required></textarea>
+              <span class="help-block" *ngIf="description.invalid && description.dirty">Descrição é requerido</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputAssignedUser" class="col-sm-2 control-label">Avaliador:</label>
+            <div class="col-sm-9">
+              <select [(ngModel)]="process.assignedUser" class="form-control select" id="inputAssignedUser" name="assignedUser" #assignedUser="ngModel"
+                style="width: 100%" required>
+                <option *ngFor="let userReview of usersReviews" value="{{userReview.email}}">{{userReview.email}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="box-footer">
+            <button type="submit" [disabled]="!form.valid" class="btn btn-info pull-right">Salvar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

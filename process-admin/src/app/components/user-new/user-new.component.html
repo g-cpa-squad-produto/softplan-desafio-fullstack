@@ -1,0 +1,65 @@
+<section class="content-header">
+  <h1>
+    Cadastro de Usuários
+  </h1>
+  <ol class="breadcrumb">
+    <li><a [routerLink]="['/']"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li class="active">Usuários</li>
+  </ol>
+</section>
+<section class="content">
+
+  <div class="col-md-6">
+    <div class="box box-info">
+      <div class="box-header with-border">
+        <h3 class="box-title">Novo Usuário</h3>
+      </div>
+
+      <div [ngClass]="classCss" role="alert" *ngIf="message">
+        <strong>{{ message.text }}</strong>
+      </div>
+
+      <form class="form-horizontal" #form="ngForm" (ngSubmit)="register()">
+        <div class="box-body">
+          <div [ngClass]="getFromGroupClass(email.invalid, email.dirty)">
+            <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+
+            <div class="col-sm-10">
+              <input type="email" name="email" [(ngModel)]="user.email" class="form-control" id="inputEmail" #email="ngModel" placeholder="Email"
+                email>
+              <span class="help-block" *ngIf="email.invalid && email.dirty">Email é inválido</span>
+            </div>
+          </div>
+
+          <div [ngClass]="getFromGroupClass(password.invalid, password.dirty)">
+            <label for="inputPassword" class="col-sm-2 control-label">Senha</label>
+
+            <div class="col-sm-10">
+              <input type="password" name="password" [(ngModel)]="user.password" class="form-control" id="inputPassword" #password="ngModel"
+                placeholder="Senha" required>
+              <span class="help-block" *ngIf="password.invalid && password.dirty">Senha é obrigatória</span>
+            </div>
+          </div>
+
+          <div [ngClass]="getFromGroupClass(profile.invalid, profile.dirty)">
+            <label for="inputPassword" class="col-sm-2 control-label">Perfil de Acesso</label>
+
+            <div class="col-sm-10">
+              <select [(ngModel)]="user.profile" class="form-control select" id="inputProfile" name="profile" #profile="ngModel" style="width: 100%"
+                required>
+                <option value="ROLE_ADMIN">Administrador</option>
+                <option value="ROLE_PROCESS_STARTER">Cadastrar Processo</option>
+                <option value="ROLE_PROCESS_END">Analisar Processo</option>
+              </select>
+              <span class="help-block" *ngIf="profile.invalid && profile.dirty">Perfil é obrigatório</span>
+            </div>
+          </div>
+
+          <div class="box-footer">
+            <button type="submit" [disabled]="!form.valid" class="btn btn-info pull-right">Salvar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
-public class AnalysisProcess {
+public class ProcessReview {
 
 	@Id
 	private String id;
@@ -16,9 +16,9 @@ public class AnalysisProcess {
 	private Process process;
 	
 	@DBRef	
-	private User userAnalysis;
+	private User user;
 	
-	private Date date;
+	private Date dateReview;
 	
 	private String description;
 
@@ -38,20 +38,20 @@ public class AnalysisProcess {
 		this.process = process;
 	}
 
-	public User getUserAnalysis() {
-		return userAnalysis;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserAnalysis(User userAnalysis) {
-		this.userAnalysis = userAnalysis;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public Date getDate() {
-		return date;
+	public Date getDateReview() {
+		return dateReview;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setDateReview(Date dateReview) {
+		this.dateReview = dateReview;
 	}
 
 	public String getDescription() {
@@ -60,6 +60,6 @@ public class AnalysisProcess {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}	
-	
+	}
+
 }

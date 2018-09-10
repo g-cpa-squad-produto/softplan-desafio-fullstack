@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.softplan.process.api.entity.User;
+import br.com.softplan.process.api.enums.ProfileEnum;
 import br.com.softplan.process.api.repository.UserRepository;
 import br.com.softplan.process.api.service.UserService;
 
@@ -40,6 +41,11 @@ public class UserServiceImpl implements UserService {
 	public Page<User> findAll(int page, int count) {
 		Pageable pages = new PageRequest(page, count);
 		return this.userRepository.findAll(pages);
+	}
+
+	@Override
+	public Iterable<User> findAllByProfile(ProfileEnum profile) {
+		return this.userRepository.findAllByProfile(profile);
 	}
 
 }

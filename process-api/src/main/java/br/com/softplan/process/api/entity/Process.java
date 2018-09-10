@@ -3,11 +3,8 @@ package br.com.softplan.process.api.entity;
 import java.util.Date;
 import java.util.List;
 
-import javax.validation.constraints.Null;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -29,22 +26,17 @@ public class Process {
 	
 	private String subject;
 	
-	private User assignedUser;
+	private String assignedUser;
 	
 	private String description;
-	
-	private String attachment;
 	
 	private StatusEnum status;
 	
 	private PriorityEnum priority;
 	
 	@Transient
-    private List<AnalysisProcess> analyzes;
+    private List<ProcessReview> reviews;
     
-    @Transient
-    private List<ChangeStatus> changes;
-
 	public String getId() {
 		return id;
 	}
@@ -85,11 +77,11 @@ public class Process {
 		this.subject = subject;
 	}
 
-	public User getAssignedUser() {
+	public String getAssignedUser() {
 		return assignedUser;
 	}
 
-	public void setAssignedUser(User assignedUser) {
+	public void setAssignedUser(String assignedUser) {
 		this.assignedUser = assignedUser;
 	}
 
@@ -99,14 +91,6 @@ public class Process {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public String getAttachment() {
-		return attachment;
-	}
-
-	public void setAttachment(String attachment) {
-		this.attachment = attachment;
 	}
 
 	public StatusEnum getStatus() {
@@ -125,20 +109,12 @@ public class Process {
 		this.priority = priority;
 	}
 
-	public List<ChangeStatus> getChanges() {
-		return changes;
+	public List<ProcessReview> getReviews() {
+		return reviews;
 	}
 
-	public void setChanges(List<ChangeStatus> changes) {
-		this.changes = changes;
-	}
-
-	public List<AnalysisProcess> getAnalyzes() {
-		return analyzes;
-	}
-
-	public void setAnalyzes(List<AnalysisProcess> analyzes) {
-		this.analyzes = analyzes;
-	}   	    
+	public void setReviews(List<ProcessReview> reviews) {
+		this.reviews = reviews;
+	}	   	    
 	
 }

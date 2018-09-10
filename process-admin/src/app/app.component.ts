@@ -6,9 +6,10 @@ import { SharedService } from './services/shared.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   title = 'process-admin';
-  showTemplate: boolean = false;
+  isLoggedIn: boolean = false;
   public shared: SharedService;
 
   constructor(){
@@ -17,7 +18,8 @@ export class AppComponent {
 
   ngOnInit(){
     this.shared.showTemplate.subscribe(
-      show => this.showTemplate = show
+      show => this.isLoggedIn = show
     );
   }
+
 }

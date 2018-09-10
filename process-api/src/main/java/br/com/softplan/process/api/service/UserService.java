@@ -3,6 +3,7 @@ package br.com.softplan.process.api.service;
 import org.springframework.data.domain.Page;
 
 import br.com.softplan.process.api.entity.User;
+import br.com.softplan.process.api.enums.ProfileEnum;
 
 public interface UserService {
 
@@ -15,4 +16,6 @@ public interface UserService {
 	void delete(String id);
 	
 	Page<User> findAll(int page, int count);
+	
+	Iterable<User> findAllByProfile(ProfileEnum profile);
 }

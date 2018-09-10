@@ -2,9 +2,8 @@ package br.com.softplan.process.api.service;
 
 import org.springframework.data.domain.Page;
 
-import br.com.softplan.process.api.entity.AnalysisProcess;
-import br.com.softplan.process.api.entity.ChangeStatus;
 import br.com.softplan.process.api.entity.Process;
+import br.com.softplan.process.api.entity.ProcessReview;
 
 public interface ProcessService {
 
@@ -16,14 +15,10 @@ public interface ProcessService {
 
 	Page<Process> listProcess(int Page, int count);
 
-	ChangeStatus createChangeStatus(ChangeStatus changeStatus);
+	ProcessReview createProcessReview(ProcessReview processReview);
+		
+	Iterable<ProcessReview> listProcessReview(String processId);
 	
-	Iterable<ChangeStatus> listChangeStatus(String processId);
-	
-	AnalysisProcess createAnalysisProcess(AnalysisProcess analysisProcess);
-	
-	Iterable<AnalysisProcess> listAnalysisProcess(String processId);
-
 	Page<Process> findByCurrentUser(int page, int count, String userId);
 
 	Page<Process> findByParameters(int page, int count, String subject, String status, String priority);

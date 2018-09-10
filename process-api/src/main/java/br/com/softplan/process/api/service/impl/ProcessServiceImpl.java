@@ -6,12 +6,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import br.com.softplan.process.api.entity.AnalysisProcess;
-import br.com.softplan.process.api.entity.ChangeStatus;
 import br.com.softplan.process.api.entity.Process;
-import br.com.softplan.process.api.repository.AnalysisProcessRepository;
-import br.com.softplan.process.api.repository.ChangeStatusRepository;
+import br.com.softplan.process.api.entity.ProcessReview;
 import br.com.softplan.process.api.repository.ProcessRepository;
+import br.com.softplan.process.api.repository.ProcessReviewRepository;
 import br.com.softplan.process.api.service.ProcessService;
 
 @Service
@@ -21,10 +19,7 @@ public class ProcessServiceImpl implements ProcessService  {
 	private ProcessRepository processRepository;
 	
 	@Autowired
-	private ChangeStatusRepository changeStatusRepository;
-	
-	@Autowired
-	private AnalysisProcessRepository analysisProcessRepository;
+	private ProcessReviewRepository processReviewRepository;
 	
 	@Override
 	public Process createOrUpdate(Process process) {
@@ -48,25 +43,15 @@ public class ProcessServiceImpl implements ProcessService  {
 	}
 
 	@Override
-	public ChangeStatus createChangeStatus(ChangeStatus changeStatus) {
-		return this.changeStatusRepository.save(changeStatus);
+	public ProcessReview createProcessReview(ProcessReview processReview) {
+		return this.processReviewRepository.save(processReview);
 	}
 
 	@Override
-	public Iterable<ChangeStatus> listChangeStatus(String processId) {
-		return this.changeStatusRepository.findByProcessIdOrderByDateChangeStatusDesc(processId);
+	public Iterable<ProcessReview> listProcessReview(String processId) {
+		return this.processReviewRepository.findByProcessIdOrderByDateReviewDesc(processId);
 	}
 	
-	@Override
-	public AnalysisProcess createAnalysisProcess(AnalysisProcess analysisProcess) {
-		return this.analysisProcessRepository.save(analysisProcess);
-	}
-
-	@Override
-	public Iterable<AnalysisProcess> listAnalysisProcess(String processId) {
-		return this.analysisProcessRepository.findByProcessIdOrderByDateDesc(processId);
-	}	
-
 	@Override
 	public Page<Process> findByCurrentUser(int page, int count, String userId) {
 		Pageable pages = new PageRequest(page, count);
@@ -76,14 +61,14 @@ public class ProcessServiceImpl implements ProcessService  {
 	@Override
 	public Page<Process> findByParameters(int page, int count, String subject, String status, String priority) {
 		Pageable pages = new PageRequest(page, count);
-		return this.processRepository.findBySubjectIgnoreCaseContainingAndStatusAndPriorityOrderByDateDesc(subject, status, priority, pages);
+		return this.processRepository.findBySubjectIgnoreCaseContainingAndStatusContainingAndPriorityContainingOrderByDateDesc(subject, status, priority, pages);
 	}
 
 	@Override
 	public Page<Process> findByParametersAndCurrentUser(int page, int count, String subject, String status,
 			String priority, String userId) {
 		Pageable pages = new PageRequest(page, count);
-		return this.processRepository.findBySubjectIgnoreCaseContainingAndStatusAndPriorityAndUserIdOrderByDateDesc(subject, status, priority, pages);
+		return this.processRepository.findBySubjectIgnoreCaseContainingAndStatusContainingAndPriorityContainingAndUserIdOrderByDateDesc(subject, status, priority, userId, pages);
 	}
 
 	@Override
@@ -99,9 +84,9 @@ public class ProcessServiceImpl implements ProcessService  {
 
 	@Override
 	public Page<Process> findByParameterAndAssignedUser(int page, int count, String subject, String status,
-			String priority, String assignedUser) {
+			String priority, String assignedUserId) {
 		Pageable pages = new PageRequest(page, count);		
-		return this.processRepository.findBySubjectIgnoreCaseContainingAndStatusAndPriorityAndAssignedUserIdOrderByDateDesc(subject, status, priority, pages);
-	}
-	
+		return this.processRepository.findBySubjectIgnoreCaseContainingAndStatusContainingAndPriorityContainingAndAssignedUserOrderByDateDesc(subject, status, priority, assignedUserId, pages);
+	}	
+
 }

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.softplan.process.api.entity.User;
+import br.com.softplan.process.api.enums.ProfileEnum;
 import br.com.softplan.process.api.response.Response;
 import br.com.softplan.process.api.service.UserService;
 
@@ -143,6 +144,15 @@ public class UserController {
 		Page<User> users = userService.findAll(page, count);
 		response.setData(users);
 		return ResponseEntity.ok(response);		
-	}	
+	}
+	
+	@GetMapping(value = "reviews")
+	@PreAuthorize("hasAnyRole('ROLE_PROCESS_STARTER')")
+	public ResponseEntity<Response<Iterable<User>>> findAllReviews() {
+		Response<Iterable<User>> response = new Response<Iterable<User>>();		
+		Iterable<User> users = userService.findAllByProfile(ProfileEnum.ROLE_PROCESS_END);		
+		response.setData(users);
+		return ResponseEntity.ok(response);		
+	}
 
 }
