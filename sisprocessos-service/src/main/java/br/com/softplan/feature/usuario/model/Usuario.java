@@ -14,11 +14,13 @@ public class Usuario extends AbstractEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+    @Column(unique = true)
     private String cpf;
     private String telefone;
     private LocalDate aniversario;
     private String endereco;
     private boolean ativo;
+    @Column(unique = true)
     private String login;
     private String senha;
     @Enumerated(value = EnumType.STRING)

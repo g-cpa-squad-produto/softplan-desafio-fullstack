@@ -5,12 +5,12 @@
 # * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body;
 # * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
 
-### Listar Usuarios
-GET http://localhost:8082/api/usuarios
+### Listar Processos
+GET http://localhost:8082/api/processos
 Accept: application/json
 
 ### Filtrar Usuários
-POST http://localhost:8082/api/usuarios/filtro?page=0&size=10&sort=
+POST http://localhost:8082/api/processos/filtro?page=0&size=10&sort=
 Accept: application/json
 Cache-Control: no-cache
 Content-Type: application/json
@@ -20,7 +20,7 @@ Content-Type: application/json
 
 
 ### Cadastrar Usuário
-POST http://localhost:8082/api/usuarios
+POST http://localhost:8082/api/processos
 Accept: application/json
 Cache-Control: no-cache
 Content-Type: application/json
@@ -38,7 +38,7 @@ Content-Type: application/json
 }
 
 ### Atualizar as estatísticas do Canal
-PUT http://localhost:8082/api/usuarios
+PUT http://localhost:8082/api/processos
 Accept: application/json
 Cache-Control: no-cache
 
