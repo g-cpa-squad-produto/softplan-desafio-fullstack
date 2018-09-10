@@ -13,12 +13,12 @@ import java.util.List;
  */
 public interface BaseMapper<ENTIDADE, DTO, DTOLIST> {
 
-    ENTIDADE paraDocumento(DTO dto);
+    ENTIDADE paraEntidade(DTO dto);
 
-    DTO paraDTO(ENTIDADE documento);
+    DTO paraDTO(ENTIDADE entidade);
 
-    DTOLIST paraDTOResumido(ENTIDADE documento);
+    DTOLIST paraDTOResumido(ENTIDADE entidade);
 
-    List<DTOLIST> paraListaDTOResumido(Collection<ENTIDADE> documentos);
+    List<DTOLIST> paraListaDTOResumido(Collection<ENTIDADE> entidades);
 
 }

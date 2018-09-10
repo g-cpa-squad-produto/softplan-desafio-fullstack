@@ -46,6 +46,10 @@ public abstract class AbstractCrudService<ENTIDADE extends AbstractEntity, ID ex
         return repository.findById(id);
     }
 
+    public List<ENTIDADE> pesquisarPorId(Iterable<ID> ids) {
+        return repository.findAllById(ids);
+    }
+
     public List<ENTIDADE> pesquisarTodos() {
         return repository.findAll();
     }
@@ -57,7 +61,7 @@ public abstract class AbstractCrudService<ENTIDADE extends AbstractEntity, ID ex
      * @return Entidade recém cadastrada com o ID gerado
      */
     public ENTIDADE cadastrar(ENTIDADE objeto) {
-        validarDocumento(objeto);
+        validarEntidade(objeto);
         return repository.save(objeto);
     }
 
@@ -65,41 +69,41 @@ public abstract class AbstractCrudService<ENTIDADE extends AbstractEntity, ID ex
      * Realiza a alteração da entidade informada no banco de dados
      *
      * @param entidade Entidade com os novos valores
-     * @return Documento recém alterada
+     * @return Entidade recém alterada
      */
     public ENTIDADE alterar(ENTIDADE entidade) {
         validarId(entidade);
-        validarDocumento(entidade);
+        validarEntidade(entidade);
         return repository.save(entidade);
     }
 
     /**
-     * Realiza a exclusão do documento informado no banco de dados
+     * Realiza a exclusão da entidade informada no banco de dados
      *
-     * @param id ID do documento a ser excluído
+     * @param id ID da entidade a ser excluído
      */
     public void excluir(ID id) {
         repository.deleteById(id);
     }
 
     /**
-     * Valida se o documento informado possui chave primaria definida
+     * Valida se a entidade informada possui chave primaria definida
      *
-     * @param documento Entidade a ser validada
+     * @param entidade Entidade a ser validada
      */
-    private void validarId(ENTIDADE documento) {
-        if (documento.getId() == null) {
+    private void validarId(ENTIDADE entidade) {
+        if (entidade.getId() == null) {
             throw new BeanValidationException("id", "Campo ID é obrigatório");
         }
     }
 
     /**
-     * Verifica se o documento informado é valido
+     * Verifica se a entidade informada é valida
      *
-     * @param documento documento a ser validado
+     * @param entidade entidade a ser validada
      */
-    private void validarDocumento(ENTIDADE documento) {
-        DataBinder binder = new DataBinder(documento, entityClazz.getSimpleName());
+    private void validarEntidade(ENTIDADE entidade) {
+        DataBinder binder = new DataBinder(entidade, entityClazz.getSimpleName());
         binder.setValidator(validator);
         binder.validate();
         BindingResult result = binder.getBindingResult();

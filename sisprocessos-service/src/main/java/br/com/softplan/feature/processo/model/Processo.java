@@ -21,7 +21,7 @@ public class Processo extends AbstractEntity {
     private String descricao;
     private String parecer;
     @Column(name = "ID_USUARIO_PARECER")
-    private Usuario usuarioParecer;
+    private Long idUsuarioParecer;
     @Enumerated(value = EnumType.STRING)
     private StatusProcesso status;
 
@@ -30,5 +30,9 @@ public class Processo extends AbstractEntity {
             joinColumns = @JoinColumn(name = "processo_id"),
             inverseJoinColumns = @JoinColumn(name = "usuario_id"))
     private List<Usuario> usuariosPermissao;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ID_USUARIO_PARECER", insertable = false, updatable = false)
+    private Usuario usuarioParecer;
 
 }

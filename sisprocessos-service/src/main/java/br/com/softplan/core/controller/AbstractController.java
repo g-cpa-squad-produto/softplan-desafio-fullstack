@@ -54,14 +54,14 @@ public abstract class AbstractController<ENTIDADE extends AbstractEntity, DTO, D
 
     @PostMapping(path = "")
     public DTO cadastrar(@RequestBody DTO dto) {
-        ENTIDADE documento = mapper.paraDocumento(dto);
-        return mapper.paraDTO(service.cadastrar(documento));
+        ENTIDADE entidade = mapper.paraEntidade(dto);
+        return mapper.paraDTO(service.cadastrar(entidade));
     }
 
     @PutMapping(path = "")
     public DTO alterar(@RequestBody DTO dto) {
-        ENTIDADE documento = mapper.paraDocumento(dto);
-        return mapper.paraDTO(service.alterar(documento));
+        ENTIDADE entidade = mapper.paraEntidade(dto);
+        return mapper.paraDTO(service.alterar(entidade));
     }
 
     @DeleteMapping(path = "/{id}")

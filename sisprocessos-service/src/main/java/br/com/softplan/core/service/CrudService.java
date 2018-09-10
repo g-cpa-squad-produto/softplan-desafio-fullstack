@@ -27,31 +27,38 @@ public interface CrudService<ENTIDADE extends AbstractEntity, ID extends Seriali
      */
     Optional<ENTIDADE> pesquisarPorId(ID id);
 
-    //TODO Vai ficar ou vai filtrar???
+    /**
+     * Realiza a consulta das entidades com os IDs informados
+     *
+     * @param ids ID das entidades
+     * @return Registros encontrados
+     */
+    List<ENTIDADE> pesquisarPorId(Iterable<ID> ids);
+
     List<ENTIDADE> pesquisarTodos();
 
     Page<ENTIDADE> filtrar(JsonNode jsonFiltro, Pageable paginacao);
 
     /**
-     * Realiza o cadastro do documento informado no banco de dados
+     * Realiza o cadastro da entidade informada no banco de dados
      *
-     * @param documento documento a ser cadastrado
-     * @return Documento recém cadastrado com o ID gerado
+     * @param entidade entidade a ser cadastrada
+     * @return Entidade recém cadastrada com o ID gerado
      */
-    ENTIDADE cadastrar(ENTIDADE documento);
+    ENTIDADE cadastrar(ENTIDADE entidade);
 
     /**
-     * Realiza a alteração do documento informado no banco de dados
+     * Realiza a alteração da entidade informada no banco de dados
      *
-     * @param documento documento com os novos valores a ser alterado
-     * @return Documento recém alterada
+     * @param entidade entidade com os novos valores a ser alterado
+     * @return Entidade recém alterada
      */
-    ENTIDADE alterar(ENTIDADE documento);
+    ENTIDADE alterar(ENTIDADE entidade);
 
     /**
-     * Realiza a exclusão do documento informado no banco de dados
+     * Realiza a exclusão da entidade informada no banco de dados
      *
-     * @param id ID do documento a ser excluído
+     * @param id ID da entidade a ser excluído
      */
     void excluir(ID id);
 
