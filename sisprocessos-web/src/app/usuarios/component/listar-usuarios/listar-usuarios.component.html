@@ -1,0 +1,70 @@
+<div class="page-title">
+  <div class="title_left">
+    <h3>Listar Usuários</h3>
+  </div>
+</div>
+<div class="clearfix"></div>
+
+<div class="row">
+  <div class="col-12">
+    <button type="button" class="btn btn-success" routerLink="/usuarios/cadastrar">Cadastrar Usuários</button>
+
+    <ngx-datatable
+      class="bootstrap"
+      [columnMode]="'force'"
+      [rows]="dados.content"
+      [footerHeight]="40"
+      [rowHeight]="'auto'"
+      [externalPaging]="true"
+      [count]="dados.totalElements"
+      [offset]="dados.number"
+      [limit]="dados.size"
+      (page)='setPage($event)'>
+
+      <ngx-datatable-column *ngFor="let col of columns">
+        <ng-template ngx-datatable-header-template>
+          <strong>{{col.title}}</strong>
+        </ng-template>
+
+        <!-- Nome -->
+        <ng-template let-usuario="row" ngx-datatable-cell-template *ngIf="col.name == 'nome'">
+          {{usuario.nome}}
+        </ng-template>
+
+        <!-- CPF -->
+        <ng-template let-usuario="row" ngx-datatable-cell-template *ngIf="col.name == 'cpf'">
+          {{usuario.cpf}}
+        </ng-template>
+
+        <!-- Aniversário -->
+        <ng-template let-usuario="row" ngx-datatable-cell-template *ngIf="col.name == 'aniversario'">
+          {{usuario.aniversario | date:'dd/MM/yyyy'}}
+        </ng-template>
+
+        <!-- Perfil -->
+        <ng-template let-usuario="row" ngx-datatable-cell-template *ngIf="col.name == 'perfil'">
+          {{usuario?.perfil?.descricao}}
+        </ng-template>
+
+        <!-- Ações -->
+        <ng-template let-usuario="row" ngx-datatable-cell-template *ngIf="col.name == 'acoes'">
+          <button type="button" class="btn btn-sm btn-info" (click)="visualizar(usuario)" title="Visualizar">
+            <i class="fa fa-book"></i>
+          </button>
+          <button type="button" class="btn btn-sm btn-warning" (click)="editar(usuario)" title="Editar">
+            <i class="fa fa-edit"></i>
+          </button>
+          <button type="button" class="btn btn-sm btn-danger" (click)="excluir(usuario)" title="Excluir">
+            <i class="fa fa-times"></i>
+          </button>
+          <button type="button" class="btn btn-sm btn-dark" (click)="toggleAtivar(usuario)" title="Ativar" *ngIf="!usuario.ativo">
+            <i class="fa fa-lock"></i>
+          </button>
+          <button type="button" class="btn btn-sm btn-success" (click)="toggleAtivar(usuario)" title="Inativar" *ngIf="usuario.ativo">
+            <i class="fa fa-unlock-alt"></i>
+          </button>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+</div>

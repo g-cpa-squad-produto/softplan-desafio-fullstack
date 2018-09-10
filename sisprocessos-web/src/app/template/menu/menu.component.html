@@ -1,0 +1,52 @@
+<div class="col-md-3 left_col">
+  <div class="left_col scroll-view">
+
+    <div class="navbar nav_title" style="border: 0;">
+      <a href="/" class="site_title"><i class="fa fa-product-hunt"></i> <span>SisProcessos</span></a>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="profile clearfix">
+      <div class="profile_pic">
+        <img src="assets/img_profile.jpg" class="img-circle profile_img">
+      </div>
+      <div class="profile_info">
+        <span>Bem Vindo,</span>
+        <h2>Samuel Correia Guimarães</h2>
+      </div>
+    </div>
+    <br />
+
+    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+      <div class="menu_section">
+        <h3>Menu</h3>
+        <ul class="nav side-menu">
+          <li>
+            <a routerLink="" routerLinkActive="ativo" [routerLinkActiveOptions]="{exact: true}">
+              <i class="fa fa-home"></i> Início
+            </a>
+          </li>
+          <li>
+            <a routerLink="/processos" routerLinkActive="ativo">
+              <i class="fa fa-files-o"></i> Processos
+            </a>
+          </li>
+          <li>
+            <a routerLink="/usuarios" routerLinkActive="ativo">
+              <i class="fa fa-user"></i> Usuarios
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sidebar-footer hidden-small">
+      <a data-toggle="tooltip" data-placement="top" title="Configurações">
+        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+      </a>
+      <a data-toggle="tooltip" data-placement="top" title="Sair">
+        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+      </a>
+    </div>
+  </div>
+</div>

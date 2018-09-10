@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+
+.ngx-datatable.bootstrap .datatable-footer {
+  background: #172D44;
+  color: #fff;
+}
+
+.ngx-datatable.bootstrap .datatable-footer .datatable-pager ul li:not(.disabled).active a,
+.ngx-datatable.bootstrap .datatable-footer .datatable-pager ul li:not(.disabled):hover a {
+  background-color: #2d4d63;
+  color: #fff;
+}
+
+.ngx-datatable.bootstrap .datatable-footer .datatable-pager a {
+  color: #545454;
+}

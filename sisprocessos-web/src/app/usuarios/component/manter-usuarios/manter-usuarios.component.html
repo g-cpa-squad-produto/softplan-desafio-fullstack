@@ -1,0 +1,95 @@
+<div class="page-title">
+  <div class="title_left">
+    <h3>{{tituloPagina}}</h3>
+  </div>
+</div>
+<div class="clearfix"></div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="x_panel">
+      <div class="x_content">
+
+        <div class="row">
+          <div class="form-group col-md-3">
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" class="form-control" [(ngModel)]="usuario.nome" placeholder="Nome" [readonly]="readonly">
+          </div>
+
+          <div class="form-group col-md-3">
+            <label for="cpf">CPF</label>
+            <input type="text" id="cpf" class="form-control" [(ngModel)]="usuario.cpf" placeholder="CPF" mask="000.000.000-00" [readonly]="readonly">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-3">
+            <label for="endereco">Endereço</label>
+            <input type="text" id="endereco" class="form-control" [(ngModel)]="usuario.endereco" placeholder="Endereço" [readonly]="readonly">
+          </div>
+
+          <div class="form-group col-md-3">
+            <label for="telefone">Telefone</label>
+            <input type="text" id="telefone" class="form-control" [(ngModel)]="usuario.telefone" placeholder="Telefone" mask="00 00000-0000" [readonly]="readonly">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-3">
+            <label for="aniversario">Aniversário</label>
+            <my-date-picker id="aniversario" placeholder="Data Aniversário" locale="pt-br" [disabled]="readonly"
+                            [selDate]="dataSelecionada"
+                            (dateChanged)="onDateChanged($event)"
+                            [options]="{showClearDateBtn: false}"></my-date-picker>
+          </div>
+
+          <div class="form-group col-md-3">
+            <label for="perfil">Perfil</label>
+            <ng-select id="perfil" labelForId="perfil" [disabled]="readonly"
+                       [items]="perfis$ | async"
+                       [(ngModel)]="usuario.perfil"
+                       bindLabel="descricao"
+                       [clearable]="false">
+            </ng-select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-3">
+            <h4>Segurança</h4>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-3">
+            <label>Login</label>
+            <input type="text" class="form-control" [(ngModel)]="usuario.login" placeholder="Login" [readonly]="readonly">
+          </div>
+
+          <div class="form-group col-md-3">
+            <label>Senha</label>
+            <input type="password" class="form-control" [(ngModel)]="usuario.senha" placeholder="Senha" [readonly]="readonly">
+          </div>
+
+          <div class="form-group col-md-2">
+            <label for="status">Status</label>
+            <ng-select id="status" labelForId="status" [disabled]="readonly"
+                       [items]="status$ | async"
+                       [(ngModel)]="usuario.ativo"
+                       bindLabel="label"
+                       bindValue="valor"
+                       [clearable]="false">
+            </ng-select>
+          </div>
+        </div>
+
+        <div class="ln_solid"></div>
+        <div class="form-group col-md-12">
+          <button type="submit" class="btn btn-primary" (click)="salvar()">Salvar</button>
+          <button type="button" class="btn btn-default" routerLink="/usuarios">Voltar</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+ul.side-menu li a:hover {
+  background-color: #425567;
+}
+
+ul.side-menu li a.ativo {
+  background-color: #172D44;
+}
