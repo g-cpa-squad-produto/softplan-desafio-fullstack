@@ -5,6 +5,7 @@ import br.com.softplan.feature.usuario.model.Usuario;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 public class ProcessoDTO {
@@ -16,5 +17,6 @@ public class ProcessoDTO {
     private String parecer;
     private Usuario usuarioParecer;
     private StatusProcesso status;
+    private List<Usuario> usuariosPermissao;
 
 }

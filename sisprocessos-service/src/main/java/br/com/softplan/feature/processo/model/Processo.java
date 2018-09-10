@@ -6,6 +6,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Entity
@@ -23,5 +24,11 @@ public class Processo extends AbstractEntity {
     private Usuario usuarioParecer;
     @Enumerated(value = EnumType.STRING)
     private StatusProcesso status;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "processo_usuario",
+            joinColumns = @JoinColumn(name = "processo_id"),
+            inverseJoinColumns = @JoinColumn(name = "usuario_id"))
+    private List<Usuario> usuariosPermissao;
 
 }

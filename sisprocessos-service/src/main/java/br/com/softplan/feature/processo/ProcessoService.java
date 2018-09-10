@@ -20,9 +20,4 @@ public class ProcessoService extends AbstractCrudService<Processo, Long, Process
     public void excluir(Long id) {
         throw new UnsupportedOperationException("processo.nao.pode.ser.excluido");
     }
-
-    @Override
-    public Processo alterar(Processo processo) {
-        throw new UnsupportedOperationException("processo.nao.pode.ser.alterado");
-    }
 }
