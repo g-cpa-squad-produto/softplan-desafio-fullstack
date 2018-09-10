@@ -1,0 +1,9 @@
+Login:
+Foi implementado um login padrao para acesso ao sistema para que o usuario possa acessar a primeira vez e adicionar os outros usuarios.
+Login: admin
+Senha: admin
+
+Executar projeto:
+Entre na pasta do projeto e execute o comando mvn spring-boot:run.
+
+O sistema estará disponível no endereço http://localhost:8080.

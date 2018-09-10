@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+       <title>Teste Softplan</title>
+      
+       <meta charset="utf-8"/>
+       <meta name="viewport" content="width=device-width,
+     user-scalable=no"/>
+      
+       <link href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css"
+             rel="stylesheet"/>
+    <link href="/css/style.css" rel="stylesheet"/>
+</head>
+<body>
+
+<div class="container">
+    <div class="jumbotron">
+               <h1>Teste Softplan</h1>
+           </div>
+
+    <h4>
+        Designa usuarios para o processo
+    </h4>
+
+    <form th:action="@{/processos/{processoId}/processousuarios/salvar(processoId=${processoId})}">
+          <!--th:method="${processousuario.id} == 0 ? post : put" th:object="${processousuario}"-->
+        <div class="row">
+           <!-- <input id="id" type="hidden" th:field="*{id}"/>-->
+            <input id="processoId" type="hidden" th:field="*{processousuario.processo.id}"/>
+
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary"
+                    type="submit">Salvar</button>
+        </div>
+
+    </form>
+    <hr/>
+
+    <a class="btn btn-light" th:href="@{/processos/{processoId}
+    /processousuarios/listar(processoId=${processoId})}">Voltar</a>
+
+
+</div>
+</body>
+</html>

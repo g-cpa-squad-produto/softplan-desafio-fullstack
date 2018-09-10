@@ -1,0 +1,8 @@
+br\com\softplan\dao\UsuariosDao.class
+br\com\softplan\controller\UsuariosController.class
+br\com\softplan\config\ConfiguracaoSpringMvc.class
+br\com\softplan\domain\Usuarios.class
+br\com\softplan\ProcessosApplication.class
+br\com\softplan\service\UsuariosServiceImpl.class
+br\com\softplan\dao\UsuariosDaoImpl.class
+br\com\softplan\service\UsuariosService.class

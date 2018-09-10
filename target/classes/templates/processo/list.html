@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Teste Softplan</title>
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,
+     user-scalable=no"/>
+
+    <link href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css"
+          rel="stylesheet"/>
+    <link href="/css/style.css" rel="stylesheet"/>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="jumbotron">
+        <h1>Teste Softplan</h1>
+    </div>
+
+    <div>
+        <a class="btn btn-primary"  th:href="@{/processo/cadastro}">Novo Processo</a>
+    </div>
+    <hr/>
+
+    <div th:if="${processoList != null}">
+        <h4>
+            Processos
+        </h4>
+        <div th:if="${mensagem != null}">
+            <div class="alert alert-info" role="alert">
+                <span th:text="${mensagem}">mensagem</span>
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Nro. Processo</th>
+                <th>Descrição</th>
+            </tr>
+            </thead>
+            <tr th:each="processo : ${processoList}">
+                <td >
+                    <a th:text="${processo.nroprocesso}" th:href="@{/processos/{id}/processousuarios/listar(id=${processo.id})}">nome</a>
+                </td>
+                <td th:text="${processo.descricao}">descricao</td>
+                <td>
+                    <a class="btn btn-sm btn-info" th:href="@{/processo/{id}/atualizar(id=${processo.id})}">Editar</a>
+                    <a class="btn btn-sm btn-danger" th:href="@{/processo/{id}/remover(id=${processo.id})}">Excluir</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div th:if="${#lists.isEmpty(processoList)}">
+        <div class="alert alert-info" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign"></span>
+            0 processos cadastrados!
+        </div>
+    </div>
+    <hr/>
+
+    <a class="btn btn-light" href="/home">Voltar</a>
+    <hr/>
+
+</div>
+</body>
+</html>

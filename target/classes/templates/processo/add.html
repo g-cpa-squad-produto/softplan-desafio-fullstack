@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+       <title>Teste Softplan</title>
+      
+       <meta charset="utf-8"/>
+       <meta name="viewport" content="width=device-width,
+     user-scalable=no"/>
+      
+       <link href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css"
+             rel="stylesheet"/>
+    <link href="/css/style.css" rel="stylesheet"/>
+</head>
+<body>
+  
+<div class="container">
+       <div class="jumbotron">
+           <h1>Teste Softplan</h1>
+       </div>
+      
+       <h4>
+           Novo Processo
+       </h4>
+      
+       <form th:action="@{/processo/salvar}" th:method="${processo.id} == 0 ? post : put"
+             th:object="${processo}">
+            <div class="row">
+                <input id="id" type="hidden" th:field="*{id}"/>
+                <div class="form-group col-md-4">
+                    <label for="nroprocesso">Nro Processo:</label>
+                    <input class="form-control" id="nroprocesso"
+                           type="text" th:field="*{nroprocesso}"/>
+                    <div th:if="${#fields.hasErrors('nroprocesso')}"
+                         th:errors="*{nroprocesso}"></div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="descricao">Descrição:</label>
+                    <input class="form-control" id="descricao" type="text"
+                           th:field="*{descricao}"/>
+                    <div th:if="${#fields.hasErrors('descricao')}"
+                         th:errors="*{descricao}"></div>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary"
+                        type="submit">Salvar</button>
+            </div>
+
+        </form>
+      
+       <hr/>
+      
+       <a class="btn btn-light"
+          th:href="@{/processo/listar}">Voltar</a>
+      
+       <hr/>
+      
+</div>
+</body>
+</html>

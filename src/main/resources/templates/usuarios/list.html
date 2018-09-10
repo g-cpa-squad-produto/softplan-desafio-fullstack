@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Teste Softplan</title>
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,
+     user-scalable=no"/>
+
+    <link href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css"
+          rel="stylesheet"/>
+    <link href="/css/style.css" rel="stylesheet"/>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="jumbotron">
+        <h1>Teste Softplan</h1>
+    </div>
+
+    <div>
+        <a class="btn btn-primary"  th:href="@{/usuarios/cadastro}">Novo Usuaário</a>
+    </div>
+    <hr/>
+
+    <div th:if="${usuariosList != null}">
+        <h4>
+            Usuarios
+        </h4>
+        <div th:if="${mensagem != null}">
+            <div class="alert alert-info" role="alert">
+                <span th:text="${mensagem}">mensagem</span>
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Cpf</th>
+                <th>Username</th>
+                <th>Ação</th>
+            </tr>
+            </thead>
+            <tr th:each="usuarios : ${usuariosList}">
+                <td >
+                    <a th:text="${usuarios.nome}">nome</a>
+                </td>
+                <td th:text="${usuarios.cpf}">descricao</td>
+                <td th:text="${usuarios.username}">username</td>
+                <td>
+                    <a class="btn btn-sm btn-info" th:href="@{/usuarios/{id}/atualizar(id=${usuarios.id})}">Editar</a>
+                    <a class="btn btn-sm btn-danger" th:href="@{/usuarios/{id}/remover(id=${usuarios.id})}">Excluir</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div th:if="${#lists.isEmpty(usuariosList)}">
+        <div class="alert alert-info" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign"></span>
+            0 usuários cadastrados!
+        </div>
+    </div>
+    <hr/>
+
+    <a class="btn btn-light" href="/home">Voltar</a>
+    <hr/>
+
+</div>
+</body>
+</html>

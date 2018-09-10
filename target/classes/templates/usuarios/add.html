@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+       <title>Teste Softplan</title>
+      
+       <meta charset="utf-8"/>
+       <meta name="viewport" content="width=device-width,
+     user-scalable=no"/>
+      
+       <link href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css"
+             rel="stylesheet"/>
+    <link href="/css/style.css" rel="stylesheet"/>
+</head>
+<body>
+  
+<div class="container">
+       <div class="jumbotron">
+           <h1>Teste Softplan</h1>
+       </div>
+      
+       <h4>
+           Novo Usuario
+       </h4>
+      
+       <form th:action="@{/usuarios/salvar}" th:method="${usuarios.id} == 0 ? post : put"
+             th:object="${usuarios}">
+            <div class="row">
+                <input id="id" type="hidden" th:field="*{id}"/>
+                <div class="form-group col-md-4">
+                    <label for="nome">Nome:</label>
+                    <input class="form-control" id="nome"
+                           type="text" th:field="*{nome}"/>
+                    <div th:if="${#fields.hasErrors('nome')}"
+                         th:errors="*{nome}"></div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="cpf">Cpf:</label>
+                    <input class="form-control" id="cpf" type="text"
+                           th:field="*{cpf}"/>
+                    <div th:if="${#fields.hasErrors('cpf')}"
+                         th:errors="*{cpf}"></div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="username">Username:</label>
+                    <input class="form-control" id="username" type="text"
+                           th:field="*{username}"/>
+                    <div th:if="${#fields.hasErrors('username')}"
+                         th:errors="*{username}"></div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="password">Password:</label>
+                    <input class="form-control" id="password" type="password"
+                           th:field="*{password}"/>
+                    <div th:if="${#fields.hasErrors('password')}"
+                         th:errors="*{password}"></div>
+                </div>
+                <div>
+                    <label for="tipousuario">Tipo Usuario:</label>
+                    <select th:field="*{tipousuario}">
+                        <option th:value="'ut'" th:text="TRIADOR"></option>
+                        <option th:value="'uf'" th:text="FINALIZADOR"></option>
+                    </select>
+                    <div th:if="${#fields.hasErrors('password')}"
+                         th:errors="*{password}"></div>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary"
+                        type="submit">Salvar</button>
+            </div>
+
+        </form>
+      
+       <hr/>
+      
+       <a class="btn btn-light"
+          th:href="@{/usuarios/listar}">Voltar</a>
+      
+       <hr/>
+      
+</div>
+</body>
+</html>

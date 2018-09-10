@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no"/>
+
+    <link href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css"
+          rel="stylesheet"/>
+    <link href="/css/style.css" rel="stylesheet"/>
+</head>
+
+<body>
+<div class="container">
+    <div class="jumbotron">
+        <h1>Teste Softplan</h1>
+        <p class="lead">
+            Manutenção de Processos
+        </p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-0">
+        </div>
+        <div class="col-md-3">
+            <h3>Lista os Usuarios</h3>
+            <p>
+                Gerencie os usuários do sistema
+            </p>
+            <p>
+                <a class="btn btn-success"
+                   href="/usuarios/listar">Usuarios</a>
+            </p>
+        </div>
+        <div class="col-md-3">
+            <h3>Processos</h3>
+            <p>
+                Gerencie os processos
+            </p>
+            <p>
+                <a class="btn btn-success"
+                   href="/processo/listar">Processos</a>
+            </p>
+        </div>
+        <div class="col-md-3">
+            <h3>Lista de Processos</h3>
+            <p>
+                Triagem de processos
+            </p>
+            <!--<p>
+                <a class="btn btn-success"
+                   href="/usuarios/listar">Lista de Processos</a>
+            </p>-->
+        </div>
+    </div>
+
+    <hr/>
+    <footer class="footer">
+        <p>2018 TesteSoftplan</p>
+    </footer>
+</div>
+</body>
+</html>

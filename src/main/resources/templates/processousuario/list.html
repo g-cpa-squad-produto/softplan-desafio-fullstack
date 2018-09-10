@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+       <title>Spotmusic</title>
+      
+       <meta charset="utf-8"/>
+       <meta name="viewport" content="width=device-width,
+    user-scalable=no"/>
+      
+        <link href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css"
+              rel="stylesheet"/>
+    <link href="/css/style.css" rel="stylesheet"/>
+</head>
+<body>
+  
+<div class="container">
+    <div class="jumbotron">
+        <h1>Teste Softplan</h1>
+    </div>
+
+    <div>
+        <a class="btn btn-primary" th:href="@{/processos/{processoId}/processousuarios/cadastro(processoId=${processoId})}">Designar Usuario</a>
+    </div>
+
+    <hr/>
+    <div th:if="${processousuario != null}">
+        <h4>
+            Usuarios do processo
+        </h4>
+
+        <div th:if="${mensagem != null}">
+            <div class="alert alert-info" role="alert">
+                <span th:text="${mensagem == null ? '&nbsp;' : mensagem}">mensagem</span>
+            </div>
+        </div>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Usuario</th>
+                <th>Ação</th>
+            </tr>
+            </thead>
+            <tr th:each="processousuario : ${processousuarios}">
+                <td th:text="${processousuario.usuarios.nome}">Nome</td>
+                <td>
+                    <a class="btn btn-sm btn-info" th:href="@{/processousuario/{processoId}/processousuario/{processousuarioId}/atualizar(processoId=${processoId},usuarioId=${usuarios.id})}">Editar</a>
+                    <a class="btn btn-sm btn-danger" th:href="@{/processousuario/{processoId}/processousuario/{processousuarioId}/remover(processoId=${processoId},usuarioId=${usuarios.id})}">Excluir</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div th:if="${#lists.isEmpty(processousuarios)}">
+        <div class="alert alert-info" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign"></span>
+            0 usuarios designados!
+        </div>
+    </div>
+
+    <hr/>
+    <a class="btn btn-light" th:href="@{/processo/listar}">Voltar</a>
+
+</div>
+</body>
+</html>
