@@ -4,6 +4,8 @@ import {RealizarConsultaApiService} from '../../shared/service/realizar-consulta
 import {Observable} from 'rxjs';
 import {Enum} from '../../shared/model/enum';
 import {shareReplay} from 'rxjs/internal/operators';
+import {UsuarioResumido} from '../model/usuario-resumido';
+import {Usuario} from '../model/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +24,14 @@ export class UsuariosService extends RealizarConsultaApiService {
 
   ativarUsuario(id: number): Observable<Boolean> {
     return this.put<Boolean>(null, `${id}/desbloquear`);
+  }
+
+  pesquisarUsuariosTelaLogin(): Observable<Usuario[]> {
+    return this.get<Usuario[]>('lista-login');
+  }
+
+  pesquisarUsuariosFinalizadores(): Observable<UsuarioResumido[]> {
+    return this.get<UsuarioResumido[]>('finalizadores');
   }
 
   pesquisarPerfis(): Observable<Enum[]> {

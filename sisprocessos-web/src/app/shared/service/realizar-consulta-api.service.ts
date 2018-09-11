@@ -40,7 +40,7 @@ export class RealizarConsultaApiService extends ApiHttpService {
   }
 
   private realizarRequisicaoFiltro<T>(filtro: any, params: HttpParams): Observable<RetornoConsultaApi<T>> {
-    return this.http.post<RetornoConsultaApi<T>>(this.getUrlServico() + '/filtro', filtro, {params: params});
+    return this.http.post<RetornoConsultaApi<T>>(this.getUrlServico() + 'filtro', filtro, {params: params});
   }
 
 }

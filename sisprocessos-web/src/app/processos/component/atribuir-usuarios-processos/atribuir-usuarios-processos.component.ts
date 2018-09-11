@@ -24,7 +24,7 @@ export class AtribuirUsuariosProcessosComponent implements OnInit {
 
   ngOnInit() {
     this.processo = this.route.snapshot.data.processo;
-    this.usuarios$ = this.usuariosService.pesquisarTodos();
+    this.usuarios$ = this.usuariosService.pesquisarUsuariosFinalizadores();
 
     if (!this.processo.usuariosPermissao) {
       this.processo.usuariosPermissao = [];

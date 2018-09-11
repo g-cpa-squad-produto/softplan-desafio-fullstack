@@ -38,7 +38,7 @@
               <i class="fa fa-files-o"></i> Processos
             </a>
           </li>
-          <li *ngIf="usuario.perfil.codigo == 'ADMINISTRADOR'">
+          <li permissao="ADMINISTRADOR">
             <a routerLink="/usuarios" routerLinkActive="ativo">
               <i class="fa fa-user"></i> Usuarios
             </a>

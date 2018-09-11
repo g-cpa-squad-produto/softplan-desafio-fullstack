@@ -1,5 +1,5 @@
 // registrando "pt-BR" como localização padrão da aplicação
-import {CommonModule, registerLocaleData} from '@angular/common';
+import {registerLocaleData} from '@angular/common';
 import localePtBr from '@angular/common/locales/pt';
 import localePtBrExtra from '@angular/common/locales/extra/pt';
 
@@ -14,9 +14,9 @@ import {ContentComponent} from './template/content/content.component';
 import {FooterComponent} from './template/footer/footer.component';
 import {AppRoutingModule} from './app-routing.module';
 import {DashboardComponent} from './dashboard/dashboard.component';
-import {LoginComponent} from './login/login.component';
 import {AuthInterceptor} from './shared/auth/auth.interceptor';
-import {NgSelectModule} from '@ng-select/ng-select';
+import {LoginComponent} from './login/login.component';
+import {SharedModule} from './shared/shared.module';
 
 registerLocaleData(localePtBr, 'pt-BR', localePtBrExtra);
 
@@ -34,7 +34,7 @@ registerLocaleData(localePtBr, 'pt-BR', localePtBrExtra);
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-    NgSelectModule // Componente para criação de combos (select)
+    SharedModule
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'pt-BR'},

@@ -8,6 +8,7 @@ import {MyDatePickerModule} from 'mydatepicker';
 import {NgxMaskModule} from 'ngx-mask';
 import {BooleanPipe} from './pipe/boolean.pipe';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
+import {PermissaoDirective} from './directive/permissao.directive';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import {NgxDatatableModule} from '@swimlane/ngx-datatable';
     NgxDatatableModule // Componente para criação de tabelas (datatable)
   ],
   declarations: [
-    BooleanPipe
+    BooleanPipe,
+    PermissaoDirective
   ],
   exports: [
     CommonModule,
@@ -30,7 +32,8 @@ import {NgxDatatableModule} from '@swimlane/ngx-datatable';
     MyDatePickerModule,
     NgxMaskModule,
     NgxDatatableModule,
-    BooleanPipe
+    BooleanPipe,
+    PermissaoDirective
   ]
 })
 export class SharedModule {

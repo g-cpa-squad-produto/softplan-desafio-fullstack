@@ -52,11 +52,11 @@
             <i class="fa fa-book"></i>
           </button>
           <button type="button" class="btn btn-sm btn-warning" (click)="atribuirUsuariosParecer(processo)" title="Atribuir Usuários"
-                  *ngIf="processo.status.codigo == 'NOVO' || processo.status.codigo == 'AGUARDANDO_PARECER'">
+                  *ngIf="processo.status.codigo == 'NOVO' || processo.status.codigo == 'AGUARDANDO_PARECER'" permissao="TRIADOR">
             <i class="fa fa-group"></i>
           </button>
           <button type="button" class="btn btn-sm btn-dark" (click)="incluirParecer(processo)" title="Incluir Parecer"
-                  *ngIf="processo.status.codigo == 'AGUARDANDO_PARECER'">
+                  *ngIf="processo.status.codigo == 'AGUARDANDO_PARECER'" permissao="FINALIZADOR">
             <i class="fa fa-group"></i>
           </button>
         </ng-template>
