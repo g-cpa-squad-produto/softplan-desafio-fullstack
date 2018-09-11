@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/usuarios")
 public class UsuarioController extends AbstractController<Usuario, UsuarioDTO, UsuarioResumidoDTO, Long, UsuarioService, UsuarioMapper> {
@@ -17,6 +19,11 @@ public class UsuarioController extends AbstractController<Usuario, UsuarioDTO, U
     @Autowired
     public UsuarioController(UsuarioService service, UsuarioMapper mapper) {
         super(service, mapper);
+    }
+
+    @GetMapping("/lista-login")
+    public List<Usuario> listaUsuariosLogin() {
+        return service.listaUsuariosLogin();
     }
 
     @GetMapping(path = "/finalizadores")

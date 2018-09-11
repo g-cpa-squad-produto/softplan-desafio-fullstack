@@ -5,8 +5,12 @@ import br.com.softplan.core.service.AbstractCrudService;
 import br.com.softplan.feature.processo.model.Processo;
 import br.com.softplan.feature.processo.model.StatusProcesso;
 import br.com.softplan.feature.usuario.UsuarioService;
+import br.com.softplan.feature.usuario.model.PerfilUsuario;
 import br.com.softplan.feature.usuario.model.Usuario;
+import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,6 +28,14 @@ public class ProcessoService extends AbstractCrudService<Processo, Long, Process
         super(Processo.class, repository);
         this.usuarioService = usuarioService;
         this.mapper = mapper;
+    }
+
+    @Override
+    public Page<Processo> filtrar(JsonNode jsonFiltro, Pageable paginacao) {
+        if (isUserInRole(PerfilUsuario.FINALIZADOR)) {
+            return repository.findByStatus(StatusProcesso.AGUARDANDO_PARECER, paginacao);
+        }
+        return super.filtrar(jsonFiltro, paginacao);
     }
 
     public void atribuirUsuariosAProcesso(Long idProcesso, List<Long> idUsuarios) throws NegocioException {

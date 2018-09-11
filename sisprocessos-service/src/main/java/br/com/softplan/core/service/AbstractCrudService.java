@@ -3,11 +3,15 @@ package br.com.softplan.core.service;
 import br.com.softplan.core.exception.BeanValidationException;
 import br.com.softplan.core.logger.HasLogging;
 import br.com.softplan.core.model.AbstractEntity;
+import br.com.softplan.feature.usuario.model.PerfilUsuario;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.DataBinder;
 import org.springframework.validation.Validator;
@@ -111,6 +115,19 @@ public abstract class AbstractCrudService<ENTIDADE extends AbstractEntity, ID ex
         if (result.hasErrors()) {
             throw new BeanValidationException(result.getFieldErrors());
         }
+    }
+
+    protected UserDetails getUsuarioLogado() {
+        return (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    }
+
+    protected boolean isUserInRole(PerfilUsuario perfil) {
+        for (GrantedAuthority role : getUsuarioLogado().getAuthorities()) {
+            if (role.getAuthority().equals(perfil.getCodigo())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

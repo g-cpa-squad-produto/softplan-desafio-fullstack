@@ -21,6 +21,10 @@ public class UsuarioService extends AbstractCrudService<Usuario, Long, UsuarioRe
         this.mapper = mapper;
     }
 
+    public List<Usuario> listaUsuariosLogin() {
+        return repository.findByAtivoIsTrue();
+    }
+
     @Override
     public void excluir(Long id) {
         //TODO validar se usuário tem parecer em processos
