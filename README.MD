@@ -29,13 +29,16 @@ Fiquei com algumas dúvidas sobre os perfis de acesso então posso ter fugido um
 #### Backend
 O primeiro passo é compilar e empacotar o projeto utilizando o maven.
 Na raíz do projeto **sisprocessos-service** execute o comando abaixo:
+
 *$ mvn clean package*
 
 Agora basta executar o comando abaixo para que o projeto seja executado:
+
 *$ java -jar target/sisprocessos-service.war*
 
 #### Frontend
 Como foi utilizado o Angular 6 no frontend tudo que precisa ser feito para rodar o projeto em modo desenvolvimento em ambiente local é executar o seguinte comando na raíz do projeto **sisprocessos-web**:
+
 *$ ng serve*
 
 Agora basta acessar a URL: http://localhost:4200
