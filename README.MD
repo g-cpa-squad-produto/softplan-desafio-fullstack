@@ -1,82 +1,46 @@
 # Desafio implementador fullstack
 
-Seja parte da jornada de transformação digital no Brasil.
+### Tecnologias
+#### Backend
+- Java 8
+- Spring Boot 2
+- Banco de Dados H2
+- Lombok (Para geração de métodos get/set, construtores, toString, etc)
+- MapStruct (Para realizar a conversão de entidades em DTOs e vice-versa)
+- Maven (Gerenciador de dependências)
 
-Esse é o nosso desafio para a vaga de implementador fullstack na [Softplan](https://www.softplan.com.br/carreira/). Serão testadas as habilidades e qualidade de código ao transformar requisitos limitados em uma aplicação web.
+#### Frontend
+- Angular 6
+- Bootstrap 3
+- Npm (Gerenciador de dependências)
+- Angular CLI (Para criação dos módulos, componentes e etc, compilação, empacotamento e execução do projeto)
 
-Seja parte da jornada de transformação digital no Brasil.
-Procuramos desenvolvedor versátil para resolver os mais diversos problemas, que impactam no negócio do cliente, utilizando conhecimento em tecnologias back-end e front-end como meio para isso. Sinta-se confortável com ambas responsabilidades e seja engajado com o que há de melhor no mercado e boas práticas para trabalhar com inovação, tecnologias modernas e emergentes na Softplan, empresa no Top 10 dos melhores lugares para se trabalhar em Santa Catarina (GPTW 2017).
+## Desafio
+#### Perfis de Acesso
+Fiquei com algumas dúvidas sobre os perfis de acesso então posso ter fugido um pouco do esperado. O Administrador por exemplo fala que pode manter usuário, mas não fala nada sobre as operações em processos, mas eu deixei esse perfil com acesso de leitura aos processos, mas ele não pode atribuir **usuário-finalizador** aos processos, essa função ficou exclusiva do perfil **usuário-triador**, assim como a criação dos processos. E o único perfil que é permitido realizar um parecer é o de **usuário-finalizador**
 
+#### Segurança (Autenticação e Autorização)
+- No backend foi utilizado Spring Security com autenticação no banco de dados H2 (em memória) para realizar a segurança dos serviços REST
+- No frontend foi criado um interceptador para que em todas as requisições HTTP fosse adicionado de forma automática as credenciais do usuário logado, utilizando o protocolo **Authentication Basic**.
+- Foi necessário configurar o CORS no projeto de backend para que a aplicação (Angular) fosse capaz de realizar as requisições HTTP por se tratar de requisições entre diferentes hosts. Então para facilitar o desenvolvimento foi habilitado requisições de forma "permit all".
+- A forma de autentição na aplicação web (Angular) não está solicitando login e senha, é necessário apenas selecionar o usuário em uma combo e clicar no botão logar, foi tomada essa decisão apenas para facilitar e adiantar o processo de desenolvimento. Porém é importante lembrar que no backend as credenciais são utilizadas e validadas.
 
-### O que você traz?
-- Perfil proativo, saber trabalhar em equipe , raciocínio lógico, responsabilidade e comprometimento são imprescindíveis para essa oportunidade.
-- Fácil adaptação em projetos experimentais e complexos;
-- Aprendizado rápido no uso de tecnologias de desenvolvimento de software
-- Experiência em Desenvolvimento de software Web.
+## Rodando o projeto
+#### Backend
+O primeiro passo é compilar e empacotar o projeto utilizando o maven.
+Na raíz do projeto **sisprocessos-service** execute o comando abaixo:
+*$ mvn clean package*
 
+Agora basta executar o comando abaixo para que o projeto seja executado:
+*$ java -jar target/sisprocessos-service.war*
 
-### O que oferecemos
-- Oportunidade de desenvolvimento profissional, meet ups, capacitação e treinamento in-company
-- Apoio no seu crescimento e aprendizado com bolsas de graduação, pós-graduação e verba para cursos e eventos de aprendizado externos
-- Plano de bonificação por atingimento de metas
-- Biblioteca colaborativa
-- Ginástica laboral
-- No dress code
-- Parcerias com desconto em academias, restaurantes, salão de beleza, etc.
-- Espaço para refeições, com geladeira e microondas
-- Vale alimentação/refeição, auxílio transporte, assistência médica e odontológica
+#### Frontend
+Como foi utilizado o Angular 6 no frontend tudo que precisa ser feito para rodar o projeto em modo desenvolvimento em ambiente local é executar o seguinte comando na raíz do projeto **sisprocessos-web**:
+*$ ng serve*
 
+Agora basta acessar a URL: http://localhost:4200
 
-### Instruções para o desafio
-
-- **Fork** esse repositório e faça o desafio numa branch com o seu nome (exemplo: `nome-sobrenome`);
-- Assim que concluir o seu desafio, abra um **pull request** com suas alterações.
-
-
-### Desafio
-- Desenvolver uma aplicação web responsável por gerenciar processos.
-- *Soluções parcias serão aceitas.*
-- Visão de administrador
-	- Incluir, excluir, atualizar e visualizar usuários,
-- Visão de usuário-triador
-	- Incluir e visualizar processos,
-	- Atribuir um ou mais usuários a realizar um parecer sobre um processo,
-- Visão de usuário-finalizador
-	- Visualizar processos pendentes de parecer.
-	- Incluir o parecer sobre o processo.
-
-
-### Escopo do desafio
-- Documentar todas suposições realizadas.
-- Desenvolver os módulos de frontend e backend de forma separada.
-- O desenvolvimento do backend deve ser feito em Java.
-- O desenvolvimento do frontend pode utilizar JavaScript e qualquer framework ou ferramenta que suportem ou utilizem estas tecnologias.
-- Preferencialmente utilizar Spring Boot 1.5+ com toda sua stack para o desenvolvimento do backend.
-- Preferencialmente utilizar React para o desenvolvimento do frontend.
-- É aceitável utilizar algumas respostas estáticas em determinadas porções da aplicação.
-- Não é necessário submeter uma aplicação que cumpra cada um dos requisitos descritos, mas o que for submetido deve funcionar.
-
-
-### O que será avaliado
-- O código será avaliado seguindo os seguintes critérios: manutenabilidade, clareza e limpeza de código; resultado funcional; entre outros fatores. 
-- O histórico no `git` também está avaliado.
-- Não esqueça de documentar o processo necessário para rodar a aplicação.
-- Se necessário explique as decisões técnicas tomadas, as escolhas por bibliotecas e ferrramentas, o uso de patterns etc.
-- Apesar de não ter uma limitação de tempo, recomendamos não investir mais de 24 horas de trabalho nesse desafio.
-
-
-### Diferenciais
-- Adaptar a página para dispositivos móveis (torná-la responsiva).
-- Liberação da aplicação utilizando Docker.
-- Utilização de boas práticas de UX na solução.
-- Boa documentação.
-- Teste do código.
-
----
-Em caso de dúvidas, envie um email para [g_cpa_squad_produto@softplan.com.br](mailto:g_cpa_squad_produto@softplan.com.br).
-
-
-**Um dos nossos pilares é a valorização das pessoas e temos orgulho de dizer que somos uma empresa que apoia a diversidade e inclusão. Sendo assim, consideramos todos os candidatos para as nossas oportunidades, independente de raça, cor, religião, gênero, identidade de gênero, nacionalidade, deficiência, ascendência ou idade.**
-
-
-**Até breve**
+## Considerações Finais
+- Gostaria de agradecer pela oportunidade de participar do processo seletivo, mesmo eu não tendo muito tempo atualmente eu fiz o que consegui com o tempo que tinha, ao todo devo ter dedicado de 14h à 16h nesse projeto entre as várias pausas e interrupções
+- Infelizmente não deixei o projeto 100% funcional em dispositivos móveis, e nem criei um Dockerfile para o projeto. Como eu falei estou sem tempo atualmente por conta do trabalho e então resolvi submeter para a avaliação dessa forma mesmo, mas se quiserem me dar a chance de fazer ambas as atividades eu ficaria satisfeito, porém creio que só terei tempo no próximo fim de semana
+- A mesma justificativa do item acima se aplica para os testes e documentação, esse último eu até estava fazendo das classes abstratas e interfaces (parte arquitetural do projeto) logo no começo do projeto, mas depois resolvi dedicar o tempo que tinha em implementar de fato a solução.
