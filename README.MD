@@ -27,19 +27,18 @@ Fiquei com algumas dúvidas sobre os perfis de acesso então posso ter fugido um
 
 ## Rodando o projeto
 #### Backend
-O primeiro passo é compilar e empacotar o projeto utilizando o maven.
-Na raíz do projeto **sisprocessos-service** execute o comando abaixo:
+Para rodar o projeto basta executar o seguinte comando na raíz do projeto **sisprocessos-service**:
 
-*$ mvn clean package*
+*$ mvn spring-boot:run*
 
-Agora basta executar o comando abaixo para que o projeto seja executado:
-
-*$ java -jar target/sisprocessos-service.war*
+**Obs.: para executar o comando acima o Maven (mvn) precisa estar configurado nas variáveis de ambiente do SO**
 
 #### Frontend
-Como foi utilizado o Angular 6 no frontend tudo que precisa ser feito para rodar o projeto em modo desenvolvimento em ambiente local é executar o seguinte comando na raíz do projeto **sisprocessos-web**:
+Como foi utilizado o Angular 6 no frontend tudo que precisa ser feito para rodar o projeto em modo desenvolvimento é executar o seguinte comando na raíz do projeto **sisprocessos-web**:
 
 *$ ng serve*
+
+**Obs.: para executar o comando acima o Angular CLI (ng) precisa estar instalado e configurado nas variáveis de ambiente do SO. A forma mais facil de fazer isso é utilizando o 'npm': npm i -g @angular/cli**
 
 Agora basta acessar a URL: http://localhost:4200
 
