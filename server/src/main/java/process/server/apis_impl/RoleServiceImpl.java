@@ -5,6 +5,6 @@ import org.springframework.stereotype.Service;
 import process.server.apis.RoleService;
 
 @Service
-public class RoleImpl implements RoleService {
+public class RoleServiceImpl implements RoleService {
 
 }

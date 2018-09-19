@@ -5,6 +5,6 @@ import org.springframework.stereotype.Service;
 import process.server.apis.UserProcessService;
 
 @Service
-public class UserProcessImpl implements UserProcessService {
+public class UserProcessServiceImpl implements UserProcessService {
 
 }

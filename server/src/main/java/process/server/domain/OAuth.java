@@ -1,15 +1,9 @@
 package process.server.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-
-@Entity
-public class OAuth extends BaseEntity {
+public class OAuth {
 	
-	@Column
 	private String email;
 	
-	@Column
 	private String password;
 
 	public String getEmail() {

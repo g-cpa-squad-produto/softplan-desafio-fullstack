@@ -2,9 +2,18 @@ package process.server.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-public class Process extends BaseEntity {
+@Table(name="process", schema = "public")
+public class Process {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)	
+	protected Long id;
 	
 	@Column
 	private String name;
@@ -37,6 +46,14 @@ public class Process extends BaseEntity {
 
 	public void setSeem(String seem) {
 		this.seem = seem;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 }

@@ -2,10 +2,19 @@ package process.server.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
-public class User extends BaseEntity {
+@Table(name="user", schema = "public")
+public class User { 
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)	
+	protected Long id;
 	
 	@Column
 	private String name;
@@ -49,6 +58,14 @@ public class User extends BaseEntity {
 
 	public void setRole(Role role) {
 		this.role = role;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 }
