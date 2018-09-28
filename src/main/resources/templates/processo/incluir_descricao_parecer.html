@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Cadastro de Processos</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"></link>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="panel panel-default" sec:authorize="hasAnyRole('USUARIO_FINALIZADOR')">
+    <div class="panel-heading">
+        <strong>Cadastro de Processos</strong>
+
+        <form method="post" class="navbar-form navbar-right"
+              th:action="@{/logout}">
+            <button type="submit" class="btn btn-default">
+                <span class="glyphicon glyphicon-log-out"></span>
+                Sair
+            </button>
+        </form>
+    </div>
+    <div class="panel-body">
+        <form class="form-horizontal" th:object="${parecer}" th:action="@{/salvadescricao}" method="POST" style="margin: 10px">
+            <div class="form-group">
+                <fieldset>
+                    <div class="form-group row">
+                        <div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+                            <div th:each="detailedError : ${#fields.detailedErrors()}">
+                                <span th:text="${detailedError.message}"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-4" >
+                            <label>Número do parecer</label>
+                            <input type="text" class="form-control input-sm" th:field="*{id}"
+                                   autofocus="autofocus" readonly="readonly" maxlength="50"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-4" >
+                            <label>Número Processo</label>
+                            <input type="text" class="form-control input-sm" th:field="*{processo.id}"
+                                   autofocus="autofocus" readonly="readonly" maxlength="50"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-2" >
+                            <label>Data do Processo</label>
+                            <input type="date" readonly="readonly" class="form-control input-sm" th:field="*{processo.data}"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-4" >
+                            <label>Usuario finalizador</label>
+                            <input type="text" class="form-control input-sm" th:field="*{usuario.id}"
+                                   autofocus="autofocus" readonly="readonly" maxlength="50"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-2" >
+                            <label>Nome</label>
+                            <input type="text" readonly="readonly" class="form-control input-sm" th:field="*{usuario.nome}"/>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group row">
+                        <div class="col-md-2" >
+                            <label>Descrição do parecer</label>
+                            <input type="text" class="form-control input-sm" th:field="*{descricao}"/>
+                        </div>
+                    </div>
+
+
+                </fieldset>
+            </div>
+            <div class="form-group row">
+                <button type="submit" class="btn btn-sm btn-primary">Salvar</button>
+                <a th:href="@{/listarprocessos}" class="btn btn-sm btn-default">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

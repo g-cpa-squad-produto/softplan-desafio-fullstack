@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Cadastro de Processos</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"></link>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="panel panel-default" sec:authorize="hasAnyRole('USUARIO_TRIADOR')">
+    <div class="panel-heading">
+        <strong>Cadastro de Processos</strong>
+
+        <form method="post" class="navbar-form navbar-right"
+              th:action="@{/logout}">
+            <button type="submit" class="btn btn-default">
+                <span class="glyphicon glyphicon-log-out"></span>
+                Sair
+            </button>
+        </form>
+
+    </div>
+    <div class="panel-body">
+        <form class="form-horizontal" th:object="${processoVO}" th:action="@{/saveparecer}" method="POST" style="margin: 10px">
+            <div class="form-group">
+                <fieldset>
+                    <div class="form-group row">
+                        <div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+                            <div th:each="detailedError : ${#fields.detailedErrors()}">
+                                <span th:text="${detailedError.message}"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-4" >
+                            <label>Número do processo</label>
+                            <input type="text" class="form-control input-sm" th:field="*{processo.id}"
+                                   autofocus="autofocus" placeholder="Descrição do processo" maxlength="50" readonly="readonly"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-4" >
+                            <label>Descrição</label>
+                            <input type="text" class="form-control input-sm" th:field="*{processo.descricao}"
+                                   autofocus="autofocus" placeholder="Descrição do processo" maxlength="50" readonly="readonly"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-2" >
+                            <label>Data</label>
+                            <input type="date" class="form-control input-sm" th:field="*{processo.data}" readonly="readonly"/>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <div class="col-md-4" >
+                            <label>Selecione o Usuário</label>
+                            <select class="form-control" id="usuarios" th:object="${usuarios}" th:field="${processoVO.usuario}">
+                                <option th:each="usuario : ${usuarios}" th:value="${usuario.id}" th:text="${usuario.nome}" selected="selected"></option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                </fieldset>
+            </div>
+            <div class="form-group row">
+                <button type="submit" class="btn btn-sm btn-primary">Adicionar</button>
+                <a th:href="@{/}" class="btn btn-sm btn-default">Cancelar</a>
+            </div>
+        </form>
+
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-sm table-striped table-hover table-bordered">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>nome</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="parecer : ${listaParecer}">
+                        <td th:text="${parecer.usuario.id}"></td>
+                        <td th:text="${parecer.usuario.nome}"></td>
+                  </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

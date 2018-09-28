@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Cadastro de usuarios</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"></link>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="panel panel-default" sec:authorize="hasAnyRole('ADMINISTRADOR')">
+    <div class="panel-heading">
+        <strong>Cadastro de usuarios</strong>
+
+        <form method="post" class="navbar-form navbar-right"
+              th:action="@{/logout}">
+            <button type="submit" class="btn btn-default">
+                <span class="glyphicon glyphicon-log-out"></span>
+                Sair
+            </button>
+        </form>
+
+    </div>
+    <div class="panel-body">
+        <form class="form-horizontal" th:object="${usuarioVO}" th:action="@{/usuario/save}" method="POST" style="margin: 10px">
+            <div class="form-group">
+                <fieldset>
+                    <div class="form-group row">
+                        <div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+                            <div th:each="detailedError : ${#fields.detailedErrors()}">
+                                <span th:text="${detailedError.message}"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row" th:if="${id != null}">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('id')}? 'has-error'">
+                            <label>ID</label>
+                            <input type="text" class="form-control input-sm" th:field="*{id}" readonly="readonly" maxlength="50"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('nome')}? 'has-error'">
+                            <label>Nome</label>
+                            <input type="text" class="form-control input-sm" th:field="*{nome}" autofocus="autofocus" placeholder="Nome do usuário" maxlength="50"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('login')}? 'has-error'">
+                            <label>Login</label>
+                            <input type="text" class="form-control input-sm" th:field="*{login}" autofocus="autofocus" placeholder="Login do usuário" maxlength="50"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group row"  th:if="${id == null}">
+                        <div class="col-md-4" th:classappend="${#fields.hasErrors('senha')}? 'has-error'">
+                            <label>Senha</label>
+                            <input type="text" class="form-control input-sm" th:field="*{senha}" autofocus="autofocus" placeholder="Senha do usuário" maxlength="50"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-4" >
+                            <label>Tipo de Usuário</label>
+                            <select class="form-control" th:field="*{tipoUsuario}">
+                                <option value="1">Administrador</option>
+                                <option value="2">Usuário Triador</option>
+                                <option value="3">Usuário Finalizador</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+
+
+                </fieldset>
+            </div>
+            <div class="form-group row">
+                <button type="submit" class="btn btn-sm btn-primary">Salvar</button>
+                <a th:href="@{/usuario}" class="btn btn-sm btn-default">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
