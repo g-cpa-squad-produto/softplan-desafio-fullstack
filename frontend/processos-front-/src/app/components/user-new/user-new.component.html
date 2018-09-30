@@ -1,0 +1,62 @@
+<div class="col-md-6" style="margin-left:0%">
+<div class="box box-info">
+  <div class="box-header with-border">
+    <h3 class="box-title">New User</h3>
+  </div>
+  <form class="form-horizontal" #form="ngForm" (ngSubmit)="register()" novalidate>
+    <div [ngClass]="classCss" role="alert" *ngIf="message">
+      <strong>{{ message.text }}</strong>
+    </div>
+    <div class="box-body">
+      <div [ngClass]="getFormGroupClass(email.invalid,email.dirty)">
+        <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+        <div class="col-sm-10">
+          <input type="email" 
+                  [(ngModel)]="user.email"
+                  name="email"
+                  class="form-control" 
+                  id="inputEmail" 
+                  #email="ngModel"
+                  placeholder="Email"
+                  email>
+          <span class="help-block" *ngIf="email.invalid  && email.dirty">Email is invalid </span>
+        </div>
+      </div>
+      <div [ngClass]="getFormGroupClass(password.invalid,password.dirty)">
+        <label for="inputPassword" class="col-sm-2 control-label">Password</label>
+        <div class="col-sm-10">
+          <input type="password" 
+                  [(ngModel)]="user.password"
+                  name="password" 
+                  class="form-control" 
+                  id="inputPassword" 
+                  placeholder="Password"
+                  #password="ngModel" 
+                  required>
+          <span class="help-block" *ngIf="password.invalid && password.dirty">Password is required</span>
+        </div>
+      </div>
+      <div [ngClass]="getFormGroupClass(profile.invalid,profile.dirty)">
+        <label for="inputProfile" class="col-sm-2 control-label">Profile</label>
+        <div class="col-sm-10">
+          <select [(ngModel)]="user.profile" 
+              class="form-control select2" 
+              name="profile"
+              id="inputProfile"
+              #profile="ngModel"
+              style="width: 100%;"
+              required>
+              <option>ROLE_ADMIN</option>
+              <option>ROLE_TRIADOR</option>
+              <option>ROLE_FINALIZADOR</option>
+            </select>
+          <span class="help-block" *ngIf="profile.invalid && profile.dirty">Profile is required</span>
+        </div>
+      </div>
+    </div>
+    <div class="box-footer">
+      <button type="submit" [disabled]="!form.valid" class="btn btn-info pull-right">Submit</button>
+    </div>
+  </form>
+</div>
+</div>

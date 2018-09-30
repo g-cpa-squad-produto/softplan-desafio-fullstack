@@ -1,0 +1,14 @@
+<header class="main-header">
+  <a [routerLink]="['/']" class="logo">
+    <span class="logo-mini"><b>Processos</b></span>
+    <span class="logo-lg"><b>Processos</b></span>
+  </a>
+  <nav class="navbar navbar-static-top">
+    <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+      <span class="sr-only">Toggle navigation</span>
+    </a>
+    <div class="navbar-custom-menu">
+        <p style="color:white">{{ shared.user.email }} - {{ shared.user.profile }} |  <button class="btn btn-link" (click)="signOut()"><font style="color:white">Sign out</font></button></p>
+    </div>
+  </nav>
+</header>
