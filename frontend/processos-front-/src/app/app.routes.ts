@@ -8,6 +8,7 @@ import { ModuleWithProviders } from "@angular/core";
 import { AuthGuard } from './components/security/auth.guard';
 import { UserNewComponent } from './components/user-new/user-new.component';
 import { UserListComponent } from './components/user-list/user-list.component';
+import { ProcessFeedbackComponent } from './components/process-feedback/process-feedback.component';
 
 
 export const ROUTES: Routes = [
@@ -19,6 +20,7 @@ export const ROUTES: Routes = [
   { path: 'process-list' , component: ProcessListComponent, canActivate: [AuthGuard] },
   { path: 'process-new' , component: ProcessNewComponent, canActivate: [AuthGuard] },  
   { path: 'process-new/:id' , component: ProcessNewComponent, canActivate: [AuthGuard] },
+  { path: 'process-feedback/:idProcess' , component: ProcessFeedbackComponent, canActivate: [AuthGuard] },
 ]
 
 export const routes: ModuleWithProviders = RouterModule.forRoot(ROUTES);

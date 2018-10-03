@@ -10,7 +10,7 @@ import br.com.softplan.api.entity.Process;
 import br.com.softplan.api.repository.ProcessRepository;
 import br.com.softplan.api.service.ProcessService;
 /**
- * Implementação dos métodos responsáveis por gerenciar os usuários do sistema
+ * Implementação dos métodos responsáveis por gerenciar os processos do sistema
  * @author Marco
  *
  */

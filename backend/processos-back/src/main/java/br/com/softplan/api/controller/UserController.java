@@ -1,5 +1,7 @@
 package br.com.softplan.api.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.softplan.api.entity.ProfileEnum;
 import br.com.softplan.api.entity.User;
 import br.com.softplan.api.response.Response;
 import br.com.softplan.api.service.UserService;
@@ -139,5 +142,15 @@ public class UserController {
 		response.setData(users);
 		return ResponseEntity.ok(response);
     }
+	
+	
+	@GetMapping(value = "profile/{profile}")
+	@PreAuthorize("hasAnyRole('TRIADOR')")
+	public  ResponseEntity<Response<List<User>>> findByProfile(@PathVariable ProfileEnum profile) {
+		Response<List<User>> response = new Response<List<User>>();
+		List<User> users = userService.findByProfile(profile);
+		response.setData(users);
+		return ResponseEntity.ok(response);
+	}
 	
 }

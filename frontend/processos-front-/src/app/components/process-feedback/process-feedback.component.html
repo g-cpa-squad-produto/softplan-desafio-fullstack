@@ -1,0 +1,58 @@
+<div class="col-md-6" style="margin-left:0%">
+  <div class="box box-info">
+    <div class="box-header with-border">
+      <h3 class="box-title">Add Finalizator</h3>
+    </div>
+    <form class="form-horizontal" #form="ngForm" (ngSubmit)="addFinalizator()" novalidate>
+      <div [ngClass]="classCss" role="alert" *ngIf="message">
+        <strong>{{ message.text }}</strong>
+      </div>
+      <div class="box-body">
+        <ul class="list-group list-group-unbordered">
+          <li class="list-group-item">
+                <b>Process:</b> <span>{{processFeedback.process.number}}</span> 
+          </li>
+        </ul>        
+        <div [ngClass]="getFormGroupClass(finalizator.invalid,finalizator.dirty)">
+          <label for="inputFinalizator" class="col-sm-2 control-label">Finalizator:</label>
+          <div class="col-sm-10">
+            <select [(ngModel)]="processFeedback.finalizator" 
+                class="form-control select2" 
+                name="finalizator"
+                id="inputFinalizator"
+                #finalizator="ngModel"
+                style="width: 100%;"
+                required>
+                <option selected="selected" [ngValue]="null">-- SELECIONE --</option>
+                <option *ngFor="let user of finalizators" [ngValue]="user">{{user.email}}</option>
+              </select>
+            <span class="help-block" *ngIf="finalizator.invalid && finalizator.dirty">Profile is required</span>
+          </div>
+        </div>
+      </div>
+      <div class="box-footer">
+        <button type="submit" [disabled]="!form.valid" class="btn btn-info pull-right">Add</button>
+      </div>
+      <div class="box-body">
+          <table class="table table-bordered">
+            <caption>Added finalizers</caption>
+            <tr>
+              <th>User</th>
+            </tr>
+            <tr *ngFor="let item of finalizatorsAdd">
+              <td>{{item.finalizator.email}}</td>
+            </tr>
+          </table>
+        </div>  
+        <div class="box-footer clearfix"> 
+            <ul class="pagination pagination-sm no-margin pull-right">
+              <li><a href="" (click)="setPreviousPage($event)">&laquo;</a></li>
+              <li *ngFor="let p of pages; let i=index">
+                  <a [ngClass]="{'pagination-focus':i==page}"  href="" (click)="setPage(i,$event)">{{i+1}}</a>
+              </li>
+              <li><a href="" (click)="setNextPage($event)">&raquo;</a></li>
+            </ul>
+        </div>            
+    </form>
+  </div>
+  </div>

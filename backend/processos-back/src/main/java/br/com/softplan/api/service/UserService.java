@@ -1,8 +1,11 @@
 package br.com.softplan.api.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
+import br.com.softplan.api.entity.ProfileEnum;
 import br.com.softplan.api.entity.User;
 
 /**
@@ -47,4 +50,11 @@ public interface UserService {
 	 * @return
 	 */
 	Page<User> findAll(int page, int count);
+
+	/**
+	 * Busca os usuários por um perfil
+	 * @param profile
+	 * @return
+	 */
+	List<User> findByProfile(ProfileEnum profile);
 }

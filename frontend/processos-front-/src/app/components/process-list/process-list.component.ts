@@ -75,6 +75,10 @@ export class ProcessListComponent implements OnInit {
   edit(id:string){
     this.router.navigate(['/process-new',id]);
   }
+  
+  addFinalizator(id:string){
+    this.router.navigate(['/process-feedback',id]);
+  }
 
   detail(id:string){
     this.router.navigate(['/process-detail',id]);

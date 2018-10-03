@@ -1,11 +1,14 @@
 package br.com.softplan.api.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
+import br.com.softplan.api.entity.ProfileEnum;
 import br.com.softplan.api.entity.User;
 import br.com.softplan.api.repository.UserRepository;
 import br.com.softplan.api.service.UserService;
@@ -39,5 +42,10 @@ public class UserServiceImpl implements UserService {
 	public Page<User> findAll(int page, int count) {
 		Pageable pages = new PageRequest(page, count);
 		return this.userRepository.findAll(pages);
+	}
+
+	@Override
+	public List<User> findByProfile(ProfileEnum profile) {
+		return this.userRepository.findByProfile(profile);
 	}
 }

@@ -29,6 +29,10 @@ export class UserService {
   findById(id:string){
     return this.http.get(`${PROCESSOS_API}/api/user/${id}`);
   }
+ 
+  findByProfile(profile:string){
+    return this.http.get(`${PROCESSOS_API}/api/user/profile/${profile}`);
+  }
 
   delete(id:string){
     return this.http.delete(`${PROCESSOS_API}/api/user/${id}`);

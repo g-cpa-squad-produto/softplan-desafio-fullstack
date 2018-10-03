@@ -54,5 +54,15 @@ public class ProcessosBackApplication extends RepositoryRestConfigurerAdapter{
         	triador.setProfile(ProfileEnum.ROLE_TRIADOR);
         	userRepository.save(triador);
         }
+        
+        /*Salvando um usuário finalizador*/
+        user = userRepository.findByEmail("finalizador@softplan.com.br");
+        if (user == null) {
+        	User triador = new User();
+        	triador.setEmail("finalizador@softplan.com.br");
+        	triador.setPassword(passwordEncoder.encode("123456"));
+        	triador.setProfile(ProfileEnum.ROLE_FINALIZADOR);
+        	userRepository.save(triador);
+        }
     }
 }

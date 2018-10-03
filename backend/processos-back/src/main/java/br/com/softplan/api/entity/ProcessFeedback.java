@@ -5,8 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 import lombok.Data;
 
 /**
@@ -21,7 +19,6 @@ public class ProcessFeedback {
 	@Id @GeneratedValue
 	private Long id;
 
-	@NotBlank(message = "Feedback required")
 	private String feedback;
 	
 	/**Processo ao qual pertence o feedback*/

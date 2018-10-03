@@ -21,6 +21,7 @@ import { AuthInterceptor } from './components/security/auth.interceptor';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ProcessListComponent } from './components/process-list/process-list.component';
 import { ProcessNewComponent } from './components/process-new/process-new.component';
+import { ProcessFeedbackComponent } from './components/process-feedback/process-feedback.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { ProcessNewComponent } from './components/process-new/process-new.compon
     UserListComponent,
     ProcessListComponent,
     ProcessNewComponent,
+    ProcessFeedbackComponent,
   ],
   imports: [
     BrowserModule,

@@ -25,6 +25,12 @@ public class Process {
 
 	@NotBlank(message = "Number required") 
 	private String number;
+	
+	public Process() {}
+
+	public Process(Long id) {
+		setId(id);
+	}
 
 	public Long getId() {
 		return id;

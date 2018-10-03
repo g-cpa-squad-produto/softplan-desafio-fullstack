@@ -41,6 +41,10 @@
         <td *ngIf="shared.user.profile == 'TRIADOR'">
             <button class="btn btn-primary" (click)="edit(process.id)">Edit</button>
         </td>
+        <td *ngIf="shared.user.profile == 'TRIADOR'">
+          <button class="btn btn-primary" (click)="addFinalizator(process.id)">Add Finalizator</button>
+        </td>
+
 
       </tr>
     </table>
