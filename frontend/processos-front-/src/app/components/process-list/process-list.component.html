@@ -1,0 +1,59 @@
+<div [ngClass]="classCss" role="alert" *ngIf="message">
+  <strong>{{ message.text }}</strong>
+</div>
+<div class="row">
+<div class="col-md-10">
+<div class="box">
+  <div class="box-header with-border">
+    <h3 class="box-title">Process List</h3>
+  </div>
+  <div [ngClass]="classCss" role="alert" *ngIf="message">
+      <strong>{{ message.text }}</strong>
+  </div>
+  <div class="box-body">
+      <div class="form-group">
+        <label for="inputNumber" class="col-sm-2 control-label">Number</label>
+        <div class="col-sm-10">
+          <input type="text" 
+                  [(ngModel)]="processFilter.number"
+                  name="number" 
+                  class="form-control" 
+                  id="inputNumber">
+        </div>
+      </div>
+
+  </div>    
+  <div class="box-footer">
+      <button class="btn btn-info pull-left" (click)="cleanFilter()">Clean Filter</button>
+      <button style="margin-left: 10px" class="btn btn-info pull-right" (click)="filter()">Filter</button>
+  </div>
+  <div class="box-body">
+    <table class="table table-bordered">
+      <tr>
+        <th>Number</th>
+        <th>Description</th>
+        <th style="width: 10px" *ngIf="shared.user.profile == 'TRIADOR'">&nbsp;</th>
+        <th style="width: 10px" *ngIf="shared.user.profile == 'TRIADOR'">&nbsp;</th>
+      </tr>
+      <tr *ngFor="let process of listProcess">
+        <td>{{process.number}}</td>
+        <td>{{process.description}}</td>
+        <td *ngIf="shared.user.profile == 'TRIADOR'">
+            <button class="btn btn-primary" (click)="edit(process.id)">Edit</button>
+        </td>
+
+      </tr>
+    </table>
+  </div>
+  <div class="box-footer clearfix">
+    <ul class="pagination pagination-sm no-margin pull-right">
+      <li><a href="" (click)="setPreviousPage($event)">&laquo;</a></li>
+      <li *ngFor="let p of pages; let i=index">
+          <a [ngClass]="{'pagination-focus':i==page}"  href="" (click)="setPage(i,$event)">{{i+1}}</a>
+      </li>
+      <li><a href="" (click)="setNextPage($event)">&raquo;</a></li>
+    </ul>
+  </div>
+</div>
+</div>
+</div>

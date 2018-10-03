@@ -1,3 +1,5 @@
+import { ProcessNewComponent } from './components/process-new/process-new.component';
+import { ProcessListComponent } from './components/process-list/process-list.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { Routes, RouterModule } from "@angular/router";
 import { LoginComponent } from "./components/security/login/login.component";
@@ -14,6 +16,9 @@ export const ROUTES: Routes = [
   { path: 'user-new' , component: UserNewComponent, canActivate: [AuthGuard] },
   { path: 'user-new/:id' , component: UserNewComponent, canActivate: [AuthGuard] },
   { path: 'user-list' , component: UserListComponent, canActivate: [AuthGuard] },
+  { path: 'process-list' , component: ProcessListComponent, canActivate: [AuthGuard] },
+  { path: 'process-new' , component: ProcessNewComponent, canActivate: [AuthGuard] },  
+  { path: 'process-new/:id' , component: ProcessNewComponent, canActivate: [AuthGuard] },
 ]
 
 export const routes: ModuleWithProviders = RouterModule.forRoot(ROUTES);

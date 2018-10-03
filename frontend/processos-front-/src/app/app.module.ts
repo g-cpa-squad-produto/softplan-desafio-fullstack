@@ -1,3 +1,4 @@
+import { ProcessService } from './services/process/process.service';
 import { DialogService } from './dialog.service';
 import { SharedService } from './services/shared.service';
 import { UserService } from './services/user/user.service';
@@ -18,6 +19,8 @@ import { UserNewComponent } from './components/user-new/user-new.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { AuthInterceptor } from './components/security/auth.interceptor';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ProcessListComponent } from './components/process-list/process-list.component';
+import { ProcessNewComponent } from './components/process-new/process-new.component';
 
 
 @NgModule({
@@ -30,6 +33,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     HomeComponent,
     UserNewComponent,
     UserListComponent,
+    ProcessListComponent,
+    ProcessNewComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,6 +48,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     AuthGuard, 
     SharedService,
     DialogService,
+    ProcessService,
     { provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
