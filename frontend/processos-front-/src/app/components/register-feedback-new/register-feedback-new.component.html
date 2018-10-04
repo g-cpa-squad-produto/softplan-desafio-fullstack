@@ -1,0 +1,37 @@
+<div class="col-md-6" style="margin-left:0%">
+    <div class="box box-info">
+      <div class="box-header with-border">
+        <h3 class="box-title">Register feedback</h3>
+      </div>
+      <form class="form-horizontal" #form="ngForm" (ngSubmit)="register()" novalidate>
+        <div [ngClass]="classCss" role="alert" *ngIf="message">
+          <strong>{{ message.text }}</strong>
+        </div>
+        <div class="box-body">
+          <ul class="list-group list-group-unbordered">
+            <li class="list-group-item">
+                  <b>Process:</b> <span>{{processFeedback.process.number}}</span> 
+            </li>
+          </ul>  
+          <div [ngClass]="getFormGroupClass(feedback.invalid,feedback.dirty)">
+            <label for="inputFeedback" class="col-sm-2 control-label">Feedback:</label>
+            <div class="col-sm-10">
+              <textarea [(ngModel)]="processFeedback.feedback"
+                      name="feedback" 
+                      rows="3"
+                      class="form-control" 
+                      id="inputFeedback" 
+                      placeholder="Feedback..."
+                      #feedback="ngModel" 
+                      required>
+              </textarea>        
+              <span class="help-block" *ngIf="feedback.invalid && feedback.dirty">Description is required</span>
+            </div>
+          </div>
+        </div>
+        <div class="box-footer">
+          <button type="submit" [disabled]="!form.valid" class="btn btn-info pull-right">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>

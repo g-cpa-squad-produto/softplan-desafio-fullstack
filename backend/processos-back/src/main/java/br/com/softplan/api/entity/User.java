@@ -33,6 +33,12 @@ public class User {
 
 	@Enumerated
 	private ProfileEnum profile;
+	
+	public User() {}
+
+	public User(Long id) {
+		setId(id);
+	}
 
 	public Long getId() {
 		return id;

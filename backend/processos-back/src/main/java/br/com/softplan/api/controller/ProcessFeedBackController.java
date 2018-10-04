@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.softplan.api.entity.Process;
 import br.com.softplan.api.entity.ProcessFeedback;
+import br.com.softplan.api.entity.User;
 import br.com.softplan.api.response.Response;
 import br.com.softplan.api.service.ProcessFeedbackService;;
 
@@ -49,6 +50,7 @@ public class ProcessFeedBackController {
 				result.getAllErrors().forEach(error -> response.getErrors().add(error.getDefaultMessage()));
 				return ResponseEntity.badRequest().body(response);
 			}
+			process.setFeedback(null);
 			ProcessFeedback processPersisted = (ProcessFeedback) processService.createOrUpdate(process);
 			response.setData(processPersisted);
 		} catch (DuplicateKeyException dE) {
@@ -70,16 +72,18 @@ public class ProcessFeedBackController {
 			result.addError(new ObjectError("ProcessFeedback", "Finalizator no information"));
 			return;
 		}
-		/*Evitando adicionar duas vezes o mesmo finalizador*/
-		ProcessFeedback processFeedback = processService.findByProcessAndFinalizator(process.getProcess(), process.getFinalizator());
-		if(processFeedback != null) {
-			result.addError(new ObjectError("ProcessFeedback", "Finalizator for process already exists"));
-			return;
+		if(process.getId() == null) {
+			/*Evitando adicionar duas vezes o mesmo finalizador*/
+			ProcessFeedback processFeedback = processService.findByProcessAndFinalizator(process.getProcess(), process.getFinalizator());
+			if(processFeedback != null) {
+				result.addError(new ObjectError("ProcessFeedback", "Finalizator for process already exists"));
+				return;
+			}
 		}
 	}
 	
 	@PutMapping()
-	@PreAuthorize("hasAnyRole('TRIADOR')")
+	@PreAuthorize("hasAnyRole('TRIADOR', 'FINALIZADOR')")
 	public ResponseEntity<Response<ProcessFeedback>> update(HttpServletRequest request, @RequestBody ProcessFeedback process,
 			BindingResult result) {
 		Response<ProcessFeedback> response = new Response<ProcessFeedback>();
@@ -107,7 +111,7 @@ public class ProcessFeedBackController {
 	}
 	
 	@GetMapping(value = "{id}")
-	@PreAuthorize("hasAnyRole('TRIADOR')")
+	@PreAuthorize("hasAnyRole('TRIADOR', 'FINALIZADOR')")
 	public ResponseEntity<Response<ProcessFeedback>> findById(@PathVariable("id") long id) {
 		Response<ProcessFeedback> response = new Response<ProcessFeedback>();
 		ProcessFeedback process = processService.findById(id);
@@ -147,8 +151,6 @@ public class ProcessFeedBackController {
     		 							@PathVariable int page, 
     		 							@PathVariable int count,
     		 							@PathVariable String idProcess) {
-		
-		
 		Response<Page<ProcessFeedback>> response = new Response<Page<ProcessFeedback>>();
 		Page<ProcessFeedback> processes = null;
 		if(idProcess != null && !"".equals(idProcess.trim())) {
@@ -157,5 +159,21 @@ public class ProcessFeedBackController {
 		response.setData(processes);
 		return ResponseEntity.ok(response);
     }
+	
+	@GetMapping(value = "{page}/{count}/{idFinalizator}/{pending}")
+	@PreAuthorize("hasAnyRole('FINALIZADOR')")
+	public  ResponseEntity<Response<Page<ProcessFeedback>>> findByFinalizator(HttpServletRequest request, 
+			@PathVariable int page, 
+			@PathVariable int count,
+			@PathVariable String idFinalizator,
+			@PathVariable boolean pending) {
+		Response<Page<ProcessFeedback>> response = new Response<Page<ProcessFeedback>>();
+		Page<ProcessFeedback> processes = null;
+		if(idFinalizator != null && !"".equals(idFinalizator.trim())) {
+			processes = processService.findByFinalizator(page, count, new User(new Long(idFinalizator)), pending);
+		}
+		response.setData(processes);
+		return ResponseEntity.ok(response);
+	}
 	
 }

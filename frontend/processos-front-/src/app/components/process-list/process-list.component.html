@@ -34,10 +34,14 @@
         <th>Description</th>
         <th style="width: 10px" *ngIf="shared.user.profile == 'TRIADOR'">&nbsp;</th>
         <th style="width: 10px" *ngIf="shared.user.profile == 'TRIADOR'">&nbsp;</th>
+        <th style="width: 10px" *ngIf="shared.user.profile == 'TRIADOR'">&nbsp;</th>
       </tr>
       <tr *ngFor="let process of listProcess">
         <td>{{process.number}}</td>
         <td>{{process.description}}</td>
+        <td *ngIf="shared.user.profile == 'TRIADOR'">
+            <button class="btn btn-primary" (click)="detail(process.id)">Detail</button>
+        </td>
         <td *ngIf="shared.user.profile == 'TRIADOR'">
             <button class="btn btn-primary" (click)="edit(process.id)">Edit</button>
         </td>

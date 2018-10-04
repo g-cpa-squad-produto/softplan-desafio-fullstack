@@ -22,6 +22,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ProcessListComponent } from './components/process-list/process-list.component';
 import { ProcessNewComponent } from './components/process-new/process-new.component';
 import { ProcessFeedbackComponent } from './components/process-feedback/process-feedback.component';
+import { RegisterFeedbackComponent } from './components/register-feedback/register-feedback.component';
+import { RegisterFeedbackNewComponent } from './components/register-feedback-new/register-feedback-new.component';
+import { ProcessDetailComponent } from './components/process-detail/process-detail.component';
 
 
 @NgModule({
@@ -37,6 +40,9 @@ import { ProcessFeedbackComponent } from './components/process-feedback/process-
     ProcessListComponent,
     ProcessNewComponent,
     ProcessFeedbackComponent,
+    RegisterFeedbackComponent,
+    RegisterFeedbackNewComponent,
+    ProcessDetailComponent,
   ],
   imports: [
     BrowserModule,

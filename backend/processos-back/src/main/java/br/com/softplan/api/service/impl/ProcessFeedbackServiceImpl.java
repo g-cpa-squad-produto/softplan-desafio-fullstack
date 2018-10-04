@@ -39,9 +39,13 @@ public class ProcessFeedbackServiceImpl implements ProcessFeedbackService {
 		return this.processRepository.findAll(pages);
 	}
 	
-	public Page<ProcessFeedback> findByFinalizator(int page, int count, User finalizator){
+	public Page<ProcessFeedback> findByFinalizator(int page, int count, User finalizator, boolean pending){
 		Pageable pages = new PageRequest(page, count);
-		return this.processRepository.findByFinalizator(finalizator, pages);
+		if(pending) {
+			return this.processRepository.findByFinalizatorAndFeedbackIsNull(finalizator, pages);
+		}else {
+			return this.processRepository.findByFinalizator(finalizator, pages);
+		}
 	}
 	
 	public Page<ProcessFeedback> findByProcess(int page, int count, Process process){

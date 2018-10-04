@@ -1,3 +1,6 @@
+import { ProcessDetailComponent } from './components/process-detail/process-detail.component';
+import { RegisterFeedbackNewComponent } from './components/register-feedback-new/register-feedback-new.component';
+import { RegisterFeedbackComponent } from './components/register-feedback/register-feedback.component';
 import { ProcessNewComponent } from './components/process-new/process-new.component';
 import { ProcessListComponent } from './components/process-list/process-list.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -21,6 +24,9 @@ export const ROUTES: Routes = [
   { path: 'process-new' , component: ProcessNewComponent, canActivate: [AuthGuard] },  
   { path: 'process-new/:id' , component: ProcessNewComponent, canActivate: [AuthGuard] },
   { path: 'process-feedback/:idProcess' , component: ProcessFeedbackComponent, canActivate: [AuthGuard] },
+  { path: 'register-feedback' , component: RegisterFeedbackComponent, canActivate: [AuthGuard] },
+  { path: 'register-feedback-new/:idProcessFeedback' , component: RegisterFeedbackNewComponent, canActivate: [AuthGuard] },
+  { path: 'process-detail/:idProcess' , component: ProcessDetailComponent, canActivate: [AuthGuard] },
 ]
 
 export const routes: ModuleWithProviders = RouterModule.forRoot(ROUTES);

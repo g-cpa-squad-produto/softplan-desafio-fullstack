@@ -22,4 +22,5 @@ public interface ProcessFeedbackRepository extends PagingAndSortingRepository<Pr
 
 	ProcessFeedback findByProcessAndFinalizator(Process process, User finalizator);
 	
+	Page<ProcessFeedback> findByFinalizatorAndFeedbackIsNull(User finalizator, Pageable pages);
 }

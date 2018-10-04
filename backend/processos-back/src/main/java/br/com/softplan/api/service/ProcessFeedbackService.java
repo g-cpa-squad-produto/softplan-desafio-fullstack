@@ -44,13 +44,13 @@ public interface ProcessFeedbackService {
 	Page<ProcessFeedback> findAll(int page, int count);
 	
 	/**
-	 * Realiza a busca de um processo pelo finalizador
+	 * Realiza a busca de um processo pelo finalizador e se está pendente de feedback
 	 * @param page
 	 * @param count
 	 * @param number
 	 * @return
 	 */
-	public Page<ProcessFeedback> findByFinalizator(int page, int count, User finalizator);
+	public Page<ProcessFeedback> findByFinalizator(int page, int count, User finalizator, boolean pending);
 	
 	/**
 	 * Realiza a busco por processo

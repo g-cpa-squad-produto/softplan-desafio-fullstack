@@ -24,7 +24,18 @@
           <li><a [routerLink]="['/process-list']"><i class="fa fa-circle-o"></i> List</a></li>
           <li><a [routerLink]="['/process-new']"><i class="fa fa-circle-o"></i> New Process</a></li>
         </ul>
-      </li>      
+      </li>  
+      <li class="treeview" *ngIf="shared.user.profile == 'FINALIZADOR'">
+          <a href="#">
+            <i class="fa fa-edit"></i> <span>Process</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a [routerLink]="['/register-feedback']"><i class="fa fa-circle-o"></i> List pending feedback</a></li>
+          </ul>
+        </li>          
     </ul>
   </section>
 </aside>

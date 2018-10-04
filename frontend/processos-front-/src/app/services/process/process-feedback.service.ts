@@ -35,4 +35,8 @@ export class ProcessFeedbackService {
     return this.http.get(`${PROCESSOS_API}/api/process-feedback/${page}/${count}/${id}`);
   }
 
+  findByFinalizator(page:number,count:number, id:string, pending:boolean){
+    return this.http.get(`${PROCESSOS_API}/api/process-feedback/${page}/${count}/${id}/${pending}`);
+  }
+
 }

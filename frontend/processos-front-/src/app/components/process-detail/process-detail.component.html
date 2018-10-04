@@ -1,0 +1,44 @@
+<div class="col-md-10" style="margin-left:0%">
+    <div class="box box-info">
+      <div class="box-header with-border">
+        <h3 class="box-title">Detail Process</h3>
+      </div>
+      <form class="form-horizontal" #form="ngForm" (ngSubmit)="register()" novalidate>
+        <div [ngClass]="classCss" role="alert" *ngIf="message">
+          <strong>{{ message.text }}</strong>
+        </div>
+        <div class="box-body">
+          <ul class="list-group list-group-unbordered">
+            <li class="list-group-item">
+                  <b>Number :</b> <span>{{process.number}}</span> 
+            </li>
+            <li class="list-group-item">
+              <b>Description :</b> <span>{{process.description}}</span>
+            </li>           
+          </ul>     
+        </div>
+        <div class="box-body" *ngIf="listProcess != 0">
+          <table class="table table-bordered">
+            <caption>Feedbacks</caption>
+            <tr>
+              <th>User</th>
+              <th>Feedback</th>
+            </tr>
+            <tr *ngFor="let item of listProcess">
+              <td>{{item.finalizator.email}}</td>
+              <td>{{item.feedback}}</td>
+            </tr>
+          </table>
+        </div>  
+        <div class="box-footer clearfix" *ngIf="listProcess != 0"> 
+            <ul class="pagination pagination-sm no-margin pull-right">
+              <li><a href="" (click)="setPreviousPage($event)">&laquo;</a></li>
+              <li *ngFor="let p of pages; let i=index">
+                  <a [ngClass]="{'pagination-focus':i==page}"  href="" (click)="setPage(i,$event)">{{i+1}}</a>
+              </li>
+              <li><a href="" (click)="setNextPage($event)">&raquo;</a></li>
+            </ul>
+        </div>         
+      </form>
+    </div>
+  </div>
