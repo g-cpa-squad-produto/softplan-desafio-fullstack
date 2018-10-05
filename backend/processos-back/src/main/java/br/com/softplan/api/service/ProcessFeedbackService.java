@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import br.com.softplan.api.entity.Process;
 import br.com.softplan.api.entity.ProcessFeedback;
 import br.com.softplan.api.entity.User;
+import br.com.softplan.arq.service.AbstractService;
 
 /**
  * Interface responsável por concentrar todos os métodos padrão de gerenciamento de perecer de processos que ficará disponível para o controller.
@@ -13,35 +14,7 @@ import br.com.softplan.api.entity.User;
  *
  */
 @Component
-public interface ProcessFeedbackService {
-	
-	/**
-	 * Cria o ProcessFeedback ou altera, considerando se o id foi informado ou não.
-	 * @param user
-	 * @return
-	 */
-	ProcessFeedback createOrUpdate(ProcessFeedback processFeedback);
-	
-	/**
-	 * Busca o ProcessFeedback pelo ID
-	 * @param id
-	 * @return
-	 */
-	ProcessFeedback findById(Long id);
-	
-	/**
-	 * Remove o ProcessFeedback
-	 * @param id
-	 */
-	void delete(Long id);
-	
-	/**
-	 * Busca todos paginado.
-	 * @param page
-	 * @param count
-	 * @return
-	 */
-	Page<ProcessFeedback> findAll(int page, int count);
+public interface ProcessFeedbackService extends AbstractService<ProcessFeedback, Long> {
 	
 	/**
 	 * Realiza a busca de um processo pelo finalizador e se está pendente de feedback

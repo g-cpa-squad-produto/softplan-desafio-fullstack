@@ -73,6 +73,13 @@ public class UserController {
 			result.addError(new ObjectError("User", "Email no information"));
 			return;
 		}
+		
+		User userDB = this.userService.findByEmail(user.getEmail());
+		if(userDB != null && !userDB.getId().equals(user.getId())) {
+			result.addError(new ObjectError("User", "Email already exists"));
+			return;
+		}
+		
 	}
 	
 	@PutMapping()
@@ -101,10 +108,7 @@ public class UserController {
 			result.addError(new ObjectError("User", "Id no information"));
 			return;
 		}
-		if (user.getEmail() == null) {
-			result.addError(new ObjectError("User", "Email no information"));
-			return;
-		}
+		validateCreateUser(user, result);
 	}
 	
 	@GetMapping(value = "{id}")

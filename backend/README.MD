@@ -15,4 +15,10 @@ O projeto comtempla o desenvolvimento do modulo backend, foi desenvolvido utiliz
 - Spring Security 1.5.12.RELEASE
 - JJWT 0.7.0
 
+### Preparar o Ambiente
+
+- Faça um clone do projeto em seu workspace.
+- No eclipse vá em file > import > Maven > Existing maven projects, realize a importação do projeto.
+- Clique com o botão direito na classe br.com.softplan.ProcessosBackApplication.java > Run as > Java application
+
 

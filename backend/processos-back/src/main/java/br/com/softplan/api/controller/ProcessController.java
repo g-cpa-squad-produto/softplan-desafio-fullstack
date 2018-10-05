@@ -69,6 +69,12 @@ public class ProcessController {
 			result.addError(new ObjectError("Process", "Description no information"));
 			return;
 		}
+		
+		Process processDB = this.processService.findByNumber(process.getNumber());
+		if(processDB != null && !processDB.getId().equals(process.getId())) {
+			result.addError(new ObjectError("Process", "Process number already exists"));
+			return;
+		}
 	}
 	
 	@PutMapping()

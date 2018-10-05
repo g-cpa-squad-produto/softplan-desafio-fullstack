@@ -16,4 +16,5 @@ public interface ProcessRepository extends PagingAndSortingRepository<Process, L
 	
 	Page<Process> findByNumber(String number,Pageable pages);
 	
+	Process findByNumber(String number);
 }
