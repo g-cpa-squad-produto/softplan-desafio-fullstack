@@ -12,21 +12,31 @@ import javax.persistence.Table;
 public class UserProcess {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	protected Long id;
 	
 	@ManyToOne
-	private Role role;
+	private Process process;
 	
 	@ManyToOne
 	private User user;
 
-	public Role getRole() {
-		return role;
+	public UserProcess() {
+		super();
+	}
+	
+	public UserProcess(Process process, User user) {
+		super();
+		this.process = process;
+		this.user = user;
 	}
 
-	public void setRole(Role role) {
-		this.role = role;
+	public Process getProcess() {
+		return process;
+	}
+
+	public void setProcess(Process process) {
+		this.process = process;
 	}
 
 	public User getUser() {

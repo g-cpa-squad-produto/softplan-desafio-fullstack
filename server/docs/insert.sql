@@ -35,4 +35,4 @@ INSERT INTO role (id, name, code)
 VALUES(3, 'Usuário - Finalizador', 'finalizador');
 
 INSERT INTO "user" (id, name, email, password, role_id)
-VALUES(1, 'Adminstrador', 'admin@softplan.com', '123', (SELECT id FROM role WHERE code = 'adminstrador'));
+VALUES(0, 'Adminstrador', 'admin@softplan.com', '123', (SELECT id FROM role WHERE code = 'adminstrador'));

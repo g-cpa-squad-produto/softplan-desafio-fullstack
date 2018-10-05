@@ -30,6 +30,12 @@ public class UserServiceRest {
     }
 	
 	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(value = "", method = RequestMethod.POST)
+    private User save(@RequestBody  User user) {
+		return userService.save(user);
+    }
+	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "", method = RequestMethod.GET)
     private List<User> findAll() {
 		return userService.findAll();
@@ -40,13 +46,13 @@ public class UserServiceRest {
     private Map<String, Object> findAllWithPagination(@RequestParam(value = "sort", required = false) String sort, 
     		@RequestParam("page") Long page, 
     		@RequestParam("per_page") Long perPage,
-    		@RequestParam(value = "sort", required = false) String filter) {
+    		@RequestParam(value = "filter", required = false) String filter) {
 		return userService.findAllWithPagination(sort, page, perPage, filter);
     }
 	
 	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    private User findAll(@PathVariable("id") Long id) {
+    private User findOne(@PathVariable("id") Long id) {
 		return userService.findOne(id);
     }
 	

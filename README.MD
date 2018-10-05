@@ -4,7 +4,7 @@ Projeto para o processo seletivo para a vaga de fullstack na [Softplan](https://
 
 ## Objetivo do Projeto
 
-O projeto visa criar um programa web para gerenciamento de processos. Obtou-se em criar duas camadas para a aplicação: back-end, servidor, e front-end, camada de visualização.
+O projeto visa criar um programa web para gerenciamento de processos. Optou-se em criar duas camadas para a aplicação: back-end, servidor, e front-end, camada de visualização.
 
 ## Tecnologias
 

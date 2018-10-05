@@ -9,6 +9,8 @@ import process.server.domain.User;
 public interface UserService {
 
 	User OAuth(OAuth oauth);
+	
+	User save(User user);
 		
 	List<User> findAll();
 	

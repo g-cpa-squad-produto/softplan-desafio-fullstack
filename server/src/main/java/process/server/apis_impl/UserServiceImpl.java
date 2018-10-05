@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,6 +26,11 @@ public class UserServiceImpl implements UserService {
 	public User OAuth(OAuth oAuth) {
 		return userDao.findByEmailAndPassword(oAuth.getEmail(), oAuth.getPassword());
 	}
+	
+	@Override
+	public User save(User user) {
+		return userDao.save(user);
+	}
 
 	@Override
 	public List<User> findAll() {
@@ -45,11 +51,21 @@ public class UserServiceImpl implements UserService {
 		usersWithPagination.put("per_page", perPage);
 		
 		Pageable pageable = new PageRequest(from.intValue(), to.intValue());
-		Page<User> data = userDao.findAllWithPagination(pageable);
+		Page<User> data = null;
+		
+		if (StringUtils.isBlank(filter)) {
+			data = userDao.findAllWithPagination(pageable);
+		} else {
+			data = userDao.findAllWithPaginationByFilter(filter, pageable);
+		}
 
-		usersWithPagination.put("data", data.getContent());
-		usersWithPagination.put("total", data.getTotalElements());
-		usersWithPagination.put("to", data.getNumberOfElements());
+		if (data != null) {
+			
+			usersWithPagination.put("data", data.getContent());
+			usersWithPagination.put("total", data.getTotalElements());
+			usersWithPagination.put("to", data.getNumberOfElements());
+			
+		}
 		
 		return usersWithPagination;
 	}

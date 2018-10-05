@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class Process {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	protected Long id;
 	
 	@Column
