@@ -1,89 +1,68 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from '../components/Login.vue'
-import Home from '../components/Home.vue'
-import Process from '../components/Process.vue'
-import User from '../components/User.vue'
+import Home from 'components/home'
+import Login from 'components/Login'
+import UserList from 'components/UserList'
+import User from 'components/User'
+import ProcessList from 'components/ProcessList'
+import Process from 'components/Process'
+import store from '../store'
 
 Vue.use(Router)
 
-let router = new Router({
-  // export default new Router({
+const ifNotAuthenticated = (to, from, next) => {
+  if (!store.getters.isAuthenticated) {
+    next()
+    return
+  }
+  next('/')
+}
+
+const ifAuthenticated = (to, from, next) => {
+  if (store.getters.isAuthenticated) {
+    next()
+    return
+  }
+  next('/login')
+}
+
+export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
-      redirect: {
-        name: 'login'
-      }
+      name: 'Home',
+      component: Home,
     },
     {
       path: '/login',
-      name: 'login',
-      component: Login
+      name: 'Login',
+      component: Login,
+      beforeEnter: ifNotAuthenticated,
     },
     {
-      path: '/home',
-      name: 'home',
-      component: Home
+      path: '/userList',
+      name: 'UserList',
+      component: UserList,
+      beforeEnter: ifAuthenticated,
     },
     {
-      path: '/process',
-      name: 'process',
-      component: Process
+      path: '/user/:id',
+      name: 'User',
+      component: User,
+      beforeEnter: ifAuthenticated,
     },
     {
-      path: '/user',
-      name: 'user',
-      component: User
-    }
-  ]
-});
-
-router.beforeEach((to, from, next) => {
-  debugger;
-  // if (from && (from.path === '/login' || from.path === '/')) {
-  if (from && from.path === '/') {
-    next();
-  } else {
-
-    console.log(to);
-    console.log(from);
-    console.log(localStorage);
-    console.log(sessionStorage);
-    debugger;
-    next();
-
-  }
-
-  // if (to.matched.some(record => record.meta.requiresAuth)) {
-  //   if (localStorage.getItem('jwt') == null) {
-  //     next({
-  //       path: '/login',
-  //       params: { nextUrl: to.fullPath }
-  //     })
-  //   } else {
-  //     let user = JSON.parse(localStorage.getItem('user'))
-  //     if (to.matched.some(record => record.meta.is_admin)) {
-  //       if (user.is_admin == 1) {
-  //         next()
-  //       }
-  //       else {
-  //         next({ name: 'userboard' })
-  //       }
-  //     } else {
-  //       next()
-  //     }
-  //   }
-  // } else if (to.matched.some(record => record.meta.guest)) {
-  //   if (localStorage.getItem('jwt') == null) {
-  //     next()
-  //   }
-  //   else {
-  //     next({ name: 'userboard' })
-  //   }
-  // } else {
-  //   next()
-  //   // }
+      path: '/processList',
+      name: 'ProcessList',
+      component: ProcessList,
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/process/:id',
+      name: 'Process',
+      component: Process,
+      beforeEnter: ifAuthenticated,
+    },
+  ],
 })
-
-export default router

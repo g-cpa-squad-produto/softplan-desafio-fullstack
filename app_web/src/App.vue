@@ -1,50 +1,55 @@
 <template>
-    <div id="app">
-        <div id="nav">
-            <router-link v-if="authenticated" to="/login" v-on:click.native="logout()" replace>Logout</router-link>
-        </div>
-        <router-view @authenticated="setAuthenticated" />
+  <div id="app">
+    <menu-navigation/>
+    <div class="main-container">
+      <center-container>
+        <router-view/>
+      </center-container>
     </div>
+  </div>
 </template>
 
 <script>
+import MenuNavigation from 'components/Menu'
+import { USER_REQUEST } from 'actions/user'
+
 export default {
-  name: 'App',
-  data() {
-    return {
-      authenticated: false,
-      mockAccount: {
-        username: 'a',
-        password: 'a',
-      },
-    };
+  components: {
+    MenuNavigation
   },
-  mounted() {
-    if (!this.authenticated) {
-      this.$router.replace({ name: 'login' });
+  name: 'app',
+  created: function () {
+    if (this.$store.getters.isAuthenticated) {
+      this.$store.dispatch(USER_REQUEST)
     }
-  },
-  methods: {
-    setAuthenticated(status) {
-      this.authenticated = status;
-    },
-    logout() {
-      this.authenticated = false;
-    },
-  },
-};
+  }
+}
 </script>
 
 <style>
-body {
-  background-color: #f0f0f0;
-}
-h1 {
-  padding: 0;
-  margin-top: 0;
-}
-#app {
-  width: 1024px;
-  margin: auto;
-}
+  #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    /* margin-top: 60px; */
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    color: #2e426b;
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+</style>
+
+<style scoped>
+  .main-container {
+    min-height: calc(100vh - 70px);
+  }
 </style>
