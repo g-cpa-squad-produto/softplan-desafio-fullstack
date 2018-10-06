@@ -5,7 +5,11 @@ import config from '../../../config'
 import axios from 'axios'
 import uuidv4 from 'uuid/v4'
 
-const state = { token: localStorage.getItem('user-token') || '', status: '', hasLoadedOnce: false }
+const state = {
+  token: localStorage.getItem('user-token') || '',
+  status: '',
+  hasLoadedOnce: false
+}
 
 const getters = {
   isAuthenticated: state => !!state.token,
@@ -17,7 +21,6 @@ const URL = process.env.NODE_ENV === 'production' ? config.build.url : config.de
 const actions = {
   [AUTH_REQUEST]: ({commit, dispatch}, loginData) => {
     return new Promise((resolve, reject) => {
-      console.log(loginData)
       commit(AUTH_REQUEST)
       axios.post(`${URL}api/users/oauth`, loginData)
         .then(resp => {
@@ -27,15 +30,9 @@ const actions = {
 
             localStorage.setItem('user-token', userToken)
             commit(AUTH_SUCCESS, resp.data)
-            dispatch(USER_REQUEST)
+            dispatch(USER_REQUEST, resp.data)
             resolve(resp)
           } else {
-            this.$swal({
-              type: 'error',
-              title: 'Oops...',
-              text: 'Usuário e/ou senha incorreto(s)!',
-            })
-
             const err = 'User and/or password is invalid!'
             commit(AUTH_ERROR, err)
             localStorage.removeItem('user-token')
@@ -43,7 +40,6 @@ const actions = {
           }
         })
         .catch(err => {
-          console.log(err)
           commit(AUTH_ERROR, err)
           localStorage.removeItem('user-token')
           reject(err)

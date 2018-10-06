@@ -1,7 +1,10 @@
 package process.server.rest;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -54,6 +57,30 @@ public class UserServiceRest {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
     private User findOne(@PathVariable("id") Long id) {
 		return userService.findOne(id);
+    }
+	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    private Map<String, Object> delete(@PathVariable("id") Long id) {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		try {
+			
+			userService.delete(id);
+			result.put("message", "Delete with sucess!");
+			result.put("status", HttpServletResponse.SC_OK);
+			
+		} catch (Exception e) {
+			
+			String message = "Error to delete user with id " + id.toString() + ". " + e;
+			System.out.println(message);
+			
+			result.put("message", message);
+			result.put("status", HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+		}
+		
+		return result;
     }
 	
 }

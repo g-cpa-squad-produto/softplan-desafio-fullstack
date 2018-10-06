@@ -7,10 +7,12 @@ import CenterContainer from 'components/lib/center-container'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import vSelect from 'vue-select'
+import VeeValidate from 'vee-validate'
 
 Vue.config.productionTip = false
 
 Vue.use(VueAxios, axios)
+Vue.use(VeeValidate)
 
 Vue.component('v-select', vSelect)
 Vue.component('loading', Loading)

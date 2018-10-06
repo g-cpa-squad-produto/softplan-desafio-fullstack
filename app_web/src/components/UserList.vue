@@ -6,6 +6,7 @@
       :API_URL="API_URL" 
       :fields="fields"
       :onAction="onAction"
+      :canDelete="canDelete"
     > 
     </my-vuetable>
   </div>
@@ -16,6 +17,7 @@
   import { mapState } from 'vuex'
   import config from '../../config'
   import MyVuetable from './table/MyVuetable'
+  import axios from 'axios'
 
   const URL = process.env.NODE_ENV === 'production' ? config.build.url : config.dev.url
 
@@ -28,6 +30,7 @@
       return {
         ADD_ROUTER_LINK_TO: '/user/null',
         API_URL: `${URL}api/users/pagination`,
+        canDelete: true,
         fields: [
           {
             name: 'name',
@@ -54,12 +57,26 @@
       }
     },
     methods: {
-      onAction (action, data, index) {
+      async onAction (action, data, index) {
 
         if (action === 'EDIT') {
           this.$router.push({ name: 'User', params: { id: data.id }});
         } else if (action === 'DELETE') {
-          console.log('custom-actions: ' + action, data.name, index)
+          
+          await axios.delete(`${URL}api/users/${data.id}`)
+          .then(res => {
+            
+            if (res.data.status == "200") {
+              console.log(res.data.message)
+            } else if (res.data.status == "500") {
+              console.error(res.data.message)
+            }
+            
+          })
+          .catch(err => {
+            console.log(err)
+          })
+
         }
 
       },

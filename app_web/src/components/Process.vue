@@ -1,50 +1,65 @@
 <template>
-  <div>
-    <h1 v-if="hasprocessData">Edição: {{processData.name}}</h1>
-    <h1 v-else>Cadastro de Processo</h1>
-    <form id="processForm" @submit.prevent="submit">
-      <input type="hidden" id="id" :value="processData.id">
-      <div class="form-group">
-        <label for="code">Código: </label>
-        <input type="code" class="form-control" id="code" aria-describedby="codeHelp" placeholder="Código..." v-model="processData.code">
-      </div>
-       <div class="form-group">
-        <label for="name">Nome: </label>
-        <input type="text" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Nome..." v-model="processData.name">
-      </div>
-      <div class="form-group">
-        <label for="seem">Parecer: </label>
-        <textarea type="seem" class="form-control" id="seem" placeholder="Parecer..." v-model="processData.seem"/>
-      </div>
-       <div class="form-group">
-        <label for="exampleFormControlRole1">Usuário para Parecer: </label>
-        <v-select id="users" multiple v-model="selectedUsers" :options="users"></v-select>
-      </div>
-      <button type="submit" class="btn btn-primary">Salvar</button>
-      <button @click="onCancel()" class="btn btn-primary">Cancelar</button>
-    </form>
+  <div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <h1 v-if="hasprocessData">Edição: {{processData.name}}</h1>
+            <h1 v-else>Cadastro de Processo</h1>
+            <form id="processForm" @submit.prevent="submit">
+              <input type="hidden" id="id" :value="processData.id">
+              <div class="form-group">
+                <label for="code">Código: </label>
+                <input :disabled="!isTriador" v-validate="'required'" type="text" name="code" class="form-control" placeholder="Código..." v-model="processData.code">
+                <div v-if="submitted && errors.has('code')" class="invalid-feedback">{{ errors.first('code') }}</div>
+              </div>
+              <div class="form-group">
+                <label for="name">Nome: </label>
+                <input :disabled="!isTriador" v-validate="'required'" type="text" class="form-control" placeholder="Nome..." name="name" v-model="processData.name">
+                <div v-if="submitted && errors.has('name')" class="invalid-feedback">{{ errors.first('name') }}</div>
+              </div>
+              <div class="form-group">
+                <label for="seem">Parecer: </label>
+                <textarea :disabled="!isFinalizador && isFinalizadorToProcess" class="form-control" name="seem" placeholder="Parecer..." v-model="processData.seem"/>
+                <div v-if="submitted && errors.has('seem')" class="invalid-feedback">{{ errors.first('seem') }}</div>
+              </div>
+              <div class="form-group">
+                <label for="selectedUsers">Usuário para Parecer: </label>
+                <v-select 
+                  v-model="selectedUsers" 
+                  v-validate="'required'" 
+                  :disabled="!isTriador" 
+                  id="users" 
+                  multiple 
+                  :options="users" 
+                  name="selectedUsers"
+                >
+                </v-select>
+                <div v-if="submitted && errors.has('selectedUsers')" class="invalid-feedback">{{ errors.first('selectedUsers') }}</div>
+              </div>
+              <button type="submit" class="btn btn-primary">Salvar</button>
+              <button @click="onCancel()" class="btn btn-primary">Cancelar</button>
+            </form>
+        </div>
+    </div>
   </div>
 </template>
 
 <script>
-  import {AUTH_REQUEST} from 'actions/auth'
+  import { mapGetters } from 'vuex'
   import config from '../../config'
   import axios from 'axios'
 
   const URL = process.env.NODE_ENV === 'production' ? config.build.url : config.dev.url
   
-  const getUsers = function(users) {
-
-    const data = [];
+  const getUsersData = (users) => {
+    const data = []
     if (users) {
       users.forEach(element => {
         data.push({
           label: element.name,
           value: element.id
         })
-      });
+      })
     }
-
     return data;
   };
 
@@ -55,84 +70,80 @@
         selectedUsers: null,
         users: [],
         processData: {},
-        hasprocessData: false
+        hasprocessData: false,
+        isFinalizadorToProcess: false,
+        submitted: false
       }
     },
     methods: {
-      async getUsers() {
+      async getUsers () {
         await axios.get(`${URL}api/users`)
           .then(res => {
-
-            this.users = getUsers(res.data);
-            
+            this.users = getUsersData(res.data)
             const processId = this.$route.params.id;
             if ($.isNumeric(processId)) {
-              this.getprocessData();
+              this.getprocessData()
             }
-
           })
           .catch(err => {
             console.log(err)
           })
       },
-      async getprocessData() {
-        const processId = this.$route.params.id;
+      async getprocessData () {
+        
+        const processId = this.$route.params.id
         if ($.isNumeric(processId)) {
+
           await axios.get(`${URL}api/process/${processId}`)
           .then(res => {
-            this.processData = res.data.process;
-            this.selectedUsers = getUsers(res.data.users);
-
+            this.processData = res.data.process
+            this.selectedUsers = getUsersData(res.data.users)
             if (res.data) {
-              this.hasprocessData = true;
+              this.hasprocessData = true
             }
-            
           })
           .catch(err => {
             console.log(err)
           })
         }
       },
-      async submit() {
-        
-        var process = {
-          id: document.getElementById('id').value ? Number(document.getElementById('id').value) : null,
-          code: document.getElementById('code').value,
-          name: document.getElementById('name').value,
-          seem: document.getElementById('seem').value,
-        }
+      async submit () {
+        this.submitted = true;
+        this.$validator.validate().then(async valid => {
+            if (valid) {
+                const users = [];
+                if (this.selectedUsers) {
+                  for (let i = 0; i < this.selectedUsers.length; i++) {
+                    users.push({
+                      id: this.selectedUsers[i].value
+                    })
+                  }
+                }
+                
+                const processDTO = {
+                  process: this.processData,
+                  users: users
+                }
 
-        const users = [];
-        if (this.selectedUsers) {
-
-          for (let i = 0; i < this.selectedUsers.length; i++) {
-            users.push({
-              id: this.selectedUsers[i].value
-            });
-          }
-
-        }
-
-        const processDTO = {
-          process: process,
-          users: users
-        };
-
-        await axios.post(`${URL}api/process`, processDTO)
-          .then(res => {
-            this.$router.push({name: 'ProcessList'});
-          })
-          .catch(err => {
-            console.log(err);
-          })
-        
+                await axios.post(`${URL}api/process`, processDTO)
+                  .then(res => {
+                    this.$router.push({name: 'ProcessList'})
+                  })
+                  .catch(err => {
+                    console.log(err)
+                  })
+            }
+        });
       },
-      onCancel() {
-        this.$router.push({name: 'ProcessList'});
+      onCancel () {
+        this.$router.push({name: 'ProcessList'})
       }
     },
-    async created() {
-      await this.getUsers();
+    computed: {
+      ...mapGetters(['isFinalizador', 'isTriador']),
+    },
+    async created () {
+      await this.getUsers()
     }
   }
 </script>
@@ -144,5 +155,6 @@
   #users {
     display: inline-block;
     width: 100%;
+    background: white;
   }
 </style>

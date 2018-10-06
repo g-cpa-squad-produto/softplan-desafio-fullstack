@@ -3,9 +3,9 @@
     <form class="login" @submit.prevent="login">
       <h1>Entrar</h1>
       <label>E-mail</label>
-      <input required v-model="email" type="text" placeholder="Snoopy"/>
+      <input required v-model="email" type="text" placeholder="Email..."/>
       <label>Senha</label>
-      <input required v-model="password" type="password" placeholder="Password"/>
+      <input required v-model="password" type="password" placeholder="Senha..."/>
       <hr/>
       <button type="submit">Login</button>
     </form>
@@ -27,7 +27,7 @@
       login: function () {
         const { email, password } = this
         this.$store.dispatch(AUTH_REQUEST, { email, password }).then(() => {
-          this.$router.push('/')
+          this.$router.push('/home')
         })
       }
     },

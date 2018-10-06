@@ -6,6 +6,7 @@
       :API_URL="API_URL" 
       :fields="fields"
       :onAction="onAction"
+      :canDelete="canDelete"
     > 
     </my-vuetable>
   </div>
@@ -28,6 +29,7 @@
       return {
         ADD_ROUTER_LINK_TO: '/process/null',
         API_URL: `${URL}api/process/pagination`,
+        canDelete: false,
         fields: [
           {
             name: 'name',

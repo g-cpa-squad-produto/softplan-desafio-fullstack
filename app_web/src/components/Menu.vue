@@ -1,10 +1,10 @@
 <template>
   <div class="menu">
     <ul>
-      <li v-if="isProfileLoaded">
+      <li v-if="isProfileLoaded && isAdmin ">
         <router-link to="/userList">Usuários</router-link>
       </li>
-      <li v-if="isProfileLoaded">
+      <li v-if="isProfileLoaded && !isAdmin">
         <router-link to="/processList">Processos</router-link>
       </li>
       <li v-if="isAuthenticated" @click="logout">
@@ -29,10 +29,9 @@
       }
     },
     computed: {
-      ...mapGetters(['getProfile', 'isAuthenticated', 'isProfileLoaded']),
+      ...mapGetters(['getProfile', 'isAuthenticated', 'isProfileLoaded', 'isAdmin']),
       ...mapState({
-        authLoading: state => state.auth.status === 'loading',
-        name: state => `${state.user.profile.title} ${state.user.profile.name}`,
+        authLoading: state => state.auth.status === 'loading'
       })
     },
   }
@@ -47,7 +46,7 @@
     display: flex;
     color: white;
     align-items: center;
-    background-color: #ffa035;
+    background-color: #708090;
     padding: 5px;
     margin-bottom: 30px;
 

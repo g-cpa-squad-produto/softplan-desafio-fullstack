@@ -17,5 +17,5 @@ public interface UserDao extends PagingAndSortingRepository<User, Long> {
 	
 	@Query("SELECT u FROM User u WHERE u.name like concat('%', :filter, '%') OR u.email like concat('%', :filter, '%') OR u.role.name like concat('%', :filter, '%') Order By u.name, u.email, u.role.name")
 	Page<User> findAllWithPaginationByFilter(@Param("filter") String filter, Pageable pageable);
-	
+
 }

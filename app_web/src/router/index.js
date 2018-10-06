@@ -7,30 +7,66 @@ import User from 'components/User'
 import ProcessList from 'components/ProcessList'
 import Process from 'components/Process'
 import store from '../store'
+import {AUTH_REQUEST} from 'actions/auth'
 
 Vue.use(Router)
 
 const ifNotAuthenticated = (to, from, next) => {
-  if (!store.getters.isAuthenticated) {
+  if (localStorage.getItem('userData')) {
+    const userData = JSON.parse(localStorage.getItem('userData'))
+    const email = userData.email
+    const password = userData.password
+    store.dispatch(AUTH_REQUEST, { email, password }).then(() => {
+      if (!store.getters.isAuthenticated) {
+        next()
+        return
+      }
+      next('/home')
+    })
+  } else {
     next()
-    return
   }
-  next('/')
 }
 
-const ifAuthenticated = (to, from, next) => {
-  if (store.getters.isAuthenticated) {
-    next()
-    return
+const isAdmin = (to, from, next) => {
+  if (localStorage.getItem('userData')) {
+    const userData = JSON.parse(localStorage.getItem('userData'))
+    const email = userData.email
+    const password = userData.password
+    store.dispatch(AUTH_REQUEST, { email, password }).then(() => {
+      if (store.getters.isAdmin) {
+        next()
+        return
+      }
+      next('/home')
+    })
+  } else {
+    next('/login')
   }
-  next('/login')
+}
+
+const isNotAdmin = (to, from, next) => {
+  if (localStorage.getItem('userData')) {
+    const userData = JSON.parse(localStorage.getItem('userData'))
+    const email = userData.email
+    const password = userData.password
+    store.dispatch(AUTH_REQUEST, { email, password }).then(() => {
+      if (!store.getters.isAdmin) {
+        next()
+        return
+      }
+      next('/home')
+    })
+  } else {
+    next('/login')
+  }
 }
 
 export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/',
+      path: '/home',
       name: 'Home',
       component: Home,
     },
@@ -44,25 +80,25 @@ export default new Router({
       path: '/userList',
       name: 'UserList',
       component: UserList,
-      beforeEnter: ifAuthenticated,
+      beforeEnter: isAdmin,
     },
     {
       path: '/user/:id',
       name: 'User',
       component: User,
-      beforeEnter: ifAuthenticated,
+      beforeEnter: isAdmin,
     },
     {
       path: '/processList',
       name: 'ProcessList',
       component: ProcessList,
-      beforeEnter: ifAuthenticated,
+      beforeEnter: isNotAdmin,
     },
     {
       path: '/process/:id',
       name: 'Process',
       component: Process,
-      beforeEnter: ifAuthenticated,
+      beforeEnter: isNotAdmin,
     },
   ],
 })

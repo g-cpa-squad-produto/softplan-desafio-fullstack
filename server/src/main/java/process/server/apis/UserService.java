@@ -17,4 +17,7 @@ public interface UserService {
 	Map<String, Object> findAllWithPagination(String sort, Long page, Long perPage, String filter);
 	
 	User findOne(Long id);
+
+	void delete(Long id);
+
 }

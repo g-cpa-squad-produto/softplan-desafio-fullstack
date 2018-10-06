@@ -20,7 +20,7 @@
           @click="onAction('EDIT', props.rowData, props.rowIndex)">
           <span class="glyphicon glyphicon-pencil"></span>
         </button>
-        <button class="btn btn-default btn-sm"
+        <button v-if="canDelete" class="btn btn-default btn-sm"
           @click="onAction('DELETE', props.rowData, props.rowIndex)">
           <span class="glyphicon glyphicon-remove"></span>
         </button>
@@ -57,7 +57,7 @@ export default {
     VuetablePaginationInfo,
     FilterBar
   },
-  props: ['ADD_ROUTER_LINK_TO', 'API_URL', 'fields', 'onAction'],
+  props: ['ADD_ROUTER_LINK_TO', 'API_URL', 'fields', 'onAction', 'canDelete'],
   data () {
     return {
       css: {
