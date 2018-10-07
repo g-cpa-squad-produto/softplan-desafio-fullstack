@@ -36,7 +36,7 @@
                 <div v-if="submitted && errors.has('selectedUsers')" class="invalid-feedback">{{ errors.first('selectedUsers') }}</div>
               </div>
               <button type="submit" class="btn btn-primary">Salvar</button>
-              <button @click="onCancel()" class="btn btn-primary">Cancelar</button>
+              <button type="button" @click="onCancel()" class="btn btn-primary">Cancelar</button>
             </form>
         </div>
     </div>
