@@ -40,8 +40,9 @@ public class ProcessServiceRest {
     private Map<String, Object> findAllWithPagination(@RequestParam(value = "sort", required = false) String sort, 
     		@RequestParam("page") Long page, 
     		@RequestParam("per_page") Long perPage,
-    		@RequestParam(value = "filter", required = false) String filter) {
-		return processService.findAllWithPagination(sort, page, perPage, filter);
+    		@RequestParam(value = "filter", required = false) String filter,
+    		@RequestParam(value = "userId", required = false) Long userId) {
+		return processService.findAllWithPagination(sort, page, perPage, filter, userId);
     }
 	
 	@CrossOrigin(origins = "http://localhost:3000")

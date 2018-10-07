@@ -54,7 +54,7 @@ public class ProcessServiceImpl implements ProcessService {
 	}
 
 	@Override
-	public Map<String, Object> findAllWithPagination(String sort, Long page, Long perPage, String filter) {
+	public Map<String, Object> findAllWithPagination(String sort, Long page, Long perPage, String filter, Long userId) {
 		
 		Long to = (page * perPage);
 		Long lastPage = to - perPage;
@@ -70,9 +70,9 @@ public class ProcessServiceImpl implements ProcessService {
 		Page<Process> data = null;
 		
 		if (StringUtils.isBlank(filter)) {
-			data = processDao.findAllWithPagination(pageable);
+			data = processDao.findAllWithPaginationByUserId(pageable, userId);
 		} else {
-			data = processDao.findAllWithPaginationByFilter(filter, pageable);
+			data = processDao.findAllWithPaginationByFilterAndUserId(pageable, filter, userId);
 		}
 
 		if (data != null) {

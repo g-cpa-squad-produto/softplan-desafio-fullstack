@@ -1,5 +1,7 @@
 package process.server.dao;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -10,7 +12,12 @@ import process.server.domain.User;
 
 public interface UserDao extends PagingAndSortingRepository<User, Long> {
 	
+	@Query("SELECT u FROM User u WHERE (:roleCode IS NULL OR u.role.code = :roleCode)")
+	List<User> findByRoleCode(@Param("roleCode") String roleCode);
+	
 	User findByEmailAndPassword(String email, String password);
+	
+	User findByEmail(String email);
 	
 	@Query("SELECT u FROM User u Order By u.name, u.email, u.role.name ")
 	Page<User> findAllWithPagination(Pageable pageable);

@@ -10,10 +10,19 @@ import process.server.domain.Process;
 
 public interface ProcessDao extends PagingAndSortingRepository<Process, Long> {
 	
-	@Query("SELECT p FROM Process p Order By p.name, p.code, p.seem")
-	Page<Process> findAllWithPagination(Pageable pageable);
+	@Query("SELECT DISTINCT p "
+			+ " FROM Process p, UserProcess up "
+			+ " WHERE up.process.id = p.id "
+			+ "		AND (:userId IS NULL OR up.user.id = :userId) "
+			+ " Order By p.name, p.code, p.seem")
+	Page<Process> findAllWithPaginationByUserId(Pageable pageable, @Param("userId") Long userId);
 	
-	@Query("SELECT p FROM Process p WHERE p.name like concat('%', :filter, '%') OR p.code like concat('%', :filter, '%') OR p.seem like concat('%', :filter, '%') Order By p.name, p.code, p.seem")
-	Page<Process> findAllWithPaginationByFilter(@Param("filter") String filter, Pageable pageable);
+	@Query("SELECT DISTINCT p "
+			+ " FROM Process p, UserProcess up "
+			+ " WHERE (p.name like concat('%', :filter, '%') OR p.code like concat('%', :filter, '%') OR p.seem like concat('%', :filter, '%')) "
+			+ "		AND up.process.id = p.id "
+			+ "		AND (:userId IS NULL OR up.user.id = :userId) "
+			+ " Order By p.name, p.code, p.seem")
+	Page<Process> findAllWithPaginationByFilterAndUserId(Pageable pageable, @Param("filter") String filter, @Param("userId") Long userId);
 	
 }

@@ -4,12 +4,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import process.server.apis.UserService;
 import process.server.dao.UserDao;
@@ -23,18 +28,67 @@ public class UserServiceImpl implements UserService {
 	private UserDao userDao;
 	
 	@Override
-	public User OAuth(OAuth oAuth) {
-		return userDao.findByEmailAndPassword(oAuth.getEmail(), oAuth.getPassword());
+	public Map<String, Object> OAuth(OAuth oAuth) {
+		
+		Map<String, Object> data = new HashMap<String, Object>();
+		String message = "";
+		Integer statusCode = null;
+		
+		User user = userDao.findByEmailAndPassword(oAuth.getEmail(), oAuth.getPassword());
+		if (user != null) {
+			
+			message = "Login efetuado com sucesso";
+			statusCode = HttpServletResponse.SC_OK;
+			
+		} else {
+			
+			message = "E-mail e/ou senha estão incorretos";
+			statusCode = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
+			
+		}
+		
+		data.put("message", message);
+		data.put("status", statusCode);
+		data.put("user", user);
+		
+		return data;
 	}
-	
+
+	@Transactional
+	@Modifying
 	@Override
-	public User save(User user) {
-		return userDao.save(user);
+	public Map<String, Object> save(User user) {
+		
+		Map<String, Object> data = new HashMap<String, Object>();
+		String message = "";
+		Integer statusCode = null;
+		User savedUser = null;
+		
+		User userSameEmail = userDao.findByEmail(user.getEmail());
+		if ((user.getId() == null && userSameEmail != null) 
+				|| (user.getId() != null && userSameEmail != null && !user.getId().equals(userSameEmail.getId()))) {
+			
+			message = "Já existe um usuário com esse e-mail. Por favor, utilize outro e-mail.";
+			statusCode = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
+			
+		} else {
+			
+			message = "Usuário salvo com sucesso.";
+			statusCode = HttpServletResponse.SC_OK;
+			savedUser = userDao.save(user);
+			
+		}
+		
+		data.put("message", message);
+		data.put("status", statusCode);
+		data.put("user", savedUser);
+		
+		return data;
 	}
 
 	@Override
-	public List<User> findAll() {
-		return (List<User>) userDao.findAll();
+	public List<User> findAll(String roleCode) {
+		return userDao.findByRoleCode(roleCode);
 	}
 
 	@Override
@@ -76,8 +130,24 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void delete(Long id) {
-		userDao.delete(id);
+	public Map<String, Object> delete(Long id) {
+
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		try {
+			
+			userDao.delete(id);
+			result.put("message", "Usuário deletado com sucesso");
+			result.put("status", HttpServletResponse.SC_OK);
+			
+		} catch (DataIntegrityViolationException e) {
+			
+			String message = "Usuário possui processos vinculados. Não foi possível deletar o usuário.";
+			result.put("message", message);
+			result.put("status", HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+		}
+		
+		return result;
 	}
 
 }

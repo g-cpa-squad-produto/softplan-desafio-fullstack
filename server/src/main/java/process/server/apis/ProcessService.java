@@ -10,7 +10,7 @@ public interface ProcessService {
 
 	ProcessDTO save(ProcessDTO processDTO);
 	
-	Map<String, Object> findAllWithPagination(String sort, Long page, Long perPage, String filter);
+	Map<String, Object> findAllWithPagination(String sort, Long page, Long perPage, String filter, Long userId);
 	
 	ProcessDTO findOne(Long id);
 
