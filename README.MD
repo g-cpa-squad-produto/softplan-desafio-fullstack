@@ -31,7 +31,6 @@ O projeto foi projetado para possui duas camadas: back-end, servidor, e front-en
 #### Back-End
 
 O back-end ou servidor do projeto foi construído na linguagem Java utilizando os frameworks Spring, SpringBoot, RESTFull e Hibenate.
-
 A estrutura do servidor é mostrado abaixo: 
 
 ![Estrutura Servidor](docs/images/estruturaServer.png)
@@ -49,6 +48,17 @@ Onde,
 #### Front-End
 
 O front-end ou camada de visualização do projeto foi construído utilizando o framework VueJs.
+A estrutura da aplicação web é mostrado abaixo: 
+
+![Estrutura Aplicação Web](docs/images/estruturaWeb.png)
+
+Onde,
+
+* build: Encontra-se as configurações para build.
+* config: Encontra-se as configurações gerais da aplicação.
+* src.components: Encontra-se os componentes utilizados na aplicação.
+* src.router: Encontra-se as rotas de navegação da aplicação.
+* src.store: Encontra-se os históricos, ações e getters da aplicação.
 
 #### Banco de Dados
 
@@ -93,3 +103,14 @@ Obs: Antes de executar os passos a seguir, é necessário clonar o repositório.
 3. Depois, executar **npm start**.
 
 4. Pronto, após esses passos, a aplicação web já está rodando no endereço [http://localhost:3000/](http://localhost:3000/).
+
+## Melhorias da Aplicação
+
+Melhoras que serão implementadas na aplicação com objetivo de melhorar a manutenção, segurança e disponibilização do produto.
+
+* Adicionar novas regras no eslint para deixar o código mais legível.
+* Adicionar biblioteca [Prettier](https://www.npmjs.com/package/prettier) para formatação automática do código.
+* Adicionar Spring Security para aumentar a segurança da aplicação.
+* Documentar os serviços do front-end e do back-end utilizando o [Swagger](https://swagger.io/).
+* Adicionar testes unitários no front-end e no back-end utilizando o [Karma](http://karma-runner.github.io/2.0/index.html) e [JUnit 5](https://junit.org/junit5/).
+* Disponibilidade a aplicação em Docker.
