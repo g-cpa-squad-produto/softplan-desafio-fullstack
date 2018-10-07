@@ -26,7 +26,7 @@ CREATE TABLE user_process (
 );
 
 INSERT INTO role (id, name, code)
-VALUES(1, 'Adminstrador', 'adminstrador');
+VALUES(1, 'Administrador', 'adminstrador');
 
 INSERT INTO role (id, name, code)
 VALUES(2, 'Usuário - Triador', 'triador');

@@ -9,7 +9,7 @@
 
 
 ## Database configuration:
-1. Opne the pgAdmin III program.
+1. Open the pgAdmin III program.
 
 2. Open the PostgreSQL server 9.4 (Localhost:5432)
 
@@ -29,5 +29,3 @@
 	* Click on Ok button
 
 5. Execute insert.sql file
-
-6. 
