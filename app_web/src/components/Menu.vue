@@ -1,6 +1,12 @@
 <template>
   <div class="menu">
     <ul>
+      <li v-if="isProfileLoaded && getProfile">
+        <router-link to="/profile">{{getProfile.name}}</router-link>
+      </li>
+      <li v-if="isProfileLoaded && getProfile">
+        <router-link to="/home">Home</router-link>
+      </li>
       <li v-if="isProfileLoaded && isAdmin ">
         <router-link to="/userList">Usuários</router-link>
       </li>
@@ -9,9 +15,6 @@
       </li>
       <li v-if="isAuthenticated" @click="logout">
         <span class="logout">Logout</span>
-      </li>
-      <li v-if="!isAuthenticated && !authLoading">
-        <router-link to="/login">Login</router-link>
       </li>
     </ul>
   </div>

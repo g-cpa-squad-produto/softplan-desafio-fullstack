@@ -12,7 +12,7 @@ import VeeValidate from 'vee-validate'
 Vue.config.productionTip = false
 
 Vue.use(VueAxios, axios)
-Vue.use(VeeValidate)
+Vue.use(VeeValidate, {fieldsBagName: 'formFields'})
 
 Vue.component('v-select', vSelect)
 Vue.component('loading', Loading)

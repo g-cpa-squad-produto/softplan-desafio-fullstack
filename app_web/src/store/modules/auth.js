@@ -4,6 +4,7 @@ import { USER_REQUEST } from '../actions/user'
 import config from '../../../config'
 import axios from 'axios'
 import uuidv4 from 'uuid/v4'
+import Swal from 'sweetalert2'
 
 const state = {
   token: localStorage.getItem('user-token') || '',
@@ -24,22 +25,48 @@ const actions = {
       commit(AUTH_REQUEST)
       axios.post(`${URL}api/users/oauth`, loginData)
         .then(resp => {
-          if (resp.data) {
+
+          if (resp.data.status === 200) {
+
+            if (!localStorage.getItem('userData')) {
+
+              Swal({
+                type: 'success',
+                title: resp.data.message,
+                showConfirmButton: false,
+                timer: 1500
+              })
+
+            }
+
             const userToken = uuidv4()
-            resp.data['token'] = userToken
+            resp.data.user['token'] = userToken
 
             localStorage.setItem('user-token', userToken)
-            commit(AUTH_SUCCESS, resp.data)
-            dispatch(USER_REQUEST, resp.data)
+            commit(AUTH_SUCCESS, resp.data.user)
+            dispatch(USER_REQUEST, resp.data.user)
             resolve(resp)
-          } else {
-            const err = 'User and/or password is invalid!'
-            commit(AUTH_ERROR, err)
+
+          } else if (resp.data.status === 500) {
+
+            Swal({
+              type: 'error',
+              title: 'Oops...',
+              text: resp.data.message
+            })
+
+            commit(AUTH_ERROR, resp.data.message)
             localStorage.removeItem('user-token')
-            reject(err)
+            reject(resp.data.message)
+
           }
         })
         .catch(err => {
+          Swal({
+            type: 'error',
+            title: 'Oops...',
+            text: 'Algo deu errado. Tente novamente mais tarde!'
+          })
           commit(AUTH_ERROR, err)
           localStorage.removeItem('user-token')
           reject(err)

@@ -18,7 +18,7 @@
               </div>
               <div class="form-group">
                 <label for="seem">Parecer: </label>
-                <textarea :disabled="!isFinalizador && isFinalizadorToProcess" class="form-control" name="seem" placeholder="Parecer..." v-model="processData.seem"/>
+                <textarea :disabled="!isFinalizador" class="form-control" name="seem" placeholder="Parecer..." v-model="processData.seem"/>
                 <div v-if="submitted && errors.has('seem')" class="invalid-feedback">{{ errors.first('seem') }}</div>
               </div>
               <div class="form-group">
@@ -71,13 +71,12 @@
         users: [],
         processData: {},
         hasprocessData: false,
-        isFinalizadorToProcess: false,
         submitted: false
       }
     },
     methods: {
       async getUsers () {
-        await axios.get(`${URL}api/users`)
+        await axios.get(`${URL}api/users?roleCode=finalizador`)
           .then(res => {
             this.users = getUsersData(res.data)
             const processId = this.$route.params.id;
@@ -110,29 +109,31 @@
       async submit () {
         this.submitted = true;
         this.$validator.validate().then(async valid => {
-            if (valid) {
-                const users = [];
-                if (this.selectedUsers) {
-                  for (let i = 0; i < this.selectedUsers.length; i++) {
-                    users.push({
-                      id: this.selectedUsers[i].value
-                    })
-                  }
-                }
-                
-                const processDTO = {
-                  process: this.processData,
-                  users: users
-                }
-
-                await axios.post(`${URL}api/process`, processDTO)
-                  .then(res => {
-                    this.$router.push({name: 'ProcessList'})
-                  })
-                  .catch(err => {
-                    console.log(err)
-                  })
+            
+          if (valid) {
+            
+            const users = [];
+            if (this.selectedUsers) {
+              for (let i = 0; i < this.selectedUsers.length; i++) {
+                users.push({
+                  id: this.selectedUsers[i].value
+                })
+              }
             }
+            
+            const processDTO = {
+              process: this.processData,
+              users: users
+            }
+
+            await axios.post(`${URL}api/process`, processDTO)
+              .then(res => {
+                this.$router.push({name: 'ProcessList'})
+              })
+              .catch(err => {
+                console.log(err)
+              })
+          }
         });
       },
       onCancel () {

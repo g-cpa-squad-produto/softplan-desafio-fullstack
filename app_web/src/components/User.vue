@@ -37,6 +37,7 @@
 <script>
   import config from '../../config'
   import axios from 'axios'
+  import Swal from 'sweetalert2'
 
   const URL = process.env.NODE_ENV === 'production' ? config.build.url : config.dev.url
 
@@ -104,20 +105,46 @@
 
             const user = this.userData;
 
-            if (this.selectedRole) {
-              for (let i = 0; i < this.selectedRole.length; i++) {
-                user['role'] = {
-                  id: this.selectedRole[i].value
-                }
+            if ($.isArray(this.selectedRole) && this.selectedRole.length === 1) { 
+              user['role'] = {
+                id: this.selectedRole[0].value
+              }
+            } else if (this.selectedRole) {
+              user['role'] = {
+                id: this.selectedRole.value
               }
             }
             
             await axios.post(`${URL}api/users`, user)
-            .then(res => {
+            .then(resp => {
+
+              if (resp.data.status === 200) {
+
+                Swal({
+                  type: 'success',
+                  title: resp.data.message,
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+
+              } else if (resp.data.status === 500) {
+
+                Swal({
+                  type: 'error',
+                  title: 'Oops...',
+                  text: resp.data.message
+                })
+
+              }
+
               this.$router.push({name: 'UserList'})
             })
             .catch(err => {
-              console.log(err)
+              Swal({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Algo deu errado. Tente novamente mais tarde!'
+              })
             })
 
           }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1> Usuários</h1>
+    <h1> Processos</h1>
     <my-vuetable 
       :ADD_ROUTER_LINK_TO="ADD_ROUTER_LINK_TO"
       :API_URL="API_URL" 
@@ -14,7 +14,7 @@
 
 <script>
 
-  import { mapState } from 'vuex'
+  import { mapGetters, mapState } from 'vuex'
   import config from '../../config'
   import MyVuetable from './table/MyVuetable'
 
@@ -25,10 +25,20 @@
     components: {
       MyVuetable
     },
-    data: function() {
+    data: () => {
+      
+      let API_URL = `${URL}api/process/pagination`;
+      if (localStorage.getItem('userData')) {
+        
+        const userData = JSON.parse(localStorage.getItem('userData'));
+        if (userData && userData.role && userData.role.code === 'finalizador') {
+          API_URL = `${API_URL}?userId=${userData.id}`
+        }
+      }
+
       return {
         ADD_ROUTER_LINK_TO: '/process/null',
-        API_URL: `${URL}api/process/pagination`,
+        API_URL: API_URL,
         canDelete: false,
         fields: [
           {
@@ -66,6 +76,9 @@
 
       },
     },
-    computed: mapState({profile: state => state.user.profile})
+    computed: {
+      ...mapGetters(['getProfile', 'isFinalizador']),
+      ...mapState({profile: state => state.user.profile})
+    }
   }
 </script>

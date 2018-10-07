@@ -5,7 +5,7 @@
         <div class="form-group">
           <label>Buscar por:</label>
           <input type="text" v-model="filterText" class="form-control" @keyup.enter="doFilter">
-          <button class="btn btn-primary" @click="doFilter">Buscar</button>
+          <button id="searchButton" class="btn btn-primary" @click="doFilter">Buscar</button>
           <button class="btn btn-default" @click="resetFilter">Limpar</button>
         </div>
       </div>

@@ -18,6 +18,7 @@
   import config from '../../config'
   import MyVuetable from './table/MyVuetable'
   import axios from 'axios'
+  import Swal from 'sweetalert2'
 
   const URL = process.env.NODE_ENV === 'production' ? config.build.url : config.dev.url
 
@@ -64,21 +65,38 @@
         } else if (action === 'DELETE') {
           
           await axios.delete(`${URL}api/users/${data.id}`)
-          .then(res => {
+          .then(resp => {
             
-            if (res.data.status == "200") {
-              console.log(res.data.message)
-            } else if (res.data.status == "500") {
-              console.error(res.data.message)
+            if (resp.data.status == "200") {
+              
+              Swal({
+                type: 'success',
+                title: resp.data.message,
+                showConfirmButton: false,
+                timer: 1500
+              })
+              
+              document.getElementById('searchButton').click();
+
+            } else if (resp.data.status == "500") {
+              
+              Swal({
+                type: 'error',
+                title: 'Oops...',
+                text: resp.data.message
+              })
+
             }
             
           })
           .catch(err => {
-            console.log(err)
+            Swal({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Algo deu errado. Tente novamente mais tarde!'
+              })
           })
-
         }
-
       },
     },
     computed: mapState({profile: state => state.user.profile})

@@ -82,11 +82,15 @@ export default {
         },
       },
       moreParams: {}
-  	}
+    }
   },
   mounted () {
-    this.$events.listen('filter-set', filterText => this.onFilterSet(filterText))
-    this.$events.listen('filter-reset', () => this.onFilterReset())
+    this.$events.listen('filter-set', filterText => {
+      this.onFilterSet(filterText)
+    })
+    this.$events.listen('filter-reset', () => {
+      this.onFilterReset()
+    })
   },
   methods: {
     onPaginationData (paginationData) {
@@ -100,12 +104,24 @@ export default {
       this.moreParams = {
         'filter': filterText
       }
-      Vue.nextTick(() => this.$refs.vuetable.refresh())
+      Vue.nextTick(() => {
+        if (this.$refs && this.$refs.vuetable) {
+          this.$refs.vuetable.refresh()
+        }
+      })
     },
     onFilterReset () {
       this.moreParams = {}
-      this.$refs.vuetable.refresh()
-      Vue.nextTick(() => this.$refs.vuetable.refresh())
+
+      if (this.$refs && this.$refs.vuetable) {
+        this.$refs.vuetable.refresh()
+      }
+      
+      Vue.nextTick(() => {
+        if (this.$refs && this.$refs.vuetable) {
+          this.$refs.vuetable.refresh()
+        }
+      })
     }
   },
 }
