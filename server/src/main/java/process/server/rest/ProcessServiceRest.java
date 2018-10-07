@@ -25,7 +25,7 @@ public class ProcessServiceRest {
 	
 	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value = "", method = RequestMethod.POST)
-    private ProcessDTO save(@RequestBody  ProcessDTO processDTO) {
+    private Map<String, Object> save(@RequestBody  ProcessDTO processDTO) {
 		return processService.save(processDTO);
     }
 	

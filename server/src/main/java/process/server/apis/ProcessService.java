@@ -8,7 +8,7 @@ import process.server.domain.dto.ProcessDTO;
 
 public interface ProcessService {
 
-	ProcessDTO save(ProcessDTO processDTO);
+	Map<String, Object> save(ProcessDTO processDTO);
 	
 	Map<String, Object> findAllWithPagination(String sort, Long page, Long perPage, String filter, Long userId);
 	

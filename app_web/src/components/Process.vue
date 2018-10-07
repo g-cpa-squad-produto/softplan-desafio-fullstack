@@ -47,6 +47,7 @@
   import { mapGetters } from 'vuex'
   import config from '../../config'
   import axios from 'axios'
+  import Swal from 'sweetalert2'
 
   const URL = process.env.NODE_ENV === 'production' ? config.build.url : config.dev.url
   
@@ -127,11 +128,36 @@
             }
 
             await axios.post(`${URL}api/process`, processDTO)
-              .then(res => {
-                this.$router.push({name: 'ProcessList'})
+              .then(resp => {
+
+                if (resp.data.status === 200) {
+
+                  Swal({
+                    type: 'success',
+                    title: resp.data.message,
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
+
+                  this.$router.push({name: 'ProcessList'})
+
+                } else if (resp.data.status === 500) {
+
+                  Swal({
+                    type: 'error',
+                    title: 'Oops...',
+                    text: resp.data.message
+                  })
+
+                }
+
               })
               .catch(err => {
-                console.log(err)
+                 Swal({
+                  type: 'error',
+                  title: 'Oops...',
+                  text: 'Algo deu errado. Tente novamente mais tarde!'
+                })
               })
           }
         });

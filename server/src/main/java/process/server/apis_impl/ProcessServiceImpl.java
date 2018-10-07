@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -31,20 +33,43 @@ public class ProcessServiceImpl implements ProcessService {
 	private UserProcessDao userProcessDao;
 	
 	@Override
-	public ProcessDTO save(ProcessDTO processDTO) {
+	public Map<String, Object> save(ProcessDTO processDTO) {
 		
-		Process processSaved = processDao.save(processDTO.getProcess());
+		Map<String, Object> data = new HashMap<String, Object>();
+		String message = null;
+		Integer statusCode = null;
 		
-		//-- Delete all user process before save the newest
-		deleteUserProcess(processSaved.getId());
+		Process existedProcess = processDao.findByCode(processDTO.getProcess().getCode());
+		if ((processDTO.getProcess().getId() == null && existedProcess != null) 
+				|| (processDTO.getProcess().getId() != null && existedProcess != null && !processDTO.getProcess().getId().equals(existedProcess.getId())) ) {
+			
+			message = "Já existe um processo com o mesmo código. Não é possível salvar o processo";
+			statusCode = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
+			
+		} else {
+			
+			Process processSaved = processDao.save(processDTO.getProcess());
+			
+			//-- Delete all user process before save the newest
+			deleteUserProcess(processSaved.getId());
+			
+			List<User> users = processDTO.getUsers();
+			users.forEach(user -> {
+				userProcessDao.save(new UserProcess(processSaved, user));
+			});
+			
+			processDTO.setProcess(processSaved);
+			
+			data.put("processDTO", processDTO);
+			message = "Processo salvo com sucesso";
+			statusCode = HttpServletResponse.SC_OK;
+			
+		}
 		
-		List<User> users = processDTO.getUsers();
-		users.forEach(user -> {
-			userProcessDao.save(new UserProcess(processSaved, user));
-		});
+		data.put("message", message);
+		data.put("status", statusCode);
 		
-		processDTO.setProcess(processSaved);
-		return processDTO;
+		return data;
 	}
 	
 	@Transactional

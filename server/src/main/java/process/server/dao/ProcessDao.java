@@ -24,5 +24,7 @@ public interface ProcessDao extends PagingAndSortingRepository<Process, Long> {
 			+ "		AND (:userId IS NULL OR up.user.id = :userId) "
 			+ " Order By p.name, p.code, p.seem")
 	Page<Process> findAllWithPaginationByFilterAndUserId(Pageable pageable, @Param("filter") String filter, @Param("userId") Long userId);
+
+	Process findByCode(String code);
 	
 }
