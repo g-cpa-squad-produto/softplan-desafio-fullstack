@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import br.com.softplan.process.model.User;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import io.jsonwebtoken.Jwts;
@@ -30,20 +32,23 @@ public class TokenAuthenticationService {
         response.getWriter().close();
     }
 
-    public static Authentication getAuthentication(HttpServletRequest request) {
+    public static Authentication getAuthentication(HttpServletRequest request, UserService userService) {
         String token = request.getHeader(HEADER_STRING);
 
         if (token != null) {
-            String user = Jwts.parser()
+            String email = Jwts.parser()
                     .setSigningKey(SECRET)
                     .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
                     .getBody()
                     .getSubject();
 
+            User user = userService.findByEmail(email);
+
             if (user != null) {
-                return new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());
+                return new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
             }
         }
+
         return null;
     }
 

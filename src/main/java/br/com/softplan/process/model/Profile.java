@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -11,26 +12,27 @@ import java.util.Set;
 
 @Getter
 @Setter
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Process extends BaseEntity {
+@Entity
+public class Profile extends BaseEntity {
 
     @Id
-    @NotNull
     @Column
+    @NotNull
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
+    @NotNull(message = "Campo obrigatório")
     @Column
     private String name;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_process",
+    @NotNull(message = "Campo obrigatório")
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "profile_role",
             joinColumns = @JoinColumn(
-                    name = "process_id", referencedColumnName = "id"),
+                    name = "profile_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
-                    name = "user_id", referencedColumnName = "id"))
-    private Set<User> users;
+                    name = "role_id", referencedColumnName = "id"))
+    private Set<Role> roles;
 }
