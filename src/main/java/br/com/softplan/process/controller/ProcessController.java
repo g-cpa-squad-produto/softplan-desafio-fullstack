@@ -1,6 +1,8 @@
 package br.com.softplan.process.controller;
 
+import br.com.softplan.process.converter.ProcessConverter;
 import br.com.softplan.process.model.Process;
+import br.com.softplan.process.response.ProcessResponse;
 import br.com.softplan.process.service.ProcessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,10 +16,12 @@ import java.util.List;
 public class ProcessController {
 
     private ProcessService service;
+    private ProcessConverter converter;
 
     @Autowired
-    public ProcessController(ProcessService service) {
+    public ProcessController(ProcessService service, ProcessConverter converter) {
         this.service = service;
+        this.converter = converter;
     }
 
     @PostMapping()
@@ -36,20 +40,20 @@ public class ProcessController {
 
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
-    public List<Process> list() {
-        return this.service.findAll();
+    public List<ProcessResponse> list() {
+        return this.converter.decode(this.service.findAll());
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Process find(@PathVariable Long id) throws Exception {
-        return this.service.findById(id);
+    public ProcessResponse find(@PathVariable Long id) throws Exception {
+        return this.converter.decode(this.service.findById(id));
     }
 
     @GetMapping("/user")
     @ResponseStatus(HttpStatus.OK)
-    public List<Process> findByUser() {
-        return this.service.findByUserLogged();
+    public List<ProcessResponse> findByUser() {
+        return this.converter.decode(this.service.findByUserLogged());
     }
 
     @PostMapping("/{processId}/user/{userId}")
