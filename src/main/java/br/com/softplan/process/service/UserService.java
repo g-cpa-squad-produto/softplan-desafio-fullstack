@@ -5,6 +5,8 @@ import br.com.softplan.process.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -15,12 +17,28 @@ public class UserService {
         this.repository = repository;
     }
 
-    User findById(Long id) throws Exception {
+    public User findById(Long id) throws Exception {
         return repository.findById(id)
                          .orElseThrow(() -> new Exception("Usuário inexistente"));
     }
 
     User findByEmail(String email) {
         return repository.findByEmail(email);
+    }
+
+    public void save(User user) {
+        this.repository.save(user);
+    }
+
+    public void delete(Long id) {
+        this.repository.deleteById(id);
+    }
+
+    public List<User> findAll() {
+        return this.repository.findAll();
+    }
+
+    public List<User> findByIdIn(List<Long> ids) {
+        return this.repository.findByIdIn(ids);
     }
 }

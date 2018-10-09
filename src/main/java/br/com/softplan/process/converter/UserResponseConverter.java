@@ -6,7 +6,7 @@ import br.com.softplan.process.response.UserResponse;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserConverter implements Converter<UserResponse, User> {
+public class UserResponseConverter implements Converter<UserResponse, User> {
 
     @Override
     public User encode(UserResponse response) {
@@ -20,7 +20,6 @@ public class UserConverter implements Converter<UserResponse, User> {
         response.setEmail(user.getEmail());
         response.setId(user.getId());
         response.setName(user.getName());
-        response.setUsername(user.getUsername());
 
         return response;
     }

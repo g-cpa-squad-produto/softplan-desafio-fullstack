@@ -1,7 +1,8 @@
 package br.com.softplan.process.controller;
 
-import br.com.softplan.process.converter.ProcessConverter;
-import br.com.softplan.process.model.Process;
+import br.com.softplan.process.converter.ProcessRequestConverter;
+import br.com.softplan.process.converter.ProcessResponseConverter;
+import br.com.softplan.process.request.ProcessRequest;
 import br.com.softplan.process.response.ProcessResponse;
 import br.com.softplan.process.service.ProcessService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,50 +17,45 @@ import java.util.List;
 public class ProcessController {
 
     private ProcessService service;
-    private ProcessConverter converter;
+    private ProcessResponseConverter responseConverter;
+    private ProcessRequestConverter requestConverter;
 
     @Autowired
-    public ProcessController(ProcessService service, ProcessConverter converter) {
+    public ProcessController(ProcessService service, ProcessResponseConverter responseConverter, ProcessRequestConverter requestConverter) {
         this.service = service;
-        this.converter = converter;
+        this.responseConverter = responseConverter;
+        this.requestConverter = requestConverter;
     }
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public void save(@RequestBody @Valid Process process) {
-        this.service.save(process);
+    public void save(@RequestBody @Valid ProcessRequest request) {
+        this.service.save(requestConverter.encode(request));
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void update(@PathVariable Long id,
-                       @RequestBody @Valid Process process) {
+                       @RequestBody @Valid ProcessRequest process) {
         process.setId(id);
-        this.service.save(process);
+        this.service.save(requestConverter.encode(process));
     }
 
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
     public List<ProcessResponse> list() {
-        return this.converter.decode(this.service.findAll());
+        return this.responseConverter.decode(this.service.findAll());
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ProcessResponse find(@PathVariable Long id) throws Exception {
-        return this.converter.decode(this.service.findById(id));
+        return this.responseConverter.decode(this.service.findById(id));
     }
 
     @GetMapping("/user")
     @ResponseStatus(HttpStatus.OK)
     public List<ProcessResponse> findByUser() {
-        return this.converter.decode(this.service.findByUserLogged());
-    }
-
-    @PostMapping("/{processId}/user/{userId}")
-    @ResponseStatus(HttpStatus.OK)
-    public void relateUserToSight(@PathVariable Long processId,
-                                  @PathVariable Long userId) throws Exception {
-        this.service.relateUserToSight(processId, userId);
+        return this.responseConverter.decode(this.service.findByUserLogged());
     }
 }

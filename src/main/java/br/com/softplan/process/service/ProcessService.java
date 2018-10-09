@@ -14,13 +14,11 @@ public class ProcessService {
 
     private ProcessRepository repository;
     private AuthService authService;
-    private UserService userService;
 
     @Autowired
-    public ProcessService(ProcessRepository repository, AuthService authService, UserService userService) {
+    public ProcessService(ProcessRepository repository, AuthService authService) {
         this.repository = repository;
         this.authService = authService;
-        this.userService = userService;
     }
 
     public void save(Process process) {
@@ -39,14 +37,5 @@ public class ProcessService {
 
     public List<Process> findByUserLogged() {
         return repository.findByUsers(Collections.singletonList(authService.getAuthentication()));
-    }
-
-    public void relateUserToSight(Long processId, Long userId) throws Exception {
-        User user = userService.findById(userId);
-        Process process = findById(processId);
-
-        process.setUsers(Collections.singleton(user));
-
-        repository.save(process);
     }
 }

@@ -1,6 +1,5 @@
 package br.com.softplan.process.response;
 
-import br.com.softplan.process.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,5 +15,5 @@ public class ProcessResponse {
 
     private Long id;
     private String name;
-    private List<UserResponse> usersResponse;
+    private List<UserResponse> users;
 }

@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ProcessConverter implements Converter<ProcessResponse, Process> {
+public class ProcessResponseConverter implements Converter<ProcessResponse, Process> {
 
-    private UserConverter userConverter;
+    private UserResponseConverter userResponseConverter;
 
     @Autowired
-    public ProcessConverter(UserConverter userConverter) {
-        this.userConverter = userConverter;
+    public ProcessResponseConverter(UserResponseConverter userResponseConverter) {
+        this.userResponseConverter = userResponseConverter;
     }
 
     @Override
@@ -27,7 +27,7 @@ public class ProcessConverter implements Converter<ProcessResponse, Process> {
 
         processResponse.setId(process.getId());
         processResponse.setName(process.getName());
-        processResponse.setUsersResponse(userConverter.decode(process.getUsers()));
+        processResponse.setUsers(userResponseConverter.decode(process.getUsers()));
 
         return processResponse;
     }

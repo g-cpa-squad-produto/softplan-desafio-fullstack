@@ -33,10 +33,6 @@ public class User extends BaseEntity implements UserDetails {
 
     @Column
     @NotNull(message = "Campo obrigatório")
-    private String username;
-
-    @Column
-    @NotNull(message = "Campo obrigatório")
     private String email;
 
     @Column
