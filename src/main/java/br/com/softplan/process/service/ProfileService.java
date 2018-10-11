@@ -1,5 +1,6 @@
 package br.com.softplan.process.service;
 
+import br.com.softplan.process.exception.ApplicationException;
 import br.com.softplan.process.model.Profile;
 import br.com.softplan.process.repository.ProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,10 @@ public class ProfileService {
 
     public List<Profile> findAll() {
         return repository.findAll();
+    }
+
+    public Profile findById(Long id) {
+        return repository.findById(id)
+                         .orElseThrow(() -> new ApplicationException("Perfil inexistente"));
     }
 }

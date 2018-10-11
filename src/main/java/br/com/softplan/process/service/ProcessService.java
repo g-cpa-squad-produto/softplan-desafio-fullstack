@@ -1,5 +1,6 @@
 package br.com.softplan.process.service;
 
+import br.com.softplan.process.exception.ApplicationException;
 import br.com.softplan.process.model.Process;
 import br.com.softplan.process.model.User;
 import br.com.softplan.process.repository.ProcessRepository;
@@ -29,10 +30,10 @@ public class ProcessService {
         return this.repository.findAll();
     }
 
-    public Process findById(Long id) throws Exception {
+    public Process findById(Long id) throws ApplicationException {
         return this.repository
                    .findById(id)
-                   .orElseThrow(() -> new Exception("Processo inexistente"));
+                   .orElseThrow(() -> new ApplicationException("Processo inexistente"));
     }
 
     public List<Process> findByUserLogged() {

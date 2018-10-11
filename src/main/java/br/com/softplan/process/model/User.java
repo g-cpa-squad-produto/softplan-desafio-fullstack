@@ -4,15 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 @Setter
@@ -40,13 +40,18 @@ public class User extends BaseEntity implements UserDetails {
     private String password;
 
     @NotNull(message = "Campo obrigatório")
+    @Cascade(org.hibernate.annotations.CascadeType.DETACH)
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_profile",
-            joinColumns = @JoinColumn(
-                    name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "profile_id", referencedColumnName = "id"))
+               joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "profile_id", referencedColumnName = "id"))
     private Set<Profile> profiles;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_process",
+               joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "process_id", referencedColumnName = "id"))
+    private Set<Process> processes;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -79,5 +84,19 @@ public class User extends BaseEntity implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        this.password = passwordEncoder.encode(this.password);
+        this.setCreatedAt(new Date());
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        this.password = passwordEncoder.encode(this.password);
+        this.setUpdatedAt(new Date());
     }
 }

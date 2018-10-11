@@ -10,4 +10,5 @@ import java.util.List;
 public interface ProfileRepository extends JpaRepository<Profile, Long> {
 
     List<Profile> findByIdIn(List<Long> ids);
+    Profile findByName(String name);
 }

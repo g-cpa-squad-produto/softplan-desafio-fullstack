@@ -20,10 +20,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
+                .antMatchers("/user/profile/{id}").hasRole("USER_LIST_BY_PROFILE")
                 .antMatchers("/user/**").hasRole("USER_GRANT_ALL")
                 .antMatchers("/sight/**").hasRole("SIGHT_GRANT_ALL")
                 .antMatchers("/process/user").hasRole("PROCESS_LIST_BY_USER")
                 .antMatchers("/process/**").hasRole("PROCESS_GRANT_ALL")
+                .antMatchers("/profile/**").hasRole("USER_GRANT_ALL")
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
                 .anyRequest().authenticated()
                 .and()

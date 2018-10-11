@@ -1,10 +1,8 @@
 package br.com.softplan.process.converter;
 
 import br.com.softplan.process.Converter;
-import br.com.softplan.process.model.Profile;
 import br.com.softplan.process.model.User;
-import br.com.softplan.process.request.UserRequest;
-import br.com.softplan.process.response.UserResponse;
+import br.com.softplan.process.request.UserInsertRequest;
 import br.com.softplan.process.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,17 +10,17 @@ import org.springframework.stereotype.Component;
 import java.util.HashSet;
 
 @Component
-public class UserRequestConverter implements Converter<UserRequest, User> {
+public class UserInsertRequestConverter implements Converter<UserInsertRequest, User> {
 
     private ProfileService profileService;
 
     @Autowired
-    public UserRequestConverter(ProfileService profileService) {
+    public UserInsertRequestConverter(ProfileService profileService) {
         this.profileService = profileService;
     }
 
     @Override
-    public User encode(UserRequest request) {
+    public User encode(UserInsertRequest request) {
         User user = new User();
 
         user.setId(request.getId());
@@ -35,7 +33,7 @@ public class UserRequestConverter implements Converter<UserRequest, User> {
     }
 
     @Override
-    public UserRequest decode(User user) {
+    public UserInsertRequest decode(User user) {
         return null;
     }
 }

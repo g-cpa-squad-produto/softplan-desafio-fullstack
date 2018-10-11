@@ -2,6 +2,7 @@ package br.com.softplan.process.controller;
 
 import br.com.softplan.process.converter.ProcessRequestConverter;
 import br.com.softplan.process.converter.ProcessResponseConverter;
+import br.com.softplan.process.exception.ApplicationException;
 import br.com.softplan.process.request.ProcessRequest;
 import br.com.softplan.process.response.ProcessResponse;
 import br.com.softplan.process.service.ProcessService;
@@ -49,7 +50,7 @@ public class ProcessController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ProcessResponse find(@PathVariable Long id) throws Exception {
+    public ProcessResponse find(@PathVariable Long id) throws ApplicationException {
         return this.responseConverter.decode(this.service.findById(id));
     }
 
