@@ -1,4 +1,6 @@
-# tasklist-web
+# DESAFIO GERENCIAMENTO DE PROCESSOS
+
+Aplicação feita com ReactJS
 
 **Pré-requisitos:**
 
@@ -13,4 +15,4 @@
 
 `npm start`
 
-OBS: No arquivo Http.js modificar a linha 3 para o host back-end.
+OBS: No arquivo Methods.js modificar o método getURL() para os host do back-end configurado.
