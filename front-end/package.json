@@ -1,0 +1,46 @@
+{
+  "name": "tasklist",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.18.0",
+    "google-maps-react": "^2.0.2",
+    "highcharts": "^6.1.1",
+    "highcharts-drilldown": "^0.1.7",
+    "jspdf": "^1.4.1",
+    "jspdf-autotable": "^2.3.4",
+    "moment": "^2.22.2",
+    "rc-dropzone": "^1.1.3",
+    "react": "^16.4.0",
+    "react-bootstrap": "^0.32.1",
+    "react-bootstrap-sweetalert": "^4.4.1",
+    "react-csv": "^1.0.14",
+    "react-dom": "^16.4.0",
+    "react-dropzone": "^4.2.13",
+    "react-dropzone-component": "^3.2.0",
+    "react-event-timeline": "^1.5.4",
+    "react-highcharts": "^16.0.2",
+    "react-image-gallery": "^0.8.8",
+    "react-images": "^0.5.17",
+    "react-loader-spinner": "^2.1.0",
+    "react-loading": "^2.0.3",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.1.4",
+    "react-select": "^1.2.1",
+    "reactstrap": "^6.3.0",
+    "sweetalert": "^2.1.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {},
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

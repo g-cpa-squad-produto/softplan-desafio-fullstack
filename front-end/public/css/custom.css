@@ -1,0 +1,11 @@
+.button-rounded {
+    border-radius: 50% !important;
+}
+
+.zindex{
+    z-index: 999;
+}
+
+textarea{
+    text-transform: uppercase;
+}
