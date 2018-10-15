@@ -2,6 +2,7 @@ package br.com.softplan.process.controller;
 
 import br.com.softplan.process.model.Profile;
 import br.com.softplan.process.service.ProfileService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +23,8 @@ public class ProfileController {
         this.service = service;
     }
 
-    @GetMapping()
+    @ApiOperation(value = "Listar todos os perfis")
+    @GetMapping(produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public List<Profile> list() {
         return this.service.findAll();

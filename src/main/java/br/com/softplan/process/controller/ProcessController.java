@@ -6,6 +6,7 @@ import br.com.softplan.process.exception.ApplicationException;
 import br.com.softplan.process.request.ProcessRequest;
 import br.com.softplan.process.response.ProcessResponse;
 import br.com.softplan.process.service.ProcessService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -28,13 +29,15 @@ public class ProcessController {
         this.requestConverter = requestConverter;
     }
 
-    @PostMapping()
+    @ApiOperation(value = "Salvar Processo")
+    @PostMapping(produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public void save(@RequestBody @Valid ProcessRequest request) {
         this.service.save(requestConverter.encode(request));
     }
 
-    @PutMapping("/{id}")
+    @ApiOperation(value = "Atualizar Processo")
+    @PutMapping(value = "/{id}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public void update(@PathVariable Long id,
                        @RequestBody @Valid ProcessRequest process) {
@@ -42,19 +45,22 @@ public class ProcessController {
         this.service.save(requestConverter.encode(process));
     }
 
-    @GetMapping()
+    @ApiOperation(value = "Listar todos os Processo")
+    @GetMapping(produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public List<ProcessResponse> list() {
         return this.responseConverter.decode(this.service.findAll());
     }
 
-    @GetMapping("/{id}")
+    @ApiOperation(value = "Buscar processos por id")
+    @GetMapping(value = "/{id}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public ProcessResponse find(@PathVariable Long id) throws ApplicationException {
         return this.responseConverter.decode(this.service.findById(id));
     }
 
-    @GetMapping("/user")
+    @ApiOperation(value = "Buscar todos os processos referentes so usuário logado")
+    @GetMapping(value = "/user", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public List<ProcessResponse> findByUser() {
         return this.responseConverter.decode(this.service.findByUserLogged());

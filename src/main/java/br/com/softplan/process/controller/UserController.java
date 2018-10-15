@@ -8,6 +8,8 @@ import br.com.softplan.process.request.UserInsertRequest;
 import br.com.softplan.process.request.UserUpdateRequest;
 import br.com.softplan.process.response.UserResponse;
 import br.com.softplan.process.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+@Api(value = "Api REST de usuários")
 @RestController
 @RequestMapping(path = "/user")
 public class UserController {
@@ -33,13 +36,15 @@ public class UserController {
         this.updateRequestConverter = updateRequestConverter;
     }
 
-    @PostMapping()
+    @ApiOperation(value = "Salvar usuário")
+    @PostMapping(produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public void save(@RequestBody @Valid UserInsertRequest user) {
         this.service.save(insertRequestConverter.encode(user));
     }
 
-    @PutMapping("/{id}")
+    @ApiOperation(value = "Atualizar usuário")
+    @PutMapping(value = "/{id}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public void update(@PathVariable Long id,
                        @RequestBody @Valid UserUpdateRequest user) {
@@ -47,25 +52,29 @@ public class UserController {
         this.service.save(updateRequestConverter.encode(user));
     }
 
-    @GetMapping()
+    @ApiOperation(value = "Listar todos os usuário")
+    @GetMapping(produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public List<UserResponse> get() {
         return this.responseConverter.decode(this.service.findAll());
     }
 
-    @GetMapping("/profile/{id}")
+    @ApiOperation(value = "Buscar usuário por perfil")
+    @GetMapping(value = "/profile/{id}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public List<UserResponse> getByProfile(@PathVariable Long id) {
         return this.responseConverter.decode(this.service.findAllByProfile(id));
     }
 
-    @GetMapping("/{id}")
+    @ApiOperation(value = "Buscar usuário por id")
+    @GetMapping(value = "/{id}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public UserResponse find(@PathVariable Long id) throws ApplicationException {
         return this.responseConverter.decode(this.service.findById(id));
     }
 
-    @DeleteMapping("/{id}")
+    @ApiOperation(value = "Excluir usuário por id")
+    @DeleteMapping(value = "/{id}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable Long id) throws ApplicationException {
         this.service.delete(id);
