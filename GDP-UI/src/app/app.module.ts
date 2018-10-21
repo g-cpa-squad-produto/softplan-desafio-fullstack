@@ -11,10 +11,7 @@ import { LeftNavModule } from './components/left-nav/left-nav.module';
     AppComponent  ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-        BrowserModule,
-        SearchBarModule,
-        LeftNavModule
+    AppRoutingModule
   ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
