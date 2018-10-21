@@ -1,0 +1,14 @@
+/home/thiago/dev/workspace-sts/thiago-bernardo-desafio-softplan/src/main/java/com/softplan/thiagobernardo/config/WebSecurityConfig.java
+/home/thiago/dev/workspace-sts/thiago-bernardo-desafio-softplan/src/main/java/com/softplan/thiagobernardo/ThiagoBernardoDesafioSoftplanApplication.java
+/home/thiago/dev/workspace-sts/thiago-bernardo-desafio-softplan/src/main/java/com/softplan/thiagobernardo/processo/repository/ProcessoRepository.java
+/home/thiago/dev/workspace-sts/thiago-bernardo-desafio-softplan/src/main/java/com/softplan/thiagobernardo/parecer/repository/ParecerRepository.java
+/home/thiago/dev/workspace-sts/thiago-bernardo-desafio-softplan/src/main/java/com/softplan/thiagobernardo/config/ConfigurationCors.java
+/home/thiago/dev/workspace-sts/thiago-bernardo-desafio-softplan/src/main/java/com/softplan/thiagobernardo/usuario/controller/UsuarioApiController.java
+/home/thiago/dev/workspace-sts/thiago-bernardo-desafio-softplan/src/main/java/com/softplan/thiagobernardo/processo/controller/ProcessoApiController.java
+/home/thiago/dev/workspace-sts/thiago-bernardo-desafio-softplan/src/main/java/com/softplan/thiagobernardo/usuario/entity/Usuario.java
+/home/thiago/dev/workspace-sts/thiago-bernardo-desafio-softplan/src/main/java/com/softplan/thiagobernardo/usuario/repository/UsuarioRepository.java
+/home/thiago/dev/workspace-sts/thiago-bernardo-desafio-softplan/src/main/java/com/softplan/thiagobernardo/parecer/entity/Parecer.java
+/home/thiago/dev/workspace-sts/thiago-bernardo-desafio-softplan/src/main/java/com/softplan/thiagobernardo/parecer/ParecerApiController.java
+/home/thiago/dev/workspace-sts/thiago-bernardo-desafio-softplan/src/main/java/com/softplan/thiagobernardo/ServletInitializer.java
+/home/thiago/dev/workspace-sts/thiago-bernardo-desafio-softplan/src/main/java/com/softplan/thiagobernardo/util/ParecerStatus.java
+/home/thiago/dev/workspace-sts/thiago-bernardo-desafio-softplan/src/main/java/com/softplan/thiagobernardo/processo/entity/Processo.java
