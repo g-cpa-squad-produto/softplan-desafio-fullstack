@@ -10,7 +10,7 @@ export class TokenService {
     }
 
     setToken(token) {
-        window.localStorage.setItem(KEY, token);
+        window.localStorage.setItem(KEY, JSON.stringify(token)) ;
     }
 
     getToken() {

@@ -13,13 +13,10 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   constructor(
-    private messegesService: MessegesService,
     private formBuilder: FormBuilder,
-    private loginService: LoginService,
-    private router: Router  ) { }
+    private loginService: LoginService ) { }
 
-  user: User = new User();
-  loginForm: FormGroup;
+    loginForm: FormGroup;
 
   ngOnInit() {
     this.createForm();
@@ -43,14 +40,11 @@ export class LoginComponent implements OnInit {
     const login = this.loginForm.get('login').value;
     const password = this.loginForm.get('password').value;
 
+    const user = new User(login, password );
+
+
     if (this.loginForm.valid) {
-      this.loginService.authenticate(login, password).subscribe(
-        () => this.router.navigate(['/']),
-        error => {
-          this.messegesService.error('login failed');
-          console.log(error);
-        }
-      );
+        this.loginService.authenticate(user).subscribe(resp => {});
     }
   }
 

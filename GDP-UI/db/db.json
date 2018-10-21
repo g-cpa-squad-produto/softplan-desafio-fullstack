@@ -1,0 +1,19 @@
+{
+  "login": [
+    {
+      "id": 1,
+      "login": "yure",
+      "password": "1234"
+    },
+    {
+      "login": "yurekesley",
+      "password": "12345678",
+      "id": 2
+    }
+  ],
+
+  "processos" : [
+    {"id":1, "nome":"Porcesso 1", "tipo": "CIVIL"},
+    {"id":2, "nome":"Porcesso 2", "tipo": "CRIMINAL"}
+  ]
+}
