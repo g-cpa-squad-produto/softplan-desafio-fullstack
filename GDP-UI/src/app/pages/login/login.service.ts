@@ -25,13 +25,12 @@ export class LoginService {
    }
 
    authenticate(user: User): Observable<User> {
-    return this.httpService.post(user, 'login').pipe(
+    return this.httpService.post(user, 'login/autenticate').pipe(
       tap(res => {
            this.tokenService.setToken(user);
            this.router.navigate(['/']);
       },  (error: HttpErrorResponse ) => {
         console.log(error);
-        this.messageService.error(error.message);
       })
     );
 

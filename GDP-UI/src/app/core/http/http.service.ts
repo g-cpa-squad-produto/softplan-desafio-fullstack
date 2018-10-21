@@ -18,7 +18,7 @@ export class HttpService<T> {
             if (error.status === 404) {
                 this.messageService.error('Not Found');
             } else if (error.status === 401) {
-                this.messageService.error('Authenticate field');
+                this.messageService.error('Authentication field');
             } else if (error.status === 403) {
                 this.messageService.error('Forbidden');
             } else if (error.status === 501) {
