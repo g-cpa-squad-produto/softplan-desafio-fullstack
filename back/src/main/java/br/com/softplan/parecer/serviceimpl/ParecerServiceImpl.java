@@ -1,0 +1,21 @@
+package br.com.softplan.parecer.serviceimpl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import br.com.softplan.parecer.modelos.Parecer;
+import br.com.softplan.parecer.repository.ParecerRepository;
+import br.com.softplan.parecer.service.ParecerService;
+
+@Service
+public class ParecerServiceImpl implements ParecerService {
+	@Autowired
+	private ParecerRepository repository;
+
+	@Override
+	public Parecer incluirParecer(Parecer parecer) {
+		Parecer parecerSalvo = this.repository.save(parecer);
+		return parecerSalvo;
+	}
+
+}
