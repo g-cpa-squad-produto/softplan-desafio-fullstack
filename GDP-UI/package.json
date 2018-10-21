@@ -7,11 +7,12 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
+    "json": "json-server --watch  ./db/db.json --port 8080",
     "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^6.0.3",
+    "@angular/animations": "^6.1.10",
     "@angular/common": "^6.0.3",
     "@angular/compiler": "^6.0.3",
     "@angular/core": "^6.0.3",
@@ -24,6 +25,7 @@
     "core-js": "^2.5.4",
     "feather-icons": "^4.7.3",
     "jquery": "^3.3.1",
+    "ngx-toastr": "^9.1.1",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"
   },

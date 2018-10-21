@@ -1,7 +1,9 @@
+import { MessegesService } from './../../core/messeges/messages.service';
 import { User } from './../../model/user';
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from './login.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,8 +13,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
 
   constructor(
+    private messegesService: MessegesService,
     private formBuilder: FormBuilder,
-    private loginService: LoginService) { }
+    private loginService: LoginService,
+    private router: Router  ) { }
 
   user: User = new User();
   loginForm: FormGroup;
@@ -23,7 +27,7 @@ export class LoginComponent implements OnInit {
 
   public createForm() {
     this.loginForm = this.formBuilder.group({
-      email: ['', Validators.required],
+      login: ['', Validators.required],
       password: ['', Validators.required]
   });
   }
@@ -36,10 +40,17 @@ export class LoginComponent implements OnInit {
 
   public login() {
 
-    console.log(this.loginForm.valid);
+    const login = this.loginForm.get('login').value;
+    const password = this.loginForm.get('password').value;
 
     if (this.loginForm.valid) {
-      this.loginService.login();
+      this.loginService.authenticate(login, password).subscribe(
+        () => this.router.navigate(['/']),
+        error => {
+          this.messegesService.error('login failed');
+          console.log(error);
+        }
+      );
     }
   }
 
