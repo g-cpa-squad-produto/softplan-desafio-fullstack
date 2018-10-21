@@ -1,0 +1,67 @@
+front/.DS_STORE
+front/dist/
+front/bazel-*
+front/e2e_test.*
+front/node_modules
+front/bower_components
+front/tools/gulp-tasks/cldr/cldr-data/
+front/# Include when developing application packages.
+front/pubspec.lock
+front/.c9
+front/.idea/
+front/.settings/
+front/*.swo
+front/modules/.settings
+front/.vscode
+front/modules/.vscode
+front/# Don't check in secret files
+front/*secret.js
+front/# Ignore npm/yarn debug log
+front/npm-debug.log
+front/yarn-error.log
+front/# build-analytics
+front/.build-analytics
+front/# rollup-test output
+front/modules/rollup-test/dist/
+
+back/*#
+back/*.iml
+back/*.ipr
+back/*.iws
+back/*.jar
+back/*.sw?
+back/*~
+back/.#*
+back/.*.md.html
+back/.DS_Store
+back/.classpath
+back/.factorypath
+back/.gradle
+back/.idea
+back/.metadata
+back/.project
+back/.recommenders
+back/.settings
+back/.springBeans
+back/build
+back/code
+back/MANIFEST.MF
+back/_site/
+back/activemq-data
+back/bin
+back/build
+back/build.log
+back/dependency-reduced-pom.xml
+back/dump.rdb
+back/interpolated*.xml
+back/lib/
+back/manifest.yml
+back/overridedb.*
+back/settings.xml
+back/target
+back/transaction-logs
+back/.flattened-pom.xml
+back/secrets.yml
+back/.gradletasknamecache
+back/.sts4-cache
+back/database/*
