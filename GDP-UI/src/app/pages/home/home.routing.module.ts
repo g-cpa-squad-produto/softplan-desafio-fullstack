@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home.component';
 import { AuthGuard } from '../login/login.guard.service';
-import { LoginComponent } from '../login/login.component';
+import { UserListComponent } from '../users/user-list/user-list.component';
 
 const routes: Routes = [
     {
@@ -15,7 +15,11 @@ const routes: Routes = [
             {
                 path: '',
                 component: ListTableComponent,
-            }
+            },
+            {
+              path: 'users',
+              component: UserListComponent,
+          }
         ]
     },
 ];

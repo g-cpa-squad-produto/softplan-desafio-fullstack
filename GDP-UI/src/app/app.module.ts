@@ -19,7 +19,7 @@ import { AppComponent } from './app.component';
     ToastrModule.forRoot({
       preventDuplicates: true
     })
-  ],
+    ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

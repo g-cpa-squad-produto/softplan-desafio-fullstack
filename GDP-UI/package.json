@@ -21,6 +21,7 @@
     "@angular/platform-browser": "^6.0.3",
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.3",
+    "@fortawesome/fontawesome-free": "^5.4.1",
     "bootstrap": "^4.1.0",
     "core-js": "^2.5.4",
     "feather-icons": "^4.7.3",

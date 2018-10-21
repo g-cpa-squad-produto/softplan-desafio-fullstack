@@ -7,6 +7,7 @@ import { ListTableModule } from 'src/app/components/list-table/list-table.module
 import { LoginModule } from '../login/login.module';
 import { RouterModule } from '@angular/router';
 import { HomeRoutingModule } from './home.routing.module';
+import { UsersModule } from '../users/users.module';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { HomeRoutingModule } from './home.routing.module';
         LeftNavModule,
         ListTableModule,
         LoginModule,
+        UsersModule,
         RouterModule,
         HomeRoutingModule
   ],

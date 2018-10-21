@@ -1,9 +1,5 @@
 <div class="container text-center">
   <form class="form-signin" [formGroup]="loginForm" (submit)="login()">
-      <div *ngIf="hasHttpError" class="alert alert-danger alert-dismissible fade show" role="alert">
-      <strong>Error</strong> Unavailable Server
-    </div>
-
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
     <div class="form-group">
       <label for="login" class="sr-only">Login</label>

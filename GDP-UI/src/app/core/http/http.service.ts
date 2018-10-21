@@ -4,8 +4,7 @@ import { Observable } from 'rxjs';
 
 import { tap } from 'rxjs/operators';
 import { MessegesService } from '../messeges/messages.service';
-
-const API_URL = 'http://localhost:8080';
+import { API_URL } from '../const';
 
 @Injectable({ providedIn: 'root'})
 export class HttpService<T> {
