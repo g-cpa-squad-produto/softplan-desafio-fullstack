@@ -9,6 +9,7 @@ import { Error404Component } from './pages/error404/error404.component';
 import { LoginComponent } from './pages/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HeaderComponent } from './pages/header/header.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
     HomeComponent,
     AboutComponent,
     Error404Component,
-    LoginComponent
+    LoginComponent,
+    HeaderComponent
   ],
   imports: [
     HttpClientModule,

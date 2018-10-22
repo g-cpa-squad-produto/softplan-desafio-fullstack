@@ -26,6 +26,7 @@ public class JwtTokenUtil {
 
 	static final String CLAIM_KEY_USERNAME = "sub";
 	static final String CLAIM_KEY_ID = "id_usuario";
+	static final String CLAIM_NOME = "nome";
 	static final String CLAIM_KEY_ROLE = "role";
 	static final String CLAIM_KEY_CREATED = "created";
 
@@ -63,7 +64,8 @@ public class JwtTokenUtil {
 		JwtUser jwtUser;
 		try {
 			Claims claims = getClaimsFromToken(token);
-			jwtUser = new JwtUser(Long.parseLong(claims.get(CLAIM_KEY_ID).toString()), claims.getSubject(), null, null);
+			jwtUser = new JwtUser(Long.parseLong(claims.get(CLAIM_KEY_ID).toString()), claims.getSubject(), null,
+					claims.get(CLAIM_NOME).toString(), null);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -167,6 +169,7 @@ public class JwtTokenUtil {
 		Map<String, Object> claims = new HashMap<>();
 		claims.put(CLAIM_KEY_USERNAME, userDetails.getUsername());
 		claims.put(CLAIM_KEY_ID, userDetails.getId());
+		claims.put(CLAIM_NOME, userDetails.getNome());
 		userDetails.getAuthorities().forEach(authority -> claims.put(CLAIM_KEY_ROLE, authority.getAuthority()));
 		claims.put(CLAIM_KEY_CREATED, new Date());
 		return gerarToken(claims);

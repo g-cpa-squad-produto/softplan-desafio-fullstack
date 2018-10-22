@@ -21,11 +21,14 @@ public class JwtUser implements UserDetails {
 	private Long id;
 	private String username;
 	private String password;
+	private String nome;
 
 	private Collection<? extends GrantedAuthority> authorities;
 
-	public JwtUser(Long id, String username, String senha, Collection<? extends GrantedAuthority> authorities) {
+	public JwtUser(Long id, String username, String senha, String nome,
+			Collection<? extends GrantedAuthority> authorities) {
 		this.id = id;
+		this.nome = nome;
 		this.username = username;
 		this.password = senha;
 		this.authorities = authorities;
@@ -138,4 +141,11 @@ public class JwtUser implements UserDetails {
 		this.authorities = authorities;
 	}
 
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 }
