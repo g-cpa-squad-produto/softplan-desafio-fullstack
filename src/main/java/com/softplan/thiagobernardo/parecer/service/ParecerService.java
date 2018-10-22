@@ -52,10 +52,14 @@ public class ParecerService {
 	}
 	
 	@Transactional
-	public Parecer salvarParecerProcesso(Parecer parecer) {
-		Parecer parecerCriado = criar(parecer);
-		processoService.alterarStatusParecer(parecer.getProcesso().getId(), ParecerStatus.CONCLUIDO);
-		return parecerCriado;
+	public Parecer salvarParecerProcesso(Parecer parecer) throws Exception {
+		Parecer existeParecer = parecerRepository.findByProcesso_id(parecer.getProcesso().getId());
+		if(existeParecer==null) {
+			processoService.alterarStatusParecer(parecer.getProcesso().getId(), ParecerStatus.CONCLUIDO);
+			return criar(parecer);
+		}else {
+			throw new Exception("Já existe paracer para esse processo!");
+		}
 	}
 
 }

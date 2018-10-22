@@ -33,6 +33,7 @@ public class ProcessoService {
 		return processoRepository.findById(processoId).map(processo -> {
 			processo.setNumero(processoRequest.getNumero());
 			processo.setDescricao(processoRequest.getDescricao());
+			processo.setStatusParecer(processoRequest.getStatusParecer());
 			processo.setUsuariosPararecer(processoRequest.getUsuariosPararecer());
 			return processoRepository.save(processo);
 		}).orElseThrow(() -> new RuntimeException("Processo não encontrado!"));

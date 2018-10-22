@@ -75,7 +75,7 @@ public class ParecerApiController {
 	}
 	
 	@PostMapping("pareceres/processo")
-	public Parecer criarParecerProcesso(@RequestHeader(LoginApiController.NOME_TOKEN_HEADER) String token, @Valid @RequestBody Parecer parecer) {
+	public Parecer criarParecerProcesso(@RequestHeader(LoginApiController.NOME_TOKEN_HEADER) String token, @Valid @RequestBody Parecer parecer) throws Exception {
 		UsuarioDTO usuario = usuarioService.trazerPorToken(token);
 		if(usuario.isFinalizador()) {
 			return parecerService.salvarParecerProcesso(parecer);

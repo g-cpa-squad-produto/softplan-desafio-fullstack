@@ -8,4 +8,6 @@ import com.softplan.thiagobernardo.parecer.entity.Parecer;
 @Repository
 public interface ParecerRepository extends JpaRepository<Parecer, Long> {
 	
+	Parecer findByProcesso_id(Long processoId);
+	
 }
