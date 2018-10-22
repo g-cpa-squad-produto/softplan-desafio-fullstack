@@ -1,11 +1,15 @@
+import { PerfilTypes } from './perfil-types';
+
 export class User  {
 
   login: string;
   password: string;
+  perfil: PerfilTypes;
 
-  constructor(login, password) {
-      this.login = login;
-      this.password = password;
+  constructor(init?: Partial<User>) {
+    if (init) {
+      Object.assign(this, init);
+    }
   }
 
 }

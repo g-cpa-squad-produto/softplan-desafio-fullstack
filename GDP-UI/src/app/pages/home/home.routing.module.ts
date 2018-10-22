@@ -1,3 +1,4 @@
+import { UserResolver } from './../../core/resolver/user.resolver';
 import { ListTableComponent } from './../../components/list-table/list-table.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -11,6 +12,9 @@ const routes: Routes = [
         path: '',
         component: HomeComponent,
         canActivate: [AuthGuard],
+        resolve: {
+          user: UserResolver
+        },
         children: [
             {
                 path: '',

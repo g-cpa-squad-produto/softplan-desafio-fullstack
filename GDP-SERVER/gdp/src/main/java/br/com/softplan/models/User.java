@@ -2,6 +2,8 @@ package br.com.softplan.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,6 +26,17 @@ public @Data class User {
 
 	@Column(nullable = false)
 	private String password;
+	
+    @Enumerated(EnumType.STRING)
+	private PerfilType perfil;
+
+	public PerfilType getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(PerfilType perfil) {
+		this.perfil = perfil;
+	}
 
 	public Long getId() {
 		return id;

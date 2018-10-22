@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
     const login = this.loginForm.get('login').value;
     const password = this.loginForm.get('password').value;
 
-    const user = new User(login, password );
+    const user = new User( {login, password} );
 
 
     if (this.loginForm.valid) {

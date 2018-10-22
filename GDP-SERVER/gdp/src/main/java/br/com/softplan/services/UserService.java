@@ -15,5 +15,9 @@ public class UserService {
 	public User autenticate(User user) {
 		return this.userRepository.findByLoginAndPassword(user.getLogin(), user.getPassword());
 	}
+	
+	public User getUserByLogin(String login) {
+		return this.userRepository.findByLogin(login);
+	}
 
 }

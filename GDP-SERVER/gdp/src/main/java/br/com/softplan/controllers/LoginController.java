@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.softplan.exceptions.UserNotFoundException;
+import br.com.softplan.exceptions.UserUnauthorizedException;
 import br.com.softplan.models.Token;
 import br.com.softplan.models.User;
 import br.com.softplan.services.TokenService;
@@ -34,10 +35,23 @@ public class LoginController {
     	User userResponse  = this.userService.autenticate(user);
     	
     	if (userResponse == null) {
-            throw new UserNotFoundException("User not found");
+            throw new UserUnauthorizedException("Unauthorized");
     	}
     	
 		return new ResponseEntity<>(this.tokenService.getToken(), HttpStatus.OK);
+	}
+    
+    @RequestMapping(value="/user", method = RequestMethod.POST)
+    @ResponseBody
+	public ResponseEntity<User> getUserByLogin(@RequestBody User user) {
+    	
+    	User userResponse  = this.userService.getUserByLogin(user.getLogin());
+    	
+    	if (userResponse == null) {
+            throw new UserNotFoundException("User not found");
+    	}
+    	
+		return new ResponseEntity<>(userResponse, HttpStatus.OK);
 	}
 
 }

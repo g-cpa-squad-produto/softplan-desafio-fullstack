@@ -6,16 +6,16 @@ import { Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
 import { User } from '../../model/user';
 import { Observable } from 'rxjs';
-import { MessegesService } from '../../core/messeges/messages.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Token } from 'src/app/model/token';
+import { UserService } from 'src/app/core/service/user.service';
 
 
 @Injectable({ providedIn: 'root'})
 export class LoginService {
   constructor(
     private httpService: HttpService<User>,
-    private messageService: MessegesService,
+    private userService: UserService,
     private tokenService: TokenService,
     private router: Router ) {
 
@@ -29,6 +29,7 @@ export class LoginService {
     return this.httpService.login(user, 'login/autenticate').pipe(
       tap(token => {
            this.tokenService.setToken(token.value);
+           this.userService.setUser(user);
            this.router.navigate(['/']);
       },  (error: HttpErrorResponse ) => {
         console.log(error);
