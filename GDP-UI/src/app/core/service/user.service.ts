@@ -16,14 +16,14 @@ export class UserService {
     }
 
     public getUser(): Observable<User> {
+      if (this.user) {
+        return this.httpService.post(this.user, 'login/user').pipe(
+          tap(user => {
+             this.user = user;
+          })
+        );
+      }
 
-      console.log('cccccccc');
-
-      return this.httpService.post(this.user, 'login/user').pipe(
-        tap(user => {
-           this.user = user;
-        })
-      );
     }
 
       public setUser(user: User): void {
