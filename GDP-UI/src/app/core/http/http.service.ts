@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { MessegesService } from '../messeges/messages.service';
 import { API_URL } from '../const';
+import { Token } from 'src/app/model/token';
 
 @Injectable({ providedIn: 'root'})
 export class HttpService<T> {
@@ -36,6 +37,17 @@ export class HttpService<T> {
               return data;
             }, (error: HttpErrorResponse) => {
                  this.handlerError(error);
+            }));
+      }
+
+      public login(item: T, endpoint): Observable<Token> {
+        return this.http
+          .post<Token>(`${API_URL}/${endpoint}`, item)
+          .pipe(tap(data => {
+              return data;
+            }, (error: HttpErrorResponse) => {
+              this.handlerError(error);
+              console.log(error);
             }));
       }
 }

@@ -8,6 +8,7 @@ import { User } from '../../model/user';
 import { Observable } from 'rxjs';
 import { MessegesService } from '../../core/messeges/messages.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Token } from 'src/app/model/token';
 
 
 @Injectable({ providedIn: 'root'})
@@ -24,10 +25,10 @@ export class LoginService {
      return this.tokenService.hasToken();
    }
 
-   authenticate(user: User): Observable<User> {
-    return this.httpService.post(user, 'login/autenticate').pipe(
-      tap(res => {
-           this.tokenService.setToken(user);
+   authenticate(user: User): Observable<Token> {
+    return this.httpService.login(user, 'login/autenticate').pipe(
+      tap(token => {
+           this.tokenService.setToken(token.value);
            this.router.navigate(['/']);
       },  (error: HttpErrorResponse ) => {
         console.log(error);
