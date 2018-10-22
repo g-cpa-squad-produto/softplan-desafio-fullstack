@@ -1,0 +1,59 @@
+
+<html>
+<head ng-app="myApp">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="resources/css/bootstrap.min.css">
+	<link rel="stylesheet" href="estilos.css">
+</head>
+<script src="jquery.js"></script>
+<script src="resources/js/bootstrap/bootstrap.min.js"></script>
+<script>
+    var senha = $('#senha');
+    var olho= $("#olho");
+
+    olho.mousedown(function() {
+      senha.attr("type", "text");
+    });
+
+    olho.mouseup(function() {
+      senha.attr("type", "password");
+    });
+    // para evitar o problema de arrastar a imagem e a senha continuar exposta, 
+    //citada pelo nosso amigo nos comentários
+    $( "#olho" ).mouseout(function() { 
+      $("#senha").attr("type", "password");
+    });
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+<body >
+
+<p><a href="index.html">Home</a></p>
+
+<a href="#!red">Red</a>
+<a href="#!green">Green</a>
+<a href="#!blue">Blue</a>
+
+<div ng-view></div>
+
+<script>
+var app = angular.module('myApp', ['ngRoute']);
+app.config(function($routeProvider) {
+    $routeProvider
+    .when('/teste', {
+        templateUrl : 'login.html'
+    })
+    .when('/red', {
+        templateUrl : 'red.html'
+    })
+    .when('/green', {
+        templateUrl : 'green.htm'
+    })
+    .when('/blue', {
+        templateUrl : 'blue.htm'
+    });
+});
+</script>
+</body>
+</html>

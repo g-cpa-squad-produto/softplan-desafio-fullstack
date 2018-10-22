@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">	
+<link rel="stylesheet" type="text/css" href="resources/css/usuarios.css">	
+</head>
+<body ng-app="AnaliseApp">
+	<h2>Cadastro Usuários</h2>
+	
+	<h3>Novo Usuário</h3>
+	<div class="usuario-novo">
+		<div>
+			<label for="nomeUsuario">Nome de Usuário</label><input id="nomeUsuario" type="text" placeholder="Nome" />
+		</div>
+		<div>
+			<label for="tipo">Tipo</label>
+			<select id="tipo">
+				<option>Triador</option>
+				<option>Finalizador</option>
+			</select>
+		</div>
+		<div>
+			<label for="senha">Senha</label><input id="senha" type="password" placeholder="Senha" />
+		</div>
+		<div>
+			<button>Adicionar</button>
+		</div>
+	</div>
+	<h3>Usuários cadastrados</h3>
+	<table>
+	  <tr>
+	    <th>Nome</th>
+	    <th>Tipo</th>
+	  </tr>
+	  <tr>
+	    <td>Thiago</td>
+	    <td>Triador</td>
+	    <td>
+	    	<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+	    	<i class="fa fa-trash" aria-hidden="true"></i>
+	    </td>
+	  </tr>
+	</table>
+	
+	<script src="resources/js/app.js"></script>
+
+	<script src="resources/js/controllers/usuarioProcessoController.js"></script>
+
+	<script src="resources/js/services/usuarioProcesso.js"></script>
+</body>
+</html>

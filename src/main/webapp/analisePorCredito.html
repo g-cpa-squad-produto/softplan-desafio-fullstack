@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- <link rel="stylesheet" type="text/css" href="css/restaurante.css"> -->
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="resources/js/lib/validator.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="resources/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" type="text/css" href="resources/css/bootstrap-select.min.css"> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+
+
+</head>
+<body ng-app="AnaliseApp">
+
+	<h3>
+		Faca sua análise de risco
+		</h2>
+		<div class="main" ng-controller="AnaliseController">
+			<form role="form" data-toggle="validator">
+				<div class="form-group">
+					<label for="nomeCliente" class="control-label">Nome Cliente</label>
+					<div class="input-group">
+						<span class="input-group-addon" id="sizing-addon1">@</span> <input
+							type="text" name="nomeCliente" id="nomeCliente"
+							ng-model="nomeCliente" class="form-control"
+							placeholder="Nome cliente" aria-describedby="sizing-addon1"
+							required />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="limiteCredito" class="control-label">Limite de
+						Crédito</label>
+					<div class="input-group">
+						<span class="input-group-addon" id="sizing-addon2">R$</span> <input
+							type="number" name="limiteCredito" id="limiteCredito"
+							ng-model="limiteCredito" class="form-control"
+							placeholder="Limite de crédito" aria-describedby="sizing-addon2"
+							required />
+					</div>
+				</div>
+				<div class="form-group">
+					<button ng-click="analisePorLimtiteCredito()" type="submit"
+						class="btn btn-primary">Análise</button>
+				</div>
+			</form>
+		</div>
+
+		<script src="resources/js/app.js"></script>
+
+		<script src="resources/js/controllers/analiseController.js"></script>
+
+		<script src="resources/js/services/analise.js"></script>
+</body>
+</html>
