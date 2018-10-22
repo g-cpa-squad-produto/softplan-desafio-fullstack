@@ -20,6 +20,8 @@ public class ConfigurationCors {
         config.addAllowedMethod(HttpMethod.DELETE);
         config.addAllowedMethod(HttpMethod.GET);
         config.addAllowedMethod(HttpMethod.POST);
+        config.addAllowedMethod(HttpMethod.HEAD);
+        config.addExposedHeader("Authorization");
         source.registerCorsConfiguration("/**", config);
         @SuppressWarnings("unchecked")
 		FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));

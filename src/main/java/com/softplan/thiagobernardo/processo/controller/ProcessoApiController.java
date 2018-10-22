@@ -5,67 +5,82 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.softplan.thiagobernardo.login.controller.LoginApiController;
 import com.softplan.thiagobernardo.processo.entity.Processo;
-import com.softplan.thiagobernardo.processo.repository.ProcessoRepository;
-import com.softplan.thiagobernardo.util.ParecerStatus;
+import com.softplan.thiagobernardo.processo.entity.ProcessoDTO;
+import com.softplan.thiagobernardo.processo.service.ProcessoService;
+import com.softplan.thiagobernardo.usuario.entity.UsuarioDTO;
+import com.softplan.thiagobernardo.usuario.service.UsuarioService;
 
 @RestController
 public class ProcessoApiController {
 	
 	@Autowired
-	private ProcessoRepository processoRepository;
-
-
+	private ProcessoService processoService;
+	
+	@Autowired
+	private UsuarioService usuarioService;
+	
 	@GetMapping("processos")
-	public List<Processo> listarProcessos() {
-		return processoRepository.findAll();
+	public List<ProcessoDTO> listarProcessos(@RequestHeader(LoginApiController.NOME_TOKEN_HEADER) String token) {
+		UsuarioDTO usuario = usuarioService.trazerPorToken(token);
+		if(usuario.isTriador()) {
+			return processoService.listar();
+		}
+		return null;
 	}
 	
 	@GetMapping("processos/{processoId}")
-	public Processo listarProcessos(@PathVariable Long processoId) {
-		return processoRepository.findById(processoId).orElseThrow(() -> new RuntimeException("Processo não encontrado!"));
+	public ProcessoDTO trazer(@RequestHeader(LoginApiController.NOME_TOKEN_HEADER) String token, @PathVariable Long processoId) {
+		UsuarioDTO usuario = usuarioService.trazerPorToken(token);
+		if(usuario.isTriador() || usuario.isFinalizador()) {
+			return processoService.trazer(processoId);
+		}
+		return null;	
 	}
 	
 	@PostMapping("processos")
-	public Processo criarProcesso(@Valid @RequestBody Processo processo) {
-		return processoRepository.save(processo);
+	public Processo criarProcesso(@RequestHeader(LoginApiController.NOME_TOKEN_HEADER) String token, @Valid @RequestBody Processo processo) {
+		UsuarioDTO usuario = usuarioService.trazerPorToken(token);
+		if(usuario.isTriador()) {
+			return processoService.criar(processo);
+		}
+		return null;	
 	}
 
 	@PutMapping("processos/{processoId}")
-	public Processo alterarProcesso(@PathVariable Long processoId, @RequestBody Processo processoRequest) {
-		return processoRepository.findById(processoId).map(processo -> {
-			processo.setDescricao(processoRequest.getDescricao());
-			processo.setUsuariosPararecer(processoRequest.getUsuariosPararecer());
-			return processoRepository.save(processo);
-		}).orElseThrow(() -> new RuntimeException("Processo não encontrado!"));
+	public Processo alterarProcesso(@RequestHeader(LoginApiController.NOME_TOKEN_HEADER) String token, @PathVariable Long processoId, @RequestBody Processo processoRequest) {
+		UsuarioDTO usuario = usuarioService.trazerPorToken(token);
+		if(usuario.isTriador()) {
+			return processoService.alterar(processoId, processoRequest);
+		}
+		return null;
 	}
 
 	@DeleteMapping("/processos/{processoId}")
-	public ResponseEntity<?> deletarProcesso(@PathVariable Long processoId) {
-		if (!processoRepository.existsById(processoId)) {
-			throw new RuntimeException("Processo não encontrado!");
+	public void deletarProcesso(@RequestHeader(LoginApiController.NOME_TOKEN_HEADER) String token, @PathVariable Long processoId) {
+		UsuarioDTO usuario = usuarioService.trazerPorToken(token);
+		if(usuario.isTriador()) {
+			processoService.deletar(processoId);
 		}
-
-		return processoRepository.findById(processoId).map(processo -> {
-			processoRepository.delete(processo);
-			return ResponseEntity.ok().build();
-		}).orElseThrow(() -> new RuntimeException("Processo não encontrado!"));
 	}
 	
-	@GetMapping("processos/usuarios/{processoId}")
-	public List<Processo> listarProcessos22(@PathVariable Long processoId) {
-		return processoRepository.findByStatusParecerAndUsuariosPararecer_id(ParecerStatus.PENDENTE,processoId);
+	@GetMapping("processos/usuarios/pendentes")
+	public List<ProcessoDTO> listarPendentesDeParecerPorUsuario(@RequestHeader(LoginApiController.NOME_TOKEN_HEADER) String token) {
+		UsuarioDTO usuario = usuarioService.trazerPorToken(token);
+		if(usuario.isFinalizador()) {
+			return processoService.listarPendentesDeParecerPorUsuario(usuario.getId());
+		}
+		return null;
 	}
-	
-	
 	
 }

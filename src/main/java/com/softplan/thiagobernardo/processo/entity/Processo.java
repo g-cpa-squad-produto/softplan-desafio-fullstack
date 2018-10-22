@@ -15,6 +15,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.softplan.thiagobernardo.usuario.entity.Usuario;
 import com.softplan.thiagobernardo.util.ParecerStatus;
@@ -33,9 +34,10 @@ public class Processo implements Serializable {
     @SequenceGenerator(name = "processo_generator", sequenceName = "processo_sequence", initialValue = 1)
 	private Long id;
 	
-	@NotNull
-	@Column(unique=true)
-	private Integer numero;
+	@NotBlank
+	@Column(columnDefinition = "text", unique=true)
+	@Size(max = 100)
+	private String numero;
 	
 	@NotBlank
 	@Column(columnDefinition = "text")
@@ -65,10 +67,10 @@ public class Processo implements Serializable {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public Integer getNumero() {
+	public String getNumero() {
 		return numero;
 	}
-	public void setNumero(Integer numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 	public List<Usuario> getUsuariosPararecer() {

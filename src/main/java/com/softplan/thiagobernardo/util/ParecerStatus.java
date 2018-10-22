@@ -1,10 +1,11 @@
 package com.softplan.thiagobernardo.util;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum ParecerStatus {
 	
 	PENDENTE("Pendente"), 
-	CONCLUIDO("Concluido"), 
-	CANCELADO("Cancelado");
+	CONCLUIDO("Concluido");
 
 	private final String descricao;
 
@@ -15,5 +16,10 @@ public enum ParecerStatus {
 	public String getDescricao() {
 		return descricao;
 	}
+	
+	@JsonValue
+    public int toValue() {
+        return ordinal();
+    }
 
 }
