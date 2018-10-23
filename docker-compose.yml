@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+    # vue
+    vue:
+      image: thiagobsn/vue_app:latest
+      ports: 
+          - 8080:8080
+      depends_on:
+          - web
+
+    # spring
+    web:
+      image: thiagobsn/spring_api:latest
+      ports: 
+          - 8081:8081
+      depends_on:
+          - db
+    # banco postgres
+    db:
+        container_name: desafiosoftplan_db
+        image: postgres:9.5
+        volumes:
+            - desafiosoftplan_db:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_PASSWORD=root
+            - POSTGRES_USER=postgres
+            - POSTGRES_DB=desafiosoftplan
+            - PGDATA=/var/lib/postgresql/data/pgdata
+        ports:
+            - 5432:5432
+
+    
+volumes:
+    desafiosoftplan_db: {}
