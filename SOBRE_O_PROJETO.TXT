@@ -46,7 +46,7 @@ Projeto implementado utilizando as seguintes tecnologias:
 
 	    Importar a aplicação como mavem project por meio de uma ide.
 	    Comando maven para iniciar a aplicação:
-            “mvn compile spring-boot run”
+            “mvn compile spring-boot:run”
 	
         É necessário um banco postgres 9+ com um banco criado com o seguintes requisitos:
         
