@@ -1,0 +1,11 @@
+server:
+  port: 8080
+  
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost/processos?createDatabaseIfNotExist=true&useSSL=false
+  jpa:
+    database: MYSQL
+    show-sql: true
