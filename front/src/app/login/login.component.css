@@ -1,0 +1,22 @@
+#formLogin{
+  margin: 5% auto;
+  justify-content: center;
+  width: 50%;
+}
+
+#formLogin input {
+  width: 100%
+  
+}
+#formLogin #btnLogin{
+  display: table;
+  margin: 10px auto 0 ;
+  width: 100%;
+}
+
+#btnLogin{
+  background:  #007BFF;
+}
+#formLogin .row{
+  margin-top: 10px ;
+}
