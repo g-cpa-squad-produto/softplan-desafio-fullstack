@@ -3,9 +3,16 @@ server:
   
 spring:
   datasource:
+    data: classpath:/sql/data.sql
+    driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: root
-    url: jdbc:mysql://localhost/processos?createDatabaseIfNotExist=true&useSSL=false
+    platform: mysql
+    url: jdbc:mysql://localhost/processos?createDatabaseIfNotExist=true&verifyServerCertificate=false&useSSL=false&requireSSL=false
+    schema: classpath:/sql/schema.sql
   jpa:
-    database: MYSQL
+    database-platform: org.hibernate.dialect.MySQLDialect
+    generate-ddl: false
+    hibernate:
+      ddl-auto: create
     show-sql: true
