@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: thiago-bernardo-desafio-softplan
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: thiago
+Implementation-Vendor-Id: com.softplan.thiagobernardo
+Build-Jdk: 1.8.0_181
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/thiago-bernardo-desafio-softplan
+Created-By: Maven Integration for Eclipse
+

@@ -7,10 +7,10 @@ services:
       ports: 
           - 8080:8080
       depends_on:
-          - web
+          - api
 
     # spring
-    web:
+    api:
       image: thiagobsn/spring_api:latest
       ports: 
           - 8081:8081
@@ -25,7 +25,7 @@ services:
         environment:
             - POSTGRES_PASSWORD=root
             - POSTGRES_USER=postgres
-            - POSTGRES_DB=desafiosoftplan
+            - POSTGRES_DB=dbdesafiosoftplan
             - PGDATA=/var/lib/postgresql/data/pgdata
         ports:
             - 5432:5432
