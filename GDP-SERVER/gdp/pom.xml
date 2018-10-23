@@ -7,7 +7,7 @@
 	<groupId>br.com.softplan</groupId>
 	<artifactId>gdp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<name>gdp</name>
 	<description>Gerênciador de Processos</description>
@@ -48,7 +48,6 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

@@ -9,7 +9,7 @@ import br.com.softplan.models.User;
 public class TokenService {
 	
 	public Token getToken(User user) {
-		return new Token("UKZDFJBXFWTHHGQMBDCOSCQV", user.getLogin(), user.getPerfil());
+		return new Token("UKZDFJBXFWTHHGQMBDCOSCQV", user.getLogin(), user.getProfile());
 	}
 
 }

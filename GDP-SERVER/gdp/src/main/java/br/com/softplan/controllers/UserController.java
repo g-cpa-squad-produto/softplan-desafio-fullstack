@@ -22,7 +22,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping("/all")
+	@GetMapping()
 	public ResponseEntity<List<User>> all() {
 		return new ResponseEntity<>(this.userService.all(), HttpStatus.OK);
 	}
