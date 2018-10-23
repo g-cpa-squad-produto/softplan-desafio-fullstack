@@ -29,6 +29,13 @@ public class ProcessoService {
 		return processoRepository.save(processo);
 	}
 
+	/**
+	 * Metodo para alterar os dados de um processo. Altera somente o numero, descrição, 
+	 * status e a lista de usuarios do parecer 
+	 * @param processoId
+	 * @param processoRequest
+	 * @return
+	 */
 	public Processo alterar(Long processoId, Processo processoRequest) {
 		return processoRepository.findById(processoId).map(processo -> {
 			processo.setNumero(processoRequest.getNumero());
@@ -49,10 +56,21 @@ public class ProcessoService {
 		}).orElseThrow(() -> new RuntimeException("Processo não encontrado!"));
 	}
 	
+	/**
+	 * Retorna uma lista de processos pendentesde parecer de um usuario
+	 * @param usuarioId
+	 * @return
+	 */
 	public List<ProcessoDTO> listarPendentesDeParecerPorUsuario(Long usuarioId) {
 		return ProcessoDTO.toListDTO(processoRepository.findByStatusParecerAndUsuariosPararecer_id(ParecerStatus.PENDENTE,usuarioId));
 	}
 	
+	/**
+	 * Altera o status do paracer de um processo
+	 * @param processoId
+	 * @param statusParecer
+	 * @return
+	 */
 	public Processo alterarStatusParecer(Long processoId ,ParecerStatus statusParecer) {
 		return processoRepository.findById(processoId).map(processo -> {
 			processo.setStatusParecer(statusParecer);;

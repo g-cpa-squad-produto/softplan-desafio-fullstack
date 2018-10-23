@@ -30,6 +30,11 @@ public class ParecerApiController {
 	@Autowired
 	private UsuarioService usuarioService;	
 
+	/**
+	 * Retorna uma lista com todos os pareceres
+	 * @param token
+	 * @return
+	 */
 	@GetMapping("pareceres")
 	public List<Parecer> listar(@RequestHeader(LoginApiController.NOME_TOKEN_HEADER) String token) {
 		UsuarioDTO usuario = usuarioService.trazerPorToken(token);
@@ -39,6 +44,12 @@ public class ParecerApiController {
 		return null;
 	}
 	
+	/**
+	 * Retorna um parecer com base no Id
+	 * @param token
+	 * @param parecerId
+	 * @return
+	 */
 	@GetMapping("pareceres/{parecerId}")
 	public Parecer trazer(@RequestHeader(LoginApiController.NOME_TOKEN_HEADER) String token, @PathVariable Long parecerId) {
 		UsuarioDTO usuario = usuarioService.trazerPorToken(token);
@@ -48,6 +59,12 @@ public class ParecerApiController {
 		return null;
 	}
 	
+	/**
+	 * Metodo para criar um novo parecer
+	 * @param token
+	 * @param parecer
+	 * @return
+	 */
 	@PostMapping("pareceres")
 	public Parecer criar(@RequestHeader(LoginApiController.NOME_TOKEN_HEADER) String token, @Valid @RequestBody Parecer parecer) {
 		UsuarioDTO usuario = usuarioService.trazerPorToken(token);
@@ -57,6 +74,13 @@ public class ParecerApiController {
 		return null;
 	}
 
+	/**
+	 * Metodo para alterar um parecer existente
+	 * @param token
+	 * @param parecerId
+	 * @param parecerRequest
+	 * @return
+	 */
 	@PutMapping("pareceres/{parecerId}")
 	public Parecer alterar(@RequestHeader(LoginApiController.NOME_TOKEN_HEADER) String token, @PathVariable Long parecerId, @Valid @RequestBody Parecer parecerRequest) {
 		UsuarioDTO usuario = usuarioService.trazerPorToken(token);
@@ -74,6 +98,13 @@ public class ParecerApiController {
 		}
 	}
 	
+	/**
+	 * Metodo para salvar um parecer de um processo
+	 * @param token
+	 * @param parecer
+	 * @return
+	 * @throws Exception
+	 */
 	@PostMapping("pareceres/processo")
 	public Parecer criarParecerProcesso(@RequestHeader(LoginApiController.NOME_TOKEN_HEADER) String token, @Valid @RequestBody Parecer parecer) throws Exception {
 		UsuarioDTO usuario = usuarioService.trazerPorToken(token);

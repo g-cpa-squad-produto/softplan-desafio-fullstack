@@ -31,7 +31,7 @@ public class ProcessoApiController {
 	private UsuarioService usuarioService;
 	
 	@GetMapping("processos")
-	public List<ProcessoDTO> listarProcessos(@RequestHeader(LoginApiController.NOME_TOKEN_HEADER) String token) {
+	public List<ProcessoDTO> listar(@RequestHeader(LoginApiController.NOME_TOKEN_HEADER) String token) {
 		UsuarioDTO usuario = usuarioService.trazerPorToken(token);
 		if(usuario.isTriador()) {
 			return processoService.listar();
@@ -49,7 +49,7 @@ public class ProcessoApiController {
 	}
 	
 	@PostMapping("processos")
-	public Processo criarProcesso(@RequestHeader(LoginApiController.NOME_TOKEN_HEADER) String token, @Valid @RequestBody Processo processo) {
+	public Processo criar(@RequestHeader(LoginApiController.NOME_TOKEN_HEADER) String token, @Valid @RequestBody Processo processo) {
 		UsuarioDTO usuario = usuarioService.trazerPorToken(token);
 		if(usuario.isTriador()) {
 			return processoService.criar(processo);
@@ -58,7 +58,7 @@ public class ProcessoApiController {
 	}
 
 	@PutMapping("processos/{processoId}")
-	public Processo alterarProcesso(@RequestHeader(LoginApiController.NOME_TOKEN_HEADER) String token, @PathVariable Long processoId, @RequestBody Processo processoRequest) {
+	public Processo alterar(@RequestHeader(LoginApiController.NOME_TOKEN_HEADER) String token, @PathVariable Long processoId, @RequestBody Processo processoRequest) {
 		UsuarioDTO usuario = usuarioService.trazerPorToken(token);
 		if(usuario.isTriador()) {
 			return processoService.alterar(processoId, processoRequest);
@@ -67,13 +67,18 @@ public class ProcessoApiController {
 	}
 
 	@DeleteMapping("/processos/{processoId}")
-	public void deletarProcesso(@RequestHeader(LoginApiController.NOME_TOKEN_HEADER) String token, @PathVariable Long processoId) {
+	public void deletar(@RequestHeader(LoginApiController.NOME_TOKEN_HEADER) String token, @PathVariable Long processoId) {
 		UsuarioDTO usuario = usuarioService.trazerPorToken(token);
 		if(usuario.isTriador()) {
 			processoService.deletar(processoId);
 		}
 	}
 	
+	/**
+	 * Retorna uma lista de processos pendentes de parecer
+	 * @param token
+	 * @return
+	 */
 	@GetMapping("processos/usuarios/pendentes")
 	public List<ProcessoDTO> listarPendentesDeParecerPorUsuario(@RequestHeader(LoginApiController.NOME_TOKEN_HEADER) String token) {
 		UsuarioDTO usuario = usuarioService.trazerPorToken(token);

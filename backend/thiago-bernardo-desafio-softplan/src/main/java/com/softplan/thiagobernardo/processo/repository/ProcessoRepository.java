@@ -9,6 +9,12 @@ import com.softplan.thiagobernardo.util.ParecerStatus;
 
 public interface ProcessoRepository extends JpaRepository<Processo, Long> {
 	
+	/**
+	 * Retorna ums lista de processos com base no status do parecer e do id do usuario
+	 * @param status
+	 * @param usuarioId
+	 * @return
+	 */
 	List<Processo> findByStatusParecerAndUsuariosPararecer_id(ParecerStatus status, Long usuarioId);
 
 }

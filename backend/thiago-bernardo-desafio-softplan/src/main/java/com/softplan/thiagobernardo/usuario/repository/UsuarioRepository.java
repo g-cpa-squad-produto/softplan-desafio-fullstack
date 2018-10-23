@@ -10,9 +10,25 @@ import com.softplan.thiagobernardo.util.TipoUsuario;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
-	
+	/**
+	 * Retorna uma lista de usuario com base no tipo de usuario
+	 * @param tipoUsuario
+	 * @return
+	 */
 	List<Usuario> findByTipoUsuario(TipoUsuario tipoUsuario);
+	
+	/**
+	 * Retorna um usuario com base no login
+	 * @param login
+	 * @return
+	 */
 	Usuario findByLogin(String login);
+	
+	/**
+	 * Retorna um usuario com base no token
+	 * @param token
+	 * @return
+	 */
 	Usuario findByToken(String token);
 	
 }

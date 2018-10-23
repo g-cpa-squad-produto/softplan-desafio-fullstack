@@ -33,6 +33,12 @@ public class ParecerService {
 		return parecerRepository.save(parecer);
 	}
 
+	/**
+	 * Metodo altera somente os atributos titulo e descricao
+	 * @param parecerId
+	 * @param parecerRequest
+	 * @return
+	 */
 	public Parecer alterar(Long parecerId, Parecer parecerRequest) {
 		return parecerRepository.findById(parecerId).map(parecer -> {
 			parecer.setTitulo(parecerRequest.getTitulo());
@@ -51,6 +57,13 @@ public class ParecerService {
 		}).orElseThrow(() -> new RuntimeException("Parecer não encontrado!"));
 	}
 	
+	/**
+	 * Metodo verifica se existe um parecer para o processo, caso não exista
+	 * o parecer e salvo e o status do parecer no processo e atualizado
+	 * @param parecer
+	 * @return
+	 * @throws Exception
+	 */
 	@Transactional
 	public Parecer salvarParecerProcesso(Parecer parecer) throws Exception {
 		Parecer existeParecer = parecerRepository.findByProcesso_id(parecer.getProcesso().getId());

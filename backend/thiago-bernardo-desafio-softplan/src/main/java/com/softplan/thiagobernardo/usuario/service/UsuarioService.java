@@ -48,19 +48,39 @@ public class UsuarioService {
 		}).orElseThrow(() -> new RuntimeException("Usuario não encontrado!"));
 	}
 	
+	/**
+	 * Lista todos os usuarios do tipo Finalizador
+	 * @return
+	 */
 	public List<UsuarioDTO> listarFinalizadores() {
 		return UsuarioDTO.toListDTO(usuarioRepository.findByTipoUsuario(TipoUsuario.FINALIZADOR));
 	}
 	
+	/**
+	 * Metodo retorna um usuario com base no token passado como parametro
+	 * @param token
+	 * @return
+	 */
 	public UsuarioDTO trazerPorToken(String token) {
 		String tokenF = token.substring(7, token.length());
 		return UsuarioDTO.toDTO(usuarioRepository.findByToken(tokenF));
 	}
 	
+	/**
+	 * Metodo retorna um usuario com base no login passado como parametro
+	 * @param login
+	 * @return
+	 */
 	public Usuario trazerPorLogin(String login) {
 		return usuarioRepository.findByLogin(login);
 	}
 	
+	/**
+	 * Metodo para atualizar somente o token de um usuario
+	 * @param usuarioId
+	 * @param usuarioRequest
+	 * @return
+	 */
 	public Usuario alterarToken(Long usuarioId, Usuario usuarioRequest) {
 		return usuarioRepository.findById(usuarioId).map(usuario -> {
 			usuario.setToken(usuarioRequest.getToken());

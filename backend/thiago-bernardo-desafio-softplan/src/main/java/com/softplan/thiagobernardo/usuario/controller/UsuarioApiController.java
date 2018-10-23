@@ -69,6 +69,11 @@ public class UsuarioApiController {
 		}
 	}
 	
+	/**
+	 * Retorna uma lista com os usuario do tipo finalizador
+	 * @param token
+	 * @return
+	 */
 	@GetMapping("usuarios/finalizadores/")
 	public List<UsuarioDTO> listarUsuariosPorTipo(@RequestHeader(LoginApiController.NOME_TOKEN_HEADER) String token) {
 		UsuarioDTO usuario = usuarioService.trazerPorToken(token);

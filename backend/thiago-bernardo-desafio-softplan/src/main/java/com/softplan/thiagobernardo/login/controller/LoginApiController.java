@@ -30,6 +30,13 @@ public class LoginApiController {
 	@Autowired
 	private UsuarioService usuarioService;
 
+	/**
+	 * Metodo para realizar o login e gerar um token para o usuario
+	 * @param login
+	 * @param senha
+	 * @param response
+	 * @return
+	 */
 	@PostMapping("login")
 	public ResponseEntity<String> login(@Valid @RequestParam("login") String login, @RequestParam("senha") String senha, HttpServletResponse response ) {
 		Usuario usuarioLogin = usuarioService.trazerPorLogin(login);
@@ -47,6 +54,11 @@ public class LoginApiController {
 		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("");
 	}
 	
+	/**
+	 * Metodo para ficar validando se o usuario ainda possui o token
+	 * @param token
+	 * @return
+	 */
 	@GetMapping("login/refresh")
 	public ResponseEntity<String> loginRefresh(@RequestHeader(NOME_TOKEN_HEADER) String token) {
 		if(token != null) {
@@ -55,7 +67,11 @@ public class LoginApiController {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("");
 	}
 	
-	
+	/**
+	 * Metodo para retornar os dados do usuario com base no token
+	 * @param token
+	 * @return
+	 */
 	@GetMapping("login/usuario")
 	public UsuarioDTO trazerUsuarioToken(@RequestHeader(NOME_TOKEN_HEADER) String token) {
 		return usuarioService.trazerPorToken(token);
