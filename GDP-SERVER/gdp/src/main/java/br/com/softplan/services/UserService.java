@@ -1,5 +1,7 @@
 package br.com.softplan.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,14 @@ public class UserService {
 	
 	public User getUserByLogin(String login) {
 		return this.userRepository.findByLogin(login);
+	}
+	
+	public List<User> all () {
+		return this.userRepository.findAll();
+	}
+	
+	public void delete(Long id)  {
+		this.userRepository.deleteById(id);
 	}
 
 }

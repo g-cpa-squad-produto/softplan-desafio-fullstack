@@ -6,7 +6,7 @@ const toastConfig = {
 };
 
 @Injectable({ providedIn: 'root'})
-export class MessegesService {
+export class MassegesService {
     constructor (private toastr: ToastrService) {
     }
 

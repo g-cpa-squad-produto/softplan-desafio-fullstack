@@ -1,4 +1,4 @@
-import { MessegesService } from './../../core/messeges/messages.service';
+import { MassegesService } from './../../core/messeges/messages.service';
 import { User } from './../../model/user';
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from './login.service';

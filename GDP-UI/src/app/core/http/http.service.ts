@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { tap } from 'rxjs/operators';
-import { MessegesService } from '../messeges/messages.service';
+import { MassegesService } from '../messeges/messages.service';
 import { API_URL } from '../const';
 import { Token } from 'src/app/model/token';
 
@@ -11,7 +11,7 @@ import { Token } from 'src/app/model/token';
 export class HttpService<T> {
     constructor (
         private http: HttpClient,
-        private messageService: MessegesService ) {
+        private messageService: MassegesService ) {
 
     }
 
@@ -40,6 +40,24 @@ export class HttpService<T> {
             }));
       }
 
+      public get(endpoint): Observable<T[]> {
+        return this.http
+          .get<T[]>(`${API_URL}/${endpoint}`)
+          .pipe(tap(data => {
+              return data;
+            }, (error: HttpErrorResponse) => {
+                 this.handlerError(error);
+            }));
+      }
+
+      delete(endpoint: string, id: number): Observable<any> {
+        return this.http.delete(`${API_URL}/${endpoint}/${id}`)
+        .pipe(tap(data => {
+          return data;
+        }, (error: HttpErrorResponse) => {
+            this.handlerError(error);
+       }));
+      }
       public login(item: T, endpoint): Observable<Token> {
         return this.http
           .post<Token>(`${API_URL}/${endpoint}`, item)

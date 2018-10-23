@@ -27,9 +27,9 @@ export class LoginService {
 
    authenticate(user: User): Observable<Token> {
     return this.httpService.login(user, 'login/autenticate').pipe(
-      tap(token => {
-           this.tokenService.setToken(token.value);
-           this.userService.setUser(user);
+      tap((token: Token) => {
+           this.tokenService.setToken(token);
+           this.tokenService.setUser(user);
            this.router.navigate(['/']);
       },  (error: HttpErrorResponse ) => {
         console.log(error);

@@ -27,15 +27,21 @@ public @Data class User {
 	@Column(nullable = false)
 	private String password;
 	
+	@Column(nullable = true)
+	private String name;
+	
+	@Column(nullable = true, name="last_name")
+	private String lastName;
+	
     @Enumerated(EnumType.STRING)
-	private PerfilType perfil;
+	private PerfilType profile;
 
 	public PerfilType getPerfil() {
-		return perfil;
+		return profile;
 	}
 
 	public void setPerfil(PerfilType perfil) {
-		this.perfil = perfil;
+		this.profile = perfil;
 	}
 
 	public Long getId() {
@@ -56,6 +62,30 @@ public @Data class User {
 
 	public String getPassword() {
 		return password;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public PerfilType getProfile() {
+		return profile;
+	}
+
+	public void setProfile(PerfilType profile) {
+		this.profile = profile;
 	}
 
 	public void setPassword(String password) {

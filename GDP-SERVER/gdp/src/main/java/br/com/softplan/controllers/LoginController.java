@@ -38,7 +38,7 @@ public class LoginController {
             throw new UserUnauthorizedException("Unauthorized");
     	}
     	
-		return new ResponseEntity<>(this.tokenService.getToken(), HttpStatus.OK);
+		return new ResponseEntity<>(this.tokenService.getToken(userResponse), HttpStatus.OK);
 	}
     
     @RequestMapping(value="/user", method = RequestMethod.POST)

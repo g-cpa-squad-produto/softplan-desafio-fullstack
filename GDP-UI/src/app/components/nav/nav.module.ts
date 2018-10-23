@@ -1,14 +1,14 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LeftNavComponent } from './left-nav.component';
+import { NavComponent } from './nav.component';
 
 @NgModule({
   imports: [
     CommonModule
   ],
-  declarations: [LeftNavComponent],
-  exports: [LeftNavComponent],
+  declarations: [NavComponent],
+  exports: [NavComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 
 })
-export class LeftNavModule { }
+export class NavModule { }

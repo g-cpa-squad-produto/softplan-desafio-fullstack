@@ -4,7 +4,7 @@ import lombok.Data;
 
 public @Data class Token {
 	
-	public Token(String value) {
+	public Token(String value, String login, PerfilType perfil) {
 		this.value = value;
 	}
 	
