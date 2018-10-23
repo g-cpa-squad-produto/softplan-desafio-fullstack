@@ -20,6 +20,7 @@ export class TokenService {
 
     setUser(user: User) {
       user.password = null;
+      console.log(user);
       window.localStorage.setItem('USER', (JSON.stringify(user)));
     }
 
