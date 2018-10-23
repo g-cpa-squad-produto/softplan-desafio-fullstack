@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.softplan.thiagobernardo.exception.NaoEncontradoException;
 import com.softplan.thiagobernardo.usuario.entity.Usuario;
 import com.softplan.thiagobernardo.usuario.entity.UsuarioDTO;
 import com.softplan.thiagobernardo.usuario.repository.UsuarioRepository;
@@ -21,7 +22,7 @@ public class UsuarioService {
 	}
 	
 	public UsuarioDTO trazer(Long usuarioId) {
-		Usuario usuario = usuarioRepository.findById(usuarioId).orElseThrow(() -> new RuntimeException("Usuario não encontrado!"));
+		Usuario usuario = usuarioRepository.findById(usuarioId).orElseThrow(() -> new NaoEncontradoException("Usuario não encontrado!"));
 		return UsuarioDTO.toDTO(usuario);
 	}
 
@@ -35,7 +36,7 @@ public class UsuarioService {
 			usuario.setLogin(usuarioRequest.getLogin());
 			usuario.setSenha(usuarioRequest.getSenha());
 			return usuarioRepository.save(usuario);
-		}).orElseThrow(() -> new RuntimeException("Usuario não encontrado!"));
+		}).orElseThrow(() -> new NaoEncontradoException("Usuario não encontrado!"));
 	}
 
 	public void deletar(Long usuarioId) {
@@ -45,7 +46,7 @@ public class UsuarioService {
 		usuarioRepository.findById(usuarioId).map(usuario -> {
 			usuarioRepository.delete(usuario);
 			return true;
-		}).orElseThrow(() -> new RuntimeException("Usuario não encontrado!"));
+		}).orElseThrow(() -> new NaoEncontradoException("Usuario não encontrado!"));
 	}
 	
 	/**
@@ -85,7 +86,7 @@ public class UsuarioService {
 		return usuarioRepository.findById(usuarioId).map(usuario -> {
 			usuario.setToken(usuarioRequest.getToken());
 			return usuarioRepository.save(usuario);
-		}).orElseThrow(() -> new RuntimeException("Usuario não encontrado!"));
+		}).orElseThrow(() -> new NaoEncontradoException("Usuario não encontrado!"));
 	}
 
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.softplan.thiagobernardo.exception.AcessoNaoPermitidoException;
 import com.softplan.thiagobernardo.login.controller.LoginApiController;
 import com.softplan.thiagobernardo.processo.entity.Processo;
 import com.softplan.thiagobernardo.processo.entity.ProcessoDTO;
@@ -35,8 +36,9 @@ public class ProcessoApiController {
 		UsuarioDTO usuario = usuarioService.trazerPorToken(token);
 		if(usuario.isTriador()) {
 			return processoService.listar();
+		}else {
+			throw new AcessoNaoPermitidoException();
 		}
-		return null;
 	}
 	
 	@GetMapping("processos/{processoId}")
@@ -44,8 +46,9 @@ public class ProcessoApiController {
 		UsuarioDTO usuario = usuarioService.trazerPorToken(token);
 		if(usuario.isTriador() || usuario.isFinalizador()) {
 			return processoService.trazer(processoId);
-		}
-		return null;	
+		}else {
+			throw new AcessoNaoPermitidoException();
+		}	
 	}
 	
 	@PostMapping("processos")
@@ -53,8 +56,9 @@ public class ProcessoApiController {
 		UsuarioDTO usuario = usuarioService.trazerPorToken(token);
 		if(usuario.isTriador()) {
 			return processoService.criar(processo);
-		}
-		return null;	
+		}else {
+			throw new AcessoNaoPermitidoException();
+		}	
 	}
 
 	@PutMapping("processos/{processoId}")
@@ -62,8 +66,9 @@ public class ProcessoApiController {
 		UsuarioDTO usuario = usuarioService.trazerPorToken(token);
 		if(usuario.isTriador()) {
 			return processoService.alterar(processoId, processoRequest);
+		}else {
+			throw new AcessoNaoPermitidoException();
 		}
-		return null;
 	}
 
 	@DeleteMapping("/processos/{processoId}")
@@ -71,6 +76,8 @@ public class ProcessoApiController {
 		UsuarioDTO usuario = usuarioService.trazerPorToken(token);
 		if(usuario.isTriador()) {
 			processoService.deletar(processoId);
+		}else {
+			throw new AcessoNaoPermitidoException();
 		}
 	}
 	
@@ -84,8 +91,9 @@ public class ProcessoApiController {
 		UsuarioDTO usuario = usuarioService.trazerPorToken(token);
 		if(usuario.isFinalizador()) {
 			return processoService.listarPendentesDeParecerPorUsuario(usuario.getId());
+		}else {
+			throw new AcessoNaoPermitidoException();
 		}
-		return null;
 	}
 	
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.softplan.thiagobernardo.exception.AcessoNaoPermitidoException;
 import com.softplan.thiagobernardo.login.controller.LoginApiController;
 import com.softplan.thiagobernardo.parecer.entity.Parecer;
 import com.softplan.thiagobernardo.parecer.service.ParecerService;
@@ -40,8 +41,9 @@ public class ParecerApiController {
 		UsuarioDTO usuario = usuarioService.trazerPorToken(token);
 		if(usuario.isFinalizador()) {
 			return parecerService.listar();
+		}else {
+			throw new AcessoNaoPermitidoException();
 		}
-		return null;
 	}
 	
 	/**
@@ -55,8 +57,9 @@ public class ParecerApiController {
 		UsuarioDTO usuario = usuarioService.trazerPorToken(token);
 		if(usuario.isFinalizador()) {
 			return parecerService.trazer(parecerId);
+		}else {
+			throw new AcessoNaoPermitidoException();
 		}
-		return null;
 	}
 	
 	/**
@@ -70,8 +73,9 @@ public class ParecerApiController {
 		UsuarioDTO usuario = usuarioService.trazerPorToken(token);
 		if(usuario.isFinalizador()) {
 			return parecerService.criar(parecer);
+		}else {
+			throw new AcessoNaoPermitidoException();
 		}
-		return null;
 	}
 
 	/**
@@ -86,8 +90,9 @@ public class ParecerApiController {
 		UsuarioDTO usuario = usuarioService.trazerPorToken(token);
 		if(usuario.isFinalizador()) {
 			return parecerService.alterar(parecerId, parecerRequest);
+		}else {
+			throw new AcessoNaoPermitidoException();
 		}
-		return null;
 	}
 
 	@DeleteMapping("/pareceres/{parecerId}")
@@ -95,6 +100,8 @@ public class ParecerApiController {
 		UsuarioDTO usuario = usuarioService.trazerPorToken(token);
 		if(usuario.isFinalizador()) {
 			parecerService.deletar(parecerId);
+		}else {
+			throw new AcessoNaoPermitidoException();
 		}
 	}
 	
@@ -110,8 +117,9 @@ public class ParecerApiController {
 		UsuarioDTO usuario = usuarioService.trazerPorToken(token);
 		if(usuario.isFinalizador()) {
 			return parecerService.salvarParecerProcesso(parecer);
+		}else {
+			throw new AcessoNaoPermitidoException();
 		}
-		return null;
 	}
 
 }

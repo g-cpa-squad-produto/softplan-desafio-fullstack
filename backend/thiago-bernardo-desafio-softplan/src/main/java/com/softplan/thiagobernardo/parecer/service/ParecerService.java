@@ -7,6 +7,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.softplan.thiagobernardo.exception.NaoEncontradoException;
+import com.softplan.thiagobernardo.exception.ParecerProcessoException;
 import com.softplan.thiagobernardo.parecer.entity.Parecer;
 import com.softplan.thiagobernardo.parecer.repository.ParecerRepository;
 import com.softplan.thiagobernardo.processo.service.ProcessoService;
@@ -26,7 +28,7 @@ public class ParecerService {
 	}
 	
 	public Parecer trazer(Long parecerId) {
-		return parecerRepository.findById(parecerId).orElseThrow(() -> new RuntimeException("Parecer não encontrado!"));
+		return parecerRepository.findById(parecerId).orElseThrow(() -> new NaoEncontradoException("Parecer não encontrado!"));
 	}
 	
 	public Parecer criar(Parecer parecer) {
@@ -44,17 +46,17 @@ public class ParecerService {
 			parecer.setTitulo(parecerRequest.getTitulo());
 			parecer.setDescricao(parecerRequest.getDescricao());
 			return parecerRepository.save(parecer);
-		}).orElseThrow(() -> new RuntimeException("Parecer não encontrado!"));
+		}).orElseThrow(() -> new NaoEncontradoException("Parecer não encontrado!"));
 	}
 
 	public void deletar(Long parecerId) {
 		if (!parecerRepository.existsById(parecerId)) {
-			throw new RuntimeException("Parecer não encontrado!");
+			throw new NaoEncontradoException("Parecer não encontrado!");
 		}
 		parecerRepository.findById(parecerId).map(parecer -> {
 			parecerRepository.delete(parecer);
 			return true;
-		}).orElseThrow(() -> new RuntimeException("Parecer não encontrado!"));
+		}).orElseThrow(() -> new NaoEncontradoException("Parecer não encontrado!"));
 	}
 	
 	/**
@@ -62,7 +64,7 @@ public class ParecerService {
 	 * o parecer e salvo e o status do parecer no processo e atualizado
 	 * @param parecer
 	 * @return
-	 * @throws Exception
+	 * @throws ParecerProcessoException
 	 */
 	@Transactional
 	public Parecer salvarParecerProcesso(Parecer parecer) throws Exception {
@@ -71,7 +73,7 @@ public class ParecerService {
 			processoService.alterarStatusParecer(parecer.getProcesso().getId(), ParecerStatus.CONCLUIDO);
 			return criar(parecer);
 		}else {
-			throw new Exception("Já existe paracer para esse processo!");
+			throw new ParecerProcessoException();
 		}
 	}
 

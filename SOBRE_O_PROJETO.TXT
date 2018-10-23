@@ -1,0 +1,94 @@
+Projeto implementado utilizando as seguintes tecnologias:
+
+    #Backend: 
+        Java 8
+        Spring-boot 2.0.6
+        JPA
+
+    -Adicionais:
+        Jjwt: utilizado para gerar um token para o usuário. 
+
+
+    #Frontend:
+        JavaScript
+        Vue 2
+    
+    -Adicionais:
+        Vue-router: utlizado para crias as rotas da aplicação fontend
+        Vue-resource: utilizado para acessar os recursos da api.
+        Bootstrap 4
+        Vue-fontawesome
+        Vue-auth: utilizado para realizar o controle de acesso as paginas no frottend. 
+    
+    #Banco de dados: 
+        Postgres 9.5
+
+    #Considerações:
+	    Existem 3 tipos de usuários: ADMIN, TRIADOR e FINALIZADOR.
+	    O controle de acesso aos recursos foi implementado no backend e frontend de acordo com os  requisitos.
+	    Só é permitido um parecer por processo.
+	    Ao rodar o backend pela primeira vez, é criado um usuário do tipo ADMIN que pode cadastrar os demais usuários:
+
+            login: admin
+            senha: admin
+  
+    #Estrutura de pasta do projeto.
+        
+        - backend
+	        - desafio-softplan
+        
+        - frontend
+	        - thiago-bernardo-desafio-softplan
+
+    Processo para rodar a aplicação
+
+    #Backend
+
+	    Importar a aplicação como mavem project por meio de uma ide.
+	    Comando maven para iniciar a aplicação:
+            “mvn compile spring-boot run”
+	
+        É necessário um banco postgres 9+ com um banco criado com o seguintes requisitos:
+        
+            nome: dbdesafiosoftplan
+            senha: postgres
+            usuario: root
+	
+        A aplicação está configurada para rodar na porta “8081” com context path “desafiosoftplan”
+	    para ter acesso aos recursos da api: “localhost:8081/ desafiosoftplan/<recurso>”
+        Todas as configurações acima poderm ser alteradas no arquivo “application.properties” contido no projeto.
+
+    #Fontend
+
+	    Dentro da pasta “frontend/desafio-softplan”:
+        Executar o comando “npm install” para instalar as dependências
+        Executar o comando “npm run serve” para rodar a aplicação
+	    Aplicação estará rodando a parti da porta “8080” no endereço “localhost:8080”
+	    A aplicação está configurada para acessar os recurso a partir do endereço:
+            
+            “http://localhost:8081/desafiosoftplan/”
+	
+        A configuração pode ser alterada a partir do arquivo “src/main.js” contido no projeto.
+            
+            “Vue.http.options.root = 'http://localhost:8081/desafiosoftplan/'”
+
+
+    #Docker
+
+        Ambos os projetos possuem Dockerfile configurado
+        Passos para realizar rodar localmente(build local) utilizando o arquivo “docker-compose.yml”. 
+	    
+            1 - Realizar o build do banckend usando os comando:
+                mvn compile package -Dmaven.test.skip=true
+	
+            2 - Realizar o docker build do backend
+                docker build -t thiagobsn/spring_api .
+	        
+            3 - Realizar o docker build do frontend
+                docker build -t thiagobsn/vue_app .
+	        
+            4 – Executar o arquivo docker-compose contido na reiz do projetos
+                docker-compose up
+	        
+            5- Acesso a aplicação pro meio do endereço “localhost:8080/”
+  

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.softplan.thiagobernardo.exception.AcessoNaoPermitidoException;
 import com.softplan.thiagobernardo.login.controller.LoginApiController;
 import com.softplan.thiagobernardo.usuario.entity.Usuario;
 import com.softplan.thiagobernardo.usuario.entity.UsuarioDTO;
@@ -30,8 +31,9 @@ public class UsuarioApiController {
 		UsuarioDTO usuario = usuarioService.trazerPorToken(token);
 		if(usuario.isAdmin()) {
 			return usuarioService.listar();
+		}else {
+			throw new AcessoNaoPermitidoException();
 		}
-		return null;
 	}
 	
 	@GetMapping("usuarios/{usuarioId}/")
@@ -39,8 +41,9 @@ public class UsuarioApiController {
 		UsuarioDTO usuario = usuarioService.trazerPorToken(token);
 		if(usuario.isAdmin()) {
 			return usuarioService.trazer(usuarioId);
+		}else {
+			throw new AcessoNaoPermitidoException();
 		}
-		return null;
 	}
 
 	@PostMapping("usuarios")
@@ -48,8 +51,9 @@ public class UsuarioApiController {
 		UsuarioDTO usuariotoken = usuarioService.trazerPorToken(token);
 		if(usuariotoken.isAdmin()) {
 			return usuarioService.criar(usuario);
-		}
-		return null;
+		}else {
+			throw new AcessoNaoPermitidoException();
+		}	
 	}
 
 	@PutMapping("usuarios/{usuarioId}")
@@ -57,8 +61,9 @@ public class UsuarioApiController {
 		UsuarioDTO usuario = usuarioService.trazerPorToken(token);
 		if(usuario.isAdmin()) {
 			return usuarioService.alterar(usuarioId, usuarioRequest);
+		}else {
+			throw new AcessoNaoPermitidoException();
 		}
-		return null;
 	}
 
 	@DeleteMapping("/usuarios/{usuarioId}")
@@ -66,6 +71,8 @@ public class UsuarioApiController {
 		UsuarioDTO usuario = usuarioService.trazerPorToken(token);
 		if(usuario.isAdmin()) {
 			usuarioService.deletar(usuarioId);
+		}else {
+			throw new AcessoNaoPermitidoException();
 		}
 	}
 	
@@ -79,8 +86,9 @@ public class UsuarioApiController {
 		UsuarioDTO usuario = usuarioService.trazerPorToken(token);
 		if(usuario.isAdmin() || usuario.isTriador()) {
 			return usuarioService.listarFinalizadores();
+		}else {
+			throw new AcessoNaoPermitidoException();
 		}
-		return null;
 	}
 
 }

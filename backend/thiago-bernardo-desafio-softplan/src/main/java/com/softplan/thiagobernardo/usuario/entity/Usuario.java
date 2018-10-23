@@ -36,12 +36,12 @@ public class Usuario implements Serializable {
     private String nome;
 	
 	@NotBlank
-	@Size(min = 6, max = 20)
+	@Size(min = 5, max = 20)
 	@Column(columnDefinition = "text", unique = true)
     private String login;
 	
 	@NotBlank
-	@Size(min = 6, max = 12)
+	@Size(min = 5, max = 12)
 	@Column(columnDefinition = "text")
     private String senha;
 	
@@ -51,7 +51,19 @@ public class Usuario implements Serializable {
 	
 	@Column(columnDefinition = "text")
 	private String token;
-
+	
+	public Usuario() {
+		super();
+	}
+	
+	public Usuario(@NotBlank @Size(min = 2, max = 100) String nome, @NotBlank @Size(min = 6, max = 20) String login,
+			@NotBlank @Size(min = 6, max = 12) String senha, @NotNull TipoUsuario tipoUsuario) {
+		super();
+		this.nome = nome;
+		this.login = login;
+		this.senha = senha;
+		this.tipoUsuario = tipoUsuario;
+	}
 	public Long getId() {
 		return id;
 	}

@@ -15,12 +15,8 @@ npm run serve
 npm run build
 ```
 
-### Lints and fixes files
+### Build docker
 ```
-npm run lint
+docker build -t thiagobsn/vue_app .
 ```
 
-### Run your unit tests
-```
-npm run test:unit
-```

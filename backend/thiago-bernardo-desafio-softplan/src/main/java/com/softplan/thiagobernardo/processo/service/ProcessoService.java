@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.softplan.thiagobernardo.exception.NaoEncontradoException;
 import com.softplan.thiagobernardo.processo.entity.Processo;
 import com.softplan.thiagobernardo.processo.entity.ProcessoDTO;
 import com.softplan.thiagobernardo.processo.repository.ProcessoRepository;
@@ -21,7 +22,7 @@ public class ProcessoService {
 	}
 	
 	public ProcessoDTO trazer(Long processoId) {
-		Processo processo = processoRepository.findById(processoId).orElseThrow(() -> new RuntimeException("Processo não encontrado!"));
+		Processo processo = processoRepository.findById(processoId).orElseThrow(() -> new NaoEncontradoException("Processo não encontrado!"));
 		return ProcessoDTO.toDTO(processo);
 	}
 	
@@ -43,17 +44,17 @@ public class ProcessoService {
 			processo.setStatusParecer(processoRequest.getStatusParecer());
 			processo.setUsuariosPararecer(processoRequest.getUsuariosPararecer());
 			return processoRepository.save(processo);
-		}).orElseThrow(() -> new RuntimeException("Processo não encontrado!"));
+		}).orElseThrow(() -> new NaoEncontradoException("Processo não encontrado!"));
 	}
 
 	public void deletar(Long processoId) {
 		if (!processoRepository.existsById(processoId)) {
-			throw new RuntimeException("Processo não encontrado!");
+			throw new NaoEncontradoException("Processo não encontrado!");
 		}
 		processoRepository.findById(processoId).map(processo -> {
 			processoRepository.delete(processo);
 			return true;
-		}).orElseThrow(() -> new RuntimeException("Processo não encontrado!"));
+		}).orElseThrow(() -> new NaoEncontradoException("Processo não encontrado!"));
 	}
 	
 	/**
@@ -75,7 +76,7 @@ public class ProcessoService {
 		return processoRepository.findById(processoId).map(processo -> {
 			processo.setStatusParecer(statusParecer);;
 			return processoRepository.save(processo);
-		}).orElseThrow(() -> new RuntimeException("Processo não encontrado!"));
+		}).orElseThrow(() -> new NaoEncontradoException("Processo não encontrado!"));
 	}
 	
 
