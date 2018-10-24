@@ -6,28 +6,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.softplan.models.User;
-import br.com.softplan.repository.UserRepository;
+import br.com.softplan.repository.IUserRepository;
 
 @Service
-public class UserService {
+public class UserService extends GenericService<User, Long>  {
 	
 	@Autowired
-	private UserRepository userRepository;
+	private IUserRepository repository;
 	
 	public User autenticate(User user) {
-		return this.userRepository.findByLoginAndPassword(user.getLogin(), user.getPassword());
+		return this.repository.findByLoginAndPassword(user.getLogin(), user.getPassword());
 	}
 	
 	public User getUserByLogin(String login) {
-		return this.userRepository.findByLogin(login);
-	}
-	
-	public List<User> all () {
-		return this.userRepository.findAll();
+		return this.repository.findByLogin(login);
 	}
 	
 	public void delete(Long id)  {
-		this.userRepository.deleteById(id);
+		this.repository.deleteById(id);
 	}
 
 }

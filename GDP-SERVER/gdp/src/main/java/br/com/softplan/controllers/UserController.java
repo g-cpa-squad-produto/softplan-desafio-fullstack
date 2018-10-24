@@ -24,7 +24,7 @@ public class UserController {
 
 	@GetMapping()
 	public ResponseEntity<List<User>> all() {
-		return new ResponseEntity<>(this.userService.all(), HttpStatus.OK);
+		return new ResponseEntity<>(this.userService.findAll(), HttpStatus.OK);
 	}
 	
 	@CrossOrigin
