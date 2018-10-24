@@ -11,6 +11,9 @@
              <textbox id="filtroCodigo"/>
            </auxheader>
            <auxheader>
+             <intbox id="filtroNumprocesso"/>
+           </auxheader>
+           <auxheader>
              <textbox id="filtroPessoa"/>
            </auxheader>
            <auxheader>
@@ -22,7 +25,8 @@
          </auxhead>
          <listhead>
            <listheader label="" width="25px" />
-           <listheader label="Código" sort="auto(id)" width="120px"/>
+           <listheader label="Código" sort="auto(id)" width="110px"/>
+           <listheader label="N. PROCESSO " sort="auto(numprocesso)" width="130px"/>
            <listheader label="PESSOA" sort="auto(pessoa.nome)" />
            <listheader label="DATA ABERTURA" sort="auto(dtabertura)" width="150px"/>
            <listheader label="OBS" sort="auto(obs)" />
@@ -32,6 +36,10 @@
      </div>
      <div id="form" class="form fade out ocultar">
        <div class="new-li">
+         <div class="new-col" width="110px">
+           <label>N. PROCESSO *</label>
+           <intbox id="intboxNumprocesso" class="form-control input-sm" maxlength="9" value="@{controller.processo.numprocesso}"/>
+         </div>
          <div class="new-col" width="380px"> 
             <a href="#" id="labelPessoa">Pessoa*<span class="glyphicon glyphicon-link"></span></a>
             <a id="aInfopessoa"  popup="msg" class="glyphicon glyphicon-info-sign" style="margin-bottom: 3px;"></a>
@@ -39,17 +47,13 @@
                <longbox id="longboxPessoa" class="form-control input-sm" />
                <bandbox id="bandboxPessoa" autodrop="true"> 
                   <bandpopup>
-                     <listbox id="listboxPessoa" width="500px">
+                     <listbox id="listboxPessoa" width="810px">
                         <listhead>
-                           <listheader label="Código" width="100px" />
-                           <listheader label="Fipopessoa" /> 
+                           <listheader label="Código" width="70px" />
+                           <listheader label="Tipo" width="90px"/> 
                            <listheader label="Fmagem" /> 
                            <listheader label="Nome" /> 
-                           <listheader label="Data" /> 
-                           <listheader label="Cpf" /> 
-                           <listheader label="Cnpj" /> 
-                           <listheader label="Cep" /> 
-                           <listheader label="Uf" /> 
+                           <listheader label="Cpf / Cnpj" /> 
                            <listheader label="Cidade" /> 
                            <listheader label="Logradouro" /> 
                         </listhead>
@@ -60,13 +64,13 @@
             </div>
          </div>
          <div class="new-col" width="140px">
-           <a id="aInfodtabertura"  popup="msg" class="glyphicon glyphicon-info-sign" style="margin-bottom: 3px;"></a>
            <label>DATA ABERTURA*</label>
+           <a id="aInfodtabertura"  popup="msg" class="glyphicon glyphicon-info-sign" style="margin-bottom: 3px;"></a>
            <datebox id="dateboxDtabertura" class="form-control input-sm" value="@{controller.processo.dtabertura}" />
          </div>
-         <div class="new-col" width="250px">
+         <div class="new-col" width="350px">
            <label>OBS</label>
-           <textbox id="textboxObs" class="form-control input-sm" maxlength="333" value="@{controller.processo.obs}"/>
+           <textbox id="textboxObs" rows="3" class="form-control input-sm" maxlength="333" value="@{controller.processo.obs}"/>
          </div>
        </div>
 

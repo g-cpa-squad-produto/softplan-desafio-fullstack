@@ -102,6 +102,11 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
            arg0.appendChild(lc);
            arg0.appendChild(new Listcell(m.getId().toString()));
            try{
+           arg0.appendChild(new Listcell(m.getNumprocesso().toString()));
+           }catch(Exception e){
+              arg0.appendChild(new Listcell("")); 
+           }
+           try{
            arg0.appendChild(new Listcell(m.getPessoa().getNome()));
            }catch(Exception e){
               arg0.appendChild(new Listcell("")); 
@@ -195,73 +200,60 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
 	    }
      
      public void renderizarBandboxPessoa(){
-        listboxPessoa.setItemRenderer(new ListitemRenderer() {
-           public void render(Listitem arg0, Object arg1) throws Exception {
-              Pessoa m = (Pessoa) arg1;
-               arg0.appendChild(new Listcell(m.getId().toString()));
- 
-                 try{
-                    arg0.appendChild(new Listcell(m.getTipopessoa().getDescricao().toString()));
-                 }catch(Exception e){
-                    arg0.appendChild(new Listcell("")); 
-                 }
-                 try{
-                    Image imagem = new Image();
-                    imagem.setContent(AGFImagem.converterByteToBufferedImage(m.getImagem()));
-                    Listcell cell = new Listcell();
-                    if(imagem.getSrc() == null) {
-                       cell.setImageContent(imagem.getContent());
-                    }else{
-                       cell.setImage(imagem.getSrc());
-                    }
-                    arg0.appendChild(cell);
-                 }catch(Exception e){
-                    arg0.appendChild(new Listcell("")); 
-                 }
-                 try{
-                    arg0.appendChild(new Listcell(m.getNome()));
-                 }catch(Exception e){
-                    arg0.appendChild(new Listcell("")); 
-                 }
-                 try{
-                    SimpleDateFormat formatodate = new SimpleDateFormat("E dd/MM/yyyy");
-                    arg0.appendChild(new Listcell(String.valueOf(formatodate.format(m.getData()))));
-                 }catch(Exception e){
-                    arg0.appendChild(new Listcell("")); 
-                 }
-                 try{
-                    arg0.appendChild(new Listcell(m.getCpf()));
-                 }catch(Exception e){
-                    arg0.appendChild(new Listcell("")); 
-                 }
-                 try{
-                    arg0.appendChild(new Listcell(m.getCnpj()));
-                 }catch(Exception e){
-                    arg0.appendChild(new Listcell("")); 
-                 }
-                 try{
-                    arg0.appendChild(new Listcell(m.getCep()));
-                 }catch(Exception e){
-                    arg0.appendChild(new Listcell("")); 
-                 }
-                 try{
-                    arg0.appendChild(new Listcell(m.getUf()));
-                 }catch(Exception e){
-                    arg0.appendChild(new Listcell("")); 
-                 }
-                 try{
-                    arg0.appendChild(new Listcell(m.getCidade()));
-                 }catch(Exception e){
-                    arg0.appendChild(new Listcell("")); 
-                 }
-                 try{
-                    arg0.appendChild(new Listcell(m.getLogradouro()));
-                 }catch(Exception e){
-                    arg0.appendChild(new Listcell("")); 
-                 }
-           }
-        });
-     }
+         listboxPessoa.setItemRenderer(new ListitemRenderer() {
+            public void render(Listitem arg0, Object arg1) throws Exception {
+               Pessoa m = (Pessoa) arg1;
+                arg0.appendChild(new Listcell(m.getId().toString()));
+  
+                  try{
+                     arg0.appendChild(new Listcell(m.getTipopessoa().getDescricao().toString()));
+                  }catch(Exception e){
+                     arg0.appendChild(new Listcell("")); 
+                  }
+                  try{
+                     Image imagem = new Image();
+                     imagem.setContent(AGFImagem.converterByteToBufferedImage(m.getImagem()));
+                     Listcell cell = new Listcell();
+                     if(imagem.getSrc() == null) {
+                        cell.setImageContent(imagem.getContent());
+                     }else{
+                        cell.setImage(imagem.getSrc());
+                     }
+                     arg0.appendChild(cell);
+                  }catch(Exception e){
+                     arg0.appendChild(new Listcell("")); 
+                  }
+                  try{
+                     arg0.appendChild(new Listcell(m.getNome()));
+                  }catch(Exception e){
+                     arg0.appendChild(new Listcell("")); 
+                  }
+                  if(m.getTipopessoa().getId()==1) {
+       	           try{
+       	           arg0.appendChild(new Listcell(m.getCpf()));
+       	           }catch(Exception e){
+       	              arg0.appendChild(new Listcell("")); 
+       	           }
+                  }else if(m.getTipopessoa().getId()==2){
+       	           try{
+       	           arg0.appendChild(new Listcell(m.getCnpj()));
+       	           }catch(Exception e){
+       	              arg0.appendChild(new Listcell("")); 
+       	           }
+                  }                
+                  try{
+                     arg0.appendChild(new Listcell(m.getCidade()));
+                  }catch(Exception e){
+                     arg0.appendChild(new Listcell("")); 
+                  }
+                  try{
+                     arg0.appendChild(new Listcell(m.getLogradouro()));
+                  }catch(Exception e){
+                     arg0.appendChild(new Listcell("")); 
+                  }
+            }
+         });
+      }
  
      /* 
       * Fim BandBox Banco - Arthur Freire 
@@ -295,6 +287,10 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
          valid = 2;
          ret =  false;
        }
+       if(processo.getNumprocesso()==null){
+         valid = 5;
+         ret = false;
+       }
        return ret;
      }
 
@@ -310,6 +306,9 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
            break;
            case 2:
              AGFComponente.showMessage("info","Informe o campo: DATA ABERTURA.");
+           break;
+           case 5:
+             AGFComponente.showMessage("info","Informe o campo: N. PROCESSO .");
            break;
            }
          }
@@ -328,6 +327,7 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
        compAux.getPessoa().setId(0l);
        compAux.setDtabertura(((Datebox) auxhead.getFellow("filtroDtabertura")).getValue() );
        compAux.setObs(((Textbox) auxhead.getFellow("filtroObs")).getValue());
+       compAux.setNumprocesso(((Intbox) auxhead.getFellow("filtroNumprocesso")).getValue());
        int totalSize = 0;
        objs = new ArrayList<ObjetoPadrao>();
        objs = processoService.filter(compAux, pageSize, AGFPaginacao.getPagePaginacao(new Paging(),pageSize,0));

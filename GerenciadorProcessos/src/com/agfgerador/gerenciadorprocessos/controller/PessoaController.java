@@ -340,10 +340,18 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
          valid = 10;
          ret = false;
        }
+       if((pessoa.getBairro()==null)||(pessoa.getBairro().equals(""))){
+           valid = 11;
+           ret = false;
+         }
        if((pessoa.getLogradouro()==null)||(pessoa.getLogradouro().equals(""))){
-         valid = 11;
+         valid = 12;
          ret = false;
        }
+       if((pessoa.getNcasa()==null)||(pessoa.getNcasa().equals(""))){
+           valid = 13;
+           ret = false;
+         }
        return ret;
      }
 
@@ -373,7 +381,13 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
              AGFComponente.showMessage("info","Informe o campo: TIPO LOGRADOURO.");
            break;
            case 11:
+             AGFComponente.showMessage("info","Informe o campo: BAIRRO.");
+           break;
+           case 12:
              AGFComponente.showMessage("info","Informe o campo: LOGRADOURO.");
+           break;
+           case 13:
+             AGFComponente.showMessage("info","Informe o campo: NÚMERO CASA.");
            break;
            }
          }

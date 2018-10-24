@@ -34,11 +34,11 @@
      private Date data;
  
      @Type(type="com.agfgerador.compartilhado.util.UpperCase")
-     @Column(length=11, nullable=true)
+     @Column(length=14, nullable=true)
      private String cpf;
      
      @Type(type="com.agfgerador.compartilhado.util.UpperCase")
-     @Column(length=16, nullable=true)
+     @Column(length=18, nullable=true)
      private String cnpj;
      
      @Type(type="com.agfgerador.compartilhado.util.UpperCase")
@@ -60,6 +60,14 @@
      @Type(type="com.agfgerador.compartilhado.util.UpperCase")
      @Column(length=77, nullable=false)
      private String logradouro;
+     
+     @Type(type="com.agfgerador.compartilhado.util.UpperCase")
+     @Column(length=77, nullable=false)
+     private String bairro;
+     
+     @Type(type="com.agfgerador.compartilhado.util.UpperCase")
+     @Column(length=9, nullable=false)
+     private String ncasa;
      
     public Tipopessoa getTipopessoa() {
        return tipopessoa;
@@ -149,7 +157,23 @@
        this.logradouro = logradouro;
      }
      
-     public String toString(){
+     public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getNcasa() {
+		return ncasa;
+	}
+
+	public void setNcasa(String ncasa) {
+		this.ncasa = ncasa;
+	}
+
+	public String toString(){
      return nome;
      }
      

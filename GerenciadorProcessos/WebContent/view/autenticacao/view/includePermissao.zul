@@ -52,13 +52,13 @@
                <longbox id="longboxComponente" class="form-control input-sm" />
                <bandbox id="bandboxComponente" autodrop="true"> 
                   <bandpopup>
-                     <listbox id="listboxComponente" width="500px">
+                     <listbox id="listboxComponente" width="750px">
                         <listhead>
                            <listheader label="Código" width="100px" />
-                           <listheader label="Nescricao" /> 
-                           <listheader label="Informacao" /> 
-                           <listheader label="Momponentemenu" /> 
-                           <listheader label="Tipomenu" /> 
+                           <listheader label="Descrição" /> 
+                           <listheader label="Informação" /> 
+                           <listheader label="Componente do menu" /> 
+                           <listheader label="Tipo Menu" /> 
                         </listhead>
                      </listbox>
                      <paging id="paginacaoComponente" />

@@ -318,6 +318,11 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
                  }catch(Exception e){
                     arg0.appendChild(new Listcell("")); 
                  }
+                 try{
+                    arg0.appendChild(new Listcell(m.getNumprocesso().toString()));
+                 }catch(Exception e){
+                    arg0.appendChild(new Listcell("")); 
+                 }
            }
         });
      }

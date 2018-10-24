@@ -34,6 +34,9 @@
      @Column(length=333, nullable=true)
      private String obs;
      
+     @Column(unique = true,nullable=false)
+     private Integer numprocesso;
+     
     public Pessoa getPessoa() {
        return pessoa;
      }
@@ -56,6 +59,14 @@
      
      public void setObs(String obs) {
        this.obs = obs;
+     }
+     
+    public Integer getNumprocesso() {
+       return this.numprocesso;
+     }
+     
+     public void setNumprocesso(Integer numprocesso) {
+       this.numprocesso = numprocesso;
      }
      
      public String toString(){

@@ -97,16 +97,16 @@
          </div>
          <div class="new-col" width="250px">
            <label>CPF</label>
-           <textbox id="textboxCpf" class="form-control input-sm" maxlength="11" value="@{controller.pessoa.cpf}"/>
+           <textbox id="textboxCpf" class="form-control input-sm" maxlength="14" value="@{controller.pessoa.cpf}" c:onFocus="mask(jq(this), 'cpf');"/>
          </div>
          <div class="new-col" width="250px">
            <label>CNPJ</label>
-           <textbox id="textboxCnpj" class="form-control input-sm" maxlength="16" value="@{controller.pessoa.cnpj}"/>
+           <textbox id="textboxCnpj" class="form-control input-sm" maxlength="18" value="@{controller.pessoa.cnpj}" c:onFocus="mask(jq(this), 'cnpj');"/>
          </div>
          <div class="new-col" width="250px">
            <label>CEP*</label>
            <a id="aInfocep"  popup="msg" class="glyphicon glyphicon-info-sign" style="margin-bottom: 3px;"></a>
-           <textbox id="textboxCep" class="form-control input-sm" maxlength="9" value="@{controller.pessoa.cep}"/>
+           <textbox id="textboxCep" class="form-control input-sm" maxlength="9" value="@{controller.pessoa.cep}" c:onFocus="mask(jq(this), 'cep');"/>
          </div>
          <div class="new-col" width="250px">
            <label>UF*</label>
@@ -117,12 +117,20 @@
            <textbox id="textboxCidade" class="form-control input-sm" maxlength="77" value="@{controller.pessoa.cidade}"/>
          </div>
          <div class="new-col" width="250px">
+           <label>BAIRRO*</label>
+           <textbox id="textboxBairro" class="form-control input-sm" maxlength="77" value="@{controller.pessoa.Bairro}"/>
+         </div>
+         <div class="new-col" width="250px">
            <label>TIPO LOGRADOURO*</label>
            <textbox id="textboxTipologradouro" class="form-control input-sm" maxlength="27" value="@{controller.pessoa.tipologradouro}"/>
          </div>
          <div class="new-col" width="250px">
            <label>LOGRADOURO*</label>
            <textbox id="textboxLogradouro" class="form-control input-sm" maxlength="77" value="@{controller.pessoa.logradouro}"/>
+         </div>
+         <div class="new-col" width="250px">
+           <label>Número Casa*</label>
+           <textbox id="textboxNcasa" class="form-control input-sm" maxlength="77" value="@{controller.pessoa.ncasa}"/>
          </div>
        </div>
      </div>

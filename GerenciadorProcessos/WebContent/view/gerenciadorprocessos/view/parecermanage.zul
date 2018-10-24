@@ -65,6 +65,7 @@
                            <listheader label="Pessoa" /> 
                            <listheader label="Dtabertura" /> 
                            <listheader label="Obs" /> 
+                           <listheader label="Numprocesso" /> 
                         </listhead>
                      </listbox>
                      <paging id="paginacaoProcesso" />

@@ -90,6 +90,9 @@
        if((((Processo)obj).getObs() != null)&&(!((Processo)obj).getObs().equals(""))) 
          criteria.add(Restrictions.ilike("obs",((Processo)obj).getObs()+"%")); 
 
+       if((((Processo)obj).getNumprocesso() != null)) 
+         criteria.add(Restrictions.eq("numprocesso",((Processo)obj).getNumprocesso())); 
+
        return criteria.list();
      }
 
@@ -129,6 +132,9 @@
        if((((Processo)obj).getObs() != null)&&(!((Processo)obj).getObs().equals(""))) 
          criteria.add(Restrictions.ilike("obs",((Processo)obj).getObs()+"%")); 
 
+       if((((Processo)obj).getNumprocesso() != null)) 
+         criteria.add(Restrictions.eq("numprocesso",((Processo)obj).getNumprocesso())); 
+
        criteria.setFirstResult(page);
        criteria.setMaxResults(pagesize);
        return criteria.list();
@@ -158,6 +164,9 @@
 
        if((((Processo)obj).getObs() != null)&&(!((Processo)obj).getObs().equals(""))) 
          criteria.add(Restrictions.ilike("obs",((Processo)obj).getObs()+"%")); 
+
+       if((((Processo)obj).getNumprocesso() != null)) 
+         criteria.add(Restrictions.eq("numprocesso",((Processo)obj).getNumprocesso())); 
 
        criteria.setProjection(Projections.rowCount());
        return (Long) criteria.list().get(0);
