@@ -3,6 +3,7 @@ package br.com.softplan.processos.model;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,10 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Usuario implements Serializable {
@@ -24,21 +25,22 @@ public class Usuario implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long codigo;
 
-    @Size(min = 3, max = 50)
-    @NotNull
-    private String nome;
-
     @Email
-    @NotNull
-    @Size(min = 0, max = 50)
+    @NotEmpty
+    @Size(min = 0, max = 100)
+    @Column(updatable = false, nullable = false)
     private String email;
 
+    @Size(min = 3, max = 50)
+    @NotEmpty
+    private String nome;
+
     @Size(min = 0, max = 500)
-    @NotNull
+    @NotEmpty
     private String senha;
 
     @ManyToMany
-    @JoinTable(name = "usuario_permissao", joinColumns = @JoinColumn(name = "codigo_usuario"), inverseJoinColumns = @JoinColumn(name = "permissao"))
+    @JoinTable(name = "usuario_permissao", joinColumns = @JoinColumn(name = "email_usuario"), inverseJoinColumns = @JoinColumn(name = "permissao"))
     private Set<Permissao> permissoes;
 
     public Long getCodigo() {
@@ -49,20 +51,20 @@ public class Usuario implements Serializable {
 	this.codigo = codigo;
     }
 
-    public String getNome() {
-	return nome;
-    }
-
-    public void setNome(String nome) {
-	this.nome = nome;
-    }
-
     public String getEmail() {
 	return email;
     }
 
     public void setEmail(String email) {
 	this.email = email;
+    }
+
+    public String getNome() {
+	return nome;
+    }
+
+    public void setNome(String nome) {
+	this.nome = nome;
     }
 
     public String getSenha() {

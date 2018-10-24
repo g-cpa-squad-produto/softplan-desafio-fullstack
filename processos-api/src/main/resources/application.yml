@@ -1,18 +1,15 @@
 server:
   port: 8080
-  
+
 spring:
+  jpa:
+    database: MYSQL
+    show-sql: true
   datasource:
-    data: classpath:/sql/data.sql
-    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost/processosdb?createDatabaseIfNotExist=true&useSSL=false
     username: root
     password: root
-    platform: mysql
-    url: jdbc:mysql://localhost/processos?createDatabaseIfNotExist=true&verifyServerCertificate=false&useSSL=false&requireSSL=false
     schema: classpath:/sql/schema.sql
-  jpa:
-    database-platform: org.hibernate.dialect.MySQLDialect
-    generate-ddl: false
-    hibernate:
-      ddl-auto: create
-    show-sql: true
+    data:
+    - classpath:sql/data.sql
+  

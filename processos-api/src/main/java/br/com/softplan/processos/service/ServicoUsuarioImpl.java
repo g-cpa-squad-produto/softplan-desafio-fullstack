@@ -17,4 +17,19 @@ public class ServicoUsuarioImpl implements ServicoUsuario {
 	return usuarioDAO.findAll();
     }
 
+    @Override
+    public Usuario selecionarUsuarioPorId(Long id) {
+	return usuarioDAO.findOne(id);
+    }
+
+    @Override
+    public Usuario adicionarUsuario(Usuario usuario) {
+	return usuarioDAO.save(usuario);
+    }
+
+    @Override
+    public void excluirUsuario(Long id) {
+	usuarioDAO.delete(id);
+    }
+
 }

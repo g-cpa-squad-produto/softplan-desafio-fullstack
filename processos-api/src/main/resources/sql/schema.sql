@@ -1,18 +1,18 @@
-CREATE TABLE IF NOT EXISTS processos.usuario (
-  codigo INTEGER NOT NULL PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS processosdb.usuario (
+  codigo BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+  email VARCHAR(100) NOT NULL UNIQUE,
   nome VARCHAR(50) NOT NULL,
-  email VARCHAR(50) NOT NULL,
   senha VARCHAR(500) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS processos.permissao (
+CREATE TABLE IF NOT EXISTS processosdb.permissao (
   nome VARCHAR(50) NOT NULL PRIMARY KEY
 );
 
-CREATE TABLE IF NOT EXISTS processos.usuario_permissao (
-    codigo_usuario INTEGER NOT NULL,
+CREATE TABLE IF NOT EXISTS processosdb.usuario_permissao (
+    email_usuario VARCHAR(100) NOT NULL,
     permissao VARCHAR(50) NOT NULL,
-    FOREIGN KEY (codigo_usuario) REFERENCES processos.usuario (codigo),
-    FOREIGN KEY (permissao) REFERENCES processos.permissao (nome),
-    UNIQUE INDEX user_authority_idx_1 (codigo_usuario, permissao)
+    FOREIGN KEY (email_usuario) REFERENCES processosdb.usuario (email),
+    FOREIGN KEY (permissao) REFERENCES processosdb.permissao (nome),
+    UNIQUE INDEX user_authority_idx_1 (email_usuario, permissao)
 );
