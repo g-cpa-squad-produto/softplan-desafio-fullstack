@@ -1,0 +1,140 @@
+
+@import "../../compartilhado/less/estilo-geral.less";
+/**
+* CSS PARA PERSONALIZACAO DAS CORES DO LAYOUT
+*
+*/
+
+/* Cor para botoes com acao de submit */
+@cor_ativa: #2C89B4;
+/* Cor para botoes com acao simples (btVoltar, btCancelar..etc) */
+@cor_secundaria: #89979E;
+/* Fonte default dos sistemas */
+@fonte_default: "Open Sans", Calibri, Candara, Arial, sans-serif;
+/* Cores dos textos do sistema */
+@cor_texto_default: #818181;
+@cor_texto_topo: #FFF;
+ 
+@cor_topo: #343D54;
+
+*, *:before, *:after {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+} 
+
+.portal {
+	.topo {  
+		background-color: @cor_topo;
+		color: @cor_texto_topo;  
+		
+		.btn-ativ-sistemas { 
+			background-color:@cor_topo;
+			&:hover {
+				background-color: darken(@cor_topo, 10%);
+			}
+		}
+		
+		.menu-ativ-sistemas {
+			&.open .btn-ativ-sistemas {
+				background-color: darken(@cor_topo, 10%); 
+			}
+			
+			.lista-sistemas {
+				background-color: darken(@cor_topo, 10%);
+				.form { 
+					background-color: @cor_topo;
+				}
+				a, .z-button {
+					background-color: darken(@cor_topo, 10%); 
+					&:hover {
+						background-color: darken(@cor_topo, 7%);
+					}
+				}
+			}
+		}
+		.nome-usuario {   
+			.btn-group>.btn { 
+				&:hover {
+					background: darken(@cor_topo, 5%);
+				} 
+			}
+			.dropdown-menu { 
+				>li>a:hover {
+					background: @cor_topo;
+				}
+			} 
+			.btn-group.open .btn.dropdown-toggle {
+				background-color: darken(@cor_topo, 10%);
+			}
+		}
+	}
+	
+	.menu-vert {  
+		color: @cor_texto_default; 
+	} 
+	
+	.content { 		
+		.z-tabbox {
+			.barra-ferramentas {
+				ul.nav-pills {
+					li {
+						a {  
+							&:hover { 
+								color: @cor_topo;
+								border-bottom: 2px solid @cor_topo;
+							}
+						}
+					}
+				}
+			}  
+		} 
+	}
+}
+
+.z-window-modal-header, .z-window-highlighted-header {  
+	background-color: @cor_topo;
+	border-bottom: 1px solid darken(@cor_topo, 4%);
+}
+
+/*
+ * Alterando Calendario (Datebox)
+ */
+ 
+.z-datebox-pp {
+	.z-calendar {
+		.z-calendar-calctrl {
+			background: @cor_topo;
+		}
+		.z-calendar-tdl, .z-calendar-tdr {
+			background: @cor_topo;
+			
+			.z-calendar-left-icon, .z-calendar-right-icon {
+				border-top-color: @cor_topo;
+				border-bottom-color: @cor_topo;
+			}
+		}
+		
+		.z-calendar-caldayrow .z-calendar-over { 
+			color: @cor_topo;
+		}
+		
+		.z-calendar-calday td.z-calendar-seld {
+			background: @cor_topo;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,9 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"  root="./windowSobreOSistema" ?>
+<zk xmlns:n="native" xmlns:w="http://www.zkoss.org/2005/zk/client">
+	<window id="windowSobreOSistema" closable="true" position="center" title="Informações do Sistema" width="680px"
+		apply="">
+		<div class="form">
+			<n:h1>Ainda falta implementar</n:h1>
+		</div>
+	</window>
+</zk>

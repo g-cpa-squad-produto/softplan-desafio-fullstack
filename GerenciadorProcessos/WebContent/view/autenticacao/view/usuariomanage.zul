@@ -1,0 +1,95 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"  root="./windowUsuario" ?>
+<?page contentType="text/html;charset=UTF-8"?>
+<zk xmlns:n="native" xmlns:c="client">
+   <window id="windowUsuario" apply="com.agfgerador.autenticacao.controller.UsuarioController">
+     <include id="barraFerramentas" src="/view/compartilhado/view/barraFerramentas.zul"></include>
+     <div id="list">
+       <listbox id="listbox">
+         <auxhead id="auxhead">
+           <auxheader/>
+           <auxheader>
+             <textbox id="filtroCodigo"/>
+           </auxheader>
+           <auxheader>
+             <textbox id="filtroNome"/>
+           </auxheader>
+           <auxheader>
+             <textbox id="filtroLogin"/>
+           </auxheader>
+           <auxheader>
+             <combobox id="filtroHabilitado">
+               <comboitem label="Ativo" value="Ativo"></comboitem>
+               <comboitem label="Inativo" value="Inativo"></comboitem>
+             </combobox>
+           </auxheader>
+           <auxheader>
+             <textbox id="filtroEmail"/>
+           </auxheader>
+         </auxhead>
+         <listhead>
+           <listheader label="" width="25px" />
+           <listheader label="Código" sort="auto(id)" width="120px"/>
+           <listheader label="NOME" sort="auto(nome)" />
+           <listheader label="LOGIN" sort="auto(login)" />
+           <listheader label="HABILITADO" sort="auto(habilitado)" width="170px"/>
+           <listheader label="EMAIL" sort="auto(email)" />
+         </listhead>
+       </listbox>
+       <paging id="paginacao"></paging>
+     </div>
+     <div id="form" class="form fade out ocultar">
+       <div class="new-li">
+         <div class="new-col" width="250px">
+           <label>NOME*</label>
+           <a id="aInfonome"  popup="msg" class="glyphicon glyphicon-info-sign" style="margin-bottom: 3px;"></a>
+           <textbox id="textboxNome" class="form-control input-sm" maxlength="255" value="@{controller.usuario.nome}"/>
+         </div>
+         <div class="new-col" width="250px">
+           <label>LOGIN*</label>
+           <a id="aInfologin"  popup="msg" class="glyphicon glyphicon-info-sign" style="margin-bottom: 3px;"></a>
+           <textbox id="textboxLogin" class="form-control input-sm" maxlength="60" value="@{controller.usuario.login}"/>
+         </div>
+         <div class="new-col" width="250px">
+           <label>SENHA*</label>
+           <a id="aInfosenha"  popup="msg" class="glyphicon glyphicon-info-sign" style="margin-bottom: 3px;"></a>
+           <textbox id="textboxSenha" type="password" class="form-control input-sm" maxlength="255" value="@{controller.usuario.senha}"/>
+         </div>
+         <div class="new-col" width="210px">
+           <label>EMAIL</label>
+           <a id="aInfoemail"  popup="msg" class="glyphicon glyphicon-info-sign" style="margin-bottom: 3px;"></a>
+           <textbox id="textboxEmail" class="form-control input-sm" maxlength="255" value="@{controller.usuario.email}"/>
+         </div>
+         <div class="new-col" width="180px">
+           <label>TELEFONE</label>
+           <a id="aInfotelefone"  popup="msg" class="glyphicon glyphicon-info-sign" style="margin-bottom: 3px;"></a>
+           <textbox id="textboxTelefone" class="form-control input-sm" maxlength="14" value="@{controller.usuario.telefone}" c:onFocus="mask(jq(this), 'telefone');"/>
+         </div>
+         <div class="new-col" width="180px">
+           <label>CELULAR</label>
+           <a id="aInfotelefonealternativo"  popup="msg" class="glyphicon glyphicon-info-sign" style="margin-bottom: 3px;"></a>
+           <textbox id="textboxTelefonealternativo" class="form-control input-sm" maxlength="15" value="@{controller.usuario.telefoneAlternativo}" c:onFocus="mask(jq(this), 'cel');"/>
+         </div>
+         <div class="new-col" width="125px">
+           <checkbox id="checkboxHabilitado" label="HABILITADO"></checkbox>
+           <a id="aInfohabilitado"  popup="msg" class="glyphicon glyphicon-info-sign" style="margin-top: 23px;"></a>
+		 </div>
+       </div>
+
+         <n:br></n:br>
+            <tabbox id="tb" style="min-height: 300px;">
+               <tabs id="tabs">
+                  <tab id="tabUsuarioperfil" label="PERFIL" />
+               </tabs>
+               <tabpanels>
+                  <tabpanel><include id="includeUsuarioperfil" apply="com.agfgerador.autenticacao.controller.IncludeUsuarioperfil" src="..\..\autenticacao\view\includeUsuarioperfil.zul"></include></tabpanel>
+               </tabpanels>
+            </tabbox>
+     </div>
+        <popup id="msg" width="300px">
+			<vlayout>
+				<label id="labelNomePoup"/>
+				<toolbarbutton id="toolbarButton"/>
+			</vlayout>
+		</popup>
+   </window>
+</zk>

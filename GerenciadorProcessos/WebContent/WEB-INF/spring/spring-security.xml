@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/security 
+       http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <security:global-method-security secured-annotations="enabled" pre-post-annotations="enabled"  />
+
+    <security:http auto-config='true'>
+		<security:form-login login-page="/index.zul"  
+			authentication-failure-url="/index.zul?return=invalido"
+			default-target-url='/view/compartilhado/view/dashboard.zul'
+			always-use-default-target='true' />
+		<security:intercept-url pattern="/view/autenticacao/view/**" access="ROLE_USER" />
+		<security:intercept-url pattern="/view/compartilhado/view/**" access="ROLE_USER" />
+		<security:session-management invalid-session-url="/index.zul" >
+		  	<security:concurrency-control max-sessions="1" session-registry-alias="sessionRegistry"  expired-url="/index.zul"  />
+		</security:session-management>
+		<security:logout logout-url="/logout" logout-success-url="/" invalidate-session="true"/>
+		<security:access-denied-handler error-page="/index.zul"/>
+		<security:anonymous enabled="false"/>
+	</security:http>
+    
+   <bean id="myAuthenticationProvider" class="com.agfgerador.compartilhado.controller.MyAuthenticationProvider">  
+    </bean>
+    
+    <security:authentication-manager alias="authenticationManager">
+        <security:authentication-provider ref="myAuthenticationProvider" />
+    </security:authentication-manager>
+    
+    <bean id="usuarioServiceBean" class="com.agfgerador.autenticacao.service.UsuarioServiceImpl">
+		<property name="sessionReg" ref="sessionRegistry" />
+	</bean>
+
+</beans>

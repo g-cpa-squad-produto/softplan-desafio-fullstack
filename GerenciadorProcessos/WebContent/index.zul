@@ -1,0 +1,68 @@
+<?page title="Login AGF - Progeto Base" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.spring.DelegatingVariableResolver"?>
+<?link rel="shortcut icon" type="image/x-icon" href="/ativ.ico"?>
+<?link rel="icon" type="image/x-icon" href="/ativ.ico"?>
+<?link rel="stylesheet" type="text/css" href="/view/compartilhado/css/bootstrap.min.css"?>  
+<?link rel="stylesheet" type="text/css" href="/view/compartilhado/css/estilo-index.min.css"?>
+<?script type="text/javascript" src="view/compartilhado/js/head.core.min.js" ?> 
+<?script type="text/javascript" src="view/compartilhado/js/ativ.js" ?> 
+<?meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no"?>
+<zk>
+	<window id="windowIndex" class="page page-login" xmlns:n="native" xmlns:c="client" 
+		apply="com.agfgerador.compartilhado.controller.IndexController" style="opacity: 1;margin-top: 0;"> 	
+		<div class="box-login">
+			<div class="box-login-left"> 
+				<label class="logo"></label>
+			</div>
+			<div class="box-login-right">
+				
+				<div id="msg">
+					<div id="msg2" class="alert alert-danger"  if="${param.return == 'invalido'}"> 
+			       		<label value="Login ou senha inválido" />
+			     	</div>  
+		     	</div> 
+		     	
+				<div id="divForm" class="box-login-form fade in">
+					<h:form action="j_spring_security_check" method="POST" onsubmit="return checkFormLogin()" xmlns:h="http://www.w3.org/1999/xhtml">
+						<div  class="titulo">
+							<label >Logar no Projeto Base AGF</label>
+						</div>
+						<div class="new-li">
+							<div class="new-col" width="100%">
+								<label>Login</label> 
+								<textbox id="login" name="j_username" focus="true" tooltiptext="Login" />
+							</div>
+						</div>
+						<div class="new-li">
+							<div class="new-col" width="100%">
+								<label>Senha</label>  
+								<textbox id="senha" name="j_password" type="password" tooltiptext="Senha" />
+							</div>
+						</div>  
+						<h:input type="submit" class="btn btn-primary btn-block" value="Acessar" />
+						<div class="box-login-form-link">
+							<label>Esqueceu sua senha? </label>
+							<a href="#" tooltiptext="Caso tenha esquecido sua senha. Clique aqui." 
+							c:onClick="divAtivaLogin('divRecuperarSenha'); this.$f('login').setValue('');
+										this.$f('senha').setValue(''); this.$f('loginRecovery').focus(true)"> Clique aqui</a>
+						</div> 
+					</h:form>
+				</div> 
+				<div id="divRecuperarSenha" class="box-login-form fade out">
+					<div class="new-li">
+						<div class="new-col" width="100%">
+							<label>Login cadastrado</label> 
+							<textbox id="loginRecovery" tooltiptext="Digite o login cadastrado no sistema." />
+						</div>
+					</div>  
+					<a class="btn btn-default" id="btVoltar" c:onClick="divAtivaLogin('divForm'); this.$f('loginRecovery').setValue(''); this.$f('login').focus(true)">Voltar</a> 
+					<a class="btn btn-primary" id="btResetar" href="#">Resetar</a>  
+				</div>
+			</div>
+		</div>
+		<div class="texto-footer"> 
+			<n:p class="browser-require">Navegadores Recomendados: Google Chrome, Mozilla Firefox, Internet Explorer 9+ e Safari 6.1</n:p>
+			<n:p class="resolution">Para melhor visualização utilize resoluções de tela a partir de 1024x768. Resoluções inferiores poderão dificultar o uso do sistema.</n:p>
+		</div> 
+	</window>
+</zk>

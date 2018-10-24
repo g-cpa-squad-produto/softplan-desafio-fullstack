@@ -1,0 +1,136 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"  root="./windowComponente" ?>
+<?page contentType="text/html;charset=UTF-8"?>
+<zk xmlns:n="native" xmlns:c="client">
+   <window id="windowComponente" apply="com.agfgerador.autenticacao.controller.ComponenteController">
+     <include id="barraFerramentas" src="/view/compartilhado/view/barraFerramentas.zul"></include>
+     <div id="list">
+       <listbox id="listbox">
+         <auxhead id="auxhead">
+           <auxheader/>
+           <auxheader>
+             <textbox id="filtroCodigo"/>
+           </auxheader>
+           <auxheader>
+             <textbox id="filtroDescricao"/>
+           </auxheader>
+           <auxheader>
+             <textbox id="filtroInformacao"/>
+           </auxheader>
+           <auxheader>
+             
+           </auxheader>
+           <auxheader>
+             <textbox id="filtroTipomenu"/>
+           </auxheader>
+         </auxhead>
+         <listhead>
+           <listheader label="" width="25px" />
+           <listheader label="Código" sort="auto(id)" width="120px"/>
+           <listheader label="NOME VISÍVEL" sort="auto(descricao)" />
+           <listheader label="INFORMAÇÕES" sort="auto(informacao)" />
+           <listheader label="MENU" sort="auto(componentemenu)" />
+           <listheader label="TIPO MENU" sort="auto(tipomenu)" />
+         </listhead>
+       </listbox>
+       <paging id="paginacao"></paging>
+     </div>
+     <div id="form" class="form fade out ocultar">
+       <div class="new-li">
+         <div class="new-col" width="270px"> 
+            <a href="#" id="labelTipomenu">Tipo menu*<span class="glyphicon glyphicon-link"></span></a>
+            <div class="new-col-link">
+               <longbox id="longboxTipomenu" class="form-control input-sm" />
+               <bandbox id="bandboxTipomenu" autodrop="true"> 
+                  <bandpopup>
+                     <listbox id="listboxTipomenu" width="500px">
+                        <listhead>
+                           <listheader label="Código" width="100px" />
+                           <listheader label="Nome" /> 
+                        </listhead>
+                     </listbox>
+                     <paging id="paginacaoTipomenu" />
+                  </bandpopup>
+               </bandbox>
+            </div>
+         </div>
+         <div id="divtextboxDescricao" class="new-col" width="230px">
+           <label>NOME VISÍVEL*</label>
+           <a id="aInfodescricao"  popup="msg" class="glyphicon glyphicon-info-sign" style="margin-bottom: 3px;"></a>
+           <textbox id="textboxDescricao" class="form-control input-sm" maxlength="255" value="@{controller.componente.descricao}"/>
+         </div>
+         <div id="divtextboxNome" class="new-col" width="230px">
+           <label>NOME PARA MENU*</label>
+           <a id="aInfonome"  popup="msg" class="glyphicon glyphicon-info-sign" style="margin-bottom: 3px;"></a>
+           <textbox id="textboxNome" class="form-control input-sm" maxlength="60" value="@{controller.componente.nome}"/>
+         </div>
+         <div id="divtextboxUrl" class="new-col" width="300px">
+           <label>URL*</label>
+           <a id="aInfourl"  popup="msg" class="glyphicon glyphicon-info-sign" style="margin-bottom: 3px;"></a>
+           <textbox id="textboxUrl" class="form-control input-sm" maxlength="255" value="@{controller.componente.url}"/>
+         </div>
+         <div id="divtextboxMenu" class="new-col" width="250px">
+           <label>MENU</label>
+           <textbox id="textboxMenu" class="form-control input-sm" maxlength="60" value="@{controller.componente.menu}"/>
+         </div>
+                  <div id="divbandboxComponentemenu" class="new-col" width="270px"> 
+            <a href="#" id="labelComponentemenu">Menu*<span class="glyphicon glyphicon-link"></span></a>
+            <a id="aInfocomponentemenu"  popup="msg" class="glyphicon glyphicon-info-sign" style="margin-bottom: 3px;"></a>
+            <div class="new-col-link">
+               <longbox id="longboxComponentemenu" class="form-control input-sm" />
+               <bandbox id="bandboxComponentemenu" autodrop="true"> 
+                  <bandpopup>
+                     <listbox id="listboxComponentemenu" width="500px">
+                        <listhead>
+                           <listheader label="Código" width="100px" />
+                           <listheader label="Descricao" /> 
+                           <listheader label="Tipo" /> 
+                        </listhead>
+                     </listbox>
+                     <paging id="paginacaoComponentemenu" />
+                  </bandpopup>
+               </bandbox>
+            </div>
+         </div>
+         <div id="divtextboxInformacao" class="new-col" width="300px">
+           <label>INFORMAÇÕES</label>
+           <a id="aInfoinformacao"  popup="msg" class="glyphicon glyphicon-info-sign" style="margin-bottom: 3px;"></a>
+           <textbox id="textboxInformacao" rows="3" class="form-control input-sm" maxlength="555" value="@{controller.componente.informacao}"/>
+         </div>
+         <div id="divbandboxIcone" class="new-col" width="380px"> 
+            <a href="#" id="labelIcone">Ícone*<span class="glyphicon glyphicon-link"></span></a>
+            <div class="new-col-link">
+               <longbox id="longboxIcone" class="form-control input-sm" />
+               <bandbox id="bandboxIcone" autodrop="true"> 
+                  <bandpopup>
+                     <listbox id="listboxIcone" width="500px">
+                        <listhead>
+                           <listheader label="Código" width="100px" />
+                           <listheader label="Nome" /> 
+                           <listheader label="Url" /> 
+                        </listhead>
+                     </listbox>
+                     <paging id="paginacaoIcone" />
+                  </bandpopup>
+               </bandbox>
+            </div>
+         </div>
+       </div>
+
+         <n:br></n:br>
+            <tabbox id="tb" style="min-height: 300px;">
+               <tabs id="tabs">
+                  <tab id="tabPerfilvinculado" label="PERFIL VINCULADO" />
+               </tabs>
+               <tabpanels>
+                  <tabpanel><include id="includePerfilvinculado" apply="com.agfgerador.autenticacao.controller.IncludePerfilvinculado" src="..\..\autenticacao\view\includePerfilvinculado.zul"></include></tabpanel>
+               </tabpanels>
+            </tabbox>
+     </div>
+        <popup id="msg" width="300px">
+			<vlayout>
+				<label id="labelNomePoup"/>
+				<toolbarbutton id="toolbarButton"/>
+			</vlayout>
+		</popup>
+   </window>
+</zk>

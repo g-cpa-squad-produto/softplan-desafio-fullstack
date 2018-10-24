@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+ <display-name>AGF - WEB</display-name>
+ <context-param>
+ 	 <param-name>contextConfigLocation</param-name>
+  	<param-value>/WEB-INF/spring/spring.xml</param-value>
+ </context-param>
+ <servlet>
+		<servlet-name>context</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		 <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/spring/spring.xml</param-value>
+        </init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+ <listener>
+  	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+ </listener>
+ <listener>
+  	<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+ </listener>
+ <listener>
+  	<listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
+ </listener>
+ <filter>
+  	<filter-name>CharacterEncodingFilter</filter-name>
+  	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+  	<init-param>
+   		<param-name>encoding</param-name>
+   		<param-value>UTF-8</param-value>
+  	</init-param>
+ </filter>
+ <filter>
+  	<filter-name>springSecurityFilterChain</filter-name>
+  	<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+ </filter>
+ <filter-mapping>
+  	<filter-name>CharacterEncodingFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+ </filter-mapping>
+ <filter-mapping>
+  	<filter-name>springSecurityFilterChain</filter-name>
+  	<url-pattern>/*</url-pattern>
+ </filter-mapping>
+ <listener>
+  	<description>Used to cleanup when a session is destroyed</description>
+  	<display-name>ZK Session cleaner</display-name>
+  	<listener-class>org.zkoss.zk.ui.http.HttpSessionListener</listener-class>
+ </listener>
+ <session-config>
+  <session-timeout>15</session-timeout>
+</session-config>
+ <servlet>
+  	<description>The ZK loader for ZUML pages</description>
+  	<servlet-name>zkLoader</servlet-name>
+  	<servlet-class>org.zkoss.zk.ui.http.DHtmlLayoutServlet</servlet-class>
+  	<init-param>
+   		<param-name>update-uri</param-name>
+   		<param-value>/zkau</param-value>
+  	</init-param>
+  	<load-on-startup>1</load-on-startup>
+ </servlet>
+ <servlet>
+  <description>The asynchronous update engine for ZK</description>
+  <servlet-name>auEngine</servlet-name>
+  <servlet-class>org.zkoss.zk.au.http.DHtmlUpdateServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>zkLoader</servlet-name>
+  <url-pattern>*.zul</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>zkLoader</servlet-name>
+  <url-pattern>*.zhtml</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>auEngine</servlet-name>
+  <url-pattern>/zkau/*</url-pattern>
+ </servlet-mapping>
+
+ <welcome-file-list>
+  <welcome-file>index.zul</welcome-file>
+ </welcome-file-list>
+</web-app>

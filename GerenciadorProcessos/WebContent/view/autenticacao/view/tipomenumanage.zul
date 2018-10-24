@@ -1,0 +1,34 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"  root="./windowTipomenu" ?>
+<?page contentType="text/html;charset=UTF-8"?>
+<zk xmlns:n="native" xmlns:c="client">
+   <window id="windowTipomenu" apply="com.agfgerador.autenticacao.controller.TipomenuController">
+     <include id="barraFerramentas" src="/view/compartilhado/view/barraFerramentas.zul"></include>
+     <div id="list">
+       <listbox id="listbox">
+         <auxhead id="auxhead">
+           <auxheader/>
+           <auxheader>
+             <textbox id="filtroCodigo"/>
+           </auxheader>
+           <auxheader>
+             <textbox id="filtroNome"/>
+           </auxheader>
+         </auxhead>
+         <listhead>
+           <listheader label="" width="25px" />
+           <listheader label="Código" sort="auto(id)" width="120px"/>
+           <listheader label="NOME" sort="auto(nome)" />
+         </listhead>
+       </listbox>
+       <paging id="paginacao"></paging>
+     </div>
+     <div id="form" class="form fade out ocultar">
+       <div class="new-li">
+         <div class="new-col" width="250px">
+           <label>NOME*</label>
+           <textbox id="textboxNome" class="form-control input-sm" maxlength="133" value="@{controller.tipomenu.nome}"/>
+         </div>
+       </div>
+     </div>
+   </window>
+</zk>

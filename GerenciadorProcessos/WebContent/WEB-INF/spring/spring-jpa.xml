@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       					   http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+						   http://www.springframework.org/schema/context 
+						   http://www.springframework.org/schema/context/spring-context-4.1.xsd
+						   http://www.springframework.org/schema/tx 
+						   http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
+						   
+<context:property-placeholder location="classpath:application.properties" />
+
+	<context:component-scan base-package="com.agfgerador" />
+	<!--EntityManager AGF Gerador - Arthur Freire-->
+		<tx:annotation-driven transaction-manager="txManagerConexao" />
+		<bean id="entityManagerFactory"
+			class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+			<property name="persistenceUnitName" value="conexao" />
+			<property name="dataSource" ref="dataSource" />
+			<property name="jpaVendorAdapter">
+				<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+					<property name="databasePlatform" value="${database.target}" />
+					<property name="showSql" value="${database.showSql}" />
+					<property name="generateDdl" value="${database.generateDdl}" />					
+				</bean>
+			</property>
+		</bean>
+		<bean id="dataSource"
+			class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+			<property name="driverClassName" value="${database.driver}" />
+			<property name="url" value="${database.url}" />
+			<property name="username" value="${database.username}" />
+			<property name="password" value="${database.password}" />
+		</bean>
+		<bean id="txManagerConexao" class="org.springframework.orm.jpa.JpaTransactionManager">
+			<property name="entityManagerFactory" ref="entityManagerFactory" />
+		</bean> 
+	<!--Fim EntityManager AGF Gerador - Arthur Freire-->
+	
+	<!--EntityManager Autênticação - Arthur Freire-->
+		<tx:annotation-driven transaction-manager="txManagerAutenticacao" />
+		<bean id="entityManagerFactoryAutenticacao"
+			class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+			<property name="persistenceUnitName" value="autenticacao" />
+			<property name="dataSource" ref="dataSourceAutenticacao" />
+			<property name="jpaVendorAdapter">
+				<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+					<property name="databasePlatform" value="${databaseAutenticacao.target}" />
+					<property name="showSql" value="${databaseAutenticacao.showSql}" />
+					<property name="generateDdl" value="${databaseAutenticacao.generateDdl}" />
+				</bean>
+			</property>
+		</bean>
+		<bean id="dataSourceAutenticacao"
+			class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+			<property name="driverClassName" value="${databaseAutenticacao.driver}" />
+			<property name="url" value="${databaseAutenticacao.url}" />
+			<property name="username" value="${databaseAutenticacao.username}" />
+			<property name="password" value="${databaseAutenticacao.password}" />
+		</bean>
+		<bean id="txManagerAutenticacao" class="org.springframework.orm.jpa.JpaTransactionManager">
+			<property name="entityManagerFactory" ref="entityManagerFactoryAutenticacao" />
+			<qualifier value="txManagerAutenticacao"/>
+		</bean>
+	
+	<!--Fim EntityManager Autênticação - Arthur Freire-->
+
+	<bean
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+	<bean
+		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+</beans>

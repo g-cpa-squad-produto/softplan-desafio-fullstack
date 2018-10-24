@@ -1,0 +1,74 @@
+<div xmlns:c="client" xmlns:n="native">
+   <div class="include-header">
+      <n:h1>PERFIL</n:h1> 
+      <include id="barraFerramentasInclude" src="../../compartilhado/view/barraFerramentasInclude.zul"></include>
+   </div>
+     <div id="list">
+       <listbox id="listbox">
+         <auxhead id="auxhead">
+           <auxheader/>
+           <auxheader>
+             <textbox id="filtroCodigo"/>
+           </auxheader>
+           <auxheader>
+             <textbox id="filtroPerfil"/>
+           </auxheader>
+           <auxheader>
+             <combobox id="filtroAtivo">
+               <comboitem label="Ativo" value="Ativo"></comboitem>
+               <comboitem label="Inativo" value="Inativo"></comboitem>
+             </combobox>
+           </auxheader>
+           <auxheader>
+             <combobox id="filtroAdministrador">
+               <comboitem label="Ativo" value="Ativo"></comboitem>
+               <comboitem label="Inativo" value="Inativo"></comboitem>
+             </combobox>
+           </auxheader>
+         </auxhead>
+         <listhead>
+           <listheader label="" width="25px" />
+           <listheader label="Código" sort="auto(id)" width="120px"/>
+           <listheader label="PERFIL" sort="auto(perfil)" />
+           <listheader label="ATIVO" sort="auto(ativo)" width="170px"/>
+           <listheader label="ADMINISTRADOR" sort="auto(administrador)" width="170px"/>
+         </listhead>
+       </listbox>
+       <paging id="paginacao"></paging>
+     </div>
+     <div id="form" class="form fade out ocultar">
+       <div class="new-li">
+         <div class="new-col" width="380px"> 
+            <a href="#" id="labelPerfil">Perfil*<span class="glyphicon glyphicon-link"></span></a>
+            <div class="new-col-link">
+               <longbox id="longboxPerfil" class="form-control input-sm" />
+               <bandbox id="bandboxPerfil" autodrop="true"> 
+                  <bandpopup>
+                     <listbox id="listboxPerfil" width="500px">
+                        <listhead>
+                           <listheader label="Código" width="100px" />
+                           <listheader label="Nome" /> 
+                        </listhead>
+                     </listbox>
+                     <paging id="paginacaoPerfil" />
+                  </bandpopup>
+               </bandbox>
+            </div>
+         </div>
+         <div class="new-col" width="100px">
+           <checkbox id="checkboxAtivo" label="ATIVO"></checkbox>
+           <a id="aInfoativo"  popup="msg" class="glyphicon glyphicon-info-sign" style="margin-top: 23px;"></a>
+			</div>
+         <div class="new-col" width="160px">
+           <checkbox id="checkboxAdministrador" label="ADMINISTRADOR"></checkbox>
+           <a id="aInfoadministrador"  popup="msg" class="glyphicon glyphicon-info-sign" style="margin-top: 23px;"></a>
+			</div>
+       </div>
+     </div>
+        <popup id="msg" width="300px">
+			<vlayout>
+				<label id="labelNomePoup"/>
+				<toolbarbutton id="toolbarButton"/>
+			</vlayout>
+		</popup>
+</div>

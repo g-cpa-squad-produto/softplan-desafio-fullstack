@@ -1,0 +1,110 @@
+<?page title="AGF - Projeto Base" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="./windowProjetoBase" ?> 
+<?variable-resolver class="org.zkoss.spring.DelegatingVariableResolver"?>
+<?link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"?>  
+<?link rel="stylesheet" type="text/css" href="../css/bootstrap-wysihtml5.css"?>
+<?link rel="stylesheet" type="text/css" href="../css/estilo-sistema.min.css"?>
+<?link rel="shortcut icon" type="image/x-icon" href="/ativ.ico"?>
+<?link rel="icon" type="image/x-icon" href="/ativ.ico"?> 
+
+<zk xmlns:n="native" xmlns:c="client"> 
+	<window id="windowProjetoBase" class="page portal" apply="com.agfgerador.compartilhado.controller.DashboardController" > 
+		<div class="topo"> 
+			<div class="nome-cliente" >
+				<label id="nomeInstituicao"></label>
+			</div> 
+			<div class="right-menu">
+			
+						 <div class="divbandboxbusca"> 
+				               <bandbox id="bandboxComponente" class="classbandboxbusca" tooltiptext="Digite o nome da pagina que deseja encontrar"> 
+				                  <bandpopup height="100%">
+				                     <listbox id="listboxComponente" width="750px" style="margin-top: -5px;">
+				                        <listhead>
+				                           <listheader label="Componente" width="200px"/> 
+				                           <listheader label="Informação"/> 
+				                        </listhead>
+				                     </listbox>
+				                     <paging id="paginacaoComponente" />
+				                  </bandpopup>
+				               </bandbox>
+				         </div>
+		         
+				<div class="nome-usuario" style="margin-left: 10px;margin-right: 7px;">
+					<div class="btn-group">
+					  <n:button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					    <label id="nomeUsuario"></label> <span class="caret"></span>
+					  </n:button>				  
+					  <n:ul class="dropdown-menu" role="menu"> 
+					    <n:li><a href="#" id="alterarsenha"><span class="glyphicon glyphicon-edit">Alterar Senha</span></a></n:li>
+		     		<!--<n:li><a href="#" id="senhaLiberacao"><span class="glyphicon glyphicon-lock">Senha de Liberação</span></a></n:li> --> 
+					    <n:li class="divider"></n:li>
+					    <n:li><a href="/logout"><span class="glyphicon glyphicon-remove">Sair</span></a></n:li>
+					  </n:ul>
+					</div>
+				</div>
+		   <!-- <div class="menudrop dropdown menu-ativ-sistemas">
+				  <n:a class="dropdown-toggle btn btn-ativ-sistemas" href="#" data-toggle="dropdown">Projeto Base</n:a>
+				  <n:div class="dropdown-menu lista-sistemas">
+				  	<n:form action="/" method="POST" role="form" name="formSistemas" id="formSistemas">
+				  		<textbox id="param1" class="hide" name="param1"></textbox>
+						<textbox id="param2" class="hide" name="param2"></textbox>
+						<textbox id="param3" class="hide" name="param3"></textbox>
+					</n:form>
+                  </n:div>
+				</div> -->
+			</div>
+			
+		</div>
+		<include id="includeLiberacao" visible="false" src="/view/compartilhado/view/liberacao.zul" />
+		<div class='notifications top-right'></div>
+		
+		<div class="menu-vert">
+			<div class="menu-vert-header">
+				<n:h2>Menu</n:h2>
+				<!--<label>Selecione uma opção abaixo</label> -->
+			</div>
+			<div class="menu-vert-content">
+				<menubar id="menubar" orient="vertical" autodrop="true"/>	
+				
+			</div>
+		</div>
+		
+		<div class="content">
+			<tabbox id="tabbox">
+				<tabs id="tabs">
+					<tab label="AGF"/>
+				</tabs>
+				<tabpanels id="tabpanels">
+					<tabpanel>
+						<div id="dashboardFluid" class="form">
+							<div id="atalhos"/>
+							<include id="includeShortcut" class="shortcut-include"></include>
+						</div>
+					</tabpanel>
+				</tabpanels>
+			</tabbox>
+		</div>
+		
+		<div class="footer">
+		
+		</div> 
+	</window> 
+	<n:script>
+		$('#teste').wysihtml5({
+			"font-styles": false,
+			"link": false,
+			"image": false
+		});
+		
+		$(document).ready(function () {
+		    $("html").niceScroll();
+		});
+	</n:script>
+	<script type="text/javascript" src="../../compartilhado/js/jquery-2.js"/>
+	<script type="text/javascript" src="../../compartilhado/js/bootstrap.min.js"/>
+	<script type="text/javascript" src="../../compartilhado/js/vendor.min.js"/>
+	<script type="text/javascript" src="../../compartilhado/js/agf.js"/>
+	<script type="text/javascript" src="../../compartilhado/js/jquery.watermarkinput.js" />
+    <script type="text/javascript" src="../../compartilhado/js/jquery.maskedinput.min.js" />
+</zk>
+			

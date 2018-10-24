@@ -1,0 +1,26 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"  root="./windowAlterarSenha" ?>
+<zk xmlns:w="http://www.zkoss.org/2005/zk/client">
+	<window id="windowAlterarSenha" closable="true" position="center" title="Alterar Senha" width="680px"
+		apply="com.agfgerador.compartilhado.controller.AlterarSenhaController"> 
+		<include id="includeMensagem" src="/view/compartilhado/view/mensagem.zul" />
+		<div  class="form">
+			<div class="new-li">
+				<div class="new-col" width="150px">
+					Digite sua senha atual
+					<textbox type="password" id="senhaAtual" class="form-control input-sm" />
+				</div>
+				<div class="new-col" width="150px"> 
+					Digite sua nova senha
+					<textbox  type="password" id="senhaNova" class="form-control input-sm" />
+				</div>
+				<div class="new-col" width="150px">
+					Confirme a sua nova senha
+					<textbox type="password" id="repetirSenha" class="form-control input-sm"/>
+				</div>
+				<div class="new-col align-y"> 
+					<a class="btn btn-primary" id="btAlterar"><span class="glyphicon glyphicon-ok">Alterar Senha</span></a>  
+				</div>
+			</div>
+		</div> 
+	</window>
+</zk>

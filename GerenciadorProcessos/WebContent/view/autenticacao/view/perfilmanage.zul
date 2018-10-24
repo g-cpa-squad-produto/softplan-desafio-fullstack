@@ -1,0 +1,58 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"  root="./windowPerfil" ?>
+<?page contentType="text/html;charset=UTF-8"?>
+<zk xmlns:n="native" xmlns:c="client">
+   <window id="windowPerfil" apply="com.agfgerador.autenticacao.controller.PerfilController">
+     <include id="barraFerramentas" src="/view/compartilhado/view/barraFerramentas.zul"></include>
+     <div id="list">
+       <listbox id="listbox">
+         <auxhead id="auxhead">
+           <auxheader/>
+           <auxheader>
+             <textbox id="filtroCodigo"/>
+           </auxheader>
+           <auxheader>
+             <textbox id="filtroNome"/>
+           </auxheader>
+         </auxhead>
+         <listhead>
+           <listheader label="" width="25px" />
+           <listheader label="Código" sort="auto(id)" width="120px"/>
+           <listheader label="NOME" sort="auto(nome)" />
+         </listhead>
+       </listbox>
+       <paging id="paginacao"></paging>
+     </div>
+     <div id="form" class="form fade out ocultar">
+       <div class="new-li">
+         <div class="new-col" width="250px">
+           <label>NOME*</label>
+           <a id="aInfonome"  popup="msg" class="glyphicon glyphicon-info-sign" style="margin-bottom: 3px;"></a>
+           <textbox id="textboxNome" class="form-control input-sm" maxlength="100" value="@{controller.perfil.nome}"/>
+         </div>
+         <div class="new-col" width="250px">
+           <label>DESCRIÇÃO</label>
+           <a id="aInfodescricao"  popup="msg" class="glyphicon glyphicon-info-sign" style="margin-bottom: 3px;"></a>
+           <textbox id="textboxDescricao" class="form-control input-sm" maxlength="755" value="@{controller.perfil.descricao}"/>
+         </div>
+       </div>
+
+         <n:br></n:br>
+            <tabbox id="tb" style="min-height: 300px;">
+               <tabs id="tabs">
+                  <tab id="tabUsuarioperfill" label="USUÁRIO" />
+                  <tab id="tabPermissao" label="COMPONENTES OU MENUS PERMITIDOS" />
+               </tabs>
+               <tabpanels>
+                  <tabpanel><include id="includeUsuarioperfill" apply="com.agfgerador.autenticacao.controller.IncludeUsuarioperfill" src="..\..\autenticacao\view\includeUsuarioperfill.zul"></include></tabpanel>
+                  <tabpanel><include id="includePermissao" apply="com.agfgerador.autenticacao.controller.IncludePermissao" src="..\..\autenticacao\view\includePermissao.zul"></include></tabpanel>
+               </tabpanels>
+            </tabbox>
+     </div>
+        <popup id="msg" width="300px">
+			<vlayout>
+				<label id="labelNomePoup"/>
+				<toolbarbutton id="toolbarButton"/>
+			</vlayout>
+		</popup>
+   </window>
+</zk>

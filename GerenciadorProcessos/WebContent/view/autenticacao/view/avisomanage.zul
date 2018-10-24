@@ -1,0 +1,76 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"  root="./windowAviso" ?>
+<zk xmlns:n="native" xmlns:w="http://www.zkoss.org/2005/zk/client">
+	<window id="windowAviso" apply="com.agfgerador.compartilhado.controller.AvisoController"> 
+		<include id="barraFerramentas" src="/view/compartilhado/view/barraFerramentas.zul"></include>
+		<div id="list">
+			<listbox id="listbox">
+				<auxhead id="auxhead">
+					<auxheader/>
+					<auxheader>
+						<textbox id="filtroCodigo"/>
+					</auxheader>
+					<auxheader>
+						<combobox id="filtroSistema" />
+					</auxheader>
+					<auxheader>
+						<textbox id="filtroTitulo"/>
+					</auxheader>
+					<auxheader>
+						<textbox id="filtroDescricao"/>
+						
+					</auxheader>
+				</auxhead>
+				<listhead>
+					<listheader label="" width="25px" />
+					<listheader label="Código" sort="auto(id)" width="120px" />
+					<listheader label="Sistema" sort="auto(sistema)" width="150px"/>
+					<listheader label="Título" sort="auto(titulo)" />
+					<listheader label="Descrição" sort="auto(descricao)" />
+				</listhead>
+			</listbox>
+			<paging id="paginacao" />
+		</div>
+		<div id="form" class="form" >
+			<div class="new-li">
+				<div class="new-col" width="200px">
+					<label>Sistema*</label>
+					<combobox id="comboSistema" class="form-control input-sm" constraint="strict"/> 
+				</div>
+				<div class="new-col" width="510px">
+					<label>Título*</label>
+					<textbox id="titulo" class="form-control input-sm" value="@{controller.aviso.titulo}" maxlength="100" /> 
+				</div>
+			</div>
+			<div class="new-li">
+				<div class="new-col" width="500px">
+					<label>Descrição*</label>
+					<textbox rows="2" id="descricao" class="form-control input-sm" value="@{controller.aviso.descricao}" maxlength="5000"/> 
+				</div>
+			</div>
+			<div class="new-li">
+				<div class="new-col" width="300px">
+					<label>Perfil</label>
+					<combobox id="comboPerfil" class="form-control input-sm" constraint="strict"/> 
+				</div>
+				<div class="new-col" width="150px">
+					<label>Tipo Usuário</label>
+					<combobox id="comboTipo" constraint="strict" class="form-control input-sm"/> 
+				</div>
+				<div class="new-col" width="120px">
+					<checkbox id="check" label="anexar arquivo?" onCheck="btArquivo.setVisible(check.isChecked());nomeArquivo.setVisible(check.isChecked())"></checkbox>
+				</div>
+				<div width="150px">
+					<button visible="false" id="btArquivo" label="Localizar Arquivo" upload="true" tooltiptext="Localizar Arquivo">
+						<attribute name="onUpload">
+					    	<![CDATA[windowAviso.setAttribute("media",event.getMedia());]]>
+						</attribute>
+		    		</button>
+				</div> 
+				<div class="new-col" width="150px">
+					<textbox width="95%" id="nomeArquivo" visible="false" maxlength="100" disabled="true" value="@{controller.aviso.nomedoc}"/> 
+				</div>
+				
+			</div>
+		</div>
+	</window>
+</zk>

@@ -1,0 +1,259 @@
+
+@import "/estilo-geral.less";
+
+/**
+* CSS PARA PERSONALIZACAO DAS CORES DO LAYOUT
+*
+*/
+
+/* Cor para botoes com acao de submit */
+@cor_ativa: #2C89B4;
+/* Cor para botoes com acao simples (btVoltar, btCancelar..etc) */
+@cor_secundaria: #89979E;
+/* Fonte default dos sistemas */
+@fonte_default: "Open Sans", Calibri, Candara, Arial, sans-serif;
+/* Cores dos textos do sistema */
+@cor_texto_default: #818181;
+@cor_texto_topo: #FFF;
+
+@cor_topo: #3E7DB2;
+
+*, *:before, *:after {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+} 
+
+.portal {
+	.topo {  
+		background-color: @cor_topo;
+		color: @cor_texto_topo;  
+		
+		.btn-ativ-sistemas { 
+			background-color:@cor_topo;
+			&:hover {
+				background-color: darken(@cor_topo, 10%);
+			}
+		}
+		
+		.menu-ativ-sistemas {
+			&.open .btn-ativ-sistemas {
+				background-color: darken(@cor_topo, 10%); 
+			}
+			
+			.lista-sistemas {
+				background-color: darken(@cor_topo, 10%);
+				.form { 
+					background-color: @cor_topo;
+				}
+				a, .z-button {
+					background-color: darken(@cor_topo, 10%); 
+					&:hover {
+						background-color: darken(@cor_topo, 7%);
+					}
+				}
+			}
+		}
+		
+		.nome-usuario {   
+			.btn-group>.btn { 
+				&:hover {
+					background: darken(@cor_topo, 5%);
+				} 
+			}
+			.dropdown-menu {
+				>li>a:hover {
+					background: @cor_topo;
+				}
+			}
+			.btn-group.open .btn.dropdown-toggle {
+				background-color: darken(@cor_topo, 10%);
+			}
+		}
+	}
+	
+	.menu-vert {  
+		color: @cor_texto_default;
+	} 
+	
+	.content {
+		.z-tabbox {
+			.barra-ferramentas {
+				ul.nav-pills {
+					li {
+						a {  
+							&:hover { 
+								color: @cor_topo;
+								border-bottom: 2px solid @cor_topo;
+							}
+						}
+					}
+				}
+			}  
+		} 
+	}
+}
+
+.z-window-modal-header, .z-window-highlighted-header {  
+	background-color: @cor_topo;
+	border-bottom: 1px solid darken(@cor_topo, 4%);
+}
+
+/*
+ * Alterando Calendario (Datebox)
+ */
+ 
+.z-datebox-pp {
+	.z-calendar {
+		.z-calendar-calctrl {
+			background: @cor_topo;
+		}
+		.z-calendar-tdl, .z-calendar-tdr {
+			background: @cor_topo;
+			
+			.z-calendar-left-icon, .z-calendar-right-icon {
+				border-top-color: @cor_topo;
+				border-bottom-color: @cor_topo;
+			}
+		}
+		
+		.z-calendar-caldayrow .z-calendar-over { 
+			color: @cor_topo;
+		}
+		
+		.z-calendar-calday td.z-calendar-seld {
+			background: @cor_topo;
+		}
+	}
+}
+
+.form-readonly {
+	.new-col {
+		margin-right: 30px;
+		strong {
+			span {
+				font-weight: bold;
+				font-size: 11px;
+			}
+		}
+		span {
+			display: block;
+			width: auto;
+		}
+	}
+}
+
+.atalho-form {
+	color: #A0A0A0;
+	h2 {
+		margin-top: 10px;
+	}
+	
+	h3 {
+		border-left: 5px solid #EFEFEF;
+		padding: 6px;
+		margin-bottom: 25px;
+		font-size: 24px;
+		color: #8D9FB8;
+	}
+	p {
+		font-size: 11px;
+	}
+	.search-inline-form {
+		.align-y {
+			margin-top: 20px;
+		}
+	}
+	.z-label + .z-radio {
+		margin-left: 5px;
+	}
+	.z-radio {
+		margin-right: 15px;
+		input {
+			vertical-align: text-top;
+			margin-right: 2px;
+		}
+	}	
+	.z-listbox {
+		tr.z-listitem .btn {
+			color: #FFF;
+			font-size: 11px;
+			padding: 3px 10px;
+		}
+	}
+	.glyphicon {
+		float: left;
+	}
+}
+.pessoa-info {
+	.glyphicon {
+		margin-right: 10px;
+		margin-top: 1px;
+	}
+	.pessoa-info-head {
+		.pessoa-info-head-img {
+			float: left;
+		}
+		.pessoa-info-head-form {
+			float: left;
+			width: 80%;
+			margin-top: 1%;
+			margin-left: 15px;
+		}
+	}
+	&.form-readonly {
+		.pessoa-info-head {
+			.pessoa-info-head-form {
+				margin-top: 2%;
+			}
+			strong span {
+				margin-bottom: 0px;
+				border-bottom: 1px solid #E5E5E5;
+				color: #B5B5B5;
+				font-size: 11px;
+			}
+			span {
+				font-size: 20px;
+				color: #737373;
+			}
+		}
+	}
+	
+	.pessoa-info-body {
+		.new-li {
+			margin-left: 15px;
+		}
+	}
+}
+
+.floating-list {
+	display: inline-block;
+	background: #FFF;
+	padding: 10px 20px;
+	border-radius: 3px;
+	border: 1px solid #EDEDED;
+	box-shadow: 0 2px 0px #EDEDED;
+	margin-bottom: 10px;
+	transition: all .3s ease-out;
+}
+
+.atalho-form-triagem, .atalho-form-prontuario {
+	h4, h3 {
+		.btn {
+			margin-left: 15px;
+			font-size: 12px;
+			.glyphicon {
+				margin-right: 8px;
+				margin-top: 1px;
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+

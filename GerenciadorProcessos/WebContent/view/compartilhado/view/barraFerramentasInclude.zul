@@ -1,0 +1,10 @@
+
+<div xmlns:n="native" xmlns:c="client" class="barra-ferramentas">
+	<a id="btNovo" class="hide"><span class="glyphicon glyphicon-plus">Novo</span></a> 
+	<a id="btSalvar" class="hide"><span class="glyphicon glyphicon-ok">Salvar</span></a>
+	<a id="btRemover" class="hide"><span class="glyphicon glyphicon-trash">Remover</span></a>
+	<a id="btCadastrarTodos" class="hide"><span class="glyphicon glyphicon-ok-circle">Adicionar Todos</span></a>
+	<a id="btDeletarTodos" class="hide"><span class="glyphicon glyphicon-remove-circle">Remover Todos</span></a>
+	<a id="btInformacoes" class="hide"><span class="glyphicon glyphicon-info-sign">Info.</span></a>
+	<a id="btLista" class="hide"><span class="glyphicon glyphicon-remove">Cancelar</span></a>
+</div>

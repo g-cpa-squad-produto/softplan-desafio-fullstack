@@ -1,0 +1,293 @@
+
+@import "../../compartilhado/less/estilo-geral.less";
+
+/**
+* Estrutura da pagina 
+*
+* Esta folha de estilos descreve a 
+* a estrutura da tela do portal
+* como: Topo, Navbar e Elementos do zk.
+*
+*/
+
+
+/* Cor para botoes com acao de submit */
+@cor_ativa: #189CCF;
+/* Cor para botoes com acao simples (btVoltar, btCancelar..etc) */
+@cor_secundaria: #89979E;
+/* Fonte default dos sistemas */
+@fonte_default: "Open Sans", Calibri, Candara, Arial, sans-serif;
+/* Cores dos textos do sistema */
+@cor_texto_default: #818181;
+
+/*
+ * Estilo index.html
+ */
+
+.page-login {  
+    background-color: #F1F1F1;
+}
+ 
+.browser-warning {
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.16);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr='#4cffffff', endColorstr='#CDCDCD');
+	position: absolute;
+	top: 0;
+	font-family: arial,sans-serif;
+	
+	.box-warning { 
+		width: 500px;
+		top: 30%;
+		margin-left: auto;
+		margin-right: auto;
+		position: relative;
+		background-color: #FFF;
+		box-shadow: 0px 0px 10px rgba(125, 125, 125, 0.65);
+		border: 1px solid #AEAEAE;
+		color: #707070;
+	}
+	
+	.title {
+		font-size: 20px;
+		font-weight: bold;
+		text-align: center;
+		margin: 10px;
+	}
+	
+	.content {
+		padding: 20px;
+		text-align: center;
+		.nav {
+			margin: 20px auto;
+			display: table;
+			a {
+				margin: 20px;
+				padding: 20px; 
+				img {
+					width: 100px;
+					transition: width 0.2s;
+				}
+				&:hover {
+					text-decoration: none;
+				}
+			}
+		} 
+		.continuar {
+			font-size: 12px;
+		}
+	}
+}
+
+.box-login {
+	width: 610px;
+	height: 400px;
+	margin: 190px auto 0;
+	
+	@media (max-width: 800px) {
+		margin: 100px auto 0;
+		width: 305px;
+	}
+	@media only screen 
+	and (min-device-width : 320px) 
+	and (max-device-width : 480px) {
+		margin: 20px auto 0;		
+		height: auto;	
+	}
+	
+	.box-login-left { 
+		width: 50%;
+		height: 100%;
+		float: left;
+		
+		@media screen and (max-width: 800px) {
+			border-bottom: 1px dotted #D3D3D3;
+			box-shadow: 0px 1px 0px #FFF;
+			padding-bottom: 25px;
+			width: auto;
+			height: auto;
+			float: none;
+		}
+		@media only screen 
+		and (min-device-width : 320px) 
+		and (max-device-width : 480px) {
+			padding-bottom: 5px;
+		}
+		
+		.logo {
+			width: 300px;
+			height: 115px;
+			display: block;
+			background-repeat: no-repeat;
+			background-image: url("../img/mb/logoAtivMedio.png");
+			margin-top: 100px;
+			
+			@media screen and (max-width: 800px) {
+				margin: 0 auto;
+			}
+			@media only screen 
+			and (min-device-width : 320px) 
+			and (max-device-width : 480px) {
+				background-size: 120px;
+				width: 120px;
+				height: 50px;
+			}
+		}
+	}
+	
+	.box-login-center{
+		width: 5%;
+		float: left;
+		@media screen and (max-width: 800px) {
+			display: none;
+		}
+	}
+	
+	.box-login-right {
+		width: 45%;
+		height: 100%; 
+		float: right;
+		color: #939797;
+		@media screen and (max-width: 800px) {
+			margin-left: 13px;
+			margin-top: -15px;
+			float: none;
+			width: auto;
+		}
+		@media only screen 
+		and (min-device-width : 320px) 
+		and (max-device-width : 480px) {
+			padding-left: 15px;
+			padding-right: 15px;
+			padding-bottom: 20px;
+			margin: 0;
+		}
+		.alert {
+			margin-bottom: 10px;
+			font-size: 12px;
+		}
+		.box-login-form { 
+			margin-top: 25px; 
+			
+			.titulo {
+				margin: 5px 0;
+				span {
+					color: #9D9D9D;
+					text-shadow: 1px 1px 1px #FFF;
+				}
+			}
+			
+			input {
+				height: 40px;
+				border-radius: 2px;
+				border-color: #E0E0E0;
+				width: 100%;
+				margin-bottom: 10px; 
+				padding-left: 5px;
+			} 
+			
+			input[type="submit"]{ 
+				background-color: @cor_ativa; 
+				border-color: darken(@cor_ativa, 2%);
+				background-image: none;
+				width: 100%;
+				height: 40px;
+				&:hover {
+					background-color: lighten(@cor_ativa, 5%);
+				}
+			} 
+			
+			.titulo {
+				text-align: left;
+			}
+			
+			.new-col {
+				padding: 0;
+			} 
+			
+			.new-li span {
+				font-size: 14px;
+			}
+		}
+	}
+}    
+
+.box-login-form-link {  
+	text-align: center;
+	padding-right: 3px;
+	margin-bottom: 15px;
+	span {
+		font-size: 11px;
+	} 
+	a { 
+		color: #757575;
+		font-weight: bold;
+		font-size: 11px;
+		&:visited {
+			color: #757575;
+		}
+	}	
+} 
+
+.box-timeout {
+	width: 700px;
+	margin: 15% auto 0;
+	text-align: center;
+	color: #989898;
+}
+
+.texto-footer {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	color: #949292; 
+	margin-right: 8px;
+	text-align: right;
+	font-size: 11px;
+	p {
+		margin: 2px 0;
+	}
+	
+	img {
+		background: url("../img/ativ/ativPeB.png") no-repeat 0px 1px;
+		margin-bottom: -8px;
+		margin-right: -5px;
+		margin-top: 1px;
+		background-size: 46px;
+		width: 46px;
+		height: 17px;
+		float: left;
+		margin-left: 341px;
+	}
+	
+	a {
+		margin-left: 4px;
+		font-size: 11px;
+		float: none;
+		text-decoration: none;
+		color: @cor_texto_default;
+		&:hover {
+			color: #74C7F1;
+		}
+	}
+	@media only screen 
+	and (min-device-width : 320px) 
+	and (max-device-width : 480px) {
+		p {
+			display: none;
+		} 
+	}
+} 
+
+
+
+
+
+
+
+
+
+
+
+

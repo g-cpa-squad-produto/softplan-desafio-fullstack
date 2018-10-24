@@ -1,0 +1,35 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"  root="./windowLiberacao" ?>
+<zk xmlns:w="http://www.zkoss.org/2005/zk/client">
+	<window id="windowLiberacao" border="none"
+		apply="com.agfgerador.compartilhado.controller.LiberacaoSistemaController"> 
+		
+		<div class="block-scr">
+			<div class="box-lib">
+				<div class="mensagem-erro ocultar" id="mensagem">
+					<label id="txtMensagem"></label>
+				</div>
+				<timer id="contador" delay="5000">
+					<attribute name="onTimer">  
+						mensagem.setClass("mensagem-erro ocultar");  
+					</attribute>
+				</timer>
+				<label class="locked"></label>
+				<div class="lib-body">
+					<label class="tt">Sistema Bloqueado</label>
+					<div class="lib-senha">
+						<label>Senha de liberação:</label>
+						<textbox id="textSenha" maxlength="30"></textbox>	
+					</div> 
+					<div class="lib-bt">
+						<a href="#" id="btLiberar" class="btn btn-success">
+							<label>Liberar Sistema</label>
+						</a> 
+					</div> 
+				</div> 
+				<div class="lib-footer">
+					<label >*Contacte o administrador do sistema.</label>
+				</div>
+			</div>
+		</div>
+	</window>
+</zk>

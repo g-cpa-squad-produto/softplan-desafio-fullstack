@@ -1,0 +1,114 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"  root="./windowPermissao" ?>
+<?page contentType="text/html;charset=UTF-8"?>
+<zk xmlns:n="native" xmlns:c="client">
+   <window id="windowPermissao" apply="com.agfgerador.autenticacao.controller.PermissaoController">
+     <include id="barraFerramentas" src="/view/compartilhado/view/barraFerramentas.zul"></include>
+     <div id="list">
+       <listbox id="listbox">
+         <auxhead id="auxhead">
+           <auxheader/>
+           <auxheader>
+             <textbox id="filtroCodigo"/>
+           </auxheader>
+           <auxheader>
+             <textbox id="filtroPerfil"/>
+           </auxheader>
+           <auxheader>
+             <textbox id="filtroComponente"/>
+           </auxheader>
+           <auxheader>
+             <combobox id="filtroAtivo">
+               <comboitem label="Ativo" value="Ativo"></comboitem>
+               <comboitem label="Inativo" value="Inativo"></comboitem>
+             </combobox>
+           </auxheader>
+           <auxheader>
+             <combobox id="filtroAtalho">
+               <comboitem label="Ativo" value="Ativo"></comboitem>
+               <comboitem label="Inativo" value="Inativo"></comboitem>
+             </combobox>
+           </auxheader>
+           <auxheader>
+             <combobox id="filtroSomenteleitura">
+               <comboitem label="Ativo" value="Ativo"></comboitem>
+               <comboitem label="Inativo" value="Inativo"></comboitem>
+             </combobox>
+           </auxheader>
+         </auxhead>
+         <listhead>
+           <listheader label="" width="25px" />
+           <listheader label="Código" sort="auto(id)" width="120px"/>
+           <listheader label="PERFIL" sort="auto(perfil)" />
+           <listheader label="COMPONENTES DO MENU" sort="auto(componente)" />
+           <listheader label="ATIVO" sort="auto(ativo)" />
+           <listheader label="ATALHO" sort="auto(atalho)" />
+           <listheader label="SOMENTE LEITURA" sort="auto(somenteleitura)" />
+         </listhead>
+       </listbox>
+       <paging id="paginacao"></paging>
+     </div>
+     <div id="form" class="form fade out ocultar">
+       <div class="new-li">
+         <div class="new-col" width="350px"> 
+            <a href="#" id="labelPerfil">Perfil*<span class="glyphicon glyphicon-link"></span></a>
+            <div class="new-col-link">
+               <longbox id="longboxPerfil" class="form-control input-sm" />
+               <bandbox id="bandboxPerfil" autodrop="true"> 
+                  <bandpopup>
+                     <listbox id="listboxPerfil" width="500px">
+                        <listhead>
+                           <listheader label="Código" width="100px" />
+                           <listheader label="Nome" /> 
+                        </listhead>
+                     </listbox>
+                     <paging id="paginacaoPerfil" />
+                  </bandpopup>
+               </bandbox>
+            </div>
+         </div>
+         <div class="new-col" width="350px"> 
+            <a href="#" id="labelComponente">Componentes do menu*<span class="glyphicon glyphicon-link"></span></a>
+            <a id="aInfocomponente"  popup="msg" class="glyphicon glyphicon-info-sign" style="margin-bottom: 3px;"></a>
+            <div class="new-col-link">
+               <longbox id="longboxComponente" class="form-control input-sm" />
+               <bandbox id="bandboxComponente" autodrop="true"> 
+                  <bandpopup>
+                     <listbox id="listboxComponente" width="500px">
+                        <listhead>
+                           <listheader label="Código" width="100px" />
+                           <listheader label="Nescricao" /> 
+                           <listheader label="Informacao" /> 
+                           <listheader label="Momponentemenu" /> 
+                           <listheader label="Tipomenu" /> 
+                        </listhead>
+                     </listbox>
+                     <paging id="paginacaoComponente" />
+                  </bandpopup>
+               </bandbox>
+            </div>
+         </div>
+         <div class="new-col" width="80px">
+           <checkbox id="checkboxAtivo" label="ATIVO"></checkbox>
+			</div>
+         <div class="new-col" width="100px">
+           <checkbox id="checkboxAtalho" label="ATALHO"></checkbox>
+           <a id="aInfoatalho"  popup="msg" class="glyphicon glyphicon-info-sign" style="margin-top: 23px;"></a>
+			</div>
+         <div class="new-col" width="170px">
+           <checkbox id="checkboxSomenteleitura" label="SOMENTE LEITURA"></checkbox>
+           <a id="aInfosomenteleitura"  popup="msg" class="glyphicon glyphicon-info-sign" style="margin-top: 23px;"></a>
+		 </div>
+		 <div class="new-col" width="110px">
+           <checkbox id="checkboxExcluir" label="EXCLUIR"></checkbox>
+           <a id="aInfoexcluir"  popup="msg" class="glyphicon glyphicon-info-sign" style="margin-top: 23px;"></a>
+		 </div>
+       </div>
+     </div>
+        <popup id="msg" width="300px">
+			<vlayout>
+				<label id="labelNomePoup"/>
+				<toolbarbutton id="toolbarButton"/>
+			</vlayout>
+		</popup>
+   </window>
+</zk>

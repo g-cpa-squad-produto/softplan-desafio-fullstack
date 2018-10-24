@@ -1,0 +1,17 @@
+<div xmlns:n="native" xmlns:c="client" class="barra-ferramentas">
+	<n:ul class="nav nav-pills"> 
+	  <n:li><a id="btNovo" href="#" class="hide-left" tooltiptext="Adicionar um novo registro"><span class="glyphicon glyphicon-plus"></span>Novo</a></n:li>
+	  <n:li><a id="btSalvar" href="#" class="hide-left" tooltiptext="Salvar as alterações"><span class="glyphicon glyphicon-floppy-disk"></span>Salvar</a></n:li>
+	  <n:li><a id="btRemover" href="#" class="hide-left" tooltiptext="Remover registro"><span class="glyphicon glyphicon-trash"></span>Remover</a></n:li>
+	  <n:li><a id="btCancelar" href="#" class="hide-left" tooltiptext="Cancelar as alterações"><span class="glyphicon glyphicon-floppy-remove"></span>Cancelar</a></n:li>
+	  <n:li><a id="btAnterior" href="#" class="hide-left" tooltiptext="Ir para o registro anterior"><span class="glyphicon glyphicon-chevron-left"></span>Anterior</a></n:li>
+	  <n:li><a id="btProximo" href="#" class="hide-left" tooltiptext="Ir para o próximo registro"><span class="glyphicon glyphicon-chevron-right"></span>Próximo</a></n:li>
+	  <n:li><a id="btImprimir" href="#" class="hide-left" tooltiptext="Imprimir relação"><span class="glyphicon glyphicon-print"></span>Imprimir</a></n:li>
+	  <n:li><a id="btExportar" href="#" class="hide-left" tooltiptext="Exportar relação"><span class="glyphicon glyphicon-export"></span>Exportar</a></n:li>
+	  <n:li><a id="btInformacoes" href="#" class="hide-left" tooltiptext="Informações"><span class="glyphicon glyphicon-info-sign"></span>Informações</a></n:li>
+	  <n:li><a id="btLista" href="#" class="hide-left" tooltiptext="Listar os registros salvos"><span class="glyphicon glyphicon-th-list"></span>Listar registros</a></n:li>
+	</n:ul>
+	<menupopup id="relatorioContexto" class="m-d" >
+        <menuitem id="reportContexto" label="Associar Relatório" />
+     </menupopup> 
+</div>

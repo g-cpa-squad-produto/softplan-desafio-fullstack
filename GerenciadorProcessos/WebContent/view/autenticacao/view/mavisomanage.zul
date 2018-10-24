@@ -1,0 +1,20 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"  root="./windowMAviso" ?>
+<zk xmlns:w="http://www.zkoss.org/2005/zk/client">
+	<window id="windowMAviso" closable="true" position="center" height="97px" width="416px"
+			apply="com.agfgerador.compartilhado.controller.MAvisosController">	
+		
+		<div id="form" visible="true" height="108px" style="formPrincipal">
+			<div id="divValores" class="new-li">
+				<div class="new-col" width="120px">
+					<label id="descricao"></label>
+				
+				</div>
+				<div id="divdoc" visible="false" class="new-col" width="120px">
+					<a id="btDow" href="" tooltiptext="Baixar Arquivo" class="botaoSubmit bt-bottom">
+						<label id="nomedoc"></label>
+					</a>
+				</div>	
+			</div> 
+		</div>
+	</window>
+</zk>

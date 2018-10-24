@@ -1,0 +1,23 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"  root="./windowCam" ?>
+<zk xmlns:n="native" xmlns:c="client">
+   <window id="windowCam" mode="overlapped" border="normal" apply="com.agfgerador.compartilhado.controller.CamController">
+   		<div class="form webcam-modal">
+   			<n:h1>Webcam</n:h1>
+	   		<n:div id="webcam">
+		   		<n:div id="my_camera" style="width:336px; height:252px;"></n:div>
+			    <a id="btCaptura" class="btn btn-default btn-block" 
+			    	c:onClick="javascript:take_snapshot('windowCam'); addClass('webcam', 'hide-top'); removeClass('my_result', 'hide-top')">Capturar</a>
+	   		</n:div>
+		    <n:div id="my_result" class="hide-top">
+			    <div class="webcam-review">
+				    <image id="previa">
+				    	<custom-attributes org.zkoss.zk.ui.updateByClient="true" />
+			    	</image>
+			    </div>
+			    <a id="btReCaptura" class="btn btn-default"
+			    	c:onClick="javascript: addClass('my_result', 'hide-top'); removeClass('webcam', 'hide-top')">Capturar Novamente</a>
+		    	<a id="saveImg" class="btn btn-primary" c:onClick="javascript:Webcam.reset();">Salvar</a>
+	    	</n:div>
+   		</div>
+    </window>
+</zk>

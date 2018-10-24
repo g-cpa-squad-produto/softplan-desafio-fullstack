@@ -1,0 +1,15 @@
+<?page title="AGF - Progeto Base" contentType="text/html;charset=UTF-8"?>
+<?link rel="shortcut icon" type="image/x-icon" href="/ativ.ico"?>
+<?link rel="icon" type="image/x-icon" href="/ativ.ico"?>
+<?link rel="stylesheet" type="text/css" href="/view/compartilhado/css/bootstrap.min.css"?>  
+<?link rel="stylesheet" type="text/css" href="/view/compartilhado/css/estilo-index.css"?>
+<?script type="text/javascript" src="view/compartilhado/js/ativ.js" ?> 
+<?meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no"?>
+<window xmlns:n="native" class="page page-login" >
+	<div class="box-timeout">
+		<n:h1>Tempo de Sessão Esgotado</n:h1>
+		<n:p>O sistema finalizou sua sessão.</n:p>
+		<n:p>Isso ocorre quando o sistema fica muito tempo inativo. </n:p>
+		<n:p>Para utiliza-lo novamente basta fazer o <a href="/" class="btn btn-primary">Login.</a></n:p>
+	</div>
+</window>

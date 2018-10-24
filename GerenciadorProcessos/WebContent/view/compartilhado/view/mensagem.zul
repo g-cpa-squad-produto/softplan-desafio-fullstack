@@ -1,0 +1,9 @@
+<div id="divMensagem" class="mensagem esconder-mensagem">
+	<div class="imagemMensagem"></div>
+	<label id="labelMensagem"></label>
+	<timer id="contador" delay="5000">
+		<attribute name="onTimer">  
+			divMensagem.setClass(divMensagem.getSclass() + " esconder-mensagem");  
+		</attribute>
+	</timer>
+</div> 

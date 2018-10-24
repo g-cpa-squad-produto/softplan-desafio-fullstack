@@ -1,0 +1,21 @@
+<?page title="Redirecionando..." contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.spring.DelegatingVariableResolver"?>
+<?link rel="shortcut icon" type="image/x-icon" href="/ativ.ico"?>
+<?link rel="icon" type="image/x-icon" href="/ativ.ico"?>
+<?link rel="stylesheet" type="text/css" href="/view/compartilhado/css/bootstrap.min.css"?>  
+<?link rel="stylesheet" type="text/css" href="/view/compartilhado/css/estilo-index.css"?>
+<?script type="text/javascript" src="view/compartilhado/js/ativ.js" ?> 
+<zk>
+<window class="hide" title="Redirecioando" apply="com.agfgerador.compartilhado.controller.RedirectController">
+	<h:form id="form" action="j_spring_security_check" method="POST" xmlns:h="http://www.w3.org/1999/xhtml">
+		<textbox id="login" name="j_username" class="hide" />
+		<textbox id="senha" name="j_password" class="hide" type="password" />
+		<h:input type="submit" class="hide"/>
+	</h:form>
+</window>
+<div class="z-loading" style="left:0px;top:0px">
+    <div class="z-loading-indicator">
+        <span class="z-loading-icon"></span> Redirecionando...
+    </div>
+</div>
+</zk>
