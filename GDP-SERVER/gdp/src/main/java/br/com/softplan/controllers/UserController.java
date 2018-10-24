@@ -9,5 +9,4 @@ import br.com.softplan.models.User;
 @RequestMapping("/users")
 public class UserController extends GenericController<User, Long> {
 
-
 }
