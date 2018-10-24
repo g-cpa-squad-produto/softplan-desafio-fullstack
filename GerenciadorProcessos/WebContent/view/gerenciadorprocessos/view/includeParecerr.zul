@@ -1,0 +1,71 @@
+<div xmlns:c="client" xmlns:n="native">
+   <div class="include-header">
+      <n:h1>PARECER DO PROCESSO</n:h1> 
+      <include id="barraFerramentasInclude" src="../../compartilhado/view/barraFerramentasInclude.zul"></include>
+   </div>
+     <div id="list">
+       <listbox id="listbox">
+         <auxhead id="auxhead">
+           <auxheader/>
+           <auxheader>
+             <textbox id="filtroCodigo"/>
+           </auxheader>
+           <auxheader>
+             <textbox id="filtroProcesso"/>
+           </auxheader>
+           <auxheader>
+             <textbox id="filtroDescricao"/>
+           </auxheader>
+           <auxheader>
+             <datebox id="filtroDtparecer"/>
+           </auxheader>
+         </auxhead>
+         <listhead>
+           <listheader label="" width="25px" />
+           <listheader label="Código" sort="auto(id)" width="120px"/>
+           <listheader label="PROCESSO" sort="auto(processo.obs)" />
+           <listheader label="DESCRIÇÃO" sort="auto(descricao)" />
+           <listheader label="DATA PARECER" sort="auto(dtparecer)" width="150px"/>
+         </listhead>
+       </listbox>
+       <paging id="paginacao"></paging>
+     </div>
+     <div id="form" class="form fade out ocultar">
+       <div class="new-li">
+         <div class="new-col" width="380px"> 
+            <a href="#" id="labelProcesso">Processo*<span class="glyphicon glyphicon-link"></span></a>
+            <div class="new-col-link">
+               <longbox id="longboxProcesso" class="form-control input-sm" />
+               <bandbox id="bandboxProcesso" autodrop="true"> 
+                  <bandpopup>
+                     <listbox id="listboxProcesso" width="500px">
+                        <listhead>
+                           <listheader label="Código" width="100px" />
+                           <listheader label="Pessoa" /> 
+                           <listheader label="Dtabertura" /> 
+                           <listheader label="Obs" /> 
+                        </listhead>
+                     </listbox>
+                     <paging id="paginacaoProcesso" />
+                  </bandpopup>
+               </bandbox>
+            </div>
+         </div>
+         <div class="new-col" width="250px">
+           <label>DESCRIÇÃO</label>
+           <a id="aInfodescricao"  popup="msg" class="glyphicon glyphicon-info-sign" style="margin-bottom: 3px;"></a>
+           <textbox id="textboxDescricao" class="form-control input-sm" maxlength="257" value="@{controller.parecer.descricao}"/>
+         </div>
+         <div class="new-col" width="140px">
+           <label>DATA PARECER</label>
+           <datebox id="dateboxDtparecer" class="form-control input-sm" value="@{controller.parecer.dtparecer}" />
+         </div>
+       </div>
+     </div>
+        <popup id="msg" width="300px">
+			<vlayout>
+				<label id="labelNomePoup"/>
+				<toolbarbutton id="toolbarButton"/>
+			</vlayout>
+		</popup>
+</div>

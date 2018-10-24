@@ -1,0 +1,136 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"  root="./windowPessoa" ?>
+<?page contentType="text/html;charset=UTF-8"?>
+<zk xmlns:n="native" xmlns:c="client">
+   <window id="windowPessoa" apply="com.agfgerador.gerenciadorprocessos.controller.PessoaController">
+     <include id="barraFerramentas" src="/view/compartilhado/view/barraFerramentas.zul"></include>
+     <div id="list">
+       <listbox id="listbox">
+         <auxhead id="auxhead">
+           <auxheader/>
+           <auxheader>
+             <textbox id="filtroCodigo"/>
+           </auxheader>
+           <auxheader>
+             <textbox id="filtroTipopessoa"/>
+           </auxheader>
+           <auxheader>
+
+           </auxheader>
+           <auxheader>
+             <textbox id="filtroNome"/>
+           </auxheader>
+           <auxheader>
+             <textbox id="filtroCpfCnpj"/>
+           </auxheader>
+           <auxheader>
+             <textbox id="filtroCep"/>
+           </auxheader>
+           <auxheader>
+             <textbox id="filtroUf"/>
+           </auxheader>
+           <auxheader>
+             <textbox id="filtroCidade"/>
+           </auxheader>
+           <auxheader>
+             <textbox id="filtroLogradouro"/>
+           </auxheader>
+         </auxhead>
+         <listhead>
+           <listheader label="" width="25px" />
+           <listheader label="Código" sort="auto(id)" width="80px"/>
+           <listheader label="FÍSICA/JURÍDICA" sort="auto(tipopessoa.descricao)" width="140px"/>
+           <listheader label="IMAGEM" sort="auto(imagem)" width="120px"/>
+           <listheader label="NOME" sort="auto(nome)" />
+           <listheader label="CPF/CNPJ" sort="auto(cpf)" width="160px"/>
+           <listheader label="UF" sort="auto(uf)" width="80px"/>
+           <listheader label="CIDADE" sort="auto(cidade)" />
+           <listheader label="LOGRADOURO" sort="auto(logradouro)" />
+         </listhead>
+       </listbox>
+       <paging id="paginacao"></paging>
+     </div>
+     <div id="form" class="form fade out ocultar">
+       <div class="new-li">
+         <div class="new-col" width="380px"> 
+            <a href="#" id="labelTipopessoa">Física / jurídica*<span class="glyphicon glyphicon-link"></span></a>
+            <a id="aInfotipopessoa"  popup="msg" class="glyphicon glyphicon-info-sign" style="margin-bottom: 3px;"></a>
+            <div class="new-col-link">
+               <longbox id="longboxTipopessoa" class="form-control input-sm" />
+               <bandbox id="bandboxTipopessoa" autodrop="true"> 
+                  <bandpopup>
+                     <listbox id="listboxTipopessoa" width="500px">
+                        <listhead>
+                           <listheader label="Código" width="100px" />
+                           <listheader label="Descricao" /> 
+                        </listhead>
+                     </listbox>
+                     <paging id="paginacaoTipopessoa" />
+                  </bandpopup>
+               </bandbox>
+            </div>
+         </div>
+         <div class="pessoa-info-head-img">
+           <div class="image-upload image-upload-circle">
+             <div class="image-upload-change">
+               <n:p>Alterar Imagem...</n:p>
+               <div class="image-upload-change-menu">
+                 <button id="btAlterarImagem" tooltiptext="Procurar Imagem" upload="true" label="Procurar Imagem">
+                   <attribute name="onUpload">
+                     <![CDATA[windowPessoa.setAttribute("media",event.getMedia()); ]]>
+                   </attribute>
+                 </button>
+                 <n:p>ou</n:p>
+                 <a id="btWebCam"><span class="glyphicon glyphicon-facetime-video"></span></a>
+               </div>
+             </div>
+             <div id="pics0"  class="Esta sendo criado">
+             </div>
+           </div>
+         </div>
+         <div class="new-col" width="250px">
+           <label>NOME*</label>
+           <textbox id="textboxNome" class="form-control input-sm" maxlength="255" value="@{controller.pessoa.nome}"/>
+         </div>
+         <div class="new-col" width="140px">
+           <label>DT. NASCIMENTO</label>
+           <datebox id="dateboxData" class="form-control input-sm" value="@{controller.pessoa.data}" />
+         </div>
+         <div class="new-col" width="250px">
+           <label>CPF</label>
+           <textbox id="textboxCpf" class="form-control input-sm" maxlength="11" value="@{controller.pessoa.cpf}"/>
+         </div>
+         <div class="new-col" width="250px">
+           <label>CNPJ</label>
+           <textbox id="textboxCnpj" class="form-control input-sm" maxlength="16" value="@{controller.pessoa.cnpj}"/>
+         </div>
+         <div class="new-col" width="250px">
+           <label>CEP*</label>
+           <a id="aInfocep"  popup="msg" class="glyphicon glyphicon-info-sign" style="margin-bottom: 3px;"></a>
+           <textbox id="textboxCep" class="form-control input-sm" maxlength="9" value="@{controller.pessoa.cep}"/>
+         </div>
+         <div class="new-col" width="250px">
+           <label>UF*</label>
+           <textbox id="textboxUf" class="form-control input-sm" maxlength="2" value="@{controller.pessoa.uf}"/>
+         </div>
+         <div class="new-col" width="250px">
+           <label>CIDADE*</label>
+           <textbox id="textboxCidade" class="form-control input-sm" maxlength="77" value="@{controller.pessoa.cidade}"/>
+         </div>
+         <div class="new-col" width="250px">
+           <label>TIPO LOGRADOURO*</label>
+           <textbox id="textboxTipologradouro" class="form-control input-sm" maxlength="27" value="@{controller.pessoa.tipologradouro}"/>
+         </div>
+         <div class="new-col" width="250px">
+           <label>LOGRADOURO*</label>
+           <textbox id="textboxLogradouro" class="form-control input-sm" maxlength="77" value="@{controller.pessoa.logradouro}"/>
+         </div>
+       </div>
+     </div>
+        <popup id="msg" width="300px">
+			<vlayout>
+				<label id="labelNomePoup"/>
+				<toolbarbutton id="toolbarButton"/>
+			</vlayout>
+		</popup>
+   </window>
+</zk>

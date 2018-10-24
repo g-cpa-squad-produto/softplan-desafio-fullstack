@@ -1,0 +1,50 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"  root="./windowUsuario" ?>
+<?page contentType="text/html;charset=UTF-8"?>
+<zk xmlns:n="native" xmlns:c="client">
+   <window id="windowUsuario" apply="com.agfgerador.gerenciadorprocessos.controller.UsuarioController">
+     <include id="barraFerramentas" src="/view/compartilhado/view/barraFerramentas.zul"></include>
+     <div id="list">
+       <listbox id="listbox">
+         <auxhead id="auxhead">
+           <auxheader/>
+           <auxheader>
+             <textbox id="filtroCodigo"/>
+           </auxheader>
+           <auxheader>
+             <textbox id="filtroNome"/>
+           </auxheader>
+         </auxhead>
+         <listhead>
+           <listheader label="" width="25px" />
+           <listheader label="Código" sort="auto(id)" width="120px"/>
+           <listheader label="NOME" sort="auto(nome)" />
+         </listhead>
+       </listbox>
+       <paging id="paginacao"></paging>
+     </div>
+     <div id="form" class="form fade out ocultar">
+       <div class="new-li">
+         <div class="new-col" width="250px">
+           <label>NOME*</label>
+           <textbox id="textboxNome" class="form-control input-sm" maxlength="255" value="@{controller.usuario.nome}"/>
+         </div>
+       </div>
+
+         <n:br></n:br>
+            <tabbox id="tb" style="min-height: 300px;">
+               <tabs id="tabs">
+                  <tab id="tabParecerr" label="PARECER DO PROCESSO" />
+               </tabs>
+               <tabpanels>
+                  <tabpanel><include id="includeParecerr" apply="com.agfgerador.gerenciadorprocessos.controller.IncludeParecerr" src="..\..\gerenciadorprocessos\view\includeParecerr.zul"></include></tabpanel>
+               </tabpanels>
+            </tabbox>
+     </div>
+        <popup id="msg" width="300px">
+			<vlayout>
+				<label id="labelNomePoup"/>
+				<toolbarbutton id="toolbarButton"/>
+			</vlayout>
+		</popup>
+   </window>
+</zk>
