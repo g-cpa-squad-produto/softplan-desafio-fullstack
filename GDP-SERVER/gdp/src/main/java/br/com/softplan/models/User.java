@@ -34,7 +34,7 @@ public @Data class User {
 	private String lastName;
 	
     @Enumerated(EnumType.STRING)
-	private PerfilType profile;
+	private ProfileTypes profile;
 
 
 

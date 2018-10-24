@@ -1,14 +1,11 @@
 import { ProfileTypes } from './profile-types';
 
-export class User {
-  id: number;
+export class UserDTO {
   login: string;
-  password: string;
-  name: string;
-  lastName: string;
   profile: ProfileTypes;
+  token: string;
 
-  constructor(init?: Partial<User>) {
+  constructor(init?: Partial<UserDTO>) {
     if (init) {
       Object.assign(this, init);
     }

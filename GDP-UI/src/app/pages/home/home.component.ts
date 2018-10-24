@@ -11,8 +11,7 @@ export class HomeComponent implements OnInit {
   user: User;
   constructor(
     private activatedRoute: ActivatedRoute
-    ) {
-     }
+    ) { }
 
   ngOnInit() {
     this.user = this.activatedRoute.snapshot.data['user'];

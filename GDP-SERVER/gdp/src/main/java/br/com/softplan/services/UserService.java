@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.softplan.models.User;
+import br.com.softplan.models.UserDTO;
 import br.com.softplan.repository.IUserRepository;
 
 @Service
@@ -12,8 +13,20 @@ public class UserService extends GenericService<User, Long> {
 	@Autowired
 	private IUserRepository repository;
 
-	public User autenticate(User user) {
-		return this.repository.findByLoginAndPassword(user.getLogin(), user.getPassword());
+	@Autowired
+	TokenService tokenService;
+
+	public UserDTO autenticate(String login, String password) {
+		User user = this.repository.findByLoginAndPassword(login, password);
+		
+		if (user == null ) {
+			return null;
+		}
+
+		UserDTO userDTO = UserDTO.builder().login(user.getLogin()).profile(user.getProfile())
+				.token(this.tokenService.getToken()).build();
+
+		return userDTO;
 	}
 
 	public User getUserByLogin(String login) {
@@ -22,12 +35,6 @@ public class UserService extends GenericService<User, Long> {
 
 	public void delete(Long id) {
 		this.repository.deleteById(id);
-	}
-
-	@Override
-	public User update(User t, Long id) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

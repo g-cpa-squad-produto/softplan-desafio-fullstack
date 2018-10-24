@@ -13,9 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.softplan.exceptions.UserNotFoundException;
 import br.com.softplan.exceptions.UserUnauthorizedException;
-import br.com.softplan.models.Token;
 import br.com.softplan.models.User;
-import br.com.softplan.services.TokenService;
+import br.com.softplan.models.UserDTO;
 import br.com.softplan.services.UserService;
 
 @RestController
@@ -25,20 +24,18 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 	
-	@Autowired
-	private TokenService tokenService;
 
     @RequestMapping(value="/autenticate", method = RequestMethod.POST)
     @ResponseBody
-	public ResponseEntity<Token> autenticate(@RequestBody @Valid User user) {
+	public ResponseEntity<UserDTO> autenticate(@RequestBody User user) {
     	
-    	User userResponse  = this.userService.autenticate(user);
+    	UserDTO userResponse  = this.userService.autenticate(user.getLogin(), user.getPassword());
     	
     	if (userResponse == null) {
             throw new UserUnauthorizedException("Unauthorized");
     	}
     	
-		return new ResponseEntity<>(this.tokenService.getToken(userResponse), HttpStatus.OK);
+		return new ResponseEntity<>(userResponse, HttpStatus.OK);
 	}
     
     @RequestMapping(value="/user", method = RequestMethod.POST)

@@ -1,28 +1,23 @@
 import { Injectable } from '@angular/core';
-import { User } from 'src/app/model/user';
-import { Token } from 'src/app/model/token';
+import { UserDTO } from 'src/app/model/user.dto';
 
 const KEY = 'authToken';
 
 @Injectable({ providedIn: 'root'})
 export class TokenService {
-  getUser(): User {
-    return JSON.parse(window.localStorage.getItem('USER')) as User;
-  }
 
   hasToken() {
         return !!this.getToken();
     }
 
-    setToken(token: Token) {
-        window.localStorage.setItem(KEY, (JSON.stringify(token)));
+    setTokenUserDTO(userDTO: UserDTO) {
+        window.localStorage.setItem(KEY, (JSON.stringify(userDTO)));
     }
 
-    setUser(user: User) {
-      user.password = null;
-      console.log(user);
-      window.localStorage.setItem('USER', (JSON.stringify(user)));
+    getTokenUserDTO(): UserDTO {
+      return JSON.parse(window.localStorage.getItem(KEY)) as UserDTO;
     }
+
 
     getToken() {
         return window.localStorage.getItem(KEY);

@@ -1,20 +1,15 @@
-import { UserResolver } from './core/resolver/user.resolver';
 import { NotFoundModule } from './pages/not-found/not-found.module';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { HomeModule } from './pages/home/home.module';
 import { LoginComponent } from './pages/login/login.component';
-import { AuthGuard } from './pages/login/login.guard.service';
 
 const routes: Routes = [
   {
       path: '',
       pathMatch: 'full',
-      redirectTo: 'home',
-      resolve: {
-        user: UserResolver
-      }
+      redirectTo: 'home'
   },
   {
       path: 'home',

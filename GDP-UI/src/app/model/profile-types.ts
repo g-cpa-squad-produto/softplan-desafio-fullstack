@@ -1,4 +1,4 @@
-export enum PerfilTypes  {
+export enum ProfileTypes  {
 
   ADMIN = 'ADMIN',
   TRIADADOR = 'TRIADADOR',

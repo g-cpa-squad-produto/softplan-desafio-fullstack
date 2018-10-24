@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { MassegesService } from '../messeges/messages.service';
 import { API_URL } from '../const';
-import { Token } from 'src/app/model/token';
+import { UserDTO } from 'src/app/model/user.dto';
 
 @Injectable({ providedIn: 'root'})
 export class HttpService<T> {
@@ -50,7 +50,7 @@ export class HttpService<T> {
             }));
       }
 
-      delete(endpoint: string, id: number): Observable<any> {
+     public delete(endpoint: string, id: number): Observable<any> {
         return this.http.delete(`${API_URL}/${endpoint}/${id}`)
         .pipe(tap(data => {
           return data;
@@ -58,9 +58,11 @@ export class HttpService<T> {
             this.handlerError(error);
        }));
       }
-      public login(item: T, endpoint): Observable<Token> {
+
+
+      public login(item: T, endpoint): Observable<UserDTO> {
         return this.http
-          .post<Token>(`${API_URL}/${endpoint}`, item)
+          .post<UserDTO>(`${API_URL}/${endpoint}`, item)
           .pipe(tap(data => {
               return data;
             }, (error: HttpErrorResponse) => {

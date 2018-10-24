@@ -1,3 +1,54 @@
-<p>
-  user-list works!
-</p>
+<div class="container-fluid">
+<div class="row">
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+       <h5 class="card-title">
+          <div class="row">
+              <div class="col-md-6 ">Users</div>
+              <div class="col-md-6 text-right">
+              <a type="button" href="#/users/new"  class="btn btn-debug .navbar-right">
+                  <i class="fas fa-user-plus"></i>
+              </a>
+            </div>
+        </div>
+       </h5>
+       <div class="table-responsive">
+       <table class="table table-dark table-hover">
+          <thead>
+           <tr>
+             <th scope="col">#</th>
+             <th scope="col">Name</th>
+             <th scope="col">Last Name</th>
+             <th scope="col">Profile</th>
+             <th scope="col">Actions</th>
+           </tr>
+         </thead>
+         <tbody>
+            <tr *ngFor="let user of users">
+                <td>{{user.name}}</td>
+                <td>{{user.lastName}}</td>
+                <td>{{user.login}}</td>
+                <td>{{user.profile}}</td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="#">Update</a>
+                          <a class="dropdown-item" href="#/users/{{user.id}}/show">Show</a>
+                          <a class="dropdown-item" href="#" (click)="delete(user.id)">Delete</a>
+                        </div>
+                      </div>
+                </td>
+            </tr>
+         </tbody>
+       </table>
+      </div>
+     </div>
+   </div>
+ </div>
+</div>
+</div>
+
+

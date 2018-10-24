@@ -7,7 +7,7 @@ import { tap } from 'rxjs/operators';
 import { User } from '../../model/user';
 import { Observable } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Token } from 'src/app/model/token';
+import { UserDTO } from 'src/app/model/user.dto';
 import { UserService } from 'src/app/core/service/user.service';
 
 
@@ -15,26 +15,21 @@ import { UserService } from 'src/app/core/service/user.service';
 export class LoginService {
   constructor(
     private httpService: HttpService<User>,
-    private userService: UserService,
     private tokenService: TokenService,
-    private router: Router ) {
-
-   }
+    private router: Router ) { }
 
    public isLoggedIn() {
      return this.tokenService.hasToken();
    }
 
-   authenticate(user: User): Observable<Token> {
+  public authenticate(user: User): Observable<UserDTO> {
     return this.httpService.login(user, 'login/autenticate').pipe(
-      tap((token: Token) => {
-           this.tokenService.setToken(token);
-           this.tokenService.setUser(user);
+      tap((userDTO: UserDTO) => {
+           this.tokenService.setTokenUserDTO(userDTO);
            this.router.navigate(['/']);
       },  (error: HttpErrorResponse ) => {
         console.log(error);
       })
     );
-
   }
 }
