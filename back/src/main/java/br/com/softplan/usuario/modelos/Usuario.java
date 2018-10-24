@@ -32,7 +32,6 @@ public class Usuario {
 	@Column
 	private String login;
 
-	@NotNull
 	@Column
 	private String senha;
 

@@ -8,5 +8,5 @@ package br.com.softplan.security.enums;
  *
  */
 public enum PerfilEnum {
-	ADMINISTRADOR, USUARIO_TRIADOR, USUARIO_FINALIZADOR
+	ROLE_ADMINISTRADOR, ROLE_USUARIO_TRIADOR, ROLE_USUARIO_FINALIZADOR
 }

@@ -8,19 +8,24 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './auth/auth.guard';
 import { HeaderComponent } from './header/header.component';
-import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthService } from './service/auth.service';
+import { TokenInterceptor } from './auth/jwt-interceptor';
+import { HomeComponent } from './pages/home/home.component';
+import { ProcessosComponent } from './pages/processos/processos.component';
+import { ModalModule, BsModalRef } from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     HeaderComponent,
-    LoginComponent
+    LoginComponent,
+    ProcessosComponent
   ],
   imports: [
+    ModalModule.forRoot(),
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
@@ -29,7 +34,15 @@ import { AuthService } from './service/auth.service';
     BrowserAnimationsModule,
     AppMaterialModule
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [
+    BsModalRef,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+    AuthService,
+    AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

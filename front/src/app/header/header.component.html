@@ -1,5 +1,5 @@
 <nav *ngIf="isLoggedIn$ | async as isLoggedIn" class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" href="#">Gerenciador</a>
+  <a class="navbar-brand" href="#">Gerenciador de processos</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -8,10 +8,12 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="#">Usuarios</a>
+        <a class="nav-link" href="/processos">Processos</a>
       </li>
     </ul>
   </div>
-
+  <form class="form-inline my-2 my-lg-0">
+    <button class="btn btn-outline-light my-2 my-sm-0" (click)="onLogout()" type="submit">Sair</button>
+  </form>
 
 </nav>

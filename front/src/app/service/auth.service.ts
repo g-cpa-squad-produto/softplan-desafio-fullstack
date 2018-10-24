@@ -27,11 +27,16 @@ export class AuthService {
         let token = data.data.token;
         let jwtDecode = jwt_decode(token);
         console.log(jwtDecode)
-        window.localStorage.setItem('idUsuario', jwtDecode.id)
-        window.localStorage.setItem('token', token);
-        this.router.navigate(['home']);
+        window.localStorage.setItem(Util.ID_DO_USUARIO, jwtDecode.id_usuario)
+        window.localStorage.setItem(Util.TIPO_DO_USUARIO, jwtDecode.role)
+        window.localStorage.setItem(Util.NOME_DO_USUARIO, jwtDecode.nome)
+        window.localStorage.setItem(Util.TOKEN, token);
         this.loggedIn.next(true);
-        this.router.navigate(['/']);
+        this.router.navigate(['/usuarios']);
+      }
+    ).catch(
+      error => {
+        alert('Usuario ou senha incorretas');
       }
     )
   }

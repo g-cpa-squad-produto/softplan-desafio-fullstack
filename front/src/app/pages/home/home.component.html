@@ -1,0 +1,58 @@
+<div class="container">
+  <h1>Cadastro de usuario</h1>
+
+  <div class="form-group">
+    <label for="exampleInputEmail1">Endereço de Email</label>
+    <input type="email" class="form-control" [(ngModel)]="user.email" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Insira o email">
+  </div>
+  <div class="form-group">
+    <label>Login</label>
+    <input type="text" class="form-control" [(ngModel)]="user.login" placeholder="Insira o login">
+  </div>
+  <div class="form-group">
+    <label>Nome</label>
+    <input type="text" class="form-control" [(ngModel)]="user.nome" placeholder="Insira o nome">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" [(ngModel)]="user.senha" id="exampleInputPassword1" placeholder="Password">
+  </div>
+  <div class="form-group">
+    <label for="exampleSelect1">Tipo de usuario</label>
+    <select class="form-control" [(ngModel)]="user.perfil" id="exampleSelect1">
+      <option value="ROLE_ADMINISTRADOR">Administrador</option>
+      <option value="ROLE_USUARIO_TRIADOR">Usuario Triador</option>
+      <option value="ROLE_USUARIO_FINALIZADOR">Usuario Finalizar</option>
+    </select>
+  </div>
+  <button type="submit" (click)="cadastrarUsuario(user)" class="btn btn-primary">Criar</button>
+  <h1>Usuarios cadastrados</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">Login</th>
+        <th scope="col">Senha</th>
+        <th scope="col">Perfil</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor='let usuario of usuarios'>
+        <td><input type="text" class="form-control" [(ngModel)]="usuario.nome" placeholder="Insira o nome"></td>
+        <td><input type="text" class="form-control" [(ngModel)]="usuario.login" placeholder="Insira o login"></td>
+        <td><input type="password" class="form-control" [(ngModel)]="usuario.senha" placeholder="Insira o senha"></td>
+        <td><select class="form-control" [(ngModel)]="usuario.perfil" id="exampleSelect1">
+            <option value="ROLE_ADMINISTRADOR">Administrador</option>
+            <option value="ROLE_USUARIO_TRIADOR">Usuario Triador</option>
+            <option value="ROLE_USUARIO_FINALIZADOR">Usuario Finalizar</option>
+          </select></td>
+        <th>
+          <button type="button" (click)="deletarUsuario(usuario.id)" class="btn btn-danger">Deletar</button>
+          <button type="submit" (click)="cadastrarUsuario(usuario)" class="btn btn-primary">Atualizar</button>
+        </th>
+      </tr>
+    </tbody>
+  </table>
+</div>

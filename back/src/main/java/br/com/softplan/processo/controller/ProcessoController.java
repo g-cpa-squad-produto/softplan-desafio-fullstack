@@ -1,4 +1,4 @@
-package br.com.softplan.processo;
+package br.com.softplan.processo.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,7 +34,7 @@ public class ProcessoController {
 	private ProcessoService processoService;
 
 	@PostMapping("/processo")
-	@Secured({ "USUARIO_TRIADOR" })
+	@PreAuthorize("hasRole('USUARIO_TRIADOR')")
 	public ResponseEntity<Response<ProcessoDto>> criarNovoProcesso(@Valid @RequestBody Processo processo,
 			BindingResult result) {
 
@@ -53,12 +53,18 @@ public class ProcessoController {
 	}
 
 	@GetMapping("/processos")
-	@Secured({ "USUARIO_TRIADOR" })
-	public ResponseEntity<Response<List<ProcessoDto>>> listarProcessos(@RequestParam("idUsuario") Integer idUsuario) {
+	@PreAuthorize("hasRole('USUARIO_TRIADOR')")
+	public ResponseEntity<Response<List<ProcessoDto>>> listarProcessos(
+			@RequestParam(name = "idUsuario", required = false) Integer idUsuario) {
 
 		Response<List<ProcessoDto>> response = new Response<List<ProcessoDto>>();
 
-		List<Processo> processosDoBanco = processoService.listarPorUsuario(idUsuario);
+		List<Processo> processosDoBanco = new ArrayList<>();
+		if (idUsuario == null) {
+			processosDoBanco = processoService.listarTodos();
+		} else {
+			processosDoBanco = processoService.listarPorUsuario(idUsuario);
+		}
 		List<ProcessoDto> processos = new ArrayList<>();
 		processosDoBanco.forEach(usuario -> processos.add(new ProcessoDto(usuario)));
 
@@ -67,7 +73,7 @@ public class ProcessoController {
 	}
 
 	@GetMapping("/processos-sem-parecer")
-	@Secured({ "USUARIO_TRIADOR" })
+	@PreAuthorize("hasRole('USUARIO_TRIADOR')")
 	public ResponseEntity<Response<List<ProcessoDto>>> listarProcessosSemParecer() {
 
 		Response<List<ProcessoDto>> response = new Response<List<ProcessoDto>>();
@@ -81,10 +87,10 @@ public class ProcessoController {
 	}
 
 	@DeleteMapping("/processo")
-	@Secured({ "USUARIO_TRIADOR" })
-	public ResponseEntity<Response<StringResponse>> deletarProcesso(@RequestParam("id") Integer idUsuario) {
+	@PreAuthorize("hasRole('USUARIO_TRIADOR')")
+	public ResponseEntity<Response<StringResponse>> deletarProcesso(@RequestParam("id") Integer id) {
 		Response<StringResponse> response = new Response<StringResponse>();
-		processoService.excluir(idUsuario);
+		processoService.excluir(id);
 		response.setData(new StringResponse("Processo excluido"));
 		return ResponseEntity.ok(response);
 	}

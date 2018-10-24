@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.softplan.parecer.dto.ParecerDto;
 import br.com.softplan.parecer.modelos.Parecer;
 import br.com.softplan.parecer.service.ParecerService;
-import br.com.softplan.processo.ProcessoController;
+import br.com.softplan.processo.controller.ProcessoController;
 import br.com.softplan.response.Response;
 
 @RestController
@@ -26,9 +26,9 @@ public class ParecerController {
 
 	@Autowired
 	private ParecerService parecerService;
-
+	
 	@PostMapping("/parecer")
-	@Secured({ "USUARIO_TRIADOR" })
+	@PreAuthorize("hasRole('USUARIO_FINALIZADOR')")
 	public ResponseEntity<Response<ParecerDto>> incluirNovoParecer(@Valid @RequestBody Parecer parecer,
 			BindingResult result) {
 

@@ -11,6 +11,7 @@ public class UsuarioDto {
 	public String telefone;
 	public PerfilEnum perfil;
 	public Boolean ativo;
+	public String nome;
 
 	public UsuarioDto(Usuario usuario) {
 		this.id = usuario.getId();
@@ -19,5 +20,6 @@ public class UsuarioDto {
 		this.telefone = usuario.getTelefone();
 		this.perfil = usuario.getPerfil();
 		this.ativo = usuario.getAtivo();
+		this.nome = usuario.getNome();
 	}
 }

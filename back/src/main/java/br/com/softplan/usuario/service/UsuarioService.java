@@ -3,6 +3,7 @@ package br.com.softplan.usuario.service;
 import java.util.List;
 import java.util.Optional;
 
+import br.com.softplan.security.enums.PerfilEnum;
 import br.com.softplan.usuario.modelos.Usuario;
 
 /**
@@ -17,7 +18,7 @@ public interface UsuarioService {
 
 	public Usuario excluirUsuario(Integer id);
 
-	public List<Usuario> listarUsuarios();
+	public List<Usuario> listarUsuarios(PerfilEnum perfil);
 
 	public List<Usuario> listarTodosUsuarios();
 }

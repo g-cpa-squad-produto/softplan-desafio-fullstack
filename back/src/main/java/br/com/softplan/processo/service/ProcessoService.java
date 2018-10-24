@@ -6,12 +6,14 @@ import br.com.softplan.processo.modelos.Processo;
 
 public interface ProcessoService {
 
-	Processo atualizarOuSalvar(Processo processo);
+	public Processo atualizarOuSalvar(Processo processo);
 
-	Processo excluir(Integer id);
+	public Processo excluir(Integer id);
 
-	List<Processo> listarPorUsuario(Integer idUsuario);
+	public List<Processo> listarPorUsuario(Integer idUsuario);
 
-	List<Processo> listarProcessoSemParecer();
+	public List<Processo> listarProcessoSemParecer();
+
+	public List<Processo> listarTodos();
 
 }

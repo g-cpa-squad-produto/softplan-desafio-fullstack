@@ -39,6 +39,7 @@ public class ProcessoServiceImpl implements ProcessoService {
 		Processo processo = repository.getOne(id);
 		processo.setAtivo(Boolean.FALSE);
 		processo.setDeletado(Boolean.TRUE);
+		repository.save(processo);
 		return processo;
 	}
 
@@ -52,6 +53,12 @@ public class ProcessoServiceImpl implements ProcessoService {
 	@Override
 	public List<Processo> listarPorUsuario(Integer idUsuario) {
 		List<Processo> processos = repository.listarProcessosDeUmUsuario(idUsuario);
+		return processos;
+	}
+
+	@Override
+	public List<Processo> listarTodos() {
+		List<Processo> processos = repository.listarTodosProcessos();
 		return processos;
 	}
 

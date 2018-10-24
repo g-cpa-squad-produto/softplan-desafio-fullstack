@@ -1,0 +1,47 @@
+<div class="container">
+  <h1>Cadastro de usuario</h1>
+
+  <div class="form-group">
+    <label>Nome do processo</label>
+    <input type="text" class="form-control" [(ngModel)]="processo.nome" placeholder="Insira o nome do processo">
+  </div>
+  <div class="form-group">
+    <label>A quem pertence</label>
+    <li *ngFor="let usuario of usuarios">
+      <a>
+        <input (click)="inserirUsuario(usuario)" type="checkbox"> {{usuario.nome}}
+      </a>
+    </li>
+  </div>
+  <button type="submit" class="btn btn-primary" (click)="cadastrarProcesso(processo)">Criar</button>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">Data de cricacao</th>
+        <th scope="col">Pertence</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor='let processo of processos'>
+        <td><input type="text" class="form-control" [(ngModel)]="processo.nome" placeholder="Insira o nome"></td>
+        <td><label type="text" class="form-control">{{processo.dataHora | date: 'dd/MM/yyyy' }}</label></td>
+        <td>
+          <ul>
+            <li *ngFor='let usuario of processo.usuarios'>
+              {{usuario.nome}}
+            </li>
+
+          </ul>
+        </td>
+
+        <th> <button type="button" (click)="deletarProcesso(processo.id)" class="btn btn-danger">Deletar</button>
+          <button type="submit" (click)="atualizar(processo)" class="btn btn-primary">Atualizar</button>
+        </th>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal -->
+</div>
