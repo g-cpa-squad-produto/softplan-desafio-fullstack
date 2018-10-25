@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { User } from 'src/app/model/user';
 
+const endPoint = 'users';
+
 @Injectable({ providedIn: 'root' })
 export class UserService {
   _user: User;
@@ -14,10 +16,14 @@ export class UserService {
   ) {}
 
   public findAll(): Observable<User[]> {
-    return this.httpService.get('users');
+    return this.httpService.get(`${endPoint}`);
   }
 
-  public delete(id: number): Observable<any> {
-    return this.httpService.delete('users', id);
+  public findById(id: number) {
+      return  this.httpService.getOne(`${endPoint}\/${id}`);
   }
+  public delete(id: number): Observable<any> {
+    return this.httpService.delete(`${endPoint}`, id);
+  }
+
 }

@@ -24,8 +24,7 @@ export class LoginService {
    }
 
    public decidirRouter() {
-
-      const userDTO = this.tokenService.getTokenUserDTO();
+    const userDTO = this.tokenService.getTokenUserDTO();
       if (userDTO.profile === ProfileTypes.ADMIN) {
           this.router.navigate(['/usuarios']);
       }

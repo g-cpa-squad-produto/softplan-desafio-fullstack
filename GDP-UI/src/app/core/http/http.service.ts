@@ -47,9 +47,18 @@ export class HttpService<T> {
               return data;
             }, (error: HttpErrorResponse) => {
                  this.handlerError(error);
-            }));
-      }
+           }));
+    }
 
+    public getOne(endpoint): Observable<T> {
+      return this.http
+        .get<T>(`${API_URL}/${endpoint}`)
+        .pipe(tap(data => {
+            return data;
+          }, (error: HttpErrorResponse) => {
+               this.handlerError(error);
+         }));
+    }
      public delete(endpoint: string, id: number): Observable<any> {
         return this.http.delete(`${API_URL}/${endpoint}/${id}`)
         .pipe(tap(data => {

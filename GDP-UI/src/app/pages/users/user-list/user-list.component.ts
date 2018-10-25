@@ -44,11 +44,5 @@ export class UserListComponent implements OnInit {
               this.users = [...this.users];
           });
         }
-
-
     }
-
-  public show(id: number) {
-      alert(id);
-  }
 }
