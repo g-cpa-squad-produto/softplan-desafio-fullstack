@@ -1,0 +1,14 @@
+<h1>{{ titulo }}</h1>
+<form (submit)="salvar()">
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Nome" [(ngModel)]="usuario.nome">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Email" [(ngModel)]="usuario.email">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <input matInput type="password" [(ngModel)]="usuario.senha">
+    </mat-form-field>
+    <button mat-button class="primary">Salvar</button>
+    <button mat-button (click)="voltar()">Voltar</button>
+</form>

@@ -1,0 +1,22 @@
+<table border="0">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Número</th>
+      <th>Ano Processo</th>
+      <th>Data de Cadastro</th>
+      <th>Opções</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let processo of processosSemParecer; let i = index">
+      <td>{{ processo.nome }}</td>
+      <td>{{ processo.numero }}</td>
+      <td>{{ processo.ano }}</td>
+      <td>{{ processo.cadastro | date:'dd/MM/yyyy' }}</td>
+      <td>
+        <a (click)='adicionarParecer(processo.id);'>Editar</a>
+      </td>
+    </tr>
+  </tbody>
+</table>

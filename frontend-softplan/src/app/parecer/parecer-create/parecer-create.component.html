@@ -1,0 +1,16 @@
+<h1>Criar Parecer do Processo</h1>
+<form (ngSubmit)="salvarParecer()">
+  <label for="nome">Nome</label><br>
+  {{ processo.nome }}<br>
+  <label for="numero">Número</label><br>
+  {{ processo.numero }}<br>
+  <label for="ano">Ano</label><br>
+  {{ processo.ano }}<br>
+  <label>Parecer</label><br><br>
+    <label>Descrição</label><br>
+    <input type="text" name="descricao" id="descricao" [(ngModel)]="parecer.descricao"/><br>
+    <label>Data de Cadastro</label><br>
+    <input type="date" name="cadastro" id="cadastro" [(ngModel)]="parecer.cadastro"/><br>
+  <button type="submit">Salvar</button>
+  <button type="button" (click)="voltar()">Voltar</button>
+</form>

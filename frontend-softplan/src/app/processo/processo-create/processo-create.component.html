@@ -1,0 +1,11 @@
+<h1>{{ titulo }}</h1>
+<form  (ngSubmit)="salvar()">
+    <label for="nome">Nome</label><br>
+    <input type="text" name="nome" id="nome" [(ngModel)]="processo.nome"><br>
+    <label for="numero">Número</label><br>
+    <input type="number" name="numero" id="numero" [(ngModel)]="processo.numero"><br>
+    <label for="ano">Ano</label><br>
+    <input type="number" name="ano" id="ano" [(ngModel)]="processo.ano"><br>
+    <button type="submit">Salvar</button>
+    <button type="button" (click)="voltar()">Voltar</button>
+</form>

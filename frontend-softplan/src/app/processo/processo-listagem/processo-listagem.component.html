@@ -1,0 +1,24 @@
+<a [routerLink]="['/processo/cadastro']">Cadastrar</a>
+<table border="0">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Número</th>
+      <th>Ano Processo</th>
+      <th>Data de Cadastro</th>
+      <th>Opções</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let processo of processos; let i = index">
+      <td>{{ processo.nome }}</td>
+      <td>{{ processo.numero }}</td>
+      <td>{{ processo.ano }}</td>
+      <td>{{ processo.cadastro | date:'dd/MM/yyyy' }}</td>
+      <td>
+        <a (click)='editar(processo.id);'>Editar</a>
+        <a (click)='visualizar(processo.id);'>Visualizar</a>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,21 @@
+<button mat-flat-button color="primary" (click)="cadastrar()">Cadastro</button>
+<br>
+<mat-form-field>
+  <input matInput (keyup)="filterTable($event.target.value)" placeholder="Filtrar por nome:">
+</mat-form-field>
+<div class="mat-elevation-z8">
+<table mat-table [dataSource]="tableDataSource" matSort>
+  <ng-container matColumnDef="nome">
+    <th mat-header-cell *matHeaderCellDef>Nome</th>
+    <td mat-cell *matCellDef="let usuario">{{usuario.nome}}</td>
+  </ng-container>
+  <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let usuario">{{usuario.email}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+</table>
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
