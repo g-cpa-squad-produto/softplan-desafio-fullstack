@@ -23,11 +23,13 @@ import br.com.softplan.processo.dto.ProcessoDto;
 import br.com.softplan.processo.modelos.Processo;
 import br.com.softplan.processo.service.ProcessoService;
 import br.com.softplan.response.Response;
+import br.com.softplan.security.JwtUser;
+import br.com.softplan.util.ControllerUtil;
 import br.com.softplan.util.StringResponse;
 
 @RestController
 @RequestMapping("/api-processo")
-public class ProcessoController {
+public class ProcessoController extends ControllerUtil {
 	private static final Logger log = LoggerFactory.getLogger(ProcessoController.class);
 
 	@Autowired
@@ -73,12 +75,12 @@ public class ProcessoController {
 	}
 
 	@GetMapping("/processos-sem-parecer")
-	@PreAuthorize("hasRole('USUARIO_TRIADOR')")
+	@PreAuthorize("hasAnyRole('USUARIO_FINALIZADOR', 'USUARIO_TRIADOR')")
 	public ResponseEntity<Response<List<ProcessoDto>>> listarProcessosSemParecer() {
-
+		JwtUser user = jwtTokenUtil.getJwtUser(request);
 		Response<List<ProcessoDto>> response = new Response<List<ProcessoDto>>();
 
-		List<Processo> processosDoBanco = processoService.listarProcessoSemParecer();
+		List<Processo> processosDoBanco = processoService.listarProcessoSemParecer(user.getId().intValue());
 		List<ProcessoDto> processos = new ArrayList<>();
 		processosDoBanco.forEach(usuario -> processos.add(new ProcessoDto(usuario)));
 

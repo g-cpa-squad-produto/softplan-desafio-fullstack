@@ -37,7 +37,7 @@ public class ProcessoServiceImpl implements ProcessoService {
 	@Override
 	public Processo excluir(Integer id) {
 		Processo processo = repository.getOne(id);
-		processo.setAtivo(Boolean.FALSE);
+		processo.setFinalizado(Boolean.FALSE);
 		processo.setDeletado(Boolean.TRUE);
 		repository.save(processo);
 		return processo;
@@ -63,8 +63,8 @@ public class ProcessoServiceImpl implements ProcessoService {
 	}
 
 	@Override
-	public List<Processo> listarProcessoSemParecer() {
-		List<Processo> processos = repository.listarProcessosSemParecer();
+	public List<Processo> listarProcessoSemParecer(Integer idUsuario) {
+		List<Processo> processos = repository.listarProcessosSemParecer(idUsuario);
 		return processos;
 	}
 

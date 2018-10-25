@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import br.com.softplan.processo.modelos.Processo;
+import br.com.softplan.usuario.modelos.Usuario;
 
 @Entity(name = "Parecer")
 @Table(name = "parecer")
@@ -40,10 +41,21 @@ public class Parecer {
 	@Column
 	private Boolean deletado = Boolean.FALSE;
 
-	@NotNull
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_usuario", nullable = true)
+	private Usuario usuario;
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_processo", nullable = true)
 	private Processo processo;
+
+	public Parecer() {
+
+	}
+
+	public Parecer(Integer id) {
+		this.id = id;
+	}
 
 	public Integer getId() {
 		return id;
@@ -99,6 +111,14 @@ public class Parecer {
 
 	public void setProcesso(Processo processo) {
 		this.processo = processo;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	@Override

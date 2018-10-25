@@ -7,5 +7,7 @@ export class Processo {
 
     public dataHora: Date;
 
-    public usuarios: [];
+    public usuarios: [] = [];
+
+    public finalizado: Boolean = false;
 }

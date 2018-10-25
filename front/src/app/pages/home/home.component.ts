@@ -37,6 +37,9 @@ export class HomeComponent implements OnInit {
     }
   }
   usuarioValido(usuario: Usuario) {
+    if (usuario.nome == null) {
+      return false;
+    }
     if (usuario.login == null) {
       return false;
     }

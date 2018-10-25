@@ -12,7 +12,7 @@ public interface ProcessoService {
 
 	public List<Processo> listarPorUsuario(Integer idUsuario);
 
-	public List<Processo> listarProcessoSemParecer();
+	public List<Processo> listarProcessoSemParecer(Integer idUsuario);
 
 	public List<Processo> listarTodos();
 

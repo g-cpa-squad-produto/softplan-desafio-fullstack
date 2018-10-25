@@ -38,7 +38,7 @@ public class Processo {
 	private Timestamp dataHoraDeletado;
 
 	@Column
-	private Boolean ativo = Boolean.TRUE;
+	private Boolean finalizado = Boolean.FALSE;
 
 	@Column
 	private Boolean deletado = Boolean.FALSE;
@@ -89,12 +89,12 @@ public class Processo {
 		this.dataHoraDeletado = dataHoraDeletado;
 	}
 
-	public Boolean getAtivo() {
-		return ativo;
+	public Boolean getFinalizado() {
+		return finalizado;
 	}
 
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
+	public void setFinalizado(Boolean finalizado) {
+		this.finalizado = finalizado;
 	}
 
 	public Boolean getDeletado() {

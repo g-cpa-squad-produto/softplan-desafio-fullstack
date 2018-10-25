@@ -19,4 +19,7 @@ export class ProcessosService {
   public listarTodosProcessos() {
     return this.http.get<Response>(Util._url + 'api-processo/processos');
   }
+  public listarProcessosSemParecer(){
+    return this.http.get<Response>(Util._url+ 'api-processo/processos-sem-parecer');
+  }
 }

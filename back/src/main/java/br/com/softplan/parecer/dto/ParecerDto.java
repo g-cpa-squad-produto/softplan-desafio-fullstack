@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 import br.com.softplan.parecer.modelos.Parecer;
 import br.com.softplan.processo.dto.ProcessoDto;
+import br.com.softplan.usuario.dto.UsuarioDto;
 
 public class ParecerDto {
 
@@ -15,10 +16,13 @@ public class ParecerDto {
 
 	public ProcessoDto processo;
 
+	public UsuarioDto usuario;
+
 	public ParecerDto(Parecer parecer) {
 		this.id = parecer.getId();
 		this.nome = parecer.getNome();
 		this.dataHora = parecer.getDataHora();
 		this.processo = new ProcessoDto(parecer.getProcesso());
+		this.usuario = new UsuarioDto(parecer.getUsuario());
 	}
 }

@@ -17,13 +17,13 @@ public class ProcessoDto {
 
 	public List<UsuarioDto> usuarios = new ArrayList<>();
 
-	public Boolean ativo;
+	public Boolean finalizado;
 
 	public ProcessoDto(Processo processo) {
 		this.id = processo.getId();
 		this.nome = processo.getNome();
 		this.dataHora = processo.getDataHora();
-		this.ativo = processo.getAtivo();
+		this.finalizado = processo.getFinalizado();
 		processo.getUsuarios().forEach(usuario -> {
 			usuarios.add(new UsuarioDto(usuario));
 		});

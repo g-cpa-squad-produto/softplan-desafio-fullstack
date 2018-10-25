@@ -15,6 +15,7 @@ import { TokenInterceptor } from './auth/jwt-interceptor';
 import { HomeComponent } from './pages/home/home.component';
 import { ProcessosComponent } from './pages/processos/processos.component';
 import { ModalModule, BsModalRef } from 'ngx-bootstrap';
+import { ParecerComponent } from './pages/parecer/parecer.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ModalModule, BsModalRef } from 'ngx-bootstrap';
     HomeComponent,
     HeaderComponent,
     LoginComponent,
-    ProcessosComponent
+    ProcessosComponent,
+    ParecerComponent
   ],
   imports: [
     ModalModule.forRoot(),

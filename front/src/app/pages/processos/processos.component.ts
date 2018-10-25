@@ -5,22 +5,26 @@ import { Usuario } from 'src/app/modelos/user';
 import { UsuarioService } from 'src/app/service/usuario/usuario.service';
 import { BsModalRef } from 'ngx-bootstrap';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { ParecerService } from 'src/app/service/parecer/parecer.service';
+import { Parecer } from 'src/app/modelos/parecer';
 
 
 @Component({
   selector: 'app-processos',
   templateUrl: './processos.component.html',
   styleUrls: ['./processos.component.css'],
-  providers: [ProcessosService]
+  providers: [ProcessosService, ParecerService]
 })
 export class ProcessosComponent implements OnInit {
 
   public processo: Processo = new Processo();
   public processos: [Processo]
-  private usuarios: [Usuario];
-  private usuarioResponsaveis: [] = [];
-  modalRef: BsModalRef;
-  constructor(private modalService: BsModalService, private usuarioService: UsuarioService, public processoService: ProcessosService) { }
+  public usuarios: [Usuario];
+  public usuarioResponsaveis: [] = [];
+  public pareceres: [Parecer];
+  public modalRef: BsModalRef;
+
+  constructor(private modalService: BsModalService, public usuarioService: UsuarioService, public processoService: ProcessosService, public parecerService: ParecerService, ) { }
   ngOnInit() {
     this.listarTodosProcessos();
     this.listarUsuarios();
@@ -33,17 +37,44 @@ export class ProcessosComponent implements OnInit {
     this.processo = processo;
   }
 
-  cadastrarProcesso(processo: Processo) {
-    this.processo.usuarios = this.usuarioResponsaveis;
+  cadastrarProcesso(processo: Processo, form) {
+    if (this.processo.usuarios.length == 0) {
+      this.processo.usuarios = this.usuarioResponsaveis;
+    }
+    if (this.processo.usuarios.length == 0) {
+      alert('Escolha pelo menos um usuário')
+      return;
+    }
     this.processoService.cadastrar(processo).toPromise().then(
       data => {
         this.listarTodosProcessos();
         this.processo = new Processo();
         this.usuarioResponsaveis = [];
+        var itens = document.querySelectorAll('input[type=checkbox]');
+        this.limparCheckBox(itens);
         alert('Pronto');
       }
     )
   }
+  limparCheckBox(itens) {
+    for (var i = 0; i < itens.length; i++) {
+      itens[i].checked = false;
+    }
+  }
+
+  finalizarProcesso() {
+    var totalDeParecer: number = this.pareceres.length;
+    var totalDeUsuario: number = this.processo.usuarios.length;
+    if (totalDeUsuario === totalDeParecer) {
+      this.processo.finalizado = true;
+      this.cadastrarProcesso(this.processo, null);
+      this.processo = new Processo();
+    } else {
+      alert('Alguns usuarios não inseriram parecer')
+      this.processo = new Processo();
+    }
+  }
+
   inserirUsuario(usuario) {
     this.usuarioResponsaveis = this.contemElemento(this.usuarioResponsaveis, usuario);
     console.log(this.usuarioResponsaveis)
@@ -57,7 +88,14 @@ export class ProcessosComponent implements OnInit {
       )
     }
   }
-
+  listarParecerDoProcesso(processo: Processo) {
+    this.processo = processo;
+    this.parecerService.listarParecerDoProcesso(processo.id).toPromise().then(
+      data => {
+        this.pareceres = data.data
+      }
+    )
+  }
   listarTodosProcessos() {
     this.processoService.listarTodosProcessos().toPromise().then(
       data => {

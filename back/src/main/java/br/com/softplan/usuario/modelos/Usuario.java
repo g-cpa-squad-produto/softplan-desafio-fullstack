@@ -22,6 +22,7 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	@NotNull
 	@Column
 	private String nome;
 

@@ -1,5 +1,7 @@
 package br.com.softplan.parecer.serviceimpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,12 @@ public class ParecerServiceImpl implements ParecerService {
 	public Parecer incluirParecer(Parecer parecer) {
 		Parecer parecerSalvo = this.repository.save(parecer);
 		return parecerSalvo;
+	}
+
+	@Override
+	public List<Parecer> listarParecerPorProcesso(Integer idProcesso) {
+		List<Parecer> pareceres = repository.listarParecerPorProcesso(idProcesso);
+		return pareceres;
 	}
 
 }

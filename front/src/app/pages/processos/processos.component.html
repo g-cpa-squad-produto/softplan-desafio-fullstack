@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Cadastro de usuario</h1>
+  <h1>Cadastro de processos</h1>
 
   <div class="form-group">
     <label>Nome do processo</label>
@@ -7,7 +7,7 @@
   </div>
   <div class="form-group">
     <label>A quem pertence</label>
-    <li *ngFor="let usuario of usuarios">
+    <li id="checkDosUsuarios" *ngFor="let usuario of usuarios">
       <a>
         <input (click)="inserirUsuario(usuario)" type="checkbox"> {{usuario.nome}}
       </a>
@@ -36,12 +36,34 @@
           </ul>
         </td>
 
-        <th> <button type="button" (click)="deletarProcesso(processo.id)" class="btn btn-danger">Deletar</button>
+        <th>
           <button type="submit" (click)="atualizar(processo)" class="btn btn-primary">Atualizar</button>
+          <button type="button" class="btn btn-primary" (click)="openModal(template);listarParecerDoProcesso(processo)">Listar
+            Parecer</button>
+          <button type="button" (click)="deletarProcesso(processo.id)" class="btn btn-danger">Deletar</button>
         </th>
       </tr>
     </tbody>
   </table>
 
-  <!-- Modal -->
+  <ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Listar Parecer</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <ul>
+        <li *ngFor='let parecer of pareceres'>
+          {{parecer.nome}}
+        </li>
+      </ul>
+    </div>
+    <div class="modal-footer">
+      <button type="button" (click)="finalizarProcesso(processo);modalRef.hide()" class="btn btn-primary">Finalizar
+        processo</button>
+    </div>
+  </ng-template>
+
 </div>
