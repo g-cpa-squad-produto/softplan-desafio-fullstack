@@ -24,6 +24,7 @@ export class AuthService {
   login(user: Usuario) {
     this.http.post<Response>(Util._url + 'api-publica/login', user).toPromise().then(
       data => {
+        window.localStorage.clear();
         let token = data.data.token;
         let jwtDecode = jwt_decode(token);
         console.log(jwtDecode)
@@ -32,7 +33,20 @@ export class AuthService {
         window.localStorage.setItem(Util.NOME_DO_USUARIO, jwtDecode.nome)
         window.localStorage.setItem(Util.TOKEN, token);
         this.loggedIn.next(true);
-        this.router.navigate(['/usuarios']);
+
+        if (jwtDecode.role == 'ROLE_USUARIO_FINALIZADOR') {
+          this.router.navigate(['/parecer']);
+          return;
+        }
+        if (jwtDecode.role == 'ROLE_USUARIO_TRIADOR') {
+          this.router.navigate(['/processos']);
+          return;
+        }
+        if (jwtDecode.role == 'ROLE_ADMINISTRADOR') {
+          this.router.navigate(['/usuarios']);
+          return;
+        }
+
       }
     ).catch(
       error => {
@@ -40,6 +54,18 @@ export class AuthService {
       }
     )
   }
+  isAuthenticated() {
+    const token = localStorage.getItem(Util.TOKEN);
+    if (!token) {
+      console.log("Token nao existe");
+      return false;
+    }
+    else {
+      console.log("Token existe");
+      return true;
+    }
+  }
+
 
   logout() {
     this.loggedIn.next(false);

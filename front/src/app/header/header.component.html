@@ -1,17 +1,9 @@
 <nav *ngIf="isLoggedIn$ | async as isLoggedIn" class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" (click)="redirecionar('/usuarios')">Gerenciador de processos</a>
+  <a class="navbar-brand">Gerenciador de processos</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
   </button>
-
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" (click)="redirecionar('/processos')">Processos</a>
-        <a class="nav-link"(click)="redirecionar('/parecer')">Parecer</a>
-      </li>
-    </ul>
   </div>
   <form class="form-inline my-2 my-lg-0">
     <button class="btn btn-outline-light my-2 my-sm-0" (click)="onLogout()" type="submit">Sair</button>

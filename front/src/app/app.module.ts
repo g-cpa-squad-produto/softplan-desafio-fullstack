@@ -16,6 +16,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { ProcessosComponent } from './pages/processos/processos.component';
 import { ModalModule, BsModalRef } from 'ngx-bootstrap';
 import { ParecerComponent } from './pages/parecer/parecer.component';
+import { Page404Component } from './pages/page404/page404.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ParecerComponent } from './pages/parecer/parecer.component';
     HeaderComponent,
     LoginComponent,
     ProcessosComponent,
-    ParecerComponent
+    ParecerComponent,
+    Page404Component
   ],
   imports: [
     ModalModule.forRoot(),

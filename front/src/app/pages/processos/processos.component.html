@@ -1,20 +1,49 @@
 <div class="container">
-  <h1>Cadastro de processos</h1>
+  <div id="formLogin">
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-6">
+        <h2>
+          Cadastro de Processo
+        </h2>
+      </div>
+    </div>
 
-  <div class="form-group">
-    <label>Nome do processo</label>
-    <input type="text" class="form-control" [(ngModel)]="processo.nome" placeholder="Insira o nome do processo">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-10"> <b>Insira o nome do Processo</b></div>
+    </div>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-10"><input class="form-control" type="text" [(ngModel)]="processo.nome"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-10"> <b>A quem pertence</b></div>
+    </div>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-10">
+        <ul class="list-group">
+          <li class="list-group-item" id="checkDosUsuarios" *ngFor="let usuario of usuarios">
+            <a>
+              <input (click)="inserirUsuario(usuario)" type="checkbox"> {{usuario.nome}}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-10">
+        <button type="button" id="btnLogin" class="btn btn-primary" (click)="cadastrarProcesso(processo)">Criar</button>
+      </div>
+    </div>
+
   </div>
-  <div class="form-group">
-    <label>A quem pertence</label>
-    <li id="checkDosUsuarios" *ngFor="let usuario of usuarios">
-      <a>
-        <input (click)="inserirUsuario(usuario)" type="checkbox"> {{usuario.nome}}
-      </a>
-    </li>
-  </div>
-  <button type="submit" class="btn btn-primary" (click)="cadastrarProcesso(processo)">Criar</button>
-  <table class="table">
+
+  <h2>Processos</h2>
+  <table id="tabelaDosProcessos" class="table">
     <thead>
       <tr>
         <th scope="col">Nome</th>
@@ -37,7 +66,7 @@
         </td>
 
         <th>
-          <button type="submit" (click)="atualizar(processo)" class="btn btn-primary">Atualizar</button>
+          <button type="button" (click)="atualizar(processo)" class="btn btn-primary">Atualizar</button>
           <button type="button" class="btn btn-primary" (click)="openModal(template);listarParecerDoProcesso(processo)">Listar
             Parecer</button>
           <button type="button" (click)="deletarProcesso(processo.id)" class="btn btn-danger">Deletar</button>
@@ -48,7 +77,7 @@
 
   <ng-template #template>
     <div class="modal-header">
-      <h4 class="modal-title pull-left">Listar Parecer</h4>
+      <h4 class="modal-title pull-left">Pareceres</h4>
       <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -56,7 +85,8 @@
     <div class="modal-body">
       <ul>
         <li *ngFor='let parecer of pareceres'>
-          {{parecer.nome}}
+          Parecer de:{{parecer.usuario.nome}} <br>
+          Parecer: {{parecer.nome}}
         </li>
       </ul>
     </div>

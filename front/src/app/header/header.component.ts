@@ -32,9 +32,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.isLoggedIn$ = this.authService.isLoggedIn;
   }
-  redirecionar(url) {
-    this.router.navigate([url]);
-  }
 
   onLogout() {
     this.authService.logout();

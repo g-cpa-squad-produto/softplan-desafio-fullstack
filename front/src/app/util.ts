@@ -1,5 +1,5 @@
 export class Util {
-    public static _url = 'http://localhost:8080/'
+    public static _url = 'https://gerenciador-api.herokuapp.com/'
 
     public static ID_DO_USUARIO = 'id_usuario';
     public static TIPO_DO_USUARIO = 'tipo';
