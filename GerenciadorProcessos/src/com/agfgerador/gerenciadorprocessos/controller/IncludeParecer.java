@@ -8,7 +8,8 @@
  import org.zkoss.zul.ListModel;
  import org.zkoss.zul.ListModelList;
  import org.zkoss.zul.Listcell;
- import org.zkoss.zk.ui.event.UploadEvent;
+import org.zkoss.zul.Listheader;
+import org.zkoss.zk.ui.event.UploadEvent;
  import org.zkoss.util.media.AMedia;
  import org.zkoss.zul.Listitem;
  import org.zkoss.zul.ListitemRenderer;
@@ -47,8 +48,11 @@
  import com.agfgerador.compartilhado.util.AGFComponente;
  import com.agfgerador.gerenciadorprocessos.domain.Parecer;
  import com.agfgerador.gerenciadorprocessos.service.ParecerService;
- import com.agfgerador.autenticacao.domain.Usuario;
- import com.agfgerador.autenticacao.service.UsuarioService;
+import com.agfgerador.autenticacao.domain.Perfil;
+import com.agfgerador.autenticacao.domain.Usuario;
+import com.agfgerador.autenticacao.domain.UsuarioPerfil;
+import com.agfgerador.autenticacao.service.UsuarioPerfilService;
+import com.agfgerador.autenticacao.service.UsuarioService;
  import org.zkoss.zul.Listbox;
  import com.agfgerador.compartilhado.util.AGFBandbox;
  import org.zkoss.zul.Bandbox;
@@ -70,6 +74,12 @@
      private Parecer compAux = new Parecer();
      private int totalSize = 0;
      private Integer pageSizeBandbox = 5;
+     private Perfil perfil = new Perfil();
+     private UsuarioPerfilService usuarioPerfilService;
+     private Div divparecer, divdtparecer,divBandboxUsuario;
+     private Textbox filtroDescricao;
+     private Datebox filtroDtparecer;
+     private Listheader listheaderDescricao,listheaderDtparecer;
 
    
     /////////////Usuario
@@ -79,6 +89,7 @@
     private Listbox listboxUsuario;
     private Paging paginacaoUsuario;
     private Usuario usuarioBandbox;
+    private UsuarioPerfil usuPerAux;
     private UsuarioService usuarioService;
  
     private Label labelNomePoup;
@@ -95,6 +106,7 @@
  	public void onInicio(List<Object> objetos) {
  		onInicio();
  		processo = (Processo)objetos.get(0);
+ 		perfil = (Perfil)objetos.get(2);
  	}
 
       public void renderizarListaPrincipal() {
@@ -138,7 +150,21 @@
      
      public void onOK$longboxUsuario(){
         usuario = new Usuario();
-        setCompUsuario((Usuario)AGFBandbox.onOKLongbox(longboxUsuario, usuarioBandbox, usuarioService));
+        inicRecepUsuario();
+        if(longboxUsuario.getValue()!=null) {
+        	inicRecepUsuario();
+        	usuPerAux.getUsuario().setId(longboxUsuario.getValue());
+        	List<ObjetoPadrao>listausoperfil = usuarioPerfilService.filter(usuPerAux, pageSizeBandbox, AGFPaginacao.getPagePaginacao(new Paging(),pageSizeBandbox,0));
+        	if(listausoperfil.size()>0) {
+        		usuario = ((UsuarioPerfil)listausoperfil.get(0)).getUsuario();
+        		setCompUsuario(usuario);
+        	}else {
+        		setCompUsuario(usuario);
+        	}
+        }else {
+        	setCompUsuario(usuario);
+        }
+        //setCompUsuario((Usuario)AGFBandbox.onOKLongbox(longboxUsuario, usuarioBandbox, usuarioService));
      }
      
      public void onOK$bandboxUsuario(){
@@ -146,10 +172,14 @@
      }
      
      public void onChange$bandboxUsuario(){
-        usuario.setNome(bandboxUsuario.getValue());
         inicRecepUsuario();
-        objs = usuarioService.filter(usuario, pageSizeBandbox, AGFPaginacao.getPagePaginacao(new Paging(),pageSizeBandbox,0));
-        totalSize = usuarioService.getNumberRecordsFilter(usuario).intValue();
+        usuPerAux.getUsuario().setNome(bandboxUsuario.getValue());
+        
+        for(ObjetoPadrao temp:usuarioPerfilService.filter(usuPerAux, pageSizeBandbox, AGFPaginacao.getPagePaginacao(new Paging(),pageSizeBandbox,0))) {
+            objs.add(((UsuarioPerfil)temp).getUsuario());
+        }
+        totalSize = usuarioPerfilService.getNumberRecordsFilter(usuPerAux).intValue();
+        
         AGFBandbox.onChange(bandboxUsuario, listboxUsuario, usuarioService, paginacaoUsuario, pageSizeBandbox, totalSize, objs);
      }
      
@@ -165,19 +195,36 @@
     
      public void listaUsuarios(){
         inicRecepUsuario();
-        objs = usuarioService.filter(usuario, pageSizeBandbox, AGFPaginacao.getPagePaginacao(new Paging(),pageSizeBandbox,0));
-        totalSize = usuarioService.getNumberRecordsFilter(usuario).intValue();
+        
+        for(ObjetoPadrao temp:usuarioPerfilService.filter(usuPerAux, pageSizeBandbox, AGFPaginacao.getPagePaginacao(new Paging(),pageSizeBandbox,0))) {
+            objs.add(((UsuarioPerfil)temp).getUsuario());
+        }
+        totalSize = usuarioPerfilService.getNumberRecordsFilter(usuPerAux).intValue();
+        
         AGFBandbox.listaElementos(listboxUsuario, usuarioService, paginacaoUsuario, pageSizeBandbox, totalSize, objs);
      }
     
      public void onPaging$paginacaoUsuario(){
         inicRecepUsuario();
-        objs = usuarioService.filter(usuario, pageSizeBandbox, AGFPaginacao.getPagePaginacao(paginacaoUsuario,pageSizeBandbox,paginaAnterior));
+        
+        for(ObjetoPadrao temp:usuarioPerfilService.filter(usuPerAux, pageSizeBandbox, AGFPaginacao.getPagePaginacao(paginacaoUsuario,pageSizeBandbox,paginaAnterior))) {
+            objs.add(((UsuarioPerfil)temp).getUsuario());
+        }
+        
         AGFBandbox.onPaging(null, listboxUsuario, usuarioService, paginacaoUsuario, pageSizeBandbox, paginaAnterior, objs);
      }
      
      public void inicRecepUsuario(){
-        usuario.setId(0l);
+        //usuario.setId(0l);
+    	 usuPerAux = new UsuarioPerfil();
+         usuPerAux.setId(0L);
+         usuPerAux.setPerfil(new Perfil()); 
+         usuPerAux.getPerfil().setId(8L);
+         usuPerAux.setUsuario(new Usuario()); 
+         usuPerAux.getUsuario().setNome(null);
+         usuPerAux.getUsuario().setId(0L);
+         usuPerAux.setAtivo(null);
+         usuPerAux.setAdministrador(null);
         totalSize = 0;
         objs = new ArrayList<ObjetoPadrao>();
      }
@@ -255,8 +302,8 @@
          Parecer comp = (Parecer) btSalvar(parecer, parecerService);
       	if(comp!=null){
            parecer = comp;
-           limitarQuantidade();
-           }
+           getTriadorFinalizador(false);
+        }
         else {
          switch (valid) {
            case 1:
@@ -314,6 +361,7 @@
        }else{
           parecer = new Parecer();
           btNovo();
+          getTriadorFinalizador(true);
        }
      }
 
@@ -326,6 +374,7 @@
      }
 
      public void onClickbtLista() {
+       getTriadorFinalizadorGeral();
        btLista();
        try{
          if(processo.getId()==null){
@@ -373,6 +422,7 @@
      public void carregarObjeto(Object obj) {
        parecer = (Parecer) obj;
        carregarObj(parecer);
+       getTriadorFinalizador(false);
      }
 
      public void setObjetoTelaForm() {
@@ -432,6 +482,34 @@
 	               barraFerramentasInclude.getFellow("btNovo").setVisible(true);
 	            }
           }
+       }
+       
+       //////////////////////////////////////////
+       
+       private void getTriadorFinalizadorGeral() {
+    	   if(perfil!=null) {
+        	   if(perfil.getId()==7) {
+        		   barraFerramentasInclude.getFellow("btRemover").setVisible(false);
+        		   divBandboxUsuario.setVisible(true);
+        		   divdtparecer.setVisible(false);
+        		   divparecer.setVisible(false);
+        		   filtroDescricao.setVisible(false);
+        		   filtroDtparecer.setVisible(false);
+        		   listheaderDescricao.setVisible(false);
+        		   listheaderDtparecer.setVisible(false);
+        	   }else
+        	   if(perfil.getId()==8) {        		  
+        	   }
+    	   }
+       }
+       
+       private void getTriadorFinalizador(Boolean b) {
+    	   if(perfil!=null) {
+	    	   if(perfil.getId()==7) {
+	    		   barraFerramentasInclude.getFellow("btSalvar").setVisible(b);        		   
+	    	   }else if(perfil.getId()==8) {        		  
+	    	   }
+    	   }
        }
 
    }

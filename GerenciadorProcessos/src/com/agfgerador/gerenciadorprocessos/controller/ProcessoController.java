@@ -3,7 +3,8 @@
  import java.util.List;
  import java.util.ArrayList;
  import org.zkoss.zul.Paging;
- import org.zkoss.zk.ui.Component;
+import org.zkoss.zul.Tab;
+import org.zkoss.zk.ui.Component;
  import org.zkoss.zk.ui.event.Event;
  import org.zkoss.zul.ListModel;
  import org.zkoss.zul.ListModelList;
@@ -17,6 +18,13 @@
  import org.zkoss.zul.Intbox;
  import org.zkoss.zul.Image;
  import org.zkoss.zul.Include;
+
+import com.agfgerador.autenticacao.domain.Perfil;
+import com.agfgerador.autenticacao.domain.Permissao;
+import com.agfgerador.autenticacao.domain.Usuario;
+import com.agfgerador.autenticacao.domain.UsuarioPerfil;
+import com.agfgerador.autenticacao.service.PermissaoService;
+import com.agfgerador.autenticacao.service.UsuarioPerfilService;
 import com.agfgerador.compartilhado.controller.ControllerAGF;
 import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
  import org.zkoss.zul.Window;
@@ -69,6 +77,11 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
      private Processo compAux = new Processo();
      private int totalSize = 0;
      private Integer pageSizeBandbox = 5;
+     private UsuarioPerfilService usuarioPerfilService;
+     private UsuarioPerfil usuarioperfil = new UsuarioPerfil();
+     private Perfil perfil = new Perfil();
+     private Tab tabParecer;
+     
 
    
     /////////////Pessoa
@@ -91,6 +104,7 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
        super.doAfterCompose(win,true,"all");
        renderizarBandboxPessoa();
        btInformacoes.setVisible(false);
+       perfil = getTriadorFinalizadorGeral();
      }
 
      public void renderizarListaPrincipal() {
@@ -298,7 +312,8 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
          Processo comp = (Processo) btSalvar(processo, processoService);
       	if(comp!=null){
            processo = comp;
-           }
+           getTriadorFinalizador(false);
+        }
         else {
          switch (valid) {
            case 1:
@@ -341,6 +356,7 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
        processo = new Processo();
        btNovo();
        controllerParecer.onClickbtLista();
+       getTriadorFinalizador(true);
      }
 
      public void onClickbtCancelar() {
@@ -369,6 +385,7 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
        processo = (Processo) obj;
        carregarObj(processo);
        controllerParecer.onClickbtLista();
+       getTriadorFinalizador(false);
      }
 
      public void setObjetoTelaForm() {
@@ -425,6 +442,7 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
         objetos = new ArrayList<Object>();
         objetos.add(processo);
         objetos.add(binder);
+        objetos.add(perfil);
      controllerParecer.onInicio(objetos);
      }
      
@@ -432,6 +450,40 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
      public void onClick$tabParecer(){
         controllerParecer.onClickbtLista();
      }
-
+     //////////////////////////////////
+     
+     private Perfil getTriadorFinalizadorGeral() {
+         UsuarioPerfil usuperf = new UsuarioPerfil();
+         usuperf.setId(0l);
+         usuperf.setPerfil(new Perfil());
+         usuperf.getPerfil().setNome(null);
+         usuperf.getPerfil().setId(0l);
+         usuperf.setUsuario((Usuario)session.getAttribute("usuarioLogado"));
+         usuperf.setAtivo(null);
+         usuperf.setAdministrador(null);
+        for(ObjetoPadrao temp:usuarioPerfilService.filter(usuperf)) {
+      	   System.out.println("perfil: "+((UsuarioPerfil)temp).getPerfil().getNome()+", Nome Usuário: "+((UsuarioPerfil)temp).getUsuario().getNome());
+      	   if(((UsuarioPerfil)temp).getPerfil().getId()==7) {
+      		   System.out.println("id do perfil: "+((UsuarioPerfil)temp).getPerfil().getId());
+      		   btRemover.setVisible(false);
+      		 tabParecer.setLabel("USUÁRIOS QUE REALIZARAM O PARECER");
+      		   //btInformacoes.setVisible(false);
+      		   return ((UsuarioPerfil)temp).getPerfil();
+      	   }else
+      	   if(((UsuarioPerfil)temp).getPerfil().getId()==8) {
+      		   return ((UsuarioPerfil)temp).getPerfil();
+      	   }
+         }
+        return null;
+     }
+     
+     private void getTriadorFinalizador(Boolean b) {
+  	   if(perfil!=null) {
+	  		 if(perfil.getId() == 7) {
+	      	   btSalvar.setVisible(b);
+	         }else if(perfil.getId()==8) {        		  
+	    	 }
+  	   }
+     }
 
    }

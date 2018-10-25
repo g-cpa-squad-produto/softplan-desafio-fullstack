@@ -139,7 +139,6 @@ public abstract class ControllerPadraoSemId extends GenericForwardComposer imple
 					obj = updateObjeto(obj, service);
 				binder.loadAll();
 			}else{
-				System.out.println("ControllerPadrao sem id aui eqw123123123");
 				obj = null;
 			}
 			}

@@ -24,15 +24,15 @@
            <listheader label="" width="25px" />
            <listheader label="Código" sort="auto(id)" width="120px"/>
            <listheader label="USUARIO" sort="auto(usuario.nome)" />
-           <listheader label="DESCRIÇÃO" sort="auto(descricao)" />
-           <listheader label="DATA PARECER" sort="auto(dtparecer)" width="150px"/>
+           <listheader id="listheaderDescricao" label="DESCRIÇÃO" sort="auto(descricao)" />
+           <listheader id="listheaderDtparecer" label="DATA PARECER" sort="auto(dtparecer)" width="150px"/>
          </listhead>
        </listbox>
        <paging id="paginacao"></paging>
      </div>
      <div id="form" class="form fade out ocultar">
        <div class="new-li">
-         <div class="new-col" width="380px"> 
+         <div id="divBandboxUsuario" class="new-col" width="380px"> 
             <a href="#" id="labelUsuario">Usuario*<span class="glyphicon glyphicon-link"></span></a>
             <div class="new-col-link">
                <longbox id="longboxUsuario" class="form-control input-sm" />
@@ -49,12 +49,12 @@
                </bandbox>
             </div>
          </div>
-         <div class="new-col" width="250px">
-           <label>DESCRIÇÃO</label>
+         <div id="divparecer" class="new-col" width="450px">
+           <label>Parecer</label>
            <a id="aInfodescricao"  popup="msg" class="glyphicon glyphicon-info-sign" style="margin-bottom: 3px;"></a>
-           <textbox id="textboxDescricao" class="form-control input-sm" maxlength="257" value="@{controller.parecer.descricao}"/>
+           <textbox id="textboxDescricao" rows="3" class="form-control input-sm" maxlength="257" value="@{controller.parecer.descricao}"/>
          </div>
-         <div class="new-col" width="140px">
+         <div id="divdtparecer" class="new-col" width="140px">
            <label>DATA PARECER</label>
            <datebox id="dateboxDtparecer" class="form-control input-sm" value="@{controller.parecer.dtparecer}" />
          </div>
