@@ -10,10 +10,11 @@ import { ProcessoCreateComponent } from './processo/processo-create/processo-cre
 import { ProcessoVisualizarComponent } from './processo/processo-visualizar/processo-visualizar.component';
 import { ParecerComponent } from './parecer/parecer.component';
 import { ParecerCreateComponent } from './parecer/parecer-create/parecer-create.component';
+import { HomeComponent } from './home/home.component';
 
 const appRoutes: Routes = [
-    { path: 'home', component: AppComponent },
-    { path: '', component: AppComponent },
+    { path: 'home', component: HomeComponent },
+    { path: '', component: HomeComponent },
     { path: 'usuario', component: UsuarioComponent },
     { path: 'usuario/cadastro', component: UsuarioCreateComponent },
     { path: 'usuario/editar/:id', component: UsuarioCreateComponent },

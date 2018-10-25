@@ -9,7 +9,6 @@ import { UsuarioComponent } from './usuario/usuario.component';
 import { UsuarioCreateComponent } from './usuario/usuario-create/usuario-create.component';
 import { routing } from './app.routes';
 import { HomeComponent } from './home/home.component';
-import { NavbarComponent } from './navbar/navbar.component';
 import { UsuarioListagemComponent } from './usuario/usuario-listagem/usuario-listagem.component';
 import { UsuarioService } from './usuario/usuario.service';
 import { GenericServerService } from './generic-server.service';
@@ -32,7 +31,6 @@ import { MaterialModule } from './material/material.module';
     UsuarioComponent,
     UsuarioCreateComponent,
     HomeComponent,
-    NavbarComponent,
     UsuarioListagemComponent,
     UsuarioVisualizarComponent,
     ProcessoComponent,

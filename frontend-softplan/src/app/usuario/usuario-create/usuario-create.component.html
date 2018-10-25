@@ -1,14 +1,17 @@
 <h1>{{ titulo }}</h1>
 <form (submit)="salvar()">
     <mat-form-field class="example-full-width">
-        <input matInput placeholder="Nome" [(ngModel)]="usuario.nome">
+        <input matInput placeholder="Nome" name="nome" [(ngModel)]="usuario.nome">
     </mat-form-field>
+    <br>
     <mat-form-field class="example-full-width">
-        <input matInput placeholder="Email" [(ngModel)]="usuario.email">
+        <input matInput placeholder="Email" name="email" [(ngModel)]="usuario.email">
     </mat-form-field>
+    <br>
     <mat-form-field class="example-full-width">
-        <input matInput type="password" [(ngModel)]="usuario.senha">
+        <input matInput type="password" placeholder="Senha" name="senha" [(ngModel)]="usuario.senha">
     </mat-form-field>
-    <button mat-button class="primary">Salvar</button>
-    <button mat-button (click)="voltar()">Voltar</button>
+    <br>
+    <button mat-flat-button color="primary" type="submit">Salvar</button>
+    <button mat-flat-button (click)="voltar()">Voltar</button>
 </form>
