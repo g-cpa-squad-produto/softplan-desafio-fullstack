@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UserDTO } from 'src/app/model/user.dto';
 import { UserService } from 'src/app/core/service/user.service';
+import { ProfileTypes } from 'src/app/model/profile-types';
 
 
 @Injectable({ providedIn: 'root'})
@@ -22,11 +23,23 @@ export class LoginService {
      return this.tokenService.hasToken();
    }
 
+   public decidirRouter(userDTO: UserDTO) {
+      if (userDTO.profile === ProfileTypes.ADMIN) {
+          this.router.navigate(['/usuarios']);
+    }
+    if (userDTO.profile === ProfileTypes.FINALIZADOR) {
+        this.router.navigate(['/parecer']);
+    }
+    if (userDTO.profile === ProfileTypes.TRIADADOR) {
+      this.router.navigate(['/triagem']);
+    }
+   }
+
   public authenticate(user: User): Observable<UserDTO> {
     return this.httpService.login(user, 'login/autenticate').pipe(
       tap((userDTO: UserDTO) => {
            this.tokenService.setTokenUserDTO(userDTO);
-           this.router.navigate(['/']);
+           this.decidirRouter(userDTO);
       },  (error: HttpErrorResponse ) => {
         console.log(error);
       })
