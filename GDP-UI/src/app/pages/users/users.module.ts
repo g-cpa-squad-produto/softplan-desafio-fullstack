@@ -5,11 +5,13 @@ import { NewUserComponent } from './new-user/new-user.component';
 import { ShowUserComponent } from './show-user/show-user.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormUserComponent } from './form-user/form-user.component';
 
 const components = [
     UserListComponent,
     NewUserComponent,
-    ShowUserComponent
+    ShowUserComponent,
+    FormUserComponent
 ];
 
 @NgModule({

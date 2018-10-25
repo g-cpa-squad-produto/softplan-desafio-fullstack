@@ -6,6 +6,7 @@ import { HomeComponent } from './home.component';
 import { AuthGuard } from '../login/login.guard.service';
 import { NewUserComponent } from '../users/new-user/new-user.component';
 import { ShowUserComponent } from '../users/show-user/show-user.component';
+import { FormUserComponent } from '../users/form-user/form-user.component';
 
 const routes: Routes = [
   {
@@ -23,11 +24,15 @@ const routes: Routes = [
       },
       {
         path: 'users/new',
-        component: NewUserComponent
+        component: FormUserComponent
       },
       {
         path: 'users/:id/show',
         component: ShowUserComponent
+      },
+      {
+        path: 'users/:id/update',
+        component: FormUserComponent
       }
     ]
   }
