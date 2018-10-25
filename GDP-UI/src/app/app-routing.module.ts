@@ -29,7 +29,7 @@ const routes: Routes = [
   imports: [
     HomeModule,
     NotFoundModule,
-    RouterModule.forRoot(routes, { useHash: true })
+    RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload', useHash: true })
   ],
   exports: [RouterModule]
 })

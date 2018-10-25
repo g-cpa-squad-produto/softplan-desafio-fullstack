@@ -13,9 +13,9 @@ import { AppComponent } from './app.component';
     AppComponent ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule,
     ToastrModule.forRoot({
       preventDuplicates: true
     })

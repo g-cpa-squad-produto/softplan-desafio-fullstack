@@ -18,14 +18,14 @@
           <thead>
            <tr>
              <th scope="col">#</th>
-             <th scope="col">Name</th>
-             <th scope="col">Last Name</th>
-             <th scope="col">Profile</th>
-             <th scope="col">Actions</th>
+             <th scope="col">Nome</th>
+             <th scope="col">Sobre nome</th>
+             <th scope="col">Perfil</th>
+             <th scope="col">Ações</th>
            </tr>
          </thead>
          <tbody>
-            <tr *ngFor="let user of users">
+            <tr *ngFor="let user of users; let i = index" [attr.data-index]="i">
                 <td>{{user.name}}</td>
                 <td>{{user.lastName}}</td>
                 <td>{{user.login}}</td>
@@ -37,7 +37,7 @@
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                           <a class="dropdown-item" href="#">Update</a>
                           <a class="dropdown-item" href="#/users/{{user.id}}/show">Show</a>
-                          <a class="dropdown-item" href="#" (click)="delete(user.id)">Delete</a>
+                          <a class="dropdown-item" href="#" (click)="delete(user.id, i)">Delete</a>
                         </div>
                       </div>
                 </td>

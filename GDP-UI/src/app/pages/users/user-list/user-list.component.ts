@@ -1,10 +1,11 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { UserDTO } from 'src/app/model/user.dto';
 import { User } from 'src/app/model/user';
 import { UserService } from 'src/app/core/service/user.service';
 import { TokenService } from 'src/app/core/token/token.service';
 import { MassegesService } from 'src/app/core/messeges/messages.service';
-import { ActivatedRoute } from '@angular/router';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-list',
@@ -13,13 +14,13 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class UserListComponent implements OnInit {
 
-  currentUser: UserDTO;
-  users: User[];
+  private currentUser: UserDTO;
+  public users: Array<User> = new Array<User>();
 
   constructor(private userService: UserService,
          private tokenService: TokenService,
-         private massagesService: MassegesService,
-         private activatedRoute: ActivatedRoute
+         private route: Router,
+         private massagesService: MassegesService
     ) { }
 
   ngOnInit() {
@@ -28,21 +29,24 @@ export class UserListComponent implements OnInit {
   }
 
   public getAllUsers() {
-    this.userService.findAll().subscribe(users => {
-      this.users = users.filter((item, i) => {
-        return item.login !== this.currentUser.login;
+     this.userService.findAll().subscribe(users => {
+        this.users = [...users.filter((item, i) => {
+          return item.login !== this.currentUser.login;
+        })];
       });
-    });
   }
 
-  public delete(id: number) {
-    if (confirm('Delete this user ?')) {
-        this.userService.delete(id).subscribe(data => {
-          this.getAllUsers();
-          this.massagesService.success('Success', 'Delete Success');
-        });
+  public delete(id: number, index) {
+    if (confirm('Deseja deletar este usuário ?')) {
+        this.userService.delete(id).subscribe(() => {
+            this.massagesService.success('Success', 'Delete Success');
+              this.users.splice(index, 1);
+              this.users = [...this.users];
+          });
+        }
+
+
     }
-  }
 
   public show(id: number) {
       alert(id);

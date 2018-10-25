@@ -1,3 +1,4 @@
+import { UserDTO } from 'src/app/model/user.dto';
 import { TokenService } from 'src/app/core/token/token.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -13,8 +14,10 @@ export class NavComponent implements OnInit {
 
   }
 
-  ngOnInit() {
+  public user: UserDTO ;
 
+  ngOnInit() {
+    this.user = this.tokenService.getTokenUserDTO();
   }
 
   public logout() {
