@@ -1,3 +1,4 @@
+import { LoginService } from './../login/login.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/model/user';
@@ -9,12 +10,11 @@ import { User } from 'src/app/model/user';
 })
 export class HomeComponent implements OnInit {
   user: User;
-  constructor(
-    private activatedRoute: ActivatedRoute
+  constructor(private loginService: LoginService
     ) { }
 
   ngOnInit() {
-    this.user = this.activatedRoute.snapshot.data['user'];
+    this.loginService.decidirRouter();
   }
 
 }

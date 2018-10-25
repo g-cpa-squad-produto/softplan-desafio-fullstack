@@ -16,8 +16,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private loginService: LoginService,
     private messageService: MassegesService) { }
-
-    loginForm: FormGroup;
+    private loginForm: FormGroup;
 
   ngOnInit() {
     this.createForm();

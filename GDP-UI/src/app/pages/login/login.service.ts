@@ -23,23 +23,25 @@ export class LoginService {
      return this.tokenService.hasToken();
    }
 
-   public decidirRouter(userDTO: UserDTO) {
+   public decidirRouter() {
+
+      const userDTO = this.tokenService.getTokenUserDTO();
       if (userDTO.profile === ProfileTypes.ADMIN) {
           this.router.navigate(['/usuarios']);
-    }
-    if (userDTO.profile === ProfileTypes.FINALIZADOR) {
-        this.router.navigate(['/parecer']);
-    }
-    if (userDTO.profile === ProfileTypes.TRIADADOR) {
-      this.router.navigate(['/triagem']);
-    }
+      }
+      if (userDTO.profile === ProfileTypes.FINALIZADOR) {
+          this.router.navigate(['/parecer']);
+      }
+      if (userDTO.profile === ProfileTypes.TRIADADOR) {
+        this.router.navigate(['/triagem']);
+      }
    }
 
   public authenticate(user: User): Observable<UserDTO> {
     return this.httpService.login(user, 'login/autenticate').pipe(
       tap((userDTO: UserDTO) => {
            this.tokenService.setTokenUserDTO(userDTO);
-           this.decidirRouter(userDTO);
+           this.decidirRouter();
       },  (error: HttpErrorResponse ) => {
         console.log(error);
       })
