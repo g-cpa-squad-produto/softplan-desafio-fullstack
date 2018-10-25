@@ -43,8 +43,6 @@ export class LoginComponent implements OnInit {
 
     const user = new User( {login, password} );
 
-    console.log(this.loginForm.valid);
-
     if (this.loginForm.valid) {
         this.loginService.authenticate(user).subscribe(resp => {});
     } else {

@@ -1,5 +1,6 @@
+import { TokenService } from 'src/app/core/token/token.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -8,10 +9,18 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class NavComponent implements OnInit {
 
-  constructor( private activatedRoute: ActivatedRoute
-    ) {
+  constructor(private tokenService: TokenService, private route: Router) {
+
   }
 
   ngOnInit() {
+
+  }
+
+  public logout() {
+    if (confirm('Deseja realmente sair ?')) {
+        this.tokenService.removeToken();
+        this.route.navigate(['login']);
+    }
   }
 }
