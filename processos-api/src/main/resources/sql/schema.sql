@@ -16,3 +16,10 @@ CREATE TABLE IF NOT EXISTS processosdb.usuario_permissao (
     FOREIGN KEY (permissao) REFERENCES processosdb.permissao (nome),
     UNIQUE INDEX user_authority_idx_1 (codigo_usuario, permissao)
 );
+
+CREATE TABLE IF NOT EXISTS processosdb.processo (
+	codigo BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+	titulo VARCHAR(50) NOT NULL,
+	descricao VARCHAR(500),
+	data_criacao DATE
+);

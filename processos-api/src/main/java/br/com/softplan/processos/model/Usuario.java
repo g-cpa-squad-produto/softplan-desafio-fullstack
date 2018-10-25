@@ -27,7 +27,7 @@ public class Usuario implements Serializable {
 
     @Email
     @NotEmpty
-    @Size(min = 0, max = 100)
+    @Size(min = 1, max = 100)
     @Column(updatable = false, nullable = false)
     private String email;
 
@@ -35,7 +35,7 @@ public class Usuario implements Serializable {
     @NotEmpty
     private String nome;
 
-    @Size(min = 0, max = 500)
+    @Size(min = 3, max = 500)
     @NotEmpty
     private String senha;
 

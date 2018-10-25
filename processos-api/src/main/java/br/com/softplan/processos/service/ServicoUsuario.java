@@ -23,7 +23,7 @@ public interface ServicoUsuario {
     public Usuario selecionarUsuarioPorId(Long id) throws GenericException;
 
     /**
-     * Adiciona um usuário
+     * Adiciona um novo usuário
      * 
      * @param usuario
      * @throws GenericException
