@@ -22,8 +22,8 @@ WHERE NOT EXISTS (
     SELECT nome FROM processosdb.permissao WHERE nome = 'ROLE_USUARIO_FINALIZADOR'
 ) LIMIT 1;
 
-INSERT INTO processosdb.usuario_permissao (email_usuario, permissao)
-SELECT * FROM (SELECT 'admin@admin.com', 'ROLE_ADMIN') AS tmp
+INSERT INTO processosdb.usuario_permissao (codigo_usuario, permissao)
+SELECT * FROM (SELECT 1, 'ROLE_ADMIN') AS tmp
 WHERE NOT EXISTS (
-    SELECT email_usuario, permissao FROM processosdb.usuario_permissao WHERE email_usuario = 'admin@admin.com' and permissao = 'ROLE_ADMIN'
+    SELECT codigo_usuario, permissao FROM processosdb.usuario_permissao WHERE codigo_usuario = 1 and permissao = 'ROLE_ADMIN'
 ) LIMIT 1;

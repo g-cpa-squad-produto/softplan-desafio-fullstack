@@ -10,9 +10,9 @@ CREATE TABLE IF NOT EXISTS processosdb.permissao (
 );
 
 CREATE TABLE IF NOT EXISTS processosdb.usuario_permissao (
-    email_usuario VARCHAR(100) NOT NULL,
+    codigo_usuario BIGINT(20) NOT NULL,
     permissao VARCHAR(50) NOT NULL,
-    FOREIGN KEY (email_usuario) REFERENCES processosdb.usuario (email),
+    FOREIGN KEY (codigo_usuario) REFERENCES processosdb.usuario (codigo),
     FOREIGN KEY (permissao) REFERENCES processosdb.permissao (nome),
-    UNIQUE INDEX user_authority_idx_1 (email_usuario, permissao)
+    UNIQUE INDEX user_authority_idx_1 (codigo_usuario, permissao)
 );

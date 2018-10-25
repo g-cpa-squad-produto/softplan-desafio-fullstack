@@ -40,7 +40,8 @@ public class Usuario implements Serializable {
     private String senha;
 
     @ManyToMany
-    @JoinTable(name = "usuario_permissao", joinColumns = @JoinColumn(name = "email_usuario"), inverseJoinColumns = @JoinColumn(name = "permissao"))
+    @JoinTable(name = "usuario_permissao", joinColumns = @JoinColumn(name = "codigo_usuario"), inverseJoinColumns = @JoinColumn(name = "permissao"))
+    @NotEmpty
     private Set<Permissao> permissoes;
 
     public Long getCodigo() {
