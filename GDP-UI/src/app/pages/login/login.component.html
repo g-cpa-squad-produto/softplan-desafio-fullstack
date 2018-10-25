@@ -1,18 +1,15 @@
-<div class="container text-center">
-  <form class="form-signin" [formGroup]="loginForm" (submit)="login()">
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <div class="form-group">
-      <label for="login" class="sr-only">Login</label>
-      <input id="login" formControlName="login" autocomplete="off" class="form-control" [ngClass]="(this.isFieldValid('login')) ?'is-invalid':''"
-        placeholder="Login" required autofocus>
-      <div class="invalid-feedback">Field required</div>
+<div class="wrapper fadeInDown" style="margin-top: 10%">
+    <div id="formContent">
+
+      <h2 class="active"> GDP - Gerenciador de Processos </h2>
+      <form [formGroup]="loginForm" (submit)="login()">
+        <input type="text" id="login" formControlName="login" autocomplete="off"  class="fadeIn second" autocomplete="off" name="login" placeholder="login">
+        <input type="password" id="password" formControlName="password" class="fadeIn third"  autocomplete="off" name="login" placeholder="password">
+        <input [disabled]="loginForm.invalid" class="btn btn-lg btn-primary btn-block" type="submit"  class="fadeIn fourth" value="Entrar">
+      </form>
+
+      <div id="formFooter">
+        GDP - 2018
+      </div>
     </div>
-    <div class="form-group">
-      <label for="password" class="sr-only">Password</label>
-      <input type="password" id="password" formControlName="password" class="form-control" [ngClass]="(this.isFieldValid('password')) ?'is-invalid':''"
-        required>
-      <div class="invalid-feedback">Field required</div>
-    </div>
-    <button [disabled]="loginForm.invalid" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-  </form>
-</div>
+  </div>

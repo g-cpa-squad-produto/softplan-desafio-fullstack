@@ -14,7 +14,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private loginService: LoginService ) { }
+    private loginService: LoginService,
+    private messageService: MassegesService) { }
 
     loginForm: FormGroup;
 
@@ -42,9 +43,12 @@ export class LoginComponent implements OnInit {
 
     const user = new User( {login, password} );
 
+    console.log(this.loginForm.valid);
 
     if (this.loginForm.valid) {
         this.loginService.authenticate(user).subscribe(resp => {});
+    } else {
+      this.messageService.error('Erro', 'Preencha os campos obrigatórios');
     }
   }
 
