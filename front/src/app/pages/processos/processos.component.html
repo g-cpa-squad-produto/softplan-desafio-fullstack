@@ -1,29 +1,16 @@
-<div class="container">
-  <div id="formLogin">
-    <div class="row">
-      <div class="col-md-4"></div>
-      <div class="col-md-6">
-        <h2>
-          Cadastro de Processo
-        </h2>
+<div class="container h-100">
+  <div class="row h-100 justify-content-center">
+    <div class="col-12">
+      <div class="form-group">
+        <h2>Cadastro de processos</h2>
       </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-2"></div>
-      <div class="col-md-10"> <b>Insira o nome do Processo</b></div>
-    </div>
-    <div class="row">
-      <div class="col-md-2"></div>
-      <div class="col-md-10"><input class="form-control" type="text" [(ngModel)]="processo.nome"></div>
-    </div>
-    <div class="row">
-      <div class="col-md-2"></div>
-      <div class="col-md-10"> <b>A quem pertence</b></div>
-    </div>
-    <div class="row">
-      <div class="col-md-2"></div>
-      <div class="col-md-10">
+      <div class="form-group">
+        <label for="formGroupExampleInput"><strong>Insira o nome do Processo</strong></label>
+        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Insira o nome do processo"
+          [(ngModel)]="processo.nome">
+      </div>
+      <div class="form-group">
+        <label for="formGroupExampleInput2">Escolha a quem pertence o processo</label>
         <ul class="list-group">
           <li class="list-group-item" id="checkDosUsuarios" *ngFor="let usuario of usuarios">
             <a>
@@ -32,49 +19,47 @@
           </li>
         </ul>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-2"></div>
-      <div class="col-md-10">
-        <button type="button" id="btnLogin" class="btn btn-primary" (click)="cadastrarProcesso(processo)">Criar</button>
+      <div class="form-group">
+        <button type="button" id="btnLogin" class="btn btn-primary" (click)="cadastrarProcesso(processo)">Criar
+          Processo</button>
+      </div>
+      <div class="form-group">
+        <h2>Processos já cadastrados</h2>
+      </div>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Nome</th>
+              <th scope="col">Data de cricacao</th>
+              <th scope="col">Pertence</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor='let processo of processos'>
+              <td><input type="text" class="form-control" [(ngModel)]="processo.nome" placeholder="Insira o nome"></td>
+              <td><label type="text" class="form-control">{{processo.dataHora | date: 'dd/MM/yyyy' }}</label></td>
+              <td>
+                <ul>
+                  <li *ngFor='let usuario of processo.usuarios'>
+                    {{usuario.nome}}
+                  </li>
+
+                </ul>
+              </td>
+              <th>
+                <button type="button" (click)="atualizar(processo)" class="btn btn-primary">Atualizar</button>
+                <button type="button" class="btn btn-primary" (click)="openModal(template);listarParecerDoProcesso(processo)">Listar
+                  Parecer</button>
+                <button type="button" (click)="deletarProcesso(processo.id)" class="btn btn-danger">Deletar</button>
+              </th>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
-
   </div>
-
-  <h2>Processos</h2>
-  <table id="tabelaDosProcessos" class="table">
-    <thead>
-      <tr>
-        <th scope="col">Nome</th>
-        <th scope="col">Data de cricacao</th>
-        <th scope="col">Pertence</th>
-        <th scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor='let processo of processos'>
-        <td><input type="text" class="form-control" [(ngModel)]="processo.nome" placeholder="Insira o nome"></td>
-        <td><label type="text" class="form-control">{{processo.dataHora | date: 'dd/MM/yyyy' }}</label></td>
-        <td>
-          <ul>
-            <li *ngFor='let usuario of processo.usuarios'>
-              {{usuario.nome}}
-            </li>
-
-          </ul>
-        </td>
-
-        <th>
-          <button type="button" (click)="atualizar(processo)" class="btn btn-primary">Atualizar</button>
-          <button type="button" class="btn btn-primary" (click)="openModal(template);listarParecerDoProcesso(processo)">Listar
-            Parecer</button>
-          <button type="button" (click)="deletarProcesso(processo.id)" class="btn btn-danger">Deletar</button>
-        </th>
-      </tr>
-    </tbody>
-  </table>
-
   <ng-template #template>
     <div class="modal-header">
       <h4 class="modal-title pull-left">Pareceres</h4>
@@ -95,5 +80,3 @@
         processo</button>
     </div>
   </ng-template>
-
-</div>

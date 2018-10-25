@@ -8,7 +8,7 @@ import { Util } from 'src/app/util';
 })
 export class ProcessosService {
 
-  constructor(private http: HttpClient) { }
+  constructor(public http: HttpClient) { }
 
   public deletar(id) {
     return this.http.delete<Response>(Util._url + 'api-processo/processo?id=' + id);

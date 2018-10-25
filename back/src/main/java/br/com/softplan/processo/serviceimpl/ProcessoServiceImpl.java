@@ -9,33 +9,25 @@ import br.com.softplan.processo.modelos.Processo;
 import br.com.softplan.processo.repository.ProcessoRepository;
 import br.com.softplan.processo.service.ProcessoService;
 
+/**
+ * @author emanuel
+ *
+ */
 @Service
 public class ProcessoServiceImpl implements ProcessoService {
 
 	@Autowired
 	private ProcessoRepository repository;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * br.com.softplan.processo.serviceimpl.ProcessoService#atualizarOuSalvar(br.com
-	 * .softplan.processo.modelo.Processo)
-	 */
 	@Override
 	public Processo atualizarOuSalvar(Processo processo) {
 		Processo processoSalvo = repository.save(processo);
 		return processoSalvo;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see br.com.softplan.processo.serviceimpl.ProcessoService#excluir(java.lang.
-	 * Integer)
-	 */
 	@Override
 	public Processo excluir(Integer id) {
+		// Apenas seta o processo como deletado
 		Processo processo = repository.getOne(id);
 		processo.setFinalizado(Boolean.FALSE);
 		processo.setDeletado(Boolean.TRUE);
@@ -43,13 +35,6 @@ public class ProcessoServiceImpl implements ProcessoService {
 		return processo;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * br.com.softplan.processo.serviceimpl.ProcessoService#listarPorUsuario(java.
-	 * lang.Integer)
-	 */
 	@Override
 	public List<Processo> listarPorUsuario(Integer idUsuario) {
 		List<Processo> processos = repository.listarProcessosDeUmUsuario(idUsuario);

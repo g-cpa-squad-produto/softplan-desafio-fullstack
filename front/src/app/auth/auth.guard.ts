@@ -10,13 +10,12 @@ import { Observable } from 'rxjs';
 export class AuthGuard implements CanActivate {
   constructor(public auth: AuthService, public router: Router) { }
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
-    let ehValido = true;
+    let ehValido = false;
     let expectedRoleArray = route.data;
     expectedRoleArray = expectedRoleArray.expectedRole;
 
     const token = localStorage.getItem(Util.TOKEN);
 
-    // decode the token to get its payload
     const tokenPayload = decode(token);
 
     let expectedRole = '';
@@ -31,12 +30,11 @@ export class AuthGuard implements CanActivate {
       console.log("User permitted to access the route");
       ehValido = true;
     }
-    ehValido = false;
-
+    //Verifica se esta logado para aparecer ou não o menu
     return this.auth.isLoggedIn.pipe(
       take(1),
       map((estaLogado: boolean) => {
-        if (window.localStorage.getItem('token') || estaLogado) {
+        if ((window.localStorage.getItem('token') && ehValido) || estaLogado) {
           this.auth.loggedIn.next(true);
           return true;
         } else {

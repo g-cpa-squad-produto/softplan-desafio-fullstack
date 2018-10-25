@@ -9,7 +9,7 @@ import { Response } from 'src/app/modelos/response';
 })
 export class ParecerService {
 
-  constructor(private http: HttpClient) { }
+  constructor(public http: HttpClient) { }
 
   public cadastrar(parecer: Parecer) {
     return this.http.post<Response>(Util._url + 'api-parecer/parecer', parecer);

@@ -1,15 +1,17 @@
 package br.com.softplan.util;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import br.com.softplan.security.JwtUser;
 import br.com.softplan.security.enums.PerfilEnum;
 import br.com.softplan.security.utils.JwtTokenUtil;
 
+/**
+ * @author emanuel
+ *
+ *         Classe utilizada para auxiliar os controllers
+ */
 public class ControllerUtil {
 
 	@Autowired

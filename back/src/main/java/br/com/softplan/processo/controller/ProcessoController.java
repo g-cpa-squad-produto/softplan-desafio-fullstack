@@ -27,6 +27,10 @@ import br.com.softplan.security.JwtUser;
 import br.com.softplan.util.ControllerUtil;
 import br.com.softplan.util.StringResponse;
 
+/**
+ * @author emanuel
+ *
+ */
 @RestController
 @RequestMapping("/api-processo")
 public class ProcessoController extends ControllerUtil {
@@ -56,17 +60,11 @@ public class ProcessoController extends ControllerUtil {
 
 	@GetMapping("/processos")
 	@PreAuthorize("hasRole('USUARIO_TRIADOR')")
-	public ResponseEntity<Response<List<ProcessoDto>>> listarProcessos(
-			@RequestParam(name = "idUsuario", required = false) Integer idUsuario) {
+	public ResponseEntity<Response<List<ProcessoDto>>> listarProcessos() {
 
 		Response<List<ProcessoDto>> response = new Response<List<ProcessoDto>>();
 
-		List<Processo> processosDoBanco = new ArrayList<>();
-		if (idUsuario == null) {
-			processosDoBanco = processoService.listarTodos();
-		} else {
-			processosDoBanco = processoService.listarPorUsuario(idUsuario);
-		}
+		List<Processo> processosDoBanco = processoService.listarTodos();
 		List<ProcessoDto> processos = new ArrayList<>();
 		processosDoBanco.forEach(usuario -> processos.add(new ProcessoDto(usuario)));
 

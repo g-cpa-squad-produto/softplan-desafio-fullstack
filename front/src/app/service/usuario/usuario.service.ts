@@ -9,7 +9,7 @@ import { Response } from 'src/app/modelos/response';
 })
 export class UsuarioService {
 
-  constructor(private http: HttpClient) { }
+  constructor(public http: HttpClient) { }
 
   getAllUser() {
     return this.http.get<Response>(Util._url + 'api-usuario/usuarios');

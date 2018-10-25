@@ -4,6 +4,10 @@ import java.util.List;
 
 import br.com.softplan.processo.modelos.Processo;
 
+/**
+ * @author emanuel
+ *
+ */
 public interface ProcessoService {
 
 	public Processo atualizarOuSalvar(Processo processo);

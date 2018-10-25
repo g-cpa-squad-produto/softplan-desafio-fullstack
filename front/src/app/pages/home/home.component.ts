@@ -11,9 +11,9 @@ import { Util } from 'src/app/util';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private usuarioService: UsuarioService) { }
-  private usuarios: [Usuario];
-  private user: Usuario = new Usuario();
+  constructor(public usuarioService: UsuarioService) { }
+  public usuarios: [Usuario];
+  public user: Usuario = new Usuario();
   ngOnInit() {
     this.listarUsuarios();
   }

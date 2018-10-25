@@ -1,33 +1,39 @@
 <div class="container">
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Nome</th>
-        <th scope="col">Data de cricacao</th>
-        <th scope="col">Pertence</th>
-        <th scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor='let processo of processos'>
-        <td><input type="text" class="form-control" [(ngModel)]="processo.nome" placeholder="Insira o nome"></td>
-        <td><label type="text" class="form-control">{{processo.dataHora | date: 'dd/MM/yyyy' }}</label></td>
-        <td>
-          <ul>
-            <li *ngFor='let usuario of processo.usuarios'>
-              {{usuario.nome}}
-            </li>
 
-          </ul>
-        </td>
+  <h2>Processos pendentes de parecer</h2>
+  <br>
+  <div class="table-responsive">
 
-        <th> <button type="button" class="btn btn-primary" (click)="openModal(template);escolherEste(processo)">Adicionar
-            parecer</button>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Nome</th>
+          <th scope="col">Data de cricacao</th>
+          <th scope="col">Pertence</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor='let processo of processos'>
+          <td><input type="text" class="form-control" [(ngModel)]="processo.nome" placeholder="Insira o nome"></td>
+          <td><label type="text" class="form-control">{{processo.dataHora | date: 'dd/MM/yyyy' }}</label></td>
+          <td>
+            <ul>
+              <li *ngFor='let usuario of processo.usuarios'>
+                {{usuario.nome}}
+              </li>
 
-        </th>
-      </tr>
-    </tbody>
-  </table>
+            </ul>
+          </td>
+
+          <th> <button type="button" class="btn btn-primary" (click)="openModal(template);escolherEste(processo)">Adicionar
+              parecer</button>
+
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
   <ng-template #template>
     <div class="modal-header">
       <h4 class="modal-title pull-left">Adicionar Parecer</h4>

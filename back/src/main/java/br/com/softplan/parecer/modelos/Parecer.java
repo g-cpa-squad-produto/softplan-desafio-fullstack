@@ -17,6 +17,10 @@ import javax.validation.constraints.NotNull;
 import br.com.softplan.processo.modelos.Processo;
 import br.com.softplan.usuario.modelos.Usuario;
 
+/**
+ * @author emanuel
+ *
+ */
 @Entity(name = "Parecer")
 @Table(name = "parecer")
 public class Parecer {

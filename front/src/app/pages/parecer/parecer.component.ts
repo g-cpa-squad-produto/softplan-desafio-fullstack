@@ -18,7 +18,7 @@ export class ParecerComponent implements OnInit {
   public parecerACadastrar: Parecer = new Parecer();
   public modalRef: BsModalRef;
 
-  constructor(private modalService: BsModalService, public processoService: ProcessosService, public parecerService: ParecerService, ) { }
+  constructor(public modalService: BsModalService, public processoService: ProcessosService, public parecerService: ParecerService, ) { }
 
   ngOnInit() {
     this.listarProcessosSemParecer();

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.softplan.response.Response;
+import br.com.softplan.security.JwtUser;
 import br.com.softplan.security.enums.PerfilEnum;
 import br.com.softplan.usuario.dto.UsuarioDto;
 import br.com.softplan.usuario.modelos.Usuario;
@@ -28,6 +29,10 @@ import br.com.softplan.usuario.service.UsuarioService;
 import br.com.softplan.util.ControllerUtil;
 import br.com.softplan.util.StringResponse;
 
+/**
+ * @author emanuel
+ *
+ */
 @RestController
 @RequestMapping("/api-usuario")
 public class UsuarioController extends ControllerUtil {
@@ -70,6 +75,7 @@ public class UsuarioController extends ControllerUtil {
 		log.info("Criando um novo usuario {}", usuario.getLogin());
 
 		Usuario usuarioSalvo = usuarioService.atualizarOuSalvar(usuario);
+		// Se retornar nulo significa que ja existe usuario com esse login
 		if (usuarioSalvo != null) {
 			response.setData(new UsuarioDto(usuarioSalvo));
 			return ResponseEntity.ok(response);
@@ -85,7 +91,7 @@ public class UsuarioController extends ControllerUtil {
 
 		Response<List<UsuarioDto>> response = new Response<List<UsuarioDto>>();
 		List<Usuario> usuariosDoBanco = new ArrayList<>();
-		//Se for triador retorna apenas usuarios do tipo finalizado
+		// Se for triador retorna apenas usuarios do tipo finalizador
 		if (isTriador()) {
 			usuariosDoBanco = usuarioService.listarUsuarios(PerfilEnum.ROLE_USUARIO_FINALIZADOR);
 		} else {
@@ -101,10 +107,15 @@ public class UsuarioController extends ControllerUtil {
 	@DeleteMapping("usuario")
 	@PreAuthorize("hasRole('ADMINISTRADOR')")
 	public ResponseEntity<Response<StringResponse>> deletarUsuario(@RequestParam("id") Integer idUsuario) {
+		JwtUser user = jwtTokenUtil.getJwtUser(request);
 		Response<StringResponse> response = new Response<StringResponse>();
-		usuarioService.excluirUsuario(idUsuario);
-		response.setData(new StringResponse("Usuario excluido"));
-		return ResponseEntity.ok(response);
+		Usuario usuarioDeletado = usuarioService.excluirUsuario(idUsuario, user.getId().intValue());
+		if (usuarioDeletado != null) {
+			response.setData(new StringResponse("Usuario excluido"));
+			return ResponseEntity.ok(response);
+		} else {
+			response.getErros().add("Usuario não pode ser deletado");
+			return ResponseEntity.badRequest().body(response);
+		}
 	}
-
 }

@@ -18,6 +18,10 @@ import br.com.softplan.usuario.modelos.Usuario;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
+/**
+ * @author emanuel
+ *
+ */
 public class TokenAuthenticationService {
 
 	// EXPIRATION_TIME = 10 dias

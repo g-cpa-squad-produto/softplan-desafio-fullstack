@@ -27,6 +27,10 @@ import br.com.softplan.security.JwtUser;
 import br.com.softplan.usuario.modelos.Usuario;
 import br.com.softplan.util.ControllerUtil;
 
+/**
+ * @author emanuel
+ *
+ */
 @RestController
 @RequestMapping("/api-parecer")
 public class ParecerController extends ControllerUtil {
@@ -49,6 +53,7 @@ public class ParecerController extends ControllerUtil {
 		}
 		log.info("Criando um novo parecer {}", parecer.getNome());
 
+		// Seta o usuario do parecer pelo token do usuario
 		JwtUser user = jwtTokenUtil.getJwtUser(request);
 		parecer.setUsuario(new Usuario(user.getId().intValue()));
 		Parecer parecerSalvo = parecerService.incluirParecer(parecer);

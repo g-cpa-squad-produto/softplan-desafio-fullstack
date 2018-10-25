@@ -14,6 +14,10 @@ import javax.validation.constraints.NotNull;
 
 import br.com.softplan.security.enums.PerfilEnum;
 
+/**
+ * @author emanuel
+ *
+ */
 @Entity(name = "Usuario")
 @Table(name = "usuario")
 public class Usuario {

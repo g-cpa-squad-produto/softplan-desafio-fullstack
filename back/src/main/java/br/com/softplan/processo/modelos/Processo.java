@@ -19,6 +19,10 @@ import javax.validation.constraints.NotNull;
 
 import br.com.softplan.usuario.modelos.Usuario;
 
+/**
+ * @author emanuel
+ *
+ */
 @Entity(name = "Processo")
 @Table(name = "processo")
 public class Processo {

@@ -12,6 +12,11 @@ import org.springframework.stereotype.Repository;
 import br.com.softplan.security.enums.PerfilEnum;
 import br.com.softplan.usuario.modelos.Usuario;
 
+/**
+ * @author emanuel
+ * 
+ *         Classe utilizada para fazer requisicoes dinamicas
+ */
 @Repository
 public class UsuarioRepositoryDinamico {
 	@PersistenceContext

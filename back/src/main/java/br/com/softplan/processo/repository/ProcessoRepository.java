@@ -9,6 +9,10 @@ import org.springframework.stereotype.Repository;
 
 import br.com.softplan.processo.modelos.Processo;
 
+/**
+ * @author emanuel
+ *
+ */
 @Repository
 public interface ProcessoRepository extends JpaRepository<Processo, Integer> {
 	Processo save(Processo persiste);

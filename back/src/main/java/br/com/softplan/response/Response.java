@@ -8,10 +8,9 @@ import java.util.List;
 
 /**
  * @author emanuel
- *
+ * 	Classe criada para passar resposta e os erros gerados durante a requisicao da API
  */
 public class Response<T> {
-
 	private T data;
 	private List<String> erros;
 

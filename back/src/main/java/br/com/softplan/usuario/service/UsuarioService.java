@@ -16,7 +16,7 @@ public interface UsuarioService {
 
 	public Usuario atualizarOuSalvar(Usuario usuario);
 
-	public Usuario excluirUsuario(Integer id);
+	public Usuario excluirUsuario(Integer id, Integer idUsuarioLogado);
 
 	public List<Usuario> listarUsuarios(PerfilEnum perfil);
 

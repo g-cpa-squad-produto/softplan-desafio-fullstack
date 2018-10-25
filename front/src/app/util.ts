@@ -6,4 +6,9 @@ export class Util {
     public static NOME_DO_USUARIO = 'nome';
     public static TOKEN = 'token';
 
+
+    public static ROLE_ADMINISTRADOR = 'ROLE_ADMINISTRADOR';
+    public static ROLE_USUARIO_TRIADOR = 'ROLE_USUARIO_TRIADOR';
+    public static ROLE_USUARIO_FINALIZADOR = 'ROLE_USUARIO_FINALIZADOR';
+
 }

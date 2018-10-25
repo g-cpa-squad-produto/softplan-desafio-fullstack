@@ -6,6 +6,7 @@ import { Usuario } from '../modelos/user';
 import * as jwt_decode from "jwt-decode";
 import { Util } from '../util';
 import { Response } from '../modelos/response';
+import { Utils } from 'ngx-bootstrap';
 
 
 @Injectable()
@@ -17,8 +18,8 @@ export class AuthService {
   }
 
   constructor(
-    private router: Router,
-    private http: HttpClient
+    public router: Router,
+    public http: HttpClient
   ) { }
 
   login(user: Usuario) {
@@ -34,15 +35,15 @@ export class AuthService {
         window.localStorage.setItem(Util.TOKEN, token);
         this.loggedIn.next(true);
 
-        if (jwtDecode.role == 'ROLE_USUARIO_FINALIZADOR') {
+        if (jwtDecode.role == Util.ROLE_USUARIO_FINALIZADOR) {
           this.router.navigate(['/parecer']);
           return;
         }
-        if (jwtDecode.role == 'ROLE_USUARIO_TRIADOR') {
+        if (jwtDecode.role == Util.ROLE_USUARIO_TRIADOR) {
           this.router.navigate(['/processos']);
           return;
         }
-        if (jwtDecode.role == 'ROLE_ADMINISTRADOR') {
+        if (jwtDecode.role == Util.ROLE_ADMINISTRADOR) {
           this.router.navigate(['/usuarios']);
           return;
         }

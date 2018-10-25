@@ -16,16 +16,20 @@ import { Router } from '@angular/router';
     .fill-remaining-space {
       flex: 1 1 auto;
     }
+    #tituloDoMenu {
+      color:#fff !important
+    }
     `
   ]
 })
+//Classe usada para o menu, somente aparece se o isLoggedIn for TRUE
 export class HeaderComponent implements OnInit {
   public nomeDoUsuario: string;
   isLoggedIn$: Observable<boolean>;
 
   constructor(
-    private router: Router,
-    private authService: AuthService) {
+    public router: Router,
+    public authService: AuthService) {
     this.nomeDoUsuario = window.localStorage.getItem(Util.NOME_DO_USUARIO)
   }
 

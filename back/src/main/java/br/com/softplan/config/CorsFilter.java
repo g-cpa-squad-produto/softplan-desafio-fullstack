@@ -28,8 +28,7 @@ public class CorsFilter implements Filter {
 
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
 			throws IOException, ServletException {
-		// Verifica se e uma conexao socket, se for n seta determinadas informacoes no
-		// cabecarios
+
 		HttpServletResponse response = (HttpServletResponse) res;
 		HttpServletRequest request = (HttpServletRequest) req;
 

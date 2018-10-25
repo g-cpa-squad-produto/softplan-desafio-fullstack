@@ -24,7 +24,7 @@ export class ProcessosComponent implements OnInit {
   public pareceres: [Parecer];
   public modalRef: BsModalRef;
 
-  constructor(private modalService: BsModalService, public usuarioService: UsuarioService, public processoService: ProcessosService, public parecerService: ParecerService, ) { }
+  constructor(public modalService: BsModalService, public usuarioService: UsuarioService, public processoService: ProcessosService, public parecerService: ParecerService, ) { }
   ngOnInit() {
     this.listarTodosProcessos();
     this.listarUsuarios();
@@ -37,7 +37,7 @@ export class ProcessosComponent implements OnInit {
     this.processo = processo;
   }
 
-  cadastrarProcesso(processo: Processo, form) {
+  cadastrarProcesso(processo: Processo) {
     if (this.processo.usuarios.length == 0) {
       this.processo.usuarios = this.usuarioResponsaveis;
     }
@@ -67,7 +67,7 @@ export class ProcessosComponent implements OnInit {
     var totalDeUsuario: number = this.processo.usuarios.length;
     if (totalDeUsuario === totalDeParecer) {
       this.processo.finalizado = true;
-      this.cadastrarProcesso(this.processo, null);
+      this.cadastrarProcesso(this.processo);
       this.processo = new Processo();
     } else {
       alert('Alguns usuarios não inseriram parecer')

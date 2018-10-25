@@ -3,6 +3,10 @@ package br.com.softplan.usuario.dto;
 import br.com.softplan.security.enums.PerfilEnum;
 import br.com.softplan.usuario.modelos.Usuario;
 
+/**
+ * @author emanuel
+ *
+ */
 public class UsuarioDto {
 
 	public Integer id;

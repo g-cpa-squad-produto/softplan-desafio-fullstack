@@ -13,12 +13,16 @@ import br.com.softplan.usuario.repository.UsuarioRepository;
 import br.com.softplan.usuario.repository.UsuarioRepositoryDinamico;
 import br.com.softplan.usuario.service.UsuarioService;
 
+/**
+ * @author emanuel
+ *
+ */
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
 
 	@Autowired
 	private UsuarioRepository repository;
-	
+
 	@Autowired
 	private UsuarioRepositoryDinamico repositoryDinamico;
 
@@ -61,7 +65,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public Usuario excluirUsuario(Integer id) {
+	public Usuario excluirUsuario(Integer id, Integer idUsuarioLogado) {
+		// Usuario nao pode deletar a si mesmo
+		if (id == idUsuarioLogado) {
+			return null;
+		}
 		Usuario usuarioDoBanco = repository.findOne(id);
 		usuarioDoBanco.setAtivo(Boolean.FALSE);
 		usuarioDoBanco.setDeletado(Boolean.TRUE);

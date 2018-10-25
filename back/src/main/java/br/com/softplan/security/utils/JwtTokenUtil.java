@@ -209,15 +209,6 @@ public class JwtTokenUtil {
 	}
 
 	/**
-	 * Retorna a data de expiracao com base na data atual
-	 * 
-	 * @return Date
-	 */
-	private Date gerarDataDeExpiracao() {
-		return new Date(System.currentTimeMillis() + expiration * 100);
-	}
-
-	/**
 	 * Verifica se o Token ja foi expirado
 	 * 
 	 * @param token

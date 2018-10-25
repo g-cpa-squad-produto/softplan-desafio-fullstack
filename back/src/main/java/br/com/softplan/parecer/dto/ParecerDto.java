@@ -6,6 +6,10 @@ import br.com.softplan.parecer.modelos.Parecer;
 import br.com.softplan.processo.dto.ProcessoDto;
 import br.com.softplan.usuario.dto.UsuarioDto;
 
+/**
+ * @author emanuel
+ *
+ */
 public class ParecerDto {
 
 	public Integer id;

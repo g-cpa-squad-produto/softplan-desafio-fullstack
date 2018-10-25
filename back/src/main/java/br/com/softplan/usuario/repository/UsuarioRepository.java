@@ -9,6 +9,10 @@ import org.springframework.stereotype.Repository;
 
 import br.com.softplan.usuario.modelos.Usuario;
 
+/**
+ * @author emanuel
+ *
+ */
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 	@SuppressWarnings("unchecked")

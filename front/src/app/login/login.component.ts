@@ -10,8 +10,7 @@ import { Usuario } from '../modelos/user';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  netImage: any = "assets/images/a.png"; 
-  constructor(private authService: AuthService) {
+  constructor(public authService: AuthService) {
     window.localStorage.clear();
   }
   user: Usuario = new Usuario()

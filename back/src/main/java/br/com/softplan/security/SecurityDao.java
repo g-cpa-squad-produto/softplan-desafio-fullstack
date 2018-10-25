@@ -7,6 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import br.com.softplan.usuario.modelos.Usuario;
 import br.com.softplan.usuario.repository.UsuarioRepository;
 
+/**
+ * @author emanuel
+ *
+ */
 public class SecurityDao {
 
 	@Autowired

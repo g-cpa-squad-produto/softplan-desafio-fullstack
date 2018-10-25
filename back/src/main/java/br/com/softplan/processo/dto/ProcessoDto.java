@@ -6,7 +6,10 @@ import java.util.List;
 
 import br.com.softplan.processo.modelos.Processo;
 import br.com.softplan.usuario.dto.UsuarioDto;
-
+/**
+ * @author emanuel
+ *
+ */
 public class ProcessoDto {
 
 	public Integer id;

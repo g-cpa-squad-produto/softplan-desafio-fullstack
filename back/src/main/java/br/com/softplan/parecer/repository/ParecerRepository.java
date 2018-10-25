@@ -9,6 +9,10 @@ import org.springframework.stereotype.Repository;
 
 import br.com.softplan.parecer.modelos.Parecer;
 
+/**
+ * @author emanuel
+ *
+ */
 @Repository
 public interface ParecerRepository extends JpaRepository<Parecer, Integer> {
 	Parecer save(Parecer persiste);

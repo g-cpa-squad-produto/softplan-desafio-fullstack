@@ -18,6 +18,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.com.softplan.usuario.modelos.Usuario;
 
+/**
+ * @author emanuel
+ *
+ */
 public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 
 	protected JWTLoginFilter(String url, AuthenticationManager authManager) {

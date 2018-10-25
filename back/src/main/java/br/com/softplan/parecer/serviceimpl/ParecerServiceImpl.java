@@ -9,6 +9,10 @@ import br.com.softplan.parecer.modelos.Parecer;
 import br.com.softplan.parecer.repository.ParecerRepository;
 import br.com.softplan.parecer.service.ParecerService;
 
+/**
+ * @author emanuel
+ *
+ */
 @Service
 public class ParecerServiceImpl implements ParecerService {
 	@Autowired

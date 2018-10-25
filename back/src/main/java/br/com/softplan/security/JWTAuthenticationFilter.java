@@ -17,6 +17,10 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import br.com.softplan.security.utils.JwtTokenUtil;
 
+/**
+ * @author emanuel
+ *
+ */
 public class JWTAuthenticationFilter extends OncePerRequestFilter {
 
 	private static final String AUTH_HEADER = "Authorization";
