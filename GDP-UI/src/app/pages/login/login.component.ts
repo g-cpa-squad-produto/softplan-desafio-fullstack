@@ -3,7 +3,6 @@ import { User } from './../../model/user';
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from './login.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',

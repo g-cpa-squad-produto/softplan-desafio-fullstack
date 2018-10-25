@@ -19,11 +19,19 @@ export class UserService {
     return this.httpService.get(`${endPoint}`);
   }
 
-  public findById(id: number) {
+  public findById(id: string) {
       return  this.httpService.getOne(`${endPoint}\/${id}`);
   }
   public delete(id: number): Observable<any> {
     return this.httpService.delete(`${endPoint}`, id);
+  }
+
+  public update (user: User) {
+      return this.httpService.put(user, `${endPoint}`);
+  }
+
+  public salve(user: User) {
+    return this.httpService.post(user, `${endPoint}`);
   }
 
 }

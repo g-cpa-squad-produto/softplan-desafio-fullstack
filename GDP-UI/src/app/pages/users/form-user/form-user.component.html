@@ -16,30 +16,31 @@
               </div>
               <div class="row">
                   <div class="col-12">
-                    <form>
+                    <form [formGroup]="formUser" (submit)="user.id ? update() : create() ">
                         <div class="form-row">
+                          <div class="form-group col-md-2" *ngIf="id == null">
+                              <label for="name">Login:</label>
+                              <input type="text" formControlName="login" class="form-control" autocomplete="off" id="login" placeholder="Login">
+                           </div>
+
                           <div class="form-group col-md-6">
-                            <label for="inputEmail4">Nome:</label>
-                            <input type="text" class="form-control" id="name" placeholder="Nome">
+                            <label for="name">Nome:</label>
+                            <input type="text" formControlName="name" class="form-control" autocomplete="off" id="name" placeholder="Nome">
                           </div>
                           <div class="form-group col-md-6">
                             <label for="inputPassword4">Sobrenome:</label>
-                            <input type="text" class="form-control" id="lastName" placeholder="Sobrenome">
+                            <input type="text" formControlName="lastName" class="form-control" id="lastName" autocomplete="off" placeholder="Sobrenome">
                           </div>
                         </div>
                         <div class="form-row">
                           <div class="form-group col-md-12">
                             <label for="profile">Perfil:</label>
-                            <select id="profile" class="form-control">
-                              <option selected>Selecione ...</option>
-                              <option>...</option>
-                              <option>...</option>
-                              <option>...</option>
-                              <option>...</option>
+                            <select id="profile" formControlName="profile" class="form-control">
+                              <option *ngFor="let profile of profiles">{{profile}}</option>
                             </select>
                           </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="submit" [disabled]="formUser.invalid" class="btn btn-primary">Salvar</button>
                       </form>
 
                   </div>

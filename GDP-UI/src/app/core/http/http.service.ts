@@ -40,6 +40,16 @@ export class HttpService<T> {
             }));
       }
 
+      public put(item: T, endpoint): Observable<T> {
+        return this.http
+          .put<T>(`${API_URL}/${endpoint}`, item)
+          .pipe(tap(data => {
+              return data;
+            }, (error: HttpErrorResponse) => {
+                 this.handlerError(error);
+            }));
+      }
+
       public get(endpoint): Observable<T[]> {
         return this.http
           .get<T[]>(`${API_URL}/${endpoint}`)

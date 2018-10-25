@@ -6,6 +6,7 @@ import { ShowUserComponent } from './show-user/show-user.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormUserComponent } from './form-user/form-user.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 const components = [
     UserListComponent,
@@ -19,6 +20,8 @@ const components = [
     CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [CommonModule],
   declarations: [components]
