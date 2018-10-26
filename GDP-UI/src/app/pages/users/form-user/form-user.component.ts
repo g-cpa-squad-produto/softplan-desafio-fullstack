@@ -4,7 +4,7 @@ import { ProfileTypes } from 'src/app/model/profile-types';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from 'src/app/core/service/user.service';
 import { User } from 'src/app/model/user';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-user',
@@ -20,14 +20,15 @@ export class FormUserComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
+    private activeRoute: ActivatedRoute,
     private massagesServer: MassegesService,
-    private userService: UserService
+    private userService: UserService,
+    private route: Router
   ) {}
 
   ngOnInit() {
     this.createForm();
-    this.id = this.route.snapshot.paramMap.get('id');
+    this.id = this.activeRoute.snapshot.paramMap.get('id');
     if (this.id) {
       this.userService.findById(this.id).subscribe(user => {
         this.user = new User(user);
@@ -47,6 +48,7 @@ export class FormUserComponent implements OnInit {
     } else {
       this.formUser = this.formBuilder.group({
         id: [],
+        password: ['', Validators.required],
         login: ['', Validators.required],
         name: ['', Validators.required],
         lastName: ['', Validators.required],
@@ -56,16 +58,19 @@ export class FormUserComponent implements OnInit {
   }
 
   public update() {
-    this.user = Object.assign(this.formUser.value, this.user);
+    this.user = new User(this.formUser.value);
     this.userService.update(this.user).subscribe(() => {
       this.massagesServer.success('Usuário atualizado com sucesso!', 'Success');
+      this.route.navigate(['usuarios']);
+    });
+ }
+
+  public create() {
+    this.user = new User(this.formUser.value);
+    this.userService.salve(this.user).subscribe(() => {
+      this.massagesServer.success('Usuário criado com sucesso!', 'Success');
+      this.route.navigate(['usuarios']);
     });
   }
 
-  public create(user) {
-    this.user = Object.assign(this.formUser.value, this.user);
-    this.userService.salve(this.user).subscribe(() => {
-      this.massagesServer.success('Usuário criado com sucesso!', 'Success');
-    });
-  }
 }
