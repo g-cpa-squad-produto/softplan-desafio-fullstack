@@ -105,12 +105,8 @@ import com.agfgerador.gerenciadorprocessos.domain.Processo;
           }
           criteria.add(Restrictions.eq("usuario.id", ((Parecer)obj).getUsuario().getId()));
        }
+       
        int x1=0;
-       if((((Parecer)obj).getProcesso().getObs() != null)&&(!((Parecer)obj).getProcesso().getObs().equals(""))){ 
-         criteria.createAlias("processo", "processo");
-         criteria.add(Restrictions.ilike("processo.obs",((Parecer)obj).getProcesso().getObs()+"%")); 
-         x1=1;
-       }
        if(((Parecer)obj).getProcesso().getId() != 0) {
           if(x1==0) {
              criteria.createAlias("processo", "processo");
@@ -152,9 +148,6 @@ import com.agfgerador.gerenciadorprocessos.domain.Processo;
        if((((Parecer)obj).getDescricao() != null)&&(((Parecer)obj).getDescricao().equals(" "))) 
        criteria.add(Restrictions.isNull("descricao"));
 
-       if((((Parecer)obj).getDtparecer()!=null)&&(!((Parecer)obj).getDtparecer().equals("")))
-         criteria.add(Restrictions.eq("dtparecer", ((Parecer)obj).getDtparecer()));
-
        return criteria.list();
      }
 
@@ -188,12 +181,8 @@ import com.agfgerador.gerenciadorprocessos.domain.Processo;
           }
           criteria.add(Restrictions.eq("usuario.id", ((Parecer)obj).getUsuario().getId()));
        }
+       
        int x3=0;
-       if((((Parecer)obj).getProcesso().getObs() != null)&&(!((Parecer)obj).getProcesso().getObs().equals(""))){ 
-         criteria.createAlias("processo", "processo");
-         criteria.add(Restrictions.ilike("processo.obs",((Parecer)obj).getProcesso().getObs()+"%")); 
-         x3=1;
-       }
        if(((Parecer)obj).getProcesso().getId() != 0) {
           if(x3==0) {
              criteria.createAlias("processo", "processo");
@@ -234,9 +223,6 @@ import com.agfgerador.gerenciadorprocessos.domain.Processo;
        if((((Parecer)obj).getDescricao() != null)&&(((Parecer)obj).getDescricao().equals(" "))) 
        criteria.add(Restrictions.isNull("descricao"));
 
-       if((((Parecer)obj).getDtparecer()!=null)&&(!((Parecer)obj).getDtparecer().equals("")))
-         criteria.add(Restrictions.eq("dtparecer", ((Parecer)obj).getDtparecer()));
-
        criteria.setFirstResult(page);
        criteria.setMaxResults(pagesize);
        return criteria.list();
@@ -261,12 +247,8 @@ import com.agfgerador.gerenciadorprocessos.domain.Processo;
           }
           criteria.add(Restrictions.eq("usuario.id", ((Parecer)obj).getUsuario().getId()));
        }
+       
        int x5=0;
-       if((((Parecer)obj).getProcesso().getObs() != null)&&(!((Parecer)obj).getProcesso().getObs().equals(""))){ 
-         criteria.createAlias("processo", "processo");
-         criteria.add(Restrictions.ilike("processo.obs",((Parecer)obj).getProcesso().getObs()+"%")); 
-         x5=1;
-       }
        if(((Parecer)obj).getProcesso().getId() != 0) {
           if(x5==0) {
              criteria.createAlias("processo", "processo");
@@ -305,9 +287,6 @@ import com.agfgerador.gerenciadorprocessos.domain.Processo;
          
        if((((Parecer)obj).getDescricao() != null)&&(((Parecer)obj).getDescricao().equals(" "))) 
        criteria.add(Restrictions.isNull("descricao"));
-       
-       if((((Parecer)obj).getDtparecer()!=null)&&(!((Parecer)obj).getDtparecer().equals("")))
-         criteria.add(Restrictions.eq("dtparecer", ((Parecer)obj).getDtparecer()));
 
        criteria.setProjection(Projections.rowCount());
        return (Long) criteria.list().get(0);

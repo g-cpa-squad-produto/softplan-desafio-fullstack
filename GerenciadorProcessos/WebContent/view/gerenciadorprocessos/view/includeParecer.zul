@@ -16,16 +16,12 @@
            <auxheader>
              <textbox id="filtroDescricao"/>
            </auxheader>
-           <auxheader>
-             <datebox id="filtroDtparecer"/>
-           </auxheader>
          </auxhead>
          <listhead>
            <listheader label="" width="25px" />
            <listheader label="Código" sort="auto(id)" width="120px"/>
-           <listheader label="USUARIO" sort="auto(usuario.nome)" />
+           <listheader label="USUÁRIO" sort="auto(usuario.nome)" />
            <listheader id="listheaderDescricao" label="DESCRIÇÃO" sort="auto(descricao)" />
-           <listheader id="listheaderDtparecer" label="DATA PARECER" sort="auto(dtparecer)" width="150px"/>
          </listhead>
        </listbox>
        <paging id="paginacao"></paging>
@@ -33,7 +29,8 @@
      <div id="form" class="form fade out ocultar">
        <div class="new-li">
          <div id="divBandboxUsuario" class="new-col" width="380px"> 
-            <a href="#" id="labelUsuario">Usuario*<span class="glyphicon glyphicon-link"></span></a>
+            <!--<a href="#" id="labelUsuario">Usuario*<span class="glyphicon glyphicon-link"></span></a> -->
+            <label>USUÁRIO*</label>
             <div class="new-col-link">
                <longbox id="longboxUsuario" class="form-control input-sm" />
                <bandbox id="bandboxUsuario" autodrop="true"> 
@@ -49,14 +46,10 @@
                </bandbox>
             </div>
          </div>
-         <div id="divparecer" class="new-col" width="450px">
-           <label>Parecer</label>
+         <div id="divparecer" class="new-col" width="650px">
+           <label>Parecer*</label>
            <a id="aInfodescricao"  popup="msg" class="glyphicon glyphicon-info-sign" style="margin-bottom: 3px;"></a>
-           <textbox id="textboxDescricao" rows="3" class="form-control input-sm" maxlength="257" value="@{controller.parecer.descricao}"/>
-         </div>
-         <div id="divdtparecer" class="new-col" width="140px">
-           <label>DATA PARECER</label>
-           <datebox id="dateboxDtparecer" class="form-control input-sm" value="@{controller.parecer.dtparecer}" />
+           <textbox id="textboxDescricao" height="150px" rows="3" class="form-control input-sm" maxlength="257" value="@{controller.parecer.descricao}"/>
          </div>
        </div>
      </div>

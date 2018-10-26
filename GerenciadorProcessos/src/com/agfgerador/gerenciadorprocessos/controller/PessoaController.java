@@ -43,14 +43,13 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
  import org.zkoss.zul.Iframe;
  import com.agfgerador.compartilhado.controller.ControllerAutenticacao;
  import com.agfgerador.compartilhado.util.AGFPaginacao;
- import com.agfgerador.compartilhado.controller.IPaginacao;
+import com.agfgerador.compartilhado.util.AGFUtil;
+import com.agfgerador.compartilhado.controller.IPaginacao;
  import com.agfgerador.compartilhado.controller.IFilhas;
  import com.agfgerador.compartilhado.domain.ObjetoPadrao;
  import com.agfgerador.compartilhado.util.AGFComponente;
  import com.agfgerador.gerenciadorprocessos.domain.Pessoa;
  import com.agfgerador.gerenciadorprocessos.service.PessoaService;
- import com.agfgerador.gerenciadorprocessos.domain.Tipopessoa;
- import com.agfgerador.gerenciadorprocessos.service.TipopessoaService;
  import org.zkoss.zul.Listbox;
  import com.agfgerador.compartilhado.util.AGFBandbox;
  import org.zkoss.zul.Bandbox;
@@ -68,16 +67,6 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
      private Pessoa compAux = new Pessoa();
      private int totalSize = 0;
      private Integer pageSizeBandbox = 5;
-
-   
-    /////////////Tipopessoa
-    Tipopessoa tipopessoa = new Tipopessoa();
-    private Bandbox bandboxTipopessoa;
-    private Longbox longboxTipopessoa;
-    private Listbox listboxTipopessoa;
-    private Paging paginacaoTipopessoa;
-    private Tipopessoa tipopessoaBandbox;
-    private TipopessoaService tipopessoaService;
  
     private Label labelNomePoup;
     private Toolbarbutton toolbarButton;
@@ -91,7 +80,6 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
        win.setAttribute("nomeTela", "Pessoa");
        mbmodal = new AGFModal();
        super.doAfterCompose(win,true,"all");
-       renderizarBandboxTipopessoa();
        btInformacoes.setVisible(false);
      }
 
@@ -103,11 +91,6 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
            lc.appendChild(new Checkbox());
            arg0.appendChild(lc);
            arg0.appendChild(new Listcell(m.getId().toString()));
-           try{
-           arg0.appendChild(new Listcell(m.getTipopessoa().getDescricao()));
-           }catch(Exception e){
-              arg0.appendChild(new Listcell("")); 
-           }
            try{
            imagem = new Image();
            imagem.setContent(AGFImagem.converterByteToBufferedImage(m.getImagem()));
@@ -126,34 +109,11 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
            }catch(Exception e){
               arg0.appendChild(new Listcell("")); 
            }
-           if(m.getTipopessoa().getId()==1) {
-	           try{
-	           arg0.appendChild(new Listcell(m.getCpf()));
-	           }catch(Exception e){
-	              arg0.appendChild(new Listcell("")); 
-	           }
-           }else if(m.getTipopessoa().getId()==2){
-	           try{
-	           arg0.appendChild(new Listcell(m.getCnpj()));
-	           }catch(Exception e){
-	              arg0.appendChild(new Listcell("")); 
-	           }
-           }
-           try{
-           arg0.appendChild(new Listcell(m.getUf()));
-           }catch(Exception e){
-              arg0.appendChild(new Listcell("")); 
-           }
-           try{
-           arg0.appendChild(new Listcell(m.getCidade()));
-           }catch(Exception e){
-              arg0.appendChild(new Listcell("")); 
-           }
-           try{
-           arg0.appendChild(new Listcell(m.getLogradouro()));
-           }catch(Exception e){
-              arg0.appendChild(new Listcell("")); 
-           }
+	       try{
+	          arg0.appendChild(new Listcell(m.getCpf()));
+	       }catch(Exception e){
+	          arg0.appendChild(new Listcell("")); 
+	       }
          }
        });
      }
@@ -163,91 +123,6 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
        imagem.setVisible(false);
 
 }
-
-     /* 
-      * BandBox Tipopessoa - Arthur Freire 
-      */ 
-     public void onClick$labelTipopessoa(){
-      labelLink("tipopessoa", null);
-     }
-     
-     public void onOK$longboxTipopessoa(){
-        tipopessoa = new Tipopessoa();
-        setCompTipopessoa((Tipopessoa)AGFBandbox.onOKLongbox(longboxTipopessoa, tipopessoaBandbox, tipopessoaService));
-     }
-     
-     public void onOK$bandboxTipopessoa(){
-        onChange$bandboxTipopessoa();
-     }
-     
-     public void onChange$bandboxTipopessoa(){
-        tipopessoa.setDescricao(bandboxTipopessoa.getValue());
-        inicRecepTipopessoa();
-        objs = tipopessoaService.filter(tipopessoa, pageSizeBandbox, AGFPaginacao.getPagePaginacao(new Paging(),pageSizeBandbox,0));
-        totalSize = tipopessoaService.getNumberRecordsFilter(tipopessoa).intValue();
-        AGFBandbox.onChange(bandboxTipopessoa, listboxTipopessoa, tipopessoaService, paginacaoTipopessoa, pageSizeBandbox, totalSize, objs);
-     }
-     
-     public void onOpen$bandboxTipopessoa(){
-        tipopessoa.setDescricao(null);
-        listaTipopessoas();
-     }
-     
-     public void onClick$listboxTipopessoa(){	
-        tipopessoa.setDescricao(null);
-        setCompTipopessoa((Tipopessoa)AGFBandbox.onClickList(bandboxTipopessoa, tipopessoaBandbox, listboxTipopessoa));
-     }
-    
-     public void listaTipopessoas(){
-        inicRecepTipopessoa();
-        objs = tipopessoaService.filter(tipopessoa, pageSizeBandbox, AGFPaginacao.getPagePaginacao(new Paging(),pageSizeBandbox,0));
-        totalSize = tipopessoaService.getNumberRecordsFilter(tipopessoa).intValue();
-        AGFBandbox.listaElementos(listboxTipopessoa, tipopessoaService, paginacaoTipopessoa, pageSizeBandbox, totalSize, objs);
-     }
-    
-     public void onPaging$paginacaoTipopessoa(){
-        inicRecepTipopessoa();
-        objs = tipopessoaService.filter(tipopessoa, pageSizeBandbox, AGFPaginacao.getPagePaginacao(paginacaoTipopessoa,pageSizeBandbox,paginaAnterior));
-        AGFBandbox.onPaging(null, listboxTipopessoa, tipopessoaService, paginacaoTipopessoa, pageSizeBandbox, paginaAnterior, objs);
-     }
-     
-     public void inicRecepTipopessoa(){
-        tipopessoa.setId(0l);
-        totalSize = 0;
-        objs = new ArrayList<ObjetoPadrao>();
-     }
-     
-     public void setCompTipopessoa(Tipopessoa p){
-        if(p!=null){	
-           tipopessoaBandbox = p;
-           bandboxTipopessoa.setValue(tipopessoaBandbox.getDescricao()); 
-           longboxTipopessoa.setValue(tipopessoaBandbox.getId());
-        }else{
-	          tipopessoaBandbox = null;
-	          bandboxTipopessoa.setValue(" "); 
-	          longboxTipopessoa.setValue(null);
-	          bandboxTipopessoa.setValue(null); 
-        }
-	    }
-     
-     public void renderizarBandboxTipopessoa(){
-        listboxTipopessoa.setItemRenderer(new ListitemRenderer() {
-           public void render(Listitem arg0, Object arg1) throws Exception {
-              Tipopessoa m = (Tipopessoa) arg1;
-               arg0.appendChild(new Listcell(m.getId().toString()));
- 
-                 try{
-                    arg0.appendChild(new Listcell(m.getDescricao()));
-                 }catch(Exception e){
-                    arg0.appendChild(new Listcell("")); 
-                 }
-           }
-        });
-     }
- 
-     /* 
-      * Fim BandBox Banco - Arthur Freire 
-      */ 
      
      private void inicializaElementosImagem(){
         imagem.setParent(pics0);
@@ -275,10 +150,6 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
      }
 
      public void getRelacoesNpara1() {
-       if(tipopessoaBandbox!=null)
-          pessoa.setTipopessoa(tipopessoaBandbox);
-       else
-          pessoa.setTipopessoa(null);
        
        if(imagem.getContent()!=null){
           byte[] bra = AGFImagem .converterImageToByte(imagem);
@@ -288,7 +159,6 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
        pessoa.setData(dateboxData.getValue());
      }
      public void setRelacoesNpara1() {
-       setCompTipopessoa(pessoa.getTipopessoa());
        pics0.getChildren().clear();
        imagem.setParent(pics0);
        imagem.setVisible(false);
@@ -307,7 +177,7 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
        dateboxData.setValue(pessoa.getData());
      }
      public void limparRelacoesNpara1() {
-       setCompTipopessoa(null);
+
        imagem = new Image();
        imagem.setSrc(null);
        pics0.getChildren().clear();
@@ -316,42 +186,13 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
      public boolean isValidForm() {
        boolean ret = true;
        valid = 0;
-       if(pessoa.getTipopessoa()==null){
-         valid = 1;
-         ret = false;
-       }
        if((pessoa.getNome()==null)||(pessoa.getNome().equals(""))){
          valid = 3;
          ret = false;
-       }
-       if((pessoa.getCep()==null)||(pessoa.getCep().equals(""))){
-         valid = 7;
-         ret = false;
-       }
-       if((pessoa.getUf()==null)||(pessoa.getUf().equals(""))){
-         valid = 8;
-         ret = false;
-       }
-       if((pessoa.getCidade()==null)||(pessoa.getCidade().equals(""))){
-         valid = 9;
-         ret = false;
-       }
-       if((pessoa.getTipologradouro()==null)||(pessoa.getTipologradouro().equals(""))){
-         valid = 10;
-         ret = false;
-       }
-       if((pessoa.getBairro()==null)||(pessoa.getBairro().equals(""))){
-           valid = 11;
-           ret = false;
-         }
-       if((pessoa.getLogradouro()==null)||(pessoa.getLogradouro().equals(""))){
-         valid = 12;
-         ret = false;
-       }
-       if((pessoa.getNcasa()==null)||(pessoa.getNcasa().equals(""))){
-           valid = 13;
-           ret = false;
-         }
+       }else if ((pessoa.getCpf()!=null)&&(!AGFUtil.isValidCPF(pessoa.getCpf()))){
+			valid = 5;
+			ret = false;
+		}
        return ret;
      }
 
@@ -362,33 +203,12 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
            }
         else {
          switch (valid) {
-           case 1:
-             AGFComponente.showMessage("info","Informe o campo: FÍSICA / JURÍDICA.");
-           break;
            case 3:
              AGFComponente.showMessage("info","Informe o campo: NOME.");
-           break;
-           case 7:
-             AGFComponente.showMessage("info","Informe o campo: CEP.");
-           break;
-           case 8:
-             AGFComponente.showMessage("info","Informe o campo: UF.");
-           break;
-           case 9:
-             AGFComponente.showMessage("info","Informe o campo: CIDADE.");
-           break;
-           case 10:
-             AGFComponente.showMessage("info","Informe o campo: TIPO LOGRADOURO.");
-           break;
-           case 11:
-             AGFComponente.showMessage("info","Informe o campo: BAIRRO.");
-           break;
-           case 12:
-             AGFComponente.showMessage("info","Informe o campo: LOGRADOURO.");
-           break;
-           case 13:
-             AGFComponente.showMessage("info","Informe o campo: NÚMERO CASA.");
-           break;
+           break;  
+			case 5:
+				AGFComponente.showMessage("alerta","Informe o CPF válido para o campo: CPF.");
+		    break;
            }
          }
        }
@@ -401,17 +221,9 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
        }else {
          compAux.setId(Long.valueOf(idAux));
        }
-       compAux.setTipopessoa(new Tipopessoa()); 
-       compAux.getTipopessoa().setDescricao(((Textbox) auxhead.getFellow("filtroTipopessoa")).getValue());
-       compAux.getTipopessoa().setId(0l);
        compAux.setNome(((Textbox) auxhead.getFellow("filtroNome")).getValue());
        compAux.setData(null);
-       compAux.setCpf(((Textbox) auxhead.getFellow("filtroCpfCnpj")).getValue());
-       compAux.setCnpj(((Textbox) auxhead.getFellow("filtroCpfCnpj")).getValue());
-       compAux.setCep(null);
-       compAux.setUf(((Textbox) auxhead.getFellow("filtroUf")).getValue());
-       compAux.setCidade(((Textbox) auxhead.getFellow("filtroCidade")).getValue());
-       compAux.setLogradouro(((Textbox) auxhead.getFellow("filtroLogradouro")).getValue());
+       compAux.setCpf(((Textbox) auxhead.getFellow("filtroCpf")).getValue());
        int totalSize = 0;
        objs = new ArrayList<ObjetoPadrao>();
        objs = pessoaService.filter(compAux, pageSize, AGFPaginacao.getPagePaginacao(new Paging(),pageSize,0));

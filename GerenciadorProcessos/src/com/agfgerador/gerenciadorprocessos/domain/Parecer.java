@@ -35,8 +35,6 @@ import com.agfgerador.autenticacao.domain.Usuario;
      @Column(length=257, nullable=true)
      private String descricao;
      @Column(nullable = true)
-     @Temporal(TemporalType.DATE)
-     private Date dtparecer;
  
      
     public Usuario getUsuario() {
@@ -61,14 +59,6 @@ import com.agfgerador.autenticacao.domain.Usuario;
      
      public void setDescricao(String descricao) {
        this.descricao = descricao;
-     }
-     
-    public Date getDtparecer() {
-       return this.dtparecer;
-     }
-     
-     public void setDtparecer(Date dtparecer) {
-       this.dtparecer = dtparecer;
      }
      
      public String toString(){

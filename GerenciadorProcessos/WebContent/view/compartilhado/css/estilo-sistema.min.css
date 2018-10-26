@@ -112,7 +112,7 @@ a {
 }
 
 .new-col .new-col-link .z-bandbox-inp {
-	width: 97%;
+	width: 93%;
 	height: 25px;
 }
 
@@ -2176,3 +2176,4 @@ tr.z-row-over>td.z-row-inner, tr.z-row-over>.z-cell {
     margin: 0;
     height: 25px;
     width: 120px;
+}

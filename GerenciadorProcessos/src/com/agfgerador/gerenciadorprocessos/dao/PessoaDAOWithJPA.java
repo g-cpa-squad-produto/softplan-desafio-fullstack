@@ -72,44 +72,14 @@
        if(obj.getId() != 0)
          criteria.add(Restrictions.eq("id", obj.getId()));
 
-       int x0=0;
-       if((((Pessoa)obj).getTipopessoa().getDescricao() != null)&&(!((Pessoa)obj).getTipopessoa().getDescricao().equals(""))){ 
-         criteria.createAlias("tipopessoa", "tipopessoa");
-         criteria.add(Restrictions.ilike("tipopessoa.descricao",((Pessoa)obj).getTipopessoa().getDescricao()+"%")); 
-         x0=1;
-       }
-       if(((Pessoa)obj).getTipopessoa().getId() != 0) {
-          if(x0==0) {
-             criteria.createAlias("tipopessoa", "tipopessoa");
-          }
-          criteria.add(Restrictions.eq("tipopessoa.id", ((Pessoa)obj).getTipopessoa().getId()));
-       }
        if((((Pessoa)obj).getNome() != null)&&(!((Pessoa)obj).getNome().equals(""))) 
            criteria.add(Restrictions.ilike("nome",((Pessoa)obj).getNome()+"%")); 
 
-         if((((Pessoa)obj).getData()!=null)&&(!((Pessoa)obj).getData().equals("")))
+       if((((Pessoa)obj).getData()!=null)&&(!((Pessoa)obj).getData().equals("")))
            criteria.add(Restrictions.eq("data", ((Pessoa)obj).getData()));
 
-         /*if((((Pessoa)obj).getCpf() != null)&&(!((Pessoa)obj).getCpf().equals(""))) 
-           criteria.add(Restrictions.ilike("cpf",((Pessoa)obj).getCpf()+"%"));*/ 
-         if(((((Pessoa)obj).getCpf() != null)&&(!((Pessoa)obj).getCpf().equals("")))||((((Pessoa)obj).getCep() != null)&&(!((Pessoa)obj).getCep().equals("")))) {
-      	   criteria.add(Restrictions.or(Restrictions.ilike("cpf",((Pessoa)obj).getCpf()+"%"), Restrictions.ilike("cnpj",((Pessoa)obj).getCnpj()+"%")));
-         }
-
-         /*if((((Pessoa)obj).getCnpj() != null)&&(!((Pessoa)obj).getCnpj().equals(""))) 
-           criteria.add(Restrictions.ilike("cnpj",((Pessoa)obj).getCnpj()+"%"));*/ 
-
-         if((((Pessoa)obj).getCep() != null)&&(!((Pessoa)obj).getCep().equals(""))) 
-           criteria.add(Restrictions.ilike("cep",((Pessoa)obj).getCep()+"%")); 
-
-         if((((Pessoa)obj).getUf() != null)&&(!((Pessoa)obj).getUf().equals(""))) 
-           criteria.add(Restrictions.ilike("uf",((Pessoa)obj).getUf()+"%")); 
-
-         if((((Pessoa)obj).getCidade() != null)&&(!((Pessoa)obj).getCidade().equals(""))) 
-           criteria.add(Restrictions.ilike("cidade",((Pessoa)obj).getCidade()+"%")); 
-
-         if((((Pessoa)obj).getLogradouro() != null)&&(!((Pessoa)obj).getLogradouro().equals(""))) 
-           criteria.add(Restrictions.ilike("logradouro",((Pessoa)obj).getLogradouro()+"%")); 
+       if((((Pessoa)obj).getCpf() != null)&&(!((Pessoa)obj).getCpf().equals(""))) 
+           criteria.add(Restrictions.ilike("cpf",((Pessoa)obj).getCpf()+"%"));
 
        return criteria.list();
      }
@@ -132,44 +102,15 @@
        if(obj.getId() != 0)
          criteria.add(Restrictions.eq("id", obj.getId()));
 
-       int x1=0;
-       if((((Pessoa)obj).getTipopessoa().getDescricao() != null)&&(!((Pessoa)obj).getTipopessoa().getDescricao().equals(""))){ 
-         criteria.createAlias("tipopessoa", "tipopessoa");
-         criteria.add(Restrictions.ilike("tipopessoa.descricao",((Pessoa)obj).getTipopessoa().getDescricao()+"%")); 
-         x1=1;
-       }
-       if(((Pessoa)obj).getTipopessoa().getId() != 0) {
-          if(x1==0) {
-             criteria.createAlias("tipopessoa", "tipopessoa");
-          }
-          criteria.add(Restrictions.eq("tipopessoa.id", ((Pessoa)obj).getTipopessoa().getId()));
-       }
        if((((Pessoa)obj).getNome() != null)&&(!((Pessoa)obj).getNome().equals(""))) 
            criteria.add(Restrictions.ilike("nome",((Pessoa)obj).getNome()+"%")); 
 
          if((((Pessoa)obj).getData()!=null)&&(!((Pessoa)obj).getData().equals("")))
            criteria.add(Restrictions.eq("data", ((Pessoa)obj).getData()));
 
-         /*if((((Pessoa)obj).getCpf() != null)&&(!((Pessoa)obj).getCpf().equals(""))) 
-           criteria.add(Restrictions.ilike("cpf",((Pessoa)obj).getCpf()+"%"));*/ 
-         if(((((Pessoa)obj).getCpf() != null)&&(!((Pessoa)obj).getCpf().equals("")))||((((Pessoa)obj).getCep() != null)&&(!((Pessoa)obj).getCep().equals("")))) {
-      	   criteria.add(Restrictions.or(Restrictions.ilike("cpf",((Pessoa)obj).getCpf()+"%"), Restrictions.ilike("cnpj",((Pessoa)obj).getCnpj()+"%")));
-         }
+         if((((Pessoa)obj).getCpf() != null)&&(!((Pessoa)obj).getCpf().equals(""))) 
+           criteria.add(Restrictions.ilike("cpf",((Pessoa)obj).getCpf()+"%"));
 
-         /*if((((Pessoa)obj).getCnpj() != null)&&(!((Pessoa)obj).getCnpj().equals(""))) 
-           criteria.add(Restrictions.ilike("cnpj",((Pessoa)obj).getCnpj()+"%"));*/ 
-
-         if((((Pessoa)obj).getCep() != null)&&(!((Pessoa)obj).getCep().equals(""))) 
-           criteria.add(Restrictions.ilike("cep",((Pessoa)obj).getCep()+"%")); 
-
-         if((((Pessoa)obj).getUf() != null)&&(!((Pessoa)obj).getUf().equals(""))) 
-           criteria.add(Restrictions.ilike("uf",((Pessoa)obj).getUf()+"%")); 
-
-         if((((Pessoa)obj).getCidade() != null)&&(!((Pessoa)obj).getCidade().equals(""))) 
-           criteria.add(Restrictions.ilike("cidade",((Pessoa)obj).getCidade()+"%")); 
-
-         if((((Pessoa)obj).getLogradouro() != null)&&(!((Pessoa)obj).getLogradouro().equals(""))) 
-           criteria.add(Restrictions.ilike("logradouro",((Pessoa)obj).getLogradouro()+"%")); 
 
        criteria.setFirstResult(page);
        criteria.setMaxResults(pagesize);
@@ -183,44 +124,15 @@
        if(obj.getId() != 0)
          criteria.add(Restrictions.eq("id", obj.getId()));
 
-       int x2=0;
-       if((((Pessoa)obj).getTipopessoa().getDescricao() != null)&&(!((Pessoa)obj).getTipopessoa().getDescricao().equals(""))){ 
-         criteria.createAlias("tipopessoa", "tipopessoa");
-         criteria.add(Restrictions.ilike("tipopessoa.descricao",((Pessoa)obj).getTipopessoa().getDescricao()+"%")); 
-         x2=1;
-       }
-       if(((Pessoa)obj).getTipopessoa().getId() != 0) {
-          if(x2==0) {
-             criteria.createAlias("tipopessoa", "tipopessoa");
-          }
-          criteria.add(Restrictions.eq("tipopessoa.id", ((Pessoa)obj).getTipopessoa().getId()));
-       }
        if((((Pessoa)obj).getNome() != null)&&(!((Pessoa)obj).getNome().equals(""))) 
          criteria.add(Restrictions.ilike("nome",((Pessoa)obj).getNome()+"%")); 
 
        if((((Pessoa)obj).getData()!=null)&&(!((Pessoa)obj).getData().equals("")))
          criteria.add(Restrictions.eq("data", ((Pessoa)obj).getData()));
 
-       /*if((((Pessoa)obj).getCpf() != null)&&(!((Pessoa)obj).getCpf().equals(""))) 
-         criteria.add(Restrictions.ilike("cpf",((Pessoa)obj).getCpf()+"%"));*/ 
-       if(((((Pessoa)obj).getCpf() != null)&&(!((Pessoa)obj).getCpf().equals("")))||((((Pessoa)obj).getCep() != null)&&(!((Pessoa)obj).getCep().equals("")))) {
-    	   criteria.add(Restrictions.or(Restrictions.ilike("cpf",((Pessoa)obj).getCpf()+"%"), Restrictions.ilike("cnpj",((Pessoa)obj).getCnpj()+"%")));
-       }
+       if((((Pessoa)obj).getCpf() != null)&&(!((Pessoa)obj).getCpf().equals(""))) 
+         criteria.add(Restrictions.ilike("cpf",((Pessoa)obj).getCpf()+"%")); 
 
-       /*if((((Pessoa)obj).getCnpj() != null)&&(!((Pessoa)obj).getCnpj().equals(""))) 
-         criteria.add(Restrictions.ilike("cnpj",((Pessoa)obj).getCnpj()+"%"));*/ 
-
-       if((((Pessoa)obj).getCep() != null)&&(!((Pessoa)obj).getCep().equals(""))) 
-         criteria.add(Restrictions.ilike("cep",((Pessoa)obj).getCep()+"%")); 
-
-       if((((Pessoa)obj).getUf() != null)&&(!((Pessoa)obj).getUf().equals(""))) 
-         criteria.add(Restrictions.ilike("uf",((Pessoa)obj).getUf()+"%")); 
-
-       if((((Pessoa)obj).getCidade() != null)&&(!((Pessoa)obj).getCidade().equals(""))) 
-         criteria.add(Restrictions.ilike("cidade",((Pessoa)obj).getCidade()+"%")); 
-
-       if((((Pessoa)obj).getLogradouro() != null)&&(!((Pessoa)obj).getLogradouro().equals(""))) 
-         criteria.add(Restrictions.ilike("logradouro",((Pessoa)obj).getLogradouro()+"%")); 
 
        criteria.setProjection(Projections.rowCount());
        return (Long) criteria.list().get(0);

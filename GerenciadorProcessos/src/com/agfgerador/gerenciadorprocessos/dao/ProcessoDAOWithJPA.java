@@ -87,9 +87,6 @@
        if((((Processo)obj).getDtabertura()!=null)&&(!((Processo)obj).getDtabertura().equals("")))
          criteria.add(Restrictions.eq("dtabertura", ((Processo)obj).getDtabertura()));
 
-       if((((Processo)obj).getObs() != null)&&(!((Processo)obj).getObs().equals(""))) 
-         criteria.add(Restrictions.ilike("obs",((Processo)obj).getObs()+"%")); 
-
        if((((Processo)obj).getNumprocesso() != null)) 
          criteria.add(Restrictions.eq("numprocesso",((Processo)obj).getNumprocesso())); 
 
@@ -129,9 +126,6 @@
        if((((Processo)obj).getDtabertura()!=null)&&(!((Processo)obj).getDtabertura().equals("")))
          criteria.add(Restrictions.eq("dtabertura", ((Processo)obj).getDtabertura()));
 
-       if((((Processo)obj).getObs() != null)&&(!((Processo)obj).getObs().equals(""))) 
-         criteria.add(Restrictions.ilike("obs",((Processo)obj).getObs()+"%")); 
-
        if((((Processo)obj).getNumprocesso() != null)) 
          criteria.add(Restrictions.eq("numprocesso",((Processo)obj).getNumprocesso())); 
 
@@ -161,9 +155,6 @@
        }
        if((((Processo)obj).getDtabertura()!=null)&&(!((Processo)obj).getDtabertura().equals("")))
          criteria.add(Restrictions.eq("dtabertura", ((Processo)obj).getDtabertura()));
-
-       if((((Processo)obj).getObs() != null)&&(!((Processo)obj).getObs().equals(""))) 
-         criteria.add(Restrictions.ilike("obs",((Processo)obj).getObs()+"%")); 
 
        if((((Processo)obj).getNumprocesso() != null)) 
          criteria.add(Restrictions.eq("numprocesso",((Processo)obj).getNumprocesso())); 

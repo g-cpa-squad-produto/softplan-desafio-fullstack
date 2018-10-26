@@ -28,11 +28,7 @@
      @Column(nullable = false)
      @Temporal(TemporalType.DATE)
      private Date dtabertura;
- 
-     
-     @Type(type="com.agfgerador.compartilhado.util.UpperCase")
-     @Column(length=333, nullable=true)
-     private String obs;
+
      
      @Column(unique = true,nullable=false)
      private Integer numprocesso;
@@ -53,14 +49,6 @@
        this.dtabertura = dtabertura;
      }
      
-    public String getObs() {
-       return this.obs;
-     }
-     
-     public void setObs(String obs) {
-       this.obs = obs;
-     }
-     
     public Integer getNumprocesso() {
        return this.numprocesso;
      }
@@ -70,7 +58,7 @@
      }
      
      public String toString(){
-     return obs;
+     return null;
      }
      
     @Override

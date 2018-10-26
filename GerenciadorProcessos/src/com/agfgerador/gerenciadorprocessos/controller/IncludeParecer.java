@@ -76,10 +76,9 @@ import com.agfgerador.autenticacao.service.UsuarioService;
      private Integer pageSizeBandbox = 5;
      private Perfil perfil = new Perfil();
      private UsuarioPerfilService usuarioPerfilService;
-     private Div divparecer, divdtparecer,divBandboxUsuario;
+     private Div divparecer, divBandboxUsuario;
      private Textbox filtroDescricao;
-     private Datebox filtroDtparecer;
-     private Listheader listheaderDescricao,listheaderDtparecer;
+     private Listheader listheaderDescricao;
 
    
     /////////////Usuario
@@ -125,12 +124,6 @@ import com.agfgerador.autenticacao.service.UsuarioService;
            }
            try{
            arg0.appendChild(new Listcell(m.getDescricao()));
-           }catch(Exception e){
-              arg0.appendChild(new Listcell("")); 
-           }
-           try{
-              SimpleDateFormat formatodate = new SimpleDateFormat("E dd/MM/yyyy");
-              arg0.appendChild(new Listcell(String.valueOf(formatodate.format(m.getDtparecer()))));
            }catch(Exception e){
               arg0.appendChild(new Listcell("")); 
            }
@@ -275,11 +268,9 @@ import com.agfgerador.autenticacao.service.UsuarioService;
        }else{
           parecer.setProcesso(null);
        }
-       parecer.setDtparecer(dateboxDtparecer.getValue());
      }
      public void setRelacoesNpara1() {
        setCompUsuario(parecer.getUsuario());
-       dateboxDtparecer.setValue(parecer.getDtparecer());
      }
      public void limparRelacoesNpara1() {
        setCompUsuario(null);
@@ -291,19 +282,29 @@ import com.agfgerador.autenticacao.service.UsuarioService;
        if(parecer.getUsuario()==null){
          valid = 1;
          ret = false;
-       }
+       }else
        if(parecer.getProcesso()==null){
          valid = 2;
          ret = false;
+       }else {
+	       if(perfil!=null && perfil.getId()==7) {
+			   Parecer parecertemp = new Parecer();
+			   parecertemp.setId(0l);
+			   parecertemp.setUsuario(parecer.getUsuario());
+			   parecertemp.setProcesso(parecer.getProcesso());
+			   parecertemp.setDescricao(null);
+			   if(parecerService.getNumberRecordsFilter(parecertemp)>0) {
+				   valid = 3;
+				   ret = false;
+			   }
+		   }else if(perfil!=null && perfil.getId()==8) { 
+			   if((parecer.getDescricao()==null)||(parecer.getDescricao().equals(""))){
+			         valid = 4;
+			         ret = false;
+			       }		   
+		   }      
        }
-       if(perfil!=null && perfil.getId()==7) {
-		          		   
-	   }else if(perfil!=null && perfil.getId()==8) { 
-		   if((parecer.getDescricao()==null)||(parecer.getDescricao().equals(""))){
-		         valid = 3;
-		         ret = false;
-		       }
-	   }       return ret;
+       return ret;
      }
 
      public void onClickbtSalvar() throws InterruptedException {
@@ -321,6 +322,9 @@ import com.agfgerador.autenticacao.service.UsuarioService;
              AGFComponente.showMessage("info","Informe o campo: PROCESSO.");
            break;
            case 3:
+               AGFComponente.showMessage("alerta","Usuário já está vinculado ao processo.");
+           break;
+           case 4:
                AGFComponente.showMessage("info","Informe o campo: PARECER.");
            break;
            }
@@ -346,7 +350,6 @@ import com.agfgerador.autenticacao.service.UsuarioService;
              compAux.setProcesso(new Processo()); 
              compAux.setProcesso(processo);
              compAux.setDescricao(((Textbox) auxhead.getFellow("filtroDescricao")).getValue());
-             compAux.setDtparecer(((Datebox) auxhead.getFellow("filtroDtparecer")).getValue() );
              int totalSize = 0;
              objsemid = new ArrayList<ObjetoPadraoSemId>();
              objsemid = parecerService.filter(compAux, pageSize, AGFPaginacao.getPagePaginacao(new Paging(),pageSize,0));
@@ -411,7 +414,6 @@ import com.agfgerador.autenticacao.service.UsuarioService;
              compAux.setProcesso(processo);
              System.out.println("include filter descrição: "+((Textbox) auxhead.getFellow("filtroDescricao")).getValue());
              compAux.setDescricao(((Textbox) auxhead.getFellow("filtroDescricao")).getValue());
-             compAux.setDtparecer(((Datebox) auxhead.getFellow("filtroDtparecer")).getValue() );
              Integer totalSize = 0;
              objsemid = new ArrayList<ObjetoPadraoSemId>();
              objsemid = parecerService.filter(compAux, pageSize, AGFPaginacao.getPagePaginacao(new Paging(),pageSize,0));
@@ -491,12 +493,9 @@ import com.agfgerador.autenticacao.service.UsuarioService;
         	   if(perfil.getId()==7) {
         		   barraFerramentasInclude.getFellow("btRemover").setVisible(false);
         		   divBandboxUsuario.setVisible(true);
-        		   divdtparecer.setVisible(false);
         		   divparecer.setVisible(false);
         		   filtroDescricao.setVisible(false);
-        		   filtroDtparecer.setVisible(false);
         		   listheaderDescricao.setVisible(false);
-        		   listheaderDtparecer.setVisible(false);
         	   }else
         	   if(perfil.getId()==8) {       
         		   barraFerramentasInclude.getFellow("btRemover").setVisible(false);

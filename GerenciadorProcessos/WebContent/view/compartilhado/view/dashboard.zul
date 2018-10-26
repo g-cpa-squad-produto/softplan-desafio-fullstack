@@ -1,11 +1,11 @@
-<?page title="AGF - Projeto Base" contentType="text/html;charset=UTF-8"?>
+<?page title="SOFTPLAN" contentType="text/html;charset=UTF-8"?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="./windowProjetoBase" ?> 
 <?variable-resolver class="org.zkoss.spring.DelegatingVariableResolver"?>
 <?link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"?>  
 <?link rel="stylesheet" type="text/css" href="../css/bootstrap-wysihtml5.css"?>
 <?link rel="stylesheet" type="text/css" href="../css/estilo-sistema.min.css"?>
-<?link rel="shortcut icon" type="image/x-icon" href="/ativ.ico"?>
-<?link rel="icon" type="image/x-icon" href="/ativ.ico"?> 
+<?link rel="shortcut icon" type="image/x-icon" href="/softplan.ico"?>
+<?link rel="icon" type="image/x-icon" href="/softplan.ico"?> 
 
 <zk xmlns:n="native" xmlns:c="client"> 
 	<window id="windowProjetoBase" class="page portal" apply="com.agfgerador.compartilhado.controller.DashboardController" > 
@@ -72,7 +72,7 @@
 		<div class="content">
 			<tabbox id="tabbox">
 				<tabs id="tabs">
-					<tab label="AGF"/>
+					<tab label="SOFTPLAN - PROCESSOS"/>
 				</tabs>
 				<tabpanels id="tabpanels">
 					<tabpanel>
