@@ -10,7 +10,7 @@ export class GenericicService<T> {
     return this.httpService.get(`${this.endPoint}`);
   }
 
-  public findById(id: string) {
+  public findById(id: number) {
       return  this.httpService.getOne(`${this.endPoint}\/${id}`);
   }
   public delete(id: number): Observable<any> {

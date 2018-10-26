@@ -1,7 +1,6 @@
 import { Process } from 'src/app/model/process';
 import { HttpService } from './../http/http.service';
 import { Injectable } from '@angular/core';
-import { User } from 'src/app/model/user';
 import { GenericicService } from './generic.service';
 
 const endPoint = 'process';

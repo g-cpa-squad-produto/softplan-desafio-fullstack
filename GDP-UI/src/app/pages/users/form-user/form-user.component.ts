@@ -16,7 +16,7 @@ export class FormUserComponent implements OnInit {
   public formUser: FormGroup;
 
   public user: User = new User();
-  public id: string;
+  public id: number;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,7 +28,7 @@ export class FormUserComponent implements OnInit {
 
   ngOnInit() {
     this.createForm();
-    this.id = this.activeRoute.snapshot.paramMap.get('id');
+    this.id = Number(this.activeRoute.snapshot.paramMap.get('id'));
     if (this.id) {
       this.userService.findById(this.id).subscribe(user => {
         this.user = new User(user);

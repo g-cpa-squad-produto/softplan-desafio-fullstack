@@ -12,15 +12,12 @@ import { AppComponent } from './app.component';
   declarations: [
     AppComponent ],
   imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    HttpClientModule,
-    ToastrModule.forRoot({
-      preventDuplicates: true
-    })
-    ],
-  providers: [],
+      BrowserModule,
+      BrowserAnimationsModule,
+      AppRoutingModule,
+      HttpClientModule,
+      ToastrModule.forRoot({ preventDuplicates: true })
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })

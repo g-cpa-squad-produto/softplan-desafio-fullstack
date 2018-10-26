@@ -15,7 +15,6 @@ export class ListScreeningComponent implements OnInit {
 
   ngOnInit() {
     this.processList = this.activatedRoute.snapshot.data['processList'];
-    console.log(this.processList);
   }
 
   public atribuir(id: number, index: number) {

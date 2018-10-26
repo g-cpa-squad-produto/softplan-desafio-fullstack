@@ -1,3 +1,4 @@
+import { ShowScreeningComponent } from './../screening/show-screening/show-screening.component';
 import { ListScreeningComponent } from './../screening/list-screening/list-screening.component';
 import { FinalizeGuard } from './../finalize/finalize.guard';
 import { UserGuard } from './../users/user.guard';
@@ -11,7 +12,8 @@ import { ShowUserComponent } from '../users/show-user/show-user.component';
 import { FormUserComponent } from '../users/form-user/form-user.component';
 import { ScreeningGuard } from '../screening/screening.guard';
 import { FinalizeComponent } from '../finalize/finalize.component';
-import { ListScreeningResolver } from '../screening/list-screening/list-screening.resolve';
+import { ListScreeningResolver } from '../screening/list-screening/list-screening.resolver';
+import { ShowScreeningResolver } from '../screening/show-screening/show-screening.resolver';
 
 const routes: Routes = [
   {
@@ -49,6 +51,14 @@ const routes: Routes = [
         canActivate: [ScreeningGuard],
         resolve: {
           processList: ListScreeningResolver
+        }
+      },
+      {
+        path: 'triagem/:id/show',
+        component: ShowScreeningComponent,
+        canActivate: [ScreeningGuard],
+        resolve: {
+           process: ShowScreeningResolver
         }
       },
       {

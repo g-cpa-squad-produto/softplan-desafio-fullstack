@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Process } from 'src/app/model/process';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-show-screening',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShowScreeningComponent implements OnInit {
 
-  constructor() { }
+  process: Process;
+
+  constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.process = this.activatedRoute.snapshot.data['process'];
   }
 
 }
