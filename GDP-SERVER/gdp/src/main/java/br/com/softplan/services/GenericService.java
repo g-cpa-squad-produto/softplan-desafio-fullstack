@@ -30,5 +30,10 @@ public abstract class GenericService<T, ID> implements IGenericService<T, ID> {
 	public void save(T t) {
 		this.repository.save(t);
 	}
+	
+	@Override
+	public void update(T t) {
+		this.repository.save(t);
+	}
 
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import br.com.softplan.services.IGenericService;
 
+
 public abstract class GenericController<T, ID> implements IGenericController<T, ID> {
 
 	@Autowired
@@ -25,13 +26,14 @@ public abstract class GenericController<T, ID> implements IGenericController<T, 
 		return this.service.findAll();
 	}
 
-	@CrossOrigin
 	@GetMapping("/{id}")
+	@CrossOrigin
 	@Override
 	public Optional<T> findById(@PathVariable ID id) {
 		return this.service.findById(id);
 	}
 
+	
 	@Override
 	@CrossOrigin
 	@DeleteMapping("/{id}")
@@ -46,9 +48,10 @@ public abstract class GenericController<T, ID> implements IGenericController<T, 
 	}
 
 	@Override
+	@CrossOrigin
 	@PutMapping
 	public void update(@RequestBody T t) {
-		this.service.save(t);
+		this.service.update(t);
 	}
 
 }

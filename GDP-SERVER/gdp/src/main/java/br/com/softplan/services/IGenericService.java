@@ -13,5 +13,6 @@ public interface IGenericService<T, ID> {
 
 	public void save(T t);
 
+	public void update(T t);
 
 }

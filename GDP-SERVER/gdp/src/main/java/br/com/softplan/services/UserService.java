@@ -1,6 +1,9 @@
 package br.com.softplan.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import br.com.softplan.models.User;
@@ -33,8 +36,16 @@ public class UserService extends GenericService<User, Long> {
 		return this.repository.findByLogin(login);
 	}
 
-	public void delete(Long id) {
-		this.repository.deleteById(id);
+	@Override
+	public void update(User t) {
+		
+		Optional<User> aux = this.repository.findById(t.getId());
+		
+		if (aux == null) {
+			new UsernameNotFoundException("User Not Found");
+		}
+		
+		t.setPassword(aux.get().getLastName());
+		this.repository.save(t);
 	}
-
 }
