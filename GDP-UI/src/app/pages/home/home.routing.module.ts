@@ -14,6 +14,7 @@ import { ScreeningGuard } from '../screening/screening.guard';
 import { FinalizeComponent } from '../finalize/finalize.component';
 import { ListScreeningResolver } from '../screening/list-screening/list-screening.resolver';
 import { ShowScreeningResolver } from '../screening/show-screening/show-screening.resolver';
+import { FormScreeningComponent } from '../screening/form-screening/form-screening.component';
 
 const routes: Routes = [
   {
@@ -52,6 +53,11 @@ const routes: Routes = [
         resolve: {
           processList: ListScreeningResolver
         }
+      },
+      {
+        path: 'triagem/new',
+        component: FormScreeningComponent,
+        canActivate: [ScreeningGuard]
       },
       {
         path: 'triagem/:id/show',
