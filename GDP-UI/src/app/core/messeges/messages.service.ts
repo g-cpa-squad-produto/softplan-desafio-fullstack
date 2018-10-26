@@ -12,7 +12,7 @@ export class MassegesService {
 
     public success (messege, title?) {
         if (!title) {
-            this.toastr.success( messege, 'Success!' , toastConfig);
+            this.toastr.success( messege, 'Sucesso!' , toastConfig);
         } else {
             this.toastr.success(messege, title, toastConfig);
         }
@@ -20,9 +20,17 @@ export class MassegesService {
 
     public error (messege, title?) {
         if (!title) {
-            this.toastr.error( messege, 'Error!', toastConfig);
+            this.toastr.error( messege, 'Erro!', toastConfig);
         } else {
             this.toastr.error(messege, title, toastConfig);
         }
+    }
+
+    public warning(messege, title?) {
+      if (!title) {
+        this.toastr.warning( messege, 'Aviso!', toastConfig);
+    } else {
+        this.toastr.warning(messege, title, toastConfig);
+    }
     }
  }

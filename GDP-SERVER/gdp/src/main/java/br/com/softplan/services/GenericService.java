@@ -36,4 +36,9 @@ public abstract class GenericService<T, ID> implements IGenericService<T, ID> {
 		this.repository.save(t);
 	}
 
+	@Override
+	public void deleteAll() {
+		this.repository.deleteAll();
+	}
+	
 }

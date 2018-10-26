@@ -45,7 +45,7 @@ public class UserService extends GenericService<User, Long> {
 			new UsernameNotFoundException("User Not Found");
 		}
 		
-		t.setPassword(aux.get().getLastName());
+		t.setPassword(aux.get().getPassword());
 		this.repository.save(t);
 	}
 }

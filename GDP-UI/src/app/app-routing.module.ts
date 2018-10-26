@@ -1,3 +1,4 @@
+import { LoginGuard } from './pages/login/login.guard';
 import { NotFoundModule } from './pages/not-found/not-found.module';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -17,6 +18,7 @@ const routes: Routes = [
   },
   {
     path: 'login',
+    canActivate: [LoginGuard],
     component: LoginComponent
   },
   {
