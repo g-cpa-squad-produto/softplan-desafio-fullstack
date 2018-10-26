@@ -1,0 +1,51 @@
+<div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+           <h5 class="card-title">
+              <div class="row">
+                  <div class="col-md-6 ">Triagem</div>
+                  <div class="col-md-6 text-right">
+                  <a type="button" href="#/triagem/new"  class="btn btn-debug .navbar-right">
+                      <i class="fas fa-plus"></i>
+                  </a>
+                </div>
+            </div>
+           </h5>
+           <div class="table-responsive">
+           <table class="table table-dark table-hover">
+              <thead>
+               <tr>
+                 <th scope="col">Código</th>
+                 <th scope="col">Processo</th>
+                 <th scope="col">Status</th>
+                 <th scope="col">Ações</th>
+               </tr>
+             </thead>
+             <tbody>
+                <tr *ngFor="let p of processList; let i = index" [attr.data-index]="i">
+                    <td>{{p.code}}</td>
+                    <td>{{p.name}}</td>
+                    <td>{{p.status}}</td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <a class="dropdown-item" href="#/triagem/{{p.id}}/show">Detalhe</a>
+                              <a class="dropdown-item link"  (click)="atribuir(p.id, i)">Atribuir</a>
+                            </div>
+                          </div>
+                    </td>
+                </tr>
+             </tbody>
+           </table>
+          </div>
+         </div>
+       </div>
+     </div>
+    </div>
+    </div>
+
+

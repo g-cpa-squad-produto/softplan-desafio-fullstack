@@ -1,15 +1,15 @@
+import { Process } from 'src/app/model/process';
 import { HttpService } from './../http/http.service';
-import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { User } from 'src/app/model/user';
 import { GenericicService } from './generic.service';
 
-const endPoint = 'users';
+const endPoint = 'process';
 
 @Injectable({ providedIn: 'root' })
-export class UserService extends GenericicService<User> {
+export class ProcessService extends GenericicService<Process> {
 
-  constructor(httpService: HttpService<User>) {
+  constructor(httpService: HttpService<Process>) {
     super(endPoint, httpService, );
   }
 

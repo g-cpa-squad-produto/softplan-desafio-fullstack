@@ -3,6 +3,7 @@ import { StatusProcess } from './status-process';
 export class Process {
 
   id: number;
+  code: string;
   name: string;
   status: StatusProcess;
   feedbacks: Feedback[];

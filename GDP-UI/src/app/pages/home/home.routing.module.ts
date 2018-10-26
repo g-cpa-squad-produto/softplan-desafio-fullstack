@@ -11,6 +11,7 @@ import { ShowUserComponent } from '../users/show-user/show-user.component';
 import { FormUserComponent } from '../users/form-user/form-user.component';
 import { ScreeningGuard } from '../screening/screening.guard';
 import { FinalizeComponent } from '../finalize/finalize.component';
+import { ListScreeningResolver } from '../screening/list-screening/list-screening.resolve';
 
 const routes: Routes = [
   {
@@ -46,6 +47,9 @@ const routes: Routes = [
         path: 'triagem',
         component: ListScreeningComponent,
         canActivate: [ScreeningGuard],
+        resolve: {
+          processList: ListScreeningResolver
+        }
       },
       {
         path: 'finalizar',

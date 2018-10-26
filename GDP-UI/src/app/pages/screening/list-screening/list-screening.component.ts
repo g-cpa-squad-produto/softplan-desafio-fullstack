@@ -1,3 +1,5 @@
+import { ActivatedRoute } from '@angular/router';
+import { Process } from './../../../model/process';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListScreeningComponent implements OnInit {
 
-  constructor() { }
+  processList: Process[];
+
+  constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.processList = this.activatedRoute.snapshot.data['processList'];
+    console.log(this.processList);
+  }
+
+  public atribuir(id: number, index: number) {
+
   }
 
 }
