@@ -4,9 +4,9 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home.component';
 import { AuthGuard } from '../login/login.guard.service';
-import { NewUserComponent } from '../users/new-user/new-user.component';
 import { ShowUserComponent } from '../users/show-user/show-user.component';
 import { FormUserComponent } from '../users/form-user/form-user.component';
+import { ScreeningComponent } from '../screening/screening.component';
 
 const routes: Routes = [
   {
@@ -33,6 +33,10 @@ const routes: Routes = [
       {
         path: 'users/:id/update',
         component: FormUserComponent
+      },
+      {
+        path: 'triagem',
+        component: ScreeningComponent
       }
     ]
   }

@@ -1,6 +1,6 @@
 export enum ProfileTypes  {
 
   ADMIN = 'ADMIN',
-  TRIADADOR = 'TRIADADOR',
+  TRIADOR = 'TRIADOR',
   FINALIZADOR = 'FINALIZADOR'
 }

@@ -29,10 +29,10 @@ export class LoginService {
           this.router.navigate(['/usuarios']);
       }
       if (userDTO.profile === ProfileTypes.FINALIZADOR) {
-          this.router.navigate(['/parecer']);
+          this.router.navigate(['/finalizar']);
       }
-      if (userDTO.profile === ProfileTypes.TRIADADOR) {
-        this.router.navigate(['/triagem']);
+      if (userDTO.profile === ProfileTypes.TRIADOR) {
+          this.router.navigate(['/triagem']);
       }
    }
 

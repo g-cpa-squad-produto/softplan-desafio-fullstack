@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { HomeRoutingModule } from './home.routing.module';
 import { UsersModule } from '../users/users.module';
 import { NavModule } from 'src/app/components/nav/nav.module';
+import { ScreeningModule } from '../screening/screening.module';
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import { NavModule } from 'src/app/components/nav/nav.module';
         NavModule,
         LoginModule,
         UsersModule,
+        ScreeningModule,
         RouterModule,
         HomeRoutingModule
   ],
