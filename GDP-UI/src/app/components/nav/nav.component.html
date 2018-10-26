@@ -6,13 +6,16 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav ml-md-auto d-md-flex">
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="user.profile === 'ADMIN'">
           <a class="nav-link" href="#/usuarios">Usuarios
             <span class="sr-only">(current)</span>
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#/processos">Processos</a>
+        <li class="nav-item" *ngIf="user.profile === 'TRIADOR'">
+            <a class="nav-link" href="#/triagem">Triagem</a>
+        </li>
+        <li class="nav-item" *ngIf="user.profile === 'FINALIZADOR'">
+            <a class="nav-link" href="#/finalizar">Finalização</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" (click)="logout()">Sair</a>

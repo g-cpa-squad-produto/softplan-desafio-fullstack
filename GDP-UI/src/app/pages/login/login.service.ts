@@ -8,7 +8,6 @@ import { User } from '../../model/user';
 import { Observable } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UserDTO } from 'src/app/model/user.dto';
-import { UserService } from 'src/app/core/service/user.service';
 import { ProfileTypes } from 'src/app/model/profile-types';
 
 
@@ -35,6 +34,12 @@ export class LoginService {
           this.router.navigate(['/triagem']);
       }
    }
+
+   public getUserProfile(): ProfileTypes {
+        if (this.isLoggedIn()) {
+          return this.tokenService.getTokenUserDTO().profile;
+        }
+  }
 
   public authenticate(user: User): Observable<UserDTO> {
     return this.httpService.login(user, 'login/autenticate').pipe(

@@ -1,12 +1,16 @@
+import { FinalizeGuard } from './../finalize/finalize.guard';
+import { UserGuard } from './../users/user.guard';
 import { UserListComponent } from './../users/user-list/user-list.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home.component';
-import { AuthGuard } from '../login/login.guard.service';
+import { AuthGuard } from '../../core/guard/auth.guard';
 import { ShowUserComponent } from '../users/show-user/show-user.component';
 import { FormUserComponent } from '../users/form-user/form-user.component';
 import { ScreeningComponent } from '../screening/screening.component';
+import { ScreeningGuard } from '../screening/screening.guard';
+import { FinalizeComponent } from '../finalize/finalize.component';
 
 const routes: Routes = [
   {
@@ -20,23 +24,33 @@ const routes: Routes = [
       },
       {
         path: 'usuarios',
-        component: UserListComponent
+        component: UserListComponent,
+        canActivate: [UserGuard],
       },
       {
         path: 'users/new',
-        component: FormUserComponent
+        component: FormUserComponent,
+        canActivate: [UserGuard],
       },
       {
         path: 'users/:id/show',
-        component: ShowUserComponent
+        component: ShowUserComponent,
+        canActivate: [UserGuard],
       },
       {
         path: 'users/:id/update',
-        component: FormUserComponent
+        component: FormUserComponent,
+        canActivate: [UserGuard],
       },
       {
         path: 'triagem',
-        component: ScreeningComponent
+        component: ScreeningComponent,
+        canActivate: [ScreeningGuard],
+      },
+      {
+        path: 'finalizar',
+        component: FinalizeComponent,
+        canActivate: [FinalizeGuard],
       }
     ]
   }
