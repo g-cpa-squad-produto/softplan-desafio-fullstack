@@ -1,3 +1,4 @@
+import { ListScreeningComponent } from './../screening/list-screening/list-screening.component';
 import { FinalizeGuard } from './../finalize/finalize.guard';
 import { UserGuard } from './../users/user.guard';
 import { UserListComponent } from './../users/user-list/user-list.component';
@@ -8,7 +9,6 @@ import { HomeComponent } from './home.component';
 import { AuthGuard } from '../../core/guard/auth.guard';
 import { ShowUserComponent } from '../users/show-user/show-user.component';
 import { FormUserComponent } from '../users/form-user/form-user.component';
-import { ScreeningComponent } from '../screening/screening.component';
 import { ScreeningGuard } from '../screening/screening.guard';
 import { FinalizeComponent } from '../finalize/finalize.component';
 
@@ -44,7 +44,7 @@ const routes: Routes = [
       },
       {
         path: 'triagem',
-        component: ScreeningComponent,
+        component: ListScreeningComponent,
         canActivate: [ScreeningGuard],
       },
       {

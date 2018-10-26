@@ -25,7 +25,7 @@ public @Data class Feedback {
 	private User user;
 	
 	@OneToOne(fetch = FetchType.EAGER)
-	private Process process;
+	private Proccess process;
 	
 	@Column(name="description")
 	private String description;

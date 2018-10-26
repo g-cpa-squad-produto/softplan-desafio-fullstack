@@ -1,11 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ScreeningComponent } from './screening.component';
+import { ListScreeningComponent } from './list-screening/list-screening.component';
+import { FormScreeningComponent } from './form-screening/form-screening.component';
+import { ShowScreeningComponent } from './show-screening/show-screening.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
   ],
-  declarations: [ScreeningComponent]
+  declarations: [ListScreeningComponent, FormScreeningComponent, ShowScreeningComponent]
 })
 export class ScreeningModule { }
