@@ -100,6 +100,7 @@ import com.agfgerador.autenticacao.service.UsuarioService;
        win.setAttribute("controller",this);
        super.doAfterCompose(win,"all");
        renderizarBandboxUsuario();
+       usuarioAux = (Usuario)session.getAttribute("usuarioLogado");
      }
 
  	@Override
@@ -295,14 +296,21 @@ import com.agfgerador.autenticacao.service.UsuarioService;
          valid = 2;
          ret = false;
        }
-       return ret;
+       if(perfil!=null && perfil.getId()==7) {
+		          		   
+	   }else if(perfil!=null && perfil.getId()==8) { 
+		   if((parecer.getDescricao()==null)||(parecer.getDescricao().equals(""))){
+		         valid = 3;
+		         ret = false;
+		       }
+	   }       return ret;
      }
 
      public void onClickbtSalvar() throws InterruptedException {
          Parecer comp = (Parecer) btSalvar(parecer, parecerService);
       	if(comp!=null){
            parecer = comp;
-           getTriadorFinalizador(false);
+           getTriadorFinalizador(false,false);
         }
         else {
          switch (valid) {
@@ -311,6 +319,9 @@ import com.agfgerador.autenticacao.service.UsuarioService;
            break;
            case 2:
              AGFComponente.showMessage("info","Informe o campo: PROCESSO.");
+           break;
+           case 3:
+               AGFComponente.showMessage("info","Informe o campo: PARECER.");
            break;
            }
          }
@@ -361,7 +372,7 @@ import com.agfgerador.autenticacao.service.UsuarioService;
        }else{
           parecer = new Parecer();
           btNovo();
-          getTriadorFinalizador(true);
+          getTriadorFinalizador(true,false);
        }
      }
 
@@ -388,11 +399,17 @@ import com.agfgerador.autenticacao.service.UsuarioService;
              }else {
                compAux.setId(Long.valueOf(idAux));
              }
-             compAux.setUsuario(new Usuario()); 
-             compAux.getUsuario().setNome(((Textbox) auxhead.getFellow("filtroUsuario")).getValue());
-             compAux.getUsuario().setId(0l);
+              
+             if(perfil!=null && perfil.getId()==8) {
+            	 compAux.setUsuario(usuarioAux);
+             }else {
+	             compAux.setUsuario(new Usuario());
+	             compAux.getUsuario().setNome(((Textbox) auxhead.getFellow("filtroUsuario")).getValue());
+	             compAux.getUsuario().setId(0l);
+             }
              compAux.setProcesso(new Processo()); 
              compAux.setProcesso(processo);
+             System.out.println("include filter descrição: "+((Textbox) auxhead.getFellow("filtroDescricao")).getValue());
              compAux.setDescricao(((Textbox) auxhead.getFellow("filtroDescricao")).getValue());
              compAux.setDtparecer(((Datebox) auxhead.getFellow("filtroDtparecer")).getValue() );
              Integer totalSize = 0;
@@ -402,7 +419,6 @@ import com.agfgerador.autenticacao.service.UsuarioService;
              paginacao.setActivePage(0);
              AGFPaginacao.btListaPaginacao(listbox, paginacao, pageSize, parecerService,totalSize,objsemid);
              AGFPaginacao.paginacao(listbox, paginacao, pageSize, 0, parecerService, objsemid,null);
-             limitarQuantidade();
           }
        }catch(Exception e){
           ListModel ls = new ListModelList();
@@ -422,7 +438,11 @@ import com.agfgerador.autenticacao.service.UsuarioService;
      public void carregarObjeto(Object obj) {
        parecer = (Parecer) obj;
        carregarObj(parecer);
-       getTriadorFinalizador(false);
+       if((parecer.getDescricao()==null)||(parecer.getDescricao().equals(""))){
+    	   getTriadorFinalizador(false,true);
+       }else {
+    	   getTriadorFinalizador(false,false);
+       }
      }
 
      public void setObjetoTelaForm() {
@@ -463,26 +483,6 @@ import com.agfgerador.autenticacao.service.UsuarioService;
            labelNomePoup.setValue("DESCRIÇÃO");
            toolbarButton.setLabel("Descrição do parecer");
         }
- 
-       public void limitarQuantidade() {
-          Parecer buscas = new Parecer();
-          buscas.setId(0l);
-          buscas.setUsuario(new Usuario()); 
-          buscas.getUsuario().setNome(((Textbox) auxhead.getFellow("filtroUsuario")).getValue());
-          buscas.getUsuario().setId(0l);
-          buscas.setProcesso(new Processo()); 
-          buscas.setProcesso(processo);
-          buscas.setDescricao(null);
-          buscas.setDtparecer(null);
-          Integer totalSize = parecerService.getNumberRecordsFilter(buscas).intValue();
-    	     if(totalSize!=null) {
-	            if(totalSize>=5) {
-	               barraFerramentasInclude.getFellow("btNovo").setVisible(false);
-	            }else {
-	               barraFerramentasInclude.getFellow("btNovo").setVisible(true);
-	            }
-          }
-       }
        
        //////////////////////////////////////////
        
@@ -498,18 +498,20 @@ import com.agfgerador.autenticacao.service.UsuarioService;
         		   listheaderDescricao.setVisible(false);
         		   listheaderDtparecer.setVisible(false);
         	   }else
-        	   if(perfil.getId()==8) {        		  
+        	   if(perfil.getId()==8) {       
+        		   barraFerramentasInclude.getFellow("btRemover").setVisible(false);
+        		   barraFerramentasInclude.getFellow("btNovo").setVisible(false);
+        		   divBandboxUsuario.setVisible(false);
         	   }
     	   }
        }
        
-       private void getTriadorFinalizador(Boolean b) {
-    	   if(perfil!=null) {
-	    	   if(perfil.getId()==7) {
-	    		   barraFerramentasInclude.getFellow("btSalvar").setVisible(b);        		   
-	    	   }else if(perfil.getId()==8) {        		  
+       private void getTriadorFinalizador(Boolean triador, Boolean finalizador) {
+	    	   if(perfil!=null && perfil.getId()==7) {
+	    		   barraFerramentasInclude.getFellow("btSalvar").setVisible(triador);        		   
+	    	   }else if(perfil!=null && perfil.getId()==8) { 
+	    		   barraFerramentasInclude.getFellow("btSalvar").setVisible(finalizador);
 	    	   }
-    	   }
        }
 
    }

@@ -57,8 +57,10 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
  import com.agfgerador.compartilhado.util.AGFComponente;
  import com.agfgerador.gerenciadorprocessos.domain.Processo;
  import com.agfgerador.gerenciadorprocessos.service.ProcessoService;
- import com.agfgerador.gerenciadorprocessos.domain.Pessoa;
- import com.agfgerador.gerenciadorprocessos.service.PessoaService;
+import com.agfgerador.gerenciadorprocessos.domain.Parecer;
+import com.agfgerador.gerenciadorprocessos.domain.Pessoa;
+import com.agfgerador.gerenciadorprocessos.service.ParecerService;
+import com.agfgerador.gerenciadorprocessos.service.PessoaService;
  import org.zkoss.zul.Listbox;
  import com.agfgerador.compartilhado.util.AGFBandbox;
  import org.zkoss.zul.Bandbox;
@@ -76,11 +78,15 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
      private List<ObjetoPadraoSemId> objsemid = null;
      private Processo compAux = new Processo();
      private int totalSize = 0;
-     private Integer pageSizeBandbox = 5;
+     private Integer pageSizeBandbox = 5, objnull = 0;
      private UsuarioPerfilService usuarioPerfilService;
      private UsuarioPerfil usuarioperfil = new UsuarioPerfil();
      private Perfil perfil = new Perfil();
      private Tab tabParecer;
+     private ParecerService parecerService;
+     private Intbox intboxNumprocesso;
+     private Textbox textboxObs;
+     private A labelPessoa;
      
 
    
@@ -104,7 +110,7 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
        super.doAfterCompose(win,true,"all");
        renderizarBandboxPessoa();
        btInformacoes.setVisible(false);
-       perfil = getTriadorFinalizadorGeral();
+       //perfil = getTriadorFinalizadorGeral();
      }
 
      public void renderizarListaPrincipal() {
@@ -312,7 +318,7 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
          Processo comp = (Processo) btSalvar(processo, processoService);
       	if(comp!=null){
            processo = comp;
-           getTriadorFinalizador(false);
+           triadorFinalizador(false);
         }
         else {
          switch (valid) {
@@ -333,7 +339,7 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
        compAux = new Processo();
        String idAux = 	((Textbox) auxhead.getFellow("filtroCodigo")).getValue();
        if(idAux.equals("")){
-         compAux.setId(0L);
+         compAux.setId(0l);
        }else {
          compAux.setId(Long.valueOf(idAux));
        }
@@ -343,10 +349,15 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
        compAux.setDtabertura(((Datebox) auxhead.getFellow("filtroDtabertura")).getValue() );
        compAux.setObs(((Textbox) auxhead.getFellow("filtroObs")).getValue());
        compAux.setNumprocesso(((Intbox) auxhead.getFellow("filtroNumprocesso")).getValue());
-       int totalSize = 0;
-       objs = new ArrayList<ObjetoPadrao>();
-       objs = processoService.filter(compAux, pageSize, AGFPaginacao.getPagePaginacao(new Paging(),pageSize,0));
-       totalSize = processoService.getNumberRecordsFilter(compAux).intValue();
+       totalSize = 0;
+       if(perfil!=null && perfil.getId()==8) {  
+    	   parecerPendente(compAux, false);
+    	   objnull = 1;
+       }else {
+    	   objs = new ArrayList<ObjetoPadrao>();
+    	   objs = processoService.filter(compAux, pageSize, AGFPaginacao.getPagePaginacao(new Paging(),pageSize,0));
+    	   totalSize = processoService.getNumberRecordsFilter(compAux).intValue();
+       }
        paginacao.setActivePage(0);
        AGFPaginacao.btListaPaginacao(listbox, paginacao, pageSize, processoService,totalSize,objs);
        AGFPaginacao.paginacao(listbox, paginacao, pageSize, 0, processoService, objs,null);
@@ -356,7 +367,7 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
        processo = new Processo();
        btNovo();
        controllerParecer.onClickbtLista();
-       getTriadorFinalizador(true);
+       triadorFinalizador(true);
      }
 
      public void onClickbtCancelar() {
@@ -369,15 +380,32 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
 
      public void onClickbtLista() {
        btLista();
-       AGFPaginacao.btListaPaginacao(listbox, paginacao, pageSize, processoService, null, null);
-       objs = null;
+       perfil = triadorFinalizadorGeral();
+	  		 if(perfil!=null && perfil.getId()==8) {  
+	  			parecerPendente(null, false);
+		  		AGFPaginacao.btListaPaginacao(listbox, paginacao, pageSize, processoService, totalSize, objs);
+		  		objnull = 0;
+		     }else {
+		    	AGFPaginacao.btListaPaginacao(listbox, paginacao, pageSize, processoService, null, null);
+		     }
+	  		objs = null;
      }
 
 
      public void onPaging$paginacao() {
-       if(objs!=null){
-          objs = processoService.filter(compAux, pageSize, AGFPaginacao.getPagePaginacao(paginacao,pageSize,paginaAnterior));
-       }
+       if(perfil!=null && perfil.getId()==8) {
+    	   if(objnull==0){
+    		   parecerPendente(null, true);
+    		   objnull = 0;
+    	   }else {
+    		   parecerPendente(compAux, true);
+    		   objnull = 1;
+    	   }    	  
+       }else {
+	       if(objs!=null){
+	          objs = processoService.filter(compAux, pageSize, AGFPaginacao.getPagePaginacao(paginacao,pageSize,paginaAnterior));
+	       }
+       }    
        AGFPaginacao.paginacao(listbox, paginacao, pageSize, paginaAnterior, processoService, objs,null);
      }
 
@@ -385,7 +413,7 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
        processo = (Processo) obj;
        carregarObj(processo);
        controllerParecer.onClickbtLista();
-       getTriadorFinalizador(false);
+       triadorFinalizador(false);
      }
 
      public void setObjetoTelaForm() {
@@ -412,11 +440,6 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
      @Override
      public Boolean removeDependencias(ObjetoPadraoSemId obj) {
         return null;
-     }
-     
-     public void onClick$aInfopessoa(){
-        labelNomePoup.setValue("PESSOA");
-        toolbarButton.setLabel("Pode se Física / Jurídica");
      }
  
      public void onClick$aInfodtabertura(){
@@ -452,38 +475,79 @@ import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
      }
      //////////////////////////////////
      
-     private Perfil getTriadorFinalizadorGeral() {
+     private Perfil triadorFinalizadorGeral() {
          UsuarioPerfil usuperf = new UsuarioPerfil();
          usuperf.setId(0l);
          usuperf.setPerfil(new Perfil());
          usuperf.getPerfil().setNome(null);
          usuperf.getPerfil().setId(0l);
-         usuperf.setUsuario((Usuario)session.getAttribute("usuarioLogado"));
+         usuperf.setUsuario(usuarioAux);
          usuperf.setAtivo(null);
          usuperf.setAdministrador(null);
         for(ObjetoPadrao temp:usuarioPerfilService.filter(usuperf)) {
       	   System.out.println("perfil: "+((UsuarioPerfil)temp).getPerfil().getNome()+", Nome Usuário: "+((UsuarioPerfil)temp).getUsuario().getNome());
       	   if(((UsuarioPerfil)temp).getPerfil().getId()==7) {
-      		   System.out.println("id do perfil: "+((UsuarioPerfil)temp).getPerfil().getId());
       		   btRemover.setVisible(false);
-      		 tabParecer.setLabel("USUÁRIOS QUE REALIZARAM O PARECER");
-      		   //btInformacoes.setVisible(false);
+      		   tabParecer.setLabel("USUÁRIOS QUE REALIZARAM O PARECER");
       		   return ((UsuarioPerfil)temp).getPerfil();
       	   }else
       	   if(((UsuarioPerfil)temp).getPerfil().getId()==8) {
+      		   btRemover.setVisible(false);
+      		   btSalvar.setVisible(false);
+      		   btNovo.setVisible(false);
+      		   tabParecer.setLabel("INFORME O SEU PARECER");
+      		   intboxNumprocesso.setDisabled(true);
+      		   labelPessoa.setDisabled(true);
+      		   longboxPessoa.setDisabled(true);
+      		   bandboxPessoa.setDisabled(true);
+      		   dateboxDtabertura.setDisabled(true);
+      		   textboxObs.setDisabled(true);
       		   return ((UsuarioPerfil)temp).getPerfil();
       	   }
          }
         return null;
      }
-     
-     private void getTriadorFinalizador(Boolean b) {
+
+     private void triadorFinalizador(Boolean b) {
   	   if(perfil!=null) {
 	  		 if(perfil.getId() == 7) {
 	      	   btSalvar.setVisible(b);
-	         }else if(perfil.getId()==8) {        		  
+	         }else if(perfil.getId()==8) { 
+	           btRemover.setVisible(false);
+	      	   btSalvar.setVisible(false);
+	      	   btNovo.setVisible(false); 
 	    	 }
   	   }
      }
+     
+     private void parecerPendente(Processo pro, Boolean pag) {
+    	 List<ObjetoPadraoSemId> listaparecer = new ArrayList<ObjetoPadraoSemId>();
+    	 Parecer parecer = new Parecer();
+		 	parecer.setId(0l);
+		 	parecer.setUsuario(usuarioAux);
+		 	if(pro==null) {
+			 	parecer.setProcesso(new Processo());
+			 	//parecer.getProcesso().setObs(null);
+			 	parecer.getProcesso().setId(0l);
+			 	parecer.getProcesso().setPessoa(new Pessoa());
+			 	
+		 	}else {
+		 		parecer.setProcesso(pro);
+		 	}
+		 	parecer.setDescricao(" ");
+		 	parecer.setDtparecer(null);
+		 	totalSize = parecerService.getNumberRecordsFilter(parecer).intValue();
+		 	objs = new ArrayList<ObjetoPadrao>();
+		 	if(totalSize>0) {
+		 		if(pag) {
+		 			listaparecer = parecerService.filter(parecer,pageSize,AGFPaginacao.getPagePaginacao(paginacao,pageSize,paginaAnterior));
+		 		}else {
+		 			listaparecer = parecerService.filter(parecer,pageSize,0);
+		 		}
+			 	for(ObjetoPadraoSemId temp: listaparecer) {
+			 		objs.add(((Parecer)temp).getProcesso());
+			 	}
+		 	}
+     	}
 
    }

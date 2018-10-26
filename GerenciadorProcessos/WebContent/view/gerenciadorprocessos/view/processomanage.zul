@@ -42,7 +42,6 @@
          </div>
          <div class="new-col" width="380px"> 
             <a href="#" id="labelPessoa">Pessoa*<span class="glyphicon glyphicon-link"></span></a>
-            <a id="aInfopessoa"  popup="msg" class="glyphicon glyphicon-info-sign" style="margin-bottom: 3px;"></a>
             <div class="new-col-link">
                <longbox id="longboxPessoa" class="form-control input-sm" />
                <bandbox id="bandboxPessoa" autodrop="true"> 

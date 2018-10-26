@@ -12,9 +12,12 @@
  import org.springframework.transaction.annotation.Transactional;
  import com.agfgerador.compartilhado.domain.ObjetoPadraoSemId;
  import org.hibernate.internal.SessionImpl;
- import java.sql.Connection;
+import org.hibernate.sql.JoinType;
+
+import java.sql.Connection;
  import java.sql.PreparedStatement;
  import com.agfgerador.gerenciadorprocessos.domain.Parecer;
+import com.agfgerador.gerenciadorprocessos.domain.Processo;
 
 
    @Repository
@@ -42,7 +45,7 @@
 
      public void update(ObjetoPadraoSemId obj) {
        ObjetoPadraoSemId objofi = loadById(obj.getId());
-       String sql = "UPDATE parecer SET usuario_id = "+((Parecer)obj).getUsuario().getId()+" , processo_id = "+((Parecer)obj).getProcesso().getId()+" , descricao = \""+((Parecer)obj).getDescricao()+"\" , dtparecer = '"+((Parecer)obj).getDtparecer()+"' WHERE id = "+((Parecer)objofi).getId();
+       String sql = "UPDATE parecer SET usuario_id = "+((Parecer)obj).getUsuario().getId()+" , processo_id = "+((Parecer)obj).getProcesso().getId()+" , descricao = \""+((Parecer)obj).getDescricao()+"\" WHERE id = "+((Parecer)objofi).getId();
         SessionImpl session = (SessionImpl) entityManager.getDelegate();
        Connection con = session.connection();
        try {
@@ -113,9 +116,41 @@
              criteria.createAlias("processo", "processo");
           }
           criteria.add(Restrictions.eq("processo.id", ((Parecer)obj).getProcesso().getId()));
+          x1=1;
        }
-       if((((Parecer)obj).getDescricao() != null)&&(!((Parecer)obj).getDescricao().equals(""))) 
-         criteria.add(Restrictions.ilike("descricao",((Parecer)obj).getDescricao()+"%")); 
+       
+       ////////////////////////////////////////////////////////
+       if(((Parecer)obj).getProcesso().getNumprocesso() != null) {
+           if(x1==0) {
+              criteria.createAlias("processo", "processo");
+           }
+           criteria.add(Restrictions.eq("processo.numprocesso", ((Parecer)obj).getProcesso().getNumprocesso()));
+           x1=1;
+        }
+       
+       if((((Parecer)obj).getProcesso().getDtabertura()!= null)&&(!((Parecer)obj).getProcesso().getDtabertura().equals(""))) {
+           if(x1==0) {
+              criteria.createAlias("processo", "processo");
+           }
+           criteria.add(Restrictions.eq("processo.dtabertura", ((Parecer)obj).getProcesso().getDtabertura()));
+           x1=1;
+        }
+       
+       if((((Parecer)obj).getProcesso().getPessoa().getNome()!= null)&&(!((Parecer)obj).getProcesso().getPessoa().getNome().equals(""))) {
+           if(x1==0) {
+              criteria.createAlias("processo", "processo");
+           }
+           criteria.createCriteria("processo.pessoa","p",JoinType.LEFT_OUTER_JOIN);
+           criteria.add(Restrictions.ilike("p.nome", ((Parecer)obj).getProcesso().getPessoa().getNome()+"%"));
+           x1=1;
+        }
+       ///////////////////////////////////////////////////////////////////
+       
+       if((((Parecer)obj).getDescricao() != null)&&(!((Parecer)obj).getDescricao().replaceAll(" ","").equals(""))) 
+           criteria.add(Restrictions.ilike("descricao",((Parecer)obj).getDescricao()+"%")); 
+         
+       if((((Parecer)obj).getDescricao() != null)&&(((Parecer)obj).getDescricao().equals(" "))) 
+       criteria.add(Restrictions.isNull("descricao"));
 
        if((((Parecer)obj).getDtparecer()!=null)&&(!((Parecer)obj).getDtparecer().equals("")))
          criteria.add(Restrictions.eq("dtparecer", ((Parecer)obj).getDtparecer()));
@@ -164,9 +199,40 @@
              criteria.createAlias("processo", "processo");
           }
           criteria.add(Restrictions.eq("processo.id", ((Parecer)obj).getProcesso().getId()));
+          x3=1;
        }
-       if((((Parecer)obj).getDescricao() != null)&&(!((Parecer)obj).getDescricao().equals(""))) 
-         criteria.add(Restrictions.ilike("descricao",((Parecer)obj).getDescricao()+"%")); 
+       ////////////////////////////////////////////////////////
+       if(((Parecer)obj).getProcesso().getNumprocesso() != null) {
+           if(x3==0) {
+              criteria.createAlias("processo", "processo");
+           }
+           criteria.add(Restrictions.eq("processo.numprocesso", ((Parecer)obj).getProcesso().getNumprocesso()));
+           x3=1;
+        }
+       
+       if((((Parecer)obj).getProcesso().getDtabertura()!= null)&&(!((Parecer)obj).getProcesso().getDtabertura().equals(""))) {
+           if(x3==0) {
+              criteria.createAlias("processo", "processo");
+           }
+           criteria.add(Restrictions.eq("processo.dtabertura", ((Parecer)obj).getProcesso().getDtabertura()));
+           x3=1;
+        }
+       
+       if((((Parecer)obj).getProcesso().getPessoa().getNome()!= null)&&(!((Parecer)obj).getProcesso().getPessoa().getNome().equals(""))) {
+           if(x3==0) {
+              criteria.createAlias("processo", "processo");
+           }
+           criteria.createCriteria("processo.pessoa","p",JoinType.LEFT_OUTER_JOIN);
+           criteria.add(Restrictions.ilike("p.nome", ((Parecer)obj).getProcesso().getPessoa().getNome()+"%"));
+           x3=1;
+        }
+       ///////////////////////////////////////////////////////////////////
+       
+       if((((Parecer)obj).getDescricao() != null)&&(!((Parecer)obj).getDescricao().replaceAll(" ","").equals(""))) 
+           criteria.add(Restrictions.ilike("descricao",((Parecer)obj).getDescricao()+"%")); 
+         
+       if((((Parecer)obj).getDescricao() != null)&&(((Parecer)obj).getDescricao().equals(" "))) 
+       criteria.add(Restrictions.isNull("descricao"));
 
        if((((Parecer)obj).getDtparecer()!=null)&&(!((Parecer)obj).getDtparecer().equals("")))
          criteria.add(Restrictions.eq("dtparecer", ((Parecer)obj).getDtparecer()));
@@ -206,10 +272,40 @@
              criteria.createAlias("processo", "processo");
           }
           criteria.add(Restrictions.eq("processo.id", ((Parecer)obj).getProcesso().getId()));
+          x5=1;
        }
-       if((((Parecer)obj).getDescricao() != null)&&(!((Parecer)obj).getDescricao().equals(""))) 
-         criteria.add(Restrictions.ilike("descricao",((Parecer)obj).getDescricao()+"%")); 
-
+       ////////////////////////////////////////////////////////
+       if(((Parecer)obj).getProcesso().getNumprocesso() != null) {
+           if(x5==0) {
+              criteria.createAlias("processo", "processo");
+           }
+           criteria.add(Restrictions.eq("processo.numprocesso", ((Parecer)obj).getProcesso().getNumprocesso()));
+           x5=1;
+        }
+       
+       if((((Parecer)obj).getProcesso().getDtabertura()!= null)&&(!((Parecer)obj).getProcesso().getDtabertura().equals(""))) {
+           if(x5==0) {
+              criteria.createAlias("processo", "processo");
+           }
+           criteria.add(Restrictions.eq("processo.dtabertura", ((Parecer)obj).getProcesso().getDtabertura()));
+           x5=1;
+        }
+       
+       if((((Parecer)obj).getProcesso().getPessoa().getNome()!= null)&&(!((Parecer)obj).getProcesso().getPessoa().getNome().equals(""))) {
+           if(x5==0) {
+              criteria.createAlias("processo", "processo");
+           }
+           criteria.createCriteria("processo.pessoa","p",JoinType.LEFT_OUTER_JOIN);
+           criteria.add(Restrictions.ilike("p.nome", ((Parecer)obj).getProcesso().getPessoa().getNome()+"%"));
+           x5=1;
+        }
+       ///////////////////////////////////////////////////////////////////
+       if((((Parecer)obj).getDescricao() != null)&&(!((Parecer)obj).getDescricao().replaceAll(" ","").equals(""))) 
+           criteria.add(Restrictions.ilike("descricao",((Parecer)obj).getDescricao()+"%")); 
+         
+       if((((Parecer)obj).getDescricao() != null)&&(((Parecer)obj).getDescricao().equals(" "))) 
+       criteria.add(Restrictions.isNull("descricao"));
+       
        if((((Parecer)obj).getDtparecer()!=null)&&(!((Parecer)obj).getDtparecer().equals("")))
          criteria.add(Restrictions.eq("dtparecer", ((Parecer)obj).getDtparecer()));
 
