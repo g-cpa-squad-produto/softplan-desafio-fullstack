@@ -1,0 +1,22 @@
+.main-footer {
+    position: fixed;
+    bottom:0px;
+    width:100%;
+}
+
+button {
+    margin-left: 5px;
+}
+
+.table-actions {
+    width: 150px;
+    
+}
+
+.content-wrapper {
+    min-height: 510px
+}
+
+.form-padding {
+    padding-bottom: 40px;
+}
