@@ -16,7 +16,7 @@
               </div>
               <div class="row">
                 <div class="col-12">
-                  <form [formGroup]="formAssign" (submit)="assign()">
+                  <form [formGroup]="formAssign" >
                     <div class="form-row">
                       <div class="form-group col-md-3">
                         <label for="name">Código:</label>
@@ -25,20 +25,24 @@
                       </div>
                       <div class="form-group col-md-9">
                         <label for="name">Descricao:</label>
-                        <input type="text" formControlName="name" class="form-control" autocomplete="off" id="password"
+                        <input type="text" formControlName="name" class="form-control" autocomplete="off" id="name"
                           placeholder="Descricao">
                       </div>
                     </div>
                     <div class="form-row">
+                      <label for="name">Status:</label>
+                      <input type="text" formControlName="status" class="form-control" autocomplete="off" id="status"
+                        placeholder="Descricao">
+                    </div>
+                    <div class="form-row">
                       <div class="form-group col-md-12">
-                        <label for="profile">Perfil:</label>
-                        <select id="profile" formControlName="status" class="form-control">
-                          <option >--SELECIONE--</option>
-                          <option *ngFor="let s of status">{{s}}</option>
+                        <label for="users">Atribuir processos para:</label>
+                        <select formControlName="users" multiple="true" class="form-control" id="users">
+                          <option [ngValue]="s" *ngFor="let s of users" >{{s.name}}</option>
                         </select>
                       </div>
                     </div>
-                    <button type="submit" [disabled]="formProcess.invalid" class="btn btn-primary">Salvar</button>
+                    <button (click)="assign()" [disabled]="formAssign.invalid" class="btn btn-primary">Salvar</button>
                   </form>
                 </div>
               </div>

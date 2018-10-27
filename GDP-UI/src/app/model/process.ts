@@ -1,3 +1,4 @@
+import { User } from './user';
 import { Feedback } from './feedback';
 import { StatusProcess } from './status-process';
 export class Process {
@@ -7,6 +8,7 @@ export class Process {
   name: string;
   status: StatusProcess;
   feedbacks: Feedback[];
+  users: User[];
 
   constructor(init?: Partial<Process>) {
     if (init) {

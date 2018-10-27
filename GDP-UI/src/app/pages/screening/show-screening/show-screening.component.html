@@ -35,23 +35,19 @@
         <div class="card-body">
           <h5 class="card-title">
             <div class="row">
-              <div class="col-md-6 ">Pareceres</div>
+              <div class="col-md-6 ">Atribuído Para :</div>
             </div>
           </h5>
           <div class="list-group">
-            <a class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let feed of process.feedbacks">
+            <a class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let user of process.users">
               <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">List group item heading</h5>
-                <small>3 days ago</small>
+                <h5 class="mb-1">{{user.name}}</h5>
               </div>
-              <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius
-                blandit.</p>
-              <small>Donec id elit non mi porta.</small>
+              <p class="mb-1">{{getReport(user)}}</p>
             </a>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </div>

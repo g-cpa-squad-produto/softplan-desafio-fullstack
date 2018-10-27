@@ -38,6 +38,9 @@ public @Data class Proccess {
 	@OneToMany(cascade = CascadeType.ALL,  orphanRemoval = true )
 	private List<Feedback> feedbacks;
 	
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<User> users;
+	
 
 	
 }
