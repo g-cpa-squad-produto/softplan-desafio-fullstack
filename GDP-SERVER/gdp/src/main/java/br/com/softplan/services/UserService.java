@@ -3,9 +3,9 @@ package br.com.softplan.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import br.com.softplan.exceptions.UserNotFoundException;
 import br.com.softplan.models.User;
 import br.com.softplan.models.UserDTO;
 import br.com.softplan.repository.IUserRepository;
@@ -42,7 +42,7 @@ public class UserService extends GenericService<User, Long> {
 		Optional<User> aux = this.repository.findById(t.getId());
 		
 		if (aux == null) {
-			new UsernameNotFoundException("User Not Found");
+			new UserNotFoundException("User Not Found");
 		}
 		
 		t.setPassword(aux.get().getPassword());

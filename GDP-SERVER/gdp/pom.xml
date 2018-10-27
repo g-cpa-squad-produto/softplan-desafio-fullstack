@@ -6,7 +6,7 @@
 
 	<groupId>br.com.softplan</groupId>
 	<artifactId>gdp</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>01</version>
 	<packaging>jar</packaging>
 
 	<name>gdp</name>
