@@ -15,6 +15,7 @@ import { FinalizeComponent } from '../finalize/finalize.component';
 import { ListScreeningResolver } from '../screening/list-screening/list-screening.resolver';
 import { ShowScreeningResolver } from '../screening/show-screening/show-screening.resolver';
 import { FormScreeningComponent } from '../screening/form-screening/form-screening.component';
+import { FormAssignComponent } from '../screening/form-assign/form-assign.component';
 
 const routes: Routes = [
   {
@@ -71,6 +72,14 @@ const routes: Routes = [
         path: 'triagem/:id/update',
         component: FormScreeningComponent,
         canActivate: [ScreeningGuard]
+      },
+      {
+        path: 'triagem/:id/atribuir',
+        component: FormAssignComponent,
+        canActivate: [ScreeningGuard],
+        resolve: {
+          process: ShowScreeningResolver
+       }
       },
       {
         path: 'finalizar',

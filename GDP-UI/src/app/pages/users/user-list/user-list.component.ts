@@ -1,11 +1,9 @@
-import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { UserDTO } from 'src/app/model/user.dto';
 import { User } from 'src/app/model/user';
 import { UserService } from 'src/app/core/service/user.service';
 import { TokenService } from 'src/app/core/token/token.service';
 import { MassegesService } from 'src/app/core/messeges/messages.service';
-import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-list',
@@ -19,7 +17,6 @@ export class UserListComponent implements OnInit {
 
   constructor(private userService: UserService,
          private tokenService: TokenService,
-         private route: Router,
          private massagesService: MassegesService
     ) { }
 
