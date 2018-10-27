@@ -253,7 +253,7 @@ public abstract class ControllerPadrao extends GenericForwardComposer implements
 		return obj;
 	}
 
-	public void onDoubleClick$listbox()
+	public void onClick$listbox()
 	{	ObjetoPadrao obj  = controllerComponente.onDoubleClick$listbox(listbox);
 		if(obj!=null){
 			carregarObjeto(obj);  

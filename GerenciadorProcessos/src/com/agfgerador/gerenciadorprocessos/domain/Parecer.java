@@ -1,13 +1,8 @@
  package com.agfgerador.gerenciadorprocessos.domain;
 
  import javax.persistence.JoinColumn;
- import javax.persistence.JoinColumns;
- import javax.persistence.Lob;
  import javax.persistence.ManyToOne;
  import javax.persistence.Column;
- import java.util.Date;
- import javax.persistence.TemporalType;
- import javax.persistence.Temporal;
  import javax.persistence.Entity;
  import javax.persistence.Table;
  import org.hibernate.annotations.Type;

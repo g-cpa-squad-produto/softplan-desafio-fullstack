@@ -8,51 +8,22 @@
  import org.zkoss.zul.ListModel;
  import org.zkoss.zul.ListModelList;
  import org.zkoss.zul.Listcell;
- import org.zkoss.zk.ui.event.UploadEvent;
- import org.zkoss.util.media.AMedia;
  import org.zkoss.zul.Listitem;
  import org.zkoss.zul.ListitemRenderer;
  import com.agfgerador.compartilhado.domain.ObjetoPadraoSemId;
  import org.zkoss.zul.Textbox;
  import org.zkoss.zul.Intbox;
- import org.zkoss.zul.Image;
-  import org.zkoss.zul.Window;
- import org.zkoss.zk.ui.util.Clients;
  import org.zkoss.zul.Messagebox;
- import java.util.Map;
- import org.zkoss.util.media.Media;
- import org.zkforge.json.simple.JSONArray;
- import org.zkoss.zul.A;
- import org.zkoss.zul.Div;
- import java.awt.image.BufferedImage;
- import com.agfgerador.compartilhado.util.AGFImagem;
- import com.agfgerador.compartilhado.controller.ICam;
- import com.agfgerador.compartilhado.controller.IModal;
- import com.agfgerador.compartilhado.util.AGFJs;
- import com.agfgerador.compartilhado.util.AGFModal;
- import org.zkoss.zul.Longbox;
- import org.zkoss.zul.api.Doublebox;
- import org.zkoss.zul.Datebox;
- import org.zkoss.zul.Timebox;
  import org.zkoss.zul.Checkbox;
- import org.zkoss.zul.Combobox;
- import java.text.SimpleDateFormat;
- import org.zkoss.zul.Iframe;
- import com.agfgerador.compartilhado.controller.ControllerAutenticacao;
  import com.agfgerador.compartilhado.util.AGFPaginacao;
  import com.agfgerador.compartilhado.controller.IPaginacao;
- import com.agfgerador.compartilhado.controller.IncludeBaseSemId;
  import com.agfgerador.compartilhado.controller.IncludeBase;
  import com.agfgerador.compartilhado.domain.ObjetoPadrao;
  import com.agfgerador.compartilhado.util.AGFComponente;
  import com.agfgerador.autenticacao.domain.Email;
  import com.agfgerador.autenticacao.service.EmailService;
  import com.agfgerador.autenticacao.domain.Parametros;
- import com.agfgerador.autenticacao.service.ParametrosService;
- import org.zkoss.zul.Listbox;
- import com.agfgerador.compartilhado.util.AGFBandbox;
- import org.zkoss.zul.Bandbox;
-
+ 
    public class IncludeEmail extends IncludeBase implements IPaginacao{
     private static final long serialVersionUID = 1L;
 
@@ -61,10 +32,7 @@
      private EmailService emailService;
      private int valid;
      private List<ObjetoPadrao> objs = null;
-     private List<ObjetoPadraoSemId> objsemid = null;
      private Email compAux = new Email();
-     private int totalSize = 0;
-     private Integer pageSizeBandbox = 5;
 
 
      public void doAfterCompose(Component win) throws Exception {

@@ -6,11 +6,7 @@ import org.zkoss.zul.Paging;
 import org.zkoss.zul.Tab;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zul.ListModel;
-import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listcell;
-import org.zkoss.zk.ui.event.UploadEvent;
-import org.zkoss.util.media.AMedia;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.ListitemRenderer;
 import com.agfgerador.compartilhado.domain.ObjetoPadraoSemId;
@@ -18,38 +14,15 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Image;
 import org.zkoss.zul.Include;
-
 import com.agfgerador.autenticacao.domain.Perfil;
-import com.agfgerador.autenticacao.domain.Permissao;
-import com.agfgerador.autenticacao.domain.Usuario;
 import com.agfgerador.autenticacao.domain.UsuarioPerfil;
-import com.agfgerador.autenticacao.service.PermissaoService;
 import com.agfgerador.autenticacao.service.UsuarioPerfilService;
 import com.agfgerador.compartilhado.controller.ControllerAGF;
-import com.agfgerador.compartilhado.controller.ControllerAGFSemId;
-import org.zkoss.zul.Window;
-import org.zkoss.zk.ui.util.Clients;
-import org.zkoss.zul.Messagebox;
-import java.util.Map;
-import org.zkoss.util.media.Media;
-import org.zkforge.json.simple.JSONArray;
-import org.zkoss.zul.A;
-import org.zkoss.zul.Div;
-import java.awt.image.BufferedImage;
 import com.agfgerador.compartilhado.util.AGFImagem;
-import com.agfgerador.compartilhado.controller.ICam;
-import com.agfgerador.compartilhado.controller.IModal;
-import com.agfgerador.compartilhado.util.AGFJs;
-import com.agfgerador.compartilhado.util.AGFModal;
 import org.zkoss.zul.Longbox;
-import org.zkoss.zul.api.Doublebox;
 import org.zkoss.zul.Datebox;
-import org.zkoss.zul.Timebox;
 import org.zkoss.zul.Checkbox;
-import org.zkoss.zul.Combobox;
 import java.text.SimpleDateFormat;
-import org.zkoss.zul.Iframe;
-import com.agfgerador.compartilhado.controller.ControllerAutenticacao;
 import com.agfgerador.compartilhado.util.AGFPaginacao;
 import com.agfgerador.compartilhado.controller.IPaginacao;
 import com.agfgerador.compartilhado.controller.IFilhas;
@@ -67,6 +40,10 @@ import org.zkoss.zul.Bandbox;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Toolbarbutton;
 
+/**ProcessoController - Classe para controle das funções da View processomanage.zul.
+ * 
+ * @author Arthur Freire
+ */
 public class ProcessoController extends ControllerAGF implements IPaginacao,IFilhas{
 	private static final long serialVersionUID = 1L;
 
@@ -74,12 +51,10 @@ public class ProcessoController extends ControllerAGF implements IPaginacao,IFil
 	private ProcessoService processoService;
 	private int valid;
 	private List<ObjetoPadrao> objs = null;
-	private List<ObjetoPadraoSemId> objsemid = null;
 	private Processo compAux = new Processo();
 	private int totalSize = 0;
 	private Integer pageSizeBandbox = 5, objnull = 0;
 	private UsuarioPerfilService usuarioPerfilService;
-	private UsuarioPerfil usuarioperfil = new UsuarioPerfil();
 	private Perfil perfil = new Perfil();
 	private Tab tabParecer;
 	private ParecerService parecerService;
@@ -98,6 +73,11 @@ public class ProcessoController extends ControllerAGF implements IPaginacao,IFil
 	private Toolbarbutton toolbarButton;
 	private Datebox dateboxDtabertura;
 
+	/**Inicializa todas as funções da classe controller 
+	 * 
+	 * @author Arthur Freire
+	 * @param win Componente - Dados que será usado na view para iniciar a classe controller. 
+	 */
 	public void doAfterCompose(Component win) throws Exception {
 		win.setAttribute("controller",this);
 		win.setAttribute("nomeTela", "Processo");
@@ -107,7 +87,10 @@ public class ProcessoController extends ControllerAGF implements IPaginacao,IFil
 		btInformacoes.setVisible(false);
 		//perfil = getTriadorFinalizadorGeral();
 	}
-
+	/**Método aonde é informado os códigos que insere os valores na listagem da view.
+	 * 
+	 * @author Arthur Freire      
+	 */
 	public void renderizarListaPrincipal() {
 		listbox.setItemRenderer(new ListitemRenderer() {
 			public void render(Listitem arg0, Object arg1) throws Exception {
@@ -136,6 +119,11 @@ public class ProcessoController extends ControllerAGF implements IPaginacao,IFil
 		});
 	}
 
+	/**Método aonde é informado os códigos que seram inicializado 
+	 * as relações que será usado na formação da view. 
+	 * 
+	 * @author Arthur Freire
+	 */
 	public void inicializarRelacoesNpara1() {
 
 	}
@@ -143,19 +131,35 @@ public class ProcessoController extends ControllerAGF implements IPaginacao,IFil
 	/* 
 	 * BandBox Pessoa - Arthur Freire 
 	 */ 
+	/**Método aonde redireciona para a tela de Pessoa 
+	 * 
+	 * @author Arthur Freire
+	 * @deprecated
+	 */
 	public void onClick$labelPessoa(){
 		labelLink("pessoa", null);
 	}
 
+	/**Método que busca pelo id do objeto do Bandbox Pessoa. 
+	 * 
+	 * @author Arthur Freire
+	 */
 	public void onOK$longboxPessoa(){
 		pessoa = new Pessoa();
 		setCompPessoa((Pessoa)AGFBandbox.onOKLongbox(longboxPessoa, pessoaBandbox, pessoaService));
 	}
 
+	/**Método ao aperta enter no Bandbox Pessoa. 
+	 * 
+	 * @author Arthur Freire
+	 */
 	public void onOK$bandboxPessoa(){
 		onChange$bandboxPessoa();
 	}
-
+	/**Método quando ouver uma mudança no Bandbox Pessoa. 
+	 * 
+	 * @author Arthur Freire
+	 */
 	public void onChange$bandboxPessoa(){
 		pessoa.setNome(bandboxPessoa.getValue());
 		inicRecepPessoa();
@@ -163,36 +167,55 @@ public class ProcessoController extends ControllerAGF implements IPaginacao,IFil
 		totalSize = pessoaService.getNumberRecordsFilter(pessoa).intValue();
 		AGFBandbox.onChange(bandboxPessoa, listboxPessoa, pessoaService, paginacaoPessoa, pageSizeBandbox, totalSize, objs);
 	}
-
+	/**Método quando abrir Bandbox Pessoa. 
+	 * 
+	 * @author Arthur Freire
+	 */
 	public void onOpen$bandboxPessoa(){
 		pessoa.setNome(null);
 		listaPessoas();
 	}
-
+	/**Método ao clicar Bandbox Pessoa. 
+	 * 
+	 * @author Arthur Freire
+	 */
 	public void onClick$listboxPessoa(){	
 		pessoa.setNome(null);
 		setCompPessoa((Pessoa)AGFBandbox.onClickList(bandboxPessoa, pessoaBandbox, listboxPessoa));
 	}
-
+	/**Método de listar os objetos da Bandbox Pessoa. 
+	 * 
+	 * @author Arthur Freire
+	 */
 	public void listaPessoas(){
 		inicRecepPessoa();
 		objs = pessoaService.filter(pessoa, pageSizeBandbox, AGFPaginacao.getPagePaginacao(new Paging(),pageSizeBandbox,0));
 		totalSize = pessoaService.getNumberRecordsFilter(pessoa).intValue();
 		AGFBandbox.listaElementos(listboxPessoa, pessoaService, paginacaoPessoa, pageSizeBandbox, totalSize, objs);
 	}
-
+	/**Método dos botões de paginação do Bandbox pessoa. 
+	 * 
+	 * @author Arthur Freire
+	 */
 	public void onPaging$paginacaoPessoa(){
 		inicRecepPessoa();
 		objs = pessoaService.filter(pessoa, pageSizeBandbox, AGFPaginacao.getPagePaginacao(paginacaoPessoa,pageSizeBandbox,paginaAnterior));
 		AGFBandbox.onPaging(null, listboxPessoa, pessoaService, paginacaoPessoa, pageSizeBandbox, paginaAnterior, objs);
 	}
-
+	/**Método inicializar o objeto e variiaveis do objeto do cambobox pessoa . 
+	 * 
+	 * @author Arthur Freire
+	 */
 	public void inicRecepPessoa(){
 		pessoa.setId(0l);
 		totalSize = 0;
 		objs = new ArrayList<ObjetoPadrao>();
 	}
-
+	/**Método para guarda o objeto escolhido para o Bandbox e mostrar na view os dados que foi selecionado. 
+	 * 
+	 * @author Arthur Freire
+	 * @param p Pessoa - Objeto do Bandbox Pessoa.
+	 */
 	public void setCompPessoa(Pessoa p){
 		if(p!=null){	
 			pessoaBandbox = p;
@@ -205,7 +228,10 @@ public class ProcessoController extends ControllerAGF implements IPaginacao,IFil
 			bandboxPessoa.setValue(null); 
 		}
 	}
-
+	/**Método aonde é informado os códigos que insere os valores das variaveis no Bandbox Pessoa.
+	 * 
+	 * @author Arthur Freire      
+	 */
 	public void renderizarBandboxPessoa(){
 		listboxPessoa.setItemRenderer(new ListitemRenderer() {
 			public void render(Listitem arg0, Object arg1) throws Exception {
@@ -239,10 +265,13 @@ public class ProcessoController extends ControllerAGF implements IPaginacao,IFil
 	}
 
 	/* 
-	 * Fim BandBox Banco - Arthur Freire 
+	 * Fim BandBox Pessoa - Arthur Freire 
 	 */ 
 
-
+	/**Método aonde é informado os códigos que seram introduzido nas variaveis do objeto os valores da view. 
+	 * 
+	 * @author Arthur Freire
+	 */
 	public void getRelacoesNpara1() {
 		if(pessoaBandbox!=null)
 			processo.setPessoa(pessoaBandbox);
@@ -251,14 +280,25 @@ public class ProcessoController extends ControllerAGF implements IPaginacao,IFil
 
 		processo.setDtabertura(dateboxDtabertura.getValue());
 	}
+	/**Método aonde é informado os códigos que seram introduzido nos campos da view os valores do objeto. 
+	 * 
+	 * @author Arthur Freire
+	 */
 	public void setRelacoesNpara1() {
 		setCompPessoa(processo.getPessoa());
 		dateboxDtabertura.setValue(processo.getDtabertura());
 	}
+	/**Método aonde é informado os códigos que irá limpar os campos da view.  
+	 * 
+	 * @author Arthur Freire
+	 */
 	public void limparRelacoesNpara1() {
 		setCompPessoa(null);
 	}
-
+	/**Método aonde é informado os códigos que irá validar os campos da variavel do objeto.
+	 * 
+	 * @author Arthur Freire
+	 */
 	public boolean isValidForm() {
 		boolean ret = true;
 		valid = 0;
@@ -272,22 +312,25 @@ public class ProcessoController extends ControllerAGF implements IPaginacao,IFil
 			valid = 3;
 			ret = false;
 		}else
-		if(processo.getPessoa()==null){
-			valid = 1;
-			ret = false;
-		}else
-		if((processo.getDtabertura() == null)||(processo.getDtabertura().equals(""))){
-			valid = 2;
-			ret =  false;
-		}else
-		if(processo.getNumprocesso()==null){
-			valid = 5;
-			ret = false;
-		}
+			if(processo.getPessoa()==null){
+				valid = 1;
+				ret = false;
+			}else
+				if((processo.getDtabertura() == null)||(processo.getDtabertura().equals(""))){
+					valid = 2;
+					ret =  false;
+				}else
+					if(processo.getNumprocesso()==null){
+						valid = 5;
+						ret = false;
+					}
 
 		return ret;
 	}
-
+	/**Método do botão salvar, salva ou alterar aonde é informado os códigos que irá imprimir a mensagem de erro na tela para os usuários.
+	 * 
+	 * @author Arthur Freire
+	 */
 	public void onClickbtSalvar() throws InterruptedException {
 		Processo comp = (Processo) btSalvar(processo, processoService);
 		if(comp!=null){
@@ -311,7 +354,11 @@ public class ProcessoController extends ControllerAGF implements IPaginacao,IFil
 			}
 		}
 	}
-
+	/**Método para fazer Busca com filtros quando apertado enter nos campos de busca.
+	 * 
+	 * @author Arthur Freire
+	 * @param event - campo para informar eventos.
+	 */
 	public void onOK$auxhead(Event event) {
 		compAux = new Processo();
 		String idAux = 	((Textbox) auxhead.getFellow("filtroCodigo")).getValue();
@@ -338,22 +385,35 @@ public class ProcessoController extends ControllerAGF implements IPaginacao,IFil
 		AGFPaginacao.btListaPaginacao(listbox, paginacao, pageSize, processoService,totalSize,objs);
 		AGFPaginacao.paginacao(listbox, paginacao, pageSize, 0, processoService, objs,null);
 	}
-
+	/**Método do botão novo, abre o formulário para cadastro de um novo objeto.
+	 * 
+	 * @author Arthur Freire
+	 */
 	public void onClickbtNovo() {
 		processo = new Processo();
 		btNovo();
 		controllerParecer.onClickbtLista();
 		triadorFinalizador(true);
 	}
-
+	/**Método do botão cancelar, cancela alguma alteração nova.
+	 * 
+	 * @author Arthur Freire
+	 * @deprecated
+	 */
 	public void onClickbtCancelar() {
 		processo = (Processo) btCancelar(processo, processoService);
 	}
-
+	/**Método do botão remover, remove um oou varios objetos.
+	 * 
+	 * @author Arthur Freire
+	 */
 	public void onClickbtRemover() throws InterruptedException {
 		btRemover(processo, processoService);
 	}
-
+	/**Método do botão listar, lista os objetos existentes.
+	 * 
+	 * @author Arthur Freire
+	 */
 	public void onClickbtLista() {
 		btLista();
 		perfil = triadorFinalizadorGeral();
@@ -366,8 +426,10 @@ public class ProcessoController extends ControllerAGF implements IPaginacao,IFil
 		}
 		objs = null;
 	}
-
-
+	/**Método dos botões de paginação, jagina os objetos da classe.
+	 * 
+	 * @author Arthur Freire
+	 */
 	public void onPaging$paginacao() {
 		if(perfil!=null && perfil.getId()==8) {
 			if(objnull==0){
@@ -384,58 +446,66 @@ public class ProcessoController extends ControllerAGF implements IPaginacao,IFil
 		}    
 		AGFPaginacao.paginacao(listbox, paginacao, pageSize, paginaAnterior, processoService, objs,null);
 	}
-
+	/**Método usado quando for clicado no objeto da lista ele carregará o objeto na tela.
+	 * 
+	 * @author Arthur Freire
+	 * @param obj Object - Objeto da classe
+	 */
 	public void carregarObjeto(Object obj) {
 		processo = (Processo) obj;
 		carregarObj(processo);
 		controllerParecer.onClickbtLista();
 		triadorFinalizador(false);
 	}
-
-	public void setObjetoTelaForm() {
-
-	}
-
-	public void atualizaComboLink(String combo) {
-
-	}
-
-	public void onClickbtImprimir() {
-
-	}
-
-	public void onClick$btInformacoes() {
-
-	}
-
+	/**Método usado para remover dependencias da classe pai.
+	 * 
+	 * @author Arthur Freire
+	 * @param obj ObjetoPadrao - Classe pai.
+	 * @deprecated
+	 */
 	@Override
 	public Boolean removeDependencias(ObjetoPadrao obj) {
 		return null;
 	}
-
+	/**Método usado para remover dependencias da classe pai de um objeto sem id padrao.
+	 * 
+	 * @author Arthur Freire
+	 * @param obj ObjetoPadrao - Classe pai.
+	 * 
+	 * @return Boolean - True / False
+	 * @deprecated
+	 */
 	@Override
 	public Boolean removeDependencias(ObjetoPadraoSemId obj) {
 		return null;
 	}
-
+	/**Método cria um informativo no campo de DATA ABERTURA.
+	 * 
+	 * @author Arthur Freire
+	 */
 	public void onClick$aInfodtabertura(){
 		labelNomePoup.setValue("DATA ABERTURA");
 		toolbarButton.setLabel("Data de abertura do processo.");
 	}
 
-	/**
-	 * Filhas
-	 * @author Arthur Freire
+	/*
+	 * Classes Filhas - início
+	 * 
 	 */ 
-
 	private IncludeParecer controllerParecer = null;
 	private Include includeParecer;
-
+	/**Método para iniciar o controler da classes filhas pela classe pai.
+	 * 
+	 * @author Arthur Freire
+	 */
 	@Override
 	public void setControllerFilha() {
 		controllerParecer = (IncludeParecer)includeParecer.getAttribute("controller");
 	}
-
+	/**Método cria um objeto com valores que será levada para a classes filhas.
+	 * 
+	 * @author Arthur Freire
+	 */
 	@Override
 	public void setObjetosFilha() {
 		objetos = new ArrayList<Object>();
@@ -445,12 +515,23 @@ public class ProcessoController extends ControllerAGF implements IPaginacao,IFil
 		controllerParecer.onInicio(objetos);
 	}
 
-	/*//////////////////////////Abas//////////////////////////*/ 
+	/*
+	 * Classes Filhas - FIM
+	 * 
+	 */ 
+
+	/**Método quando click for clicado nas abas seja listada a classe filha da aba especifica.
+	 * 
+	 * @author Arthur Freire
+	 */
 	public void onClick$tabParecer(){
 		controllerParecer.onClickbtLista();
 	}
-	//////////////////////////////////
-
+	/**Método indentifica qual é o perfil logado, se o perfil for Triador ou
+	 * Finalizador terá suas especificações de cada perfil criadas.
+	 * 
+	 * @author Arthur Freire
+	 */
 	private Perfil triadorFinalizadorGeral() {
 		UsuarioPerfil usuperf = new UsuarioPerfil();
 		usuperf.setId(0l);
@@ -481,7 +562,11 @@ public class ProcessoController extends ControllerAGF implements IPaginacao,IFil
 		}
 		return null;
 	}
-
+	/**Método para fisualizar componentes, se o perfil for Triador ou Finalizador
+	 *  será visualizados as componentes especificos de cada perfil.
+	 * 
+	 * @author Arthur Freire
+	 */
 	private void triadorFinalizador(Boolean b) {
 		if(perfil!=null) {
 			if(perfil.getId() == 7) {
@@ -493,7 +578,10 @@ public class ProcessoController extends ControllerAGF implements IPaginacao,IFil
 			}
 		}
 	}
-
+	/**Método lista somente os processo que estam com o parecer Pendente.
+	 * 
+	 * @author Arthur Freire
+	 */
 	private void parecerPendente(Processo pro, Boolean pag) {
 		List<ObjetoPadraoSemId> listaparecer = new ArrayList<ObjetoPadraoSemId>();
 		Parecer parecer = new Parecer();

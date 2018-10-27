@@ -7,7 +7,6 @@
  import org.hibernate.Session;
  import org.hibernate.criterion.Restrictions;
  import org.hibernate.criterion.Projections;
- import javax.persistence.TypedQuery;
  import org.springframework.stereotype.Repository;
  import org.springframework.transaction.annotation.Transactional;
  import com.agfgerador.compartilhado.domain.ObjetoPadrao;

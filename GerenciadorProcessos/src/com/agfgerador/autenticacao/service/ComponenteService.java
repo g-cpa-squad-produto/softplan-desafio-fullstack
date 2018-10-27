@@ -2,8 +2,6 @@ package com.agfgerador.autenticacao.service;
 
 import java.util.List;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import com.agfgerador.autenticacao.domain.Componente;
 import com.agfgerador.autenticacao.domain.TipoSistema;
 import com.agfgerador.autenticacao.domain.UsuarioPerfil;

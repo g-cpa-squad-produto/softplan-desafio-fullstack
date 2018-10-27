@@ -41,8 +41,8 @@
 						</div>  
 						<h:input type="submit" class="btn btn-primary btn-block" value="Acessar" />
 						<div class="box-login-form-link">
-							<label>Esqueceu sua senha? </label>
-							<a href="#" tooltiptext="Caso tenha esquecido sua senha. Clique aqui." 
+							<label visible="false" >Esqueceu sua senha? </label>
+							<a href="#" visible="false" tooltiptext="Caso tenha esquecido sua senha. Clique aqui." 
 							c:onClick="divAtivaLogin('divRecuperarSenha'); this.$f('login').setValue('');
 										this.$f('senha').setValue(''); this.$f('loginRecovery').focus(true)"> Clique aqui</a>
 						</div> 

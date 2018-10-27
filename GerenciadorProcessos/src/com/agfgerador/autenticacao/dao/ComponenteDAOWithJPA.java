@@ -4,19 +4,14 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.sql.JoinType;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.agfgerador.autenticacao.domain.Componente;
-import com.agfgerador.autenticacao.domain.Permissao;
 import com.agfgerador.autenticacao.domain.TipoSistema;
-import com.agfgerador.autenticacao.domain.Usuario;
 import com.agfgerador.autenticacao.domain.UsuarioPerfil;
 import com.agfgerador.compartilhado.domain.ObjetoPadrao;
 

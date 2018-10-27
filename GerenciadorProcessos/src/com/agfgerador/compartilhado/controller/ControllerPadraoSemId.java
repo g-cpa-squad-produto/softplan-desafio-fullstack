@@ -190,7 +190,7 @@ public abstract class ControllerPadraoSemId extends GenericForwardComposer imple
 		return obj;
 	}
 
-	public void onDoubleClick$listbox()
+	public void onClick$listbox()
 	{	ObjetoPadraoSemId obj  = controllerComponenteSemId.onDoubleClick$listbox(listbox);
 		if(obj!=null){
 			carregarObjeto(obj);  

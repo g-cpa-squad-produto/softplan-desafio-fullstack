@@ -54,7 +54,7 @@
            <label>NOME*</label>
            <textbox id="textboxNome" class="form-control input-sm" maxlength="255" value="@{controller.pessoa.nome}"/>
          </div>
-         <div class="new-col" width="250px">
+         <div class="new-col" width="150px">
            <label>CPF*</label>
            <textbox id="textboxCpf" class="form-control input-sm" maxlength="14" value="@{controller.pessoa.cpf}" c:onFocus="mask(jq(this), 'cpf');"/>
          </div>

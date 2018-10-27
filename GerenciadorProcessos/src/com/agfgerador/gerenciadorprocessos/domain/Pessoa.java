@@ -1,8 +1,6 @@
  package com.agfgerador.gerenciadorprocessos.domain;
 
- import javax.persistence.JoinColumn;
  import javax.persistence.Lob;
- import javax.persistence.ManyToOne;
  import javax.persistence.Column;
  import java.util.Date;
  import javax.persistence.TemporalType;

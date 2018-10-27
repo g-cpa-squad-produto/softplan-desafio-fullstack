@@ -35,7 +35,6 @@
      private EmailService emailService;
      private int valid;
      private List<ObjetoPadrao> objs = null;
-     private List<ObjetoPadraoSemId> objsemid = null;
      private Email compAux = new Email();
      private int totalSize = 0;
      private Integer pageSizeBandbox = 5;
