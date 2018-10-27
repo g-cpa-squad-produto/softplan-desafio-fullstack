@@ -25,7 +25,7 @@ public class ServicoProcessoImpl implements ServicoProcesso {
     @Override
     public Processo selecionarProcessoPorId(Long id) throws GenericException {
 	try {
-	    return null;
+	    return processoDAO.findOne(id);
 	} catch (Exception e) {
 	    throw new GenericException("Falha ao ler informações do processo");
 	}

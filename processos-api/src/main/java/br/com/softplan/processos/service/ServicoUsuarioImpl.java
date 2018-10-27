@@ -7,8 +7,6 @@ import org.springframework.stereotype.Service;
 import br.com.softplan.processos.dao.UsuarioDAO;
 import br.com.softplan.processos.exception.GenericException;
 import br.com.softplan.processos.exception.RegraNegocioException;
-import br.com.softplan.processos.model.Papel;
-import br.com.softplan.processos.model.Permissao;
 import br.com.softplan.processos.model.Usuario;
 
 @Service
@@ -38,7 +36,14 @@ public class ServicoUsuarioImpl implements ServicoUsuario {
     @Override
     public Usuario adicionarUsuario(Usuario usuario) throws GenericException {
 	try {
-	    return usuarioDAO.save(usuario);
+	    // Verifica se já existe algum usuário cadastrado com o e-mail
+	    if (usuarioDAO.findByEmail(usuario.getEmail()) == null) {
+		return usuarioDAO.save(usuario);
+	    } else {
+		throw new RegraNegocioException("E-mail já está sendo utilizado");
+	    }
+	} catch (RegraNegocioException e) {
+	    throw e;
 	} catch (Exception e) {
 	    throw new GenericException("Falha ao tentar cadastrar usuário");
 	}
@@ -70,7 +75,7 @@ public class ServicoUsuarioImpl implements ServicoUsuario {
 	try {
 	    Usuario usuario = usuarioDAO.findOne(id);
 	    // Verifica se o usuario existe e se não é usuário ADMIN
-	    if (usuario != null && !usuario.getPermissoes().contains(new Permissao(Papel.ROLE_ADMIN.name()))) {
+	    if (usuario != null && !usuario.isAdministrador()) {
 		usuarioDAO.delete(id);
 	    } else {
 		throw new RegraNegocioException("Usuário não encontrado ou não pode ser excluído");

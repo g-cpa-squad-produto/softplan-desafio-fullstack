@@ -83,4 +83,8 @@ public class Usuario implements Serializable {
     public void setPermissoes(Set<Permissao> permissoes) {
 	this.permissoes = permissoes;
     }
+
+    public Boolean isAdministrador() {
+	return (permissoes != null && permissoes.contains(new Permissao(Papel.ROLE_ADMIN.name())));
+    }
 }
