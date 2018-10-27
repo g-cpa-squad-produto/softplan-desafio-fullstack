@@ -6,6 +6,7 @@ import { ShowScreeningComponent } from './show-screening/show-screening.componen
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormAssignComponent } from './form-assign/form-assign.component';
 
 @NgModule({
   imports: [
@@ -14,6 +15,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     ReactiveFormsModule,
   ],
-  declarations: [ListScreeningComponent, FormScreeningComponent, ShowScreeningComponent]
+  declarations: [ListScreeningComponent, FormScreeningComponent, ShowScreeningComponent, FormAssignComponent]
 })
 export class ScreeningModule { }
