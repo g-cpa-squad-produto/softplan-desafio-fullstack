@@ -29,6 +29,9 @@ public @Data class Proccess {
 	@Column(name="name")
 	private String name;
 	
+	@Column(name="code")
+	private String code;
+	
 	@Enumerated(EnumType.STRING)
 	private StatusProcess status;
 	

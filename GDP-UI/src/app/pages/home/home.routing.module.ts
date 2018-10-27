@@ -68,6 +68,11 @@ const routes: Routes = [
         }
       },
       {
+        path: 'triagem/:id/update',
+        component: FormScreeningComponent,
+        canActivate: [ScreeningGuard]
+      },
+      {
         path: 'finalizar',
         component: FinalizeComponent,
         canActivate: [FinalizeGuard],

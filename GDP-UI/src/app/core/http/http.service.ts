@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
+
+import { TokenService } from 'src/app/core/token/token.service';
 import { MassegesService } from '../messeges/messages.service';
 import { API_URL } from '../const';
 import { UserDTO } from 'src/app/model/user.dto';
@@ -11,12 +13,16 @@ import { UserDTO } from 'src/app/model/user.dto';
 export class HttpService<T> {
     constructor (
         private http: HttpClient,
-        private messageService: MassegesService ) {
+        private messageService: MassegesService,
+        private router: Router,
+        private tokenService: TokenService) {
 
     }
 
     public handlerError (error: HttpErrorResponse) {
             if (error.status === 404) {
+              this.messageService.error('Internal Error');
+            } else if (error.status === 404) {
                 this.messageService.error('Not Found');
             } else if (error.status === 401) {
                 this.messageService.error('Authentication field');
@@ -25,6 +31,8 @@ export class HttpService<T> {
             } else if (error.status === 501) {
                 this.messageService.error('Internal Error');
             } else {
+                this.tokenService.removeToken();
+                this.router.navigate(['login']);
                 this.messageService.error(error.message);
             }
 
