@@ -22,7 +22,11 @@ export class GenericicService<T> {
   }
 
   public salve(t: T) {
-    return this.httpService.post(t, `${this.endPoint}`);
+    return this.httpService.salve(t, `${this.endPoint}`);
+  }
+
+  public post(item: any, rest: string) {
+    return this.httpService.post(item, `${this.endPoint}\/${rest}`);
   }
 
 }

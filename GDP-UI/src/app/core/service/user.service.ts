@@ -10,7 +10,7 @@ const endPoint = 'users';
 export class UserService extends GenericicService<User> {
 
   constructor(httpService: HttpService<User>) {
-    super(endPoint, httpService, );
+    super(endPoint, httpService);
   }
 
 }

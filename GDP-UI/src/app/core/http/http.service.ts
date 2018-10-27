@@ -38,7 +38,17 @@ export class HttpService<T> {
 
     }
 
-    public post(item: T, endpoint): Observable<T> {
+    public salve(item: T, endpoint): Observable<T> {
+        return this.http
+          .post<T>(`${API_URL}/${endpoint}`, item)
+          .pipe(tap(data => {
+              return data;
+            }, (error: HttpErrorResponse) => {
+                 this.handlerError(error);
+            }));
+      }
+
+      public post(item: any, endpoint): Observable<any> {
         return this.http
           .post<T>(`${API_URL}/${endpoint}`, item)
           .pipe(tap(data => {

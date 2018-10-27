@@ -11,11 +11,14 @@ import { AuthGuard } from '../../core/guard/auth.guard';
 import { ShowUserComponent } from '../users/show-user/show-user.component';
 import { FormUserComponent } from '../users/form-user/form-user.component';
 import { ScreeningGuard } from '../screening/screening.guard';
-import { FinalizeComponent } from '../finalize/finalize.component';
 import { ListScreeningResolver } from '../screening/list-screening/list-screening.resolver';
 import { ShowScreeningResolver } from '../screening/show-screening/show-screening.resolver';
 import { FormScreeningComponent } from '../screening/form-screening/form-screening.component';
 import { FormAssignComponent } from '../screening/form-assign/form-assign.component';
+import { ListFinalizeComponent } from '../finalize/list-finalize/list-finalize.component';
+import { ShowFinalizeComponent } from '../finalize/show-finalize/show-finalize.component';
+import { FormFinalizeComponent } from '../finalize/form-finalize/form-finalize.component';
+import { ShowFinalizeResolver } from '../finalize/show-finalize/show-finalize.resolver';
 
 const routes: Routes = [
   {
@@ -83,8 +86,28 @@ const routes: Routes = [
       },
       {
         path: 'finalizar',
-        component: FinalizeComponent,
+        component: ListFinalizeComponent,
         canActivate: [FinalizeGuard],
+        resolve: {
+          processList: ListScreeningResolver
+        }
+      },
+      {
+        path: 'finalizar/:id/show',
+        component: ShowFinalizeComponent,
+        canActivate: [FinalizeGuard],
+        resolve: {
+          process: ShowScreeningResolver,
+          feedbaks: ShowFinalizeResolver
+       }
+      },
+      {
+        path: 'finalizar/:id/parecer',
+        component: FormFinalizeComponent,
+        canActivate: [FinalizeGuard],
+        resolve: {
+          process: ShowScreeningResolver
+        }
       }
     ]
   }

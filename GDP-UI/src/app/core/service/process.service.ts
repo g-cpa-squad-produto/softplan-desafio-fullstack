@@ -9,7 +9,7 @@ const endPoint = 'process';
 export class ProcessService extends GenericicService<Process> {
 
   constructor(httpService: HttpService<Process>) {
-    super(endPoint, httpService, );
+    super(endPoint, httpService);
   }
 
 }

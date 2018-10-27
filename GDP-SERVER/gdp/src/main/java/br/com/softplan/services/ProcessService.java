@@ -10,26 +10,23 @@ import br.com.softplan.models.Proccess;
 import br.com.softplan.repository.IProcessRepository;
 
 @Service
-public class ProcessService extends GenericService<Proccess, Long> { 
-	
-@Autowired
-private IProcessRepository repository;
-	
-@Override
-public void update(Proccess t) {
-	
-	Optional<Proccess> aux = this.repository.findById(t.getId());
-		
-	if (aux == null) {
-		throw new ProcessNotFound("Process Not Found");
+public class ProcessService extends GenericService<Proccess, Long> {
+
+	@Autowired
+	private IProcessRepository repository;
+
+	public void assining(Proccess t) {
+		Optional<Proccess> aux = this.repository.findById(t.getId());
+
+		if (aux == null) {
+			throw new ProcessNotFound("Process Not Found");
+		}
+
+		Proccess p = aux.get();
+
+		p.setUsers(null);
+
+		this.repository.save(t);
 	}
-	
-	Proccess p = aux.get();
-	
-	p.setUsers(null);
-	
-	this.repository.save(t);
+
 }
-	
-	
-}	

@@ -1,0 +1,53 @@
+<div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">
+              <div class="row">
+                <div class="col-md-6 ">Processo: {{process.code}}</div>
+              </div>
+            </h5>
+            <div class="row">
+              <div class="col-4">
+                <div class="btn-group" role="group" aria-label="Exemplo básico">
+                  <a type="button" href="#/finalizar" class="btn btn-secondary">Voltar</a>
+                </div>
+              </div>
+              <div class="col-8">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">
+                    <h4>Descrição: </h4>{{process.name}}
+                  </li>
+                  <li class="list-group-item">
+                    <h4>Status: </h4>{{process.status}}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" style="margin-top: 1%">
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">
+              <div class="row">
+                <div class="col-md-6 ">Atribuído Para :</div>
+              </div>
+            </h5>
+            <div class="list-group">
+              <a class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let f of feedbaks">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">{{f.user.name}}</h5>
+                </div>
+                <p class="mb-1">{{f.description}}</p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
