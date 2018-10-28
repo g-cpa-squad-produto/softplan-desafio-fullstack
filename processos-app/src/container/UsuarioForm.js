@@ -14,11 +14,9 @@ export default class UsuarioForm extends Component {
             email: "",
             nome: "",
             senha: "",
-            permissoes:[
-                {
-                    nome: 'ROLE_USUARIO_TRIADOR'
-                }
-            ] 
+            permissoes:[{
+                nome: "ROLE_USUARIO_TRIADOR"
+            }] 
         };
     };
 
@@ -51,6 +49,7 @@ export default class UsuarioForm extends Component {
 
     handleChange = event => {
         event.preventDefault();
+
         this.setState({
           [event.target.name]: event.target.value
         });
@@ -104,7 +103,7 @@ export default class UsuarioForm extends Component {
         return(
             <div className="NovoUsuario container">
                 <Alert erros={this.state.erros} />
-                <form id="usuarioForm" onSubmit={this.handleSubmit}>
+                <form id="usuarioForm" onSubmit={this.handleSubmit.bind(this)}>
                     <FormGroup>
                         <ControlLabel>E-mail</ControlLabel>
                         <FormControl 
@@ -112,14 +111,16 @@ export default class UsuarioForm extends Component {
                             type="email"
                             name="email"
                             value={this.state.email} 
-                            readOnly={this.state.codigo != null ? true : false} />
+                            readOnly={this.state.codigo != null ? true : false} 
+                            placeholder="Digite o e-mail"/>
                     </FormGroup>
                     <FormGroup>
                         <ControlLabel>Nome Completo</ControlLabel>
                         <FormControl 
                             onChange={this.handleChange}
                             name="nome"
-                            value={this.state.nome} />
+                            value={this.state.nome} 
+                            placeholder="Digite o nome completo"/>
                     </FormGroup>
                     <FormGroup>
                         <ControlLabel>Senha</ControlLabel>
@@ -127,8 +128,10 @@ export default class UsuarioForm extends Component {
                             type="password" 
                             onChange={this.handleChange}
                             name="senha"
-                            value={this.senha} />
-                    </FormGroup>
+                            value={this.senha} 
+                            placeholder="Digite a senha"/>
+                    </FormGroup>  
+                    
                     <ButtonToolbar>
                         <Button type="submit" bsStyle="success" disabled={!this.validateForm()}>{this.state.codigo != null ? 'Atualizar' : 'Criar'} Usuário</Button>
                         <Button type="button" bsStyle="default" onClick={this.handleCancel.bind(this)}>Voltar</Button>

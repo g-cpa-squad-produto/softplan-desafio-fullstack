@@ -13,7 +13,8 @@ export default class ProcessoForm extends Component {
             erros: [],
             codigo: null,
             titulo: "",
-            descricao: ""
+            descricao: "",
+            permissao:[]
         }
     }
 
@@ -89,7 +90,8 @@ export default class ProcessoForm extends Component {
                             type="text"
                             name="titulo"
                             value={this.state.titulo} 
-                            readOnly={this.state.codigo != null ? true : false} />
+                            readOnly={this.state.codigo != null ? true : false} 
+                            placeholder="Digite o título"/>
                     </FormGroup>
                     <FormGroup>
                         <ControlLabel>Descrição</ControlLabel>
@@ -98,7 +100,8 @@ export default class ProcessoForm extends Component {
                             onChange={this.handleChange}
                             name="descricao"
                             value={this.state.descricao} 
-                            readOnly={this.state.codigo != null ? true : false} />
+                            readOnly={this.state.codigo != null ? true : false} 
+                            placeholder="Digite a descrição"/>
                     </FormGroup>
                     <ButtonToolbar>
                         {this.state.codigo == null 
