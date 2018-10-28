@@ -2,12 +2,16 @@ package br.com.softplan.processos.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -35,6 +39,10 @@ public class Processo implements Serializable {
     @JsonSerialize(using = LocalDateSerializer.class)
     @Column(name = "data_criacao", columnDefinition = "DATE")
     private LocalDate dataCriacao;
+
+    @ManyToMany
+    @JoinTable(name = "processo_usuario_parecer", joinColumns = @JoinColumn(name = "codigo_processo"), inverseJoinColumns = @JoinColumn(name = "codigo_usuario"))
+    private Set<Usuario> usuarios;
 
     public Processo() {
     }
@@ -76,6 +84,14 @@ public class Processo implements Serializable {
 
     public void setDataCriacao(LocalDate dataCriacao) {
 	this.dataCriacao = dataCriacao;
+    }
+
+    public Set<Usuario> getUsuarios() {
+	return usuarios;
+    }
+
+    public void setUsuarios(Set<Usuario> usuarios) {
+	this.usuarios = usuarios;
     }
 
     @Override

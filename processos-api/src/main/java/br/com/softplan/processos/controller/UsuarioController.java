@@ -1,6 +1,7 @@
 package br.com.softplan.processos.controller;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -30,7 +31,7 @@ public class UsuarioController {
     private ServicoUsuario servicoUsuario;
 
     @GetMapping
-    public ResponseEntity<Iterable<Usuario>> selecionarTodos() throws GenericException {
+    public ResponseEntity<List<Usuario>> selecionarTodos() throws GenericException {
 	// Seleciona todos os usuários
 	return ResponseEntity.ok().body(servicoUsuario.selecionarTodos());
     }
@@ -48,6 +49,8 @@ public class UsuarioController {
     public ResponseEntity<Usuario> adicionarUsuario(@Valid @RequestBody Usuario usuario) throws GenericException {
 	Usuario usuarioCriado = servicoUsuario.adicionarUsuario(usuario);
 
+	// Cria a uri que será retornada no location, mostrando como acessar o novo
+	// conteúdo
 	URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
 	        .buildAndExpand(usuarioCriado.getCodigo()).toUri();
 
@@ -70,5 +73,10 @@ public class UsuarioController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void excluirUsuario(@PathVariable Long id) throws GenericException {
 	servicoUsuario.excluirUsuario(id);
+    }
+
+    @GetMapping("/finalizador")
+    public void selecionarUsuariosFinalizador() {
+
     }
 }

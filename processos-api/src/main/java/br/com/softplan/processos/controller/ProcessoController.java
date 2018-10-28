@@ -2,6 +2,7 @@ package br.com.softplan.processos.controller;
 
 import java.net.URI;
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -27,7 +28,7 @@ public class ProcessoController {
     private ServicoProcesso servicoProcesso;
 
     @GetMapping
-    public ResponseEntity<Iterable<Processo>> selecionarTodos() throws GenericException {
+    public ResponseEntity<List<Processo>> selecionarTodos() throws GenericException {
 	// Seleciona todos os processo
 	return ResponseEntity.ok().body(servicoProcesso.selecionarTodos());
     }
@@ -48,6 +49,8 @@ public class ProcessoController {
 
 	Processo processoCriado = servicoProcesso.adicionarProcesso(processo);
 
+	// Cria a uri que será retornada no location, mostrando como acessar o novo
+	// conteúdo
 	URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
 	        .buildAndExpand(processoCriado.getCodigo()).toUri();
 

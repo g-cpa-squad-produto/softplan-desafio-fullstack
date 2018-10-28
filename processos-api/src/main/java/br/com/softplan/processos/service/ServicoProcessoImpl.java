@@ -1,5 +1,7 @@
 package br.com.softplan.processos.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +16,7 @@ public class ServicoProcessoImpl implements ServicoProcesso {
     private ProcessoDAO processoDAO;
 
     @Override
-    public Iterable<Processo> selecionarTodos() throws GenericException {
+    public List<Processo> selecionarTodos() throws GenericException {
 	try {
 	    return processoDAO.findAll();
 	} catch (Exception e) {

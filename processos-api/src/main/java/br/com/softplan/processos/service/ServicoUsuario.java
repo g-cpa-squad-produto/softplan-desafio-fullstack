@@ -1,5 +1,7 @@
 package br.com.softplan.processos.service;
 
+import java.util.List;
+
 import br.com.softplan.processos.exception.GenericException;
 import br.com.softplan.processos.model.Usuario;
 
@@ -8,10 +10,10 @@ public interface ServicoUsuario {
     /**
      * Retorna a lista de todos os usuários
      * 
-     * @return Iterable<Usuario>
+     * @return List<Usuario>
      * @throws GenericException
      */
-    public Iterable<Usuario> selecionarTodos() throws GenericException;
+    public List<Usuario> selecionarTodos() throws GenericException;
 
     /**
      * Retorna o usuário de acordo com o ID
@@ -47,4 +49,5 @@ public interface ServicoUsuario {
      * @throws GenericException
      */
     public void excluirUsuario(Long id) throws GenericException;
+
 }

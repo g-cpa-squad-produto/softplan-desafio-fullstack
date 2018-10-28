@@ -1,5 +1,7 @@
 package br.com.softplan.processos.service;
 
+import java.util.List;
+
 import br.com.softplan.processos.exception.GenericException;
 import br.com.softplan.processos.model.Processo;
 
@@ -8,10 +10,10 @@ public interface ServicoProcesso {
     /**
      * Retorna a lista de todos os processos
      * 
-     * @return Iterable<Processo>
+     * @return List<Processo>
      * @throws GenericException
      */
-    public Iterable<Processo> selecionarTodos() throws GenericException;
+    public List<Processo> selecionarTodos() throws GenericException;
 
     /**
      * Retorna o processo de acordo com o ID

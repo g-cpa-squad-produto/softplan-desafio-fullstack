@@ -1,5 +1,7 @@
 package br.com.softplan.processos.service;
 
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +18,7 @@ public class ServicoUsuarioImpl implements ServicoUsuario {
     private UsuarioDAO usuarioDAO;
 
     @Override
-    public Iterable<Usuario> selecionarTodos() throws GenericException {
+    public List<Usuario> selecionarTodos() throws GenericException {
 	try {
 	    return usuarioDAO.findAll();
 	} catch (Exception e) {
