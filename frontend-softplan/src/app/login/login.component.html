@@ -1,0 +1,10 @@
+<form (submit)="login()">
+  <mat-form-field class="full-form">
+    <input matInput type="email" name='email' placeholder="Email" [(ngModel)]="usuario.email">
+  </mat-form-field>
+  <mat-form-field class="full-form">
+    <input matInput type="password" name='senha' placeholder="Senha" [(ngModel)]="usuario.senha">
+  </mat-form-field>
+  <br>
+  <button mat-flat-button color="primary" type="submit"><mat-icon>lock</mat-icon>Login</button>
+</form>

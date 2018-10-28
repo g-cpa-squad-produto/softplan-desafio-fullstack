@@ -14,7 +14,6 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class UsuarioListagemComponent implements OnInit {
 
-  private usuarios: Usuario[] = new Array<Usuario>();
   private index = 0;
   columnsToDisplay: string[] = ['nome', 'email', 'actions'];
   private response: ResponseModel = new ResponseModel();
@@ -66,7 +65,7 @@ export class UsuarioListagemComponent implements OnInit {
           alert(this.response.mensagem);
         }
       });
-      this.usuarios.splice(this.index, 1);
+      this.tableDataSource.data.splice(this.index, 1);
     }
   }
 }

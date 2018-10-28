@@ -24,6 +24,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProcessoService } from './processo/processo.service';
 import { ParecerService } from './parecer/parecer.service';
 import { MaterialModule } from './material/material.module';
+import { LoginComponent } from './login/login.component';
+import { SharedService } from './login/shared.service';
+import { ToolbarComponent } from './toolbar/toolbar.component';
+import { MenusidenavComponent } from './menusidenav/menusidenav.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +43,10 @@ import { MaterialModule } from './material/material.module';
     ProcessoVisualizarComponent,
     ParecerComponent,
     ParecerCreateComponent,
-    ParecerListagemComponent
+    ParecerListagemComponent,
+    LoginComponent,
+    ToolbarComponent,
+    MenusidenavComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +62,8 @@ import { MaterialModule } from './material/material.module';
     GenericServerService,
     UsuarioService,
     ProcessoService,
-    ParecerService ],
+    ParecerService,
+    SharedService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

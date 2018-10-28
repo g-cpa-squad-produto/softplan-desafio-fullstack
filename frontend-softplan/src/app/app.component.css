@@ -1,8 +1,7 @@
-.full-container{
-    width: 100%;
-    height: 75%;
+.full-container {
+    padding-left: 100px;
 }
 
-table {
-    width: 100%;
+button {
+    align-content: center;
 }

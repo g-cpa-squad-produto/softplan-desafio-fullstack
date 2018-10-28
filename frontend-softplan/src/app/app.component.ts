@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SharedService } from './login/shared.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'frontend-softplan';
+
+  showTemplate: Boolean = false;
+  public shared: SharedService;
+  title = 'Sistema de Processos';
+
+  constructor() {
+    this.shared = SharedService.getInstance();
+    this.shared.showTemplate.subscribe(show => this.showTemplate = show);
+  }
 }

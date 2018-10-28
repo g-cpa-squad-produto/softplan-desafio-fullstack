@@ -1,11 +1,17 @@
 <h1>{{ titulo }}</h1>
-<form  (ngSubmit)="salvar()">
-    <label for="nome">Nome</label><br>
-    <input type="text" name="nome" id="nome" [(ngModel)]="processo.nome"><br>
-    <label for="numero">Número</label><br>
-    <input type="number" name="numero" id="numero" [(ngModel)]="processo.numero"><br>
-    <label for="ano">Ano</label><br>
-    <input type="number" name="ano" id="ano" [(ngModel)]="processo.ano"><br>
-    <button type="submit">Salvar</button>
-    <button type="button" (click)="voltar()">Voltar</button>
+<form (submit)="salvar()">
+    <mat-form-field class="example-full-width">
+        <input matInput type="text" placeholder="Nome" name="nome" [(ngModel)]="processo.nome">
+    </mat-form-field><br>
+    
+    <mat-form-field class="example-full-width">
+        <input matInput type="number" name="numero" placeholder="Número" [(ngModel)]="processo.numero">
+    </mat-form-field><br>
+    
+    <mat-form-field class="example-full-width">
+        <input matInput type="number" name="ano" placeholder="Ano" [(ngModel)]="processo.ano">
+    </mat-form-field><br>
+    
+    <button mat-flat-button color="primary" type="submit">Salvar</button>
+    <button mat-flat-button type="button" (click)="voltar()">Voltar</button>
 </form>

@@ -16,6 +16,6 @@
     <label>Data de Cadastro</label><br>
     {{processo.parecer.cadastro | date: 'dd/MM/yyyy'}}<br>
   </div>
-  <button type="button" (click)="editar()">Editar</button>
-  <button type="button" (click)="voltar()">Voltar</button>
+  <button mat-flat-button color="primary" type="button" (click)="editar()">Editar</button>
+  <button mat-flat-button type="button" (click)="voltar()">Voltar</button>
 </form>

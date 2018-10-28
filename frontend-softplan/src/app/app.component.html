@@ -1,13 +1,6 @@
-<mat-toolbar color="primary">Softplan</mat-toolbar>
+<app-toolbar *ngIf="!showTemplate"></app-toolbar>
 <mat-sidenav-container>
-    <mat-sidenav mode="side" opened>
-        <mat-nav-list>
-            <a mat-list-item [routerLink]="['/']">Home</a>
-            <a mat-list-item [routerLink]="['/usuario']">Usuário</a>
-            <a mat-list-item [routerLink]="['/processo']">Processo</a>
-            <a mat-list-item [routerLink]="['/parecer']">Parecer</a>
-        </mat-nav-list>
-    </mat-sidenav>
+    <app-menusidenav *ngIf="!showTemplate"></app-menusidenav>
     <mat-sidenav-content class="full-container">
         <router-outlet></router-outlet>    
     </mat-sidenav-content>

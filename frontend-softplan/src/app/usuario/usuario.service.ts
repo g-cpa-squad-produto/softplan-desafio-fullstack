@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { GenericServerService } from '../generic-server.service';
 import { map } from 'rxjs/operators';
 import { Usuario } from './usuario.entity';
+import { CurrentUser } from './currentuser.entity';
 
 @Injectable({
   providedIn: 'root'
@@ -38,5 +39,9 @@ export class UsuarioService extends GenericServerService {
 
   getUsuarioById(id: string): Observable<Usuario> {
     return this.http.get<Usuario>(`${this.api}editar/${id}`).pipe(map(res => res));
+  }
+
+  login(usuario: Usuario) {
+    return this.http.post<CurrentUser>(this.getUrl() + '/api/auth', JSON.stringify(usuario)).pipe(map(user => user));
   }
 }

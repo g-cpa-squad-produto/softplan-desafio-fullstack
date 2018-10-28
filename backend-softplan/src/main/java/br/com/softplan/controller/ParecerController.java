@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.softplan.entity.Parecer;
 import br.com.softplan.entity.Processo;
 import br.com.softplan.entity.ResponseEntity;
 import br.com.softplan.service.ParecerService;
@@ -45,6 +46,11 @@ public class ParecerController {
 	@RequestMapping(value="/incluir/{id}", method=RequestMethod.GET)
 	public @ResponseBody Processo getProcesso(@PathVariable("id") String id) {
 		return processoService.findById(id);
+	}
+	
+	@RequestMapping(value="/getbyprocesso/{id_processo}", method=RequestMethod.GET)
+	public @ResponseBody Parecer getParecerByProcesso(@PathVariable("id_processo") String id) {
+		return parecerService.getByProcessoId(id);
 	}
 
 }

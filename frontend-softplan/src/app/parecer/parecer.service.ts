@@ -4,6 +4,7 @@ import { Processo } from '../processo/processo.entity';
 import { GenericServerService } from '../generic-server.service';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { Parecer } from './parecer.entity';
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +29,10 @@ export class ParecerService extends GenericServerService {
   getProcessoById(processoId: String): Observable<Processo> {
     return this.http.get<Processo>(`${this.api}incluir/${processoId}`,
             this.httpOptions).pipe(map(res => res));
+  }
+
+  getParecerByProcesso(processoId: String): Observable<Parecer> {
+    return this.http.get<Parecer>(`${this.api}getbyprocesso/${processoId}`, this.httpOptions)
+            .pipe(map(res => res));
   }
 }

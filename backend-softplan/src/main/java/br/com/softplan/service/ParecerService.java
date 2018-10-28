@@ -64,4 +64,9 @@ public class ParecerService {
 				.collect(Collectors.toList());
 		return lista;
 	}
+
+	public Parecer getByProcessoId(String id) {
+		// TODO Auto-generated method stub
+		return processoRepository.findById(id).get().getParecer();
+	}
 }

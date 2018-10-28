@@ -1,16 +1,23 @@
 <h1>Criar Parecer do Processo</h1>
-<form (ngSubmit)="salvarParecer()">
+<form (submit)="salvarParecer()">
+
   <label for="nome">Nome</label><br>
-  {{ processo.nome }}<br>
+  {{ processo.nome }}
+  <br>
   <label for="numero">Número</label><br>
-  {{ processo.numero }}<br>
+  {{ processo.numero }}
   <label for="ano">Ano</label><br>
-  {{ processo.ano }}<br>
+  {{ processo.ano }}
+  <br>
   <label>Parecer</label><br><br>
-    <label>Descrição</label><br>
-    <input type="text" name="descricao" id="descricao" [(ngModel)]="parecer.descricao"/><br>
-    <label>Data de Cadastro</label><br>
-    <input type="date" name="cadastro" id="cadastro" [(ngModel)]="parecer.cadastro"/><br>
-  <button type="submit">Salvar</button>
-  <button type="button" (click)="voltar()">Voltar</button>
+  <mat-form-field class="example-full-width">
+    <input matInput type="text" placeholder="Descrição" name="descricao" [(ngModel)]="parecer.descricao" />
+  </mat-form-field><br>
+  <mat-form-field class="example-full-width">
+    <input matInput [matDatepicker]="picker" name="cadastro" placeholder="Cadastro" [(ngModel)]="parecer.cadastro" />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker touchUi #picker></mat-datepicker>
+  </mat-form-field><br>
+  <button mat-flat-button color="primary" type="submit">Salvar</button>
+  <button mat-flat-button type="button" (click)="voltar()">Voltar</button>
 </form>

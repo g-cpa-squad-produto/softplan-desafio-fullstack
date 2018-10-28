@@ -5,6 +5,8 @@ import java.util.Date;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import br.com.softplan.enums.PerfilEnum;
+
 @Document(collection="usuario")
 public class Usuario {
 	
@@ -18,6 +20,8 @@ public class Usuario {
 	private String senha;
 	
 	private Date cadastro;
+	
+	private PerfilEnum perfil;
 
 	public String getId() {
 		return id;
@@ -57,6 +61,14 @@ public class Usuario {
 
 	public void setCadastro(Date cadastro) {
 		this.cadastro = cadastro;
+	}
+
+	public PerfilEnum getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(PerfilEnum perfil) {
+		this.perfil = perfil;
 	}
 
 }

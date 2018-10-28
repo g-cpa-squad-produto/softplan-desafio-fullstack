@@ -1,0 +1,11 @@
+table{
+    width: 100%;
+}
+
+.paginator {
+    padding-bottom: 25%;
+}
+
+.filter{
+    width: 50%;
+}
