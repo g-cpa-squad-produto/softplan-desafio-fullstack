@@ -14,8 +14,8 @@ export class FinalizeService extends GenericicService<Feedback> {
     super(endPoint, httpService);
   }
 
-  public findAllByProcess(process: Process): Observable<Array<Feedback>>  {
-      return this.post(process, 'by-process');
+  public findAllByProcessBy(id: number): Observable<Array<Feedback>>  {
+      return this.post({id: id}, 'by-process');
   }
 
 }

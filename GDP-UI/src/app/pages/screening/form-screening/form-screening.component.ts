@@ -57,7 +57,8 @@ export class FormScreeningComponent implements OnInit {
   public create() {
     const process = new Process(this.formProcess.value);
     this.proccessService.salve(process).subscribe(() => {
-        this.massagesServer.success('Processo salvo com sucesso', 'Sucesso');
+        this.route.navigate(['triagem']);
+        this.massagesServer.success('Processo criado com sucesso', 'Sucesso');
     });
   }
 

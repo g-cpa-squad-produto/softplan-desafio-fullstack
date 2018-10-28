@@ -7,9 +7,9 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ShowScreeningResolver implements Resolve<Observable<Process>> {
-  constructor(private processService: ProcessService) {}
+  constructor(private processService: ProcessService) { }
 
-  public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  public resolve(route: ActivatedRouteSnapshot) {
     const id = (route.params['id']);
     if (id) {
      return  this.processService.findById(id);

@@ -17,8 +17,8 @@ import { FormScreeningComponent } from '../screening/form-screening/form-screeni
 import { FormAssignComponent } from '../screening/form-assign/form-assign.component';
 import { ListFinalizeComponent } from '../finalize/list-finalize/list-finalize.component';
 import { ShowFinalizeComponent } from '../finalize/show-finalize/show-finalize.component';
-import { FormFinalizeComponent } from '../finalize/form-finalize/form-finalize.component';
 import { ShowFinalizeResolver } from '../finalize/show-finalize/show-finalize.resolver';
+import { FormFinalizeComponent } from '../finalize/form-finalize/form-finalize.component';
 
 const routes: Routes = [
   {
@@ -99,14 +99,16 @@ const routes: Routes = [
         resolve: {
           process: ShowScreeningResolver,
           feedbaks: ShowFinalizeResolver
-       }
+        }
+
       },
       {
         path: 'finalizar/:id/parecer',
         component: FormFinalizeComponent,
         canActivate: [FinalizeGuard],
         resolve: {
-          process: ShowScreeningResolver
+          process: ShowScreeningResolver,
+          feedbaks: ShowFinalizeResolver
         }
       }
     ]

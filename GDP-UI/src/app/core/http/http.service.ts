@@ -33,7 +33,8 @@ export class HttpService<T> {
             } else {
                 this.tokenService.removeToken();
                 this.router.navigate(['login']);
-                this.messageService.error(error.message);
+                console.log(error.message);
+                this.messageService.error('Error');
             }
 
     }

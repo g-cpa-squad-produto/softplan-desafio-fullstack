@@ -7,5 +7,3 @@ INSERT INTO PROCESS (id, code, name, status  ) VALUES (seq_process_id.NEXTVAL, '
 INSERT INTO PROCESS (id, code, name, status  ) VALUES (seq_process_id.NEXTVAL, 'FD21', 'PROCESSO 2', 'PENDENTE');
 INSERT INTO PROCESS (id, code, name, status  ) VALUES (seq_process_id.NEXTVAL, 'G854', 'PROCESSO 4', 'FINALIZADO');
 
-
-

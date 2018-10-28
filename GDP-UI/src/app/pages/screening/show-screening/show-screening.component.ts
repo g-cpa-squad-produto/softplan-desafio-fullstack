@@ -1,7 +1,7 @@
+import { Feedback } from './../../../model/feedback';
 import { Component, OnInit } from '@angular/core';
 import { Process } from 'src/app/model/process';
 import { ActivatedRoute } from '@angular/router';
-import { User } from 'src/app/model/user';
 
 @Component({
   selector: 'app-show-screening',
@@ -11,15 +11,13 @@ import { User } from 'src/app/model/user';
 export class ShowScreeningComponent implements OnInit {
 
   process: Process;
+  feedbaks: Feedback[];
 
   constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.process = this.activatedRoute.snapshot.data['process'];
-  }
-
-  public getReport(user: User) {
-    return 'PARECER  XXXXXXX';
+    this.feedbaks = this.activatedRoute.snapshot.data['feedbaks'];
   }
 
 }

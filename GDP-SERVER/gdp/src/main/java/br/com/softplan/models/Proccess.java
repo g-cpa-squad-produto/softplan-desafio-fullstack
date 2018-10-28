@@ -1,6 +1,7 @@
 /* <p> NAME OF THIS CLASS IS Proccess NOT TO CUDDLE WITH Process OF java.lang.Process </p>**/
 package br.com.softplan.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,14 +12,20 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 
 @Entity
 @Table(name = "PROCESS") 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public @Data class Proccess {
 
 	@Id
@@ -35,11 +42,16 @@ public @Data class Proccess {
 	@Enumerated(EnumType.STRING)
 	private StatusProcess status;
 	
-	@OneToMany(cascade = CascadeType.ALL,  orphanRemoval = true )
+	@OneToMany(cascade = CascadeType.ALL )
 	private List<Feedback> feedbacks;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<User> users;
+	
+	 @JoinTable(name = "process_user",
+		        joinColumns = @JoinColumn(name = "process_id"),
+		        inverseJoinColumns = @JoinColumn(name = "user_id")
+		    )
+	@ManyToMany(cascade = CascadeType.ALL)
+	private List<User> users = new ArrayList<>();
 	
 
 	

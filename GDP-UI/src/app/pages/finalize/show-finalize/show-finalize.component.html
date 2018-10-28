@@ -30,12 +30,33 @@
       </div>
     </div>
     <div class="row" style="margin-top: 1%">
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">
+                <div class="row">
+                  <div class="col-md-6 ">Atribuído para: </div>
+                </div>
+              </h5>
+              <div class="list-group">
+                <a class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let p of process.users">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{p.name}}</h5>
+                  </div>
+                  <p class="mb-1">{{p.login}}</p>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="row" style="margin-top: 1%">
       <div class="col">
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">
               <div class="row">
-                <div class="col-md-6 ">Atribuído Para :</div>
+                <div class="col-md-6 ">Pareceres :</div>
               </div>
             </h5>
             <div class="list-group">
