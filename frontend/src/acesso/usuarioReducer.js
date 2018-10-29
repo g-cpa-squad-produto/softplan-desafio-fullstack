@@ -1,5 +1,7 @@
 const INITIAL_STATE = {
-    descricao: 'Teste descrição',
+    nome: 'nome',
+    login: 'JeanFlaragao',
+    tipo: 'Administrador',
     list: [{ id: 1,
             descricao: 'teste 1',
             nome: 'teste 1'
@@ -14,8 +16,10 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) =>{
     switch(action.type){
-        case 'DESCRICAO_CHANGED':
-            return { ...state, descricao: action.payload }
+        case 'NOME_CHANGED':
+            return { ...state, nome: action.payload }
+        case 'USUARIO_SEARCHED':
+            return { ...state, list : action.payload.data }
         default:
             return state
     }

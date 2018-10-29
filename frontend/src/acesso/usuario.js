@@ -1,90 +1,122 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-
-import ContentHeader from '../components/ContentHeader'
-import Content from '../components/Content'
-import Row from '../components/Row'
+import api from '../api'
 import UsuarioForm from './usuarioForm'
 import UsuarioList from './usuarioList' 
 
 
 
-const URL = 'http://localhost:8000/v1/cargo/'
+const URL = 'usuarios'
 
 export default class Usuario extends Component {
 
   constructor(props){
     super(props)
-    this.state = {id:'', descricao:'', list: []}
+    this.state = {id: '', nome: '', login: '', senha:'', tipo:'', edit:false}    
     
     this.handleAdd = this.handleAdd.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSearch = this.handleSearch.bind(this) 
+    this.setNome = this.setNome.bind(this)
+    this.setLogin = this.setLogin.bind(this)
+    this.setSenha = this.setSenha.bind(this)
+    this.setTipo = this.setTipo.bind(this)
+
     this.handleClear = this.handleClear.bind(this)
-
+    this.handleList = this.handleList.bind(this)
     this.handleRemove = this.handleRemove.bind(this)
-    this.handlePrepareUpdate = this.handlePrepareUpdate.bind(this)
+    this.handlePrepareUpdate = this.handlePrepareUpdate.bind(this);
+    this.handlePrepareInsert = this.handlePrepareInsert.bind(this);
 
-    this.refresh()
   }
 
 
-  refresh(descricao = ''){
-    const search = descricao ? `?nome=${descricao}` : ''
-    axios.get(`${URL}${search}`)
-      .then(resp => 
-        this.setState({...this.state, descricao, list : resp.data}))
+  componentDidMount() {
+    axios({
+      method: 'get', //you can set what request you want to be
+      url: `${api.API_URL}${URL}`,
+      headers: {
+        token: 'bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBRE1JTiJ9.KM7Q0IaI4DjqAw0qY0YNzqUwlmSzRgyp5DIC4Iq_vnY'
+      }
+    }).then(resp => this.console.log(resp))
+    .catch(e => {
+      console.log('Error: ', e.response)
+    })
   }
+
   
+
   handleRemove(usuario){
     axios.delete(`${URL}${usuario.id}`)
     .then(resp => this.refresh())
   }
 
   handleAdd(){
-    const descricao = this.state.descricao
-    axios.post(URL, {nome: descricao, descricao: descricao})
+    axios.post(URL, {nome:this.state.nome, login:this.state.login, senha:this.state.senha})
       .then(resp => this.refresh())
   }  
 
   handleClear() {
-    this.refresh()
+    this.setState ({...this.state, id: '', nome: '', login: '', senha:'', tipo:''})  
   }
 
-  handleChange(e){
-    this.setState({...this.state, descricao: e.target.value})
+  setNome(e){
+    this.setState({...this.state, nome: e.target.value})
   }
 
-  handlePrepareUpdate(usuario){
-    this.setState({...this.state, id: usuario.id, descricao: usuario.descricao})
+  setLogin(e){
+    this.setState({...this.state, login: e.target.value})
   }
 
-  handleSearch(){
-    this.refresh(this.state.descricao)
+  setSenha(e){
+    this.setState({...this.state, senha: e.target.value})
+  }
+
+  setTipo(e){
+    this.setState({...this.state, tipo: e.target.value})
+  }
+
+  handlePrepareUpdate(e){
+    this.setState({...this.state, id: e.id
+                  , nome: e.nome
+                  , login: e.login
+                  , senha: e.senha
+                  , tipo : e.tipo
+                  , edit : true})
+  }
+
+  handlePrepareInsert(){
+    this.setState({...this.state, edit : true})
+  }
+  
+  handleList(){
+    this.setState({...this.state, edit : false})
   }
 
   render() {
       return (
         <div>
-          <ContentHeader title="Usuario" subTitle="Cadastro"/>
-          <Content >
-            <Row>
               <UsuarioForm 
-                descricao={this.state.descricao} 
-                handleChange={this.handleChange}
+                nome={this.state.nome} 
+                login={this.state.login} 
+                senha={this.state.senha} 
+                tipo={this.state.tipo}
+
+                setNome={this.setNome}
+                setLogin={this.setLogin}
+                setSenha={this.setSenha}
+                setTipo={this.setTipo}
+
                 handleAdd={this.handleAdd}
-                handleSearch={this.handleSearch}
                 handleClear={this.handleClear}
-                isUpdate={this.id ? false : true}
+                edit={this.state.edit}
+                handleList={this.handleList}
                 /> 
               
-              <UsuarioList 
-                list={this.state.list}  
+              <UsuarioList
+                edit={this.state.edit}
+                handlePrepareInsert={this.handlePrepareInsert} 
                 handleRemove={this.handleRemove}
                 handlePrepareUpdate={this.handlePrepareUpdate} 
                 /> 
-            </Row>
-          </Content>
         </div>
       )
     }

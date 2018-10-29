@@ -1,6 +1,7 @@
 import React from 'react'
 
-import If from '../common/operators/If'
+
+import If from '../common/operators/If';
 import ContentHeader from '../components/ContentHeader'
 import Content from '../components/Content'
 import Row from '../common/layout/Row'
@@ -11,26 +12,26 @@ export default props => {
     
   const renderRows = () => {
       const list = props.list || []
-      return list.map(usuario => (
-          <tr key={usuario.id}>
-            <td>{usuario.nome}</td>
+      return list.map(processo => (
+          <tr key={processo.id}>
+            <td>{processo.numero}</td>
+            <td>{processo.descricao}</td>
+            <td>{processo.statusParecer}</td>
             <td>
               <IconButton styleButton='edit' icon='edit'
-                onClick={() => props.handlePrepareUpdate(usuario)}>
+                onClick={() => props.handlePrepareUpdate(processo)}>
               </IconButton>
               <IconButton styleButton='danger' icon='trash-o'
-                onClick={() => props.handleRemove(usuario)}>
+                onClick={() => props.handleRemove(processo)}>
               </IconButton>
             </td>
           </tr>
         ))
   }
-    
-    
 
   return (
     <If test={!props.edit}>
-    <ContentHeader title="Usuário" subTitle="Lista"/>
+    <ContentHeader title="Processo" subTitle="Lista"/>
     <Content >
       <Row>
         <div className="box">
@@ -43,7 +44,9 @@ export default props => {
             <table className="table table-bordered">
               <tbody>
                 <tr>
-                  <th>Nome</th>
+                  <th className='table-codigo'>Número</th>
+                  <th>Descrição</th>
+                  <th>Situação</th>
                   <th className='table-actions'>Ações</th>
                 </tr>
                 {renderRows()}

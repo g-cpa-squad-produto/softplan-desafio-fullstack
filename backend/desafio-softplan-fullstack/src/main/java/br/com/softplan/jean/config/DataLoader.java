@@ -20,6 +20,8 @@ public class DataLoader implements ApplicationRunner {
     	Usuario usuario = usuarioRepository.findByLogin("admin");
     	if(usuario == null) {
     		usuarioRepository.save(new Usuario("Admin","admin","admin",TipoUsuario.ADMIN));
+        	usuarioRepository.save(new Usuario("Triador","triador","triador",TipoUsuario.TRIADOR));
+        	usuarioRepository.save(new Usuario("Finalizador","finalizador","finalizador",TipoUsuario.FINALIZADOR));
     	}
     }
 

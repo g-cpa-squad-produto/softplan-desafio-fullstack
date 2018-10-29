@@ -1,5 +1,6 @@
 import './components/custom.css'
 import React, { Component } from 'react'  
+import { HashRouter } from 'react-router-dom'
 
 
 import Header from './components/Header'
@@ -12,14 +13,16 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <HashRouter>
+        <div>
         <Header />
         <SideBar />
         <div className='content-wrapper'>
           <Routes />
         </div>
         <Footer />
-      </div>
+        </div>
+      </HashRouter>
     )
   }
 }

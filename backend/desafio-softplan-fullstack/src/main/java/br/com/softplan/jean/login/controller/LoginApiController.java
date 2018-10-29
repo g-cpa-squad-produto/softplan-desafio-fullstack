@@ -24,7 +24,7 @@ import io.jsonwebtoken.security.Keys;
 @RestController
 public class LoginApiController {
 	
-	public static final String NOME_TOKEN_HEADER = "Authorization";	
+	public static final String NOME_TOKEN_HEADER = "token";	
 	
 	@Autowired
 	private UsuarioService usuarioService;

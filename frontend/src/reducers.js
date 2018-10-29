@@ -1,16 +1,14 @@
+
 import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
 import { reducer as toastrReducer } from 'react-redux-toastr'
 
-import usuarioReducer from "../acesso/usuarioReducer";
-import AuthReducers from '../auth/authReducer' 
+import AuthReducer from './auth/authReducer'
 
-
-const rootReducer = combineReducers ({
-    usuario : usuarioReducer,
+const rootReducer = combineReducers({
     form: formReducer,
     toastr: toastrReducer,
-    auth : AuthReducers
+    auth: AuthReducer
 })
 
 export default rootReducer
