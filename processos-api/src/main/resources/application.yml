@@ -6,7 +6,7 @@ spring:
     database: MYSQL
     show-sql: true
   datasource:
-    url: jdbc:mysql://localhost/processosdb?createDatabaseIfNotExist=true&useSSL=false
+    url: jdbc:mysql://docker-mysql/processosdb?createDatabaseIfNotExist=true&useSSL=false
     username: root
     password: root
     schema: classpath:/sql/schema.sql

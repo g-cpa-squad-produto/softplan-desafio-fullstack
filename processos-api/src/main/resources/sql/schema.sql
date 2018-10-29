@@ -23,12 +23,3 @@ CREATE TABLE IF NOT EXISTS processosdb.processo (
 	descricao VARCHAR(500),
 	data_criacao DATE
 );
-
-CREATE TABLE IF NOT EXISTS processosdb.processo_usuario_parecer (
-    codigo_usuario BIGINT(20) NOT NULL,
-    codigo_processo BIGINT(50) NOT NULL,
-    parecer VARCHAR(500) NOT NULL,
-    FOREIGN KEY (codigo_processo) REFERENCES processosdb.processo (codigo),
-    FOREIGN KEY (codigo_usuario) REFERENCES processosdb.usuario (codigo),
-    UNIQUE INDEX user_authority_idx_1 (codigo_usuario, codigo_processo)
-);
