@@ -1,0 +1,42 @@
+Passos para rodar a aplicação:
+
+Via DOCKER:
+
+1° - rodar a imagem com o comando:
+      - docker run -p 8081:80 -p 8090:8090 --name process-manager -d gabrieljoe/process-manager-app
+2° - Iniciar a imagem:
+      - docker start process-manager
+	  
+3° - Executar os scripts abaixo porque tive problemas para deixar o serviço subindo automático:
+	  - docker exec -ti process-manager /bin/bash
+	  - service process-manager-8090 start
+
+4° - Após a inicialização do serviço acessar a aplicação em: 
+	  - http://localhost:8081/
+	  
+
+Iniciar a aplicação sem docker: 
+
+1° - Subir back-end:
+	- Entrar na pasta process-manager
+	- executar o comando: 
+		- ./gradlew bootRun
+	
+2° - Subir front-end:
+	- Entrar no diretório process-manager-app
+	- Executar os comandos: (é necessário ter o NodeJS instalado)
+		- npm install
+		- npm run dev
+
+Acessar a aplicação em: 
+	- http://localhost:8081/
+	
+
+Um usuário default já foi criado para acesso:
+	- usuário: admin
+	- password: admin
+	
+	
+
+	
+	

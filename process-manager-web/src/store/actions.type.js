@@ -1,0 +1,8 @@
+export const AUTHENTICATE = 'authenticateUser'
+export const SAVE_USER = 'saveUser'
+export const LIST_USER = 'listUser'
+export const LIST_USER_ROLE = 'listUserByRole'
+export const REMOVE_USER = 'removeUser'
+export const SAVE_PROCESS = 'saveProcess'
+export const LIST_PROCESS = 'listProcess'
+export const REMOVE_PROCESS = 'removeProcess'

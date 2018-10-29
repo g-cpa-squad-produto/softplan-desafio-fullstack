@@ -1,0 +1,20 @@
+logging:
+    level.org.hibernate: ERROR
+    level.org.springframework.web: ERROR
+    
+    
+server:
+   servlet:
+      context-path: /process-manager
+   port: 8090
+   
+spring: 
+    main:
+        banner-mode: "off"     
+    jpa:
+        database: h2
+        hibernate:
+            dialect: org.hibernate.dialect.H2Dialect
+            ddl-auto: create-drop
+
+      
