@@ -5,15 +5,11 @@ export default props => (
     <label htmlFor={props.id} className="col-sm-2 control-label">
       {props.label}
     </label>
-
     <div className="col-sm-10">
-      <input
-        {...props.input}
-        type={props.type}
-        className="form-control"
-        placeholder={props.placeHolder}
-        readOnly={props.readOnly}
-      />
+      <select {...props.select} type={props.type} className="form-control">
+        <option value="">Selecione</option>
+        {props.children}
+      </select>
     </div>
   </div>
 );

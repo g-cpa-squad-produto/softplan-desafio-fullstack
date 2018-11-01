@@ -10,11 +10,12 @@
     "font-awesome": "4.7.0",
     "ionicons": "3.0.0",
     "jquery": "^3.1.0",
+    "jslint": "^0.12.0",
     "jvectormap-next": "3.0.0",
     "lodash": "4.17.4",
-    "pubsub-js": "^1.5.3",
     "react": "16.5.2",
     "react-dom": "16.5.2",
+    "react-native": "^0.57.4",
     "react-redux": "^5.0.7",
     "react-redux-toastr": "^7.4.0",
     "react-router": "^4.3.1",
@@ -38,5 +39,10 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-plugin-prettier": "^3.0.0",
+    "prettier": "^1.14.3"
+  }
 }

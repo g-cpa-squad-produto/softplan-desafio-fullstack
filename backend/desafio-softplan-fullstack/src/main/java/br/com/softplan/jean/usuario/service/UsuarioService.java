@@ -54,7 +54,8 @@ public class UsuarioService {
 	
 	public UsuarioDTO trazerPorToken(String token) {
 		String tokenF = token.substring(7, token.length());
-		return UsuarioDTO.toDTO(usuarioRepository.findByToken(tokenF));
+		UsuarioDTO dto = UsuarioDTO.toDTO(usuarioRepository.findByToken(tokenF));
+		return dto;
 	}
 	
 	public Usuario trazerPorLogin(String login) {

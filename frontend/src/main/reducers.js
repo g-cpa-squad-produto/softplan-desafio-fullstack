@@ -1,16 +1,17 @@
-import { combineReducers } from 'redux'
-import { reducer as formReducer } from 'redux-form'
-import { reducer as toastrReducer } from 'react-redux-toastr'
+import { combineReducers } from "redux";
+import { reducer as formReducer } from "redux-form";
+import { reducer as toastrReducer } from "react-redux-toastr";
 
-import usuarioReducer from "../acesso/usuarioReducer";
-import AuthReducers from '../auth/authReducer' 
+import TabReducer from "../common/tab/tabReducer";
+import AuthReducer from "../auth/authReducer";
+import UsuarioReducer from "../usuario/usuarioReducer";
 
+const rootReducer = combineReducers({
+  tab: TabReducer,
+  toastr: toastrReducer,
+  usuario: UsuarioReducer,
+  auth: AuthReducer,
+  form: formReducer
+});
 
-const rootReducer = combineReducers ({
-    usuario : usuarioReducer,
-    form: formReducer,
-    toastr: toastrReducer,
-    auth : AuthReducers
-})
-
-export default rootReducer
+export default rootReducer;

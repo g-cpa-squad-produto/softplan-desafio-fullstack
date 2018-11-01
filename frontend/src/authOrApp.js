@@ -1,37 +1,45 @@
-import React, { Component } from 'react'
-import axios from 'axios'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import React, { Component } from "react";
+import axios from "axios";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
-import App from './App'
-import Auth from './auth/auth'
-import { validateToken } from './auth/authActions'
+import { BrowserRouter } from "react-router-dom";
 
-const baseURL = 'http://localhost:8081/desafiosoftplan'
+import App from "./App";
+import Auth from "./auth/auth";
+import { validateToken } from "./auth/authActions";
+
+const baseURL = "http://localhost:8081/desafiosoftplan";
 
 class AuthOrApp extends Component {
-
-    componentWillMount() {
-        axios.defaults.baseURL = baseURL;
-        if (this.props.auth.token) {
-            this.props.validateToken(this.props.auth.token)
-        }
+  componentWillMount() {
+    axios.defaults.baseURL = baseURL;
+    if (this.props.auth.token) {
+      this.props.validateToken(this.props.auth.token);
     }
+  }
 
-    render() {
-        const { user, token, validToken } = this.props.auth
-        if (validToken) {
-            axios.defaults.headers.common['authorization'] = token
-            return <App>{this.props.children}</App>
-        } else if (!user && !validToken) {
-            return <Auth />
-        } else {
-            return false
-        }
+  render() {
+    const { user, token, validToken } = this.props.auth;
+    if (validToken) {
+      axios.defaults.headers.common["token"] = "Bearer " + token;
+      return (
+        <BrowserRouter>
+          <App>{this.props.children}</App>
+        </BrowserRouter>
+      );
+    } else if (!user && !validToken) {
+      return <Auth />;
+    } else {
+      return false;
     }
+  }
 }
 
-
-const mapStateToProps = state => ({ auth: state.auth })
-const mapDispatchToProps = dispatch => bindActionCreators({ validateToken }, dispatch)
-export default connect(mapStateToProps, mapDispatchToProps)(AuthOrApp)
+const mapStateToProps = state => ({ auth: state.auth });
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ validateToken }, dispatch);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AuthOrApp);
