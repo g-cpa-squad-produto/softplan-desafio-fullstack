@@ -5,7 +5,7 @@ export default (state = INITIAL_STATE, action) => {
     case "USUARIO_FETCHED":
       return { ...state, list: action.payload.data };
     case "FINALIZADORES_FETCHED":
-      return { ...state, listFinalizadores: action.payload.data };
+      return { listFinalizadores: action.payload.data };
 
     default:
       return state;

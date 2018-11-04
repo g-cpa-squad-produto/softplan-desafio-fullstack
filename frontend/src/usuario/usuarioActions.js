@@ -17,7 +17,7 @@ export function getList() {
 export function getFinalizadores() {
   const request = axios.get(`${SERVICE}/finalizadores/`);
   return {
-    type: "USUARIO_FETCHED",
+    type: "FINALIZADORES_FETCHED",
     payload: request
   };
 }

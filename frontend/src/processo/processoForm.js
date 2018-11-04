@@ -35,6 +35,7 @@ class ProcessoForm extends Component {
                 placeholder="Informe a descrição"
                 required
               />
+
               <div className="form-group">
                 <label
                   htmlFor="statusParecer"
@@ -51,7 +52,7 @@ class ProcessoForm extends Component {
                 </div>
               </div>
             </div>
-            <ProcessoAprovador list={usuariosParecer} />
+            <ProcessoAprovador list={usuariosParecer} readOnly={readOnly} />
             <div className="box-footer">
               <div className="pull-right">
                 <IconButton

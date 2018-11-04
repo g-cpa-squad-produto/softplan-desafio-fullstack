@@ -1,21 +1,51 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Field, arrayInsert, arrayRemove } from "redux-form";
+import { formValueSelector, Field, arrayInsert, arrayRemove } from "redux-form";
 import Grid from "../common/layout/Grid";
-import Select from "../common/form/Select";
 import Input from "../common/form/Input";
 
 class AprovadorList extends Component {
-  add(index, item = {}) {
+  aprovadores() {
+    const finalizadores = this.props.listFinalizadores || [];
+    return (
+      <tr>
+        <td>
+          <Field component="select" name="finalizador">
+            {finalizadores.map((item, i) => (
+              <option key={i} value={item.login}>
+                {item.nome}
+              </option>
+            ))}
+          </Field>
+        </td>
+        <td>
+          <button
+            type="button"
+            className="btn btn-success"
+            onClick={() => this.add(this.props.list.length)}
+          >
+            <i className="fa fa-plus" />
+          </button>
+        </td>
+      </tr>
+    );
+  }
+
+  add(index) {
+    debugger;
+    const item = this.props.listFinalizadores.find(
+      param => param.login === this.props.finalizador
+    );
+
     if (!this.props.readOnly) {
-      this.props.arrayInsert("processoForm", this.props.field, index, item);
+      this.props.arrayInsert("processoForm", "usuariosParecer", index, item);
     }
   }
 
   remove(index) {
     if (!this.props.readOnly && this.props.list.length > 1) {
-      this.props.arrayRemove("processoForm", this.props.field, index);
+      this.props.arrayRemove("processoForm", "usuariosParecer", index);
     }
   }
 
@@ -27,6 +57,7 @@ class AprovadorList extends Component {
           <Field
             name={`usuariosParecer[${index}].nome`}
             component={Input}
+            placeholder="Informe o nome"
             readOnly={true}
           />
         </td>
@@ -48,14 +79,18 @@ class AprovadorList extends Component {
       <Grid cols={this.props.cols}>
         <fieldset>
           <legend>{this.props.legend}</legend>
+
           <table className="table">
             <thead>
               <tr>
-                <th>Aprovador</th>
+                <th>Finalizadores</th>
                 <th className="table-actions">Ações</th>
               </tr>
             </thead>
-            <tbody>{this.renderRows()}</tbody>
+            <tbody>
+              {this.aprovadores()}
+              {this.renderRows()}
+            </tbody>
           </table>
         </fieldset>
       </Grid>
@@ -65,10 +100,12 @@ class AprovadorList extends Component {
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ arrayInsert, arrayRemove }, dispatch);
-const mapStateToProps = state => ({
-  usuario: state.usuario
-});
 
+const selector = formValueSelector("processoForm");
+const mapStateToProps = state => ({
+  listFinalizadores: state.usuario.listFinalizadores,
+  finalizador: selector(state, "finalizador")
+});
 export default connect(
   mapStateToProps,
   mapDispatchToProps

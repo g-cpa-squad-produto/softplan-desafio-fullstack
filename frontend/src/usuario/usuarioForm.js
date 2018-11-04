@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import InputHorizontal from "../common/form/InputHorizontal";
-import Select from "../common/form/Select";
 import IconButton from "../common/layout/IconButton";
 import { reduxForm, Field } from "redux-form";
 
