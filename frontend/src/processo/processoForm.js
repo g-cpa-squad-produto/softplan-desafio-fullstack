@@ -1,87 +1,90 @@
-import React from 'react'
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import InputHorizontal from "../common/form/InputHorizontal";
+import IconButton from "../common/layout/IconButton";
+import { reduxForm, Field, formValueSelector } from "redux-form";
 
-import If from '../common/operators/If';
-import InputHorizontal from '../common/form/InputHorizontal'
-import ContentHeader from '../components/ContentHeader'
-import Content from '../components/Content'
-import Row from '../common/layout/Row'
-import IconButton from '../common/layout/IconButton'
+import { init } from "./processoActions";
 
-export default props => {
-  const renderRows = () => {
-    const list = props.aprovadores || []
-    return list.map(usuario => (
-        <tr key={usuario.id}>
-          <td>{usuario.nome}</td>
-          <td>{usuario.situacao}</td>
-          <td>
-            <IconButton styleButton='danger' icon='trash-o'
-              onClick={() => props.handleRemoveAprovador(usuario)}>
-            </IconButton>
-          </td>
-        </tr>
-      ))
-}
+import ProcessoAprovador from "./processoAprovador";
+
+class ProcessoForm extends Component {
+  render() {
+    const { handleSubmit, readOnly, usuariosParecer } = this.props;
+
     return (
-      <If test={props.edit}>
-      <ContentHeader title="Processo" subTitle="Cadastro"/>
-      <Content >
-        <Row>      
-          <div className="box box-info">
-              <div role="form" className='form-horizontal'>
-                <div className="box-body">
+      <form onSubmit={handleSubmit}>
+        <div className="box box-info">
+          <div role="form" className="form-horizontal">
+            <div className="box-body">
+              <Field
+                readOnly={readOnly}
+                name="numero"
+                component={InputHorizontal}
+                label="Número"
+                placeholder="Informe o número"
+                required
+              />
 
-                  <InputHorizontal id="numero" label="Número:" type="text"
-                                value={props.numero} onChange={props.setNumero}/>  
-
-                  <InputHorizontal id="descricao" label="Descrição:" type="text"
-                                value={props.descricao} onChange={props.setDescricao}/>  
-
-                  <div className="form-group">
-                      <label  className="col-sm-2 control-label">Situação:</label>
-                      <div className="col-sm-10">
-                        <select value={props.statusParecer} onChange={props.setStatusParecer} className="form-control">
-                          <option value="">Selecione</option>
-                          <option value="Pendente">Pendente</option>
-                          <option value="Concluido">Concluido</option>
-                        </select>
-                      </div>
-                  </div>
-                            
-                </div>                    
-                <div className='box-footer'>
-                  <div className='pull-right'>
-                  <IconButton styleButton='primary' label='Salvar' onClick={props.handleProcessoSubmit}/>
-                  <IconButton styleButton='default' label='Limpar' onClick={props.handleClear}/>
-                  <IconButton styleButton='warning' label='Voltar' onClick={props.handleList}/>
-                  </div>
+              <Field
+                readOnly={readOnly}
+                name="descricao"
+                component={InputHorizontal}
+                label="Descrição"
+                placeholder="Informe a descrição"
+                required
+              />
+              <div className="form-group">
+                <label
+                  htmlFor="statusParecer"
+                  className="col-sm-2 control-label"
+                >
+                  Situação
+                </label>
+                <div className="col-sm-10">
+                  <Field name="statusParecer" component="select">
+                    <option value="">Selecione</option>
+                    <option value="0">Pendente</option>
+                    <option value="1">Concluído</option>
+                  </Field>
                 </div>
+              </div>
+            </div>
+            <ProcessoAprovador list={usuariosParecer} />
+            <div className="box-footer">
+              <div className="pull-right">
+                <IconButton
+                  stylebutton="primary"
+                  label={this.props.submitLabel}
+                  type="submit"
+                  onClick={this.props.create}
+                />
+                <IconButton
+                  stylebutton="default"
+                  label="Cancelar"
+                  onClick={this.props.init}
+                  type="button"
+                />
+              </div>
             </div>
           </div>
-
-          <div className="box">
-          <div className="box-header with-border">
-            <h3 className="box-title">
-              Aprovadores
-            </h3>
-          </div>
-          <div className="box-body">
-            <table className="table table-bordered">
-              <tbody>
-                <tr>
-                  <th>Nome</th>
-                  <th>Situação</th>
-                  <th className='table-actions'>Ações</th>
-                </tr>
-                {renderRows()}
-              </tbody>
-            </table>
-          </div>
         </div>
-          </Row>
-          </Content>
-        </If> 
-      
-    )
+      </form>
+    );
+  }
 }
 
+ProcessoForm = reduxForm({ form: "processoForm", destroyOnUnmount: false })(
+  ProcessoForm
+);
+const selector = formValueSelector("processoForm");
+const mapStateToProps = state => ({
+  usuariosParecer: selector(state, "usuariosParecer")
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({ init }, dispatch);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProcessoForm);

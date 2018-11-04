@@ -3,21 +3,13 @@ import { toastr } from "react-redux-toastr";
 import { reset as resetForm, initialize } from "redux-form";
 import { showTabs, selectTab } from "../common/tab/tabActions";
 
-const SERVICE = "/usuarios";
+const SERVICE = "/processos";
 const INITIAL_VALUES = {};
 
 export function getList() {
   const request = axios.get(SERVICE);
   return {
-    type: "USUARIO_FETCHED",
-    payload: request
-  };
-}
-
-export function getFinalizadores() {
-  const request = axios.get(`${SERVICE}/finalizadores/`);
-  return {
-    type: "USUARIO_FETCHED",
+    type: "PROCESSO_FETCHED",
     payload: request
   };
 }
@@ -37,7 +29,7 @@ export function remove(values) {
 function submit(values, method) {
   return dispatch => {
     const id = values.id ? values.id : "";
-    console.log(id);
+    console.log(values);
     axios[method](`${SERVICE}/${id}`, values)
       .then(resp => {
         toastr.success("Sucesso", "Operação Realizada com sucesso.");
@@ -55,19 +47,19 @@ function submit(values, method) {
   };
 }
 
-export function showUpdate(usuario) {
+export function showUpdate(processo) {
   return [
     showTabs("tabUpdate"),
     selectTab("tabUpdate"),
-    initialize("usuarioForm", usuario)
+    initialize("processoForm", processo)
   ];
 }
 
-export function showDelete(usuario) {
+export function showDelete(processo) {
   return [
     showTabs("tabDelete"),
     selectTab("tabDelete"),
-    initialize("usuarioForm", usuario)
+    initialize("processoForm", processo)
   ];
 }
 
@@ -76,6 +68,6 @@ export function init() {
     showTabs("tabList", "tabCreate"),
     selectTab("tabList"),
     getList(),
-    initialize("usuarioForm", INITIAL_VALUES)
+    initialize("processoForm", INITIAL_VALUES)
   ];
 }

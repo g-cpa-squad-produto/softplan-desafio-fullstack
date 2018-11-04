@@ -43,6 +43,7 @@ public class LoginApiController {
 			usuarioService.alterarToken(usuarioLogin.getId(), usuarioLogin);
 			return new ResponseEntity<String>("sucesso", HttpStatus.OK);
 		}
+
 		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("");
 	}
 	

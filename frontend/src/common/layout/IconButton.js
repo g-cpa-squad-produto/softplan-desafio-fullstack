@@ -5,7 +5,7 @@ export default props => (
   <If test={!props.hide}>
     <button
       {...props}
-      className={"btn btn-" + props.styleButton}
+      className={"btn btn-" + props.stylebutton}
       onClick={props.onClick}
       type={props.type}
     >

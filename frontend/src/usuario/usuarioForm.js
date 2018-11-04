@@ -43,27 +43,30 @@ class UsuarioForm extends Component {
                 placeholder="Informe a senha"
               />
 
-              <Field
-                readOnly={readOnly}
-                name="tipoUsuario"
-                component={Select}
-                label="Tipo"
-              >
-                <option value="ADMINISTRADOR">Administrador</option>
-                <option value="TRIADOR">Triador</option>
-                <option value="FINALIADOR">Finalizador</option>
-              </Field>
+              <div className="form-group">
+                <label htmlFor="tipoUsuario" className="col-sm-2 control-label">
+                  Situação
+                </label>
+                <div className="col-sm-10">
+                  <Field name="tipoUsuario" component="select">
+                    <option value="">Selecione</option>
+                    <option value="ADMINISTRADOR">Administrador</option>
+                    <option value="TRIADOR">Triador</option>
+                    <option value="FINALIZADOR">Finalizador</option>
+                  </Field>
+                </div>
+              </div>
             </div>
             <div className="box-footer">
               <div className="pull-right">
                 <IconButton
-                  styleButton="primary"
+                  stylebutton="primary"
                   label={this.props.submitLabel}
                   type="submit"
                   onClick={this.props.create}
                 />
                 <IconButton
-                  styleButton="default"
+                  stylebutton="default"
                   label="Cancelar"
                   onClick={this.props.init}
                   type="button"

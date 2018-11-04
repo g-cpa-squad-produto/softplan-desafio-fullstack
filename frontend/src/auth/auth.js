@@ -8,7 +8,7 @@ import { login, signup } from "./authActions";
 import Row from "../common/layout/Row";
 import Grid from "../common/layout/Grid";
 import Messages from "../common/msg/messages";
-import Input from "../common/form/inputAuth";
+import Input from "../common/form/InputAuth";
 
 class Auth extends Component {
   constructor(props) {
