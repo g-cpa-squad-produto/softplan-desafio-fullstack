@@ -55,7 +55,7 @@ public class ProcessoService {
 	
 	public Processo alterarStatusParecer(Long processoId ,ParecerStatus statusParecer) {
 		return processoRepository.findById(processoId).map(processo -> {
-			processo.setStatusParecer(statusParecer);;
+			processo.setStatusParecer(statusParecer);
 			return processoRepository.save(processo);
 		}).orElseThrow(() -> new RuntimeException("Processo não encontrado!"));
 	}

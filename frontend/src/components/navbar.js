@@ -14,9 +14,56 @@ class Navbar extends Component {
   }
 
   render() {
+    const { name, email } = { name: "Jean", email: "aragao" };
     return (
       <div className="navbar-custom-menu">
-        <div className="pull-right">Sair</div>
+        <ul className="nav navbar-nav">
+          <li
+            onMouseLeave={() => this.changeOpen()}
+            className={`dropdown user user-menu ${
+              this.state.open ? "open" : ""
+            }`}
+          >
+            <a
+              href="javascript:;"
+              onClick={() => this.changeOpen()}
+              aria-expanded={this.state.open ? "true" : "false"}
+              className="dropdown-toggle"
+              data-toggle="dropdown"
+            >
+              <img
+                src="http://lorempixel.com/160/160/abstract"
+                className="user-image"
+                alt="User Image"
+              />
+              <span className="hidden-xs">{name}</span>
+            </a>
+            <ul className="dropdown-menu">
+              <li className="user-header">
+                <img
+                  src="http://lorempixel.com/160/160/abstract"
+                  className="img-circle"
+                  alt="User Image"
+                />
+                <p>
+                  {name}
+                  <small>{email}</small>
+                </p>
+              </li>
+              <li className="user-footer">
+                <div className="pull-right">
+                  <a
+                    href="#"
+                    onClick={this.props.logout}
+                    className="btn btn-default btn-flat"
+                  >
+                    Sair
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
       </div>
     );
   }
