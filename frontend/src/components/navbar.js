@@ -2,11 +2,26 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { logout } from "../auth/authActions";
+import { toastr } from "react-redux-toastr";
+import axios from "axios";
 
 class Navbar extends Component {
   constructor(props) {
     super(props);
-    this.state = { open: false };
+    this.state = { open: false, usuario: "" };
+  }
+
+  componentWillMount() {
+    axios
+      .get("/login/usuario", {
+        params: { token: localStorage.getItem("token") }
+      })
+      .then(resp => {
+        this.setState({ usuario: resp.data });
+      })
+      .catch(e => {
+        toastr.error("Erro", e);
+      });
   }
 
   changeOpen() {
@@ -14,7 +29,7 @@ class Navbar extends Component {
   }
 
   render() {
-    const { name, email } = { name: "Jean", email: "aragao" };
+    const { nome, tipoUsuario } = this.state.usuario;
     return (
       <div className="navbar-custom-menu">
         <ul className="nav navbar-nav">
@@ -31,13 +46,13 @@ class Navbar extends Component {
               className="dropdown-toggle"
               data-toggle="dropdown"
             >
-              <span className="hidden-xs">{name}</span>
+              <span className="hidden-xs">{nome}</span>
             </a>
             <ul className="dropdown-menu">
               <li className="user-header">
                 <p>
-                  {name}
-                  <small>{email}</small>
+                  {nome}
+                  <small>{tipoUsuario}</small>
                 </p>
               </li>
               <li className="user-footer">
