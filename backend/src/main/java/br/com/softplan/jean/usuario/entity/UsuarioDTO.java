@@ -1,7 +1,8 @@
 package br.com.softplan.jean.usuario.entity;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import br.com.softplan.jean.util.TipoUsuario;
@@ -40,10 +41,10 @@ public class UsuarioDTO implements Serializable {
 		}
 	}
 	
-	public static List<UsuarioDTO> toListDTO(List<Usuario> lista){
-		List<UsuarioDTO> listaDTO = null;
+	public static Set<UsuarioDTO> toSetDTO(Collection<Usuario> lista){
+		Set<UsuarioDTO> listaDTO = null;
 		if(lista != null) {
-			 listaDTO = lista.stream().map(usuario -> (toDTO(usuario))).collect(Collectors.toList());
+			 listaDTO = lista.stream().map(usuario -> (toDTO(usuario))).collect(Collectors.toSet());
 		}
 		return listaDTO;
 	}

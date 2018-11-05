@@ -1,6 +1,6 @@
 import React from "react";
 export default props => (
-  <div>
+  <div className="form-group">
     <select {...props} className="form-control" id={props.name}>
       <option value="">Selecione</option>
       {props.children}

@@ -1,6 +1,6 @@
 package br.com.softplan.jean.usuario.controller;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -26,7 +26,7 @@ public class UsuarioApiController {
 	private UsuarioService usuarioService;
 	
 	@GetMapping("usuarios")
-	public List<UsuarioDTO> listarUsuarios(@RequestHeader(LoginApiController.NOME_TOKEN_HEADER) String token) {
+	public Set<UsuarioDTO> listarUsuarios(@RequestHeader(LoginApiController.NOME_TOKEN_HEADER) String token) {
 		UsuarioDTO usuario = usuarioService.trazerPorToken(token);
 		if(usuario.isAdmin()) {
 			return usuarioService.listar();
@@ -70,7 +70,7 @@ public class UsuarioApiController {
 	}
 	
 	@GetMapping("usuarios/finalizadores/")
-	public List<UsuarioDTO> listarUsuariosPorTipo(@RequestHeader(LoginApiController.NOME_TOKEN_HEADER) String token) {
+	public Set<UsuarioDTO> listarUsuariosPorTipo(@RequestHeader(LoginApiController.NOME_TOKEN_HEADER) String token) {
 		UsuarioDTO usuario = usuarioService.trazerPorToken(token);
 		if(usuario.isAdmin() || usuario.isTriador()) {
 			return usuarioService.listarFinalizadores();

@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import { formValueSelector, Field, arrayInsert, arrayRemove } from "redux-form";
 import Grid from "../common/layout/Grid";
 import Input from "../common/form/Input";
+import SelectTable from "..commmom/form/SelectTable";
 
 class AprovadorList extends Component {
   aprovadores() {
@@ -11,7 +12,7 @@ class AprovadorList extends Component {
     return (
       <tr>
         <td>
-          <Field component="select" name="finalizador">
+          <Field component={SelectTable} name="finalizador">
             {finalizadores.map((item, i) => (
               <option key={i} value={item.login}>
                 {item.nome}

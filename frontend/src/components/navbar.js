@@ -31,20 +31,10 @@ class Navbar extends Component {
               className="dropdown-toggle"
               data-toggle="dropdown"
             >
-              <img
-                src="http://lorempixel.com/160/160/abstract"
-                className="user-image"
-                alt="User Image"
-              />
               <span className="hidden-xs">{name}</span>
             </a>
             <ul className="dropdown-menu">
               <li className="user-header">
-                <img
-                  src="http://lorempixel.com/160/160/abstract"
-                  className="img-circle"
-                  alt="User Image"
-                />
                 <p>
                   {name}
                   <small>{email}</small>
@@ -69,7 +59,7 @@ class Navbar extends Component {
   }
 }
 
-const mapStateToProps = state => ({ user: state.auth.token });
+const mapStateToProps = state => ({ user: state.auth.user });
 const mapDispatchToProps = dispatch => bindActionCreators({ logout }, dispatch);
 export default connect(
   mapStateToProps,

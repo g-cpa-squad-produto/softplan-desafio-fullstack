@@ -2,6 +2,7 @@ package br.com.softplan.jean.processo.entity;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -51,7 +52,7 @@ public class Processo implements Serializable {
 	@JoinTable(name = "processo_usuario", 
 	joinColumns = @JoinColumn(name = "processo_id"), 
 	inverseJoinColumns = @JoinColumn(name = "usuario_id"))
-	private List<Usuario> usuariosParecer;
+	private Set<Usuario> usuariosParecer;
 	
 	
 	
@@ -73,10 +74,10 @@ public class Processo implements Serializable {
 	public void setNumero(String numero) {
 		this.numero = numero;
 	}
-	public List<Usuario> getUsuariosParecer() {
+	public Set<Usuario> getUsuariosParecer() {
 		return usuariosParecer;
 	}
-	public void setUsuariosParecer(List<Usuario> usuariosParecer) {
+	public void setUsuariosParecer(Set<Usuario> usuariosParecer) {
 		this.usuariosParecer = usuariosParecer;
 	}
 	public ParecerStatus getStatusParecer() {

@@ -2,6 +2,7 @@ package br.com.softplan.jean.processo.entity;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import br.com.softplan.jean.usuario.entity.UsuarioDTO;
@@ -18,14 +19,14 @@ public class ProcessoDTO implements Serializable {
 	private String numero;
     private String descricao;
     private ParecerStatus statusParecer;
-	private List<UsuarioDTO> usuariosParecer;
+	private Set<UsuarioDTO> usuariosParecer;
 	
 	public ProcessoDTO() {
 		super();
 	}
 
 	public ProcessoDTO(Long id, String numero, String descricao, ParecerStatus statusParecer,
-			List<UsuarioDTO> usuariosParecer) {
+			Set<UsuarioDTO> usuariosParecer) {
 		super();
 		this.id = id;
 		this.numero = numero;
@@ -40,7 +41,7 @@ public class ProcessoDTO implements Serializable {
 					processo.getNumero(),
 					processo.getDescricao(),
 					processo.getStatusParecer(),
-					UsuarioDTO.toListDTO(processo.getUsuariosParecer()));
+					UsuarioDTO.toSetDTO(processo.getUsuariosParecer()));
 		}else {
 			return null;
 		}
@@ -72,10 +73,10 @@ public class ProcessoDTO implements Serializable {
 	public void setNumero(String numero) {
 		this.numero = numero;
 	}
-	public List<UsuarioDTO> getUsuariosParecer() {
+	public Set<UsuarioDTO> getUsuariosParecer() {
 		return usuariosParecer;
 	}
-	public void setUsuariosParecer(List<UsuarioDTO> usuariosParecer) {
+	public void setUsuariosParecer(Set<UsuarioDTO> usuariosParecer) {
 		this.usuariosParecer = usuariosParecer;
 	}
 	public ParecerStatus getStatusParecer() {

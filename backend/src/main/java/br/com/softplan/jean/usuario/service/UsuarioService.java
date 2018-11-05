@@ -1,6 +1,7 @@
 package br.com.softplan.jean.usuario.service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,8 +17,8 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
-	public List<UsuarioDTO> listar() {
-		return UsuarioDTO.toListDTO(usuarioRepository.findAll());
+	public Set<UsuarioDTO> listar() {
+		return UsuarioDTO.toSetDTO(usuarioRepository.findAll());
 	}
 	
 	public UsuarioDTO trazer(Long usuarioId) {
@@ -48,8 +49,8 @@ public class UsuarioService {
 		}).orElseThrow(() -> new RuntimeException("Usuario não encontrado!"));
 	}
 	
-	public List<UsuarioDTO> listarFinalizadores() {
-		return UsuarioDTO.toListDTO(usuarioRepository.findByTipoUsuario(TipoUsuario.FINALIZADOR));
+	public Set<UsuarioDTO> listarFinalizadores() {
+		return UsuarioDTO.toSetDTO(usuarioRepository.findByTipoUsuario(TipoUsuario.FINALIZADOR));
 	}
 	
 	public UsuarioDTO trazerPorToken(String token) {
