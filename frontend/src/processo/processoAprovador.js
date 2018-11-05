@@ -12,6 +12,7 @@ class AprovadorList extends Component {
       <tr>
         <td>
           <Field component="select" name="finalizador">
+            <option value="">Selecione</option>
             {finalizadores.map((item, i) => (
               <option key={i} value={item.login}>
                 {item.nome}
@@ -23,7 +24,7 @@ class AprovadorList extends Component {
           <button
             type="button"
             className="btn btn-success"
-            onClick={() => this.add(this.props.list.length)}
+            onClick={() => this.add()}
           >
             <i className="fa fa-plus" />
           </button>
@@ -32,14 +33,20 @@ class AprovadorList extends Component {
     );
   }
 
-  add(index) {
+  add() {
     debugger;
+    const listUsuariosParecer = this.props.list || [];
     const item = this.props.listFinalizadores.find(
       param => param.login === this.props.finalizador
     );
 
     if (!this.props.readOnly) {
-      this.props.arrayInsert("processoForm", "usuariosParecer", index, item);
+      this.props.arrayInsert(
+        "processoForm",
+        "usuariosParecer",
+        listUsuariosParecer.length,
+        item
+      );
     }
   }
 

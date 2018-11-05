@@ -1,0 +1,41 @@
+version: '3'
+
+
+services:
+    db:
+        image: mariadb
+        container_name: softplan-bd
+        restart: always
+        ports:
+          - 3306:3306        
+        environment:
+            MYSQL_DATABASE: desafio
+            MYSQL_ROOT_PASSWORD: 123456
+            MYSQL_ROOT_HOST: '%'
+        restart: always
+        networks: 
+            - production-network
+
+    frontend:
+        image: jeanav/softplan-frontend
+        container_name: softplan-frontend
+        ports:
+            - "8080:80"
+        networks: 
+            - production-network
+        depends_on:
+            - "backend"
+
+    backend:
+        image: jeanav/softplan-backend
+        container_name: softplan-backend
+        ports:
+            - "8081:8081"
+        networks: 
+            - production-network
+        depends_on:
+            - "db"
+
+networks: 
+    production-network:
+        driver: bridge
