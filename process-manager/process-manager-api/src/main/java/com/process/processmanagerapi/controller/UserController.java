@@ -6,44 +6,44 @@ import com.process.processmanagerapi.vo.CreateUserVO;
 import com.process.processmanagerapi.vo.EditUserVO;
 import com.process.processmanagerapi.vo.ViewAllUsersVO;
 import com.process.processmanagerapi.vo.ViewUserVO;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@Api(tags = "User APIs")
+@RequestMapping(value = "/user", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserController {
 
     @Autowired
     UserService userService;
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.OK)
-    @ResponseBody
-    public User createUser(final @RequestBody CreateUserVO createUserVO) {
+    @PostMapping(path = "/create")
+    @ApiOperation(value = "Assign Identity Provider for a given client")
+    public User createUser(final @Valid @RequestBody CreateUserVO createUserVO) {
         return userService.createUser(createUserVO);
     }
 
-    @RequestMapping(value = "/users", method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.OK)
-    @ResponseBody
-    public List<User> getAllUser(final @RequestBody ViewAllUsersVO viewAllUsersVO) {
+    @PostMapping(path = "/users")
+    @ApiOperation(value = "Get all users on database")
+    public List<User> getAllUser(final @Valid @RequestBody ViewAllUsersVO viewAllUsersVO) {
         return userService.getAllUsers(viewAllUsersVO);
     }
 
-    @RequestMapping(value = "/user", method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.OK)
-    @ResponseBody
-    public User getUserByName(final @RequestBody ViewUserVO viewUserVO) {
+    @PostMapping(path = "/user")
+    @ApiOperation(value = "Get a specific users on database by user name")
+    public User getUserByName(final @Valid @RequestBody ViewUserVO viewUserVO) {
         return userService.getUserByUserName(viewUserVO);
     }
 
-    @RequestMapping(value = "/editUser", method = RequestMethod.PATCH)
-    @ResponseStatus(HttpStatus.OK)
-    @ResponseBody
-    public User editUser(final @RequestBody EditUserVO editUserVO) {
+    @PatchMapping(path = "/editUser")
+    @ApiOperation(value = "Edit a specific users on database by user name")
+    public User editUser(final @Valid @RequestBody EditUserVO editUserVO) {
         return userService.editUserByUserName(editUserVO);
     }
 

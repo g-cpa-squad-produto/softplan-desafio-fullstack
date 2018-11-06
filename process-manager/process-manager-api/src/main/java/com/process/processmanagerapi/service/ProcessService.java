@@ -186,6 +186,7 @@ public class ProcessService {
         log.info("Unauthorize user {} to manage process {}", unauthorizedUserProcessVO.getUserName(), unauthorizedUserProcessVO.getProcessNumber());
         User user = userService.findUserByName(unauthorizedUserProcessVO.getUserName());
         userService.verifyIfUserIsNull(user);
+        userService.validateUser(userService.findUserByName(unauthorizedUserProcessVO.getUnauthorizedBy()), UserService.TRIADOR_USER);
         Process process = findProcessByProcessNumber(unauthorizedUserProcessVO.getProcessNumber());
         validateProcess(process);
         process.getAuthorizedUsers().removeIf(s -> s.getName().toUpperCase().equals(user.getName()));
