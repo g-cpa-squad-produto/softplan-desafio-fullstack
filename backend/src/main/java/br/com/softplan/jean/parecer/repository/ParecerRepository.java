@@ -1,4 +1,4 @@
-package br.com.softplan.jeanaragao.parecer.repository;
+package br.com.softplan.jean.parecer.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

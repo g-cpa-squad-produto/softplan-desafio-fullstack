@@ -27,5 +27,8 @@ public class ConfigurationCors {
 		FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
         bean.setOrder(0);
         return bean;
+       
+	
     }
+    
 }
