@@ -10,7 +10,7 @@ import App from "./App";
 import Auth from "./auth/auth";
 import { validateToken } from "./auth/authActions";
 
-const baseURL = "http://localhost:8081/desafiosoftplan";
+const baseURL = "http://backend:8081/desafiosoftplan";
 
 class AuthOrApp extends Component {
   componentWillMount() {
