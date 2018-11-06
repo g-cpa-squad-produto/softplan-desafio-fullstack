@@ -26,11 +26,7 @@
 
 4. **Criando Usuários**
 
-   O sistema irá criar automaticamente um usuário de cada tipo:
-   Usuario Senha
-   admin admin
-   triador triador
-   finalizador finalizador
+   O sistema irá criar automaticamente um usuário de cada tipo: admin, triador e finalizador. As senhas são iguais aos usuários.
 
 ## Passo a passo do React Front end app
 
