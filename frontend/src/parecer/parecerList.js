@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getList, showUpdate, showDelete } from "./processoActions";
+import { getList, showUpdate, showDelete } from "../processo/processoActions";
 
-class ProcessoList extends Component {
+class ParecerList extends Component {
   renderRows() {
     const list = this.props.list || [];
     return list.map(processo => (
@@ -56,4 +56,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ProcessoList);
+)(ParecerList);

@@ -10,55 +10,36 @@ import TabsContent from "../common/tab/tabsContent";
 import TabHeader from "../common/tab/tabHeader";
 import TabContent from "../common/tab/tabContent";
 
-import { init, create, update, remove } from "./processoActions";
-import { getFinalizadores } from "../usuario/usuarioActions";
+import { init, create } from "./parecerActions";
 
-import Form from "./processoForm";
-import List from "./processoList";
+import Form from "./parecerForm";
+import List from "./parecerList";
 
-class Processo extends Component {
+class Parecer extends Component {
   componentWillMount() {
     this.props.init();
-    this.props.getFinalizadores();
   }
 
   render() {
     return (
       <div>
-        <ContentHeader title="Processos" subTitle="Cadastro" />
+        <ContentHeader title="Parecer" subTitle="Processos" />
         <Content>
           <Tabs>
             <TabsHeader>
               <TabHeader label="Listar" icon="bars" target="tabList" />
-              <TabHeader label="Incluir" icon="plus" target="tabCreate" />
-              <TabHeader label="Alterar" icon="pencil" target="tabUpdate" />
-              <TabHeader label="Excluir" icon="trash-o" target="tabDelete" />
+              <TabHeader label="Parecer" icon="plus" target="tabCreate" />
             </TabsHeader>
             <TabsContent>
               <TabContent id="tabList">
                 <List />
               </TabContent>
-              <TabContent id="tabCreate">
-                <Form
-                  onSubmit={this.props.create}
-                  listAprovadores={this.props.listAprovadores}
-                  submitLabel="Incluir"
-                  submitClass="primary"
-                />
-              </TabContent>
               <TabContent id="tabUpdate">
                 <Form
-                  onSubmit={this.props.update}
-                  submitLabel="Alterar"
+                  onSubmit={this.props.create}
+                  submitLabel="Incluir Parecer"
                   submitClass="info"
-                />
-              </TabContent>
-              <TabContent id="tabDelete">
-                <Form
-                  onSubmit={this.props.remove}
                   readOnly={true}
-                  submitLabel="Excluir"
-                  submitClass="danger"
                 />
               </TabContent>
             </TabsContent>
@@ -73,14 +54,11 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       init,
-      create,
-      update,
-      remove,
-      getFinalizadores
+      create
     },
     dispatch
   );
 export default connect(
   null,
   mapDispatchToProps
-)(Processo);
+)(Parecer);

@@ -2,16 +2,17 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import InputHorizontal from "../common/form/InputHorizontal";
+import Select from "../common/form/Select";
 import IconButton from "../common/layout/IconButton";
 import { reduxForm, Field, formValueSelector } from "redux-form";
 
-import { init } from "./processoActions";
+import { init } from "../processo/processoActions";
 
-import ProcessoAprovador from "./processoAprovador";
-
+const required = value =>
+  value || typeof value === "number" ? undefined : "Required";
 class ProcessoForm extends Component {
   render() {
-    const { handleSubmit, readOnly, usuariosParecer } = this.props;
+    const { handleSubmit, readOnly } = this.props;
 
     return (
       <form onSubmit={handleSubmit}>
@@ -33,26 +34,28 @@ class ProcessoForm extends Component {
                 component={InputHorizontal}
                 label="Descrição"
                 placeholder="Informe a descrição"
-                required
               />
 
-              <div className="form-group">
-                <label
-                  htmlFor="statusParecer"
-                  className="col-sm-2 control-label"
-                >
-                  Situação
-                </label>
-                <div className="col-sm-10">
-                  <Field name="statusParecer" component="select">
-                    <option value="">Selecione</option>
-                    <option value="0">Pendente</option>
-                    <option value="1">Concluído</option>
-                  </Field>
-                </div>
-              </div>
+              <Field
+                component={Select}
+                id="statusParecer"
+                name="statusParecer"
+                label="Situação processo"
+              >
+                <option value="0">Pendente</option>
+                <option value="1">Outro</option>
+              </Field>
+
+              <Field
+                name="descricaoParecer"
+                component={InputHorizontal}
+                type="text"
+                label="Parecer"
+                validate={[required]}
+                placeholder="Informe o parecer"
+              />
             </div>
-            <ProcessoAprovador list={usuariosParecer} readOnly={readOnly} />
+
             <div className="box-footer">
               <div className="pull-right">
                 <IconButton

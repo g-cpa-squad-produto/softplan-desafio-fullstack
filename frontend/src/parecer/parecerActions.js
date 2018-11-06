@@ -3,11 +3,12 @@ import { toastr } from "react-redux-toastr";
 import { reset as resetForm, initialize } from "redux-form";
 import { showTabs, selectTab } from "../common/tab/tabActions";
 
-const SERVICE = "/processos";
+const SERVICE_INIT = "/processos/usuarios/pendentes";
+const SERVICE = "/parecer/processo";
 const INITIAL_VALUES = {};
 
 export function getList() {
-  const request = axios.get(SERVICE);
+  const request = axios.get(SERVICE_INIT);
   return {
     type: "PROCESSO_FETCHED",
     payload: request
@@ -15,15 +16,11 @@ export function getList() {
 }
 
 export function create(values) {
-  return submit(values, "post");
-}
-
-export function update(values) {
-  return submit(values, "put");
-}
-
-export function remove(values) {
-  return submit(values, "delete");
+  const parecer = {
+    processo: { id: values.id },
+    descricao: values.descricaoParecer
+  };
+  return submit(parecer, "post");
 }
 
 function submit(values, method) {
@@ -51,15 +48,7 @@ export function showUpdate(processo) {
   return [
     showTabs("tabUpdate"),
     selectTab("tabUpdate"),
-    initialize("processoForm", processo)
-  ];
-}
-
-export function showDelete(processo) {
-  return [
-    showTabs("tabDelete"),
-    selectTab("tabDelete"),
-    initialize("processoForm", processo)
+    initialize("parecerForm", processo)
   ];
 }
 
@@ -68,6 +57,6 @@ export function init() {
     showTabs("tabList", "tabCreate"),
     selectTab("tabList"),
     getList(),
-    initialize("processoForm", INITIAL_VALUES)
+    initialize("parecerForm", INITIAL_VALUES)
   ];
 }

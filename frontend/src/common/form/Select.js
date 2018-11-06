@@ -6,7 +6,6 @@ export default props => (
     </label>
     <div className="col-sm-10">
       <select {...props} className="form-control">
-        <option value="">Selecione</option>
         {props.children}
       </select>
     </div>

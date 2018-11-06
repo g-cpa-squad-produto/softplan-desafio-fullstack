@@ -9,5 +9,7 @@ export default props => (
     <MenuItem path="/usuario" label="Usuarios" />
 
     <MenuItem path="/processo" label="Processo" />
+
+    <MenuItem path="/parecer" label="Parecer" />
   </ul>
 );

@@ -37,11 +37,6 @@ public class Parecer implements Serializable {
 	
 	@Column(columnDefinition = "text")
 	@NotBlank
-	@Size(max = 200)
-    private String titulo;
-	
-	@Column(columnDefinition = "text")
-	@NotBlank
     private String descricao;
     
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -79,11 +74,5 @@ public class Parecer implements Serializable {
 	public void setProcesso(Processo processo) {
 		this.processo = processo;
 	}
-	public String getTitulo() {
-		return titulo;
-	}
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}   
     
 }
