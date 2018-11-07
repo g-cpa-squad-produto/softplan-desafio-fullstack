@@ -1,0 +1,28 @@
+<div class='row right-align'>      
+    <a class="waves-effect waves-light btn blue" (click)="voltarPagina();" title="Voltar"><i class="material-icons left ">arrow_back</i></a>
+</div>
+<div class="row">  
+  <div class="col s12">
+    <div class="row">
+      <div class="input-field col s12">
+        <input placeholder="Digite a descrição do processo" id="nomeP" [(ngModel)]="processo.descricao" type="text" class="validate">
+        <label for="nomeP">Descrição</label>
+      </div>
+           
+      <div class="col s12">
+        <label>Responsáveis pelo parecer</label>
+      </div>
+      <div class="col" *ngFor="let usu of lstTodosUsuTipoFinalizador">
+          <label>
+            <input id="{{usu.id}}" name="usu" type="checkbox" (click)="addProcesso(usu)"  />
+            <span class="filled-in">{{usu.nome}}</span>
+            <span>&nbsp;</span>
+          </label>         
+        </div>
+    </div>
+    
+    <div class="row">
+      <button id="salvarbtn" (click)="salvar()" type='submit' class="waves-effect waves-light btn blue">Salvar</button>
+    </div>
+  </div>
+</div>

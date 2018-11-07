@@ -1,0 +1,31 @@
+
+  <div class='row right-align'>      
+      <a class="waves-effect waves-light btn blue" (click)="voltarPagina();" title="Voltar"><i class="material-icons left ">arrow_back</i></a>
+      <span>&nbsp;</span>
+      <a class="waves-effect waves-light btn blue" (click)="redirecionaPagina('processo');"><i class="material-icons right">add</i>Novo</a>
+    
+</div>
+<div class='row'>
+    <table class="striped responsive-table">
+        <thead>
+          <tr>
+              <th>Nome</th>
+              <th>Usuários responsáveis</th>
+              <th>data criacao</th>
+              <th>Finalizado</th>
+              <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let proc of lstProcessos">
+            <td>{{proc.descricao}}</td>
+            <td>{{montaUsu(proc)}}</td>
+            <td>{{proc.dataCriacao | date: 'dd/MM/yyyy'}}</td>
+            <td>{{proc.finalizado? 'Sim' : 'Não'}}</td>
+            <td><a href="javscript:void(0);" (click)="redirecionaPagina('processo/'+ proc.id)"><i class="material-icons" >edit</i></a></td>
+          </tr>
+        </tbody>
+      </table>
+
+</div>

@@ -1,0 +1,20 @@
+#panellogin{
+    margin-top: 10%;
+    padding: 0px;
+  }
+  
+  #title{
+    background-color: #2bbbad;
+    color: white;
+    padding: 2%;
+    margin-top: 0px
+  }
+  form{
+    padding:0px;
+    border-radius: 3px;
+    box-sizing: border-box;
+  }
+  #usu,#password{
+   margin-left: 20px;
+   margin-right: 20px;
+  }

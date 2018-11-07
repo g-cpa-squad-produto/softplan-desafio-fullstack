@@ -1,0 +1,30 @@
+
+  <div class='row right-align'>      
+      <a class="waves-effect waves-light btn blue" (click)="voltarPagina();" title="Voltar"><i class="material-icons left ">arrow_back</i></a>
+      <span>&nbsp;</span>
+      <a class="waves-effect waves-light btn blue" (click)="redirecionaPagina('usuario');"><i class="material-icons right ">add</i>Novo</a>
+  </div>
+  <div class='row'>
+      <table class="striped responsive-table">
+          <thead>
+            <tr>
+                <th>Login</th>
+                <th>Nome</th>
+                <th>Permissões</th>
+                <th></th>
+                <th></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let usu of lstUsuario">
+              <td>{{usu.login}}</td>
+              <td>{{usu.nome}}</td>
+              <td>{{getDescPermissao(usu.lstPermissao)}}</td>
+              <td><a href="javscript:void(0);" (click)="redirecionaPagina('usuario/'+ usu.id)"><i class="material-icons" >edit</i></a></td>
+              <td><a href="javscript:void(0);" (click)="excluir(usu.id)"><i class="material-icons" >delete</i></a></td>
+            </tr>
+          </tbody>
+        </table>
+        
+</div>

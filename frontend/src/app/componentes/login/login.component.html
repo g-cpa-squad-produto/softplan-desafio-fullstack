@@ -1,0 +1,35 @@
+<div>
+<div class="container">
+  <div class="row">
+    <div class="col s6 offset-s3 z-depth-5" id="panellogin">
+      <h5 id="title" class="center-align blue">Sistema XPTO</h5>
+      <form class="col s12">
+
+        <div class='row'>
+          <div class='col s12'>
+          </div>
+        </div>
+
+        <div class="row" id="usu">
+          <div class="input-field col s12">
+            <input id="login" name="login" type="text" class="validate" [(ngModel)]="usuario.login">
+            <label for="login">Login</label>
+          </div>
+        </div>
+        <div class="row" id="password">
+          <div class="input-field col s12">
+            <input id="senhaLogin" name="senhaLogin"  type="password" class="validate" [(ngModel)]="usuario.senha">
+            <label for="senhaLogin">Senha</label>
+          </div>
+        </div>
+        <br />
+        <div class='container'>
+          <div class='row right-align'>
+            <button id="loginbtn" (click)="login()" type='submit' class="waves-effect waves-light btn blue">Entrar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
