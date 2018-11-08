@@ -9,9 +9,14 @@ export class AuthService {
   constructor( public jwtHelper: JwtHelperService ) {}
 
   public isAuthenticated(): boolean {
-    /* const token = localStorage.getItem('token');
-    console.log(token); */
+    const token = localStorage.getItem('token');
     // Valida se token é valido
-    return true;//!this.jwtHelper.isTokenExpired(token);
+    //return !this.jwtHelper.isTokenExpired(token);
+    if (token !== undefined && token !== null) {
+      this.jwtHelper.decodeToken(token);
+      return true;
+    } else {
+      return false;
+    }
   }
 }

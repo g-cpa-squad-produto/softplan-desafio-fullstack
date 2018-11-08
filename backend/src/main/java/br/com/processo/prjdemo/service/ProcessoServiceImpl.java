@@ -6,7 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.processo.prjdemo.model.Parecer;
 import br.com.processo.prjdemo.model.Processo;
+import br.com.processo.prjdemo.repository.ParecerRepository;
 import br.com.processo.prjdemo.repository.ProcessoRepository;
 
 /**
@@ -20,6 +22,9 @@ public class ProcessoServiceImpl implements ProcessoService {
 		
 	@Autowired
 	ProcessoRepository processoRepository;
+	
+	@Autowired
+	ParecerRepository parecerRepository;
 
 	@Override
 	public Processo getProcessoById(Long id) {
@@ -43,5 +48,13 @@ public class ProcessoServiceImpl implements ProcessoService {
 			processo.setDataCriacao(new Date());
 		}		
 		return processoRepository.save(processo);
+	}
+
+	@Override
+	public Parecer salvarProcessoParecer(Parecer parecer) {
+		if(parecer.getDataCriacao() == null){
+			parecer.setDataCriacao(new Date());
+		}
+		return parecerRepository.save(parecer);
 	}
 }

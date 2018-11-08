@@ -22,12 +22,21 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this._usarioService.login(this.usuario).subscribe(
-      res => {console.log(res);
-        localStorage.setItem('token', res);
-        this._router.navigate(['/usuario']);
-      }
-    );
+      this._usarioService.login(this.usuario).subscribe(
+        res => {
+          localStorage.setItem('token', res);
+          this._router.navigate(['/logado']);
+        }, error => {
+          console.log(error);
+          this.msgToast('Usuário e ou senha inválidos(s).');
+        }
+      );
+  }
+
+  public msgToast(texto: string) {
+    let msg = document.getElementById('msgAdm');
+    msg.onclick = (1 , eval)('(function(event){' + "M.toast({html: '" + texto + "'})" + '})');
+    msg.click();
   }
 
 }

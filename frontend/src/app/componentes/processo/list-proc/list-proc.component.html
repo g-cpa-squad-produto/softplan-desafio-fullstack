@@ -12,7 +12,6 @@
               <th>Nome</th>
               <th>Usuários responsáveis</th>
               <th>data criacao</th>
-              <th>Finalizado</th>
               <th></th>
           </tr>
         </thead>
@@ -22,7 +21,6 @@
             <td>{{proc.descricao}}</td>
             <td>{{montaUsu(proc)}}</td>
             <td>{{proc.dataCriacao | date: 'dd/MM/yyyy'}}</td>
-            <td>{{proc.finalizado? 'Sim' : 'Não'}}</td>
             <td><a href="javscript:void(0);" (click)="redirecionaPagina('processo/'+ proc.id)"><i class="material-icons" >edit</i></a></td>
           </tr>
         </tbody>

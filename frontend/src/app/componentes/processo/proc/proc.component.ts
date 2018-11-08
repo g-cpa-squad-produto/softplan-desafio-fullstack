@@ -79,7 +79,7 @@ export class ProcComponent implements OnInit {
           this._admComponent.msgToast(textMsg);
         });
     } else {
-      textMsg = 'Erro ao cadastrar usuário. Preencha todos os campos';
+      textMsg = 'Erro ao cadastrar processo. Preencha todos os campos';
       this._admComponent.msgToast(textMsg);
     }
   }

@@ -10,6 +10,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './componentes/login/login.component';
 import { LogoutComponent } from './componentes/logout/logout.component';
+import { LogadoComponent } from './componentes/logado/logado.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'logout', component: LogoutComponent },
   { path: '', component: AdmComponent,
         children: [
+          { path: 'logado', component: LogadoComponent, canActivate: [AuthGuardService]  },
           { path: 'usuario', component: UsuComponent, canActivate: [AuthGuardService]  },
           { path: 'usuario/:id', component: UsuComponent, canActivate: [AuthGuardService]  },
           { path: 'listar-usuario', component: ListUsuComponent, canActivate: [AuthGuardService]  },
@@ -24,7 +26,7 @@ const routes: Routes = [
           { path: 'processo/:id', component: ProcComponent, canActivate: [AuthGuardService]  },
           { path: 'listar-processo', component: ListProcComponent, canActivate: [AuthGuardService]  },
           { path: 'listar-pendente', component: ListPendenteComponent, canActivate: [AuthGuardService]  },
-          { path: 'pendente', component: PendenteComponent, canActivate: [AuthGuardService]  }
+          { path: 'pendente/:idProc', component: PendenteComponent, canActivate: [AuthGuardService]  }
         ]
     },
    // Outras tentativas

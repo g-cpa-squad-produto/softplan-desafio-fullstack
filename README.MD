@@ -8,4 +8,11 @@ Para o desenvolvimento da aplicação foram utilizadas:
 - No Frontend foi utilizado Angular 7.0 integrado com o framework de estilos Materialize.css 1.0.0
 
 ### Problemas encontrados
-- Devido à restrição de tempo não foi possível desenvoler o sistema em React, bem como implementar validações e testes mais complexos.
+- Devido à restrição de tempo não foi possível desenvoler o sistema em React, bem como implementar algumas funcionalidades, validações e testes mais complexos.
+- Os arquivos de testes comoeçaram a dar erro ao rodar com o Docker, e como não tive tempo habil para descobrir o problema, coloquei eles em uma pasta fora do projeto.
+
+## EXECUCAO NO DOCKER
+Para Iniciar os containers:<br/>
+```no shell executar (ira procurar dentro dos diretorios do backend e frontend e rodar o dockerfile de cada um)
+sudo docker-compose up --build
+```

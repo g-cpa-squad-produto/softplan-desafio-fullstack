@@ -1,7 +1,7 @@
 import { UsuarioService } from './servicos/usuario.service';
 import { AuthService } from './auth/auth.service';
 import { AuthGuardService } from './auth/auth-guard.service';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -23,6 +23,10 @@ import { LogadoComponent } from './componentes/logado/logado.component';
 import { AdmComponent } from './adm/adm.component';
 import { ProcessoService } from './servicos/processo.service';
 
+export function getToken(): string {
+  return localStorage.getItem('token');
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +46,12 @@ import { ProcessoService } from './servicos/processo.service';
     HttpModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+          tokenGetter: getToken
+      }
+  })
   ],
   providers: [
     JwtHelperService,

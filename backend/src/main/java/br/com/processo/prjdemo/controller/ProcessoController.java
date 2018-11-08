@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.processo.prjdemo.model.Parecer;
 import br.com.processo.prjdemo.model.Processo;
 import br.com.processo.prjdemo.service.ProcessoService;
 
@@ -20,7 +21,7 @@ import br.com.processo.prjdemo.service.ProcessoService;
  * @author Guilherme Sena
  * REST's relacionados ao processo
  */
-@CrossOrigin(origins = "http://localhost:4200")//Permite chamadas de outra porta que nao a default 8080
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)//Permite chamadas de outra porta que nao a default 8080
 @RequestMapping("/processo")
 @RestController
 public class ProcessoController {
@@ -57,12 +58,12 @@ public class ProcessoController {
 	}
     
     /**
-     * @param processo
+     * @param Parecer
      * @return insere parecer no processo
      */
-    @PatchMapping("processo-parecer-salvar")
-    public Processo salvarParecer(@RequestBody Processo processo) {
-    	processo.setFinalizado(true);
-		return processoService.salvarProcesso(processo);
+    @PatchMapping("/processo-parecer-salvar")
+    public Parecer salvarParecer(@RequestBody Parecer parecer) {
+		return processoService.salvarProcessoParecer(parecer);
 	}
+    
 }

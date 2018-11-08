@@ -41,10 +41,9 @@ public class Processo implements Serializable {
 	private String descricao;
 	
 	@OneToMany(mappedBy = "processo")
-	private Set<Parecer> lstParecerr= new HashSet<Parecer>();
+	private Set<Parecer> lstParecer= new HashSet<Parecer>();
 	
-	@Column
-	private boolean finalizado;
+	
 	
 	@Column
 	private Date dataCriacao;
@@ -77,20 +76,12 @@ public class Processo implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public Set<Parecer> getLstParecerr() {
-		return lstParecerr;
+	public Set<Parecer> getLstParecer() {
+		return lstParecer;
 	}
 
-	public void setLstParecerr(Set<Parecer> lstParecerr) {
-		this.lstParecerr = lstParecerr;
-	}
-
-	public boolean isFinalizado() {
-		return finalizado;
-	}
-
-	public void setFinalizado(boolean finalizado) {
-		this.finalizado = finalizado;
+	public void setLstParecer(Set<Parecer> lstParecer) {
+		this.lstParecer = lstParecer;
 	}
 
 	public Date getDataCriacao() {
@@ -117,7 +108,6 @@ public class Processo implements Serializable {
 				+ ((dataCriacao == null) ? 0 : dataCriacao.hashCode());
 		result = prime * result
 				+ ((descricao == null) ? 0 : descricao.hashCode());
-		result = prime * result + (finalizado ? 1231 : 1237);
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
@@ -140,8 +130,6 @@ public class Processo implements Serializable {
 			if (other.descricao != null)
 				return false;
 		} else if (!descricao.equals(other.descricao))
-			return false;
-		if (finalizado != other.finalizado)
 			return false;
 		if (id == null) {
 			if (other.id != null)

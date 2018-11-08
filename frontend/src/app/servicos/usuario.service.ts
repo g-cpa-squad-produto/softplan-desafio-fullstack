@@ -1,9 +1,9 @@
 import { EnumPermissaoUsuario } from './../entidades/enumPermissaoUsuario';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Http, RequestOptions } from '@angular/http';
+import { map, catchError } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
 import { Usuario } from '../entidades/usuario';
 
 @Injectable({
@@ -19,34 +19,52 @@ export class UsuarioService {
   private urlLogin = 'http://localhost:8080/usuario/login-usuario';
   private urlListarTodosPorPermissao = 'http://localhost:8080/usuario/todos-usuarios-permissao/:PERM';
 
-  constructor(private http: Http) { }
+  GetHttpHeaders(): HttpHeaders {
+    const headers = new HttpHeaders()
+      .set('Authorization', localStorage.getItem('token'));
 
-  recuperaTodosUsuarios() {
-    return this.http.get(this.urlListarTodos).pipe(map((response: any) => response.json()));
+    return headers;
+  }
+
+  constructor(
+    private http: HttpClient
+  ) { }
+
+  recuperaTodosUsuarios()  {
+    // tslint:disable-next-line:max-line-length
+    return this.http.get<Usuario[]>(this.urlListarTodos, { headers: this.GetHttpHeaders() } ).pipe(catchError(this.handleError));
   }
 
   recuperaTodosUsuariosPermissao(permissao) {
     // tslint:disable-next-line:max-line-length
-    return this.http.get(this.urlListarTodosPorPermissao.replace(':PERM', permissao.toString())).pipe(map((response: any) => response.json()));
+    return this.http.get<Usuario[]>(this.urlListarTodosPorPermissao.replace(':PERM', permissao.toString()), { headers: this.GetHttpHeaders() }).pipe(catchError(this.handleError));
   }
 
   recuperarUsuarioPorId(idUsu) {
-    return this.http.get(this.urlListarPorId.replace(':ID', idUsu.toString())).pipe(map((response: any) => response.json()));
+    // tslint:disable-next-line:max-line-length
+    return this.http.get<Usuario>(this.urlListarPorId.replace(':ID', idUsu.toString()), { headers: this.GetHttpHeaders() }).pipe(catchError(this.handleError));
   }
 
   excluirUsuarioPorId(idUsu) {
-    return this.http.delete(this.urlExcluirPorId.replace(':ID', idUsu.toString())).pipe(map((response: any) => response.json()));
+    // tslint:disable-next-line:max-line-length
+    return this.http.delete<boolean>(this.urlExcluirPorId.replace(':ID', idUsu.toString()), { headers: this.GetHttpHeaders() }).pipe(catchError(this.handleError));
   }
 
   recuperaTodasPermissoes() {
-    return this.http.get(this.urlListarEnumPermissoes).pipe(map((response: any) => response.json()));
+    // tslint:disable-next-line:max-line-length
+    return this.http.get<EnumPermissaoUsuario[]>(this.urlListarEnumPermissoes, { headers: this.GetHttpHeaders() }).pipe(catchError(this.handleError));
   }
 
   salvar(usuario: Usuario) {
-    return this.http.post(this.urlSalvar, usuario).pipe(map((response: any) => response.json()));
+    // tslint:disable-next-line:max-line-length
+    return this.http.post<Usuario>(this.urlSalvar, usuario, { headers: this.GetHttpHeaders() }).pipe(catchError(this.handleError));
   }
 
   login(usuario: Usuario) {
-    return this.http.post(this.urlLogin, usuario).pipe(map((response: any) => response.text()));
+    return this.http.post(this.urlLogin, usuario, {responseType: 'text'}).pipe(map(r => r.toString()));
+  }
+  private handleError(err: HttpErrorResponse) {
+      console.log(err.message);
+      return Observable.throw(err.message);
   }
 }

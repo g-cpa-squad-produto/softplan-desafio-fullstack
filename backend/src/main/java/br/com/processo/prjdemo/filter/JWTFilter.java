@@ -36,7 +36,7 @@ public class JWTFilter extends GenericFilterBean  {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
         String token = request.getHeader("Authorization");
-
+        
         //valida se o metodo http é do tipo options
         if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
             response.sendError(HttpServletResponse.SC_OK, "success");

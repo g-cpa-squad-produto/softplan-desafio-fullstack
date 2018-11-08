@@ -7,7 +7,6 @@ export class Processo {
     parecer: Parecer;
     lstUsuParecer: Array<Usuario>;
     dataCriacao: Date;
-    finalizado: boolean;
 
     constructor() {}
 }

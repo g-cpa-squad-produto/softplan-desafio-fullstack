@@ -1,3 +1,21 @@
-<p>
-  pendente works!
-</p>
+<div class='row right-align'>      
+  <a class="waves-effect waves-light btn blue" (click)="voltarPagina();" title="Voltar"><i class="material-icons left ">arrow_back</i></a>
+</div>
+<div class="row">  
+<div class="col s12">
+  <div class="row">
+    <div class="input-field col s12">      
+      <label for="nomeP">Descrição</label>
+      <p>{{processo.descricao}}</p>
+    </div>
+         
+    <div class="col s12">
+      <textarea class="materialize-textarea" name="textA" (change)="changeTextArea($event)" >{{parecer.parecer}}</textarea>
+      <label for="textA">Parecer</label>
+    </div>
+  
+  <div class="row">
+    <button id="salvarbtn" (click)="salvar()" type='submit' class="waves-effect waves-light btn blue">Salvar</button>
+  </div>
+</div>
+</div>

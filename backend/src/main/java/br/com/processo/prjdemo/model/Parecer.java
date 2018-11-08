@@ -33,7 +33,6 @@ public class Parecer {
 	@ManyToOne
 	private Processo processo;
 	
-	
 	//CONSTRUTOR	
 	public Parecer() {
 		super();
@@ -63,7 +62,7 @@ public class Parecer {
 	public void setDataCriacao(Date dataCriacao) {
 		this.dataCriacao = dataCriacao;
 	}
-
+	
 	public Usuario getUsuarioCriacao() {
 		return usuarioCriacao;
 	}

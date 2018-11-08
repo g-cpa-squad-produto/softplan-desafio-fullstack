@@ -1,8 +1,11 @@
+import { Processo } from './processo';
+import { Usuario } from './usuario';
 export class Parecer {
     id: number;
-    descricao: string;
-    parecer: Parecer;
-    parecerFinalizado: boolean;
+    parecer: string;
+    dataCriacao: Date;
+	usuarioCriacao: Usuario;
+	processo: Processo;
 
     constructor() {}
 }

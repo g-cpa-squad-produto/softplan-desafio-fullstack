@@ -3,8 +3,6 @@ package br.com.processo.prjdemo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -75,12 +73,9 @@ public class UsuarioController {
 	 * @return metodo responsavel por validar login e se autorizado retorna um token valido
 	 */
 	@PostMapping("/login-usuario")
-    public ResponseEntity<String> geUsuarioLoginSenha(@RequestBody Usuario usuario) {
+    public String geUsuarioLoginSenha(@RequestBody Usuario usuario) {
 		String token = usuarioService.getUsuarioLoginSenha(usuario);
-		if(token == null){
-			return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity<String>(token, HttpStatus.OK);
+		return token;
 	}
     
 	/**

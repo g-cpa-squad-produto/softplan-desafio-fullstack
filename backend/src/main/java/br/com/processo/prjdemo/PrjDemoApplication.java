@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 
 import br.com.processo.prjdemo.model.EnumPermissaoUsuario;
@@ -21,6 +22,7 @@ import br.com.processo.prjdemo.repository.UsuarioRepository;
  * 
  */
 @SpringBootApplication
+@EnableAutoConfiguration
 public class PrjDemoApplication {
 	
 	private static final Logger logger = LoggerFactory.getLogger(PrjDemoApplication.class);

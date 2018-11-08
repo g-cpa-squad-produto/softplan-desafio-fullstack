@@ -12,9 +12,10 @@
         </thead>
 
         <tbody>
-          <tr>
-            <td>Alvin Ribeiro</td>
-            <td><i class="material-icons" (click)="incluirParecer('processo/:id')">add</i></td>
+          <tr *ngFor="let proc of lstProcessosPendentes">
+            <td>{{proc.descricao}}</td>
+            <td>{{proc.dataCriacao | date: 'dd/MM/yyyy'}}</td>
+            <td><i class="material-icons" (click)="incluirParecer('pendente/'+proc.id)">add</i></td>
           </tr>
         </tbody>
       </table>
