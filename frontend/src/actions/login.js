@@ -31,7 +31,6 @@ export function signIn({ email, password }, history) {
     dispatch(login());
     return axios.post(`${URL}/login`, { email, password })
                 .then(res => {
-                  debugger;
                   dispatch(loginSuccess());
                   localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(res.data));
                   history.push('/home');
@@ -47,4 +46,20 @@ export function logout(history) {
   return (dispatch) => {
     dispatch(logoutSuccess());
   }
+}
+
+export function handleUser(history) {
+  return (dispatch) => {
+    const user = localStorage.getItem(USER_STORAGE_KEY);
+    if(user) {
+      if (history.location.pathname === '/') {
+          history.push('/home');
+      } else {
+        history.push(history.location.pathname)
+      }
+      dispatch(loginSuccess());
+    } else {
+      dispatch(loginFailure());
+    }
+  };
 }
