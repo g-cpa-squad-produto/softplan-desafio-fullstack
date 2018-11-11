@@ -3,12 +3,14 @@ package com.miratanlehmkuhl.backend.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.miratanlehmkuhl.backend.dto.UserNewDTO;
+import com.miratanlehmkuhl.backend.dto.ListUser;
 import com.miratanlehmkuhl.backend.model.User;
 import com.miratanlehmkuhl.backend.repository.UserRepository;
 import com.miratanlehmkuhl.backend.service.UserService;
@@ -43,6 +45,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User findByEmail(String email) {
 		return repository.findByEmail(email);
+	}
+
+	@Override
+	public ListUser findAll(Pageable pageable) {
+		PageImpl<User> search = repository.findAll(pageable);
+		return new ListUser(search.getContent(), search.getTotalElements());
 	}
 
 	/*@Override

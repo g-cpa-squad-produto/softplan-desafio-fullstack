@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.miratanlehmkuhl.backend.enums.Role;
 
 @Entity
@@ -24,14 +25,19 @@ public class User implements UserDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@JsonProperty("id")
 	private Long id;
 
+	@JsonProperty("name")
 	private String name;
 
+	@JsonProperty("email")
 	private String email;
 
+	@JsonIgnore
 	private String password;
 
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER, orphanRemoval = true)
 	private Set<UserAuthority> authorities = new HashSet<>(0);
 
@@ -87,31 +93,37 @@ public class User implements UserDetails {
 		this.authorities = authorities;
 	}
 
+	@JsonIgnore
 	@Override
 	public String getUsername() {
 		return email;
 	}
 
+	@JsonIgnore
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;
 	}
 
+	@JsonIgnore
 	@Override
 	public boolean isAccountNonLocked() {
 		return true;
 	}
 
+	@JsonIgnore
 	@Override
 	public boolean isCredentialsNonExpired() {
 		return true;
 	}
 
+	@JsonIgnore
 	@Override
 	public boolean isEnabled() {
 		return true;
 	}
 
+	@JsonIgnore
 	public Set<Role> getRoles() {
 		Set<Role> roles = EnumSet.noneOf(Role.class);
 		if (authorities != null) {
