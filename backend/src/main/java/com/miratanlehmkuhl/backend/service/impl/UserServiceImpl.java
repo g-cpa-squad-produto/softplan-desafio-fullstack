@@ -45,9 +45,9 @@ public class UserServiceImpl implements UserService {
 		return repository.findByEmail(email);
 	}
 
-	@Override
+	/*@Override
 	public void registration(UserNewDTO user) {
 		return repository.save(user);
-	}
+	}*/
 
 }

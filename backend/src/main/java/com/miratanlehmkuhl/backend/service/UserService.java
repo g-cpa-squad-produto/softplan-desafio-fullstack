@@ -15,6 +15,6 @@ public interface UserService extends UserDetailsService {
 
 	User findByEmail(String email);
 
-	void registration(UserNewDTO user);
+	// void registration(UserNewDTO user);
 
 }
