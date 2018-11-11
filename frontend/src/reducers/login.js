@@ -2,6 +2,7 @@ import {
   LOGIN,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  LOGOUT,
 } from '../constants'
 
 const initialState = {
@@ -28,6 +29,12 @@ export default function loginReducer(state = initialState, action) {
         ...state,
         loading: false,
         error: action.payload.error.message
+      }
+    case LOGOUT:
+      return {
+        ...state,
+        loading: false,
+        error: null
       }
     default:
       return state;

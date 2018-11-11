@@ -6,6 +6,7 @@ import {
   LOGIN,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  LOGOUT,
 } from '../constants'
 
 export const login = () => ({
@@ -21,6 +22,10 @@ export const loginFailure = error => ({
   payload: { error }
 });
 
+export const logoutSuccess = () => ({
+  type: LOGOUT
+});
+
 export function signIn({ email, password }, history) {
   return dispatch => {
     dispatch(login());
@@ -33,5 +38,13 @@ export function signIn({ email, password }, history) {
                 })
                 .then(error => dispatch(loginFailure(error)))
                 .catch(error => dispatch(loginFailure(error)));
+  }
+}
+
+export function logout(history) {
+  localStorage.clear();
+  history.push('/');
+  return (dispatch) => {
+    dispatch(logoutSuccess());
   }
 }
