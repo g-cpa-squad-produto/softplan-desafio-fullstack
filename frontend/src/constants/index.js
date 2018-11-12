@@ -15,3 +15,9 @@ export const LOGOUT = 'LOGOUT'
 export const LIST_USER = 'LIST_USER'
 export const LIST_USER_SUCCESS = 'LIST_USER_SUCCESS'
 export const LIST_USER_ERROR = 'LIST_USER_ERROR'
+
+
+// new user
+export const SAVE_USER = 'SAVE_USER'
+export const SAVE_USER_SUCCESS = 'SAVE_USER_SUCCESS'
+export const SAVE_USER_ERROR = 'SAVE_USER_ERROR'

@@ -5,6 +5,9 @@ import {
   LIST_USER,
   LIST_USER_SUCCESS,
   LIST_USER_ERROR,
+  SAVE_USER,
+  SAVE_USER_SUCCESS,
+  SAVE_USER_ERROR,
 } from '../constants'
 
 export const listUser = () => ({
@@ -33,4 +36,32 @@ export function list () {
                 .then(error => dispatch(listUserFailure(error)))
                 .catch(error => dispatch(listUserFailure(error)));
   };
+}
+
+export const savingUser = () => ({
+  type: SAVE_USER
+});
+
+export const saveUserSuccess = user => ({
+  type: SAVE_USER_SUCCESS,
+  payload: { user }
+});
+
+export const saveUserFailure = error => ({
+  type: SAVE_USER_ERROR,
+  payload: { error }
+});
+
+export function saveUser({ name, email, password, role }, history) {
+  let token = JSON.parse(localStorage.getItem(USER_STORAGE_KEY)).token
+  return dispatch => {
+    dispatch(savingUser());
+    return axios.post(`${URL}/users/new`, { name, email, password, role }, { headers: { Authorization: token } })
+                .then(res => {
+                  dispatch(saveUserSuccess(res.data));
+                  history.push('/user');
+                })
+                .then(error => dispatch(saveUserFailure(error)))
+                .catch(error => dispatch(saveUserFailure(error)));
+  }
 }

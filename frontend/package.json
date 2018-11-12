@@ -13,6 +13,7 @@
     "react-scripts": "2.1.1",
     "redux": "^4.0.1",
     "redux-form": "^7.4.2",
+    "redux-form-material-ui": "^4.3.4",
     "redux-thunk": "^2.3.0"
   },
   "scripts": {

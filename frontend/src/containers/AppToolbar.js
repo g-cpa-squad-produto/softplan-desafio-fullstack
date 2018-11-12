@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { withRouter } from "react-router-dom"
-import { reduxForm } from 'redux-form'
 import { logout } from '../actions/login'
 import { connect } from 'react-redux'
 
@@ -46,7 +45,7 @@ class AppToolbar extends Component {
   }
 
   render () {
-    const { handleSubmit, classes } = this.props;
+    const { classes } = this.props;
 
     return (
       <div className={classes.root}>

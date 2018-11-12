@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import com.miratanlehmkuhl.backend.dto.ListUser;
+import com.miratanlehmkuhl.backend.dto.UserNewDTO;
 import com.miratanlehmkuhl.backend.model.User;
 
 public interface UserService extends UserDetailsService {
@@ -18,6 +19,6 @@ public interface UserService extends UserDetailsService {
 
 	ListUser findAll(Pageable pageable);
 
-	// void registration(UserNewDTO user);
+	User registration(UserNewDTO user);
 
 }

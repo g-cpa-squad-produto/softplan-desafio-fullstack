@@ -60,7 +60,7 @@ class Login extends Component {
                 {errorMessage &&
                   <Grid item className="mt-2 mb-2">
                     <Grid container direction="column" justify="center" alignItems="center">
-                      <Typography variant="body2">{errorMessage}</Typography>
+                      <Typography variant="body2">{errorMessage.message}</Typography>
                     </Grid>
                   </Grid>
                 }

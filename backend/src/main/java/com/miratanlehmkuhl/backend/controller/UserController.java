@@ -31,7 +31,7 @@ public class UserController {
 
 	@PostMapping("/new")
 	public void save(@Valid @RequestBody UserNewDTO user) {
-		// service.registration(user);
+		service.registration(user);
 	}
 
 }

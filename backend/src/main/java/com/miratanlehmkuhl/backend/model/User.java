@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.miratanlehmkuhl.backend.dto.UserNewDTO;
 import com.miratanlehmkuhl.backend.enums.Role;
 
 @Entity
@@ -49,6 +50,13 @@ public class User implements UserDetails {
 		this.email = email;
 		this.password = password;
 		this.authorities = authorities;
+	}
+
+	public User(UserNewDTO user) {
+		this.name = user.getName();
+		this.email = user.getEmail();
+		this.password = user.getPassword();
+		this.grantRole(Role.valueOf(user.getRole()));
 	}
 
 	public Long getId() {

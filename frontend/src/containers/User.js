@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 import { list } from '../actions/user'
@@ -21,13 +20,17 @@ import AddIcon from '@material-ui/icons/Add'
 
 import AppToolbar from './AppToolbar'
 
-class User extends React.Component {
+class User extends Component {
   componentDidMount() {
     this.props.dispatch(list());
   }
 
+  handleClickOpen = () => {
+    this.props.history.push('/userNew');
+  }
+
   render() {
-    const { error, loading, data, classes } = this.props;
+    const { loading, data, classes } = this.props;
 
     if (loading) {
       return (
@@ -114,7 +117,8 @@ class User extends React.Component {
             <Button variant="fab"
               color="primary"
               aria-label="Add"
-              className={classes.add}>
+              className={classes.add}
+              onClick={this.handleClickOpen}>
               <AddIcon />
             </Button>
           </Grid>

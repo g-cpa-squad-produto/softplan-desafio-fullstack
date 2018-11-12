@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.miratanlehmkuhl.backend.dto.ListUser;
+import com.miratanlehmkuhl.backend.dto.UserNewDTO;
 import com.miratanlehmkuhl.backend.model.User;
 import com.miratanlehmkuhl.backend.repository.UserRepository;
 import com.miratanlehmkuhl.backend.service.UserService;
@@ -53,9 +54,9 @@ public class UserServiceImpl implements UserService {
 		return new ListUser(search.getContent(), search.getTotalElements());
 	}
 
-	/*@Override
-	public void registration(UserNewDTO user) {
-		return repository.save(user);
-	}*/
+	@Override
+	public User registration(UserNewDTO user) {
+		return repository.save(new User(user));
+	}
 
 }

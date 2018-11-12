@@ -28,7 +28,7 @@ export default function loginReducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        error: action.payload.error.message
+        error: action.payload.error
       }
     case LOGOUT:
       return {
