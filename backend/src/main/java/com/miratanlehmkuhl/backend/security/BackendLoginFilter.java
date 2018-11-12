@@ -14,7 +14,6 @@ import org.springframework.security.authentication.AuthenticationServiceExceptio
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -63,7 +62,7 @@ public class BackendLoginFilter extends AbstractAuthenticationProcessingFilter {
 			res.getWriter().flush();
 			res.getWriter().close();
 
-			SecurityContextHolder.getContext().setAuthentication(new UserAuthentication(user));
+			// SecurityContextHolder.getContext().setAuthentication(new UserAuthentication(user));
 		}
 	}
 

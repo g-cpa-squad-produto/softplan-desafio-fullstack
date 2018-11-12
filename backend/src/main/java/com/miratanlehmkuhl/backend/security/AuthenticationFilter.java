@@ -42,14 +42,15 @@ public class AuthenticationFilter extends GenericFilterBean {
 			}
 
 			SecurityContextHolder.getContext().setAuthentication(authentication);
-			chain.doFilter(req, res);
 		} catch (Exception e) {
 			HttpServletResponse response = ((HttpServletResponse) res);
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			response.getWriter().flush();
 			response.getWriter().close();
 
-			chain.doFilter(req, response);
+			res = response;
+		} finally {
+			chain.doFilter(req, res);
 		}
 	}
 
