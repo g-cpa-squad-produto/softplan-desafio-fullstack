@@ -4,6 +4,12 @@ export const USER_STORAGE_KEY = 'user_info'
 export const AUTHORIZATION_HEADER_KEY = "Authorization"
 
 
+// role
+export const ADMIN = "ADMIN"
+export const SCREENING = "SCREENING"
+export const FINISHER = "FINISHER"
+
+
 // login
 export const LOGIN = 'LOGIN'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
