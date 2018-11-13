@@ -9,9 +9,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 
 import com.miratanlehmkuhl.backend.dto.ListUser;
 import com.miratanlehmkuhl.backend.dto.UserNewDTO;
+import com.miratanlehmkuhl.backend.dto.UserUpdateDTO;
 import com.miratanlehmkuhl.backend.model.User;
 import com.miratanlehmkuhl.backend.repository.UserRepository;
 import com.miratanlehmkuhl.backend.service.UserService;
@@ -56,7 +58,15 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User registration(UserNewDTO user) {
+		if (repository.existsByEmail(user.getEmail())) {
+			throw new RestClientException("E-mail já cadastrado!"); 
+		}
 		return repository.save(new User(user));
+	}
+
+	@Override
+	public void update(UserUpdateDTO user) {
+		repository.save(new User(user));
 	}
 
 }

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Formik, Field, Form } from 'formik'
-import * as yup from 'yup'
 import { withStyles } from '@material-ui/core/styles'
 import { connect } from 'react-redux'
 import { saveUser, closeNewUser } from '../actions/user'
@@ -8,9 +7,9 @@ import { saveUser, closeNewUser } from '../actions/user'
 import AppToolbar from './AppToolbar'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
-import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import MenuItem from '@material-ui/core/MenuItem'
+import TextField from '../components/TextField'
 
 const roles = [
   <MenuItem key={'ADMIN'} value={'ADMIN'}>
@@ -27,21 +26,13 @@ const roles = [
 class NewUser extends Component {
 
   render() {
-    const { errorMessage, classes } = this.props;
+    const { classes } = this.props;
 
     return (
       <>
         <Formik
             initialValues={initialValues}
-            validationSchema={yup.object().shape({
-              role: yup.string().required(),
-              password: yup.string().required(),
-              name: yup.string().required(),
-              email: yup
-                .string()
-                .required()
-                .email(),
-            })}
+            validate={validate}
             onSubmit={(values, actions) => {
               const { saveUser } = this.props
 
@@ -65,11 +56,11 @@ class NewUser extends Component {
                           alignItems="center"
                           className="">
                         <Field name="name"
-                            component={renderTextField}
+                            component={TextField}
                             label="Nome"
                             disabled={isSubmitting} />
                         <Field name="email"
-                            component={renderTextField}
+                            component={TextField}
                             label="E-mail"
                             disabled={isSubmitting} />
                       </Grid>
@@ -79,13 +70,13 @@ class NewUser extends Component {
                           alignItems="center"
                           className="">
                         <Field name="password"
-                            component={renderTextField}
+                            component={TextField}
                             label="Password"
                             type="password"
                             disabled={isSubmitting} />
                         <Field
                             name="role"
-                            component={renderTextField}
+                            component={TextField}
                             select
                             label="Perfil"
                             variant="outlined"
@@ -118,22 +109,33 @@ class NewUser extends Component {
   }
 }
 
-const renderTextField = ({ field, form: {touched, errors}, ...props }) => (
-  <TextField
-    className="ml-2 mr-2 mt-2 mb-2"
-    variant="outlined"
-    error={Boolean(touched[field.name] && errors[field.name])}
-    helperText={touched[field.name] && errors[field.name]}
-    {...field}
-    {...props}
-  />
-)
-
 const initialValues = {
   name: "",
   email: "",
   password: "",
   role: "ADMIN",
+}
+
+const validate  = values => {
+  const errors = {}
+
+  if (!values.name) {
+    errors.name = "Campo requerido"
+  }
+
+  if (!values.email) {
+    errors.email = "Campo requerido"
+  }
+
+  if (!values.password) {
+    errors.password = "Campo requerido"
+  }
+
+  if (!values.role) {
+    errors.role = "Campo requerido"
+  }
+
+  return errors
 }
 
 const styles = theme => ({
@@ -148,7 +150,6 @@ function mapStateToProps(state) {
   return {
     loading: state.user.loading,
     data: state.user.data,
-    errorMessage: state.user.error
   };
 }
 

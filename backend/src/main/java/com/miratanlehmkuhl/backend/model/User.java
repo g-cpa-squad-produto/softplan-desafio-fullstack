@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -17,6 +18,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.miratanlehmkuhl.backend.dto.UserNewDTO;
+import com.miratanlehmkuhl.backend.dto.UserUpdateDTO;
 import com.miratanlehmkuhl.backend.enums.Role;
 
 @Entity
@@ -32,10 +34,11 @@ public class User implements UserDetails {
 	@JsonProperty("name")
 	private String name;
 
+	@Column(unique = true)
 	@JsonProperty("email")
 	private String email;
 
-	@JsonIgnore
+	@JsonProperty("password")
 	private String password;
 
 	@JsonIgnore
@@ -53,6 +56,14 @@ public class User implements UserDetails {
 	}
 
 	public User(UserNewDTO user) {
+		this.name = user.getName();
+		this.email = user.getEmail();
+		this.password = user.getPassword();
+		this.grantRole(Role.valueOf(user.getRole()));
+	}
+
+	public User(UserUpdateDTO user) {
+		this.id = user.getId();
 		this.name = user.getName();
 		this.email = user.getEmail();
 		this.password = user.getPassword();
@@ -163,6 +174,11 @@ public class User implements UserDetails {
 
 	public boolean hasRole(Role role) {
 		return authorities.contains(role.asAuthorityFor(this));
+	}
+
+	@JsonProperty("role")
+	public String role() {
+		return getRoles().toString().replace("[", "").replace("]", "");
 	}
 
 }

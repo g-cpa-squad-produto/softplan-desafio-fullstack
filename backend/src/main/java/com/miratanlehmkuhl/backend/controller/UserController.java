@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.miratanlehmkuhl.backend.dto.ListUser;
 import com.miratanlehmkuhl.backend.dto.UserNewDTO;
+import com.miratanlehmkuhl.backend.dto.UserUpdateDTO;
 import com.miratanlehmkuhl.backend.service.UserService;
 
 @RestController
@@ -29,9 +31,14 @@ public class UserController {
 		return service.findAll(PageRequest.of(page, offset));
 	}
 
-	@PostMapping("/new")
+	@PostMapping("")
 	public void save(@Valid @RequestBody UserNewDTO user) {
 		service.registration(user);
+	}
+
+	@PutMapping("")
+	public void update(@Valid @RequestBody UserUpdateDTO user) {
+		service.update(user);
 	}
 
 }

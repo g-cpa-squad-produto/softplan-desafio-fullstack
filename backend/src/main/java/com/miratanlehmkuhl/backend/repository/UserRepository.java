@@ -12,4 +12,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
 	PageImpl<User> findAll(Pageable pageable);
 
+	boolean existsByEmail(String email);
+
 }

@@ -5,6 +5,8 @@ import {
   SAVE_USER,
   SAVE_USER_SUCCESS,
   SAVE_USER_ERROR,
+  USER_SHOW_EDIT_DIALOG,
+  USER_HIDE_EDIT_DIALOG,
 } from '../constants'
 
 const initialState = {
@@ -52,6 +54,18 @@ export default function userReducer(state = initialState, action) {
         loading: false,
         error: action.payload.error,
         items: []
+      }
+    case USER_SHOW_EDIT_DIALOG:
+      return {
+        ...state,
+        openEditDialog: true,
+        item: action.payload.user,
+      }
+    case USER_HIDE_EDIT_DIALOG:
+      return {
+        ...state,
+        openEditDialog: false,
+        item: null,
       }
     default:
       return state;

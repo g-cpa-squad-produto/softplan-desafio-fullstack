@@ -8,6 +8,8 @@ import {
   SAVE_USER,
   SAVE_USER_SUCCESS,
   SAVE_USER_ERROR,
+  USER_SHOW_EDIT_DIALOG,
+  USER_HIDE_EDIT_DIALOG,
 } from '../constants'
 
 export const listUser = () => ({
@@ -56,7 +58,7 @@ export function saveUser({ name, email, password, role }, history) {
   let token = JSON.parse(localStorage.getItem(USER_STORAGE_KEY)).token
   return dispatch => {
     dispatch(savingUser());
-    return axios.post(`${URL}/users/new`, { name, email, password, role }, { headers: { Authorization: token } })
+    return axios.post(`${URL}/users`, { name, email, password, role }, { headers: { Authorization: token } })
                 .then(res => {
                   dispatch(saveUserSuccess(res.data));
                   history.push('/user');
@@ -68,4 +70,28 @@ export function saveUser({ name, email, password, role }, history) {
 
 export function closeNewUser(history) {
   history.push('/user');
+}
+
+
+export const showEditDialog = user => ({
+  type: USER_SHOW_EDIT_DIALOG,
+  payload: { user }
+})
+
+export const hideEditDialog = () => ({
+  type: USER_HIDE_EDIT_DIALOG
+})
+
+
+export function updateUser({ id, name, email, role }) {
+  let token = JSON.parse(localStorage.getItem(USER_STORAGE_KEY)).token
+  return dispatch => {
+    dispatch(savingUser());
+    return axios.put(`${URL}/users`, { id, name, email, role }, { headers: { Authorization: token } })
+                .then(res => {
+                  dispatch(hideEditDialog());
+                })
+                .then(error => dispatch(saveUserFailure(error)))
+                .catch(error => dispatch(saveUserFailure(error)));
+  }
 }

@@ -12,13 +12,11 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import TableFooter from '@material-ui/core/TableFooter'
 import TablePagination from '@material-ui/core/TablePagination'
-import IconButton from '@material-ui/core/IconButton'
 import Button from '@material-ui/core/Button'
-import DeleteIcon from '@material-ui/icons/Delete'
-import EditIcon from '@material-ui/icons/Edit'
 import AddIcon from '@material-ui/icons/Add'
 
 import AppToolbar from './AppToolbar'
+import UserItem from '../components/UserItem'
 
 class User extends Component {
   componentDidMount() {
@@ -73,17 +71,9 @@ class User extends Component {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {data.users.map(user => {
-                  return (
-                    <TableRow key={user.id}>
-                      <TableCell numeric padding={'none'}>{user.id}</TableCell>
-                      <TableCell>{user.name}</TableCell>
-                      <TableCell>{user.email}</TableCell>
-                      <TableCell padding={'none'}><IconButton aria-label="Edit"><EditIcon /></IconButton></TableCell>
-                      <TableCell padding={'none'}><IconButton aria-label="Delete"><DeleteIcon /></IconButton></TableCell>
-                    </TableRow>
-                  );
-                })}
+                {data.users.map(user => (
+                  <UserItem key={user.id} user={user} />
+                ))}
               </TableBody>
               <TableFooter>
                 <TableRow>
