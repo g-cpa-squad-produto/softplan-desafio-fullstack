@@ -59,13 +59,16 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User registration(UserNewDTO user) {
 		if (repository.existsByEmail(user.getEmail())) {
-			throw new RestClientException("E-mail já cadastrado!"); 
+			throw new RestClientException("E-mail já cadastrado!");
 		}
 		return repository.save(new User(user));
 	}
 
 	@Override
 	public void update(UserUpdateDTO user) {
+		if (repository.existsByEmail(user.getEmail())) {
+			throw new RestClientException("E-mail já cadastrado!");
+		}
 		repository.save(new User(user));
 	}
 

@@ -10,6 +10,8 @@ import {
   SAVE_USER_ERROR,
   USER_SHOW_EDIT_DIALOG,
   USER_HIDE_EDIT_DIALOG,
+  USER_SHOW_DELETE_DIALOG,
+  USER_HIDE_DELETE_DIALOG,
 } from '../constants'
 
 export const listUser = () => ({
@@ -60,7 +62,7 @@ export function saveUser({ name, email, password, role }, history) {
     dispatch(savingUser());
     return axios.post(`${URL}/users`, { name, email, password, role }, { headers: { Authorization: token } })
                 .then(res => {
-                  dispatch(saveUserSuccess(res.data));
+                  dispatch(list());
                   history.push('/user');
                 })
                 .then(error => dispatch(saveUserFailure(error)))
@@ -89,7 +91,30 @@ export function updateUser({ id, name, email, role }) {
     dispatch(savingUser());
     return axios.put(`${URL}/users`, { id, name, email, role }, { headers: { Authorization: token } })
                 .then(res => {
+                  dispatch(list());
                   dispatch(hideEditDialog());
+                })
+                .then(error => dispatch(saveUserFailure(error)))
+                .catch(error => dispatch(saveUserFailure(error)));
+  }
+}
+
+export const showDeleteDialog = user => ({
+  type: USER_SHOW_DELETE_DIALOG,
+  payload: { user }
+})
+
+export const hideDeleteDialog = () => ({
+  type: USER_HIDE_DELETE_DIALOG
+})
+
+export function del({id}) {
+  let token = JSON.parse(localStorage.getItem(USER_STORAGE_KEY)).token
+  return dispatch => {
+    dispatch(savingUser());
+    return axios.delete(`${URL}/users/${id}`, { headers: { Authorization: token } })
+                .then(res => {
+                  dispatch();
                 })
                 .then(error => dispatch(saveUserFailure(error)))
                 .catch(error => dispatch(saveUserFailure(error)));

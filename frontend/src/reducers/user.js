@@ -7,12 +7,16 @@ import {
   SAVE_USER_ERROR,
   USER_SHOW_EDIT_DIALOG,
   USER_HIDE_EDIT_DIALOG,
+  USER_SHOW_DELETE_DIALOG,
+  USER_HIDE_DELETE_DIALOG,
 } from '../constants'
 
 const initialState = {
   items: [],
   loading: false,
-  error: null
+  error: null,
+  idToDelete: null,
+  deleting: false,
 };
 
 export default function userReducer(state = initialState, action) {
@@ -66,6 +70,16 @@ export default function userReducer(state = initialState, action) {
         ...state,
         openEditDialog: false,
         item: null,
+      }
+    case USER_SHOW_DELETE_DIALOG:
+      return {
+        ...state,
+        idToDelete: action.id,
+      }
+    case USER_HIDE_DELETE_DIALOG:
+      return {
+        ...state,
+        idToDelete: null,
       }
     default:
       return state;
