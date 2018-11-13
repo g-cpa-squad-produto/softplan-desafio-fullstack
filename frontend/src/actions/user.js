@@ -65,3 +65,7 @@ export function saveUser({ name, email, password, role }, history) {
                 .catch(error => dispatch(saveUserFailure(error)));
   }
 }
+
+export function closeNewUser(history) {
+  history.push('/user');
+}

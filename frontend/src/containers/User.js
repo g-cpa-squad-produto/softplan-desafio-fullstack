@@ -60,6 +60,7 @@ class User extends Component {
     } else {
       content = (
         <>
+          <Typography className="mb-2" variant="h3">Usuários</Typography>
           <Paper className={classes.root}>
             <Table className={classes.table}>
               <TableHead>
