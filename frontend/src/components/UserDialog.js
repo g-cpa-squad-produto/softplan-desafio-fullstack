@@ -28,7 +28,7 @@ const roles = [
 class UserDialog extends Component {
 
   render () {
-    const {open, item, hideEditDialog} = this.props
+    const {open, item, show, hideEditDialog} = this.props
 
     if (!open) {
       return null
@@ -70,7 +70,7 @@ class UserDialog extends Component {
                           variant="outlined"
                           required
                           fullWidth
-                          disabled={isSubmitting}
+                          disabled={isSubmitting || show}
                         />
                       </Grid>
                       <Grid item xs={12} md={6} className="mt-2">
@@ -81,7 +81,7 @@ class UserDialog extends Component {
                           variant="outlined"
                           required
                           fullWidth
-                          disabled={isSubmitting}
+                          disabled={isSubmitting || show}
                         />
                       </Grid>
                       <Grid item xs={12} md={6} className="mt-2">
@@ -92,7 +92,7 @@ class UserDialog extends Component {
                             label="Perfil"
                             variant="outlined"
                             fullWidth
-                            disabled={isSubmitting}>
+                            disabled={isSubmitting || show}>
                             {roles}
                         </Field>
                       </Grid>
@@ -148,6 +148,7 @@ const mapStateToProps = state => {
   return {
     open: state.user.openEditDialog,
     item: state.user.item,
+    show: state.user.show,
   }
 }
 

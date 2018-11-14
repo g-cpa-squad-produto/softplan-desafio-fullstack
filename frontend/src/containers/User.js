@@ -19,15 +19,27 @@ import AppToolbar from './AppToolbar'
 import UserItem from '../components/UserItem'
 
 class User extends Component {
+
+  state = {
+    page: 0,
+    rowsPerPage: 10,
+  }
+
   componentDidMount() {
-    this.props.dispatch(list());
+    this.props.dispatch(list(this.state.page));
   }
 
   handleClickOpen = () => {
     this.props.history.push('/userNew');
   }
 
+  handleChangePage = (event, page) => {
+    this.props.dispatch(list(page));
+    this.setState({ page });
+  };
+
   render() {
+    const { rowsPerPage, page } = this.state;
     const { loading, data, classes } = this.props;
 
     if (loading) {
@@ -63,9 +75,10 @@ class User extends Component {
             <Table className={classes.table}>
               <TableHead>
                 <TableRow>
-                  <TableCell numeric padding={'none'}>Código</TableCell>
                   <TableCell>Nome</TableCell>
                   <TableCell>E-mail</TableCell>
+                  <TableCell>Perfil</TableCell>
+                  <TableCell padding={'none'}></TableCell>
                   <TableCell padding={'none'}></TableCell>
                   <TableCell padding={'none'}></TableCell>
                 </TableRow>
@@ -79,9 +92,11 @@ class User extends Component {
                 <TableRow>
                   <TablePagination colSpan={5}
                     count={data.total}
-                    rowsPerPage={10}
-                    page={0}
-                    labelRowsPerPage={'Registro por página'}/>
+                    rowsPerPage={rowsPerPage}
+                    rowsPerPageOptions={rowsPerPage}
+                    page={page}
+                    labelRowsPerPage={'Registro por página'}
+                    onChangePage={this.handleChangePage}/>
                 </TableRow>
               </TableFooter>
             </Table>
@@ -93,7 +108,7 @@ class User extends Component {
     return (
       <>
         <Grid container direction="column">
-          <AppToolbar />
+          <AppToolbar className={classes.toolbar} />
           <Grid
             container
             justify="center"
@@ -120,6 +135,9 @@ class User extends Component {
 }
 
 const styles = theme => ({
+  toolbar: {
+
+  },
   root: {
     width: '100%',
     marginTop: theme.spacing.unit * 3,

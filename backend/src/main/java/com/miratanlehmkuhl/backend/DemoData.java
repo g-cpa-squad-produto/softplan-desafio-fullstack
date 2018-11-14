@@ -36,6 +36,15 @@ public class DemoData implements CommandLineRunner {
 		user.setPassword("3333");
 		user.grantRole(Role.ADMIN);
 		service.save(user);
+
+		for (int i = 0; i < 20; i++) {
+			user = new User();
+			user.setName("Usuário " + i);
+			user.setEmail("admin" + i + "@gmail.com");
+			user.setPassword("999" + i);
+			user.grantRole(Role.ADMIN);
+			service.save(user);
+		}
 	}
 
 }

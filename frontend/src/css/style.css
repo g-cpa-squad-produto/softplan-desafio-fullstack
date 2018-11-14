@@ -65,3 +65,7 @@ body {
 .hidden {
   display: none !important;
 }
+
+.discount-toolbar {
+  margin-top: -120px;
+}

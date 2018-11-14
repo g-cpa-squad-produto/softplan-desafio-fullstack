@@ -71,6 +71,7 @@ const styles = {
   root: {
     flexGrow: 1,
     display: 'flex',
+    marginBottom: '50px',
   },
   grow: {
     flexGrow: 1,

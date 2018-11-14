@@ -28,11 +28,11 @@ export const listUserFailure = error => ({
   payload: { error }
 });
 
-export function list () {
+export const list = page => {
   let token = JSON.parse(localStorage.getItem(USER_STORAGE_KEY)).token
   return dispatch => {
     dispatch(listUser());
-    return axios.get(`${URL}/users`, { headers: { Authorization: token }, params: { page: 0, offset: 10 } })
+    return axios.get(`${URL}/users`, { headers: { Authorization: token }, params: { page: page, offset: 10 } })
                 .then(res => {
                   dispatch(listUserSuccess(res.data));
                   return res.data;
@@ -62,7 +62,7 @@ export function saveUser({ name, email, password, role }, history) {
     dispatch(savingUser());
     return axios.post(`${URL}/users`, { name, email, password, role }, { headers: { Authorization: token } })
                 .then(res => {
-                  dispatch(list());
+                  dispatch(list(0));
                   history.push('/user');
                 })
                 .then(error => dispatch(saveUserFailure(error)))
@@ -75,9 +75,9 @@ export function closeNewUser(history) {
 }
 
 
-export const showEditDialog = user => ({
+export const showEditDialog = (user, show) => ({
   type: USER_SHOW_EDIT_DIALOG,
-  payload: { user }
+  payload: { user, show }
 })
 
 export const hideEditDialog = () => ({
@@ -91,7 +91,7 @@ export function updateUser({ id, name, email, role }) {
     dispatch(savingUser());
     return axios.put(`${URL}/users`, { id, name, email, role }, { headers: { Authorization: token } })
                 .then(res => {
-                  dispatch(list());
+                  dispatch(list(0));
                   dispatch(hideEditDialog());
                 })
                 .then(error => dispatch(saveUserFailure(error)))
@@ -114,7 +114,7 @@ export const del = id => {
     dispatch(savingUser());
     return axios.delete(`${URL}/users/${id}`, { headers: { Authorization: token } })
                 .then(res => {
-                  dispatch(list());
+                  dispatch(list(0));
                   dispatch(hideDeleteDialog());
                 })
                 .then(error => dispatch(saveUserFailure(error)))

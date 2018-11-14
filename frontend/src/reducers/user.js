@@ -64,6 +64,7 @@ export default function userReducer(state = initialState, action) {
         ...state,
         openEditDialog: true,
         item: action.payload.user,
+        show: action.payload.show,
       }
     case USER_HIDE_EDIT_DIALOG:
       return {

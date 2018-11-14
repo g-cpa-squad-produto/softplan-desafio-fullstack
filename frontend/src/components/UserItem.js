@@ -6,6 +6,7 @@ import TableRow from '@material-ui/core/TableRow'
 import IconButton from '@material-ui/core/IconButton'
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
+import Icon from '@material-ui/core/Icon'
 
 import UserDialog from '../components/UserDialog'
 import DeleteDialog from '../components/DeleteDialog'
@@ -18,10 +19,11 @@ class UserItem extends Component {
     return (
       <>
         <TableRow key={user.id}>
-          <TableCell numeric padding={'none'}>{user.id}</TableCell>
           <TableCell>{user.name}</TableCell>
           <TableCell>{user.email}</TableCell>
-          <TableCell padding={'none'}><IconButton aria-label="Edit" onClick={() => showEditDialog(user)}><EditIcon /></IconButton></TableCell>
+          <TableCell>{user.role === 'ADMIN' ? 'Administrador' : user.role === 'FINISHER' ? 'Usuário-Finalizador' : 'Usuário-Triador' }</TableCell>
+          <TableCell padding={'none'}><IconButton onClick={() => showEditDialog(user, true)}><Icon>search</Icon></IconButton></TableCell>
+          <TableCell padding={'none'}><IconButton aria-label="Edit" onClick={() => showEditDialog(user, false)}><EditIcon /></IconButton></TableCell>
           <TableCell padding={'none'}><IconButton aria-label="Delete" onClick={() => showDeleteDialog(user.id)}><DeleteIcon /></IconButton></TableCell>
         </TableRow>
         <UserDialog id={user.id} />
