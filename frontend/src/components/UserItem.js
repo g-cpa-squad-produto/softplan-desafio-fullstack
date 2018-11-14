@@ -13,7 +13,7 @@ import DeleteDialog from '../components/DeleteDialog'
 class UserItem extends Component {
 
   render() {
-    const { user, idToDelete, showEditDialog, hideDeleteDialog, del, deleting } = this.props
+    const { user, showEditDialog, showDeleteDialog, hideDeleteDialog, del, idToDelete, deleting } = this.props
 
     return (
       <>
@@ -22,7 +22,7 @@ class UserItem extends Component {
           <TableCell>{user.name}</TableCell>
           <TableCell>{user.email}</TableCell>
           <TableCell padding={'none'}><IconButton aria-label="Edit" onClick={() => showEditDialog(user)}><EditIcon /></IconButton></TableCell>
-          <TableCell padding={'none'}><IconButton aria-label="Delete" onClick={() => showDeleteDialog(user)}><DeleteIcon /></IconButton></TableCell>
+          <TableCell padding={'none'}><IconButton aria-label="Delete" onClick={() => showDeleteDialog(user.id)}><DeleteIcon /></IconButton></TableCell>
         </TableRow>
         <UserDialog id={user.id} />
         <DeleteDialog

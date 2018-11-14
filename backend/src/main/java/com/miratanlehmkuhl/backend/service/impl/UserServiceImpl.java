@@ -66,10 +66,16 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void update(UserUpdateDTO user) {
-		if (repository.existsByEmail(user.getEmail())) {
+		if (repository.existsByEmail(user.getEmail()) && repository.findByEmail(user.getEmail()).getId() != user.getId()) {
 			throw new RestClientException("E-mail já cadastrado!");
 		}
 		repository.save(new User(user));
+	}
+
+	@Override
+	public void delete(Long id) {
+		// TODO INVALIDATE TOKEN {next request user can not access}
+		repository.deleteById(id);
 	}
 
 }

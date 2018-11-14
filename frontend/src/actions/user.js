@@ -99,22 +99,23 @@ export function updateUser({ id, name, email, role }) {
   }
 }
 
-export const showDeleteDialog = user => ({
+export const showDeleteDialog = id => ({
   type: USER_SHOW_DELETE_DIALOG,
-  payload: { user }
+  payload: { id }
 })
 
 export const hideDeleteDialog = () => ({
   type: USER_HIDE_DELETE_DIALOG
 })
 
-export function del({id}) {
+export const del = id => {
   let token = JSON.parse(localStorage.getItem(USER_STORAGE_KEY)).token
   return dispatch => {
     dispatch(savingUser());
     return axios.delete(`${URL}/users/${id}`, { headers: { Authorization: token } })
                 .then(res => {
-                  dispatch();
+                  dispatch(list());
+                  dispatch(hideDeleteDialog());
                 })
                 .then(error => dispatch(saveUserFailure(error)))
                 .catch(error => dispatch(saveUserFailure(error)));

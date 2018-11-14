@@ -22,7 +22,7 @@ const DeleteDialog = ({show, title, content = defaultContent, deleting, error, o
         )}
       </DialogContent>
       <DialogActions>
-      <Button color="primary" disabled={deleting} onClick={onCancel}>
+      <Button color="secondary" disabled={deleting} onClick={onCancel}>
         Cancelar
       </Button>
       <Button component={Button} color="primary" loading={deleting ? deleting.toString() : undefined} onClick={() => onDelete()}>

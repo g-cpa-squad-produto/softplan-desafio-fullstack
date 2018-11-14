@@ -74,7 +74,7 @@ export default function userReducer(state = initialState, action) {
     case USER_SHOW_DELETE_DIALOG:
       return {
         ...state,
-        idToDelete: action.id,
+        idToDelete: action.payload.id,
       }
     case USER_HIDE_DELETE_DIALOG:
       return {
