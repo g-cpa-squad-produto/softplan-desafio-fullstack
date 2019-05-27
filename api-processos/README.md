@@ -34,27 +34,3 @@
 	http://localhost:8085/processos/api/atribuicoes
 	http://localhost:8085/processos/api/pareceres
 	```
-
-## Configurando o Frontend (app-processos)
-
-+ **Resolvendo dependências e rodando o frontend**
-
-	```bash
-	cd app-processos
-	npm install && npm run start
-	```
-
-+ **Acessando a aplicação**
-
-	```bash
-	http://localhost:8080
-	```
-## Pendências
-Projeto desenvolvido entre 23/05/2019 a 27/05/2019. Não houve tempo hábil para concluir os pontos abaixo:
-
-* Implementar OAuth 2.0;
-* Documentar o backend Swagger OpenAPI 3.0;
-* Implementar operações CRUD no frontend (a API já está pronta);
-* Implementar paginação no frontend;
-* Implementar controle de acesso as visões e acordo com o perfil (atualmente está apenas direcionando);
-* Implementar CSS/melhor aparência no frontend.

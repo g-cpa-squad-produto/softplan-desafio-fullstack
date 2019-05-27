@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog logicalFilePath="db.changelog-master.xml" xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <include file="001.create_usuarios.sql" relativeToChangelogFile="true"/>
+    <include file="002.create_processos.sql" relativeToChangelogFile="true"/>
+    <include file="003.create_atribuicoes.sql" relativeToChangelogFile="true"/>
+    <include file="004.create_pareceres.sql" relativeToChangelogFile="true"/>
+    <include file="005.create_vw_processos_atribuidos.sql" relativeToChangelogFile="true"/>
+    <include file="010.inserts_padroes.sql" relativeToChangelogFile="true"/>
+
+</databaseChangeLog>
