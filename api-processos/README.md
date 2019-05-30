@@ -34,22 +34,3 @@
 	http://localhost:8085/processos/api/atribuicoes
 	http://localhost:8085/processos/api/pareceres
 	```
-
-## Configurando o Frontend (app-processos)
-
-+ **Resolvendo dependências e rodando o frontend**
-
-	```bash
-	cd app-processos
-	npm install && npm run start
-	```
-
-+ **Acessando a aplicação**
-
-	```bash
-	http://localhost:8080
-	```
-
-## Acessando a aplicação
-
-A aplicação pode ser acessada com os usuários 'admin', 'triador' ou 'finalizador', utilizando a senha 123456.
