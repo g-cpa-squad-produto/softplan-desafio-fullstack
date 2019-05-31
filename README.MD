@@ -1,4 +1,4 @@
-# SOFTPLAN - BackEnd 
+# SOFTPLAN - FullStack
 
 ## Configurações para executar a aplicação
 
@@ -30,5 +30,5 @@
 
     1. Ou abra o terminal navegue até a raiz do projeto **softplan_front_end** e execute o comando **npm install**
 
- 2. abra o terminal navegue até a raiz do projeto **softplan_front_end** e execute o comando **ng serve** ou **npm start**
+ 2. Abra o terminal navegue até a raiz do projeto **softplan_front_end** e execute o comando **ng serve** ou **npm start**
  2. Após executar o frontend estará disponível em: http://localhost:4200
