@@ -1,4 +1,5 @@
 export interface ProcessoDto {
+    isNew: Boolean,
     id: Number;
     dataCriacao: Date;
     dataFinalizacao: Date;
@@ -7,5 +8,6 @@ export interface ProcessoDto {
     descricao: String;
 
     createdBy: String;
-    responsavel: String;
+    finalizadores: Array<String>;
+    finalizadoresEscolhidos: Array<String>;
 }

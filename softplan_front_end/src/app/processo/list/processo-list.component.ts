@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {ProcessoDto} from "../../dto/processo.dto";
+import {ProcessoDto} from '../../dto/processo.dto';
 
 @Component({
     selector: 'app-processo-list',
-    templateUrl: './list.html',
-    styleUrls: ['./list.css']
+    templateUrl: './processo-list.component.html',
+    styleUrls: ['./processo-list.component.css']
 })
-export class List implements OnInit {
+export class ProcessoListComponent implements OnInit {
 
     processos: Array<ProcessoDto>;
     descricaoFilter: any;
@@ -23,8 +23,8 @@ export class List implements OnInit {
                 this.processos = (resp as Array<ProcessoDto>);
             },
             err => {
-                console.log("Error occured!", err);
-            })
+                console.log('Error occured!', err);
+            });
     }
 
     delete(id) {
@@ -35,7 +35,7 @@ export class List implements OnInit {
                 location.reload();
             },
             err => {
-                console.log("Error occured!", err);
+                console.log('Error occured!', err);
             }
         );
     }
@@ -55,7 +55,7 @@ export class List implements OnInit {
                 this.processos = res as Array<ProcessoDto>;
             },
             err => {
-                console.log("Error occured!", err);
+                console.log('Error occured!', err);
             }
         );
     }

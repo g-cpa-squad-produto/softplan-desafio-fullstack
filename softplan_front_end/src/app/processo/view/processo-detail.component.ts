@@ -5,10 +5,10 @@ import {HttpClient} from "@angular/common/http";
 
 @Component({
     selector: 'app-processo-view',
-    templateUrl: './view.html',
-    styleUrls: ['./view.css']
+    templateUrl: './processo-detail.component.html',
+    styleUrls: ['./processo-detail.component.css']
 })
-export class View {
+export class ProcessoDetailComponent {
 
     processo: ProcessoDto;
 

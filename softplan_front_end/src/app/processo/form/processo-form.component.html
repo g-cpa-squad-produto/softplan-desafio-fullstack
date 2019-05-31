@@ -1,0 +1,42 @@
+<div id="main" class="container-fluid" style="margin-top: 50px">
+    <div id="top" class="row">
+        <h2>{{processo.isNew ? 'Cadastrar' : 'Editar'}} Processo</h2>
+    </div>
+</div>
+<form (ngSubmit)="save()">
+    <div class="row col-sm-12">
+        <div class="col-sm-12">
+            <label for="titulo">T&iacute;tulo</label>
+            <input [(ngModel)]="processo.titulo" id="titulo" name="titulo" class="form-control" required="required">
+        </div>
+    </div>
+    <div class="row col-sm-12">
+        <div class="col-sm-12">
+            <label for="descricao">Descri&ccedil;&atilde;o</label>
+            <textarea [(ngModel)]="processo.descricao" id="descricao" name="descricao" class="form-control"
+                      required="required"></textarea>
+        </div>
+    </div>
+    <br>
+    <div class="row col-sm-12">
+        <div class="col-sm-6">
+            <label for="finalizadores">Respons&aacute;veis</label>
+            <select id="finalizadores" name="finalizadores" [(ngModel)]="processo.finalizadoresEscolhidos"
+                    [multiple]="true">
+                <option
+                    *ngFor="let login of (processo.finalizadores.length > 0 ? processo.finalizadores : loginFinalizadores) ">
+                    {{login}}
+                </option>
+            </select>
+        </div>
+    </div>
+    <br>
+    <div class="d-flex justify-content-between">
+        <div class="d-flex align-content-start">
+            <button class="btn material-icons" routerLink='/processo-list'>arrow_back</button>
+        </div>
+        <div class="d-flex align-content-end">
+            <button type="submit" class="btn material-icons">save</button>
+        </div>
+    </div>
+</form>

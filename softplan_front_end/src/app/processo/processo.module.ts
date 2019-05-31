@@ -3,9 +3,9 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 
-import {List} from './list/list';
-import {Form} from './form/form';
-import {View} from './view/view';
+import {ProcessoListComponent} from './list/processo-list.component';
+import {ProcessoFormComponent} from './form/processo-form.component';
+import {ProcessoDetailComponent} from './view/processo-detail.component';
 import {ProcessoRoutes} from './processo.routing';
 
 @NgModule({
@@ -15,9 +15,9 @@ import {ProcessoRoutes} from './processo.routing';
         RouterModule.forChild(ProcessoRoutes)
     ],
     declarations: [
-        List,
-        Form,
-        View
+        ProcessoListComponent,
+        ProcessoFormComponent,
+        ProcessoDetailComponent
     ]
 })
 

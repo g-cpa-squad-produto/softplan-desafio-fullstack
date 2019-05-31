@@ -7,24 +7,24 @@
     <div class="row col-sm-12">
         <div class="col-sm-4">
             <label for="codigo">C&oacute;digo</label>
-            <input [ngModel]="processo.id" id="codigo" name="codigo" class="form-control" disabled>
+            <input [(ngModel)]="processo.id" id="codigo" name="codigo" class="form-control" disabled>
         </div>
         <div class="col-sm-8">
             <label for="titulo">T&iacute;tulo</label>
-            <input [ngModel]="processo.descricao" id="titulo" name="titulo" class="form-control" disabled>
+            <input [(ngModel)]="processo.descricao" id="titulo" name="titulo" class="form-control" disabled>
         </div>
     </div>
     <div class="row col-sm-12">
         <div class="col-sm-12">
             <label for="descricao">Descri&ccedil;&atilde;o</label>
-            <textarea [ngModel]="processo.descricao" id="descricao" name="descricao" class="form-control"
+            <textarea [(ngModel)]="processo.descricao" id="descricao" name="descricao" class="form-control"
                       disabled></textarea>
         </div>
     </div>
     <div class="row col-sm-12">
         <div class="col-sm-3">
             <label for="criador">Criador</label>
-            <input [ngModel]="processo.createdBy" id="criador" name="criador" class="form-control" disabled>
+            <input [(ngModel)]="processo.createdBy" id="criador" name="criador" class="form-control" disabled>
         </div>
         <div class="col-sm-3">
             <label for="dataCriacao">Data de Cria&ccedil;&atilde;o</label>
@@ -38,7 +38,8 @@
         </div>
         <div class="col-sm-3">
             <label for="responsavel">Respons&aacute;vel</label>
-            <input [ngModel]="processo.responsavel" id="responsavel" name="responsavel" class="form-control" disabled>
+            <input [(ngModel)]="processo.finalizadores" id="responsavel" name="responsavel" class="form-control"
+                   disabled>
         </div>
     </div>
     <br>

@@ -1,17 +1,18 @@
 <div id="main" class="container-fluid" style="margin-top: 50px">
     <div id="top" class="row">
         <div class="col-sm-3">
-            <h2>Usu&aacute;rios</h2>
+            <h2>Processos</h2>
         </div>
         <div class="col-sm-6">
             <div class="input-group h2">
-                <input ([ngModel])="filtro" name="descricaoFilter" class="form-control"
-                       type="text" placeholder="Pesquisar Usuarios" (keyup.enter)="findAllBy(filtro)">
-                <button class="btn material-icons" type="submit" (click)="findAllBy(filtro)">find_replace</button>
+                <input [(ngModel)]="descricaoFilter" name="descricaoFilter" class="form-control"
+                       type="text" placeholder="Pesquisar Processos" (keyup.enter)="findAllBy(descricaoFilter)">
+                <button class="btn material-icons" type="submit" (click)="findAllBy(descricaoFilter)">find_replace
+                </button>
             </div>
         </div>
         <div class="col-sm-3">
-            <button routerLink='/usuario-form' class="btn material-icons">add_circle</button>
+            <button routerLink='/processo-form' class="btn material-icons">add_circle</button>
         </div>
     </div>
 
@@ -20,27 +21,25 @@
             <table class="table table-striped" cellspacing="0" cellpadding="0">
                 <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Data Criação</th>
-                    <th>Data Modificação</th>
-                    <th>Login</th>
-                    <th>Email</th>
-                    <th>Papel</th>
+                    <th>C&oacute;digo</th>
+                    <th>T&iacute;tulo</th>
+                    <th>Descri&ccedil;&atilde;o</th>
+                    <th>Criado</th>
+                    <th>Finalizado</th>
                     <th class="actions">Ações</th>
                 </tr>
                 </thead>
-                <tbody *ngFor="let usuario of usuarios">
+                <tbody *ngFor="let processo of processos">
                 <tr>
-                    <td>{{ usuario.id }}</td>
-                    <td>{{ usuario.dataCriacao | date: 'dd/MM/yyyy' }}</td>
-                    <td>{{ usuario.dataModificacao | date: 'dd/MM/yyyy' }}</td>
-                    <td>{{ usuario.login }}</td>
-                    <td>{{ usuario.email }}</td>
-                    <td>{{ usuario.permissao }}</td>
-                    <td class="actions">
-                        <a class="btn material-icons" (click)="view(usuario)">details</a>
-                        <a class="btn material-icons" (click)="edit(usuario)">edit</a>
-                        <a class="btn material-icons" (click)="delete(usuario.id)">delete</a>
+                    <td>{{ processo.id }}</td>
+                    <td>{{ processo.titulo }}</td>
+                    <td>{{ processo.descricao }}</td>
+                    <td>{{ processo.createdBy }} {{ processo.dataCriacao | date: '(dd/MM/yyyy)' }}</td>
+                    <td>{{ processo.finalizadores }} {{ processo.dataFinalizacao | date: '(dd/MM/yyyy)' }}</td>
+                    <td class="material-table">
+                        <a class="btn material-icons" (click)="view(processo)">details</a>
+                        <a class="btn material-icons" (click)="edit(processo)">edit</a>
+                        <a class="btn material-icons" (click)="delete(processo.id)">delete</a>
                     </td>
                 </tr>
                 </tbody>

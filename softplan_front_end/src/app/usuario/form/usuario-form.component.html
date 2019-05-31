@@ -4,20 +4,21 @@
     </div>
 </div>
 <form (ngSubmit)="save()">
-    <div class="row">
+    <div class="row col-sm-12">
         <div class="col-sm-4">
             <label for="login">Login</label>
-            <input [ngModel]="usuario.login" [disabled]="usuario.id !== null" name="login" id="login"
+            <input [(ngModel)]="usuario.login" [disabled]="usuario.id !== null" name="login" id="login"
                    class="form-control" required="required">
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-4">
             <label for="senha">Senha</label>
-            <input [ngModel]="usuario.senha" name="senha" id="senha" class="form-control" required="required"
+            <input [(ngModel)]="usuario.senha" name="senha" id="senha" class="form-control" required="required"
                    type="password">
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-4">
             <label for="permissao">Permiss&atilde;o</label>
-            <select [ngModel]="usuario.permissao" class="form-control" id="permissao" name="permissao"
+            <select [(ngModel)]="usuario.permissao" [disabled]="usuario.id !== null" class="form-control" id="permissao"
+                    name="permissao"
                     required="required">
                 <option value="ADMINISTRADOR">Admin</option>
                 <option value="TRIADOR">Triador</option>
@@ -26,15 +27,15 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row col-sm-12">
         <div class="col-sm-6">
             <label for="nomeCompleto">Nome Completo</label>
-            <input [ngModel]="usuario.nomeCompleto" name="nomeCompleto" id="nomeCompleto" class="form-control"
+            <input [(ngModel)]="usuario.nomeCompleto" name="nomeCompleto" id="nomeCompleto" class="form-control"
                    required="required">
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-6">
             <label for="email">Email</label>
-            <input [ngModel]="usuario.email" name="email" id="email" class="form-control" required="required"
+            <input [(ngModel)]="usuario.email" name="email" id="email" class="form-control" required="required"
                    type="email">
         </div>
 

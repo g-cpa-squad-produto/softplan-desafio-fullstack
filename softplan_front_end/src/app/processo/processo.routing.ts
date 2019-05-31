@@ -1,7 +1,7 @@
 import {Routes} from '@angular/router';
-import {Form} from './form/form';
-import {List} from './list/list';
-import {View} from './view/view';
+import {ProcessoFormComponent} from './form/processo-form.component';
+import {ProcessoListComponent} from './list/processo-list.component';
+import {ProcessoDetailComponent} from './view/processo-detail.component';
 
 export const ProcessoRoutes: Routes = [{
     path: '',
@@ -12,22 +12,22 @@ export const ProcessoRoutes: Routes = [{
     children: [
         {
             path: 'processo-list',
-            component: List
+            component: ProcessoListComponent
         },
         {
             path: 'processo-form',
-            component: Form
+            component: ProcessoFormComponent
         },
         {
             path: 'processo-form/:codigo',
-            component: Form
+            component: ProcessoFormComponent
         },
         {
             path: 'processo-view',
-            component: View
+            component: ProcessoDetailComponent
         },
         {
             path: 'processo-view/:codigo',
-            component: View
+            component: ProcessoDetailComponent
         }]
 }];

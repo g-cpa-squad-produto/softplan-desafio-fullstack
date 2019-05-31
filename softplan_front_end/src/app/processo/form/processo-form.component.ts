@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
 import {ProcessoDto} from '../../dto/processo.dto';
@@ -6,43 +6,59 @@ import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
     selector: 'app-processo-form',
-    templateUrl: './form.html',
-    styleUrls: ['./form.css']
+    templateUrl: './processo-form.component.html',
+    styleUrls: ['./processo-form.component.css']
 })
-export class Form {
+export class ProcessoFormComponent implements OnInit {
 
     processo: ProcessoDto;
+
+    loginFinalizadores: Array<String>;
 
     constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) {
         if (this.route.snapshot.params.id) {
             this.processo = this.getRecord();
         } else {
-            this.processo = Form.getBlankRecord();
+            this.processo = ProcessoFormComponent.getBlankRecord();
         }
-    }
-
-    getRecord(): ProcessoDto {
-        return {
-            id: this.route.snapshot.params.id,
-            titulo: this.route.snapshot.params.titulo,
-            descricao: this.route.snapshot.params.descricao,
-            dataCriacao: this.route.snapshot.params.dataCriacao,
-            createdBy: this.route.snapshot.params.createdBy,
-            dataFinalizacao: this.route.snapshot.params.dataFinalizacao,
-            responsavel: this.route.snapshot.params.responsavel
-        };
     }
 
     static getBlankRecord(): ProcessoDto {
         return {
+            isNew: true,
             id: null,
             titulo: '',
             descricao: '',
             dataCriacao: null,
             createdBy: '',
             dataFinalizacao: null,
-            responsavel: ''
+            finalizadores: [],
+            finalizadoresEscolhidos: [],
         };
+    }
+
+    getRecord(): ProcessoDto {
+        return {
+            isNew: false,
+            id: this.route.snapshot.params.id,
+            titulo: this.route.snapshot.params.titulo,
+            descricao: this.route.snapshot.params.descricao,
+            dataCriacao: this.route.snapshot.params.dataCriacao,
+            createdBy: this.route.snapshot.params.createdBy,
+            dataFinalizacao: this.route.snapshot.params.dataFinalizacao,
+            finalizadores: this.route.snapshot.params.finalizadores,
+            finalizadoresEscolhidos: this.route.snapshot.params.finalizadoresEscolhidos
+        };
+    }
+
+    ngOnInit() {
+        this.http.get('http://localhost:8080/usuario/findAllNomeUsuarioFinalizadores').subscribe(
+            resp => {
+                this.loginFinalizadores = (resp as Array<String>);
+            },
+            err => {
+                console.log('Error occured!', err);
+            });
     }
 
     save() {
@@ -57,12 +73,12 @@ export class Form {
         this.http.post('http://localhost:8080/processo', this.processo).subscribe(
             res => {
                 console.log(res);
-                alert("Processo cadastrado com sucesso!");
+                alert('Processo cadastrado com sucesso!');
                 this.router.navigate(['./processo-list']);
             },
             err => {
-                alert("Erro ao cadastrar processo: " + err.error.message);
-                console.log("Error occured", err);
+                alert('Erro ao cadastrar processo: ' + err.error.message);
+                console.log('Error occured', err);
             }
         );
     }
@@ -71,12 +87,12 @@ export class Form {
         this.http.put(`http://localhost:8080/processo/${this.processo.id}`, this.processo).subscribe(
             res => {
                 console.log(res);
-                alert("Processo atualizado com sucesso!");
+                alert('Processo atualizado com sucesso!');
                 this.router.navigate(['./processo-list']);
             },
             err => {
-                alert("Erro ao atualizar processo: " + err.error.message);
-                console.log("Error occured", err);
+                alert('Erro ao atualizar processo: ' + err.error.message);
+                console.log('Error occured', err);
             }
         );
     }

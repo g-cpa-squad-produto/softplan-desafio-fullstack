@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {UsuarioDto} from "../../dto/usuario.dto";
+import {UsuarioDto} from '../../dto/usuario.dto';
 
 @Component({
     selector: 'app-usuario-list',
-    templateUrl: './list.html',
-    styleUrls: ['./list.css']
+    templateUrl: './usuario-list.component.html',
+    styleUrls: ['./usuario-list.component.css']
 })
-export class List implements OnInit {
+export class UsuarioListComponent implements OnInit {
 
     usuarios: Array<UsuarioDto>;
     filtro: any;
@@ -22,8 +22,8 @@ export class List implements OnInit {
                 this.usuarios = (resp as Array<UsuarioDto>);
             },
             err => {
-                console.log("Error occured!", err);
-            })
+                console.log('Error occured!', err);
+            });
     }
 
     delete(id) {
@@ -31,11 +31,11 @@ export class List implements OnInit {
         this.http.delete('http://localhost:8080/usuario/' + id).subscribe(
             res => {
                 console.log(res);
-                alert("Usuario deletado com sucesso!");
+                alert('Usuario deletado com sucesso!');
                 location.reload();
             },
             err => {
-                console.log("Error occured!", err);
+                console.log('Error occured!', err);
             }
         );
     }
@@ -55,7 +55,7 @@ export class List implements OnInit {
                 this.usuarios = res as Array<UsuarioDto>;
             },
             err => {
-                console.log("Error occured!", err);
+                console.log('Error occured!', err);
             }
         );
     }

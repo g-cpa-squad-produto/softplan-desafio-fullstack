@@ -3,9 +3,9 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 
-import {List} from './list/list';
-import {UsuarioForm} from './form/usuario-form';
-import {View} from './view/view';
+import {UsuarioListComponent} from './list/usuario-list.component';
+import {UsuarioFormComponent} from './form/usuario-form.component';
+import {UsuarioDetailComponent} from './view/usuario-detail.component';
 import {UsuarioRoutes} from './usuario.routing';
 
 @NgModule({
@@ -15,9 +15,9 @@ import {UsuarioRoutes} from './usuario.routing';
         RouterModule.forChild(UsuarioRoutes)
     ],
     declarations: [
-        List,
-        UsuarioForm,
-        View
+        UsuarioListComponent,
+        UsuarioFormComponent,
+        UsuarioDetailComponent
     ]
 })
 

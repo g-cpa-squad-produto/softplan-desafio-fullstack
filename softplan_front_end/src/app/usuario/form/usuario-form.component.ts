@@ -6,10 +6,10 @@ import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
     selector: 'app-usuario-form',
-    templateUrl: './form.html',
-    styleUrls: ['./form.css']
+    templateUrl: './usuario-form.component.html',
+    styleUrls: ['./usuario-form.component.css']
 })
-export class UsuarioForm {
+export class UsuarioFormComponent {
 
     usuario: UsuarioDto;
 
@@ -17,22 +17,8 @@ export class UsuarioForm {
         if (this.route.snapshot.params.id) {
             this.usuario = this.getRecord();
         } else {
-            this.usuario = UsuarioForm.getBlankRecord();
+            this.usuario = UsuarioFormComponent.getBlankRecord();
         }
-    }
-
-    getRecord(): UsuarioDto {
-        return {
-            id: this.route.snapshot.params.id,
-            dataCriacao: this.route.snapshot.params.dataCriacao,
-            dataModificacao: this.route.snapshot.params.dataModificacao,
-            login: this.route.snapshot.params.login,
-            senha: this.route.snapshot.params.senha,
-            nomeCompleto: this.route.snapshot.params.nomeCompleto,
-            email: this.route.snapshot.params.email,
-            permissao: this.route.snapshot.params.permissao,
-            createdBy: this.route.snapshot.params.createdBy,
-        };
     }
 
     static getBlankRecord(): UsuarioDto {
@@ -49,9 +35,23 @@ export class UsuarioForm {
         };
     }
 
+    getRecord(): UsuarioDto {
+        return {
+            id: this.route.snapshot.params.id,
+            dataCriacao: this.route.snapshot.params.dataCriacao,
+            dataModificacao: this.route.snapshot.params.dataModificacao,
+            login: this.route.snapshot.params.login,
+            senha: '',
+            nomeCompleto: this.route.snapshot.params.nomeCompleto,
+            email: this.route.snapshot.params.email,
+            permissao: this.route.snapshot.params.permissao,
+            createdBy: this.route.snapshot.params.createdBy,
+        };
+    }
+
     save() {
         if (this.usuario.id) {
-            return this.update()
+            return this.update();
         } else {
             return this.create();
         }
@@ -61,12 +61,12 @@ export class UsuarioForm {
         this.http.post('http://localhost:8080/usuario', this.usuario).subscribe(
             res => {
                 console.log(res);
-                alert("Usuario cadastrado com sucesso!");
+                alert('Usuario cadastrado com sucesso!');
                 this.router.navigate(['./usuario-list']);
             },
             err => {
-                alert("Erro ao cadastrar usuario: " + err.error.message);
-                console.log("Error occured", err);
+                alert('Erro ao cadastrar usuario: ' + err.error.message);
+                console.log('Error occured', err);
             }
         );
     }
@@ -75,13 +75,14 @@ export class UsuarioForm {
         this.http.put(`http://localhost:8080/usuario/${this.usuario.id}`, this.usuario).subscribe(
             res => {
                 console.log(res);
-                alert("Usuario atualizado com sucesso!");
+                alert('Usuario atualizado com sucesso!');
                 this.router.navigate(['./usuario-list']);
             },
             err => {
-                alert("Erro ao atualizar usuario: " + err.error.message);
-                console.log("Error occured", err);
+                alert('Erro ao atualizar usuario: ' + err.error.message);
+                console.log('Error occured', err);
             }
         );
     }
+
 }

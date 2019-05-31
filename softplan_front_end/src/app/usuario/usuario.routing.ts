@@ -1,7 +1,7 @@
 import {Routes} from '@angular/router';
-import {UsuarioForm} from './form/usuario-form';
-import {List} from './list/list';
-import {View} from './view/view';
+import {UsuarioFormComponent} from './form/usuario-form.component';
+import {UsuarioListComponent} from './list/usuario-list.component';
+import {UsuarioDetailComponent} from './view/usuario-detail.component';
 
 export const UsuarioRoutes: Routes = [{
     path: '',
@@ -11,15 +11,15 @@ export const UsuarioRoutes: Routes = [{
     path: '',
     children: [{
         path: 'usuario-list',
-        component: List
+        component: UsuarioListComponent
     }, {
         path: 'usuario-form',
-        component: UsuarioForm
+        component: UsuarioFormComponent
     }, {
         path: 'usuario-form/:codigo',
-        component: UsuarioForm
+        component: UsuarioFormComponent
     }, {
         path: 'usuario-view',
-        component: View
+        component: UsuarioDetailComponent
     }]
 }];

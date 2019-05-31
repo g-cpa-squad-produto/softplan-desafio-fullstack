@@ -4,10 +4,10 @@ import {UsuarioDto} from "../../dto/usuario.dto";
 
 @Component({
     selector: 'app-usuario-view',
-    templateUrl: './view.html',
-    styleUrls: ['./view.css']
+    templateUrl: './usuario-detail.component.html',
+    styleUrls: ['./usuario-detail.component.css']
 })
-export class View {
+export class UsuarioDetailComponent {
 
     usuario: UsuarioDto;
 
