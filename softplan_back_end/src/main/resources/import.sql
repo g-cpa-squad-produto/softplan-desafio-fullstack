@@ -1,0 +1,6 @@
+INSERT INTO usuario(id, login, senha, nome_completo, email, permissao, created_By, data_criacao) VALUES (1,'admin', '$2a$10$JMuA5tFHva3ts02WqBv.HuadVsEqDEJWns74xO/gh5mF3.Utnj6Hq', 'administrador1', 'marcus.voltolim@gmail.com', 'ADMINISTRADOR', 'admin',  to_date('01/05/2019', 'dd/MM/yyyy'));
+INSERT INTO usuario(id, login, senha, nome_completo, email, permissao, created_By, data_criacao) VALUES ( 2, 'triador', '$2a$10$NjmolnF7z2c8KBVaSBtedOChmImhTRDFsw/bzSCPIP0GfcidO40ja', 'triador1', 'triador@triador.com', 'TRIADOR', 'admin',  now());
+INSERT INTO usuario(id, login, senha, nome_completo, email, permissao, created_By, data_criacao) VALUES (3,'finalizador', '$2a$10$C/dkMR7bvl2.GZ6tYEGROezRFHTYAOxqefwq8cHF/EZDycpmfb1py', 'finalizador1', 'finalizador@finalizador.com', 'FINALIZADOR', 'admin',  now());
+INSERT INTO usuario(id, login, senha, nome_completo, email, permissao, created_By, data_criacao) VALUES (4,'finalizador2', '$2a$10$C/dkMR7bvl2.GZ6tYEGROezRFHTYAOxqefwq8cHF/EZDycpmfb1py', 'finalizador1', 'finalizador@finalizador.com', 'FINALIZADOR', 'admin',  now());
+
+INSERT INTO processo(id, titulo, descricao, created_By, data_criacao) VALUES (1,'Processo Marcus Voltolim', 'Verificar as implementações para Vaga de Desenvolvimento FullStack', 'triador',  now());
