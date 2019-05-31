@@ -30,7 +30,7 @@ public abstract class AbstractService<T extends EntityLongId> {
 	
 	public T create(String json) {
 		T novaEntidade = entityFromJson(json);
-		return repository.save(novaEntidade);
+		return repository.saveAndFlush(novaEntidade);
 	}
 	
 	abstract void updateAtributos(T entidadePraAtualizar, String dadosAtualizadosJson);
@@ -42,7 +42,7 @@ public abstract class AbstractService<T extends EntityLongId> {
 		
 		T entidade = repository.getOne(id);
 		updateAtributos(entidade, json);
-		return repository.save(entidade);
+		return repository.saveAndFlush(entidade);
 	}
 	
 	public void delete(Long id) {

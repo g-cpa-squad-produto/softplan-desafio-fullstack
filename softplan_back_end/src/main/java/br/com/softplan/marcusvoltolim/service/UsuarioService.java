@@ -1,11 +1,13 @@
 package br.com.softplan.marcusvoltolim.service;
 
+import br.com.softplan.marcusvoltolim.enums.Permissao;
 import br.com.softplan.marcusvoltolim.model.Usuario;
 import br.com.softplan.marcusvoltolim.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UsuarioService extends AbstractService<Usuario> {
@@ -33,13 +35,20 @@ public class UsuarioService extends AbstractService<Usuario> {
 		return repository.findAllByLoginLikeOrEmailLikeOrNomeCompletoLike(filtro, filtro, filtro);
 	}
 	
+	public List<String> findAllNomeUsuarioFinalizadores() {
+		return repository.findAllByPermissao(Permissao.FINALIZADOR).stream().map(Usuario::getLogin)
+				.collect(Collectors.toList());
+	}
+	
 	@Override
 	void updateAtributos(Usuario usuarioExistente, String dadosNovosJson) {
 		Usuario usuarioDadosNovos = entityFromJson(dadosNovosJson);
-		usuarioExistente.setSenha(CRYPT.encode(usuarioDadosNovos.getSenha()));
 		usuarioExistente.setPermissao(usuarioDadosNovos.getPermissao());
 		usuarioExistente.setNomeCompleto(usuarioDadosNovos.getNomeCompleto());
 		usuarioExistente.setEmail(usuarioDadosNovos.getEmail());
+		if (!usuarioDadosNovos.getSenha().isEmpty()) {
+			usuarioExistente.setSenha(CRYPT.encode(usuarioDadosNovos.getSenha()));
+		}
 	}
 	
 }

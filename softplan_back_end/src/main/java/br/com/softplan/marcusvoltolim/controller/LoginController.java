@@ -11,7 +11,7 @@ import java.util.Base64;
 
 @RestController
 @CrossOrigin
-public class UserController {
+public class LoginController {
 	
 	@RequestMapping("/login")
 	public boolean login(@RequestBody UsuarioLogin user) {

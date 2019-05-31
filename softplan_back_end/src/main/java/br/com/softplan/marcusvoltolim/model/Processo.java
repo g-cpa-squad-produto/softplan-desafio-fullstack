@@ -1,6 +1,7 @@
 package br.com.softplan.marcusvoltolim.model;
 
 import br.com.softplan.marcusvoltolim.model.support.AbstractEntityLongId;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.NotBlank;
@@ -9,8 +10,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -28,7 +31,8 @@ public class Processo extends AbstractEntityLongId {
 	private String descricao;
 	
 	@OneToMany
-	List<Parecer> pareceres;
+	@JsonIgnore
+	List<Parecer> pareceres = new ArrayList<>();
 	
 	@Transient
 	private boolean isPendente() {
@@ -36,13 +40,14 @@ public class Processo extends AbstractEntityLongId {
 	}
 	
 	@Transient
-	public String getResponsavel() {
-		return !isPendente() ? getLastModifiedBy() : "";
+	public Date getDataFinalizacao() {
+		return !isPendente() ? getDataModificacao() : null;
 	}
 	
 	@Transient
-	public Date getDataFinalizacao() {
-		return !isPendente() ? getDataModificacao() : null;
+	public List<String> getFinalizadores() {
+		return !CollectionUtils.isEmpty(pareceres) ? pareceres.stream().map(Parecer::getResponsavel)
+				.collect(Collectors.toList()) : new ArrayList<>();
 	}
 	
 }
