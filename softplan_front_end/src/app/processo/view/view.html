@@ -1,0 +1,50 @@
+<div id="main" class="container-fluid" style="margin-top: 50px">
+    <div id="top" class="row">
+        <h2>Detalhes Processo</h2>
+    </div>
+</div>
+<form>
+    <div class="row col-sm-12">
+        <div class="col-sm-4">
+            <label for="codigo">C&oacute;digo</label>
+            <input [ngModel]="processo.id" id="codigo" name="codigo" class="form-control" disabled>
+        </div>
+        <div class="col-sm-8">
+            <label for="titulo">T&iacute;tulo</label>
+            <input [ngModel]="processo.descricao" id="titulo" name="titulo" class="form-control" disabled>
+        </div>
+    </div>
+    <div class="row col-sm-12">
+        <div class="col-sm-12">
+            <label for="descricao">Descri&ccedil;&atilde;o</label>
+            <textarea [ngModel]="processo.descricao" id="descricao" name="descricao" class="form-control"
+                      disabled></textarea>
+        </div>
+    </div>
+    <div class="row col-sm-12">
+        <div class="col-sm-3">
+            <label for="criador">Criador</label>
+            <input [ngModel]="processo.createdBy" id="criador" name="criador" class="form-control" disabled>
+        </div>
+        <div class="col-sm-3">
+            <label for="dataCriacao">Data de Cria&ccedil;&atilde;o</label>
+            <input [ngModel]="processo.dataCriacao | date: 'dd/MM/yyyy'" id="dataCriacao" name="dataCriacao"
+                   class="form-control" disabled>
+        </div>
+        <div class="col-sm-3">
+            <label for="dataModificacao">&Uacute;ltima modifica&ccedil;&atilde;o</label>
+            <input [ngModel]="processo.dataFinalizacao | date: 'dd/MM/yyyy'" id="dataModificacao" name="dataModificacao"
+                   class="form-control" disabled>
+        </div>
+        <div class="col-sm-3">
+            <label for="responsavel">Respons&aacute;vel</label>
+            <input [ngModel]="processo.responsavel" id="responsavel" name="responsavel" class="form-control" disabled>
+        </div>
+    </div>
+    <br>
+    <div class="d-flex justify-content-between">
+        <div class="d-flex align-content-start">
+            <button class="btn btn-dark" routerLink='/processo-list'>Voltar</button>
+        </div>
+    </div>
+</form>

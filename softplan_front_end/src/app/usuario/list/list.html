@@ -1,0 +1,70 @@
+<div id="main" class="container-fluid" style="margin-top: 50px">
+    <div id="top" class="row">
+        <div class="col-sm-3">
+            <h2>Usu&aacute;rios</h2>
+        </div>
+        <div class="col-sm-6">
+            <div class="input-group h2">
+                <input ([ngModel])="filtro" name="descricaoFilter" class="form-control"
+                       type="text" placeholder="Pesquisar Usuarios" (keyup.enter)="findAllBy(filtro)">
+                <button class="btn material-icons" type="submit" (click)="findAllBy(filtro)">find_replace</button>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <button routerLink='/usuario-form' class="btn material-icons">add_circle</button>
+        </div>
+    </div>
+
+    <div id="list" class="row">
+        <div class="table-responsive col-md-12">
+            <table class="table table-striped" cellspacing="0" cellpadding="0">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Data Criação</th>
+                    <th>Data Modificação</th>
+                    <th>Login</th>
+                    <th>Email</th>
+                    <th>Papel</th>
+                    <th class="actions">Ações</th>
+                </tr>
+                </thead>
+                <tbody *ngFor="let usuario of usuarios">
+                <tr>
+                    <td>{{ usuario.id }}</td>
+                    <td>{{ usuario.dataCriacao | date: 'dd/MM/yyyy' }}</td>
+                    <td>{{ usuario.dataModificacao | date: 'dd/MM/yyyy' }}</td>
+                    <td>{{ usuario.login }}</td>
+                    <td>{{ usuario.email }}</td>
+                    <td>{{ usuario.permissao }}</td>
+                    <td class="actions">
+                        <a class="btn material-icons" (click)="view(usuario)">details</a>
+                        <a class="btn material-icons" (click)="edit(usuario)">edit</a>
+                        <a class="btn material-icons" (click)="delete(usuario.id)">delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span
+                    aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modalLabel">Excluir Item</h4>
+            </div>
+            <div class="modal-body">
+                Deseja realmente excluir este item?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Sim</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">N&atilde;o</button>
+            </div>
+        </div>
+    </div>
+</div>

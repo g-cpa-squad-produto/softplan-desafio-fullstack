@@ -1,0 +1,62 @@
+<div id="main" class="container-fluid" style="margin-top: 50px">
+    <div id="top" class="row">
+        <h2>Detalhes Usuario</h2>
+    </div>
+</div>
+<form>
+    <div class="row col-sm-12">
+        <div class="col-sm-4">
+            <label for="id">ID</label>
+            <input [ngModel]="usuario.id" id="id" name="id" class="form-control" disabled>
+        </div>
+        <div class="col-sm-4">
+            <label for="login">Login</label>
+            <input [ngModel]="usuario.login" id="login" name="login" class="form-control" disabled>
+        </div>
+        <div class="col-sm-4">
+            <label for="email">Email</label>
+            <input [ngModel]="usuario.email" id="email" name="email" class="form-control" disabled>
+        </div>
+    </div>
+    <!--<div class="col-sm-4">-->
+    <!--<label for="Login">Senha</label>-->
+    <!--<input [ngModel]="usuario.senha" id="senha" name="senha" class="form-control" disabled>-->
+    <!--</div>-->
+    <div class="row col-sm-12">
+        <div class="col-sm-8">
+            <label for="nomeCompleto">Nome Completo</label>
+            <input [ngModel]="usuario.nomeCompleto" id="nomeCompleto" name="nomeCompleto" class="form-control" disabled>
+        </div>
+        <div class="col-sm-4">
+            <label for="papel">Papel</label>
+            <input [ngModel]="usuario.permissao" id="papel" name="papel" class="form-control" disabled>
+        </div>
+    </div>
+    <div class="row col-sm-12">
+        <div class="col-sm-3">
+            <label for="criador">Criador</label>
+            <input [ngModel]="usuario.createdBy" id="criador" name="criador" class="form-control" disabled>
+        </div>
+        <div class="col-sm-3">
+            <label for="dataCriacao">Data de Cria&ccedil;&atilde;o</label>
+            <input [ngModel]="usuario.dataCriacao | date: 'dd/MM/yyyy'" id="dataCriacao" name="dataCriacao"
+                   class="form-control" disabled>
+        </div>
+        <div class="col-sm-3">
+            <label for="dataModificacao">&Uacute;ltima modifica&ccedil;&atilde;o</label>
+            <input [ngModel]="usuario.dataModificacao | date: 'dd/MM/yyyy'" id="dataModificacao" name="dataModificacao"
+                   class="form-control" disabled>
+        </div>
+        <!--<div class="col-sm-6">-->
+        <!--<label for="criador"></label>-->
+        <!--<input [ngModel]="usuario.createdBy" id="criador" name="criador" class="form-control" disabled>-->
+        <!--</div>-->
+    </div>
+
+    <br>
+    <div class="d-flex justify-content-between">
+        <div class="d-flex align-content-start">
+            <button class="btn btn-dark" routerLink='/usuario-list'>Voltar</button>
+        </div>
+    </div>
+</form>

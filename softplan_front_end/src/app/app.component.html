@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-xl bg-dark navbar-dark">
+    <!-- Brand -->
+    <img alt="Logo" width="7%" he src="../assets/images/logo-softplan-logo.jpg">
+
+    <!-- Links -->
+    <ul class="navbar-nav">
+        <!-- Dropdown -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Usuarios</a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" routerLink="/usuario-list">Listagem</a>
+                <a class="dropdown-item" routerLink="/usuario-form">Novo</a>
+            </div>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Processos</a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" routerLink="/processo-list">Listagem</a>
+                <a class="dropdown-item" routerLink="/processo-form">Novo</a>
+                <a class="dropdown-item" routerLink="/processo-view/last">Pendentes</a>
+            </div>
+        </li>
+    </ul>
+</nav>
+<br>
+
+<div class="container">
+    <router-outlet></router-outlet>
+</div>
+
