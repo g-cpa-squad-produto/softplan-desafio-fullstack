@@ -51,8 +51,6 @@ class ProcessosAtribuicao extends Component {
             usuarioFinalizador: { id: parseInt(usuarioFinalizador) }
         }
 
-        console.log('atribuicao: ', atribuicao);
-
         AtribuicoesService.save(atribuicao)
             .then(response => {
                 if (response.status < 300) {
@@ -81,19 +79,19 @@ class ProcessosAtribuicao extends Component {
                 <div>
                     <form name="atribuicoesForm" onSubmit={this.handleSubmit}>
                         <div className="form-row">
-                            <div className="form-group col-md-2">
+                            <div className="form-group col-md-12">
                                 <label htmlFor="idProcesso">Processo</label>
                                 <input type="text" readOnly className="form-control" id="idProcesso" name="idProcesso" value={processo.id} />
                             </div>
                         </div>
                         <div className="form-row">
-                            <div className="form-group col-md-6">
+                            <div className="form-group col-md-12">
                                 <label htmlFor="sumulaProcesso">Súmula</label>
                                 <textarea type="text" rows="5" readOnly className="form-control" id="sumulaProcesso" name="sumulaProcesso" value={processo.sumula} />
                             </div>
                         </div>
                         <div className="form-row">
-                            <div className="form-group col-md-6">
+                            <div className="form-group col-md-12">
                                 <label htmlFor="usuarioFinalizador">Usuário finalizador</label>
                                 <select className="form-control" id="usuarioFinalizador" name="usuarioFinalizador" value={usuarioFinalizador} onChange={this.handleChange}>
                                     {usuarios.map(usuario => (

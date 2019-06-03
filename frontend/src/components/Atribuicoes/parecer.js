@@ -51,8 +51,6 @@ class AtribuicoesParecer extends Component {
             textoParecer: textoParecer || null
         }
 
-        console.log('parecer: ', parecer);
-
         PareceresService.save(parecer)
             .then(response => {
                 if (response.status < 300) {
@@ -81,19 +79,19 @@ class AtribuicoesParecer extends Component {
                 <div>
                     <form name="pareceresForm" onSubmit={this.handleSubmit}>
                         <div className="form-row">
-                            <div className="form-group col-md-2">
+                            <div className="form-group col-md-12">
                                 <label htmlFor="idProcesso">Processo</label>
                                 <input type="text" readOnly className="form-control" id="idProcesso" name="idProcesso" value={atribuicao.processo.id} />
                             </div>
                         </div>
                         <div className="form-row">
-                            <div className="form-group col-md-6">
+                            <div className="form-group col-md-12">
                                 <label htmlFor="sumulaProcesso">Súmula</label>
                                 <textarea type="text" rows="5" readOnly className="form-control" id="sumulaProcesso" name="sumulaProcesso" value={atribuicao.processo.sumula} />
                             </div>
                         </div>
                         <div className="form-row">
-                            <div className="form-group col-md-6">
+                            <div className="form-group col-md-12">
                                 <label htmlFor="textoParecer">Parecer</label>
                                 <textarea type="text" rows="5" className="form-control" id="textoParecer" name="textoParecer" value={textoParecer} onChange={this.handleChange} placeholder="Informe o parecer.." />
                             </div>

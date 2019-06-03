@@ -34,8 +34,6 @@ class ProcessosForm extends Component {
             usuarioAbertura: { id: usuarioAbertura.id }
         }
 
-        console.log('processo: ', processo);
-
         ProcessosService.save(processo)
             .then(response => {
                 if (response.status < 300) {
@@ -61,13 +59,13 @@ class ProcessosForm extends Component {
             <div>
                 <form name="processosForm" onSubmit={this.handleSubmit}>
                     <div className="form-row">
-                        <div className="form-group col-md-6">
+                        <div className="form-group col-md-12">
                             <label htmlFor="nome">Usuário de abertura</label>
                             <input type="text" readOnly className="form-control" id="nomeUsuarioAbertura" name="nomeUsuarioAbertura" value={usuarioAbertura.nome} />
                         </div>
                     </div>
                     <div className="form-row">
-                        <div className="form-group col-md-6">
+                        <div className="form-group col-md-12">
                             <label htmlFor="senha">Súmula</label>
                             <textarea type="text" rows="5" className="form-control" id="sumula" name="sumula" value={sumula} onChange={this.handleChange} placeholder="Informe a súmula do processo.." />
                         </div>

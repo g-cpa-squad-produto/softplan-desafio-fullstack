@@ -47,7 +47,7 @@
 + **Acessando a aplicação**
 
 	```bash
-	http://localhost:8080
+	http://localhost:3000
 	```
 
 ## Acessando a aplicação
@@ -59,3 +59,4 @@ A aplicação pode ser acessada com os usuários padrões 'admin@dominio.com', '
 * Implementar autenticação por OAuth 2.0;
 * Documentar a API utilizando OpenAPI 3.0;
 * Tratar o layout da aplicação (centralizar elementos, dimensionar colunas, tratar responsividade);
+* Isolar os styles em arquivos separados do código fonte;
