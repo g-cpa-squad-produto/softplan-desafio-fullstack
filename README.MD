@@ -52,4 +52,4 @@
 
 ## Acessando a aplicação
 
-A aplicação pode ser acessada com os usuários 'admin', 'triador' ou 'finalizador', utilizando a senha 123456.
+A aplicação pode ser acessada com os emails 'admin@dominio.com', 'triador@dominio.com' ou 'finalizador@dominio.com', utilizando a senha '123456'.
