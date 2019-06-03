@@ -11,7 +11,7 @@
 + **Configurando as credenciais de acesso ao banco de dados**
 
 	```yml
-	# api-processos/src/main/resources/application.yml
+	# backend/src/main/resources/application.yml
 	spring:
 	    datasource:
 	        url: jdbc:postgresql://localhost:5432/processos
@@ -25,12 +25,12 @@
 	mvn spring-boot:run
 	```
 
-+ **Testando a API**
++ **Endpoints disponíveis**
 
 	```bash
 	http://localhost:8085/processos/api/usuarios
 	http://localhost:8085/processos/api/processos
-	http://localhost:8085/processos/api/processos-atribuidos?usuario=3
+	http://localhost:8085/processos/api/processos-atribuidos
 	http://localhost:8085/processos/api/atribuicoes
 	http://localhost:8085/processos/api/pareceres
 	```
@@ -40,7 +40,7 @@
 + **Resolvendo dependências e rodando o frontend**
 
 	```bash
-	cd app-processos
+	cd frontend
 	npm install && npm run start
 	```
 
@@ -52,4 +52,10 @@
 
 ## Acessando a aplicação
 
-A aplicação pode ser acessada com os emails 'admin@dominio.com', 'triador@dominio.com' ou 'finalizador@dominio.com', utilizando a senha '123456'.
+A aplicação pode ser acessada com os usuários padrões 'admin@dominio.com', 'triador@dominio.com' ou 'finalizador@dominio.com', utilizando a senha '123456'.
+
+## Próximos passos
+
+* Implementar autenticação por OAuth 2.0;
+* Documentar a API utilizando OpenAPI 3.0;
+* Tratar o layout da aplicação (centralizar elementos, dimensionar colunas, tratar responsividade);

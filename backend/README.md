@@ -11,7 +11,7 @@
 + **Configurando as credenciais de acesso ao banco de dados**
 
 	```yml
-	# api-processos/src/main/resources/application.yml
+	# backend/src/main/resources/application.yml
 	spring:
 	    datasource:
 	        url: jdbc:postgresql://localhost:5432/processos
@@ -25,12 +25,12 @@
 	mvn spring-boot:run
 	```
 
-+ **Testando a API**
++ **Endpoints disponíveis**
 
 	```bash
 	http://localhost:8085/processos/api/usuarios
 	http://localhost:8085/processos/api/processos
-	http://localhost:8085/processos/api/processos-atribuidos?usuario=3
+	http://localhost:8085/processos/api/processos-atribuidos
 	http://localhost:8085/processos/api/atribuicoes
 	http://localhost:8085/processos/api/pareceres
 	```
