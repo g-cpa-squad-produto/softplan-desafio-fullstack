@@ -1,0 +1,6 @@
+/pmanagement-app/node_modules/
+/pmanagement-app/nbproject/
+/pmanagement-backend/target/
+/pmanagement-backend/nb-configuration.xml
+/pmanagement-backend/nbactions.xml
+/pmanagement-backend/nbactions-alpha.xml
