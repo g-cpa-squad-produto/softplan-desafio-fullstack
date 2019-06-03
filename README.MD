@@ -58,5 +58,8 @@ A aplicação pode ser acessada com os usuários padrões 'admin@dominio.com', '
 
 * Implementar autenticação por OAuth 2.0;
 * Documentar a API utilizando OpenAPI 3.0;
+* Implementar edição de usuários;
+* Implementar paginação;
+* Exibir a opção de logout no header, assim como os dados do usuário logado;
 * Tratar o layout da aplicação (centralizar elementos, dimensionar colunas, tratar responsividade);
 * Isolar os styles em arquivos separados do código fonte;
