@@ -1,0 +1,11 @@
+FROM node:10 AS builder-frontend
+
+RUN mkdir source
+
+COPY . /source
+
+WORKDIR /source
+
+RUN npm install
+
+EXPOSE 3000

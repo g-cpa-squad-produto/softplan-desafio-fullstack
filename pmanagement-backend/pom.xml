@@ -117,7 +117,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.pmanagement.pmanagementbackend</mainClass>
+                    <mainClass>com.pmanagement.pmanagementbackend.Application</mainClass>
                 </configuration>
             </plugin>
         </plugins>

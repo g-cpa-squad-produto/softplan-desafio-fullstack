@@ -1,0 +1,22 @@
+version: "3.7"
+services:
+  pmanagement-backend:
+    image: pmanagement-backend
+    container_name: pmanagement-backend
+    build:
+      context: ./pmanagement-backend
+      dockerfile: DockerfileBackend
+    ports:
+      - 8080:8080
+    command: java -jar /source/target/pmanagement-backend-1.0.0-SNAPSHOT-ALPHA.jar
+  pmanagement-app:
+    image: pmanagement-app
+    container_name: pmanagement-app
+    build:
+      context: ./pmanagement-app
+      dockerfile: DockerfileFrontend
+    ports:
+      - 3000:3000
+    links:
+      - pmanagement-backend
+    command: npm start

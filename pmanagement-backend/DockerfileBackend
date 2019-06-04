@@ -1,0 +1,11 @@
+FROM maven:3.6 AS builder-backend
+
+RUN mkdir source
+
+COPY . /source
+
+WORKDIR /source
+
+RUN mvn package spring-boot:repackage -Palpha
+
+EXPOSE 8080

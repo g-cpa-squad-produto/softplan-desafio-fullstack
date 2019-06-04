@@ -2,6 +2,8 @@ package com.pmanagement.pmanagementbackend.application.configuration;
 
 import com.pmanagement.pmanagementbackend.domain.entity.User;
 import com.pmanagement.pmanagementbackend.domain.repository.UserRepository;
+import java.io.IOException;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +33,11 @@ public class AuthenticationFailureHandler extends SimpleUrlAuthenticationFailure
      * @param exception
      */
     @Override
-    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) {
+    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws ServletException, IOException {
         if (exception instanceof BadCredentialsException || exception instanceof InternalAuthenticationServiceException) {
             String username = (String) request.getParameter("username");
 
-            final User user = this.userRepository.findByUsername(username).get();
+            final User user = this.userRepository.findByUsername(username).orElse(null);
 
             if (user != null) {
                 user.registerFailedLogin();
@@ -43,6 +45,6 @@ public class AuthenticationFailureHandler extends SimpleUrlAuthenticationFailure
             }
         }
         
-        throw exception;
+        super.onAuthenticationFailure(request, response, exception);
     }
 }
