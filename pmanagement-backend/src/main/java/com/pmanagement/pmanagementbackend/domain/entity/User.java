@@ -2,6 +2,8 @@ package com.pmanagement.pmanagementbackend.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.Collections;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -12,6 +14,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * The class to hold the User data
@@ -27,7 +31,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class User extends PersistentEntity {
+public class User extends PersistentEntity implements UserDetails{
 
     /**
      * The max of attempts to login
@@ -51,6 +55,7 @@ public class User extends PersistentEntity {
     private boolean status;
 
     @Column
+    @JsonIgnore
     private String password;
 
     @Column
@@ -69,14 +74,15 @@ public class User extends PersistentEntity {
         this.loginAttemps = this.loginAttemps != null ? this.loginAttemps + 1 : 1;
         this.lastLoginAttemp = LocalDateTime.now();
     }
-
+    
     /**
-     * Verify if is a valid attempt
-     *
-     * @return true if is a valid attempt
+     * {@inheritDoc }
+     * 
+     * @return 
      */
-    @JsonIgnore
+    @Override
     @Transient
+    @JsonIgnore
     public boolean isAccountNonLocked() {
         if (this.lastLoginAttemp == null || this.loginAttemps == null) {
             return true;
@@ -91,5 +97,45 @@ public class User extends PersistentEntity {
         }
 
         return true;
+    }
+
+    /**
+     * {@inheritDoc }
+     * 
+     * @return 
+     */
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.EMPTY_LIST;
+    }
+
+    /**
+     * {@inheritDoc }
+     * 
+     * @return 
+     */
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    /**
+     * {@inheritDoc }
+     * 
+     * @return 
+     */
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    /**
+     * {@inheritDoc }
+     * 
+     * @return 
+     */
+    @Override
+    public boolean isEnabled() {
+        return this.status;
     }
 }

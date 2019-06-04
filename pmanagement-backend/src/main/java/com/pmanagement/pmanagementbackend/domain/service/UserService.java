@@ -5,6 +5,7 @@ import com.pmanagement.pmanagementbackend.domain.repository.UserRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,6 +18,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserService {
+    
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private UserRepository userRepository;
@@ -57,6 +61,10 @@ public class UserService {
      * @return the persisted {@link User}
      */
     public User saveUser(User user) {
+        final String encodedPassword = this.passwordEncoder.encode(user.getPassword());
+                
+        user.setPassword(encodedPassword);
+        
         return this.userRepository.saveAndFlush(user);
     }
 

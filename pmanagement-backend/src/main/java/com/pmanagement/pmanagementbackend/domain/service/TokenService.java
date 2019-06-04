@@ -1,23 +1,21 @@
 package com.pmanagement.pmanagementbackend.domain.service;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.JWTVerifier;
-import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.auth0.jwt.interfaces.DecodedJWT;
-import java.io.UnsupportedEncodingException;
+import com.pmanagement.pmanagementbackend.application.configuration.ApplicationConstants;
+import com.pmanagement.pmanagementbackend.domain.entity.User;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.UnsupportedJwtException;
+import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.security.SignatureException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.util.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The service to manage the tokens
@@ -28,67 +26,57 @@ import org.springframework.util.StringUtils;
  * @since 1.0.0, Jun 2, 2019
  */
 public class TokenService {
-
-    static final String SECRET = "theSecret";
-    static final String HEADER_STRING = "Authorization";
-    static final long EXPIRATION_HOURS = 5;
+    
+    private static final Logger log = LoggerFactory.getLogger(TokenService.class);
 
     /**
      * Generate the token and attach to header
      *
-     * @param response
-     * @param username
+     * @param user to create the token
      */
-    public static void addAuthentication(HttpServletResponse response, String username) {
-        try {
-            final Algorithm algorithm = Algorithm.HMAC256(SECRET);
+    public static String createAuthentication(User user) {
+        final byte[] signingKey = ApplicationConstants.SECRET.getBytes();
 
-            final Date expiresDate = Date.from(
-                    LocalDateTime.now().plusHours(5).
-                            atZone(ZoneId.systemDefault()).
-                            toInstant());
+        final Date expiresDate = Date.from(
+                LocalDateTime.now().plusHours(ApplicationConstants.EXPIRATION_HOURS).
+                        atZone(ZoneId.systemDefault()).
+                        toInstant());
 
-            final String token = JWT.create()
-                    .withClaim("username", username)
-                    .withClaim("createdAt", Calendar.getInstance().getTime())
-                    .withExpiresAt(expiresDate)
-                    .sign(algorithm);
-
-            response.addHeader(HEADER_STRING, token);
-        } catch (IllegalArgumentException ex) {
-            Logger.getLogger(TokenService.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (UnsupportedEncodingException ex) {
-//            Logger.getLogger(TokenService.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        return Jwts.builder()
+                .signWith(Keys.hmacShaKeyFor(signingKey), SignatureAlgorithm.HS512)
+                .setSubject(user.getUsername())
+                .setExpiration(expiresDate)
+                .compact();
     }
 
     /**
      * Restore the token
      *
-     * @param request
-     * @return
+     * @param token
+     * @return the {@link User#username} found
      */
-    public static Authentication getAuthentication(HttpServletRequest request) {
+    public static String getAuthentication(String token) {
         try {
-            final String token = request.getHeader(HEADER_STRING);
+            final byte[] signingKey = ApplicationConstants.SECRET.getBytes();
+            final Jws<Claims> parsedToken = Jwts.parser()
+                    .setSigningKey(signingKey)
+                    .parseClaimsJws(token);
 
-            final Algorithm algorithm = Algorithm.HMAC256(SECRET);
-            final JWTVerifier verifier = JWT.require(algorithm).build();
-
-            //decrypt the token
-            final DecodedJWT jwt = verifier.verify(token);
-            final String user = jwt.getClaim("username").asString();
-
-            if (!StringUtils.isEmpty(user)) {
-                return new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());
-            }
-        } catch (JWTVerificationException ex) {
-            Logger.getLogger(TokenService.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalArgumentException ex) {
-            Logger.getLogger(TokenService.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (UnsupportedEncodingException ex) {
-//            Logger.getLogger(TokenService.class.getName()).log(Level.SEVERE, null, ex);
+            return parsedToken
+                    .getBody()
+                    .getSubject();
+        } catch (ExpiredJwtException exception) {
+            log.warn("Request to parse expired JWT : {} failed : {}", token, exception.getMessage());
+        } catch (UnsupportedJwtException exception) {
+            log.warn("Request to parse unsupported JWT : {} failed : {}", token, exception.getMessage());
+        } catch (MalformedJwtException exception) {
+            log.warn("Request to parse invalid JWT : {} failed : {}", token, exception.getMessage());
+        } catch (SignatureException exception) {
+            log.warn("Request to parse JWT with invalid signature : {} failed : {}", token, exception.getMessage());
+        } catch (IllegalArgumentException exception) {
+            log.warn("Request to parse empty or null JWT : {} failed : {}", token, exception.getMessage());
         }
+        
         return null;
     }
 }
