@@ -5,6 +5,7 @@ import com.pmanagement.pmanagementbackend.domain.service.TokenService;
 import java.io.IOException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -52,6 +53,9 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         final User user = (User) authentication.getPrincipal();
         final String token = TokenService.createAuthentication(user);
 
+        final Cookie cookie = new Cookie(ApplicationConstants.HEADER_AUTHENTICATION, token);
+        
+        response.addCookie(cookie);
         response.addHeader(ApplicationConstants.HEADER_AUTHENTICATION, token);
         getSuccessHandler().onAuthenticationSuccess(request, response, authentication);
     }
