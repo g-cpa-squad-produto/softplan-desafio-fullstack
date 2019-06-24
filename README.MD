@@ -9,7 +9,7 @@
 ### Observações
 
 - Como não deu tempo para aprender e gerar o docker compose e mandar o projeto, será preciso inserir um usuário admin com o sequinte endpoint:
-- POST localhost:8080/api/auth/register
+- POST http://localhost:8080/api/auth/register
 - com o body
 
 ```json
