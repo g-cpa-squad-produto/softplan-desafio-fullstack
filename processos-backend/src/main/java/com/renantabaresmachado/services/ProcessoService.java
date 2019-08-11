@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.renantabaresmachado.domains.Processo;
+import com.renantabaresmachado.domains.Usuario;
 import com.renantabaresmachado.repositories.ProcessoRepository;
 import com.renantabaresmachado.services.exeptions.ObjectNotFoundException;
 
@@ -28,13 +29,8 @@ public class ProcessoService {
 	
 	public Processo buscar(Integer id) {
 		Optional<Processo> processo = processoRepository.findById(id);
-		if (processo.isPresent()) {
-			return processo.get();
-		} else {
-			throw new ObjectNotFoundException(
-					"Objeto não encontrado! Id: " + id + ", Tipo: " + Processo.class.getName());
-		}
-
+		return processo.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Processo.class.getName()));
 	}
 
 
