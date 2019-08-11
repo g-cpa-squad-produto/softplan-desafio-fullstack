@@ -1,44 +1,35 @@
 package com.renantabaresmachado.domains;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Processo implements Serializable {
+public class Parecer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String nome;
-	private String status;
-	@OneToOne(mappedBy = "processo")
-	private Parecer parecer;
-	@ManyToMany
-	@JoinTable(
-			name = "ASS_PROCESSO_USUARIO",
-			joinColumns = @JoinColumn(name = "processo_id"),
-			inverseJoinColumns = @JoinColumn(name = "usuario_id")
-	)
-	private List<Usuario> usuarios;
-
-	public Processo() {
+	private String descriçao;
+	@OneToOne
+	@JoinColumn(name = "processo_id")
+	private Processo processo;
+	
+	public Parecer() {
+		
 	}
 
-	public Processo(Integer id, String nome, String status) {
+	public Parecer(Integer id, String descriçao, Processo processo) {
 		super();
 		this.id = id;
-		this.nome = nome;
-		this.status = status;
+		this.descriçao = descriçao;
+		this.processo = processo;
 	}
 
 	public Integer getId() {
@@ -49,20 +40,21 @@ public class Processo implements Serializable {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getDescriçao() {
+		return descriçao;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setDescriçao(String descriçao) {
+		this.descriçao = descriçao;
 	}
 
-	public String getStatus() {
-		return status;
+	
+	public Processo getProcesso() {
+		return processo;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setProcesso(Processo processo) {
+		this.processo = processo;
 	}
 
 	@Override
@@ -81,7 +73,7 @@ public class Processo implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Processo other = (Processo) obj;
+		Parecer other = (Parecer) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
