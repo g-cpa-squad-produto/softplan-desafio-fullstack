@@ -1,42 +1,34 @@
 package com.renantabaresmachado.domains;
 
 import java.io.Serializable;
-import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Usuario implements Serializable {
+public class PerfilUsuario implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	private String email;	
-	private String senha;
-	@ManyToMany(mappedBy = "usuarios")
-	private List<Processo> processos;
-	@OneToOne
-	@JoinColumn(name = "perfil_id")
-	private PerfilUsuario perfil;
+	@OneToOne(mappedBy = "perfil", cascade = CascadeType.ALL)
+	private Usuario usuario;
 	
 	
-	public Usuario() {		
+	public PerfilUsuario() {
+		
 	}
-	
-	public Usuario(Integer id, String nome, String email, String senha) {
+
+	public PerfilUsuario(Integer id, String nome) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.email = email;
-		this.senha = senha;
 	}
 
 	public Integer getId() {
@@ -55,22 +47,6 @@ public class Usuario implements Serializable {
 		this.nome = nome;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -87,7 +63,7 @@ public class Usuario implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Usuario other = (Usuario) obj;
+		PerfilUsuario other = (PerfilUsuario) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -95,6 +71,6 @@ public class Usuario implements Serializable {
 			return false;
 		return true;
 	}
-
-
+	
+	
 }
