@@ -20,7 +20,6 @@ public class Processo implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	private String status;
 	@OneToOne(mappedBy = "processo")
 	private Parecer parecer;
 	@ManyToMany
@@ -34,11 +33,10 @@ public class Processo implements Serializable {
 	public Processo() {
 	}
 
-	public Processo(Integer id, String nome, String status) {
+	public Processo(Integer id, String nome) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.status = status;
 	}
 
 	public Integer getId() {
@@ -57,13 +55,6 @@ public class Processo implements Serializable {
 		this.nome = nome;
 	}
 
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
 
 	@Override
 	public int hashCode() {

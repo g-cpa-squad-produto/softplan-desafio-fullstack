@@ -16,7 +16,7 @@ public class Parecer implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String descriçao;
+	private String descricao;
 	@OneToOne
 	@JoinColumn(name = "processo_id")
 	private Processo processo;
@@ -25,10 +25,10 @@ public class Parecer implements Serializable {
 		
 	}
 
-	public Parecer(Integer id, String descriçao, Processo processo) {
+	public Parecer(Integer id, String descricao, Processo processo) {
 		super();
 		this.id = id;
-		this.descriçao = descriçao;
+		this.descricao = descricao;
 		this.processo = processo;
 	}
 
@@ -40,12 +40,12 @@ public class Parecer implements Serializable {
 		this.id = id;
 	}
 
-	public String getDescriçao() {
-		return descriçao;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setDescriçao(String descriçao) {
-		this.descriçao = descriçao;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	

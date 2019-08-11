@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.renantabaresmachado.domains.Processo;
-import com.renantabaresmachado.domains.Usuario;
 import com.renantabaresmachado.repositories.ProcessoRepository;
 import com.renantabaresmachado.services.exeptions.ObjectNotFoundException;
 
