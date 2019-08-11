@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.5.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>br.com.ramonbarros</groupId>
+	<artifactId>GestaoProcessos</artifactId>
+	<version>1.0.0</version>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>gestao-processos-backend</module>
+	</modules>
+
+	<name>GestaoProcessos</name>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>11</java.version>
+		<maven.compiler.target>11</maven.compiler.target>
+		<maven.compiler.source>11</maven.compiler.source>
+	</properties>
+
+	<dependencies>
+
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework.boot</groupId> -->
+<!-- 			<artifactId>spring-boot-starter-actuator</artifactId> -->
+<!-- 		</dependency> -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework.boot</groupId> -->
+<!-- 			<artifactId>spring-boot-starter-security</artifactId> -->
+<!-- 		</dependency> -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Para hotdeploy -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.6</version>
+		</dependency>
+		
+		<dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+        
+        <!-- JWT Dependencies -->
+<!--         <dependency> -->
+<!--             <groupId>io.jsonwebtoken</groupId> -->
+<!--             <artifactId>jjwt-api</artifactId> -->
+<!--             <version>0.10.7</version> -->
+<!--         </dependency> -->
+
+<!--         <dependency> -->
+<!--             <groupId>io.jsonwebtoken</groupId> -->
+<!--             <artifactId>jjwt-impl</artifactId> -->
+<!--             <version>0.10.7</version> -->
+<!--             <scope>runtime</scope> -->
+<!--         </dependency> -->
+
+<!--         <dependency> -->
+<!--             <groupId>io.jsonwebtoken</groupId> -->
+<!--             <artifactId>jjwt-jackson</artifactId> -->
+<!--             <version>0.10.7</version> -->
+<!--             <scope>runtime</scope> -->
+<!--         </dependency> -->
+	</dependencies>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>11</source>
+						<target>11</target>
+					</configuration>
+				</plugin>
+	
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>purge-local-dependencies</id>
+							<phase>clean</phase>
+							<goals>
+								<goal>purge-local-repository</goal>
+							</goals>
+							<configuration>
+								<actTransitively>false</actTransitively>
+								<verbose>false</verbose>
+								<resolutionFuzziness>groupId</resolutionFuzziness>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+	
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>buildnumber-maven-plugin</artifactId>
+					<version>1.4</version>
+					<executions>
+						<execution>
+							<phase>validate</phase>
+							<goals>
+								<goal>create</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<doCheck>false</doCheck>
+						<doUpdate>false</doUpdate>
+						<revisionOnScmFailure>no.scm.config.in.pom</revisionOnScmFailure>
+						<providerImplementations>
+							<svn>javasvn</svn>
+						</providerImplementations>
+						<format>{0,date,yyyyMMddHHmmss}</format>
+						<items>
+							<item>timestamp</item>
+						</items>
+					</configuration>
+				</plugin>
+	
+			</plugins>
+		</pluginManagement>
+	</build>
+
+</project>
