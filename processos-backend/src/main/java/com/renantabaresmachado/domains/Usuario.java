@@ -1,15 +1,21 @@
 package com.renantabaresmachado.domains;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
+
+import com.renantabaresmachado.enuns.Perfil;
 
 @Entity
 public class Usuario implements Serializable {
@@ -23,9 +29,10 @@ public class Usuario implements Serializable {
 	private String senha;
 	@ManyToMany(mappedBy = "usuarios")
 	private List<Processo> processos;
-	@OneToOne
-	@JoinColumn(name = "perfil_id")
-	private PerfilUsuario perfil;
+	@ElementCollection(fetch=FetchType.EAGER)
+	@CollectionTable(name = "PERFIS")
+	private Set<Integer> perfis = new HashSet<>();
+	
 	
 	
 	public Usuario() {		
@@ -69,6 +76,21 @@ public class Usuario implements Serializable {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	
+
+	public List<Processo> getProcessos() {
+		return processos;
+	}
+
+	public void setProcessos(List<Processo> processos) {
+		this.processos = processos;
+	}
+	public Set<Perfil> getPerfis(){
+		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
+	}
+	public void addPerfil(Perfil perfil) {
+		perfis.add(perfil.getCod());
 	}
 
 	@Override
