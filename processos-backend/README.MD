@@ -9,8 +9,15 @@
 
 # Recursos utilizados:
 - JDK v.8.
-- .
-- Composer.
-- SGDB PostgressSQL 11.
-- PGAdmin 4.
-- Git bash.
+- springframework (spring-boot-starter-web).
+- springframework (spring-boot-starter-security).
+- SGBD (h2database).
+- Gerenciador de dependências (Maven).
+
+# Passos para rodar a aplicação:
+- clonar o projeto desse repositório.
+
+
+## estou a disposição para eventuais dúvidas;
+no seu aguardo.
+Renan.
