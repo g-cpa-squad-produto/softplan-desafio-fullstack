@@ -44,7 +44,9 @@ public class ProcessoService {
 	
 	private void updateData(Processo novoProcesso, Processo processo) {
 		novoProcesso.getListaParecer().addAll(processo.getListaParecer());
-		novoProcesso.setStatus(processo.getStatus());
+		if(null != processo.getStatus()) {
+			novoProcesso.setStatus(processo.getStatus());
+		}
 	}
 	
 }
