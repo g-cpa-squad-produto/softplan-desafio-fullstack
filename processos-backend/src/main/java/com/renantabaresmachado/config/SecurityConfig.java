@@ -16,6 +16,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.renantabaresmachado.security.JWTAuthenticationFilter;
+import com.renantabaresmachado.security.JWTAuthorizationFilter;
 import com.renantabaresmachado.security.JWTUtil;
 
 @Configuration
@@ -31,20 +32,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private JWTUtil jwtUtil;
 
-	private static final String[] PUBLIC_MATCHERS = { "/h2-console/**", "/usuarios/**", "/processos/**"
+	private static final String[] PUBLIC_MATCHERS = { "/h2-console/**", "/processos/**"
 
 	};
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
-		/*if(Arrays.asList(environment.getActiveProfiles()).contains("test")) {
-			http.headers().frameOptions().disable();
-		}*/
+		
 		http.headers().frameOptions().disable();
 		http.cors().and().csrf().disable();
 		http.authorizeRequests().antMatchers(PUBLIC_MATCHERS).permitAll().anyRequest().authenticated();
 		http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
+		http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	}
 	

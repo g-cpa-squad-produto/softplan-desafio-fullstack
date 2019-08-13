@@ -31,8 +31,5 @@ public class ProcessosBackendApplication implements CommandLineRunner {
 		usuarioService.inserir(usuario1);
 		usuarioService.inserir(usuario2);
 		
-		//usuarioRepository.saveAll(Arrays.asList(usuario, usuario1, usuario2));
-		
-		
 	}	
 }
