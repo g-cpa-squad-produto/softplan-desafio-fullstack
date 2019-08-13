@@ -119,6 +119,10 @@ public class Usuario implements Serializable {
 		perfis.add(perfil.getCod());
 	}
 	
+	public void clearPerfis() {
+		perfis.clear();
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

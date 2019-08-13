@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.ramonbarros.entity.Usuario;
+import br.com.ramonbarros.enuns.PerfilEnum;
 import br.com.ramonbarros.repository.UsuarioRepository;
 import br.com.ramonbarros.utils.PasswordUtils;
 
@@ -69,8 +70,13 @@ public class UsuarioService {
 	}
 	
 	private void updateData(Usuario novoUsuario, Usuario usuario) {
-		novoUsuario.setNome(usuario.getNome());
-		novoUsuario.getPerfis().addAll(usuario.getPerfis());
+		if(null != usuario.getNome() && !usuario.getNome().isEmpty()) {
+			novoUsuario.setNome(usuario.getNome());
+		}
+		novoUsuario.clearPerfis();
+		for(PerfilEnum p : usuario.getPerfis()) {
+			novoUsuario.addPerfil(p);
+		}
 	}
 
 	public Usuario buscarPorId(Long id) {
