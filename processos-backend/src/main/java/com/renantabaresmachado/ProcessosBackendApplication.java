@@ -22,7 +22,7 @@ public class ProcessosBackendApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		Usuario usuario = new Usuario(null, "usuarioADM", "adm@softplan.com.br", "12345");
-		Usuario usuario1 = new Usuario(null, "usuarioTRIADOR", "triado@softplan.com.br", "12345");
+		Usuario usuario1 = new Usuario(null, "usuarioTRIADOR", "triador@softplan.com.br", "12345");
 		Usuario usuario2 = new Usuario(null, "usuarioFINALIZADOR", "finalizador@softplan.com.br", "12345");
 		usuario.addPerfil(Perfil.ADMIN);
 		usuario1.addPerfil(Perfil.TRIADOR);

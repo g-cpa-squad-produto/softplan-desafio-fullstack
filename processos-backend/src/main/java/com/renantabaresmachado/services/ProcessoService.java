@@ -26,6 +26,10 @@ public class ProcessoService {
 		return processoRepository.findAll();
 	}
 	
+	public List<Processo> buscarFinalizador() {
+		return processoRepository.findAll();
+	}
+	
 	public Processo buscar(Integer id) {
 		Optional<Processo> processo = processoRepository.findById(id);
 		return processo.orElseThrow(() -> new ObjectNotFoundException(
