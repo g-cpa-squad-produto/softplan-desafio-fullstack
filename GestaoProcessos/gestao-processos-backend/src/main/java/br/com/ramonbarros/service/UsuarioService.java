@@ -51,9 +51,11 @@ public class UsuarioService {
 	}
 
 	public void salvar(Usuario usuario) {
-		if(usuario.getId() == null) {
-			usuario.setSenha(PasswordUtils.crypt(usuario.getSenha()));
-		}
+//		TODO - Validar se os campos senha e confirma senha são iguais.
+//		TODO - Alterar algoritmo de hash para senha. Está demorando. 
+//		if(usuario.getId() == null) {
+//			usuario.setSenha(PasswordUtils.crypt(usuario.getSenha()));
+//		}
 		usuarioRepository.save(usuario);
 		
 	}
