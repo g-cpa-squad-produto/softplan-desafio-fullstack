@@ -1,15 +1,15 @@
 {
 	"info": {
-		"_postman_id": "b09ffcf2-906f-4d77-9b1f-e7700dc39462",
+		"_postman_id": "8688b7aa-f524-4501-8d2f-dda182eeeb55",
 		"name": "gestao",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "perfil",
+			"name": "processo",
 			"item": [
 				{
-					"name": "Get Perfil By Id",
+					"name": "Listar",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -26,135 +26,25 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/sigap/api/perfil/348",
+							"raw": "http://localhost:8080/gestao-processos/api/processos",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"sigap",
+								"gestao-processos",
 								"api",
-								"perfil",
-								"348"
+								"processos"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Get Perfil by Name",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
+					"name": "Alterar",
 					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"type": "text",
-								"value": "{{userToken}}"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "http://localhost:8080/sigap/api/perfil?filter={\"nome\": \"Administrador\"}&page=1&size=5",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"sigap",
-								"api",
-								"perfil"
-							],
-							"query": [
-								{
-									"key": "filter",
-									"value": "{\"nome\": \"Administrador\"}"
-								},
-								{
-									"key": "page",
-									"value": "1"
-								},
-								{
-									"key": "size",
-									"value": "5"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get PerfisAssociados by IdUsuario",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/sigap/api/perfil/perfisAssociados/usuario/764",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"sigap",
-								"api",
-								"perfil",
-								"perfisAssociados",
-								"usuario",
-								"764"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Criar/Editar Perfil",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{userToken}}",
-								"type": "text"
-							},
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"perfil\": {\n\t\t\"idPerfil\": 390,\n    \t\"nmPerfil\": \"SIGAP_ADM_TRANSP_SOLIC_MATERIAIS 12\",\n    \t\"idsUsuariosAssociados\": [\n    \t\t454\n    \t]\n\t}\n  \n}"
-						},
-						"url": {
-							"raw": "http://localhost:8080/sigap/api/perfil",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"sigap",
-								"api",
-								"perfil"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Setar Flag Perfil",
-					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Authorization",
@@ -170,20 +60,52 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"perfilID\": 348,\n    \"perfilAlter\": \"S\"\n}"
+							"raw": "{\n    \"id\": 1,\n    \"listaParecer\": [\n            {\n                \"id\": 1,\n                \"idUsuario\": 1,\n                \"idProcesso\": 1,\n                \"parecer\": \"Processo iniciado com pendencias.\"\n            },\n            {\n                \"id\": 2,\n                \"idUsuario\": 1,\n                \"idProcesso\": 1,\n                \"parecer\": \"As pendencias ainda não foram resolvidas.\"\n            },\n            {\n                \"idUsuario\": 1,\n                \"idProcesso\": 1,\n                \"parecer\": \"Resolvido.\"\n            }\n        ],\n    \"status\": \"FINALIZADO\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/sigap/api/perfil/setarFlag",
+							"raw": "http://localhost:8080/gestao-processos/api/processos/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"sigap",
+								"gestao-processos",
 								"api",
-								"perfil",
-								"setarFlag"
+								"processos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Salvar",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"listaParecer\": [\n    \t{\n    \t\t\"idUsuario\" : 1,\n    \t\t\"idProcesso\" : 2,\n    \t\t\"parecer\" : \"Processo Pendente por falta de documento.\"\n    \t}\n    ],\n    \"status\": \"PENDENTE\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/gestao-processos/api/processos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gestao-processos",
+								"api",
+								"processos"
 							]
 						}
 					},
@@ -195,7 +117,7 @@
 			"name": "usuario",
 			"item": [
 				{
-					"name": "Get Usuario By Id",
+					"name": "ListarUsuarios",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -218,201 +140,111 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/sigap/api/usuario/491",
+							"raw": "http://localhost:8080/gestao-processos/api/usuarios",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"sigap",
+								"gestao-processos",
 								"api",
-								"usuario",
-								"491"
+								"usuarios"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Get All Usuario By Filter",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "http://localhost:8080/sigap/api/usuario?filter={\"nome\": \"Adri\", \"login\": \"\", \"cpf\": \"\", \"area\": \"\"}&page=0&size=10",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"sigap",
-								"api",
-								"usuario"
-							],
-							"query": [
-								{
-									"key": "filter",
-									"value": "{\"nome\": \"Adri\", \"login\": \"\", \"cpf\": \"\", \"area\": \"\"}"
-								},
-								{
-									"key": "page",
-									"value": "0"
-								},
-								{
-									"key": "size",
-									"value": "10"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get UnidadeAdministrativa by CPF Funcionario",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/sigap/api/unidadeAdministrativa/738.703.077-49/cpfFuncionario",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"sigap",
-								"api",
-								"unidadeAdministrativa",
-								"738.703.077-49",
-								"cpfFuncionario"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Usuario By Id (filter Not IN)",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
+					"name": "Buscar usuario por ID",
 					"request": {
 						"method": "GET",
 						"header": [
 							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{userToken}}"
 							},
 							{
-								"key": "Authorization",
-								"value": "{{userToken}}",
+								"key": "",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/gestao-processos/api/usuarios/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gestao-processos",
+								"api",
+								"usuarios",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AlterarUsuario",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "{\n\t\"id\" : 1,\n\t\"login\": \"admin\",\n\t\"senha\": \"123\",\n\t\"nome\": \"Administrador\",\n\t\"confirmarSenha\": \"123\"\n\t\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/sigap/api/usuario?filter={\"nome\": \"Adri\", \"idsUsu\": %5B 764, 1160 %5D}&page=0&size=5",
+							"raw": "http://localhost:8080/gestao-processos/api/usuarios/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"sigap",
+								"gestao-processos",
 								"api",
-								"usuario"
-							],
-							"query": [
-								{
-									"key": "filter",
-									"value": "{\"nome\": \"Adri\", \"idsUsu\": %5B 764, 1160 %5D}"
-								},
-								{
-									"key": "page",
-									"value": "0"
-								},
-								{
-									"key": "size",
-									"value": "5"
-								}
+								"usuarios",
+								"1"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Get Funcionario by CPF",
+					"name": "DeleteUsuario",
 					"request": {
-						"method": "GET",
+						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/sigap/api/funcionario/162.901.887-20",
+							"raw": "http://localhost:8080/gestao-processos/api/usuarios/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"sigap",
+								"gestao-processos",
 								"api",
-								"funcionario",
-								"162.901.887-20"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get ListaTipoFuncionario",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/sigap/api/funcionario/listaTipoFuncionario",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"sigap",
-								"api",
-								"funcionario",
-								"listaTipoFuncionario"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Arvore UnidadeAdministrativa",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/sigap/api/unidadeAdministrativa/arvoreUnidAdmin",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"sigap",
-								"api",
-								"unidadeAdministrativa",
-								"arvoreUnidAdmin"
+								"usuarios",
+								"2"
 							]
 						}
 					},
@@ -434,19 +266,19 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"usuario\":  {\n\t\t\"idUsu\": 1497,\n\t\t\"cdCpf\": \"000.111.222-59\",\n\t\t\"cdLogin\": \"loginteste31\",\n\t\t\"idFunc\": 1,\n\t\t\"senha\": \"123\",\n\t\t\"nmEmail\": \"fdsfds@fdfsd.com\",\n\t\t\"nmUsu\": \"login teste\",\n\t\t\"confirmarSenha\": \"123\",\n\t\t\"idsPerfisAssociados\": [\n\t\t\t212,213\t\n\t\t\t]\n\t\t}\n\t\n}"
+							"raw": "{\n\t\"login\": \"master\",\n\t\"senha\": \"123\",\n\t\"nome\": \"Master User\",\n\t\"confirmarSenha\": \"123\",\n\t\"perfis\": [\n            2, 3\n        ]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/sigap/api/usuario",
+							"raw": "http://localhost:8080/gestao-processos/api/usuarios",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"sigap",
+								"gestao-processos",
 								"api",
-								"usuario"
+								"usuarios"
 							]
 						}
 					},
@@ -455,37 +287,10 @@
 			]
 		},
 		{
-			"name": "itemMenu_funcionalidade",
+			"name": "parecer",
 			"item": [
 				{
-					"name": "Get All Item de Menu Pai",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{userToken}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:8080/sigap/api/itemMenu",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"sigap",
-								"api",
-								"itemMenu"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Menu By Id Root",
+					"name": "Buscar parecer por processo",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -493,19 +298,9 @@
 						"method": "GET",
 						"header": [
 							{
-								"key": "Authorization",
-								"value": "{{userToken}}",
-								"type": "text"
-							},
-							{
 								"key": "Content-Type",
 								"name": "Content-Type",
 								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "",
-								"value": "",
 								"type": "text"
 							}
 						],
@@ -514,17 +309,16 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/sigap/api/funcionalidade/modulo/1",
+							"raw": "http://localhost:8080/gestao-processos/api/parecer/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"sigap",
+								"gestao-processos",
 								"api",
-								"funcionalidade",
-								"modulo",
+								"parecer",
 								"1"
 							]
 						}
@@ -532,297 +326,38 @@
 					"response": []
 				},
 				{
-					"name": "Get Funcionalidades",
+					"name": "Salvar",
 					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{userToken}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:8080/sigap/api/funcionalidade/modulo/1/sistema/35",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"sigap",
-								"api",
-								"funcionalidade",
-								"modulo",
-								"1",
-								"sistema",
-								"35"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Funcionalidades By Id Perfil",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{userToken}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:8080/sigap/api/perfil/395/funcionalidades?=",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"sigap",
-								"api",
-								"perfil",
-								"395",
-								"funcionalidades"
-							],
-							"query": [
-								{
-									"key": "",
-									"value": ""
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Find Arvore UnidadeAdm",
-					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [
 							{
 								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
 								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "{{userToken}}"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"idUsuario\": 1,\n    \"idProcesso\": 1,\n    \"parecer\": \"Teste para inserir parecer do usuário ADMIN.\"\n}"
+						},
 						"url": {
-							"raw": "http://localhost:8080/sigap/api/unidadeAdministrativa/arvoreUnidAdmin",
+							"raw": "http://localhost:8080/gestao-processos/api/parecer",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"sigap",
+								"gestao-processos",
 								"api",
-								"unidadeAdministrativa",
-								"arvoreUnidAdmin"
+								"parecer"
 							]
 						}
 					},
 					"response": []
 				}
 			]
-		},
-		{
-			"name": "portal",
-			"item": [
-				{
-					"name": "getItemMenuPai",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "{{userToken}}"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:8080/sigapng/api/itemMenu/rafael.fonseca/root",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"sigapng",
-								"api",
-								"itemMenu",
-								"rafael.fonseca",
-								"root"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "getItemMenuFilhos",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "{{userToken}}"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:8080/sigapng/api/itemMenu/1/child",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"sigapng",
-								"api",
-								"itemMenu",
-								"1",
-								"child"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "getAbasECards",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "{{userToken}}"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:8080/sigapng/api/itemMenu/544/abasCards",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"sigapng",
-								"api",
-								"itemMenu",
-								"544",
-								"abasCards"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "unidade-administrativa",
-			"item": [
-				{
-					"name": "findAllUnidadeAdmHabilitada",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "{{userToken}}"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:8080/sigap/api/unidadeAdministrativa/auto-complete/",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"sigap",
-								"api",
-								"unidadeAdministrativa",
-								"auto-complete",
-								""
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Atenticar",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "056dc021-1759-4ad8-9946-021fd6d9a30b",
-						"exec": [
-							"postman.clearEnvironmentVariable(\"userToken\");",
-							"",
-							"pm.test(\"response is ok\", function () {",
-							"pm.response.to.be.ok;",
-							"});",
-							"",
-							"pm.test(\"Authorization is present\", function () {",
-							"pm.response.to.have.header(\"Authorization\");",
-							"});",
-							"",
-							"tests[\"Authorization is present\"] = responseHeaders.hasOwnProperty(\"Authorization\");",
-							"",
-							"",
-							"",
-							"pm.environment.set(\"userToken\", responseHeaders.Authorization);"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"username\":\"sigap\", \"password\":\"1\"}"
-				},
-				"url": {
-					"raw": "http://localhost:8080/sigap/auth",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"sigap",
-						"auth"
-					]
-				}
-			},
-			"response": []
 		}
 	]
 }

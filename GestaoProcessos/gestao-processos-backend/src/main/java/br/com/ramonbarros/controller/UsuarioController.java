@@ -1,5 +1,6 @@
 package br.com.ramonbarros.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,9 +39,14 @@ public class UsuarioController {
 
 	@PostMapping
 	public ResponseEntity<List<Usuario>> salvar(@RequestBody Usuario usuario){
-		service.salvar(usuario);
-		List<Usuario> lista = service.listar();
-		return ResponseEntity.status(HttpStatus.CREATED).body(lista);
+		try {
+			service.salvar(usuario);
+			List<Usuario> lista = service.listar();
+			return ResponseEntity.status(HttpStatus.CREATED).body(lista);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ArrayList<>());
 	}
 	
 	@PutMapping(value="/{id}")

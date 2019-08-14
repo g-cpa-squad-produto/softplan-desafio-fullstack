@@ -50,12 +50,17 @@ public class UsuarioService {
 		return usuarioRepository.findAll();
 	}
 
-	public void salvar(Usuario usuario) {
-//		TODO - Validar se os campos senha e confirma senha são iguais.
-//		TODO - Alterar algoritmo de hash para senha. Está demorando. 
-//		if(usuario.getId() == null) {
+	public void salvar(Usuario usuario) throws Exception {
+		if(usuario.getId() == null) {
+//			Criar validação de senha
+//			TODO - Alterar algoritmo de hash para senha. Está demorando. 
 //			usuario.setSenha(PasswordUtils.crypt(usuario.getSenha()));
-//		}
+			boolean senhaPreenchida = null != usuario.getSenha() && !usuario.getSenha().isBlank();
+			boolean confirmaSenhaPreenchida = null != usuario.getConfirmarSenha() && !usuario.getConfirmarSenha().isBlank();
+			if(!(senhaPreenchida && confirmaSenhaPreenchida && usuario.getSenha().equals(usuario.getConfirmarSenha()))) {
+				throw new Exception("Os Campos Senha e confirma Senha não podem ser diferentes");
+			}
+		}
 		usuarioRepository.save(usuario);
 		
 	}
