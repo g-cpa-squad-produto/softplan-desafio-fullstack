@@ -37,9 +37,10 @@ public class UsuarioController {
     }
 
 	@PostMapping
-	public ResponseEntity<Void> salvar(@RequestBody Usuario usuario){
+	public ResponseEntity<List<Usuario>> salvar(@RequestBody Usuario usuario){
 		service.salvar(usuario);
-		return ResponseEntity.status(HttpStatus.CREATED).build();
+		List<Usuario> lista = service.listar();
+		return ResponseEntity.status(HttpStatus.CREATED).body(lista);
 	}
 	
 	@PutMapping(value="/{id}")
