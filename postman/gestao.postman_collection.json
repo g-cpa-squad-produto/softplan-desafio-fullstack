@@ -209,7 +209,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"id\" : 1,\n\t\"login\": \"admin\",\n\t\"senha\": \"123\",\n\t\"nome\": \"Administrador\",\n\t\"confirmarSenha\": \"123\"\n\t\n}"
+							"raw": "{\n\t\"id\" : 1,\n\t\"login\": \"admin\",\n\t\"senha\": \"123\",\n\t\"nome\": \"Administrador\",\n\t\"confirmaSenha\": \"123\"\n\t\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8080/gestao-processos/api/usuarios/1",
@@ -266,7 +266,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"login\": \"master\",\n\t\"senha\": \"123\",\n\t\"nome\": \"Master User\",\n\t\"confirmarSenha\": \"123\",\n\t\"perfis\": [\n            2, 3\n        ]\n}"
+							"raw": "{\n\t\"login\": \"master\",\n\t\"senha\": \"123\",\n\t\"nome\": \"Master User\",\n\t\"confirmaSenha\": \"123\",\n\t\"perfis\": [\n            2, 3\n        ]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8080/gestao-processos/api/usuarios",

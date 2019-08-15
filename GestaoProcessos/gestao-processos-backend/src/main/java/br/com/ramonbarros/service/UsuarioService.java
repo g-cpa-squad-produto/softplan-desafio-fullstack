@@ -56,8 +56,8 @@ public class UsuarioService {
 //			TODO - Alterar algoritmo de hash para senha. Está demorando. 
 //			usuario.setSenha(PasswordUtils.crypt(usuario.getSenha()));
 			boolean senhaPreenchida = null != usuario.getSenha() && !usuario.getSenha().isBlank();
-			boolean confirmaSenhaPreenchida = null != usuario.getConfirmarSenha() && !usuario.getConfirmarSenha().isBlank();
-			if(!(senhaPreenchida && confirmaSenhaPreenchida && usuario.getSenha().equals(usuario.getConfirmarSenha()))) {
+			boolean confirmaSenhaPreenchida = null != usuario.getConfirmaSenha() && !usuario.getConfirmaSenha().isBlank();
+			if(!(senhaPreenchida && confirmaSenhaPreenchida && usuario.getSenha().equals(usuario.getConfirmaSenha()))) {
 				throw new Exception("Os Campos Senha e confirma Senha não podem ser diferentes");
 			}
 		}

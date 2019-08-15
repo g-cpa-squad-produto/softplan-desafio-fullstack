@@ -52,7 +52,7 @@ public class Usuario implements Serializable {
     
     @Transient
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private String confirmarSenha;
+    private String confirmaSenha;
     
     @ElementCollection(fetch=FetchType.EAGER)
 	@CollectionTable(name="PERFIS")
@@ -67,7 +67,7 @@ public class Usuario implements Serializable {
 		this.nome = nome;
 		this.login = login;
 		this.senha = senha;
-		this.confirmarSenha = confirmarSenha;
+		this.confirmaSenha = confirmarSenha;
 		this.addPerfil(perfil);
 	}
 
@@ -103,12 +103,12 @@ public class Usuario implements Serializable {
 		this.senha = senha;
 	}
 
-	public String getConfirmarSenha() {
-		return confirmarSenha;
+	public String getConfirmaSenha() {
+		return confirmaSenha;
 	}
 
-	public void setConfirmarSenha(String confirmarSenha) {
-		this.confirmarSenha = confirmarSenha;
+	public void setConfirmaSenha(String confirmarSenha) {
+		this.confirmaSenha = confirmarSenha;
 	}
 
 	public Set<PerfilEnum> getPerfis() {
