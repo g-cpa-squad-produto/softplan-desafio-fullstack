@@ -11,12 +11,24 @@
 - JDK v.8.
 - springframework (spring-boot-starter-web).
 - springframework (spring-boot-starter-security).
+- JWT (jsonwebtoken).
 - SGBD (h2database).
 - Gerenciador de dependências (Maven).
 
+# Pré-requisitos:
+- Java 8.
+- Maven 3.6.
+
+
 # Passos para rodar a aplicação:
-- clonar o projeto desse repositório.
-- tempo de expiração do token 60000ms ou 1min.
+1- clonar o projeto desse repositório.
+2- Na raiz do back-end rodar os comandos:
+2.1- 'mvn clean install'.
+2.2- 'cd target'.
+2.3- 'java -jar processos-backend-0.0.1-SNAPSHOT.jar'.
+
+
+- tempo de expiração do token 1min.
 
 
 ## estou a disposição para eventuais dúvidas;
