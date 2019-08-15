@@ -3,6 +3,8 @@ package com.renantabaresmachado.security;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -54,9 +56,19 @@ private AuthenticationManager authenticationManager;
                                             HttpServletResponse response,
                                             FilterChain filterChain,
                                             Authentication authentication) throws IOException, ServletException {
-		String username = ((UserSSecurity) authentication.getPrincipal()).getUsername();
-        String token = jwtUtil.generateToken(username);
-        response.addHeader("Authorization", "Bearer " + token);
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String, String> mapToken = new HashMap<>();
+		
+		UserSSecurity user = ((UserSSecurity) authentication.getPrincipal());
+        String token = jwtUtil.generateToken(user.getUsername());
+        
+        mapToken.put("token", token);
+        mapToken.put("authorities", user.getAuthorities().toString());
+        
+        //response.addHeader("Authorization", "Bearer " + token);
+        response.getWriter().write(mapper.writeValueAsString(mapToken));
+        response.getWriter().flush();
+        response.getWriter().close();
 	}
 	
 	private class JWTAuthenticationFailureHandler implements AuthenticationFailureHandler {
