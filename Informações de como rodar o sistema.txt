@@ -1,0 +1,30 @@
+Informações para rodar os projetos
+
+O desafio foi desenvolvido em Angular 8 no Front-end e Java Spring Boot 2.1.2 no Back-end. 
+Foi utilizado o Banco PostgreSql como base de dados do sistema. Então como pré-requisito para rodar a aplicação deve-se ter o postgresql instalado no computador.
+
+Sendo assim, é necessário configurar o arquivo “application.properties” para as informações corretas do nome do schema do banco de dados, host, usuário e senha.
+/*
+spring.datasource.url=jdbc:postgresql://localhost:5432/db_gerenc_proces
+spring.datasource.username=postgres
+spring.datasource.password=admin123@
+*/
+
+Após a configuração, podemos realizar um build do projeto e veremos, que graças ao flywaydb serão criados todas as tabelas do nosso sistema, além de inserir nosso usuário padrão do sistema, cujo login é “admin”, e a senha também é “admin”.
+
+No front-end, como pré-requisito é necessário ter o NODEJs e o NPM, instalados no computador. 
+Tendo os dois instalados, basta entrar com o prompt de comando na pasta raiz do projeto e instalar as dependências com o comando “npm install”.
+
+Após a instalação basta realizar o buind do projeto com o comando “ng serve” e acessar o link indicado no final do build (http://localhost:4200).
+
+Para controle de versão do código fonte, foi utilizado o Git em cada projeto, onde cada um foi criado um repositório diferente. Assim cada  projeto foi zipado com a pasta git, a fim de que possa ser analisado o histórico de commits de cada um separadamente.
+
+Não foi implementado testes unitários pela falta de tempo devido ao rotina de trabalho diário.
+
+Qualquer dúvidas fiquem a vontade de entrar em contato comigo.
+
+__________________________________________________________________________
+João Paulo Medina Passos
+medinapassos.com.br
+jpmpassos@hotmail.com
+(33) 98882-3270 
