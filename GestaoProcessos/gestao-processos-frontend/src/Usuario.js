@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import InputCustomizado from './componentes/InputCustomizado';
+import PubSub from 'pubsub-js';
 
 class FormularioUsuario extends Component{
 
@@ -23,9 +24,9 @@ class FormularioUsuario extends Component{
           dataType: 'json',
           method: 'post',
           data: JSON.stringify({nome: this.state.nome, login: this.state.login, senha: this.state.senha, confirmaSenha: this.state.confirmaSenha}),
-          success: function(resposta){
-            console.log('SUCESSO...');
-            this.setState({lista:resposta});
+          success: function(novaLista){
+            PubSub.publish('atualiza-lista', novaLista);
+            this.setState({nome: '', login:'', senha: '', confirmaSenha:''});
           }.bind(this),
           error: function(resposta){
             console.log('ERRO...');
@@ -118,6 +119,10 @@ export default class UsuarioBox extends Component{
             this.setState({lista:resposta});
           }.bind(this)
         });
+
+        PubSub.subscribe('atualiza-lista', function(topico, novaLista){
+            this.setState({lista: novaLista});
+        }.bind(this));
     }
     render(){
         return(
