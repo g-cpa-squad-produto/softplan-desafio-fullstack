@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import InputCustomizado from './componentes/InputCustomizado';
 import PubSub from 'pubsub-js';
+import TratadorErros from './TratadorErros'
 
 class FormularioUsuario extends Component{
 
@@ -29,7 +30,12 @@ class FormularioUsuario extends Component{
             this.setState({nome: '', login:'', senha: '', confirmaSenha:''});
           }.bind(this),
           error: function(resposta){
-            console.log('ERRO...');
+            if(resposta.status === 400){
+                new TratadorErros().publicaErros(resposta.responseJSON);
+            }
+          },
+          beforeSend: function(){
+              PubSub.publish("limpa-erros", {});
           }
         });
     }

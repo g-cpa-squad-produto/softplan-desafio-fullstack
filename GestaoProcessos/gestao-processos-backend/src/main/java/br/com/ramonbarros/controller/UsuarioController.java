@@ -3,6 +3,8 @@ package br.com.ramonbarros.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +40,7 @@ public class UsuarioController {
     }
 
 	@PostMapping
-	public ResponseEntity<List<Usuario>> salvar(@RequestBody Usuario usuario){
+	public ResponseEntity<List<Usuario>> salvar(@Valid @RequestBody Usuario usuario){
 		try {
 			service.salvar(usuario);
 			List<Usuario> lista = service.listar();
