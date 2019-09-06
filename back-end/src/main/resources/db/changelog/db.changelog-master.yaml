@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: schema
+      author: hebert-ramos
+      changes:
+      - sqlFile:
+          encoding: utf8
+          path: scripts/schema.sql
+          relativeToChangelogFile: true
+          splitStatements: true
+          stripComments: true
+  - changeSet:
+        id: papel-usuario-permissoes
+        author: hebert-ramos
+        changes:
+            - sqlFile:
+                  encoding: utf8
+                  path: scripts/papel-usuario-permissoes.sql
+                  relativeToChangelogFile: true
+                  splitStatements: true
+                  stripComments: true
+  - changeSet:
+      id: carga-inicial
+      author: hebert-ramos
+      changes:
+        - sqlFile:
+            encoding: utf8
+            path: scripts/carga-inicial.sql
+            relativeToChangelogFile: true
+            splitStatements: true
+            stripComments: true
