@@ -1,4 +1,4 @@
-package br.com.softplan.security;
+package br.com.softplan.security.repository;
 
 import br.com.softplan.security.entity.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
