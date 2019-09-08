@@ -8,7 +8,9 @@ import br.com.softplan.processo.exception.ProcessoNaoExistenteException;
 import br.com.softplan.processo.exception.UsuarioJaPossuiParecerProcessoException;
 import br.com.softplan.processo.repository.ParecerProcessoRepository;
 import br.com.softplan.processo.repository.ProcessoRepository;
+import br.com.softplan.security.business.Loggeduser;
 import br.com.softplan.security.dto.UsuarioDTO;
+import br.com.softplan.security.dto.UsuarioLogadoDTO;
 import br.com.softplan.security.entity.Papel;
 import br.com.softplan.security.entity.Usuario;
 import br.com.softplan.security.exception.UsuarioNaoExistenteException;
@@ -30,6 +32,9 @@ public class ParecerProcessoService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private Loggeduser loggeduser;
 
     public List<ParecerProcessoDTO> buscarTodos(Long processoId){
         return repository.buscar(processoId);
@@ -55,6 +60,8 @@ public class ParecerProcessoService {
     public ParecerProcessoDTO buscarAtual(Long processoId) {
 
         Processo processo = buscarProcesso(processoId);
+
+        UsuarioLogadoDTO usuarioLogado = loggeduser.getUsuarioLogado();
 
         Usuario usuario = new Usuario();
         usuario.setNome("ddf");

@@ -57,10 +57,6 @@ public class UsuarioService {
         return usuarioRepository.buscar(id);
     }
 
-    public Usuario buscar(String email){
-        return usuarioRepository.buscar(email);
-    }
-
     private void setDadosIniciaiNovoUsuario(Usuario usuario){
         usuario.setId(null);
         usuario.setSituacao(SituacaoUsuarioEnum.ATIVO);
