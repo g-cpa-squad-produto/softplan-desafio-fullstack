@@ -25,7 +25,7 @@
     import NavBar from "../layout/NavBar";
 
     export default {
-        name: "UsuarioList",
+        name: "ProcessoList",
         components: {NavBar},
         data() {
             return {
@@ -35,10 +35,12 @@
                         label: 'Código'
                     },
                     {
-                        key: 'nome'
+                        key: 'numero',
+                        label: 'Número'
                     },
                     {
-                        key: 'email'
+                        key: 'descricao',
+                        label: 'Descrição'
                     },
                     {
                         key: 'papel.descricao',

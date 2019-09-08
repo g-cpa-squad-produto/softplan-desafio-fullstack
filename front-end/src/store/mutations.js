@@ -7,7 +7,7 @@ const mutations = {
   [types.LOGIN_SUCCESS] (state, data) {
     const token = data.token
     const username = data.username
-    console.log('data: ', data)
+    // console.log('data: ', data)
     state.auth.isLoggedIn = true
     state.auth.pending = false
     state.auth.token = token
@@ -27,10 +27,20 @@ const mutations = {
     localStorage.removeItem('JWT')
     localStorage.removeItem('username')
     state.auth.isLoggedIn = false
+  },
+
+  [types.BUSCAR_PAPEIS] (state, papeis) {
+    state.papeis = papeis
   }
   ,
   [types.BUSCAR_USUARIOS] (state, usuarios) {
     state.usuarios = usuarios
+  },
+  [types.SALVAR_USUARIO] (state, usuario) {
+    state.usuario = usuario
+  },
+  [types.BUSCAR_USUARIO] (state, usuario) {
+    state.usuario = usuario
   }
 }
 

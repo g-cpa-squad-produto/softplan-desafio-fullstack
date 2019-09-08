@@ -23,6 +23,10 @@ public class TokenAuthenticationService {
     static final String TOKEN_PREFIX = "Softplan";
     static final String AUTHORIZATION_FIELD = "Authorization";
 
+    private TokenAuthenticationService(){
+
+    }
+
     public static void addAuthentication(HttpServletResponse response, String username) throws IOException {
         String jwtToken = buildJwtToken(username);
         addTokenToHeader(response, username);

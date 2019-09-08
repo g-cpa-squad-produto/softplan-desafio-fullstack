@@ -21,7 +21,7 @@
 
     export default {
         name: 'login',
-        data () {
+        data() {
             return {
                 username: '',
                 password: '',
@@ -31,49 +31,16 @@
         },
         methods: {
             ...mapActions([types.LOGIN]),
-            autenticar () {
-                const self = this
+            autenticar() {
 
                 this.LOGIN({
                     email: this.username,
                     senha: this.password
-                }).then((status) => {
-
-                    console.log(status)
-
-
-                // this.$store.dispatch(types.LOGIN, {
-                //     email: this.username,
-                //     senha: this.password
-                // }).then((response) => {
-                //
-                //     console.log(response);
-                //
-                //     if (response.status === 200) {
-                //
-                //             this.$store.commit(types.LOGIN_SUCCESS, {
-                //                 token: response.data.token,
-                //                 username: self.username
-                //             })
-                //             this.$router.push('/home')
-                //
-                //     } else if (response.status >= 401) {
-                //         this.log = 401
-                //
-                //         this.error = response.data
-                //
-                //         this.$store.commit(types.LOGIN_WRONG_CREDENTIALS)
-                //         this.$router.push('/')
-                //     } else {
-                //         this.log = 'else: ' + response.status
-                //         response.json().then(json => {
-                //             this.error = json
-                //         })
-                //         this.$router.push('/')
-                //         this.$store.commit(types.LOGIN_ERROR)
-                //     }
-                }).catch(json => {
+                }).then(() => {
+                    this.$router.push('/home')
+                }).catch(() => {
                     this.error = 'Unable to connect server.'
+
                 })
             }
         }
@@ -89,15 +56,19 @@
         box-sizing: border-box;
     }
 
-    body, html { height:100%; width:100% }
+    body, html {
+        height: 100%;
+        width: 100%
+    }
 
     body {
         background: #F5F5F5;
         font-family: sans-serif;
     }
+
     .screen {
         position: relative;
-        background: $black;
+        background: $ black;
         margin: 0 auto;
         width: 100%;
         min-width: 295px;
@@ -105,6 +76,7 @@
         max-height: 515px;
         min-height: 480px;
     }
+
     .logo {
         display: block;
         position: relative;
@@ -148,8 +120,8 @@
 
     input[type='submit'] {
         margin-top: 0.7em;
-        background: $blue;
-        background: linear-gradient(lighten($blue, 2.5%), darken($blue, 2.5%));
+        background: $ blue;
+        background: linear-gradient(lighten($ blue, 2.5%), darken($ blue, 2.5%));
         border-radius: 3px;
         border: 0;
         height: 2em;
@@ -159,15 +131,17 @@
         font-weight: 700;
         padding: 0 0.5em;
 
-    &:hover {
-         background: linear-gradient(lighten($blue, 7.5%), lighten($blue, 2.5%));
-     }
+    &
+    :hover {
+        background: linear-gradient(lighten($ blue, 7.5%), lighten($ blue, 2.5%));
+    }
+
     }
 
     input[type='submit'] {
         margin-top: 0.7em;
-        background: $blue;
-        background: linear-gradient(lighten($blue, 2.5%), darken($blue, 2.5%));
+        background: $ blue;
+        background: linear-gradient(lighten($ blue, 2.5%), darken($ blue, 2.5%));
         border-radius: 3px;
         border: 0;
         height: 2em;
@@ -179,19 +153,24 @@
         padding: 0 0.5em;
         width: 100%;
 
-    &:hover {
-         background: linear-gradient(lighten($blue, 7.5%), lighten($blue, 2.5%));
-     }
+    &
+    :hover {
+        background: linear-gradient(lighten($ blue, 7.5%), lighten($ blue, 2.5%));
+    }
+
     }
 
     .ribbon {
         position: absolute;
-        right: -5px; top: -5px;
+        right: -5px;
+        top: -5px;
         z-index: 1;
         overflow: hidden;
-        width: 75px; height: 75px;
+        width: 75px;
+        height: 75px;
         text-align: right;
     }
+
     .ribbon span {
         font-size: 10px;
         font-weight: bold;
@@ -207,20 +186,27 @@
         background: linear-gradient(#C9C9C9 0%, #6B6B6B 100%);
         box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
         position: absolute;
-        top: 19px; right: -21px;
+        top: 19px;
+        right: -21px;
     }
+
     .ribbon span::before {
         content: "";
-        position: absolute; left: 0px; top: 100%;
+        position: absolute;
+        left: 0px;
+        top: 100%;
         z-index: -1;
         border-left: 3px solid #6B6B6B;
         border-right: 3px solid transparent;
         border-bottom: 3px solid transparent;
         border-top: 3px solid #6B6B6B;
     }
+
     .ribbon span::after {
         content: "";
-        position: absolute; right: 0px; top: 100%;
+        position: absolute;
+        right: 0px;
+        top: 100%;
         z-index: -1;
         border-left: 3px solid transparent;
         border-right: 3px solid #6B6B6B;

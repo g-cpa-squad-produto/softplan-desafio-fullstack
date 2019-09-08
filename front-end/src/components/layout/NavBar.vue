@@ -12,8 +12,9 @@
 
                 <!-- Right aligned nav items -->
                 <b-nav is-nav-bar class="ml-auto">
-                    <b-nav is-nav-bar>
+                    <b-nav is-nav-bar class="nav-bar-soft">
                         <slot/>
+                        <b-nav-item @click="LOGOUT()">Sair</b-nav-item>
                     </b-nav>
                 </b-nav>
 
@@ -23,13 +24,22 @@
 </template>
 
 <script>
+    import {mapActions} from 'vuex'
+    import * as types from '../../store/mutation-types'
+
     export default {
-        name: "NavBar"
+        name: "NavBar",
+        methods: {
+            ...mapActions([types.LOGOUT])
+        }
     }
 </script>
 
 <style scoped>
     img {
         height: 50px;
+    }
+    .nav-bar-soft li a {
+        color: #FFFFFF;
     }
 </style>

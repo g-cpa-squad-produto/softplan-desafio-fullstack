@@ -6,12 +6,14 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 import store from '../store'
 import * as types from '../store/mutation-types'
+import NavBar from '../components/layout/NavBar'
 import HelloWorld from '../components/HelloWorld'
 import Login from '../components/login/Login'
 import UsuarioList from '../components/usuario/UsuarioList'
-import NavBar from '../components/layout/NavBar'
+import UsuarioForm from '../components/usuario/UsuarioForm'
 
 const hasToken = (to, from, next) => {
+
     const token = localStorage.getItem('JWT')
     const username = localStorage.getItem('username')
     if (token) {
@@ -24,11 +26,10 @@ const hasToken = (to, from, next) => {
 
 const requireAuth = (to, from, next) => {
 
-
-    if (store.getters.isLoggedIn) {
+    if (localStorage.getItem('JWT')) {
         next()
     } else {
-        router.push('/')
+        router.push('/login')
     }
 }
 
@@ -39,23 +40,45 @@ Vue.component('NavBar', NavBar)
 const router = new Router({
     routes: [
         {
-            path: '/',
-            alias: '/login',
+            path: '/login',
             name: 'Login',
             component: Login,
             beforeEnter: hasToken
         },
         {
-            path: '/home',
+            path: '/',
+            alias: '/home',
             name: 'Home',
             component: HelloWorld,
             beforeEnter: requireAuth
         },
         {
             path: '/usuarios',
-            name: 'UsuarioListage',
+            name: 'UsuarioListagem',
             component: UsuarioList,
-            // beforeEnter: requireAuth
+            beforeEnter: requireAuth
+        },
+        {
+            path: '/usuarios/add',
+            name: 'UsuarioAdd',
+            component: UsuarioForm,
+            meta: {
+                page: {
+                    title: 'Novo Usuário',
+                }
+            },
+            beforeEnter: requireAuth
+        },
+        {
+            path: '/usuarios/edit/:id',
+            name: 'UsuarioEdit',
+            component: UsuarioForm,
+            meta: {
+                page: {
+                    title: 'Editar Usuário',
+                }
+            },
+            beforeEnter: requireAuth
         }
     ]
 })

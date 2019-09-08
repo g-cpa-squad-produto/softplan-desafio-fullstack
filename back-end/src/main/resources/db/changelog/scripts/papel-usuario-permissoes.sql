@@ -60,6 +60,7 @@ create table softplan.tb_usuario(
  us_email character varying(64) not null,
  us_nome character varying(64) not null,
  us_senha character varying(64) not null,
+ us_situacao character varying(64) not null,
  pp_id integer not null,
  constraint pk_us_id PRIMARY KEY (us_id)
 );

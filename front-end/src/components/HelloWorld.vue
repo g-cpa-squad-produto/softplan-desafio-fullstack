@@ -4,6 +4,7 @@
     <p>
       Sofplan Desafio
       <a href="#/usuarios" >Usuarios</a>.
+      <a href="#/processos" >Processo</a>.
     </p>
   </div>
 </template>

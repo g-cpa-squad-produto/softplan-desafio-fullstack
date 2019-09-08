@@ -1,11 +1,14 @@
 package br.com.softplan.security.entity;
 
+import br.com.softplan.security.entity.enumeration.SituacaoUsuarioEnum;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,8 +17,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-import java.util.List;
 
 @Getter
 @Setter
@@ -39,11 +40,12 @@ public class Usuario {
     @Column(name = "us_nome")
     private String nome;
 
+    @Column(name = "us_situacao")
+    @Enumerated(EnumType.STRING)
+    private SituacaoUsuarioEnum situacao;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pp_id")
     private Papel papel;
-
-    @Transient
-    private List<String> permissoes;
 
 }

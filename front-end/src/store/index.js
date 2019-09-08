@@ -12,7 +12,10 @@ const state = {
     pending: false,
     token: null,
     username: null
-  }
+  },
+  papeis:[],
+  usuarios:[],
+  usuario:{papel:{}}
 }
 
 const options = {

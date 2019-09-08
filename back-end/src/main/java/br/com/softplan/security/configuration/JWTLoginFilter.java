@@ -2,7 +2,9 @@ package br.com.softplan.security.configuration;
 
 import br.com.softplan.security.entity.Usuario;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.IOUtils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -14,6 +16,8 @@ import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 
 @Slf4j
@@ -51,6 +55,9 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
     }
 
     private static Usuario getUsuario(HttpServletRequest request) throws IOException {
-        return new ObjectMapper().readValue(request.getInputStream(), Usuario.class);
+        String json = IOUtils.toString(request.getInputStream(), StandardCharsets.UTF_8);
+        Gson gson = new Gson();
+        return gson.fromJson(json, Usuario.class);
+//        return new ObjectMapper().readValue(request.getInputStream(), Usuario.class);
     }
 }
