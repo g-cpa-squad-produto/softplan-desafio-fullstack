@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd /opt/app/target
+java -jar softplan-desafio-fullstack-backend.jar

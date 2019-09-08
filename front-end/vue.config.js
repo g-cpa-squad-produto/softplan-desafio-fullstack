@@ -2,9 +2,10 @@ module.exports = {
     devServer: {
         host: '0.0.0.0',
         port: 3001,
+        disableHostCheck: true,
         proxy: {
             "/api/*": {
-                target: "http://localhost:8080",
+                target: process.env.SOFTPLAN_BACKEND_URL,
                 secure: false
             }
         }

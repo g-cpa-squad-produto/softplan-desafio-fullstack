@@ -1,6 +1,6 @@
 version: '3'
 services:
-  postgres:
+  database:
     image: postgres:9-alpine
     container_name: postgres-softplan
     restart: unless-stopped
@@ -8,10 +8,10 @@ services:
       - 5432:5432
     volumes:
       - pgdata:/var/lib/postgresql/data
-    networks:
-      - softplan
 volumes:
   pgdata:
 
 networks:
-  softplan:
+  default:
+    external:
+      name: siganet
