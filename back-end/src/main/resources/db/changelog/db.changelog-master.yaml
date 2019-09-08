@@ -20,6 +20,16 @@ databaseChangeLog:
                   splitStatements: true
                   stripComments: true
   - changeSet:
+      id: processo-andamento
+      author: hebert-ramos
+      changes:
+        - sqlFile:
+            encoding: utf8
+            path: scripts/processo-andamento.sql
+            relativeToChangelogFile: true
+            splitStatements: true
+            stripComments: true
+  - changeSet:
       id: carga-inicial
       author: hebert-ramos
       changes:

@@ -3,7 +3,7 @@
         <b-container fluid>
 
             <NavBar>
-                <b-nav-item href="#/usuarios">Voltar</b-nav-item>
+                <b-nav-item href="#/processos">Voltar</b-nav-item>
             </NavBar>
 
             <b-alert variant="success" show v-if="showSucess" >Salvo com sucesso.</b-alert>
@@ -11,16 +11,12 @@
 
             <b-form @submit="onSubmit" @reset="onReset" >
 
-                <b-form-group id="input-group-nome" label="Nome:" label-for="input-nome">
-                    <b-form-input id="input-nome" v-model="usuario.nome" required placeholder="Nome"></b-form-input>
+                <b-form-group id="input-group-numero" label="Número:" label-for="input-numero">
+                    <b-form-input id="input-numero" v-model="processo.numero" required placeholder="Número"></b-form-input>
                 </b-form-group>
 
-                <b-form-group id="input-group-email" label="E-mail:" label-for="input-email" >
-                    <b-form-input id="input-email" v-model="usuario.email" type="email" required placeholder="Endereço de Email"></b-form-input>
-                </b-form-group>
-
-                <b-form-group id="input-group-papel" label="Papel:" label-for="input-papel">
-                    <b-form-select id="input-papel" v-model="usuario.papel.id" :options="papeis" required text-field="descricao" value-field="id"></b-form-select>
+                <b-form-group id="input-group-descricao" label="Descrição:" label-for="input-descricao" >
+                    <b-form-input id="input-descricao" v-model="processo.descricao" type="descricao" required placeholder="Descrição"></b-form-input>
                 </b-form-group>
 
                 <b-button type="submit" variant="primary">Salvar</b-button>
@@ -37,7 +33,7 @@
     import NavBar from "../layout/NavBar";
 
     export default {
-        name: "UsuarioForm",
+        name: "ProcessoForm",
         components: {NavBar},
         data() {
             return {
@@ -47,20 +43,13 @@
             }
         },
         computed: {
-            ...mapState(['papeis', 'usuario'])
+            ...mapState(['processo'])
         },
         created: async function()  {
-            if(this.$route.params.id) {
-                await this.BUSCAR_USUARIO(this.$route.params.id)
-            }else{
-                this.ATRIBUIR_USUARIO_INICIAL()
-            }
-        },
-        mounted: async function () {
-            await this.BUSCAR_PAPEIS()
+            this.ATRIBUIR_PROCESSO_INICIAL()
         },
         methods: {
-            ...mapActions([types.BUSCAR_PAPEIS, types.SALVAR_USUARIO, types.BUSCAR_USUARIO, types.ATRIBUIR_USUARIO_INICIAL]),
+            ...mapActions([types.SALVAR_PROCESSO, types.ATRIBUIR_PROCESSO_INICIAL]),
             onSubmit(evt) {
                 evt.preventDefault()
 
@@ -68,14 +57,10 @@
                 this.showSucess = false;
                 this.msgError = '';
 
-                let isNovoUsuario = !this.usuario.id;
-
-                this.SALVAR_USUARIO(this.usuario)
+                this.SALVAR_PROCESSO(this.processo)
                     .then(()=>{
                         this.showSucess = true
-                        if(isNovoUsuario){
-                            this.$router.push('/usuarios/edit/' + this.usuario.id)
-                        }
+                        this.$router.push('/processos')
                     })
                     .catch((err) => {
 

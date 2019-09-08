@@ -2,19 +2,38 @@
     <div class="container">
         <b-container fluid>
             <NavBar>
-                <b-nav-item href="#/usuarios/add">Novo Usuário</b-nav-item>
+                <b-nav-item href="#/processos/add">Novo Processo</b-nav-item>
             </NavBar>
 
-            <b-table class="container" striped hover :items="usuarios" :fields="columns" responsive >
+            <b-table class="container" striped hover :items="processos" :fields="columnsProcesso" responsive >
 
                 <template v-slot:cell(actions)="row">
-                    <a :href="'#/usuarios/edit/' + row.item.id" class="btn btn-info btn-sm" style="margin-right: 4px" >Editar</a>
-                    <a href="#link" class="btn btn-danger btn-sm" >Excluir</a>
+                    <b-button @click="visualizarPareceres(row.item)" >Ver Pareceres</b-button>
+<!--                    <b-button >Incluir Parecer</b-button>-->
                 </template>
 
             </b-table>
 
         </b-container>
+
+        <!-- Modal Parecer -->
+        <b-modal ref="parecerModal" hide-footer title="Pareceres">
+
+            <div v-if="showPareceres">
+                <b-button  @click="iniciarAdicionarUsuario()" >Novo Usuário</b-button>
+
+                <br/>
+
+                <b-table class="container" striped hover :items="pareceres" :fields="columnsParecer" responsive te>
+                </b-table>
+            </div>
+
+            <div v-if="showAdicionarUsuario">
+                Adicionar Usuário
+            </div>
+
+        </b-modal>
+
     </div>
 </template>
 
@@ -29,11 +48,8 @@
         components: {NavBar},
         data() {
             return {
-                columns: [
-                    {
-                        key: 'id',
-                        label: 'Código'
-                    },
+                processoParecer:{},
+                columnsProcesso: [
                     {
                         key: 'numero',
                         label: 'Número'
@@ -43,25 +59,45 @@
                         label: 'Descrição'
                     },
                     {
-                        key: 'papel.descricao',
-                        label: 'Papel'
-
-                    },
-                    {
                         key: 'actions',
                         label: 'Ações'
                     }
-                ]
+                ],
+                columnsParecer:[
+                    {
+                        key: 'usuario.nome',
+                        label: 'Usuário'
+                    },
+                    {
+                        key: 'parecer'
+                    }
+                ],
+                showPareceres:false,
+                showAdicionarUsuario:false,
             }
         },
         computed: {
-            ...mapState(['usuarios'])
+            ...mapState(['processos', 'pareceres'])
         },
         mounted: async function () {
-            await this.BUSCAR_USUARIOS()
+            await this.BUSCAR_PROCESSOS()
         },
         methods: {
-            ...mapActions([types.BUSCAR_USUARIOS])
+            ...mapActions([types.BUSCAR_PROCESSOS, types.BUSCAR_PARECERES_PROCESSO, types.BUS]),
+            visualizarPareceres(processo) {
+
+                this.showPareceres = true
+                this.showAdicionarUsuario = false
+
+                this.$refs.parecerModal.show();
+                this.processoParecer = processo;
+                this.BUSCAR_PARECERES_PROCESSO(processo.id)
+            },
+            iniciarAdicionarUsuario(){
+
+                this.showPareceres = false
+                this.showAdicionarUsuario = true
+            }
         }
     }
 
@@ -74,10 +110,6 @@
 
     th {
         text-align: center;
-    }
-
-    .nav-link {
-        color: #FFFFFF;
     }
 
 </style>

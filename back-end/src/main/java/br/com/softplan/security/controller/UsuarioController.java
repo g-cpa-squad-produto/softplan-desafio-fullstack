@@ -33,7 +33,7 @@ public class UsuarioController {
 
     @PostMapping
     public Usuario criar(@RequestBody Usuario usuario){
-        return service.salvar(usuario);
+        return service.criar(usuario);
     }
 
     @PutMapping("/{id}")

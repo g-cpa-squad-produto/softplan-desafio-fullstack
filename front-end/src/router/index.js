@@ -12,6 +12,9 @@ import Login from '../components/login/Login'
 import UsuarioList from '../components/usuario/UsuarioList'
 import UsuarioForm from '../components/usuario/UsuarioForm'
 
+import ProcessoList from '../components/processos/ProcessoList'
+import ProcessoForm from '../components/processos/ProcessoForm'
+
 const hasToken = (to, from, next) => {
 
     const token = localStorage.getItem('JWT')
@@ -76,6 +79,28 @@ const router = new Router({
             meta: {
                 page: {
                     title: 'Editar Usuário',
+                }
+            },
+            beforeEnter: requireAuth
+        },
+        {
+            path: '/processos',
+            name: 'ProcessoList',
+            component: ProcessoList,
+            meta: {
+                page: {
+                    title: 'Processos',
+                }
+            },
+            beforeEnter: requireAuth
+        },
+        {
+            path: '/processos/add',
+            name: 'ProcessoAdd',
+            component: ProcessoForm,
+            meta: {
+                page: {
+                    title: 'Novo Processo',
                 }
             },
             beforeEnter: requireAuth

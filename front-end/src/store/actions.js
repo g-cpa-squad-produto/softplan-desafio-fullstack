@@ -74,6 +74,25 @@ const salvarUsuario = async ({commit}, usuario) => {
     }
 }
 
+const buscarProcessos = async ({commit}) => {
+    const {data} = await sendGetRequest('/api/processos')
+    commit(types.BUSCAR_PROCESSOS, data)
+}
+
+const salvarProcesso = async ({commit}, processo) => {
+    const {data} = await sendPostRequest('/api/processos', processo)
+    commit(types.SALVAR_PROCESSO, data)
+}
+
+const atribuirProcessoInicial = async ({commit}) => {
+      commit(types.SALVAR_PROCESSO, {})
+}
+
+const buscarPareceresProcesso = async ({commit}, processoId) => {
+    const {data} = await sendGetRequest('/api/processos/' + processoId +'/pareceres')
+    commit(types.BUSCAR_PARECERES_PROCESSO, data)
+}
+
 export default {
     [types.LOGIN]: login,
     [types.LOGOUT]: logout,
@@ -81,6 +100,10 @@ export default {
     [types.BUSCAR_USUARIOS]: buscarUsuarios,
     [types.SALVAR_USUARIO]: salvarUsuario,
     [types.BUSCAR_USUARIO]: buscarUsuario,
-    [types.ATRIBUIR_USUARIO_INICIAL]: atribuirUsuarioInicial
+    [types.ATRIBUIR_USUARIO_INICIAL]: atribuirUsuarioInicial,
+    [types.BUSCAR_PROCESSOS]: buscarProcessos,
+    [types.ATRIBUIR_PROCESSO_INICIAL]: atribuirProcessoInicial,
+    [types.SALVAR_PROCESSO]: salvarProcesso,
+    [types.BUSCAR_PARECERES_PROCESSO]: buscarPareceresProcesso
 }
 

@@ -41,7 +41,18 @@ const mutations = {
   },
   [types.BUSCAR_USUARIO] (state, usuario) {
     state.usuario = usuario
-  }
+  },
+  [types.BUSCAR_PROCESSOS] (state, processos) {
+    state.processos = processos
+  },
+  [types.SALVAR_PROCESSO] (state, processo) {
+    state.processo = processo
+  },
+  [types.BUSCAR_PARECERES_PROCESSO] (state, pareceres) {
+    state.pareceres = pareceres
+  },
+
 }
 
 export default mutations
+

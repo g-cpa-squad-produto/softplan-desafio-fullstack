@@ -27,7 +27,7 @@ public class UsuarioService {
         return usuarioRepository.buscarUsuariosAtivosComPapel();
     }
 
-    public Usuario salvar(Usuario usuario){
+    public Usuario criar(Usuario usuario){
 
         validarUsuarioJaExistente(usuario);
         setDadosIniciaiNovoUsuario(usuario);
@@ -66,10 +66,8 @@ public class UsuarioService {
     private void validarUsuarioJaExistente(Usuario usuario) {
 
          Usuario usuarioExistente = usuarioRepository.buscar(usuario.getEmail());
-        if(Objects.nonNull(usuarioExistente)){
-            if(Objects.isNull(usuario.getId()) || !usuario.getId().equals(usuarioExistente.getId())){
+        if(Objects.nonNull(usuarioExistente) && (Objects.nonNull(usuario.getId()) || !usuario.getId().equals(usuarioExistente.getId()))){
                 throw new UsuarioJaExistenteException();
-            }
         }
     }
 }
