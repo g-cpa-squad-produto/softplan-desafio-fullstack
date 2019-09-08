@@ -18,7 +18,8 @@ const state = {
   usuario:{papel:{}},
   processos:[],
   processo:{},
-  pareceres:[]
+  pareceres:[],
+  parecer:{processo:{}}
 }
 
 const options = {

@@ -53,9 +53,9 @@
             onSubmit(evt) {
                 evt.preventDefault()
 
-                this.showError = false;
-                this.showSucess = false;
-                this.msgError = '';
+                this.showError = false
+                this.showSucess = false
+                this.msgError = ''
 
                 this.SALVAR_PROCESSO(this.processo)
                     .then(()=>{

@@ -1,7 +1,9 @@
 package br.com.softplan.security.controller;
 
 import br.com.softplan.security.business.UsuarioService;
+import br.com.softplan.security.dto.UsuarioDTO;
 import br.com.softplan.security.entity.Usuario;
+import br.com.softplan.security.filter.UsuarioFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,8 +24,8 @@ public class UsuarioController {
     private UsuarioService service;
 
     @GetMapping
-    public List<Usuario> buscar(){
-        return service.buscarTodos();
+    public List<UsuarioDTO> buscar(UsuarioFilter filter){
+        return service.buscarTodos(filter);
     }
 
     @GetMapping("/{id}")

@@ -1,9 +1,12 @@
 package br.com.softplan.security.business;
 
+import br.com.softplan.security.dto.UsuarioDTO;
 import br.com.softplan.security.entity.Usuario;
 import br.com.softplan.security.entity.enumeration.SituacaoUsuarioEnum;
 import br.com.softplan.security.exception.UsuarioJaExistenteException;
+import br.com.softplan.security.filter.UsuarioFilter;
 import br.com.softplan.security.repository.UsuarioRepository;
+import org.apache.commons.collections4.IteratorUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -23,8 +26,9 @@ public class UsuarioService {
     @Value("sofplan-backend.senhaPadrao")
     String senhaPadrao;
 
-    public List<Usuario> buscarTodos(){
-        return usuarioRepository.buscarUsuariosAtivosComPapel();
+    public List<UsuarioDTO> buscarTodos(UsuarioFilter filter){
+        List<Usuario> usuarios = IteratorUtils.toList(usuarioRepository.findAll(filter.getMainBooleanExpression()).iterator());
+        return UsuarioDTO.getListDto(usuarios);
     }
 
     public Usuario criar(Usuario usuario){

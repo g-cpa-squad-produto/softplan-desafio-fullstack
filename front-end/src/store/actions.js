@@ -10,8 +10,10 @@ const getJwtHeaders = () => {
     }
 }
 
-const sendGetRequest = async (url) => {
-    return axios.get(url, getJwtHeaders());
+const sendGetRequest = async (url, params) => {
+    let options = getJwtHeaders();
+    options.params = params;
+    return axios.get(url, options);
 }
 
 const sendPostRequest = async (url, data) => {
@@ -47,8 +49,8 @@ const buscarPapeis = async ({commit}) => {
     commit(types.BUSCAR_PAPEIS, data)
 }
 
-const buscarUsuarios = async ({commit}) => {
-    const {data} = await sendGetRequest('/api/usuarios')
+const buscarUsuarios = async ({commit}, params) => {
+    const {data} = await sendGetRequest('/api/usuarios', params)
     commit(types.BUSCAR_USUARIOS, data)
 }
 
@@ -93,6 +95,21 @@ const buscarPareceresProcesso = async ({commit}, processoId) => {
     commit(types.BUSCAR_PARECERES_PROCESSO, data)
 }
 
+const adicionarUsuarioParecer = async ({commit}, dataSend) => {
+    const {data} = await sendPostRequest('/api/processos/' + dataSend.processo.id +'/pareceres/adicionarUsuario', dataSend.usuario)
+    return data;
+}
+
+const buscarParecerProcesso = async ({commit}, processoId) => {
+    const {data} = await sendGetRequest('/api/processos/' + processoId +'/pareceres/atual')
+    commit(types.BUSCAR_PARECER_PROCESSO, data)
+}
+
+const salvarParecerProcesso = async ({commit}, parecer) => {
+    const {data} = await sendPostRequest('/api/processos/' + parecer.processo.id +'/pareceres/' + parecer.id + '/incluirParecer', parecer)
+    commit(types.SALVAR_PARECERE_PROCESSO, data)
+}
+
 export default {
     [types.LOGIN]: login,
     [types.LOGOUT]: logout,
@@ -104,6 +121,9 @@ export default {
     [types.BUSCAR_PROCESSOS]: buscarProcessos,
     [types.ATRIBUIR_PROCESSO_INICIAL]: atribuirProcessoInicial,
     [types.SALVAR_PROCESSO]: salvarProcesso,
-    [types.BUSCAR_PARECERES_PROCESSO]: buscarPareceresProcesso
+    [types.BUSCAR_PARECERES_PROCESSO]: buscarPareceresProcesso,
+    [types.ADICIONAR_USUARIO_PARECER]: adicionarUsuarioParecer,
+    [types.BUSCAR_PARECER_PROCESSO]: buscarParecerProcesso,
+    [types.SALVAR_PARECERE_PROCESSO]: salvarParecerProcesso
 }
 

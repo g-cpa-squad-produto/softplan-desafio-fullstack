@@ -8,8 +8,8 @@
             <b-table class="container" striped hover :items="processos" :fields="columnsProcesso" responsive >
 
                 <template v-slot:cell(actions)="row">
-                    <b-button @click="visualizarPareceres(row.item)" >Ver Pareceres</b-button>
-<!--                    <b-button >Incluir Parecer</b-button>-->
+                    <b-button @click="visualizarPareceres(row.item)" >Pareceres</b-button>
+                    <b-button @click="incluirParecer(row.item)" >Incluir Parecer</b-button>
                 </template>
 
             </b-table>
@@ -30,6 +30,17 @@
 
             <div v-if="showAdicionarUsuario">
                 Adicionar Usuário
+
+                <b-alert variant="danger" show v-if="showError" >{{msgError}}</b-alert>
+
+                <b-form-input id="input-numero" placeholder="Busque por nome..." v-model="filtroAtual.nome" v-on:keyup="buscarUsuarios()" ></b-form-input>
+
+                <br/>
+
+                <b-list-group>
+                    <b-list-group-item v-for="usuario in usuarios" v-bind:key="usuario.email" v-on:click="selecionarUsario(usuario)" >{{usuario.nome}}</b-list-group-item>
+                </b-list-group>
+
             </div>
 
         </b-modal>
@@ -74,16 +85,21 @@
                 ],
                 showPareceres:false,
                 showAdicionarUsuario:false,
+                filtroAtual:{
+                    nome:''
+                },
+                showError:false,
+                msgError:''
             }
         },
         computed: {
-            ...mapState(['processos', 'pareceres'])
+            ...mapState(['processos', 'pareceres', 'usuarios'])
         },
         mounted: async function () {
             await this.BUSCAR_PROCESSOS()
         },
         methods: {
-            ...mapActions([types.BUSCAR_PROCESSOS, types.BUSCAR_PARECERES_PROCESSO, types.BUS]),
+            ...mapActions([types.BUSCAR_PROCESSOS, types.BUSCAR_PARECERES_PROCESSO, types.BUSCAR_USUARIOS, types.ADICIONAR_USUARIO_PARECER]),
             visualizarPareceres(processo) {
 
                 this.showPareceres = true
@@ -97,6 +113,40 @@
 
                 this.showPareceres = false
                 this.showAdicionarUsuario = true
+                this.showError = false
+                this.msgError = ''
+                this.filtroAtual = {
+                    nome:''
+                }
+                this.BUSCAR_USUARIOS(this.filtroAtual)
+            },
+            buscarUsuarios(){
+
+                this.BUSCAR_USUARIOS(this.filtroAtual)
+            },
+            selecionarUsario(usuario){
+
+                this.showError = false;
+                this.msgError = ''
+
+                let dataSend = {
+                    processo: JSON.parse(JSON.stringify(this.processoParecer)),
+                    usuario: JSON.parse(JSON.stringify(usuario))
+                }
+
+                this.ADICIONAR_USUARIO_PARECER(dataSend)
+                    .then(() => {
+                        this.visualizarPareceres(this.processoParecer)
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                        this.showError = true;
+                        this.msgError = err.response && err.response.data.message ? err.response.data.message : 'Erro ao realizar ação';
+                    })
+            },
+            incluirParecer(processo){
+
+                this.$router.push('/processos/'+ processo.id +'/pareceres/atual')
             }
         }
     }
@@ -110,6 +160,11 @@
 
     th {
         text-align: center;
+    }
+
+    .list-group .list-group-item:hover {
+        background-color: #3CB371;
+        cursor: pointer;
     }
 
 </style>

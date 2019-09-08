@@ -2,12 +2,11 @@ package br.com.softplan.processo.controller;
 
 import br.com.softplan.processo.business.ParecerProcessoService;
 import br.com.softplan.processo.dto.ParecerProcessoDTO;
-import br.com.softplan.processo.entity.ParecerProcesso;
+import br.com.softplan.security.dto.UsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,13 +25,18 @@ public class ParecerProcessoController {
         return service.buscarTodos(processoId);
     }
 
-    @PostMapping
-    public ParecerProcesso criar(@PathVariable("processoId") Long processoId, @RequestBody ParecerProcesso parecerProcesso){
-        return service.criar(processoId, parecerProcesso);
+    @GetMapping("/atual")
+    public ParecerProcessoDTO buscarAtual(@PathVariable("processoId") Long processoId){
+        return service.buscarAtual(processoId);
     }
 
-    @PutMapping("/{id}")
-    public ParecerProcesso editar(@PathVariable("id") Long id, @RequestBody ParecerProcesso parecerProcesso){
-        return service.editar(id, parecerProcesso);
+    @PostMapping("/adicionarUsuario")
+    public void adicionarUsuario(@PathVariable("processoId") Long processoId, @RequestBody UsuarioDTO usuarioDTO){
+        service.adicionarUsuario(processoId, usuarioDTO);
+    }
+
+    @PostMapping("/{id}/incluirParecer")
+    public ParecerProcessoDTO incluirParecer(@PathVariable("id") Long id, @RequestBody ParecerProcessoDTO parecerProcesso){
+        return service.incluirParecer(id, parecerProcesso);
     }
 }

@@ -3,11 +3,12 @@ package br.com.softplan.security.repository;
 import br.com.softplan.security.entity.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+public interface UsuarioRepository extends JpaRepository<Usuario, Long>, QuerydslPredicateExecutor<Usuario> {
 
 
     @Query("SELECT us FROM  Usuario us JOIN FETCH us.papel WHERE us.situacao = 'ATIVO'")

@@ -11,6 +11,8 @@ import java.util.List;
 public interface ParecerProcessoRepository extends JpaRepository<ParecerProcesso, Long> {
 
     @Query("SELECT new br.com.softplan.processo.dto.ParecerProcessoDTO(pa.id, pa.parecer, pa.usuario) FROM ParecerProcesso  pa WHERE pa.processo.id = :processoId")
-    public List<ParecerProcessoDTO> buscar(@Param("processoId") Long processoId);
+    List<ParecerProcessoDTO> buscar(@Param("processoId") Long processoId);
 
+    @Query("SELECT pa FROM ParecerProcesso  pa WHERE pa.processo.id = :processoId AND pa.usuario.id = :usuarioId")
+    ParecerProcesso buscarPorUsuario(@Param("processoId") Long processoId, @Param("usuarioId") Long usuarioId);
 }

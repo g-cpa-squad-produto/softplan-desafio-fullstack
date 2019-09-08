@@ -51,7 +51,12 @@ const mutations = {
   [types.BUSCAR_PARECERES_PROCESSO] (state, pareceres) {
     state.pareceres = pareceres
   },
-
+  [types.BUSCAR_PARECER_PROCESSO] (state, parecer) {
+    state.parecer = parecer
+  },
+  [types.SALVAR_PARECERE_PROCESSO] (state, parecer) {
+    state.parecer = parecer
+  }
 }
 
 export default mutations

@@ -14,6 +14,7 @@ import UsuarioForm from '../components/usuario/UsuarioForm'
 
 import ProcessoList from '../components/processos/ProcessoList'
 import ProcessoForm from '../components/processos/ProcessoForm'
+import ParecerProcessoForm from '../components/processos/ParecerProcessoForm'
 
 const hasToken = (to, from, next) => {
 
@@ -101,6 +102,17 @@ const router = new Router({
             meta: {
                 page: {
                     title: 'Novo Processo',
+                }
+            },
+            beforeEnter: requireAuth
+        },
+        {
+            path: '/processos/:processoId/pareceres/atual',
+            name: 'ParecerProcessoFormAdd',
+            component: ParecerProcessoForm,
+            meta: {
+                page: {
+                    title: 'Incluir Parecer Processo',
                 }
             },
             beforeEnter: requireAuth
