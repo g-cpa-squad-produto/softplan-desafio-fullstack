@@ -10,13 +10,13 @@ Em termos de implementação, o sistema é dividio em 2 módulos/entregáveis:
  
  
  ## Como executar o sistema
-Para executar esse sistema foram disponibilizados dois arquivos que executam os processos de **construção**, **execução** e **parada**.
+Para executar esse sistema foram disponibilizados arquivos que executam os processos de **construção**, **execução** e **parada**.
 É importante informar que os comandos dados ao Docker estão como **sudo** 
 Requisitos para execução dos passos:
 
 - Ambiente Linux
-- Docker instalado
-- docker-compose instalado  
+- Docker
+- docker-compose  
 
 ### Passo 1 - Construção 
 Os módulos são entregues em imagens **Docker**. Os comandos abaixo executam a construção das imagens tanto do front-end quanto do back-end. 
@@ -28,7 +28,7 @@ Esse processo é um pouco **demorado** devido aos artefatos que precisam serem b
  ```
 
 ### Passo 2 - Execução 
-Finalizado a consturção do sistema basta executar os comandos abaixo e os arquivos docker-compose com do banco de dados e do sistema serão iniciados. São eles:
+Finalizado a consturção do sistema basta executar os comandos abaixo e os arquivos docker-compose do banco de dados e do sistema serão iniciados. São eles:
 
 - __docker-database.yml__: Container PostgresSQL  
 - __docker-projects.yml__: Containers back-end e front-end da aplicação
