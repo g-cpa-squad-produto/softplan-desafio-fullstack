@@ -10,7 +10,8 @@ Em termos de implementação, o sistema é dividio em 2 módulos/entregáveis:
  
  
  ## Como executar o sistema
-Para executar esse sistema foram disponibilizados dois arquivos que executam os processos de **construção**, **execução** e **parada**. 
+Para executar esse sistema foram disponibilizados dois arquivos que executam os processos de **construção**, **execução** e **parada**.
+É importante informar que os comandos dados ao Docker estão como **sudo** 
 Requisitos para execução dos passos:
 
 - Ambiente Linux
@@ -22,7 +23,7 @@ Os módulos são entregues em imagens **Docker**. Os comandos abaixo executam a 
 Esse processo é um pouco **demorado** devido aos artefatos que precisam serem baixados. 
  
 ```bash
- chmox +x build-prod.sh
+ chmod +x build-prod.sh
 ./build-prod.sh
  ```
 
@@ -35,7 +36,7 @@ Finalizado a consturção do sistema basta executar os comandos abaixo e os arqu
 Um detalhe importante é que no processo também é criado uma rede chamada **softplan** para que os containers se comuniquem por ela.
  
 ```bash
- chmox +x start-prod.sh
+ chmod +x start-prod.sh
 ./start-prod.sh
  ```
 
@@ -46,7 +47,7 @@ Após iniciados os containers está Pronto!! Basta acessar http://localhost:8080
 Finalizados os testes na aplicação basta executar o comando abaixo e todos os containers serão encerrados.
 
  ```bash
-  chmox +x stop-prod.sh
+  chmod +x stop-prod.sh
  ./stop-prod.sh
   ```
 
@@ -66,7 +67,7 @@ Caso seja desejável executar o sistema em modo desenvolvimento basta que sejam 
 Em seguida executar o comando para que seja iniciado o banco, pelo docker, e aplicação front end
 
  ```bash
-  chmox +x start-dev.sh
+  chmod +x start-dev.sh
  ./start-dev.sh
   ```
  Após iniciados basta subir o back-end em seu IDE com as seguintes variáveis de ambiente.
