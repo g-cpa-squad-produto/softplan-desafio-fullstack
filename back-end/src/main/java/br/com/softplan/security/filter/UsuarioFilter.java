@@ -8,4 +8,5 @@ public class UsuarioFilter extends QueryDslFilter {
     public void setNome(String nome){
         addToMainBooleanExpression(QUsuario.usuario.nome.containsIgnoreCase(nome));
     }
+
 }

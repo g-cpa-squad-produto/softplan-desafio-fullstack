@@ -25,6 +25,7 @@ public class ProcessoController {
         return service.buscarTodos();
     }
 
+    @PreAuthorize("hasRole('Processo.Criar')")
     @PostMapping
     public Processo criar(@RequestBody Processo processo){
         return service.criar(processo);

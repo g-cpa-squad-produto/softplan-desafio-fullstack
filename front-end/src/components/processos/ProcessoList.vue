@@ -2,14 +2,14 @@
     <div class="container">
         <b-container fluid>
             <NavBar>
-                <b-nav-item href="#/processos/add">Novo Processo</b-nav-item>
+                <b-nav-item href="#/processos/add" v-if="auth.roles['Processo.Criar']" >Novo Processo</b-nav-item>
             </NavBar>
 
             <b-table class="container" striped hover :items="processos" :fields="columnsProcesso" responsive >
 
                 <template v-slot:cell(actions)="row">
-                    <b-button @click="visualizarPareceres(row.item)" >Pareceres</b-button>
-                    <b-button @click="incluirParecer(row.item)" >Incluir Parecer</b-button>
+                    <b-button @click="visualizarPareceres(row.item)" v-if="auth.roles['Processo.DelegarParecer']" >Pareceres</b-button>
+                    <b-button @click="incluirParecer(row.item)" v-if="auth.roles['Processo.IncluirParecer']" >Incluir Parecer</b-button>
                 </template>
 
             </b-table>
@@ -93,7 +93,7 @@
             }
         },
         computed: {
-            ...mapState(['processos', 'pareceres', 'usuarios'])
+            ...mapState(['processos', 'pareceres', 'usuarios', 'auth'])
         },
         mounted: async function () {
             await this.BUSCAR_PROCESSOS()

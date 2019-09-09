@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import store from '../store'
 import * as types from '../store/mutation-types'
 import NavBar from '../components/layout/NavBar'
-import HelloWorld from '../components/HelloWorld'
+import Home from '../components/Home'
 import Login from '../components/login/Login'
 import UsuarioList from '../components/usuario/UsuarioList'
 import UsuarioForm from '../components/usuario/UsuarioForm'
@@ -19,9 +19,7 @@ import ParecerProcessoForm from '../components/processos/ParecerProcessoForm'
 const hasToken = (to, from, next) => {
 
     const token = localStorage.getItem('JWT')
-    const username = localStorage.getItem('username')
     if (token) {
-        store.commit(types.LOGIN_SUCCESS, { token, username })
         router.push('/home')
     } else {
         next()
@@ -53,7 +51,7 @@ const router = new Router({
             path: '/',
             alias: '/home',
             name: 'Home',
-            component: HelloWorld,
+            component: Home,
             beforeEnter: requireAuth
         },
         {

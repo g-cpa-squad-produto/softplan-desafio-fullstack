@@ -5,23 +5,18 @@ const mutations = {
     state.auth.pending = true
   },
   [types.LOGIN_SUCCESS] (state, data) {
+
     const token = data.token
     const username = data.username
-    // console.log('data: ', data)
-    state.auth.isLoggedIn = true
-    state.auth.pending = false
+    const roles = {}
+
+    data.roles.forEach((role) => {
+      roles[role] = true
+    })
+
     state.auth.token = token
     state.auth.username = username
-    localStorage.setItem('JWT', token)
-    localStorage.setItem('username', username)
-  },
-  [types.LOGIN_WRONG_CREDENTIALS] (state) {
-    state.pending = false
-    state.auth.isLoggedIn = false
-  },
-  [types.LOGIN_ERROR] (state) {
-    state.pending = false
-    state.auth.isLoggedIn = false
+    state.auth.roles = roles
   },
   [types.LOGOUT] (state) {
     localStorage.removeItem('JWT')

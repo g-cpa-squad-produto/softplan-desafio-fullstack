@@ -29,12 +29,31 @@ const login = async ({commit}, creds) => {
 
     const {status, data} = await axios.post('/api/login', creds)
 
+    localStorage.setItem('JWT', data.token)
+    localStorage.setItem('username', creds.email)
+    localStorage.setItem('roles', data.roles)
+
     commit(types.LOGIN_SUCCESS, {
         token: data.token,
-        username: creds.email
+        username: creds.email,
+        roles: data.roles
     })
 
     return status;
+}
+
+const carregarToken = ({commit}) => {
+
+    if(localStorage.getItem('JWT')) {
+
+        const data = {
+            token: localStorage.getItem('JWT'),
+            username: localStorage.getItem('username'),
+            roles: localStorage.getItem('roles').split(',')
+        }
+
+        commit(types.LOGIN_SUCCESS, data)
+    }
 }
 
 const logout = ({commit}) => {
@@ -113,6 +132,7 @@ const salvarParecerProcesso = async ({commit}, parecer) => {
 export default {
     [types.LOGIN]: login,
     [types.LOGOUT]: logout,
+    [types.LOAD_TOKEN]: carregarToken,
     [types.BUSCAR_PAPEIS]: buscarPapeis,
     [types.BUSCAR_USUARIOS]: buscarUsuarios,
     [types.SALVAR_USUARIO]: salvarUsuario,
@@ -125,5 +145,6 @@ export default {
     [types.ADICIONAR_USUARIO_PARECER]: adicionarUsuarioParecer,
     [types.BUSCAR_PARECER_PROCESSO]: buscarParecerProcesso,
     [types.SALVAR_PARECERE_PROCESSO]: salvarParecerProcesso
+
 }
 

@@ -23,7 +23,7 @@ public class UsuarioService {
     @Autowired
     private CriptografiaService criptografiaService;
 
-    @Value("sofplan-backend.senhaPadrao")
+    @Value("${sofplan-backend.senhaPadrao}")
     String senhaPadrao;
 
     public List<UsuarioDTO> buscarTodos(UsuarioFilter filter){

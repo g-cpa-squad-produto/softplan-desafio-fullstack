@@ -2,14 +2,14 @@
     <div class="container">
         <b-container fluid>
             <NavBar>
-                <b-nav-item href="#/usuarios/add">Novo Usuário</b-nav-item>
+                <b-nav-item href="#/usuarios/add" v-if="auth.roles['Usuario.Criar']" >Novo Usuário</b-nav-item>
             </NavBar>
 
             <b-table class="container" striped hover :items="usuarios" :fields="columns" responsive >
 
                 <template v-slot:cell(actions)="row">
-                    <a :href="'#/usuarios/edit/' + row.item.id" class="btn btn-info btn-sm" style="margin-right: 4px" >Editar</a>
-                    <a href="#link" class="btn btn-danger btn-sm" >Excluir</a>
+                    <a :href="'#/usuarios/edit/' + row.item.id" class="btn btn-info btn-sm" style="margin-right: 4px" v-if="auth.roles['Usuario.Editar']" >Editar</a>
+<!--                    <a href="#link" class="btn btn-danger btn-sm" >Excluir</a>-->
                 </template>
 
             </b-table>
@@ -53,7 +53,7 @@
             }
         },
         computed: {
-            ...mapState(['usuarios'])
+            ...mapState(['usuarios', 'auth'])
         },
         mounted: async function () {
             await this.BUSCAR_USUARIOS()

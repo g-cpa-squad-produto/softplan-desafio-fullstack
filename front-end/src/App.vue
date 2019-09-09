@@ -5,8 +5,18 @@
 </template>
 
 <script>
+
+    import * as types from './store/mutation-types'
+    import {mapActions} from 'vuex'
+
     export default {
-        name: 'app'
+        name: 'app',
+        mounted: async function () {
+            await this.LOAD_TOKEN()
+        },
+        methods: {
+            ...mapActions([types.LOAD_TOKEN])
+        }
     }
 </script>
 
