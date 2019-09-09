@@ -18,7 +18,7 @@ const hasToken = (to, from, next) => {
 
     const token = localStorage.getItem('JWT')
     if (token) {
-        router.push('/home')
+        router.push('Home')
     } else {
         next()
     }
@@ -29,7 +29,7 @@ const requireAuth = (to, from, next) => {
     if (localStorage.getItem('JWT')) {
         next()
     } else {
-        router.push('/login')
+        router.push('Login')
     }
 }
 

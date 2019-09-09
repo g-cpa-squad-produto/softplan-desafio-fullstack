@@ -2,7 +2,7 @@
     <div class="container">
         <b-container fluid>
             <NavBar>
-                <b-nav-item href="#/processos/add" v-if="auth.roles['Processo.Criar']" >Novo Processo</b-nav-item>
+                <b-nav-item href="/processos/add" to="/processos/add" v-if="auth.roles['Processo.Criar']" >Novo Processo</b-nav-item>
             </NavBar>
 
             <b-table class="container" striped hover :items="processos" :fields="columnsProcesso" responsive >

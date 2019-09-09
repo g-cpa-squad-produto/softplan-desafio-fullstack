@@ -2,7 +2,7 @@
     <div class="container">
         <b-container fluid>
             <NavBar>
-                <b-nav-item href="#/usuarios/add" v-if="auth.roles['Usuario.Criar']" >Novo Usuário</b-nav-item>
+                <b-nav-item href="/usuarios/add" to="/usuarios/add" v-if="auth.roles['Usuario.Criar']" >Novo Usuário</b-nav-item>
             </NavBar>
 
             <b-table class="container" striped hover :items="usuarios" :fields="columns" responsive >

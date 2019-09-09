@@ -6,7 +6,7 @@
 
             <img src="../../assets/logo.png">
 
-            <b-navbar-brand href="#/home">Home</b-navbar-brand>
+            <b-navbar-brand href="/home" to="/home" >Home</b-navbar-brand>
 
             <b-collapse is-nav id="nav_collapse">
 
@@ -50,4 +50,5 @@
     .nav-bar-soft li a {
         color: #FFFFFF;
     }
+
 </style>

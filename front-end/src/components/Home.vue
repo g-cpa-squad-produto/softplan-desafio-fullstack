@@ -3,8 +3,8 @@
     <b-container fluid>
 
       <NavBar>
-        <b-nav-item href="#/usuarios" v-if="auth.roles['Usuario.Visualizar']">Usuários</b-nav-item>
-        <b-nav-item href="#/processos" v-if="auth.roles['Processo.Visualizar']" >Processos</b-nav-item>
+        <b-nav-item href="/usuarios" to="/usuarios" v-if="auth.roles['Usuario.Visualizar']">Usuários</b-nav-item>
+        <b-nav-item href="/processos" to="/processos" v-if="auth.roles['Processo.Visualizar']" >Processos</b-nav-item>
       </NavBar>
 
       <h1>Softplan Desafio</h1>

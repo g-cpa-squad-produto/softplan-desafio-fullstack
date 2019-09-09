@@ -61,7 +61,7 @@
                     email: this.username,
                     senha: this.password
                 }).then(() => {
-                    this.$router.push('/home')
+                    this.$router.push('Home')
                 }).catch((err) => {
 
                     console.log(err);

@@ -4,7 +4,7 @@ Aplicação desafio que disponibiliza cadastro de usuários, processos e inclus�
 
 ## Arquitetura
 
-Em termos de implementação, o sistema é dividio em 2 módulos/entregáveis: 
+Em termos de implementação, o sistema é dividio em 2 módulos/entregáveis, estão assim para facilitar o gerênciamento de recursos isoladamente: 
  - __back-end__: responsável por fornecer sua API Rest para o seu próprio frontend. Para mais detalhes de implementação acesse o [link](back-end/README.MD).
  - __front-end__: frontend principal deste sistema contendo as telas. Para mais detalhes de implementação acesse o [link](front-end/README.md).
  

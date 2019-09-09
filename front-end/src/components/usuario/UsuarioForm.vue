@@ -3,7 +3,7 @@
         <b-container fluid>
 
             <NavBar>
-                <b-nav-item href="#/usuarios">Voltar</b-nav-item>
+                <b-nav-item href="/usuarios" to="/usuarios" >Voltar</b-nav-item>
             </NavBar>
 
             <b-alert variant="success" show v-if="showSucess" >Salvo com sucesso.</b-alert>
