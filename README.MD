@@ -10,7 +10,7 @@ Em termos de implementação, o sistema é dividio em 2 módulos/entregáveis:
  
  
  ## Como executar o sistema
-Para executar esse sistema foram disponibilizados arquivos que executam os processos de **construção**, **execução** e **parada**.
+Para executar esse sistema foram disponibilizados arquivos que executam os processos de **construção**, **execução** e **parada**. Os arquivos estão na raiz do projeto.
 É importante informar que os comandos dados ao Docker estão como **sudo** 
 Requisitos para execução dos passos:
 
@@ -40,7 +40,7 @@ Um detalhe importante é que no processo também é criado uma rede chamada **so
 ./start-prod.sh
  ```
 
-Após iniciados os containers está Pronto!! Basta acessar http://localhost:8080
+Aguarde uns segundo para que sejam iniciados os containers e está Pronto!! Basta acessar http://localhost:8080
 
 Foram criados na carga inicial os seguintes usuários para acesso:
 
