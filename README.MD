@@ -45,12 +45,12 @@ Após iniciados os containers está Pronto!! Basta acessar http://localhost:8080
 Foram criados na carga inicial os seguintes usuários para acesso:
 
 | __Usuário__ | __Papel__ |
-| --------- | ------------- | ------------- |
+| --------- | ------------- |
 | administrador@teste.com | Administrador |
 | triador@teste.com | Usuário Triador |
-| finalizador@teste.com  Usuário Finalizador |
+| finalizador@teste.com | Usuário Finalizador |
 
-Todos os usuários do sistema possuem senha **123456**, inclusive os criados através do cadastro.
+Todos os usuários do sistema possuem senha `123456`, inclusive os criados através do cadastro.
 
 
 ### Passo 3 - Parando a Execução

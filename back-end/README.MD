@@ -62,18 +62,18 @@ As classes foram dividas por assunto em três pacotes principais
 
 Os serviços estão contidos nas classes `controller` e foram mapeados conforme padrão REST para fornecer ações e recusos a quem for consumir a API. São eles:
 
-| __Serviço__ | __Método HTTP__ | __Descrição__ |
-| --------- | ------------- | ------------- |
-| /api/login | POST | Realiza a autenticação do usuário |
-| /api/papeis | GET | Retorna os papéis do sistema |
-| /api/usuarios?nome= | GET | Retorna os usuários do sistema |
-| /api/usuarios/:id | GET | Retorna um usuário do sistema pelo id informado|
-| /api/usuarios | POST | Cria um usuário do sistema |
-| /api/usuarios/:id | PUT | Atualizado um usuário do sistema conforme o id |
-| /api/usuarios/:id | DELETE | Remove logicamente um usuário do sistema |
-| /api/processos | GET | Retorna os processo do sistema conforme acesso definido por regra |
-| /api/processos | POST | Cria novo processo no sistema |
-| /api/processos/:processoId/pareceres | GET | Retorna os pareceres de um processo conforme o id informado |
-| /api/processos/:processoId/pareceres/atual | GET | Retorna o parecer atual do usuário logado no sistema |
-| /api/processos/:processoId/pareceres/adicionarUsuario | POST | Cria um registro de parecer para que um usuário possa preenche-lo |
-| /api/processos/:processoId/pareceres/incluirParecer | POST | Incluí parecer no registro de parecer do processo |
+| __Serviço__ | __Método HTTP__ | __Parâmetros__ | __Descrição__ |
+| --------- | ------------- | ------------- |  ------------- |
+| /api/login | POST | email:String, senha:String | Realiza a autenticação do usuário |
+| /api/papeis | GET | | Retorna os papéis do sistema |
+| /api/usuarios?nome= | GET | | Retorna os usuários do sistema |
+| /api/usuarios/:id | GET | | Retorna um usuário do sistema pelo id informado|
+| /api/usuarios | POST | nome:String, email:String, papel:Objeto | Cria um usuário do sistema |
+| /api/usuarios/:id | PUT | nome:String, email:String, papel:Objeto | Atualizado um usuário do sistema conforme o id |
+| /api/usuarios/:id | DELETE | | Remove logicamente um usuário do sistema |
+| /api/processos | GET | | Retorna os processo do sistema conforme acesso definido por regra |
+| /api/processos | POST | numero:String, descricao:String, | Cria novo processo no sistema |
+| /api/processos/:processoId/pareceres | GET | | Retorna os pareceres de um processo conforme o id informado |
+| /api/processos/:processoId/pareceres/atual | GET | | Retorna o parecer atual do usuário logado no sistema |
+| /api/processos/:processoId/pareceres/adicionarUsuario | POST | id:Inteiro | Cria um registro de parecer para que um usuário possa preenche-lo |
+| /api/processos/:processoId/pareceres/incluirParecer | POST | parecer: String | Incluí parecer no registro de parecer do processo |
