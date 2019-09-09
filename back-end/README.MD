@@ -77,3 +77,11 @@ Os serviços estão contidos nas classes `controller` e foram mapeados conforme 
 | /api/processos/:processoId/pareceres/atual | GET | | Retorna o parecer atual do usuário logado no sistema |
 | /api/processos/:processoId/pareceres/adicionarUsuario | POST | id:Inteiro | Cria um registro de parecer para que um usuário possa preenche-lo |
 | /api/processos/:processoId/pareceres/incluirParecer | POST | parecer: String | Incluí parecer no registro de parecer do processo |
+
+## Construção
+
+O projeto foi desenvolvido com o gerenciador de dependencias **maven** portanto para construção e execução dos testes initários basta executar o comando
+
+```bash
+mvn install
+``` 
