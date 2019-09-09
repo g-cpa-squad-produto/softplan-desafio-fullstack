@@ -7,4 +7,7 @@ public class JwtConstants {
     public static final String TOKEN_PREFIX = "Softplan ";
     public static final String HEADER_AUTHORIZATION_FIELD = "Authorization";
     public static final String AUTHORITIES_KEY = "permissoes";
+
+    private JwtConstants() {
+    }
 }

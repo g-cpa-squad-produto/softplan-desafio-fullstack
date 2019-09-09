@@ -12,11 +12,11 @@
             <b-form @submit="onSubmit" @reset="onReset" >
 
                 <b-form-group id="input-group-numero" label="Número:" label-for="input-numero">
-                    <b-form-input id="input-numero" v-model="processo.numero" required placeholder="Número"></b-form-input>
+                    <b-form-input id="input-numero" type="text" v-model="processo.numero" required placeholder="Número"></b-form-input>
                 </b-form-group>
 
                 <b-form-group id="input-group-descricao" label="Descrição:" label-for="input-descricao" >
-                    <b-form-input id="input-descricao" v-model="processo.descricao" type="descricao" required placeholder="Descrição"></b-form-input>
+                    <b-form-input id="input-descricao" type="text" v-model="processo.descricao" required placeholder="Descrição"></b-form-input>
                 </b-form-group>
 
                 <b-button type="submit" variant="primary">Salvar</b-button>

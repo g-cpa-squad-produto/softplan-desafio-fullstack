@@ -24,6 +24,10 @@ const sendPutRequest = async (url, data) => {
     return axios.put(url, data, getJwtHeaders());
 }
 
+const sendDeleteRequest = async (url) => {
+    return axios.delete(url, getJwtHeaders());
+}
+
 const login = async ({commit}, creds) => {
     commit(types.LOGIN)
 
@@ -85,6 +89,10 @@ const atribuirUsuarioInicial = async ({commit}) => {
     commit(types.BUSCAR_USUARIO, usuario)
 }
 
+const excluirUsuario = async ({}, usuarioId) => {
+    await sendDeleteRequest('/api/usuarios/' + usuarioId)
+}
+
 const salvarUsuario = async ({commit}, usuario) => {
     if(!usuario.id) {
         const {data} = await sendPostRequest('/api/usuarios', usuario)
@@ -138,6 +146,7 @@ export default {
     [types.SALVAR_USUARIO]: salvarUsuario,
     [types.BUSCAR_USUARIO]: buscarUsuario,
     [types.ATRIBUIR_USUARIO_INICIAL]: atribuirUsuarioInicial,
+    [types.EXCLUIR_USUARIO]:excluirUsuario,
     [types.BUSCAR_PROCESSOS]: buscarProcessos,
     [types.ATRIBUIR_PROCESSO_INICIAL]: atribuirProcessoInicial,
     [types.SALVAR_PROCESSO]: salvarProcesso,

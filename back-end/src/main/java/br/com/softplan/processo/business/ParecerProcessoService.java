@@ -39,7 +39,7 @@ public class ParecerProcessoService {
     }
 
     public ParecerProcessoDTO incluirParecer(Long id, ParecerProcessoDTO parecerProcessoDTO) {
-        ParecerProcesso parecerExistente = repository.findById(id).orElseThrow(() -> new ParecerProcessoNaoExistenteException());
+        ParecerProcesso parecerExistente = repository.findById(id).orElseThrow(ParecerProcessoNaoExistenteException::new);
         parecerExistente.setParecer(parecerProcessoDTO.getParecer());
         repository.save(parecerExistente);
         return new ParecerProcessoDTO(parecerExistente);
@@ -48,7 +48,7 @@ public class ParecerProcessoService {
     public void adicionarUsuario(Long processoId, UsuarioDTO usuarioDTO) {
 
         Processo processo = buscarProcesso(processoId);
-        Usuario usuario = usuarioRepository.findById(usuarioDTO.getId()).orElseThrow(() -> new UsuarioNaoExistenteException());
+        Usuario usuario = usuarioRepository.findById(usuarioDTO.getId()).orElseThrow(UsuarioNaoExistenteException::new);
 
         validarUsuarioJaPossuiPareceProcesso(processo, usuario);
 
@@ -66,7 +66,7 @@ public class ParecerProcessoService {
     }
 
     private Processo buscarProcesso(Long processoId){
-        return processoRepository.findById(processoId).orElseThrow(() -> new ProcessoNaoExistenteException());
+        return processoRepository.findById(processoId).orElseThrow(ProcessoNaoExistenteException::new);
     }
 
     private void validarUsuarioJaPossuiPareceProcesso(Processo processo, Usuario usuario) {

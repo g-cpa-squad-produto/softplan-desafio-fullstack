@@ -25,6 +25,7 @@ public class UsuarioController {
 
     @GetMapping
     public List<UsuarioDTO> buscar(UsuarioFilter filter){
+        filter.somenteAtivos();
         return service.buscarTodos(filter);
     }
 

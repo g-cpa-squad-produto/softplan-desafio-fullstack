@@ -4,8 +4,6 @@ import BootstrapVue from 'bootstrap-vue';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
-import store from '../store'
-import * as types from '../store/mutation-types'
 import NavBar from '../components/layout/NavBar'
 import Home from '../components/Home'
 import Login from '../components/login/Login'

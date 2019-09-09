@@ -105,8 +105,8 @@
                 this.showPareceres = true
                 this.showAdicionarUsuario = false
 
-                this.$refs.parecerModal.show();
-                this.processoParecer = processo;
+                this.$refs.parecerModal.show()
+                this.processoParecer = processo
                 this.BUSCAR_PARECERES_PROCESSO(processo.id)
             },
             iniciarAdicionarUsuario(){
@@ -116,7 +116,8 @@
                 this.showError = false
                 this.msgError = ''
                 this.filtroAtual = {
-                    nome:''
+                    nome:'',
+                    finalizadores:true
                 }
                 this.BUSCAR_USUARIOS(this.filtroAtual)
             },

@@ -1,5 +1,11 @@
 version: '3'
 services:
+  softplan-front:
+    image: softplan-front-end
+    container_name: softplan-front
+    restart: unless-stopped
+    environment:
+      - SOFTPLAN_BACKEND_URL=http://softplan-api:8080/
   softplan-api:
     image: softplan-back-end
     container_name: softplan-api
@@ -11,12 +17,8 @@ services:
       - DATABASE_USER=postgres
       - DATABASE_URL=postgresql://database:5432/postgres
       - STATIC_SOURCES_URL=http://softplan-front:3001/
-  softplan-front:
-    image: softplan-front-end
-    container_name: softplan-front
-    restart: unless-stopped
-    environment:
-      - SOFTPLAN_BACKEND_URL=http://softplan-api:8080/
+    depends_on:
+      - softplan-front
 networks:
   default:
     external:

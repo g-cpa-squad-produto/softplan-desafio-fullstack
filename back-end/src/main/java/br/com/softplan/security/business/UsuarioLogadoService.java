@@ -43,9 +43,7 @@ public class UsuarioLogadoService implements UserDetailsService {
     public Usuario getUsuarioLogado(){
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Usuario usuario = repository.buscar(auth.getName());
-
-        return usuario;
+        return repository.buscar(auth.getName());
     }
 
     public boolean usuarioPossuiPermissao(String permissao){

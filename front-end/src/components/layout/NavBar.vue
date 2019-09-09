@@ -14,7 +14,12 @@
                 <b-nav is-nav-bar class="ml-auto">
                     <b-nav is-nav-bar class="nav-bar-soft">
                         <slot/>
-                        <b-nav-item @click="LOGOUT()">Sair</b-nav-item>
+                        <b-nav-item-dropdown right>
+                            <template v-slot:button-content>
+                                <em>{{auth.username}}</em>
+                            </template>
+                            <b-dropdown-item @click="LOGOUT()">Sair</b-dropdown-item>
+                        </b-nav-item-dropdown>
                     </b-nav>
                 </b-nav>
 
@@ -24,11 +29,14 @@
 </template>
 
 <script>
-    import {mapActions} from 'vuex'
+    import {mapActions, mapState} from 'vuex'
     import * as types from '../../store/mutation-types'
 
     export default {
         name: "NavBar",
+        computed: {
+            ...mapState(['auth'])
+        },
         methods: {
             ...mapActions([types.LOGOUT])
         }
