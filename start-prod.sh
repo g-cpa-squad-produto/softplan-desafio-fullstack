@@ -1,9 +1,9 @@
 #!/bin/bash
 
-docker network ls|grep softplan > /dev/null || docker network create --driver bridge softplan
+sudo docker network ls|grep softplan > /dev/null || sudo docker network create --driver bridge softplan
 
 ## Start Deps
-docker-compose -p softplan-deps -f docker-dependencies.yml up -d
+sudo docker-compose -p softplan-deps -f docker-database.yml up -d
 
 ## Start Projects
-docker-compose -p softplan-projects -f docker-projects.yml up -d
+sudo docker-compose -p softplan-projects -f docker-projects.yml up -d
