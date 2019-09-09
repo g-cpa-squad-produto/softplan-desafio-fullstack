@@ -20,7 +20,7 @@ Requisitos para execução dos passos:
 
 ### Passo 1 - Construção 
 Os módulos são entregues em imagens **Docker**. Os comandos abaixo executam a construção das imagens tanto do front-end quanto do back-end. 
-Esse processo é um pouco **demorado** devido aos artefatos que precisam serem baixados. 
+Esse processo é um pouco **demorado** devido aos artefatos que precisam ser baixados. 
  
 ```bash
  chmod +x build-prod.sh
@@ -42,6 +42,16 @@ Um detalhe importante é que no processo também é criado uma rede chamada **so
 
 Após iniciados os containers está Pronto!! Basta acessar http://localhost:8080
 
+Foram criados na carga inicial os seguintes usuários para acesso:
+
+| __Usuário__ | __Papel__ |
+| --------- | ------------- | ------------- |
+| administrador@teste.com | Administrador |
+| triador@teste.com | Usuário Triador |
+| finalizador@teste.com  Usuário Finalizador |
+
+Todos os usuários do sistema possuem senha **123456**, inclusive os criados através do cadastro.
+
 
 ### Passo 3 - Parando a Execução
 Finalizados os testes na aplicação basta executar o comando abaixo e todos os containers serão encerrados.
@@ -52,7 +62,7 @@ Finalizados os testes na aplicação basta executar o comando abaixo e todos os 
   ```
 
  ## Como desenvolver no sistema
-Caso seja desejável executar o sistema em modo desenvolvimento basta que sejam instaladas as dependecias de cada sub-módulo executando os comandos:
+Caso seja desejável executar o sistema em modo desenvolvimento basta instalar as dependecias de cada sub-módulo executando os comandos:
 
 - front end
  ```bash
