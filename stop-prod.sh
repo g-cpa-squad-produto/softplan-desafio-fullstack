@@ -1,7 +1,7 @@
 #!/bin/bash
 
-## Start Projects
-docker-compose -p softplan-projects -f docker-projects.yml down
+## Stop Projects
+docker-compose -p softplan-projects -f docker-projects.yml down --volumes
 
-## Start Deps
-docker-compose -p softplan-deps -f docker-dependencies.yml down
+## Stop
+docker-compose -p softplan-deps -f docker-dependencies.yml down --volumes
