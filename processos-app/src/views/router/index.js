@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+import store from '@/commons/store'
+
 import Login from '@/views/pages/login/Login'
 import ProcessoBusca from '@/views/pages/processo/busca/ProcessoBusca'
 import ProcessoBuscaPendentes from '@/views/pages/processo/busca/ProcessoBuscaPendentes'
@@ -10,7 +12,7 @@ import UsuarioDetalhe from '@/views/pages/usuario/detalhe/UsuarioDetalhe'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
     routes: [
         {
             path: '/',
@@ -48,3 +50,12 @@ export default new Router({
         }
     ]
 })
+
+router.beforeEach((to, from, next) => {
+    if (store.state.usuario === null && to.name !== 'login') {
+        next({name: 'login'})
+    }
+    next()
+})
+
+export default router

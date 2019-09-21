@@ -41,7 +41,6 @@ public class Processo {
     @JoinColumn(name = "us_id", nullable = false)
     private Usuario usuarioCriacao;
 
-    @NotNull
     @Column(name = "data_criacao", nullable = false)
     private Date dataCriacao;
 

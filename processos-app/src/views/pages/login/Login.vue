@@ -1,5 +1,5 @@
 <template>
-    <container>
+    <container classe="xs12 sm8 md4">
         <v-list two-line>
             <v-subheader>
                 Selecione o Usuário
