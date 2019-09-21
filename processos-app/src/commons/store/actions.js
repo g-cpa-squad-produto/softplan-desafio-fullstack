@@ -3,6 +3,16 @@ import {actionTypes, mutationTypes} from '@/commons/constants'
 
 export default {
 
+    async [actionTypes.BUSCAR_PARECERES_PROCESSO](context, processoId) {
+        const {data} = await axios.get(`api/processos/${processoId}/pareceres`)
+        return data
+    },
+
+    async [actionTypes.BUSCAR_PROCESSO](context, processoId) {
+        const {data} = await axios.get(`api/processos/${processoId}`)
+        return data
+    },
+
     async [actionTypes.BUSCAR_PROCESSOS]() {
         const {data} = await axios.get('api/processos')
         return data

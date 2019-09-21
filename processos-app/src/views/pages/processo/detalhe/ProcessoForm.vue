@@ -8,6 +8,7 @@
                             name="título"
                             placeholder="Processo jurídico..."
                             :counter="250"
+                            :disabled="!editando"
                             v-model="value.nome"
                             v-validate="'required'"
                             :error-messages="errors.collect('título')"
@@ -18,12 +19,13 @@
                             label="Texto"
                             name="texto"
                             :counter="4000"
+                            :disabled="!editando"
                             v-model="value.texto"
                             v-validate="'required'"
                             :error-messages="errors.collect('texto')"
                     />
                 </v-flex>
-                <v-flex xs12>
+                <v-flex xs12 v-if="editando">
                     <v-select
                             attach chips multiple
                             label="Quem realizará o parecer para o processo?"
@@ -38,7 +40,7 @@
                 </v-flex>
             </v-form>
         </v-card-text>
-        <v-card-actions>
+        <v-card-actions v-if="editando">
             <v-layout row wrap>
                 <v-flex xs12 class="mb-3">
                     <v-divider/>

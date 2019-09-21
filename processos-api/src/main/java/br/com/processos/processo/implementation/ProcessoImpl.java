@@ -1,5 +1,6 @@
 package br.com.processos.processo.implementation;
 
+import br.com.processos.processo.implementation.usecase.BuscarPareceresProcesso;
 import br.com.processos.processo.implementation.usecase.BuscarProcessoPorId;
 import br.com.processos.processo.implementation.usecase.BuscarProcessosPendentesParecer;
 import br.com.processos.processo.implementation.usecase.BuscarTodosProcessos;
@@ -35,6 +36,9 @@ public class ProcessoImpl implements IProcesso {
     @Autowired
     private RealizarParecer realizarParecer;
 
+    @Autowired
+    private BuscarPareceresProcesso buscarPareceresProcesso;
+
     @Override
     public Processo buscarProcessoPorId(Long processoId) {
         return buscarProcessoPorId.executar(processoId);
@@ -63,6 +67,11 @@ public class ProcessoImpl implements IProcesso {
     @Override
     public Parecer realizarParecer(Long parecerId, String textoParecer) {
         return realizarParecer.executar(parecerId, textoParecer);
+    }
+
+    @Override
+    public List<Parecer> buscarPareceresProcesso(Long processoId) {
+        return buscarPareceresProcesso.executar(processoId);
     }
 
 }

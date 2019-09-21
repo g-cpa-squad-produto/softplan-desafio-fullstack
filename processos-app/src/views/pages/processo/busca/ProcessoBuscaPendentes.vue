@@ -2,7 +2,7 @@
     <div>
         <v-layout class="mb-3">
             <v-flex xs12>
-                <page-title titulo="Processos" subtitulo="Listagem dos processos pendentes de parercer"/>
+                <page-title titulo="Processos" subtitulo="Listagem dos processos pendentes de parercer" rota-voltar="login"/>
             </v-flex>
         </v-layout>
         <processo-busca-tabela :processos="processos" v-if="existeProcessos"/>

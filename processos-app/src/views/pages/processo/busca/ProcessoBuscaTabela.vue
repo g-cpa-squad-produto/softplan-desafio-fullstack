@@ -11,7 +11,7 @@
             <td>{{ props.item.dataCriacao | date}}</td>
             <td class="text-xs-right">
                 <v-tooltip bottom>
-                    <v-btn flat icon slot="activator">
+                    <v-btn flat icon slot="activator" @click="verDetalhes(props.item.id)">
                         <v-icon class="text--secondary">notes</v-icon>
                     </v-btn>
                     <span>Ver detalhes</span>
@@ -59,6 +59,11 @@
                         width: '20%'
                     }
                 ]
+            }
+        },
+        methods: {
+            verDetalhes(processoId) {
+                this.$emit('ver-detalhes', processoId)
             }
         }
     }

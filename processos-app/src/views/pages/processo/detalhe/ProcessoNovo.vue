@@ -2,7 +2,8 @@
     <div>
         <v-layout class="mb-3">
             <v-flex xs10>
-                <page-title titulo="Novo Processo" subtitulo="Informe os dados abaixo para criar um novo processo"/>
+                <page-title titulo="Novo Processo" rota-voltar="processos"
+                            subtitulo="Informe os dados abaixo para criar um novo processo"/>
             </v-flex>
         </v-layout>
         <processo-form v-model="novoProcesso" @salvar="salvarProcesso"/>

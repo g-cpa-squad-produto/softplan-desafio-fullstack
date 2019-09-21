@@ -2,7 +2,7 @@
     <div>
         <v-layout class="mb-3">
             <v-flex xs10>
-                <page-title titulo="Processos" subtitulo="Listagem dos processos"/>
+                <page-title titulo="Processos" subtitulo="Listagem dos processos" rota-voltar="login"/>
             </v-flex>
             <v-flex xs2 class="text-xs-right">
                 <v-btn color="green" class="white--text" @click="irParaNovoProcesso">
@@ -10,7 +10,7 @@
                 </v-btn>
             </v-flex>
         </v-layout>
-        <processo-busca-tabela :processos="processos" v-if="existeProcessos"/>
+        <processo-busca-tabela :processos="processos" v-if="existeProcessos" @ver-detalhes="verDetalhes"/>
         <processo-busca-vazia v-else/>
     </div>
 </template>
@@ -43,6 +43,9 @@
             },
             irParaNovoProcesso() {
                 this.$router.push({name: 'processoNovo'})
+            },
+            verDetalhes(processoId) {
+                this.$router.push({name: 'processoDetalhe', params: {processoId}})
             }
         }
     }

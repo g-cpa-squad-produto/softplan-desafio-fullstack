@@ -47,6 +47,11 @@ public class ProcessoAPI {
         return iProcesso.inserirProcesso(processo);
     }
 
+    @GetMapping(path = "/{processoId}/pareceres")
+    public List<Parecer> buscarPareceresProcesso(@NotNull @PathVariable Long processoId) {
+        return iProcesso.buscarPareceresProcesso(processoId);
+    }
+
     @PostMapping(path = "/{processoId}/pareceres")
     @ResponseStatus(code = HttpStatus.CREATED)
     public List<Parecer> solicitarParecer(@NotNull @PathVariable Long processoId, @NotNull @Valid @RequestBody List<Long> usuariosId) {
