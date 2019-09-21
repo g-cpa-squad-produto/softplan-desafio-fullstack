@@ -3,6 +3,7 @@ import store from '@/commons/store'
 import router from '@/views/router'
 import App from './App'
 
+import '@/views/filters'
 import '@/commons/vendors/vuetify'
 
 Vue.config.productionTip = false

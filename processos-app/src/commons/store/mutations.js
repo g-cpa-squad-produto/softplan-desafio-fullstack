@@ -7,7 +7,6 @@ export default {
     },
 
     [mutationTypes.SET_USUARIOS](state, usuarios) {
-        console.log(usuarios)
         state.usuarios = usuarios
     }
 }
