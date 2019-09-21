@@ -7,6 +7,7 @@ import Login from '@/views/pages/login/Login'
 import ProcessoBusca from '@/views/pages/processo/busca/ProcessoBusca'
 import ProcessoBuscaPendentes from '@/views/pages/processo/busca/ProcessoBuscaPendentes'
 import ProcessoDetalhe from '@/views/pages/processo/detalhe/ProcessoDetalhe'
+import ProcessoNovo from '@/views/pages/processo/detalhe/ProcessoNovo'
 import UsuarioBusca from '@/views/pages/usuario/busca/UsuarioBusca'
 import UsuarioDetalhe from '@/views/pages/usuario/detalhe/UsuarioDetalhe'
 
@@ -37,6 +38,11 @@ const router = new Router({
             path: '/processos/:processoId',
             name: 'processoDetalhe',
             component: ProcessoDetalhe
+        },
+        {
+            path: '/processos/novo',
+            name: 'processoNovo',
+            component: ProcessoNovo
         },
         {
             path: '/usuarios',

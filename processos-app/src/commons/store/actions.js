@@ -17,6 +17,16 @@ export default {
     async [actionTypes.BUSCAR_USUARIOS]({commit}) {
         const {data} = await axios.get('api/usuarios')
         commit(mutationTypes.SET_USUARIOS, data)
+    },
+
+    async [actionTypes.INSERIR_PROCESSO](context, processo) {
+        const {data} = await axios.post('api/processos', processo)
+        return data
+    },
+
+    async [actionTypes.SOLICITAR_PARECER](context, {processoId, usuariosParecer}) {
+        const {data} = await axios.post(`api/processos/${processoId}/pareceres`, usuariosParecer)
+        return data
     }
 
 }

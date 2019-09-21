@@ -4,6 +4,8 @@ import router from '@/views/router'
 import App from './App'
 
 import '@/views/filters'
+import '@/views/mixins'
+import '@/commons/vendors/vee-validate'
 import '@/commons/vendors/vuetify'
 
 Vue.config.productionTip = false

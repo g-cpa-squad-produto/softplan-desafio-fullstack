@@ -1,12 +1,15 @@
 <template>
-  <v-app id="app" data-app>
-    <router-view/>
-  </v-app>
+    <v-app id="app" data-app>
+        <container>
+            <router-view/>
+        </container>
+    </v-app>
 </template>
 
 <script>
-
-export default {
-  name: 'app'
-}
+    import Container from './views/components/Container'
+    export default {
+        name: 'app',
+        components: {Container}
+    }
 </script>

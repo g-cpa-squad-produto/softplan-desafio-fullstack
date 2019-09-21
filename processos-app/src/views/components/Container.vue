@@ -1,5 +1,6 @@
 <template>
     <v-content>
+        <alert/>
         <v-container fluid fill-height>
             <v-layout align-center justify-center>
                 <v-flex :class="classe">
@@ -11,8 +12,10 @@
 </template>
 
 <script>
+    import Alert from './Alert'
     export default {
         name: 'Container',
+        components: {Alert},
         props: {
             classe: {
                 type: String,
