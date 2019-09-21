@@ -34,6 +34,11 @@ export default {
         return data
     },
 
+    async [actionTypes.INSERIR_USUARIO](context, usuario) {
+        const {data} = await axios.post('api/usuarios', usuario)
+        return data
+    },
+
     async [actionTypes.REALIZAR_PARECER](context, {processoId, usuarioId, textoParecer}) {
         const {data} = await axios.put(`api/processos/${processoId}/parecer/${usuarioId}`, {textoParecer})
         return data

@@ -10,6 +10,7 @@ import ProcessoDetalhe from '@/views/pages/processo/detalhe/ProcessoDetalhe'
 import ProcessoNovo from '@/views/pages/processo/detalhe/ProcessoNovo'
 import UsuarioBusca from '@/views/pages/usuario/busca/UsuarioBusca'
 import UsuarioDetalhe from '@/views/pages/usuario/detalhe/UsuarioDetalhe'
+import UsuarioNovo from '@/views/pages/usuario/detalhe/UsuarioNovo'
 
 Vue.use(Router)
 
@@ -53,6 +54,11 @@ const router = new Router({
             path: '/usuarios/:usuarioId',
             name: 'usuarioDetalhe',
             component: UsuarioDetalhe
+        },
+        {
+            path: '/usuarios/novo',
+            name: 'usuarioNovo',
+            component: UsuarioNovo
         }
     ]
 })

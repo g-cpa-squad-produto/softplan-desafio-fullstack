@@ -60,7 +60,7 @@
                 this.confirmandoRemocao = false
             },
             irParaNovoUsuario() {
-                // TODO
+                this.$router.push({name: 'usuarioNovo'})
             },
             async remover() {
                 try {
