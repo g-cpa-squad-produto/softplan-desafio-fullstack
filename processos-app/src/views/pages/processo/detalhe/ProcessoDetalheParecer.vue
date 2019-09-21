@@ -6,12 +6,15 @@
                     v-for="parecer in pareceres"
                     :key="parecer.id">
                 <template v-slot:header>
-                    <div>
-                    <span :class="{'green--text': estaRealizado(parecer), 'red--text': !estaRealizado(parecer)}">
-                        {{parecer.situacao}}
-                    </span>
+                    <v-flex xs10>
+                        <span :class="{'green--text': estaRealizado(parecer), 'red--text': !estaRealizado(parecer)}">
+                            {{parecer.situacao}}
+                        </span>
                         <span class="ml-2">{{parecer.usuario.nome}}</span>
-                    </div>
+                    </v-flex>
+                    <v-flex xs2 class="text-xs-right mr-2">
+                        <span v-if="estaRealizado(parecer)">{{parecer.dataAtualizacao | date('DD/MM/YYYY')}}</span>
+                    </v-flex>
                 </template>
                 <v-card>
                     <v-card-text>{{parecer.texto}}</v-card-text>

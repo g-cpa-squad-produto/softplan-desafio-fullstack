@@ -13,7 +13,8 @@ CREATE TABLE usuario (
 INSERT INTO usuario (nome, email, tipo, situacao) VALUES
   ('José de Freitas', 'josefreitas@tj.com.br', 'ADMINISTRADOR', 'ATIVO'),
   ('João da Silva', 'joaosilva@tj.com.br', 'TRIADOR', 'ATIVO'),
-  ('Maria da Glória', 'mariagloria@tj.com.br', 'FINALIZADOR', 'ATIVO');
+  ('Maria da Glória', 'mariagloria@tj.com.br', 'FINALIZADOR', 'ATIVO'),
+  ('Antônio Oliveira', 'antoniooliveira@tj.com.br', 'FINALIZADOR', 'ATIVO');
 
 CREATE TABLE processo (
   id INT AUTO_INCREMENT PRIMARY KEY,

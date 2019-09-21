@@ -11,7 +11,7 @@
             </v-flex>
         </v-layout>
         <processo-busca-tabela :processos="processos" v-if="existeProcessos" @ver-detalhes="verDetalhes"/>
-        <processo-busca-vazia v-else/>
+        <empty-search-results v-else/>
     </div>
 </template>
 
@@ -19,11 +19,11 @@
     import {actionTypes} from '@/commons/constants'
     import PageTitle from '@/views/components/PageTitle'
     import ProcessoBuscaTabela from './ProcessoBuscaTabela'
-    import ProcessoBuscaVazia from './ProcessoBuscaVazia'
+    import EmptySearchResults from '@/views/components/EmptySearchResults'
 
     export default {
         name: 'ProcessoBusca',
-        components: {PageTitle, ProcessoBuscaVazia, ProcessoBuscaTabela},
+        components: {PageTitle, EmptySearchResults, ProcessoBuscaTabela},
         data() {
             return {
                 processos: []
