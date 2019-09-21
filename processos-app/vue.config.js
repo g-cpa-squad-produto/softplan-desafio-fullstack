@@ -6,7 +6,7 @@ module.exports = {
         https: false,
         hotOnly: false,
         proxy: {
-            "/api/*": {
+            "api/*": {
                 target: "http://localhost:8081",
                 secure: false
             }

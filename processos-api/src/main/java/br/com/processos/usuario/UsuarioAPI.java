@@ -20,7 +20,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/usuarios")
+@RequestMapping(path = "/api/usuarios")
 public class UsuarioAPI {
 
     @Autowired

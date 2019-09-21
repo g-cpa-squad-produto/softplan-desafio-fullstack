@@ -20,7 +20,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/processos")
+@RequestMapping(path = "/api/processos")
 public class ProcessoAPI {
 
     @Autowired
