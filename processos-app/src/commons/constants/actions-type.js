@@ -6,5 +6,6 @@ export default {
     BUSCAR_USUARIOS: 'buscarUsuarios',
     INSERIR_PROCESSO: 'inserirProcesso',
     REALIZAR_PARECER: 'realizarParecer',
+    REMOVER_USUARIO: 'removerUsuario',
     SOLICITAR_PARECER: 'solicitarParecer'
 }

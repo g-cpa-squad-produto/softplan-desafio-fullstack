@@ -15,4 +15,6 @@ public interface ProcessoRepository extends CrudRepository<Processo, Long> {
 
     @Query("SELECT p FROM Processo p JOIN FETCH p.usuarioCriacao")
     List<Processo> findAllAndFetchDependencies();
+
+    List<Processo> findAllByUsuarioCriacaoId(Long usuarioId);
 }

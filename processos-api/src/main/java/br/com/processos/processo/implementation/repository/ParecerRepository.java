@@ -22,4 +22,6 @@ public interface ParecerRepository extends CrudRepository<Parecer, Long> {
 
     @Query("SELECT p FROM Parecer p JOIN FETCH p.usuario JOIN FETCH p.processo pr JOIN FETCH pr.usuarioCriacao WHERE p.processo.id = :processoId AND p.usuario.id = :usuarioId")
     Optional<Parecer> findByUsuarioIdAndProcessoId(@Param("processoId") Long processoId, @Param("usuarioId") Long usuarioId);
+
+    List<Parecer> findAllByUsuarioId(Long usuarioId);
 }

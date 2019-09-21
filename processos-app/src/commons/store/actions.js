@@ -39,6 +39,10 @@ export default {
         return data
     },
 
+    async [actionTypes.REMOVER_USUARIO](context, usuarioId) {
+        await axios.delete(`api/usuarios/${usuarioId}`)
+    },
+
     async [actionTypes.SOLICITAR_PARECER](context, {processoId, usuariosParecer}) {
         const {data} = await axios.post(`api/processos/${processoId}/pareceres`, usuariosParecer)
         return data

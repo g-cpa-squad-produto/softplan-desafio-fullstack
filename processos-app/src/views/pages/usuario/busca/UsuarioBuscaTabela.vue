@@ -10,7 +10,7 @@
             <td>{{ props.item.email }}</td>
             <td>{{ props.item.tipo | titleCase}}</td>
             <td class="text-xs-right">
-                <v-tooltip bottom>
+                <v-tooltip bottom v-if="!ehUsuarioLogado(props.item)">
                     <v-btn flat icon slot="activator" @click="remover(props.item)">
                         <v-icon class="text--secondary">delete</v-icon>
                     </v-btn>
@@ -62,6 +62,10 @@
             }
         },
         methods: {
+            ehUsuarioLogado(usuarioListagem) {
+                const usuarioLogado = this.$store.state.usuario
+                return usuarioLogado.id === usuarioListagem.id
+            },
             remover(usuario) {
                 this.$emit('remover', usuario)
             }

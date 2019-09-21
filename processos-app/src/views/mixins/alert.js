@@ -1,21 +1,22 @@
-import {mutationTypes} from '@/commons/constants'
+import {mutationTypes, exceptions} from '@/commons/constants'
 
 export default {
     methods: {
-        mostrarAlertSucesso(mensagem) {
-
-        },
         mostrarAlertSucessoDefault() {
             this.$store.commit(mutationTypes.SET_ALERT, {
                 message: 'Operação realizada com sucesso.',
                 type: 'success'
             })
         },
-        mostrarAlertErro(mensagem) {
-
-        },
-        mostrarAlertErroDefault() {
-
+        mostrarAlertExcecao(e) {
+            let message = exceptions[e.message]
+            if (!message) {
+                message = exceptions.default
+            }
+            this.$store.commit(mutationTypes.SET_ALERT, {
+                message,
+                type: 'error'
+            })
         }
     }
 }
