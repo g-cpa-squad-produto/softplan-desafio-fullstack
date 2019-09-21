@@ -5,5 +5,6 @@ export default {
     BUSCAR_PROCESSOS_PENDENTES: 'buscarProcessosPendentes',
     BUSCAR_USUARIOS: 'buscarUsuarios',
     INSERIR_PROCESSO: 'inserirProcesso',
+    REALIZAR_PARECER: 'realizarParecer',
     SOLICITAR_PARECER: 'solicitarParecer'
 }

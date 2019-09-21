@@ -16,8 +16,8 @@ public class RealizarParecer {
     @Autowired
     private ParecerRepository parecerRepository;
 
-    public Parecer executar(Long parecerId, String texto) {
-        Parecer parecer = parecerRepository.findById(parecerId).orElse(null);
+    public Parecer executar(Long processoId, Long usuarioId, String texto) {
+        Parecer parecer = parecerRepository.findByUsuarioIdAndProcessoId(processoId, usuarioId).orElse(null);
         validarParecerExistente(parecer);
         atualizarDadosParecer(parecer, texto);
         return parecerRepository.save(parecer);

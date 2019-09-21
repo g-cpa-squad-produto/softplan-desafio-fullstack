@@ -65,8 +65,8 @@ public class ProcessoImpl implements IProcesso {
     }
 
     @Override
-    public Parecer realizarParecer(Long parecerId, String textoParecer) {
-        return realizarParecer.executar(parecerId, textoParecer);
+    public Parecer realizarParecer(Long processoId, Long usuarioId, String textoParecer) {
+        return realizarParecer.executar(processoId, usuarioId, textoParecer);
     }
 
     @Override

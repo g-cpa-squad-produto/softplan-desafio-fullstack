@@ -5,7 +5,7 @@
                 <page-title titulo="Processos" subtitulo="Listagem dos processos pendentes de parercer" rota-voltar="login"/>
             </v-flex>
         </v-layout>
-        <processo-busca-tabela :processos="processos" v-if="existeProcessos"/>
+        <processo-busca-tabela :processos="processos" v-if="existeProcessos" @ver-detalhes="verDetalhes"/>
         <processo-busca-vazia v-else/>
     </div>
 </template>
@@ -35,6 +35,9 @@
         methods: {
             async buscarProcessos() {
                 this.processos = await this.$store.dispatch(actionTypes.BUSCAR_PROCESSOS_PENDENTES)
+            },
+            verDetalhes(processoId) {
+                this.$router.push({name: 'processoDetalhe', params: {processoId}})
             }
         }
     }

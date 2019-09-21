@@ -18,6 +18,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(path = "/api/processos")
@@ -58,8 +59,8 @@ public class ProcessoAPI {
         return iProcesso.solicitarParecer(processoId, usuariosId);
     }
 
-    @PutMapping(path = "/{processoId}/parecer/{parecerId}")
-    public Parecer realizarParecer(@NotNull @PathVariable Long parecerId, @NotNull @NotEmpty @RequestBody String textoParecer) {
-        return iProcesso.realizarParecer(parecerId, textoParecer);
+    @PutMapping(path = "/{processoId}/parecer/{usuarioId}")
+    public Parecer realizarParecer(@NotNull @PathVariable Long processoId, @NotNull @PathVariable Long usuarioId, @NotNull @NotEmpty @RequestBody Map<String, String> parecer) {
+        return iProcesso.realizarParecer(processoId, usuarioId, parecer.get("textoParecer"));
     }
 }

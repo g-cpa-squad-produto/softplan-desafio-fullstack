@@ -2,12 +2,21 @@
     <div>
         <v-layout class="mb-3">
             <v-flex xs10>
-                <page-title titulo="Processo" rota-voltar="processos"
-                            subtitulo="Detalhes do processo"/>
+                <page-title
+                        titulo="Processo"
+                        rota-voltar="processos"
+                        subtitulo="Detalhes do processo"/>
             </v-flex>
         </v-layout>
         <processo-form v-model="processo" :editando="false"/>
-        <processo-detalhe-parecer :pareceres="pareceres" class="mt-5" v-if="ehUsuarioTriador"/>
+        <processo-detalhe-parecer
+                class="mt-5"
+                :pareceres="pareceres"
+                v-if="ehUsuarioTriador"/>
+        <processo-detalhe-novo-parecer
+                class="mt-3"
+                @salvar="salvarParecer"
+                v-if="ehUsuarioFinalizador"/>
     </div>
 </template>
 
@@ -17,10 +26,11 @@
     import PageTitle from '@/views/components/PageTitle'
     import ProcessoForm from './ProcessoForm'
     import ProcessoDetalheParecer from './ProcessoDetalheParecer'
+    import ProcessoDetalheNovoParecer from './ProcessoDetalheNovoParecer'
 
     export default {
         name: 'ProcessoDetalhe',
-        components: {ProcessoDetalheParecer, ProcessoForm, PageTitle},
+        components: {ProcessoDetalheNovoParecer, ProcessoDetalheParecer, ProcessoForm, PageTitle},
         data() {
             return {
                 processo: {},
@@ -28,7 +38,7 @@
             }
         },
         computed: {
-            ...mapGetters(['ehUsuarioTriador'])
+            ...mapGetters(['ehUsuarioTriador', 'ehUsuarioFinalizador'])
         },
         async mounted() {
             await this.buscarProcesso(this.$route.params.processoId)
@@ -40,6 +50,15 @@
             },
             async buscarPareceresProcesso(processoId) {
                 this.pareceres = await this.$store.dispatch(actionTypes.BUSCAR_PARECERES_PROCESSO, processoId)
+            },
+            async salvarParecer(textoParecer) {
+                await this.$store.dispatch(actionTypes.REALIZAR_PARECER, {
+                    processoId: this.processo.id,
+                    usuarioId: this.$store.state.usuario.id,
+                    textoParecer
+                })
+                this.mostrarAlertSucessoDefault()
+                this.$router.push({name: 'processosPendentes'})
             }
         }
     }

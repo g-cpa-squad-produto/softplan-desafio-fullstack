@@ -17,7 +17,7 @@ public interface IProcesso {
 
     List<Parecer> solicitarParecer(Long processoId, List<Long> usuariosId);
 
-    Parecer realizarParecer(Long parecerId, String textoParecer);
+    Parecer realizarParecer(Long processoId, Long usuarioId, String textoParecer);
 
     List<Parecer> buscarPareceresProcesso(Long processoId);
 }
