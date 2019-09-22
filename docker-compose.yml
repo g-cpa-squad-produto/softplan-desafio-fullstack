@@ -1,0 +1,21 @@
+version: '3'
+services:
+
+  processos-api:
+    image: processos-api:1.0.0
+    container_name: processos-api
+    ports:
+      - 8081:8081
+    networks:
+      - processos-network
+
+  processos-app:
+    image: processos-app:1.0.0-SNAPSHOT
+    container_name: processos-app
+    ports:
+      - 8080:80
+    networks:
+      - processos-network
+
+networks:
+  processos-network:
