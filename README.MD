@@ -5,11 +5,12 @@ Adolfo Marangoni Hengling
 
 1. Ambiente
 2. Stack utilizada
-3. Build do sistema
-4. Rodando o sistema com docker
-5. Rodando o sistem sem docker
-6. Acessando a aplicação
-7. Acessando o gerenciador de banco de dados 
+3. Carga de dados inicial
+4. Build do sistema
+5. Rodando o sistema com docker
+6. Rodando o sistem sem docker
+7. Acessando a aplicação
+8. Acessando o gerenciador de banco de dados 
 
 #### 1. Ambiente 
 
@@ -17,8 +18,8 @@ Os itens listados abaixos são sugestões para o ambiente que for construir e ex
 devem ao fato de evitar erros na execução dos comandos que executam tais tarefas. 
 
 - Linux (de preferência ubuntu ou debian)
-- Maven instalado globalmente
-- NPM instalado globalmente
+- Maven (de preferência instalado globalmente)
+- NPM (de preferência instalado globalmente)
 - Docker
 - Docker Compose
 - Git
@@ -36,9 +37,9 @@ A stack escolhida levou em consideração as sugestões feitas na descrição do
 - Banco de dados em memória H2
 - Maven
 
-O banco de dados *H2* foi escolhido
-para facilitar o desenvolvimento e, visto que utilizamos o mecanismo *Spring Data* para realizar os acessos ao banco, 
-ele poderia ser facilmente substituído por outro SGDB, como *PostgreSQL* ou *SQL SERVER*. 
+O banco de dados relacional *H2* foi escolhido para facilitar o desenvolvimento e, visto que utilizamos o mecanismo 
+*Spring Data* para realizar os acessos ao banco, ele poderia ser facilmente substituído por outro SGDB, como 
+*PostgreSQL* ou *SQL SERVER*.
 
 ##### Frontend
 
@@ -50,16 +51,27 @@ servir os arquivos estáticos do frontend e também realizar o proxy para as req
 é capaz de realizar o balanceamento de carga em um ambiente clusterizado, onde temos vários servidores para a API 
 da aplicação.
 
-#### 3. Build do sistema
+#### 3. Carga de dados inicial
 
-##### 3.1 Repositório
+No escopo do desafio, a estrutura de tabelas e carga inicial de dados são criadas todas as vezes em que o 
+backend é iniciado.
+
+A carga inicial conta com quatro usuários pré-cadastrados, sendo:
+
+- Um administrador
+- Um triador 
+- Dois finalizadores 
+
+#### 4. Build do sistema
+
+##### 4.1 Repositório
 
 Abra um terminal e faça o clone deste repositório. Iremos nos referir a pasta ```softplan-desafio-fullstack``` como
 pasta raiz do código fonte do projeto. 
 
 **ATENÇÃO**: a branch com o código fonte que deve ser utilizado chama-se ```adolfo-hengling-3```.
 
-##### 3.2 Backend
+##### 4.2 Backend
 
 Abra um terminal, entre na pasta raiz do código fonte do desafio e execute os comandos a seguir:
 
@@ -70,7 +82,7 @@ mvn clean install
 
 Ao final da execução, confira se o artefato ```processos-api.jar``` foi gerado na pasta ```processos-api/target```.
 
-##### 3.3 Frontend
+##### 4.3 Frontend
 
 Abra um terminal, entre na pasta raiz do código fonte do desafio e execute os comandos a seguir:
 
@@ -82,7 +94,7 @@ npm run build
 
 Ao final da execução, confira se a pasta ```dist``` foi gerada dentro da pasta ```processos-app```. 
 
-##### 3.3 Imagens Docker
+##### 4.4 Imagens Docker
 
 Abra um terminal, entre na pasta raiz do código fonte do desafio e execute os comandos a seguir:
 
@@ -98,7 +110,7 @@ geradas através do comando:
 sudo docker images
 ```
 
-#### 4. Rodando o sistema com docker
+#### 5. Rodando o sistema com docker
 
 Abra um terminal, entre na pasta raiz do código fonte do desafio e execute os comandos a seguir:
 
@@ -110,11 +122,14 @@ sudo ./start.sh
 Espere alguns segundos e acesse o endereço ```http://localhost:8080```. A aplicação terá iniciado e você estará na tela 
 de escolha do usuário para acesso. Para mais informações de como acessar a aplicação, consulte o *item 6* deste documento.
 
-#### 5. Rodando o sistem sem docker
+**ATENÇÃO**: Caso você acesse o endereço e não veja os usuários pré cadastrados, aguarde alguns instantes e aperte 
+*F5* para atualizar a página, pois o backend pode demorar um pouco para subir completamente.
+
+#### 6. Rodando o sistem sem docker
 
 Para subir o sistema fora dos containers docker, execute os comandos abaixo:
 
-##### 5.1 Backend
+##### 6.1 Backend
 
 Abra um terminal, entre na pasta raiz do código fonte do desafio e execute os comandos a seguir:
 
@@ -123,7 +138,7 @@ cd processos-api/target
 java -jar processos-api.jar
 ```
 
-##### 5.2 Frontend
+##### 6.2 Frontend
 
 Abra um terminal, entre na pasta raiz do código fonte do desafio e execute os comandos a seguir:
 
@@ -132,7 +147,7 @@ cd processos-app
 npm run serve
 ```
 
-#### 6. Acessando a aplicação
+#### 7. Acessando a aplicação
 
 Após subir a aplicação, com ou sem docker, ela estará disponível no endereço ```http://localhost:8080```.
 
@@ -155,7 +170,7 @@ Caso seja necessário realizar testes chamando diretamente a *api*, os seguintes
 - **[PUT]** */api/processos/{id}/parecer/{usuarioId}* : atualiza um parecer de um usuário em um processo
 
 
-#### 7. Acessando o gerenciador de banco de dados
+#### 8. Acessando o gerenciador de banco de dados
 
 Após subir o backend da aplicação, com ou sem docker, será possível acessar o gerenciador de banco de dados pelo 
 endereço ```http://localhost:8081/h2-console``` e utilizando os seguintes dados de conexão:
