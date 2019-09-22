@@ -55,7 +55,9 @@ da aplicação.
 ##### 3.1 Repositório
 
 Abra um terminal e faça o clone deste repositório. Iremos nos referir a pasta ```softplan-desafio-fullstack``` como
-pasta raiz do código fonte do projeto.
+pasta raiz do código fonte do projeto. 
+
+**ATENÇÃO**: a branch com o código fonte que deve ser utilizado chama-se ```adolfo-hengling-3```.
 
 ##### 3.2 Backend
 
