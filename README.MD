@@ -21,6 +21,7 @@ devem ao fato de evitar erros na execução dos comandos que executam tais taref
 - NPM instalado globalmente
 - Docker
 - Docker Compose
+- Git
 
 Além disso, a aplicação utiliza as portas *8080* e *8081* do host local. Caso essas portas estejam alocadas por algum
 outro processo, não será possível executar a aplicação. 
@@ -51,7 +52,12 @@ da aplicação.
 
 #### 3. Build do sistema
 
-##### 3.1 Backend
+##### 3.1 Repositório
+
+Abra um terminal e faça o clone deste repositório. Iremos nos referir a pasta ```softplan-desafio-fullstack``` como
+pasta raiz do código fonte do projeto.
+
+##### 3.2 Backend
 
 Abra um terminal, entre na pasta raiz do código fonte do desafio e execute os comandos a seguir:
 
@@ -62,7 +68,7 @@ mvn clean install
 
 Ao final da execução, confira se o artefato ```processos-api.jar``` foi gerado na pasta ```processos-api/target```.
 
-##### 3.2 Frontend
+##### 3.3 Frontend
 
 Abra um terminal, entre na pasta raiz do código fonte do desafio e execute os comandos a seguir:
 
