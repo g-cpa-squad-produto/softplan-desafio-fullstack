@@ -70,7 +70,7 @@
                     this.fecharConfirmacaoRemocao()
                 } catch (e) {
                     this.fecharConfirmacaoRemocao()
-                    this.mostrarAlertExcecao(e.response.data)
+                    this.mostrarAlertExcecao(e)
                 }
             }
         }

@@ -52,13 +52,17 @@
                 this.pareceres = await this.$store.dispatch(actionTypes.BUSCAR_PARECERES_PROCESSO, processoId)
             },
             async salvarParecer(textoParecer) {
-                await this.$store.dispatch(actionTypes.REALIZAR_PARECER, {
-                    processoId: this.processo.id,
-                    usuarioId: this.$store.state.usuario.id,
-                    textoParecer
-                })
-                this.mostrarAlertSucessoDefault()
-                this.$router.push({name: 'processosPendentes'})
+                try {
+                    await this.$store.dispatch(actionTypes.REALIZAR_PARECER, {
+                        processoId: this.processo.id,
+                        usuarioId: this.$store.state.usuario.id,
+                        textoParecer
+                    })
+                    this.mostrarAlertSucessoDefault()
+                    this.$router.push({name: 'processosPendentes'})
+                } catch(e) {
+                    this.mostrarAlertExcecao(e)
+                }
             }
         }
     }

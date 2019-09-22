@@ -25,10 +25,14 @@
         },
         methods: {
             async salvarProcesso() {
-                const processoInserido = await this.inserirProcesso()
-                await this.solicitarParecerUsuarios(processoInserido)
-                this.$router.push({name: 'processos'})
-                this.mostrarAlertSucessoDefault()
+                try {
+                    const processoInserido = await this.inserirProcesso()
+                    await this.solicitarParecerUsuarios(processoInserido)
+                    this.$router.push({name: 'processos'})
+                    this.mostrarAlertSucessoDefault()
+                } catch (e) {
+                    this.mostrarAlertExcecao(e)
+                }
             },
             async inserirProcesso() {
                 this.novoProcesso.usuarioCriacao = this.$store.state.usuario

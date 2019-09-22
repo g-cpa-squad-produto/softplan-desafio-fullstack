@@ -19,7 +19,6 @@
         },
         created: function () {
             this.$store.watch(state => state.alert, () => {
-                console.log(alert)
                 const alert = this.$store.state.alert
                 if (alert.message !== '') {
                     this.show = true

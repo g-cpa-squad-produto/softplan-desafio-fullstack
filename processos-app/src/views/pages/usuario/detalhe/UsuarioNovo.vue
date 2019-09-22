@@ -31,7 +31,7 @@
                     this.mostrarAlertSucessoDefault()
                     this.$router.push({name: 'usuarios'})
                 } catch (e) {
-                    this.mostrarAlertExcecao(e.response.data)
+                    this.mostrarAlertExcecao(e)
                 }
             }
         }

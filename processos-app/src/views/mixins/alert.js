@@ -9,7 +9,7 @@ export default {
             })
         },
         mostrarAlertExcecao(e) {
-            let message = exceptions[e.message]
+            let message = e.response && e.response.data ? exceptions[e.response.data.message] : null
             if (!message) {
                 message = exceptions.default
             }
