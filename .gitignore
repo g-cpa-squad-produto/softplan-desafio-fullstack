@@ -1,4 +1,7 @@
 processos-api/target
+processos-api/processos-api.iml
+
 processos-app/node_modules
+processos-app/dist
 
 .idea

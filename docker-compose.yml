@@ -2,7 +2,7 @@ version: '3'
 services:
 
   processos-api:
-    image: processos-api:1.0.0
+    image: adolfo-hengling/processos-api:1.0.0
     container_name: processos-api
     ports:
       - 8081:8081
@@ -10,7 +10,7 @@ services:
       - processos-network
 
   processos-app:
-    image: processos-app:1.0.0-SNAPSHOT
+    image: adolfo-hengling/processos-app:1.0.0
     container_name: processos-app
     ports:
       - 8080:80
