@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="c6dcfb7a-db81-43a7-8689-e6a0637b336c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../README.MD" beforeDir="false" afterPath="$PROJECT_DIR$/../README.MD" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="postgres@shopanimal" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="postgres@shopanimal" type="feb32156:DbDataSourceImpl" />
+        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="shop-animal-core" />
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>+ &quot;</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1OiGUdWidqNviPb9IqsKs5pJJ1P" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DatabaseDriversLRU" value="postgresql" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="database.console.LAST_STATE" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\work\shop-animal-core" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="allServicesViewState">
+      <serviceView>
+        <option name="contentProportion" value="0.12972973" />
+        <treeState>
+          <expand>
+            <path>
+              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@11549e52" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+            </path>
+            <path>
+              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@11549e52" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceNode@fdafc96" type="9fbbdea:ServiceModel$ServiceNode" />
+            </path>
+          </expand>
+          <select />
+        </treeState>
+      </serviceView>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c6dcfb7a-db81-43a7-8689-e6a0637b336c" name="Default Changelist" comment="" />
+      <created>1561786783466</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1561786783466</updated>
+      <workItem from="1561786784700" duration="118000" />
+      <workItem from="1561787228054" duration="1825000" />
+      <workItem from="1561809157436" duration="6595000" />
+      <workItem from="1562022055314" duration="7017000" />
+      <workItem from="1562087791855" duration="4188000" />
+      <workItem from="1562105535881" duration="679000" />
+      <workItem from="1562191567870" duration="91000" />
+      <workItem from="1562202191217" duration="65000" />
+      <workItem from="1562202862492" duration="3000" />
+      <workItem from="1562202908102" duration="3332000" />
+      <workItem from="1562286124572" duration="6525000" />
+      <workItem from="1562362710792" duration="9128000" />
+      <workItem from="1562403031767" duration="6513000" />
+      <workItem from="1562629014749" duration="806000" />
+      <workItem from="1562887463048" duration="4701000" />
+      <workItem from="1562972338438" duration="7459000" />
+      <workItem from="1563025901519" duration="20906000" />
+      <workItem from="1563110387384" duration="1150000" />
+      <workItem from="1563142570959" duration="1213000" />
+      <workItem from="1563324401138" duration="1060000" />
+      <workItem from="1563658859864" duration="6512000" />
+      <workItem from="1563732604373" duration="670000" />
+      <workItem from="1563755080841" duration="3076000" />
+      <workItem from="1564009875973" duration="5747000" />
+      <workItem from="1564104512090" duration="2032000" />
+      <workItem from="1564180397264" duration="10364000" />
+      <workItem from="1564248231333" duration="2002000" />
+      <workItem from="1564444948898" duration="1730000" />
+      <workItem from="1564453027109" duration="437000" />
+      <workItem from="1564617194090" duration="3037000" />
+      <workItem from="1564961075331" duration="9811000" />
+      <workItem from="1565045096768" duration="2565000" />
+      <workItem from="1565134412556" duration="8302000" />
+      <workItem from="1565212615362" duration="36000" />
+      <workItem from="1565222211748" duration="7198000" />
+      <workItem from="1565301216780" duration="11013000" />
+      <workItem from="1565371851869" duration="1018000" />
+      <workItem from="1565372913846" duration="3908000" />
+      <workItem from="1565469963501" duration="642000" />
+      <workItem from="1565485769157" duration="1844000" />
+      <workItem from="1565526470599" duration="5328000" />
+      <workItem from="1565569866768" duration="3735000" />
+      <workItem from="1565580347150" duration="21000" />
+      <workItem from="1565582852425" duration="1416000" />
+      <workItem from="1565600939531" duration="1318000" />
+      <workItem from="1565602322464" duration="34000" />
+      <workItem from="1565652185850" duration="2196000" />
+      <workItem from="1565746774003" duration="1549000" />
+      <workItem from="1565822151951" duration="5621000" />
+      <workItem from="1565916115729" duration="9067000" />
+      <workItem from="1566429506191" duration="1493000" />
+      <workItem from="1566525130791" duration="625000" />
+      <workItem from="1566568342878" duration="272000" />
+      <workItem from="1566834279918" duration="1527000" />
+      <workItem from="1567205428308" duration="6975000" />
+      <workItem from="1567285191701" duration="14069000" />
+      <workItem from="1567306814057" duration="2973000" />
+      <workItem from="1567816708439" duration="1691000" />
+      <workItem from="1567913627369" duration="1264000" />
+      <workItem from="1567960406738" duration="6158000" />
+      <workItem from="1568288065539" duration="770000" />
+      <workItem from="1568471167530" duration="943000" />
+      <workItem from="1568480707069" duration="912000" />
+      <workItem from="1568990657423" duration="220000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

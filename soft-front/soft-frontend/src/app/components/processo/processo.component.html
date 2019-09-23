@@ -1,0 +1,28 @@
+<div class="container">
+  <form class="form-group">
+    <div *ngIf="model">
+      <h3>Criar Processo</h3>
+      <div class="form-group col-md-3">
+        <h5>Selecione o Usuário</h5>
+        <select class="form-control" id="usuario"
+                title="Selecione" name="usuario"
+                [(ngModel)]="usuario" data-live-search-style="begins" data-live-search="true">
+          <option *ngFor="let usu of usuarios"
+                  [ngValue]="usu">{{ usu.nome }} - {{usu.tipoUsuario}}</option>
+        </select>
+      </div>
+
+      <div class="form-group col-md-3" *ngIf="usuario && usuario.tipoUsuario === 'TRIADOR'">
+        <label for="email">Email *</label>
+        <input type="text" class="form-control" id="email" [(ngModel)]="model.email" name="email">
+      </div>
+
+      <div class="form-group col-md-6" *ngIf="usuario && usuario.tipoUsuario === 'TRIADOR'">
+        <button type="button" class="btn btn-primary" (click)="cadastrar()"
+                [disabled]="!model.email ">Cadastrar
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+

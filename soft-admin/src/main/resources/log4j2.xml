@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="60">
+    <Properties>
+        <Property name="DIR">/var/log/soft-admin</Property>
+        <Property name="SIZE">5 MB</Property>
+        <Property name="INDEX">20</Property>
+        <Property name="PATTERN">%d{ISO8601} [%t] %-5level (%c{1}:%M:%L) %m%n%throwable</Property>
+    </Properties>
+    <Appenders>
+        <RollingFile name="root" fileName="${DIR}/root.log"
+                     filePattern="${DIR}/root.log-%d{MM-dd-yyyy HH:mm:ss}">
+            <PatternLayout pattern="${PATTERN}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="${SIZE}" />
+            </Policies>
+            <DefaultRolloverStrategy max="${INDEX}"/>
+        </RollingFile>
+        <RollingFile name="info" fileName="${DIR}/info.log"
+                     filePattern="${DIR}/info.log-%d{MM-dd-yyyy HH:mm:ss}">
+            <PatternLayout pattern="${PATTERN}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="${SIZE}" />
+            </Policies>
+            <DefaultRolloverStrategy max="${INDEX}"/>
+        </RollingFile>
+        <RollingFile name="error" fileName="${DIR}/error.log"
+                     filePattern="${DIR}/error.log-%d{MM-dd-yyyy HH:mm:ss}">
+            <PatternLayout pattern="${PATTERN}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="${SIZE}" />
+            </Policies>
+            <DefaultRolloverStrategy max="${INDEX}"/>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="root" />
+        </Root>
+        <Logger name="br.com.soft">
+            <AppenderRef ref="info" additivity="false" level="info" />
+            <AppenderRef ref="error" additivity="true" level="error"/>
+        </Logger>
+    </Loggers>
+</Configuration>

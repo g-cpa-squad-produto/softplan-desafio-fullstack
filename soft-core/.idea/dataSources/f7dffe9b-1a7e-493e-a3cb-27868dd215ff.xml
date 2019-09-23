@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="postgres@shopanimal">
+  <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.15">
+    <root id="1">
+      <ServerVersion>9.6.14</ServerVersion>
+    </root>
+    <database id="2" parent="1" name="cloudsqladmin">
+      <ObjectId>16384</ObjectId>
+      <Owner>cloudsqladmin</Owner>
+      <Substituted>1</Substituted>
+    </database>
+    <database id="3" parent="1" name="postgres">
+      <ObjectId>12996</ObjectId>
+      <Comment>default administrative connection database</Comment>
+      <Owner>cloudsqlsuperuser</Owner>
+      <Substituted>1</Substituted>
+    </database>
+    <database id="4" parent="1" name="shopAnimal">
+      <ObjectId>16403</ObjectId>
+      <Owner>cloudsqlsuperuser</Owner>
+      <IntrospectionStateNumber>21496792</IntrospectionStateNumber>
+      <Current>1</Current>
+      <Relations>sequence|table|17252|17254|1
+sequence|table|17364|17366|1
+sequence|table|17640|17642|1
+sequence|table|26376|26378|1
+sequence|table|26596|26598|1
+sequence|table|26607|26609|1
+</Relations>
+      <Substituted>1</Substituted>
+    </database>
+    <database id="5" parent="1" name="shopAnimalHOM">
+      <ObjectId>26519</ObjectId>
+      <Owner>cloudsqlsuperuser</Owner>
+      <Substituted>1</Substituted>
+    </database>
+    <role id="6" parent="1" name="cloudsqladmin">
+      <ObjectId>10</ObjectId>
+      <SuperRole>1</SuperRole>
+      <Inherit>1</Inherit>
+      <CreateRole>1</CreateRole>
+      <CreateDb>1</CreateDb>
+      <CanLogin>1</CanLogin>
+      <ConnectionLimit>-1</ConnectionLimit>
+      <Replication>1</Replication>
+      <BypassRls>1</BypassRls>
+    </role>
+    <role id="7" parent="1" name="cloudsqlagent">
+      <ObjectId>16386</ObjectId>
+      <Inherit>1</Inherit>
+      <CreateRole>1</CreateRole>
+      <CreateDb>1</CreateDb>
+      <CanLogin>1</CanLogin>
+      <ConnectionLimit>-1</ConnectionLimit>
+    </role>
+    <role id="8" parent="1" name="cloudsqlreplica">
+      <ObjectId>16387</ObjectId>
+      <Inherit>1</Inherit>
+      <CanLogin>1</CanLogin>
+      <ConnectionLimit>-1</ConnectionLimit>
+      <Replication>1</Replication>
+    </role>
+    <role id="9" parent="1" name="cloudsqlsuperuser">
+      <ObjectId>16385</ObjectId>
+      <Inherit>1</Inherit>
+      <CreateRole>1</CreateRole>
+      <CreateDb>1</CreateDb>
+      <CanLogin>1</CanLogin>
+      <ConnectionLimit>-1</ConnectionLimit>
+    </role>
+    <role id="10" parent="1" name="pg_monitor">
+      <ObjectId>3373</ObjectId>
+      <Inherit>1</Inherit>
+      <ConnectionLimit>-1</ConnectionLimit>
+    </role>
+    <role id="11" parent="1" name="pg_read_all_settings">
+      <ObjectId>3374</ObjectId>
+      <Inherit>1</Inherit>
+      <ConnectionLimit>-1</ConnectionLimit>
+    </role>
+    <role id="12" parent="1" name="pg_read_all_stats">
+      <ObjectId>3375</ObjectId>
+      <Inherit>1</Inherit>
+      <ConnectionLimit>-1</ConnectionLimit>
+    </role>
+    <role id="13" parent="1" name="pg_signal_backend">
+      <ObjectId>4200</ObjectId>
+      <Inherit>1</Inherit>
+      <ConnectionLimit>-1</ConnectionLimit>
+    </role>
+    <role id="14" parent="1" name="pg_stat_scan_tables">
+      <ObjectId>3377</ObjectId>
+      <Inherit>1</Inherit>
+      <ConnectionLimit>-1</ConnectionLimit>
+    </role>
+    <role id="15" parent="1" name="postgres">
+      <ObjectId>16388</ObjectId>
+      <Inherit>1</Inherit>
+      <CreateRole>1</CreateRole>
+      <CreateDb>1</CreateDb>
+      <CanLogin>1</CanLogin>
+      <ConnectionLimit>-1</ConnectionLimit>
+    </role>
+    <role id="16" parent="1" name="shopAnimal">
+      <ObjectId>16404</ObjectId>
+      <Inherit>1</Inherit>
+      <CreateRole>1</CreateRole>
+      <CreateDb>1</CreateDb>
+      <CanLogin>1</CanLogin>
+      <ConnectionLimit>-1</ConnectionLimit>
+    </role>
+    <schema id="17" parent="2" name="information_schema">
+      <Substituted>1</Substituted>
+    </schema>
+    <schema id="18" parent="2" name="pg_catalog">
+      <Comment>system catalog schema</Comment>
+      <Substituted>1</Substituted>
+    </schema>
+    <schema id="19" parent="3" name="information_schema">
+      <Substituted>1</Substituted>
+    </schema>
+    <schema id="20" parent="3" name="pg_catalog">
+      <Comment>system catalog schema</Comment>
+      <Substituted>1</Substituted>
+    </schema>
+    <schema id="21" parent="4" name="information_schema">
+      <ObjectId>12708</ObjectId>
+      <StateNumber>938</StateNumber>
+      <Owner>cloudsqladmin</Owner>
+      <Substituted>1</Substituted>
+    </schema>
+    <schema id="22" parent="4" name="pg_catalog">
+      <ObjectId>11</ObjectId>
+      <Comment>system catalog schema</Comment>
+      <StateNumber>935</StateNumber>
+      <Owner>cloudsqladmin</Owner>
+      <Substituted>1</Substituted>
+    </schema>
+    <schema id="23" parent="4" name="pg_temp_1">
+      <ObjectId>11848</ObjectId>
+      <StateNumber>103</StateNumber>
+      <Owner>cloudsqladmin</Owner>
+    </schema>
+    <schema id="24" parent="4" name="pg_toast">
+      <ObjectId>99</ObjectId>
+      <Comment>reserved schema for TOAST tables</Comment>
+      <StateNumber>1</StateNumber>
+      <Owner>cloudsqladmin</Owner>
+    </schema>
+    <schema id="25" parent="4" name="pg_toast_temp_1">
+      <ObjectId>11849</ObjectId>
+      <StateNumber>103</StateNumber>
+      <Owner>cloudsqladmin</Owner>
+    </schema>
+    <schema id="26" parent="4" name="public">
+      <ObjectId>2200</ObjectId>
+      <Comment>standard public schema</Comment>
+      <StateNumber>1150</StateNumber>
+      <Owner>cloudsqlsuperuser</Owner>
+      <Current>1</Current>
+    </schema>
+    <schema id="27" parent="5" name="information_schema">
+      <Substituted>1</Substituted>
+    </schema>
+    <schema id="28" parent="5" name="pg_catalog">
+      <Comment>system catalog schema</Comment>
+      <Substituted>1</Substituted>
+    </schema>
+  </database-model>
+</dataSource>

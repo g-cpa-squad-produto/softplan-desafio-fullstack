@@ -1,0 +1,76 @@
+<div class="container">
+  <form class="form-group">
+    <div *ngIf="model">
+      <h3>Controle de Usuários</h3>
+      <div class="form-group col-md-6">
+        <label for="nome">Nome *</label>
+        <input type="text" class="form-control" id="nome" [(ngModel)]="model.nome" name="nome">
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="email">Email</label>
+        <input type="text" class="form-control" id="email" [(ngModel)]="model.emailLogin" name="email">
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="cnpj">CNPJ</label>
+        <input type="text" class="form-control" id="cnpj" [(ngModel)]="model.cnpj" name="cnpj">
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="cpf">CPF</label>
+        <input type="text" class="form-control" id="cpf" [(ngModel)]="model.cpf" name="cpf">
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="nome">Senha</label>
+        <input type="text" class="form-control" id="senha" [(ngModel)]="model.senhaAcesso" name="senha">
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="tipo">Tipo *</label>
+        <select class="form-control" id="tipo" required [(ngModel)]="model.tipoUsuario" name="tipo">
+          <option value="ADMINISTRADOR">Administrador</option>
+          <option value="TRIADOR">Triador</option>
+          <option value="FINALIZADOR">Finalizador</option>
+        </select>
+
+        <div class="form-group">
+          <button type="button" class="btn btn-primary" (click)="cadastrar()"
+                  [disabled]="!model.nome || !model.tipoUsuario">Cadastrar
+          </button>
+        </div>
+      </div>
+    </div>
+    <h3>Listagem de Usuários</h3>
+    <table class="table table-bordered table-dark">
+      <thead>
+      <tr>
+        <th scope="col">
+          Nome
+        </th>
+        <th scope="col">
+          Tipo
+        </th>
+        <th scope="col">
+          Email
+        </th>
+        <th scope="col">
+          Editar
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let usu of usuarios">
+        <td>{{usu.nome}}</td>
+        <td>{{usu.tipoUsuario}}</td>
+        <td>{{usu.emailLogin}}</td>
+        <td>
+          <button (click)="editar(usu)"><img src="assets/images/pencil.png" alt="Editar"></button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </form>
+
+</div>

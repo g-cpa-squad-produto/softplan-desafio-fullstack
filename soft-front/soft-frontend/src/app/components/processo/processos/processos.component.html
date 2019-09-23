@@ -1,0 +1,41 @@
+<div class="container">
+  <form class="form-group" *ngIf="usuarios">
+    <div *ngIf="usuarios">
+      <h3>Selecione o Usuário</h3>
+      <select class="form-control col-md-6" id="usuario"
+              title="Selecione" name="usuario" (change)="verificaUsuario()"
+              [(ngModel)]="usuario" data-live-search-style="begins" data-live-search="true">
+        <option *ngFor="let usu of usuarios"
+                [ngValue]="usu">{{ usu.nome }} - {{usu.tipoUsuario}}</option>
+      </select>
+
+
+      <div class="form-group col-md-16" *ngIf="usuario">
+        <h3>Listagem de Processos</h3>
+        <table class="table table-bordered table-dark">
+          <thead>
+          <tr>
+            <th scope="col">
+              Email
+            </th>
+            <th scope="col">
+              Cadastro
+            </th>
+            <th scope="col">
+              Parecer
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let pro of processos">
+            <td>{{pro.email}}</td>
+            <td>{{pro.dataCadastro}}</td>
+            <td>{{pro.dataParecer}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </form>
+</div>
+

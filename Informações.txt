@@ -1,0 +1,13 @@
+BACKEND
+Ferramenta: netbeans, swagger, docker, postgresql
+Resource > dev
+Criado: .jar > "soft-core" com o jpa
+Criado: .war > "soft-admin" com os recursos
+
+o swagger é para testar as api's diretamente, basta adicionar o /apidocs no final da url ao rodar o backend ficando: http://localhost:8080/soft-admin/apidocs/
+
+FRONTEND
+Ferramenta: Intellij
+enviroment apontando para localhost:8080
+Utilizado Angular
+é possível utilizar o frontend separado, ou rodar o backend somente, pois o projeto já está com os arquivos do build dentro dele.

@@ -1,0 +1,52 @@
+<div class="container" *ngIf="processos && processos.length > 0">
+  <form class="form-group">
+    <h3 *ngIf="model">Selecione o Usuário</h3>
+
+    <div class="form-group col-md-6" *ngIf="model">
+      <select class="form-control" id="usuario"
+              title="Selecione" name="usuario" data-live-search-style="begins" data-live-search="true">
+        <option *ngFor="let usu of model.usuarios"
+                [ngValue]="usu">{{ usu.nome }} - {{usu.tipoUsuario}}</option>
+      </select>
+    </div>
+
+    <div class="form-group col-md-6" *ngIf="model">
+      <label for="parecer">Parecer</label>
+      <input type="text" class="form-control" id="parecer" [(ngModel)]="model.parecer" name="parecer">
+    </div>
+
+    <div class="form-group">
+      <button type="button" class="btn btn-primary" (click)="concluir()" *ngIf="model"
+              [disabled]="!model || !model.parecer">Adicionar Parecer
+      </button>
+    </div>
+
+    <div class="form-group col-md-16">
+      <h3>Listagem de Processos Pendentes</h3>
+      <table class="table table-bordered table-dark">
+        <thead>
+        <tr>
+          <th scope="col">
+            Email
+          </th>
+          <th scope="col">
+            Cadastro
+          </th>
+          <th scope="col">
+            Adicionar Parecer
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let pro of processos">
+          <td>{{pro.email}}</td>
+          <td>{{pro.dataCadastro}}</td>
+          <button (click)="adicionarParecer(pro)"><img src="assets/images/database.png" alt="Adicionar Parecer">
+          </button>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </form>
+</div>
+
