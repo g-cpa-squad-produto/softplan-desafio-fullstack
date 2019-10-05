@@ -2,6 +2,7 @@ package com.isadora.backendapi.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -12,7 +13,8 @@ public class Processo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
+    @Column(nullable = false, unique = true)
     private Integer numero;
     @NotBlank(message = "Necessário incluir uma descrição para o processo.")
     private String descricao;
@@ -24,16 +26,28 @@ public class Processo {
     @OneToOne(fetch = FetchType.LAZY,
             cascade =  CascadeType.ALL,
             mappedBy = "processo")
+    @JsonIgnore
     private Parecer parecer;
+
+    @PrePersist
+    protected void onCreate(){
+        this.created_at = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate(){
+        this.updated_at = new Date();
+    }
+
 
     public Processo() {
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

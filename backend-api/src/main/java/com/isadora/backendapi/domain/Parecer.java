@@ -1,6 +1,7 @@
 package com.isadora.backendapi.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -12,30 +13,35 @@ public class Parecer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
 
     @NotBlank(message = "Necessário incluir uma texto no parecer.")
     private String texto;
 
     @OneToOne
-    @JsonManagedReference
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "processo_id", nullable = false)
+    @JsonIgnore
     private Processo processo;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date created_at;
 
+    @PrePersist
+    protected void onCreate(){
+        this.created_at = new Date();
+    }
+
     public Parecer() {
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -51,7 +57,7 @@ public class Parecer {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+   public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 

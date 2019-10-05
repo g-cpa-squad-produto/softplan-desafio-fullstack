@@ -1,7 +1,7 @@
 package com.isadora.backendapi.enums;
 
 public enum UserEnum {
-    ADMIN,
-    TRIADOR,
-    FINALIZADOR;
+    ROLE_ADMIN,
+    ROLE_TRIADOR,
+    ROLE_FINALIZADOR
 }

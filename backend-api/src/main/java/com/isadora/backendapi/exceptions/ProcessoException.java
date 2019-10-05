@@ -1,12 +1,11 @@
 package com.isadora.backendapi.exceptions;
-import com.isadora.backendapi.domain.Usuario;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.BAD_REQUEST)
-public class UsuarioException extends RuntimeException{
+public class ProcessoException extends RuntimeException{
 
-    public UsuarioException(String message) {
+    public ProcessoException(String message) {
         super(message);
     }
 }

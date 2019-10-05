@@ -24,35 +24,47 @@ public class UsuarioService {
         }
     }
 
-    public @Valid Usuario update(Long id, Usuario usuarioAlterado) {
+    public Usuario update(Long id, Usuario usuarioAlterado) {
         return usuarioRepository.findById(id).map(usuario -> {
             usuario.setStatus(usuarioAlterado.getStatus());
             usuario.setTipo(usuarioAlterado.getTipo());
             return usuarioRepository.save(usuario);
-        }).orElseThrow(() -> new RuntimeException("UsuarioException não encontrado!"));
+        }).orElseThrow(() -> new RuntimeException("Usuario nao não encontrado!"));
     }
 
 
     public Usuario findByEmail(String email) {
-        Usuario project = usuarioRepository.findByEmail(email);
+        Usuario usuario = usuarioRepository.findByEmail(email);
 
-        if (project == null) {
-            throw new UsuarioException("UsuarioException com email '"+email+"' não existe.");
+        if (usuario == null) {
+            throw new UsuarioException("Usuario com email '"+email+"' não existe.");
         } else {
-            return project;
+            return usuario;
         }
     }
 
-    public Iterable<Usuario> findAllProjects(){
+    public Iterable<Usuario> findAllUsuarios(){
         return usuarioRepository.findAll();
     }
 
-    public void deleteProjectById(Long id){
+    public void deleteUsuarioById(Long id){
         Optional<Usuario> usuario = usuarioRepository.findById(id);
-        if(usuario==null) {
-            throw new UsuarioException("UsuarioException não existe.");
+        if (!usuario.isPresent()) {
+            throw new UsuarioException("Usuário com ID '" + id + "' não existe.");
         }
         usuarioRepository.deleteById(id);
+    }
+
+    public Optional<Usuario>  findById(Long id) {
+        Optional<Usuario> usuario = usuarioRepository.findById(id);
+
+        if (!usuario.isPresent()) {
+            throw new UsuarioException("Usuário com ID '" + id + "' não existe.");
+//        } else {
+//            return ;
+//        }
+        }
+        return usuario;
     }
 
 
