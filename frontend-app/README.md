@@ -16,14 +16,14 @@ Possui as seguintes dependências:
 2. bootstrap: "^4.3.1",
 3. classnames: "^2.2.6",
 4. jwt-decode: "^2.2.0",
-   5 .npm: "^6.11.3",
-5. react-: "^16.9.0",
-6. react-dom-: "^16.9.0",
-7. react-redux-: "^7.1.1",
-8. react-router-dom: "^5.0.1",
-9. react-scripts-: "3.1.2",
-10. redux: "^4.0.4",
-    12 .redux-thunk: "^2.3.0"
+5. npm: "^6.11.3",
+6. react-: "^16.9.0",
+7. react-dom-: "^16.9.0",
+8. react-redux-: "^7.1.1",
+9. react-router-dom: "^5.0.1",
+10. react-scripts-: "3.1.2",
+11. redux: "^4.0.4",
+12. redux-thunk: "^2.3.0"
 
 #### 3. Dados Iniciais
 
