@@ -34,7 +34,7 @@ Pode-se tentar rodar a aplicação também utilizando o comando mvn spring-boot:
 
 - **[GET]** */api/processo/all* : busca todos os processos cadastrados
 - **[GET]** */api/processo/{processoId}* : busca um processo pelo *processoId* informado
-- **[GET]** */api/processo/pendentes : busca os processos pendentes de parecer
+- **[GET]** */api/processo/pendentes* : busca os processos pendentes de parecer
 - **[POST]** */api/processo* : cadastra um novo processo
 - **[DELETE]** */api/processo/{processoId}* : elimina o processo pelo *processoId* informado
 
