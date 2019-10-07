@@ -11,18 +11,19 @@ A aplicação frontend utiliza a porta 3000 do localhost.
 Para desenvolvimento do projeto frontend foi utilizado o Visual Studio Code.
 Foi desenvolvido utilizando ReactJs + Redux.
 Possui as seguintes dependências:
-*axios : ^0.19.0",
-*bootstrap: "^4.3.1",
-*classnames: "^2.2.6",
-*jwt-decode: "^2.2.0",
-*npm: "^6.11.3",
-*react-: "^16.9.0",
-*react-dom-: "^16.9.0",
-*react-redux-: "^7.1.1",
-*react-router-dom: "^5.0.1",
-*react-scripts-: "3.1.2",
-*redux: "^4.0.4",
-*redux-thunk: "^2.3.0"
+
+1. axios : ^0.19.0",
+2. bootstrap: "^4.3.1",
+3. classnames: "^2.2.6",
+4. jwt-decode: "^2.2.0",
+   5 .npm: "^6.11.3",
+5. react-: "^16.9.0",
+6. react-dom-: "^16.9.0",
+7. react-redux-: "^7.1.1",
+8. react-router-dom: "^5.0.1",
+9. react-scripts-: "3.1.2",
+10. redux: "^4.0.4",
+    12 .redux-thunk: "^2.3.0"
 
 #### 3. Dados Iniciais
 
@@ -39,5 +40,6 @@ npm start
 
 Assim que estiver tudo certo, basta acessar o endereço localhost na porta 3000 e realizar o login através do botão login no canto superior direito. Realizar o login com os usuários citados anteriormente.
 
+A aplicação backend contém as funcionalidades básicas para tornar o projeto funcional. Devido à disponibilidade do tempo e tambem por não ter tanta pratica com as stacks utilizadas, não foi possível organizar o projeto como gostaria e também tratar alguns erros e exceções.
 
 Em caso de dúvidas de entendimento ou para rodar a aplicação, entrar em contato através do email isadora_msouza@hotmail.com / isadora@scadiagro.com.br.
