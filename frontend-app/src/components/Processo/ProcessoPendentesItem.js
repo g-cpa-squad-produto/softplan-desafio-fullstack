@@ -23,7 +23,11 @@ class ProcessoSemParecerItem extends Component {
                     <i className="fa fa-flag-checkered pr-1"> Visualizar</i>
                   </li>
                 </Link>
-                <Link to={`/addParecer/3/${project.id}`}>
+                <Link
+                  to={`/addParecer/${localStorage.getItem("currentUserId")}/${
+                    project.id
+                  }`}
+                >
                   <li className="list-group-item update">
                     <i className="fa fa-edit pr-1"> Incluir Parecer</i>
                   </li>

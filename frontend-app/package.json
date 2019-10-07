@@ -6,6 +6,7 @@
     "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
     "classnames": "^2.2.6",
+    "jwt-decode": "^2.2.0",
     "npm": "^6.11.3",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",

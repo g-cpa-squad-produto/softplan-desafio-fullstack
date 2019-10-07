@@ -4,7 +4,8 @@ import {
   GET_PROCESSOS_SEM_PARECER,
   DELETE_USUARIO,
   GET_USUARIO,
-  GET_PARECER
+  GET_PARECER,
+  GET_PARECER_USUARIO
 } from "../actions/types";
 
 const initialState = {
@@ -35,6 +36,11 @@ export default function(state = initialState, action) {
         project: action.payload
       };
     case GET_PROCESSOS_SEM_PARECER:
+      return {
+        ...state,
+        projects: action.payload
+      };
+    case GET_PARECER_USUARIO:
       return {
         ...state,
         projects: action.payload

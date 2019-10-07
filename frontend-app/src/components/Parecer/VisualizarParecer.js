@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { getParecerByProcesso } from "../../actions/userActions";
 import classnames from "classnames";
 
-class AddUser extends Component {
+class VisualizarParecer extends Component {
   constructor() {
     super();
 
@@ -61,7 +61,7 @@ class AddUser extends Component {
   }
 }
 
-AddUser.propTypes = {
+VisualizarParecer.propTypes = {
   getParecerByProcesso: PropTypes.func.isRequired,
   project: PropTypes.object.isRequired
 };
@@ -72,4 +72,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { getParecerByProcesso }
-)(AddUser);
+)(VisualizarParecer);

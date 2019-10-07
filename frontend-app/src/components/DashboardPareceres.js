@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import UserItem from "./User/UserItem";
-import CreateUserButton from "./User/CreateUserButton";
+import ParecerItem from "./Parecer/ParecerItem";
 import { connect } from "react-redux";
-import { getUsuarios } from "../actions/userActions";
+import { getPareceresByUsuario } from "../actions/userActions";
 import PropTypes from "prop-types";
 
-class Dashboard extends Component {
+class DashboardPareceres extends Component {
   //load do componente
   componentDidMount() {
-    this.props.getUsuarios();
+    const { usuarioId } = this.props.match.params;
+    this.props.getPareceresByUsuario(usuarioId);
   }
 
   render() {
@@ -19,18 +19,16 @@ class Dashboard extends Component {
           <div className="row">
             <div className="col-md-12">
               <h1 className="font-weight-bold display-4 text-center">
-                Usuários
+                Meus pareceres
               </h1>
               <br />
-              <CreateUserButton />
 
               <br />
               <hr />
-              {projects
-                .map(project => <UserItem key={project.id} project={project} />)
-                .filter(
-                  obj => obj.key !== localStorage.getItem("currentUserId")
-                )}
+
+              {projects.map(project => (
+                <ParecerItem key={project.id} project={project} />
+              ))}
             </div>
           </div>
         </div>
@@ -39,8 +37,8 @@ class Dashboard extends Component {
   }
 }
 
-Dashboard.propTypes = {
-  getUsuarios: PropTypes.func.isRequired,
+DashboardPareceres.propTypes = {
+  getPareceresByUsuario: PropTypes.func.isRequired,
   project: PropTypes.object.isRequired
 };
 
@@ -50,5 +48,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getUsuarios }
-)(Dashboard);
+  { getPareceresByUsuario }
+)(DashboardPareceres);
