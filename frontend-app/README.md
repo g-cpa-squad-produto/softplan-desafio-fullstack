@@ -1,68 +1,42 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Softplan Desafio Fullstack (Frontend)
 
-## Available Scripts
+Isadora Moysés de Souza
 
-In the project directory, you can run:
+#### 1. Ambiente
 
-### `yarn start`
+A aplicação frontend utiliza a porta 3000 host local.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### 2. Stack ferramentas e bibliotecas utilizadas no frontend
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Para desenvolvimento do projeto frontend foi utilizado o Visual Studio Code.
+Foi desenvolvido utilizando ReactJs + Redux.
+Possui as seguintes dependências:
+-axios : ^0.19.0",
+-bootstrap: "^4.3.1",
+-classnames: "^2.2.6",
+-jwt-decode: "^2.2.0",
+-npm: "^6.11.3",
+-react-: "^16.9.0",
+-react-dom-: "^16.9.0",
+-react-redux-: "^7.1.1",
+-react-router-dom: "^5.0.1",
+-react-scripts-: "3.1.2",
+-redux: "^4.0.4",
+-redux-thunk: "^2.3.0"
 
-### `yarn test`
+#### 3. Carga de dados inicial
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Ao iniciar o backend, três usuários serão criados com email e senha, sendo eles um admin (admin@softplan.com.br, 123456 ), um triador (triador@softplan.com.br, 123456) e um finalizador (finalizador@softplan.com.br, 123456).
 
-### `yarn build`
+#### 4. Build do frontend
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Abra um terminal, entre na pasta raiz do código fonte do frontend e execute os comandos a seguir, considerando que pode demorar um pouco para instalar todas as dependências:
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+```$bash
+npm install
+npm start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Assim que estiver tudo certo, basta acessar o endereço localhost na porta 3000 e realizar o login, através do botão login no canto superior direito. Realizar o login com os usuários citados anteriormente.
 
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Em caso de dúvidas, entrar em contato através do email isadora_msouza@hotmail.com.
