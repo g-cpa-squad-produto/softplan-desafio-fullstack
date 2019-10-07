@@ -53,7 +53,7 @@ class Header extends Component {
 
         <ul className="navbar-nav ml-auto">
           <li className="nav-item">
-            <Link className="nav-link" to="/dashboard">
+            <Link className="nav-link" to="/dashboardProcessos">
               <i className="fas fa-user-circle mr-1" />
               {user.sub}
             </Link>
@@ -93,7 +93,7 @@ class Header extends Component {
 
         <ul className="navbar-nav ml-auto">
           <li className="nav-item">
-            <Link className="nav-link" to="/dashboard">
+            <Link className="nav-link" to="/dashboardProcessosPedentes">
               <i className="fas fa-user-circle mr-1" />
               {user.sub}
             </Link>
