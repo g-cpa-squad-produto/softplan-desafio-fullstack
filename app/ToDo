@@ -1,0 +1,18 @@
+Problemas conhecidos:
+    - Timezone (horário com 3 horas a mais)
+    - Estão fixos os ids de usuário na criação de um novo processo, e na listagem está sendo filtrada pelo query string.
+    Isso está em caracter de testes.
+
+ToDo
+    - Autenticação do usuário
+    - Autorização dos usuários
+    - ADMIN
+        - Gerenciamento de usuários por completo
+        - Gerenciamento de processos por completo
+    - TRIADOR
+        - Cadastrar processos
+        - Editar seus processos
+        - Vincular usuários aos seus processos
+    - FINALIZADOR
+        - Visualizar processos em que está vinculado e sem parecer
+        - Escrever parecer no processo
