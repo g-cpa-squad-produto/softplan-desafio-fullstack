@@ -7,26 +7,6 @@ Esse é o nosso desafio para a vaga de implementador fullstack na [Softplan](htt
 Seja parte da jornada de transformação digital no Brasil.
 Procuramos desenvolvedor versátil para resolver os mais diversos problemas, que impactam no negócio do cliente, utilizando conhecimento em tecnologias back-end e front-end como meio para isso. Sinta-se confortável com ambas responsabilidades e seja engajado com o que há de melhor no mercado e boas práticas para trabalhar com inovação, tecnologias modernas e emergentes na Softplan, empresa no Top 10 dos melhores lugares para se trabalhar em Santa Catarina (GPTW 2017).
 
-
-### O que você traz?
-- Perfil proativo, saber trabalhar em equipe , raciocínio lógico, responsabilidade e comprometimento são imprescindíveis para essa oportunidade.
-- Fácil adaptação em projetos experimentais e complexos;
-- Aprendizado rápido no uso de tecnologias de desenvolvimento de software
-- Experiência em Desenvolvimento de software Web.
-
-
-### O que oferecemos
-- Oportunidade de desenvolvimento profissional, meet ups, capacitação e treinamento in-company
-- Apoio no seu crescimento e aprendizado com bolsas de graduação, pós-graduação e verba para cursos e eventos de aprendizado externos
-- Plano de bonificação por atingimento de metas
-- Biblioteca colaborativa
-- Ginástica laboral
-- No dress code
-- Parcerias com desconto em academias, restaurantes, salão de beleza, etc.
-- Espaço para refeições, com geladeira e microondas
-- Vale alimentação/refeição, auxílio transporte, assistência médica e odontológica
-
-
 ### Instruções para o desafio
 
 - **Fork** esse repositório e faça o desafio numa branch com o seu nome (exemplo: `nome-sobrenome`);
@@ -71,11 +51,8 @@ Procuramos desenvolvedor versátil para resolver os mais diversos problemas, que
 - Boa documentação de código e de serviços.
 - Testes do código.
 
----
-Em caso de dúvidas, envie um email para [g_cpa_squad_produto@softplan.com.br](mailto:g_cpa_squad_produto@softplan.com.br).
-
-
-**Um dos nossos pilares é a valorização das pessoas e temos orgulho de dizer que somos uma empresa que apoia a diversidade e inclusão. Sendo assim, consideramos todos os candidatos para as nossas oportunidades, independente de raça, cor, religião, gênero, identidade de gênero, nacionalidade, deficiência, ascendência ou idade.**
-
-
-**Até breve**
+# Desenvolvimento
+### Recursos Utilizados
+- Swagger (/swagger-ui.html)
+- H2 como base de dados (/h2-console)
+- Carga inicial do administrador na inicialização da aplicação
