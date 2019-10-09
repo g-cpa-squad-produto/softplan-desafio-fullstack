@@ -4,8 +4,8 @@ import br.com.softplan.processmanagement.domain.*;
 import br.com.softplan.processmanagement.domain.Process;
 import br.com.softplan.processmanagement.dto.OpinionDTO;
 import br.com.softplan.processmanagement.repositories.ProcessesRepository;
-import br.com.softplan.processmanagement.repositories.UserProcessRepository;
-import br.com.softplan.processmanagement.repositories.UsersRepository;
+import br.com.softplan.processmanagement.repositories.UserSystemProcessRepository;
+import br.com.softplan.processmanagement.repositories.UsersSystemRepository;
 import br.com.softplan.processmanagement.services.exceptions.ProcessNotFoundException;
 import br.com.softplan.processmanagement.services.exceptions.UserProcessNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +22,10 @@ public class ProcessesService {
     private ProcessesRepository processesRepository;
 
     @Autowired
-    private UsersRepository usersRepository;
+    private UsersSystemRepository usersSystemRepository;
 
     @Autowired
-    private UserProcessRepository userProcessRepository;
+    private UserSystemProcessRepository userSystemProcessRepository;
 
     @Autowired
     private UsersService usersService;
@@ -41,13 +41,13 @@ public class ProcessesService {
     }
 
     public List<Process> listByUser(Long idUser) {
-        User user = usersService.searchById(idUser);
-        UserType type = user.getType();
+        UserSystem userSystem = usersService.searchById(idUser);
+        UserType type = userSystem.getType();
 
         if(type == UserType.FINALIZADOR){//FINALIZADOR VE APENAS PROCESSOS ATRIBUIDOS A ELE.
-            return usersRepository.findProcessByUser(user);
+            return usersSystemRepository.findProcessByUser(userSystem);
         }else if(type == UserType.TRIADOR){//TRIADOR VE APENAS SEUS PROCESSOS.
-            return processesRepository.findAllByCreator(user);
+            return processesRepository.findAllByCreator(userSystem);
         }
         return this.list();//ADMIN VE TUDO
     }
@@ -77,19 +77,19 @@ public class ProcessesService {
         searchById(process.getId());
     }
 
-    public UserProcess saveOpinion(Long id, OpinionDTO opinionDTO) {
+    public UserSystemProcess saveOpinion(Long id, OpinionDTO opinionDTO) {
         Optional<Process> process = Optional.of(this.searchById(id));
-        Optional<User> user = Optional.of(usersService.searchById(opinionDTO.getIdUser()));
+        Optional<UserSystem> user = Optional.of(usersService.searchById(opinionDTO.getIdUser()));
 
         if(process.isPresent() && user.isPresent()){
 
-            Optional<UserProcess> userProcessOptional = userProcessRepository.findUserProcessesByUserProcessIdUserAndUserProcessIdProcess(user.get(), process.get());
+            Optional<UserSystemProcess> userProcessOptional = userSystemProcessRepository.findUserSystemProcessByUserSystemProcessIdUserSystemAndUserSystemProcessIdProcess(user.get(), process.get());
 
             if(userProcessOptional.isPresent()){
-                UserProcess userProcess = userProcessOptional.get();
-                userProcess.setText(opinionDTO.getText());
-                userProcess.setCreatedAt(opinionDTO.getCreatedAt());
-                return userProcessRepository.save(userProcess);
+                UserSystemProcess userSystemProcess = userProcessOptional.get();
+                userSystemProcess.setText(opinionDTO.getText());
+                userSystemProcess.setCreatedAt(opinionDTO.getCreatedAt());
+                return userSystemProcessRepository.save(userSystemProcess);
             }
 
         }

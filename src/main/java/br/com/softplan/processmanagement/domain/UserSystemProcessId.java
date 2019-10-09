@@ -6,23 +6,23 @@ import javax.persistence.ManyToOne;
 import java.io.Serializable;
 
 @Embeddable
-public class UserProcessId implements Serializable {
+public class UserSystemProcessId implements Serializable {
 
     private static final long serialVersionUID = -6788045775032924656L;
 
     @ManyToOne
     @JoinColumn(name = "id_user")
-    private User user;
+    private UserSystem userSystem;
 
     @ManyToOne
     @JoinColumn(name = "id_process")
     private Process process;
 
-    public UserProcessId() {
+    public UserSystemProcessId() {
     }
 
-    public UserProcessId(User user, Process process) {
-        this.user = user;
+    public UserSystemProcessId(UserSystem userSystem, Process process) {
+        this.userSystem = userSystem;
         this.process = process;
     }
 
@@ -30,12 +30,12 @@ public class UserProcessId implements Serializable {
         return serialVersionUID;
     }
 
-    public User getUser() {
-        return user;
+    public UserSystem getUserSystem() {
+        return userSystem;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserSystem(UserSystem userSystem) {
+        this.userSystem = userSystem;
     }
 
     public Process getProcess() {

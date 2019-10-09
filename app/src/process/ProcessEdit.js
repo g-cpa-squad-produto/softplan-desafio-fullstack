@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import {Button, CustomInput, Container, Form, FormGroup, Input, Label, Card, CardHeader, CardBody } from 'reactstrap';
-import AppNavbar from './AppNavbar';
 
 class ProcessEdit extends Component {
 
@@ -140,7 +139,6 @@ class ProcessEdit extends Component {
         if(userType == 'FINALIZADOR'){
             return (
                 <div>
-                    <AppNavbar/>
                     <Container>
                         {title}
                         <br />
@@ -157,7 +155,7 @@ class ProcessEdit extends Component {
                                 <br />
                                 <FormGroup>
                                     <Label for="opinion">Parecer</Label>
-                                    <Input type="textarea" rows={10} name="opinion" id="opinion" value={item.opinion || ''}
+                                    <Input type="textarea" required rows={10} name="opinion" id="opinion" value={item.opinion || ''}
                                            onChange={this.handleChange} />
                                 </FormGroup>
                                 <FormGroup>
@@ -173,19 +171,18 @@ class ProcessEdit extends Component {
 
         return (
             <div>
-                <AppNavbar/>
                 <Container>
                     {title}
                     <div>
                         <Form onSubmit={this.handleSubmit}>
                             <FormGroup>
                                 <Label for="code">Código</Label>
-                                <Input type="text" name="code" id="code" value={item.code || ''}
+                                <Input type="text" required name="code" id="code" value={item.code || ''}
                                        onChange={this.handleChange} autoComplete="code"/>
                             </FormGroup>
                             <FormGroup>
                                 <Label for="description">Descrição</Label>
-                                <Input type="textarea" rows={10} name="description" id="description" value={item.description || ''}
+                                <Input type="textarea" required rows={10} name="description" id="description" value={item.description || ''}
                                        onChange={this.handleChange} />
                             </FormGroup>
                             <FormGroup>

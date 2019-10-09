@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import {Button, Container, Form, FormGroup, Input, Label} from 'reactstrap';
-import AppNavbar from './AppNavbar';
 
-class ProcessUsers extends Component {
+class UserEdit extends Component {
 
     emptyItem = {
         name: '',
-        description: ''
+        email: '',
+        type: ''
     };
 
     constructor(props) {
@@ -19,8 +19,8 @@ class ProcessUsers extends Component {
 
     async componentDidMount() {
         if (this.props.match.params.id !== 'new') {
-            const process = await (await fetch(`/api/processes/${this.props.match.params.id}`)).json();
-            this.setState({item: process});
+            const user = await (await fetch(`/api/users/${this.props.match.params.id}`)).json();
+            this.setState({item: user});
         }
     }
 
@@ -31,26 +31,20 @@ class ProcessUsers extends Component {
         let item = {...this.state.item};
         item[name] = value;
         this.setState({item});
-    }
+    };
 
     handleSubmit = async (event) => {
         event.preventDefault();
         const {item} = this.state;
 
-        if(!item.creator) item.creator = {};
-
-        let endpoint = '/api/processes';
+        let endpoint = '/api/users';
         if (item && item.id) {
-            endpoint += "/"+item.id;
+            endpoint += "/" + item.id;
         }
 
-        if(item.type){
+        if (item.type) {
             item.type = item.type.toUpperCase();
         }
-
-        item.creator.id = 1;
-        let now = new Date();
-        item.creationTime = now;
 
         await fetch(endpoint, {
             method: (item.id) ? 'PUT' : 'POST',
@@ -60,16 +54,15 @@ class ProcessUsers extends Component {
             },
             body: JSON.stringify(item),
         });
-        this.props.history.push('/process');
+        this.props.history.push('/users');
     }
 
     render() {
         const {item} = this.state;
-        const title = <h2>{item.id ? 'Editar Usuários do Processo' : 'Adicionar Usuários ao Processo'}</h2>;
+        const title = <h2>{item.id ? 'Editar Usuário' : 'Adicionar Usuário'}</h2>;
 
         return (
             <div>
-                <AppNavbar/>
                 <Container>
                     {title}
                     <Form onSubmit={this.handleSubmit}>
@@ -79,13 +72,20 @@ class ProcessUsers extends Component {
                                    onChange={this.handleChange} autoComplete="name"/>
                         </FormGroup>
                         <FormGroup>
-                            <Label for="description">Descrição</Label>
-                            <Input type="textarea" name="description" id="description" value={item.description || ''}
-                                   onChange={this.handleChange} />
+                            <Label for="email">Email</Label>
+                            <Input type="email" name="email" id="email" value={item.email || ''}
+                                   onChange={this.handleChange} autoComplete="email"/>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="type">Tipo</Label>
+                            <Input type="select" defaultValue={item.type} name="type" id="type" onChange={this.handleChange}>
+                                <option>Triador</option>
+                                <option>Finalizador</option>
+                            </Input>
                         </FormGroup>
                         <FormGroup>
                             <Button color="primary" type="submit">Salvar</Button>{' '}
-                            <Button color="secondary" tag={Link} to="/users">Cancelar</Button>
+                            <Link className="btn btn-secondary" to="/users">Cancelar</Link>
                         </FormGroup>
                     </Form>
                 </Container>
@@ -94,4 +94,4 @@ class ProcessUsers extends Component {
     }
 }
 
-export default withRouter(ProcessUsers);
+export default withRouter(UserEdit);

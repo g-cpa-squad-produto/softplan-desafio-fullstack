@@ -1,7 +1,7 @@
 package br.com.softplan.processmanagement.controllers;
 
 import br.com.softplan.processmanagement.domain.Process;
-import br.com.softplan.processmanagement.domain.UserProcess;
+import br.com.softplan.processmanagement.domain.UserSystemProcess;
 import br.com.softplan.processmanagement.dto.OpinionDTO;
 import br.com.softplan.processmanagement.services.ProcessesService;
 import io.swagger.annotations.Api;
@@ -67,9 +67,9 @@ public class ProcessesController {
 
     @ApiOperation(value = "Gravando parecer do processo")
     @PostMapping(value = "/{id}/opinion")
-    public ResponseEntity<UserProcess> saveOpinion(@PathVariable("id") Long id, @RequestBody OpinionDTO opinionDTO) {
-        UserProcess userProcess = processesService.saveOpinion(id, opinionDTO);
-        return ResponseEntity.ok(userProcess);
+    public ResponseEntity<UserSystemProcess> saveOpinion(@PathVariable("id") Long id, @RequestBody OpinionDTO opinionDTO) {
+        UserSystemProcess userSystemProcess = processesService.saveOpinion(id, opinionDTO);
+        return ResponseEntity.ok(userSystemProcess);
     }
 
 }

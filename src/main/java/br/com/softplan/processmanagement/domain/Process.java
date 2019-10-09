@@ -22,11 +22,11 @@ public class Process implements Serializable {
     private LocalDateTime createdAt;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    private User creator;
+    private UserSystem creator;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "app_user_process", joinColumns = @JoinColumn(name = "id_process"), inverseJoinColumns = @JoinColumn(name = "id_user"))
-    private List<User> users;
+    @JoinTable(name = "app_usersystem_process", joinColumns = @JoinColumn(name = "id_process"), inverseJoinColumns = @JoinColumn(name = "id_user"))
+    private List<UserSystem> userSystems;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -64,20 +64,20 @@ public class Process implements Serializable {
         this.createdAt = createdAt;
     }
 
-    public User getCreator() {
+    public UserSystem getCreator() {
         return creator;
     }
 
-    public void setCreator(User creator) {
+    public void setCreator(UserSystem creator) {
         this.creator = creator;
     }
 
-    public List<User> getUsers() {
-        return users;
+    public List<UserSystem> getUserSystems() {
+        return userSystems;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setUserSystems(List<UserSystem> userSystems) {
+        this.userSystems = userSystems;
     }
 
 }

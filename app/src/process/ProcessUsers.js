@@ -1,14 +1,12 @@
 import React, {Component} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import {Button, Container, Form, FormGroup, Input, Label} from 'reactstrap';
-import AppNavbar from './AppNavbar';
 
-class UserEdit extends Component {
+class ProcessUsers extends Component {
 
     emptyItem = {
         name: '',
-        email: '',
-        type: ''
+        description: ''
     };
 
     constructor(props) {
@@ -20,8 +18,8 @@ class UserEdit extends Component {
 
     async componentDidMount() {
         if (this.props.match.params.id !== 'new') {
-            const user = await (await fetch(`/api/users/${this.props.match.params.id}`)).json();
-            this.setState({item: user});
+            const process = await (await fetch(`/api/processes/${this.props.match.params.id}`)).json();
+            this.setState({item: process});
         }
     }
 
@@ -38,14 +36,20 @@ class UserEdit extends Component {
         event.preventDefault();
         const {item} = this.state;
 
-        let endpoint = '/api/users';
+        if(!item.creator) item.creator = {};
+
+        let endpoint = '/api/processes';
         if (item && item.id) {
-            endpoint += "/" + item.id;
+            endpoint += "/"+item.id;
         }
 
-        if (item.type) {
+        if(item.type){
             item.type = item.type.toUpperCase();
         }
+
+        item.creator.id = 1;
+        let now = new Date();
+        item.creationTime = now;
 
         await fetch(endpoint, {
             method: (item.id) ? 'PUT' : 'POST',
@@ -55,16 +59,15 @@ class UserEdit extends Component {
             },
             body: JSON.stringify(item),
         });
-        this.props.history.push('/users');
+        this.props.history.push('/process');
     }
 
     render() {
         const {item} = this.state;
-        const title = <h2>{item.id ? 'Editar Usuário' : 'Adicionar Usuário'}</h2>;
+        const title = <h2>{item.id ? 'Editar Usuários do Processo' : 'Adicionar Usuários ao Processo'}</h2>;
 
         return (
             <div>
-                <AppNavbar/>
                 <Container>
                     {title}
                     <Form onSubmit={this.handleSubmit}>
@@ -74,20 +77,13 @@ class UserEdit extends Component {
                                    onChange={this.handleChange} autoComplete="name"/>
                         </FormGroup>
                         <FormGroup>
-                            <Label for="email">Email</Label>
-                            <Input type="email" name="email" id="email" value={item.email || ''}
-                                   onChange={this.handleChange} autoComplete="email"/>
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for="type">Tipo</Label>
-                            <Input type="select" defaultValue={item.type} name="type" id="type" onChange={this.handleChange}>
-                                <option>Triador</option>
-                                <option>Finalizador</option>
-                            </Input>
+                            <Label for="description">Descrição</Label>
+                            <Input type="textarea" name="description" id="description" value={item.description || ''}
+                                   onChange={this.handleChange} />
                         </FormGroup>
                         <FormGroup>
                             <Button color="primary" type="submit">Salvar</Button>{' '}
-                            <Link className="btn btn-secondary" to="/users">Cancelar</Link>
+                            <Button color="secondary" tag={Link} to="/users">Cancelar</Button>
                         </FormGroup>
                     </Form>
                 </Container>
@@ -96,4 +92,4 @@ class UserEdit extends Component {
     }
 }
 
-export default withRouter(UserEdit);
+export default withRouter(ProcessUsers);

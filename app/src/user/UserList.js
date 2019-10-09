@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Button, ButtonGroup, Container, Table} from 'reactstrap';
-import AppNavBar from './AppNavbar';
 import {Link} from 'react-router-dom';
 
 class UserList extends Component {
@@ -42,7 +41,7 @@ class UserList extends Component {
             </div>
         }
 
-        const userList = users.map(user => {
+        const userList = Array.isArray(users) && users.map(user => {
             return (<tr key={user.id}>
                 <td>{user.id}</td>
                 <td style={{whiteSpace: 'nowrap'}}>{user.name}</td>
@@ -58,7 +57,6 @@ class UserList extends Component {
 
         return (
             <div>
-                <AppNavBar/>
                 <Container fluid>
                     <div className="float-right">
                         <Button color="success">

@@ -3,14 +3,12 @@ package br.com.softplan.processmanagement.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "app_user")
-public class User implements Serializable {
+public class UserSystem implements Serializable {
 
     private static final long serialVersionUID = 8822177810307774279L;
 
@@ -18,11 +16,8 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "Name is mandatory")
     private String name;
 
-    @NotNull(message = "Email is mandatory")
-    @Email
     private String email;
 
     @JsonIgnore
@@ -37,7 +32,7 @@ public class User implements Serializable {
 
     @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "app_user_process", joinColumns = @JoinColumn(name = "id_user"), inverseJoinColumns = @JoinColumn(name = "id_process"))
+    @JoinTable(name = "app_usersystem_process", joinColumns = @JoinColumn(name = "id_user"), inverseJoinColumns = @JoinColumn(name = "id_process"))
     private List<Process> processes;
 
     public static long getSerialVersionUID() {

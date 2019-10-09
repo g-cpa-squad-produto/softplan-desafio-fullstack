@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { Button, ButtonGroup, Container, Table } from 'reactstrap';
-import AppNavBar from './AppNavbar';
 import {Link} from 'react-router-dom';
 import queryString from 'query-string';
 
@@ -65,7 +64,6 @@ class ProcessList extends Component {
 
         return (
             <div>
-                <AppNavBar/>
                 <Container fluid>
                     <div className="float-right">
                         <Button color="success">

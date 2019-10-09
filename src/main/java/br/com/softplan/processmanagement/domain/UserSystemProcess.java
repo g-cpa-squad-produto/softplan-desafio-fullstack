@@ -8,13 +8,13 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="app_user_process")
-public class UserProcess implements Serializable {
+@Table(name="app_usersystem_process")
+public class UserSystemProcess implements Serializable {
 
     private static final long serialVersionUID = -3818490191704957608L;
 
     @EmbeddedId
-    private UserProcessId userProcessId;
+    private UserSystemProcessId userSystemProcessId;
 
     @Column(columnDefinition = "TEXT")
     private String text;
@@ -24,12 +24,12 @@ public class UserProcess implements Serializable {
         return serialVersionUID;
     }
 
-    public UserProcessId getUserProcessId() {
-        return userProcessId;
+    public UserSystemProcessId getUserSystemProcessId() {
+        return userSystemProcessId;
     }
 
-    public void setUserProcessId(UserProcessId userProcessId) {
-        this.userProcessId = userProcessId;
+    public void setUserSystemProcessId(UserSystemProcessId userSystemProcessId) {
+        this.userSystemProcessId = userSystemProcessId;
     }
 
     public String getText() {

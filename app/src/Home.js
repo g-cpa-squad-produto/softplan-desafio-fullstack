@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import './App.css';
-import AppNavbar from './AppNavbar';
 
 class Home extends Component {
     render() {
         return (
             <div>
-                <AppNavbar />
+                <h1>Home</h1>
             </div>
         );
     }
 }
 
-export default Home;
+export default withRouter(Home);
