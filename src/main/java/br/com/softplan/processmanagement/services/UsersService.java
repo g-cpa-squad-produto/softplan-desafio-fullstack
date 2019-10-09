@@ -1,7 +1,9 @@
 package br.com.softplan.processmanagement.services;
 
 import br.com.softplan.processmanagement.domain.User;
+import br.com.softplan.processmanagement.domain.UserType;
 import br.com.softplan.processmanagement.repositories.UsersRepository;
+import br.com.softplan.processmanagement.services.exceptions.EmailAlreadyUsedException;
 import br.com.softplan.processmanagement.services.exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -19,11 +21,19 @@ public class UsersService {
     //CRUD
     public User save(User user) {
         user.setId(null);
+        Optional<User> userByEmail = usersRepository.findByEmail(user.getEmail());
+        if(userByEmail.isPresent()){
+            throw new EmailAlreadyUsedException("Email already used.");
+        }
         return usersRepository.save(user);
     }
 
     public List<User> list() {
         return usersRepository.findAll();
+    }
+
+    public List<User> listFinalizadores() {
+        return usersRepository.findAllByType(UserType.FINALIZADOR);
     }
 
     public User searchById(Long id) {

@@ -1,9 +1,13 @@
 package br.com.softplan.processmanagement.services;
 
+import br.com.softplan.processmanagement.domain.*;
 import br.com.softplan.processmanagement.domain.Process;
-import br.com.softplan.processmanagement.domain.User;
+import br.com.softplan.processmanagement.dto.OpinionDTO;
 import br.com.softplan.processmanagement.repositories.ProcessesRepository;
+import br.com.softplan.processmanagement.repositories.UserProcessRepository;
+import br.com.softplan.processmanagement.repositories.UsersRepository;
 import br.com.softplan.processmanagement.services.exceptions.ProcessNotFoundException;
+import br.com.softplan.processmanagement.services.exceptions.UserProcessNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -18,6 +22,12 @@ public class ProcessesService {
     private ProcessesRepository processesRepository;
 
     @Autowired
+    private UsersRepository usersRepository;
+
+    @Autowired
+    private UserProcessRepository userProcessRepository;
+
+    @Autowired
     private UsersService usersService;
 
     //CRUD
@@ -30,9 +40,16 @@ public class ProcessesService {
         return processesRepository.findAll();
     }
 
-    public List<Process> listByCreator(Long idUser) {
+    public List<Process> listByUser(Long idUser) {
         User user = usersService.searchById(idUser);
-        return processesRepository.findAllByCreator(user);
+        UserType type = user.getType();
+
+        if(type == UserType.FINALIZADOR){//FINALIZADOR VE APENAS PROCESSOS ATRIBUIDOS A ELE.
+            return usersRepository.findProcessByUser(user);
+        }else if(type == UserType.TRIADOR){//TRIADOR VE APENAS SEUS PROCESSOS.
+            return processesRepository.findAllByCreator(user);
+        }
+        return this.list();//ADMIN VE TUDO
     }
 
     public Process searchById(Long id) {
@@ -60,4 +77,22 @@ public class ProcessesService {
         searchById(process.getId());
     }
 
+    public UserProcess saveOpinion(Long id, OpinionDTO opinionDTO) {
+        Optional<Process> process = Optional.of(this.searchById(id));
+        Optional<User> user = Optional.of(usersService.searchById(opinionDTO.getIdUser()));
+
+        if(process.isPresent() && user.isPresent()){
+
+            Optional<UserProcess> userProcessOptional = userProcessRepository.findUserProcessesByUserProcessIdUserAndUserProcessIdProcess(user.get(), process.get());
+
+            if(userProcessOptional.isPresent()){
+                UserProcess userProcess = userProcessOptional.get();
+                userProcess.setText(opinionDTO.getText());
+                userProcess.setCreatedAt(opinionDTO.getCreatedAt());
+                return userProcessRepository.save(userProcess);
+            }
+
+        }
+        throw new UserProcessNotFoundException("Problem finding user link with process");
+    }
 }

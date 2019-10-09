@@ -1,6 +1,8 @@
 package br.com.softplan.processmanagement.controllers;
 
 import br.com.softplan.processmanagement.domain.Process;
+import br.com.softplan.processmanagement.domain.UserProcess;
+import br.com.softplan.processmanagement.dto.OpinionDTO;
 import br.com.softplan.processmanagement.services.ProcessesService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -10,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
 import java.net.URI;
 import java.util.List;
 
@@ -30,8 +31,8 @@ public class ProcessesController {
 
     @ApiOperation(value = "Visualizar a lista de processos por criador")
     @GetMapping(value = "/user/{id}")
-    ResponseEntity<List<Process>> listByCreator(@PathVariable("id") Long idUser){
-        return ResponseEntity.ok(processesService.listByCreator(idUser));
+    ResponseEntity<List<Process>> listByUser(@PathVariable("id") Long idUser) {
+        return ResponseEntity.ok(processesService.listByUser(idUser));
     }
 
     @ApiOperation(value = "Salvando um novo processo")
@@ -64,5 +65,11 @@ public class ProcessesController {
         return ResponseEntity.noContent().build();
     }
 
+    @ApiOperation(value = "Gravando parecer do processo")
+    @PostMapping(value = "/{id}/opinion")
+    public ResponseEntity<UserProcess> saveOpinion(@PathVariable("id") Long id, @RequestBody OpinionDTO opinionDTO) {
+        UserProcess userProcess = processesService.saveOpinion(id, opinionDTO);
+        return ResponseEntity.ok(userProcess);
+    }
 
 }

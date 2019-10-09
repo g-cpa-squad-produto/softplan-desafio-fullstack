@@ -16,16 +16,16 @@ public class Process implements Serializable {
     private Long id;
 
     private String code;
+
+    @Column(columnDefinition = "TEXT")
     private String description;
     private LocalDateTime createdAt;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private User creator;
 
-    @ManyToMany
-    @JoinTable(name = "app_user_process",
-            joinColumns = @JoinColumn(name = "id_process"),
-            inverseJoinColumns = @JoinColumn(name = "id_user"))
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "app_user_process", joinColumns = @JoinColumn(name = "id_process"), inverseJoinColumns = @JoinColumn(name = "id_user"))
     private List<User> users;
 
     public static long getSerialVersionUID() {

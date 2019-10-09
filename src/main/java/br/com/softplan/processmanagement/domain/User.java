@@ -3,6 +3,7 @@ package br.com.softplan.processmanagement.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
@@ -21,6 +22,7 @@ public class User implements Serializable {
     private String name;
 
     @NotNull(message = "Email is mandatory")
+    @Email
     private String email;
 
     @JsonIgnore
@@ -35,6 +37,7 @@ public class User implements Serializable {
 
     @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "app_user_process", joinColumns = @JoinColumn(name = "id_user"), inverseJoinColumns = @JoinColumn(name = "id_process"))
     private List<Process> processes;
 
     public static long getSerialVersionUID() {

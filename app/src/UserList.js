@@ -49,7 +49,7 @@ class UserList extends Component {
                 <td>{user.email}</td>
                 <td>
                     <ButtonGroup>
-                        <Button size="sm" color="primary" tag={Link} to={"/users/" + user.id}>Editar</Button>
+                        <Button size="sm" color="primary"><Link className="text-white" tag={Link} to={"/users/" + user.id}>Editar</Link></Button>
                         <Button size="sm" color="danger" onClick={() => this.remove(user.id)}>Remover</Button>
                     </ButtonGroup>
                 </td>
@@ -61,7 +61,9 @@ class UserList extends Component {
                 <AppNavBar/>
                 <Container fluid>
                     <div className="float-right">
-                        <Button color="success" tag={Link} to="/users/new">Novo Usuário</Button>
+                        <Button color="success">
+                            <Link className="text-white" tag={Link} to="/users/new">Novo Usuário</Link>
+                        </Button>
                     </div>
                     <h3>Usuários</h3>
                     <Table className="mt-4">

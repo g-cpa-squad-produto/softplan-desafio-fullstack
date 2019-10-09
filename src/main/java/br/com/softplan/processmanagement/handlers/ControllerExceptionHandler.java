@@ -1,8 +1,10 @@
 package br.com.softplan.processmanagement.handlers;
 
 import br.com.softplan.processmanagement.domain.ErrorDetail;
+import br.com.softplan.processmanagement.services.exceptions.EmailAlreadyUsedException;
 import br.com.softplan.processmanagement.services.exceptions.ProcessNotFoundException;
 import br.com.softplan.processmanagement.services.exceptions.UserNotFoundException;
+import br.com.softplan.processmanagement.services.exceptions.UserProcessNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -24,4 +26,17 @@ public class ControllerExceptionHandler {
         ErrorDetail error = new ErrorDetail(e.getMessage(), 404l, System.currentTimeMillis(), "");
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
+
+    @ExceptionHandler(EmailAlreadyUsedException.class)
+    public ResponseEntity<ErrorDetail> handleEmailAlreadyUsedException(EmailAlreadyUsedException e, HttpServletRequest request){
+        ErrorDetail error = new ErrorDetail(e.getMessage(), 409l, System.currentTimeMillis(), "");
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+    }
+
+    @ExceptionHandler(UserProcessNotFoundException.class)
+    public ResponseEntity<ErrorDetail> handleUserProcessNotFoundException(UserProcessNotFoundException e, HttpServletRequest request){
+        ErrorDetail error = new ErrorDetail(e.getMessage(), 404l, System.currentTimeMillis(), "");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+
 }

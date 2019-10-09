@@ -56,9 +56,8 @@ class ProcessList extends Component {
                 <td>{process.description}</td>
                 <td>
                     <ButtonGroup>
-                        <Button size="sm" color="primary" tag={Link} to={"/process/" + process.id}>Editar</Button>
+                        <Button size="sm" color="primary"><Link className="text-white" tag={Link} to={"/process/" + process.id}>Editar</Link></Button>
                         <Button size="sm" color="danger" onClick={() => this.remove(process.id)}>Remover</Button>
-                        <Button size="sm" color="secondary" tag={Link} to={"/process/users/" + process.id}>Atribuir Usuários</Button>
                     </ButtonGroup>
                 </td>
             </tr>);
@@ -69,7 +68,9 @@ class ProcessList extends Component {
                 <AppNavBar/>
                 <Container fluid>
                     <div className="float-right">
-                        <Button color="success" tag={Link} to="/process/new">Novo processo</Button>
+                        <Button color="success">
+                            <Link className="text-white" tag={Link} to="/process/new">Novo processo</Link>
+                        </Button>
                     </div>
                     <h3>Processos</h3>
                     <Table className="mt-4">

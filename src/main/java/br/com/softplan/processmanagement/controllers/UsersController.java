@@ -27,6 +27,12 @@ public class UsersController {
         return ResponseEntity.ok(usersService.list());
     }
 
+    @ApiOperation(value = "Visualizar a lista de usuários finalizadores")
+    @GetMapping(value="/finalizadores")
+    ResponseEntity<List<User>> listFinalizadores() {
+        return ResponseEntity.ok(usersService.listFinalizadores());
+    }
+
     @ApiOperation(value = "Salvando um novo usuário")
     @PostMapping
     ResponseEntity<Void> save(@RequestBody @Valid User user) {

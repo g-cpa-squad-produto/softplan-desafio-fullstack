@@ -80,14 +80,14 @@ class UserEdit extends Component {
                         </FormGroup>
                         <FormGroup>
                             <Label for="type">Tipo</Label>
-                            <Input type="select" name="type" id="type" onChange={this.handleChange}>
-                                <option selected={item.type == 'TRIADOR' ? 'selected' : ''}>Triador</option>
-                                <option selected={item.type == 'FINALIZADOR' ? 'selected' : ''}>Finalizador</option>
+                            <Input type="select" defaultValue={item.type} name="type" id="type" onChange={this.handleChange}>
+                                <option>Triador</option>
+                                <option>Finalizador</option>
                             </Input>
                         </FormGroup>
                         <FormGroup>
                             <Button color="primary" type="submit">Salvar</Button>{' '}
-                            <Button color="secondary" tag={Link} to="/users">Cancelar</Button>
+                            <Link className="btn btn-secondary" to="/users">Cancelar</Link>
                         </FormGroup>
                     </Form>
                 </Container>
