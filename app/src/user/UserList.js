@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import {Button, ButtonGroup, Container, Table} from 'reactstrap';
-import {Link} from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 class UserList extends Component {
     constructor(props) {
         super(props);
         this.state = {
             users: [],
-            isLoading: true
+            isLoading: true,
+            currentUser: this.props.currentUser
         }
     }
 
@@ -34,7 +35,12 @@ class UserList extends Component {
     }
 
     render() {
-        const {users, isLoading} = this.state;
+        const {users, isLoading, currentUser} = this.state;
+
+        if(!currentUser || !currentUser.type || currentUser.type !== 'ADMIN'){
+            return <Redirect to="/" />
+        }
+
         if (isLoading) {
             return <div className="text-center m-4">
                 <p>Carregando...</p>

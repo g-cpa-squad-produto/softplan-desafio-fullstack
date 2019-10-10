@@ -3,6 +3,7 @@ package br.com.softplan.processmanagement.controllers;
 import br.com.softplan.processmanagement.domain.Process;
 import br.com.softplan.processmanagement.domain.UserSystemProcess;
 import br.com.softplan.processmanagement.dto.OpinionDTO;
+import br.com.softplan.processmanagement.security.ApiResponse;
 import br.com.softplan.processmanagement.services.ProcessesService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -52,17 +53,17 @@ public class ProcessesController {
 
     @ApiOperation(value = "Atualizar dados do processo")
     @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@RequestBody @Valid Process process, @PathVariable("id") Long id) {
+    public ResponseEntity<ApiResponse> update(@RequestBody @Valid Process process, @PathVariable("id") Long id) {
         process.setId(id);
         processesService.update(process);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(new ApiResponse(true, "Process updated"));
     }
 
     @ApiOperation(value = "Apagando o processo")
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
+    public ResponseEntity<ApiResponse> delete(@PathVariable("id") Long id) {
         processesService.delete(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(new ApiResponse(true, "Process removed"));
     }
 
     @ApiOperation(value = "Gravando parecer do processo")

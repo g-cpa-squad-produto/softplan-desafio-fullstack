@@ -2,6 +2,7 @@ package br.com.softplan.processmanagement.controllers;
 
 import br.com.softplan.processmanagement.domain.UserAuthentication;
 import br.com.softplan.processmanagement.domain.UserSystem;
+import br.com.softplan.processmanagement.security.ApiResponse;
 import br.com.softplan.processmanagement.services.UsersService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -58,17 +59,17 @@ public class UsersController {
 
     @ApiOperation(value = "Atualizar dados do usuário")
     @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@RequestBody @Valid UserSystem userSystem, @PathVariable("id") Long id) {
+    public ResponseEntity<ApiResponse> update(@RequestBody @Valid UserSystem userSystem, @PathVariable("id") Long id) {
         userSystem.setId(id);
         usersService.update(userSystem);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(new ApiResponse(true, "User updated"));
     }
 
     @ApiOperation(value = "Apagando o usuário")
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
+    public ResponseEntity<ApiResponse> delete(@PathVariable("id") Long id) {
         usersService.delete(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(new ApiResponse(true, "User removed"));
     }
 
 }

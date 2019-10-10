@@ -1,47 +1,43 @@
 import React, {Component} from 'react';
 import { Button, ButtonGroup, Container, Table } from 'reactstrap';
-import {Link} from 'react-router-dom';
-import queryString from 'query-string';
+import {Link, Redirect} from 'react-router-dom';
+import {getProcessList, deleteProcess} from "../utils/api";
 
 class ProcessList extends Component {
     constructor(props) {
         super(props);
         this.state = {
             process: [],
-            isLoading: true
+            isLoading: true,
+            currentUser: this.props.currentUser
         }
     }
 
     componentDidMount() {
-        this.setState({isLoading: true});
-        let userId = 1;
-        let params = queryString.parse(this.props.location.search);
-        if(params && params.user){
-            userId = params.user;
+        if(this.state.currentUser){
+            this.setState({isLoading: true});
+            let userId = this.state.currentUser.id;
+            getProcessList(userId)
+                .then(data => this.setState({process: data, isLoading: false}));
         }
-
-        fetch('/api/processes/user/'+userId)
-            .then(response => response.json())
-            .then(data => this.setState({process: data, isLoading: false}));
     }
 
     remove = async (id) => {
         if(window.confirm("Deseja realmente apagar este processo?")){
-            await fetch(`/api/processes/${id}`, {
-                method: 'DELETE',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            }).then(() => {
-                let updatedProcess = [...this.state.process].filter(i => i.id !== id);
-                this.setState({process: updatedProcess});
-            })
+            deleteProcess(id)
+                .then(() => {
+                    let updatedProcess = [...this.state.process].filter(i => i.id !== id);
+                    this.setState({process: updatedProcess});
+                });
         }
     }
 
     render() {
-        const {process, isLoading} = this.state;
+        const {process, isLoading, currentUser} = this.state;
+        if(!currentUser || !currentUser.type){
+            return <Redirect to="/" />
+        }
+
         if (isLoading) {
             return <div className="text-center m-4">
                 <p>Carregando...</p>
@@ -54,10 +50,21 @@ class ProcessList extends Component {
                 <td style={{whiteSpace: 'nowrap'}}>{process.creator.name}</td>
                 <td>{process.description}</td>
                 <td>
-                    <ButtonGroup>
-                        <Button size="sm" color="primary"><Link className="text-white" tag={Link} to={"/process/" + process.id}>Editar</Link></Button>
-                        <Button size="sm" color="danger" onClick={() => this.remove(process.id)}>Remover</Button>
-                    </ButtonGroup>
+                    {
+                        currentUser.type &&
+                        (currentUser.type === 'ADMIN' || currentUser.type === 'TRIADOR') &&
+                        <ButtonGroup>
+                            <Button size="sm" color="primary"><Link className="text-white" tag={Link} to={"/process/" + process.id}>Editar</Link></Button>
+                            <Button size="sm" color="danger" onClick={() => this.remove(process.id)}>Remover</Button>
+                        </ButtonGroup>
+                    }
+                    {
+                        currentUser.type &&
+                        currentUser.type === 'FINALIZADOR' &&
+                        <ButtonGroup>
+                            <Button size="sm" color="info"><Link className="text-white" tag={Link} to={"/process/" + process.id}>Escrever parecer</Link></Button>
+                        </ButtonGroup>
+                    }
                 </td>
             </tr>);
         });
@@ -65,11 +72,14 @@ class ProcessList extends Component {
         return (
             <div>
                 <Container fluid>
-                    <div className="float-right">
-                        <Button color="success">
-                            <Link className="text-white" tag={Link} to="/process/new">Novo processo</Link>
-                        </Button>
-                    </div>
+                    { currentUser.type &&
+                    (currentUser.type === 'ADMIN' || currentUser.type === 'TRIADOR') &&
+                        <div className="float-right">
+                            <Button color="success">
+                                <Link className="text-white" tag={Link} to="/process/new">Novo processo</Link>
+                            </Button>
+                        </div>
+                    }
                     <h3>Processos</h3>
                     <Table className="mt-4">
                         <thead>

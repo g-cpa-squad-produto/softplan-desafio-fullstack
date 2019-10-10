@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {Link, withRouter} from 'react-router-dom';
+import {Link, withRouter, Redirect} from 'react-router-dom';
 import {Button, CustomInput, Container, Form, FormGroup, Input, Label, Card, CardHeader, CardBody } from 'reactstrap';
+import {getProcess, getFinalizadores} from "../utils/api";
 
 class ProcessEdit extends Component {
 
@@ -14,30 +15,30 @@ class ProcessEdit extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            isLoading: true,
             item: this.emptyItem,
             usersInitials: [],
-            userType: 'FINALIZADOR'
+            currentUser: this.props.currentUser
         };
     }
 
     async componentDidMount() {
         if (this.props.match.params.id !== 'new') {
-            const process = await (await fetch(`/api/processes/${this.props.match.params.id}`)).json();
-            this.setState({item: process});
+            getProcess(this.props.match.params.id).then(data => this.setState({item: data, isLoading: false}));
         }
-
-        const users = await (await fetch(`/api/users/finalizadores`)).json();
-        this.setState({usersInitials: users});
+        getFinalizadores().then(data => this.setState({usersInitials: data, isLoading: false}));
     }
 
     verifyCheck = (id) => {
         let founded = false;
-        this.state.item.users.map(user => {
-            if(founded) return;
-            if(user.id && user.id == id){
-                founded = true;
-            }
-        })
+        if(this.state.item.userSystems) {
+            this.state.item.userSystems.map(user => {
+                if (founded) return;
+                if (user.id && user.id == id) {
+                    founded = true;
+                }
+            });
+        }
         return founded;
     }
 
@@ -47,10 +48,10 @@ class ProcessEdit extends Component {
         const name = target.name;
         let item = {...this.state.item};
         if(!this.verifyCheck(value)){
-            item.users.push({id:value});
+            item.userSystems.push({id:value});
         }else{
-            let updatedUsers = item.users.filter(u => u.id != value);
-            item.users = updatedUsers;
+            let updatedUsers = item.userSystems.filter(u => u.id != value);
+            item.userSystems = updatedUsers;
         }
         this.setState({item});
     }
@@ -104,8 +105,6 @@ class ProcessEdit extends Component {
             idUser: 3
         }
 
-        console.log(JSON.stringify(data));
-
         let endpoint = '/api/processes/'+idProcess+'/opinion';
         await fetch(endpoint, {
             method: 'POST',
@@ -120,7 +119,11 @@ class ProcessEdit extends Component {
     }
 
     render() {
-        const {item, opinion, usersInitials, userType} = this.state;
+        const {item, usersInitials, currentUser} = this.state;
+        if(!currentUser || !currentUser.type){
+            return <Redirect to="/" />
+        }
+
         const title = <h2>{item.id ? 'Editar Processo' : 'Adicionar Processo'}</h2>;
 
         const usersCheck = Array.isArray(usersInitials) && usersInitials.map(user => {
@@ -136,7 +139,7 @@ class ProcessEdit extends Component {
                 className="ml-4" />);
         });
 
-        if(userType == 'FINALIZADOR'){
+        if(currentUser && currentUser.type === 'FINALIZADOR'){
             return (
                 <div>
                     <Container>

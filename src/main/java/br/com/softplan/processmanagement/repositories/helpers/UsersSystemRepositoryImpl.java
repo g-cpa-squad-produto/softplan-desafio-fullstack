@@ -22,7 +22,7 @@ public class UsersSystemRepositoryImpl implements UsersSystemRepositoryQueries {
         Long userId = userSystem.getId();
         if(userId == null) throw new UserNotFoundException("User not found");
 
-        List<Process> processes = manager.createQuery("SELECT p.userSystemProcessId.process FROM UserSystemProcess p WHERE p.userSystemProcessId.user.id = :userId", Process.class)
+        List<Process> processes = manager.createQuery("SELECT p.userSystemProcessId.process FROM UserSystemProcess p WHERE p.userSystemProcessId.userSystem.id = :userId", Process.class)
                 .setParameter("userId", userId).getResultList();
 
         logger.info(String.valueOf(processes));

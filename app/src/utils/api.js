@@ -1,6 +1,6 @@
 import {ACCESS_TOKEN} from "./constants";
 
-const request = (options) => {
+const request = async (options) => {
 
     const headers = new Headers({
         'Content-Type': 'application/json',
@@ -13,7 +13,7 @@ const request = (options) => {
     const defaults = {headers: headers};
     options = Object.assign({}, defaults, options);
 
-    return fetch(options.url, options)
+    return await fetch(options.url, options)
         .then(response =>
             response.json().then(json => {
                 if(!response.ok) {
@@ -39,5 +39,45 @@ export function getCurrentUser() {
     return request({
         url: "/api/users/me",
         method: 'GET'
+    });
+}
+
+export function getProcessList(userId) {
+    if(!localStorage.getItem(ACCESS_TOKEN)) {
+        return Promise.reject("Token não encontrado.");
+    }
+    return request({
+        url: '/api/processes/user/'+userId,
+        method: 'GET'
+    });
+}
+
+export function getFinalizadores(){
+    if(!localStorage.getItem(ACCESS_TOKEN)) {
+        return Promise.reject("Token não encontrado.");
+    }
+    return request({
+        url: '/api/users/finalizadores',
+        method: 'GET'
+    });
+}
+
+export function getProcess(idProcess){
+    if(!localStorage.getItem(ACCESS_TOKEN)) {
+        return Promise.reject("Token não encontrado.");
+    }
+    return request({
+        url: '/api/processes/'+idProcess,
+        method: 'GET'
+    });
+}
+
+export function deleteProcess(idProcess){
+    if(!localStorage.getItem(ACCESS_TOKEN)) {
+        return Promise.reject("Token não encontrado.");
+    }
+    return request({
+        url: '/api/processes/'+idProcess,
+        method: 'DELETE'
     });
 }

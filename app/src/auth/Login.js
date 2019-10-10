@@ -25,7 +25,7 @@ class Login extends Component {
             if(error.status === 401) {
                 alert('Email/senha incorretos. Tente novamente.');
             } else {
-                alert(error.message || 'Desculpe! Alguma coisa está errada. Tente novamente!');
+                alert('Desculpe! Alguma coisa está errada. Tente novamente!');//error.message ||
             }
         });
         this.setState({isLoading: false});

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link, withRouter} from 'react-router-dom';
+import {Link, withRouter, Redirect} from 'react-router-dom';
 import {Button, Container, Form, FormGroup, Input, Label} from 'reactstrap';
 
 class UserEdit extends Component {
@@ -13,7 +13,8 @@ class UserEdit extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            item: this.emptyItem
+            item: this.emptyItem,
+            currentUser: this.props.currentUser
         };
     }
 
@@ -58,7 +59,12 @@ class UserEdit extends Component {
     }
 
     render() {
-        const {item} = this.state;
+        const {item, currentUser} = this.state;
+
+        if(!currentUser || !currentUser.type || currentUser.type !== 'ADMIN'){
+            return <Redirect to="/" />
+        }
+
         const title = <h2>{item.id ? 'Editar Usuário' : 'Adicionar Usuário'}</h2>;
 
         return (
