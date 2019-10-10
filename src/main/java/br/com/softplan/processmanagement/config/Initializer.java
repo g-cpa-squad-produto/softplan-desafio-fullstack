@@ -3,6 +3,8 @@ package br.com.softplan.processmanagement.config;
 import br.com.softplan.processmanagement.domain.Process;
 import br.com.softplan.processmanagement.domain.UserSystem;
 import br.com.softplan.processmanagement.domain.UserType;
+import br.com.softplan.processmanagement.repositories.ProcessesRepository;
+import br.com.softplan.processmanagement.repositories.UsersSystemRepository;
 import br.com.softplan.processmanagement.services.ProcessesService;
 import br.com.softplan.processmanagement.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +19,10 @@ import java.util.Arrays;
 public class Initializer implements CommandLineRunner {
 
     @Autowired
-    private UsersService usersService;
+    private UsersSystemRepository usersSystemRepository;
 
     @Autowired
-    private ProcessesService processesService;
+    private ProcessesRepository processesRepository;
 
     @Autowired
     private PasswordEncoder bcryptEncoder;
@@ -28,59 +30,17 @@ public class Initializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        UserSystem userSystemAdmin = new UserSystem();
-        userSystemAdmin.setName("Administrador");
-        userSystemAdmin.setType(UserType.ADMIN);
-        userSystemAdmin.setPassword(bcryptEncoder.encode("123456"));
-        userSystemAdmin.setEmail("admin@email.com");
-        usersService.save(userSystemAdmin);
-
-        UserSystem userSystemTriador = new UserSystem();
-        userSystemTriador.setName("Triador");
-        userSystemTriador.setType(UserType.TRIADOR);
-        userSystemTriador.setPassword(bcryptEncoder.encode("123456"));
-        userSystemTriador.setEmail("triador@email.com");
-        usersService.save(userSystemTriador);
-
-        UserSystem userSystemFinalizador = new UserSystem();
-        userSystemFinalizador.setName("Finalizador");
-        userSystemFinalizador.setType(UserType.FINALIZADOR);
-        userSystemFinalizador.setPassword(bcryptEncoder.encode("123456"));
-        userSystemFinalizador.setEmail("finalizador@email.com");
-        usersService.save(userSystemFinalizador);
-
-        UserSystem userSystemFinalizador2 = new UserSystem();
-        userSystemFinalizador2.setName("Segundo finalizador");
-        userSystemFinalizador2.setType(UserType.FINALIZADOR);
-        userSystemFinalizador2.setPassword(bcryptEncoder.encode("123456"));
-        userSystemFinalizador2.setEmail("finalizador2@email.com");
-        usersService.save(userSystemFinalizador2);
+        UserSystem userSystemAdmin = new UserSystem("Administrador","admin@email.com",bcryptEncoder.encode("123456"), UserType.ADMIN);
+        UserSystem userSystemTriador = new UserSystem("Triador","triador@email.com",bcryptEncoder.encode("123456"), UserType.TRIADOR);
+        UserSystem userSystemFinalizador = new UserSystem("Finalizador","finalizador@email.com",bcryptEncoder.encode("123456"), UserType.FINALIZADOR);
+        UserSystem userSystemFinalizador2 = new UserSystem("Segundo finalizador","finalizador2@email.com",bcryptEncoder.encode("123456"), UserType.FINALIZADOR);
+        usersSystemRepository.saveAll(Arrays.asList(userSystemAdmin,userSystemTriador,userSystemFinalizador,userSystemFinalizador2));
 
         // PROCESS
-        Process process1 = new Process();
-        process1.setCode("1234");
-        process1.setCreatedAt(LocalDateTime.now());
-        process1.setCreator(userSystemTriador);
-        process1.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porttitor ante at felis interdum egestas. In et purus mauris. Duis sed suscipit velit. Curabitur eu elementum ligula, ut lacinia magna. Aliquam auctor finibus aliquam. Fusce consequat sit amet felis ut luctus. Proin dictum luctus nibh, et vulputate risus semper id. Vivamus vel eros cursus, mattis felis quis, vestibulum turpis. Vivamus luctus, risus quis porta convallis, dui sem lacinia velit, eu maximus risus sem sit amet erat.");
-        process1.setUserSystems(Arrays.asList(new UserSystem[]{userSystemFinalizador}));
-        processesService.save(process1);
-
-        Process process2 = new Process();
-        process2.setCode("4321");
-        process2.setCreatedAt(LocalDateTime.now());
-        process2.setCreator(userSystemTriador);
-        process2.setDescription("Curabitur porttitor ante at felis interdum egestas. In et purus mauris. Duis sed suscipit velit. Curabitur eu elementum ligula, ut lacinia magna. Aliquam auctor finibus aliquam. Fusce consequat sit amet felis ut luctus. Proin dictum luctus nibh, et vulputate risus semper id. Vivamus vel eros cursus, mattis felis quis, vestibulum turpis. Vivamus luctus, risus quis porta convallis, dui sem lacinia velit, eu maximus risus sem sit amet erat.");
-        process2.setUserSystems(Arrays.asList(new UserSystem[]{userSystemFinalizador2}));
-        processesService.save(process2);
-
-        Process process3 = new Process();
-        process3.setCode("09876");
-        process3.setCreatedAt(LocalDateTime.now());
-        process3.setCreator(userSystemTriador);
-        process3.setDescription("In et purus mauris. Duis sed suscipit velit. Curabitur eu elementum ligula, ut lacinia magna. Aliquam auctor finibus aliquam. Fusce consequat sit amet felis ut luctus. Proin dictum luctus nibh, et vulputate risus semper id. Vivamus vel eros cursus, mattis felis quis, vestibulum turpis. Vivamus luctus, risus quis porta convallis, dui sem lacinia velit, eu maximus risus sem sit amet erat.");
-        process3.setUserSystems(Arrays.asList(new UserSystem[]{userSystemFinalizador2}));
-        processesService.save(process3);
-
+        Process process1 = new Process("12","Aqui vai a descrição",LocalDateTime.now(),userSystemTriador,Arrays.asList(new UserSystem[]{userSystemFinalizador}));
+        Process process2 = new Process("23","Aqui vai a descrição",LocalDateTime.now(),userSystemTriador,Arrays.asList(new UserSystem[]{userSystemFinalizador2}));
+        Process process3 = new Process("45","Aqui vai a descrição",LocalDateTime.now(),userSystemTriador,Arrays.asList(new UserSystem[]{userSystemFinalizador2}));
+        processesRepository.saveAll(Arrays.asList(process1,process2,process3));
 
     }
 }

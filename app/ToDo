@@ -1,7 +1,10 @@
 Problemas conhecidos:
     - Timezone (horário com 3 horas a mais)
-    - Estão fixos os ids de usuário na criação de um novo processo, e na listagem está sendo filtrada pelo query string.
-    Isso está em caracter de testes.
+    - Atualização do processo está apagando os pareceres já cadastrados
+    - Cadastro de novo usuário não está funcionando
+    - Resposta cadastro processo erro json (body vazio)
+
+
 
 ToDo
     - Autenticação do usuário

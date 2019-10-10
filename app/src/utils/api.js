@@ -14,13 +14,15 @@ const request = async (options) => {
     options = Object.assign({}, defaults, options);
 
     return await fetch(options.url, options)
-        .then(response =>
-            response.json().then(json => {
-                if(!response.ok) {
-                    return Promise.reject(json);
-                }
-                return json;
-            })
+        .then(response => {
+                if(!response) return;
+                return response.json().then(json => {
+                    if (!response.ok) {
+                        return Promise.reject(json);
+                    }
+                    return json;
+                })
+            }
         );
 };
 
@@ -42,42 +44,9 @@ export function getCurrentUser() {
     });
 }
 
-export function getProcessList(userId) {
+export function manipulateData(data){
     if(!localStorage.getItem(ACCESS_TOKEN)) {
         return Promise.reject("Token não encontrado.");
     }
-    return request({
-        url: '/api/processes/user/'+userId,
-        method: 'GET'
-    });
-}
-
-export function getFinalizadores(){
-    if(!localStorage.getItem(ACCESS_TOKEN)) {
-        return Promise.reject("Token não encontrado.");
-    }
-    return request({
-        url: '/api/users/finalizadores',
-        method: 'GET'
-    });
-}
-
-export function getProcess(idProcess){
-    if(!localStorage.getItem(ACCESS_TOKEN)) {
-        return Promise.reject("Token não encontrado.");
-    }
-    return request({
-        url: '/api/processes/'+idProcess,
-        method: 'GET'
-    });
-}
-
-export function deleteProcess(idProcess){
-    if(!localStorage.getItem(ACCESS_TOKEN)) {
-        return Promise.reject("Token não encontrado.");
-    }
-    return request({
-        url: '/api/processes/'+idProcess,
-        method: 'DELETE'
-    });
+    return request(data);
 }

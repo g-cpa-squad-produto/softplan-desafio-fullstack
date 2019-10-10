@@ -12,6 +12,7 @@ import AppNavbar from "./fragments/AppNavbar";
 import PrivateRoute from "./utils/PrivateRoute";
 import { ACCESS_TOKEN } from "./utils/constants";
 import { getCurrentUser } from "./utils/api";
+import Footer from "./fragments/Footer";
 
 class App extends Component {
 
@@ -120,6 +121,7 @@ class App extends Component {
                         path="/login"
                         render={(props) => <Login onLogin={this.handleLogin} {...props} />}/>
                 </Switch>
+                <Footer />
             </Router>
         )
     }

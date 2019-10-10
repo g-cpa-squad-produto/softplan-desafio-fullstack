@@ -35,6 +35,16 @@ public class UserSystem implements Serializable {
     @JoinTable(name = "app_usersystem_process", joinColumns = @JoinColumn(name = "id_user"), inverseJoinColumns = @JoinColumn(name = "id_process"))
     private List<Process> processes;
 
+    public UserSystem() {
+    }
+
+    public UserSystem(String name, String email, String password, UserType type) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.type = type;
+    }
+
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }

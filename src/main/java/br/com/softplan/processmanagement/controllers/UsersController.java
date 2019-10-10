@@ -2,6 +2,7 @@ package br.com.softplan.processmanagement.controllers;
 
 import br.com.softplan.processmanagement.domain.UserAuthentication;
 import br.com.softplan.processmanagement.domain.UserSystem;
+import br.com.softplan.processmanagement.domain.UserSystemProcess;
 import br.com.softplan.processmanagement.security.ApiResponse;
 import br.com.softplan.processmanagement.services.UsersService;
 import io.swagger.annotations.Api;
@@ -70,6 +71,13 @@ public class UsersController {
     public ResponseEntity<ApiResponse> delete(@PathVariable("id") Long id) {
         usersService.delete(id);
         return ResponseEntity.ok(new ApiResponse(true, "User removed"));
+    }
+
+    @ApiOperation(value = "Buscando parecer do processo")
+    @GetMapping(value = "/{idUser}/opinions")
+    public ResponseEntity<List<UserSystemProcess>> getOpinionsByProcess(@PathVariable("idUser") Long idUser){
+        List<UserSystemProcess> userSystemProcesses = usersService.getOpinionsByUser(idUser);
+        return ResponseEntity.ok(userSystemProcesses);
     }
 
 }

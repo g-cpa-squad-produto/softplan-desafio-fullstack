@@ -1,44 +1,48 @@
 import React, {Component} from 'react';
-import {Button, ButtonGroup, Container, Table} from 'reactstrap';
+import {Alert, Button, ButtonGroup, Container, Table } from 'reactstrap';
 import { Link, Redirect } from 'react-router-dom';
+import {manipulateData} from "../utils/api";
+import queryString from "query-string";
 
 class UserList extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
             users: [],
             isLoading: true,
-            currentUser: this.props.currentUser
+            currentUser: this.props.currentUser,
+            params: queryString.parse(this.props.location.search)
         }
     }
 
     componentDidMount() {
         this.setState({isLoading: true});
-        fetch('/api/users')
-            .then(response => response.json())
-            .then(data => this.setState({users: data, isLoading: false}));
+        let data = {
+            url: '/api/users',
+            method: "GET"
+        }
+        manipulateData(data).then(data => this.setState({users: data, isLoading: false}));
     }
 
     remove = async (id) => {
-        if(window.confirm("Deseja realmente apagar o usuário "+id+" :")) {
-            await fetch(`/api/users/${id}`, {
-                method: 'DELETE',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            }).then(() => {
+        if (window.confirm("Deseja realmente apagar o usuário "+id+" :")) {
+            let data = {
+                url: '/api/users/' + id,
+                method: 'DELETE'
+            }
+            manipulateData(data).then(() => {
                 let updatedUsers = [...this.state.users].filter(i => i.id !== id);
                 this.setState({users: updatedUsers});
-            })
+            });
         }
-    }
+    };
 
     render() {
-        const {users, isLoading, currentUser} = this.state;
+        const {users, isLoading, currentUser, params} = this.state;
 
         if(!currentUser || !currentUser.type || currentUser.type !== 'ADMIN'){
-            return <Redirect to="/" />
+            return <Redirect rerender={true} to="/" />
         }
 
         if (isLoading) {
@@ -48,6 +52,7 @@ class UserList extends Component {
         }
 
         const userList = Array.isArray(users) && users.map(user => {
+            if(user.type === 'ADMIN') return null;
             return (<tr key={user.id}>
                 <td>{user.id}</td>
                 <td style={{whiteSpace: 'nowrap'}}>{user.name}</td>
@@ -63,6 +68,10 @@ class UserList extends Component {
 
         return (
             <div>
+                {
+                    params && params.edit && params.edit === 'success' &&
+                    <Alert color="success">Alteração registrada com sucesso!</Alert>
+                }
                 <Container fluid>
                     <div className="float-right">
                         <Button color="success">
@@ -70,7 +79,7 @@ class UserList extends Component {
                         </Button>
                     </div>
                     <h3>Usuários</h3>
-                    <Table className="mt-4">
+                    <Table responsive className="mt-4">
                         <thead>
                         <tr>
                             <th width="10%">#</th>

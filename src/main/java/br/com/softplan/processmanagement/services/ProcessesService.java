@@ -1,7 +1,9 @@
 package br.com.softplan.processmanagement.services;
 
-import br.com.softplan.processmanagement.domain.*;
 import br.com.softplan.processmanagement.domain.Process;
+import br.com.softplan.processmanagement.domain.UserSystem;
+import br.com.softplan.processmanagement.domain.UserSystemProcess;
+import br.com.softplan.processmanagement.domain.UserType;
 import br.com.softplan.processmanagement.dto.OpinionDTO;
 import br.com.softplan.processmanagement.repositories.ProcessesRepository;
 import br.com.softplan.processmanagement.repositories.UserSystemProcessRepository;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,15 +44,17 @@ public class ProcessesService {
     }
 
     public List<Process> listByUser(Long idUser) {
+
         UserSystem userSystem = usersService.searchById(idUser);
         UserType type = userSystem.getType();
 
-        if(type == UserType.FINALIZADOR){//FINALIZADOR VE APENAS PROCESSOS ATRIBUIDOS A ELE.
+        if (type == UserType.FINALIZADOR) {//FINALIZADOR VE APENAS PROCESSOS ATRIBUIDOS A ELE.
             return usersSystemRepository.findProcessByUser(userSystem);
-        }else if(type == UserType.TRIADOR){//TRIADOR VE APENAS SEUS PROCESSOS.
+        } else if (type == UserType.TRIADOR) {//TRIADOR VE APENAS SEUS PROCESSOS.
             return processesRepository.findAllByCreator(userSystem);
         }
         return this.list();//ADMIN VE TUDO
+
     }
 
     public Process searchById(Long id) {
@@ -81,11 +86,11 @@ public class ProcessesService {
         Optional<Process> process = Optional.of(this.searchById(id));
         Optional<UserSystem> user = Optional.of(usersService.searchById(opinionDTO.getIdUser()));
 
-        if(process.isPresent() && user.isPresent()){
+        if (process.isPresent() && user.isPresent()) {
 
-            Optional<UserSystemProcess> userProcessOptional = userSystemProcessRepository.findUserSystemProcessByUserSystemProcessIdUserSystemAndUserSystemProcessIdProcess(user.get(), process.get());
+            Optional<UserSystemProcess> userProcessOptional = userSystemProcessRepository.findUserProcessByUserUserAndProcess(user.get(), process.get());
 
-            if(userProcessOptional.isPresent()){
+            if (userProcessOptional.isPresent()) {
                 UserSystemProcess userSystemProcess = userProcessOptional.get();
                 userSystemProcess.setText(opinionDTO.getText());
                 userSystemProcess.setCreatedAt(opinionDTO.getCreatedAt());
@@ -94,5 +99,15 @@ public class ProcessesService {
 
         }
         throw new UserProcessNotFoundException("Problem finding user link with process");
+    }
+
+    public List<UserSystemProcess> getOpinionsByProcess(Long idProcess) {
+        Optional<Process> process = Optional.of(this.searchById(idProcess));
+
+        if (process.isPresent()) {
+            List<UserSystemProcess> userSystemProcesses = userSystemProcessRepository.findAllByUserSystemProcessIdProcessAndTextNotNull(process.get());
+            return userSystemProcesses;
+        }
+        return new ArrayList<UserSystemProcess>();
     }
 }

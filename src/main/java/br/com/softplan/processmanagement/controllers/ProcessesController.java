@@ -30,7 +30,7 @@ public class ProcessesController {
         return ResponseEntity.ok(processesService.list());
     }
 
-    @ApiOperation(value = "Visualizar a lista de processos por criador")
+    @ApiOperation(value = "Visualizar a lista de processos por usuário")
     @GetMapping(value = "/user/{id}")
     ResponseEntity<List<Process>> listByUser(@PathVariable("id") Long idUser) {
         return ResponseEntity.ok(processesService.listByUser(idUser));
@@ -67,10 +67,17 @@ public class ProcessesController {
     }
 
     @ApiOperation(value = "Gravando parecer do processo")
-    @PostMapping(value = "/{id}/opinion")
+    @PostMapping(value = "/{id}/opinions")
     public ResponseEntity<UserSystemProcess> saveOpinion(@PathVariable("id") Long id, @RequestBody OpinionDTO opinionDTO) {
         UserSystemProcess userSystemProcess = processesService.saveOpinion(id, opinionDTO);
         return ResponseEntity.ok(userSystemProcess);
+    }
+
+    @ApiOperation(value = "Buscando parecer do processo")
+    @GetMapping(value = "/{idProcess}/opinions")
+    public ResponseEntity<List<UserSystemProcess>> getOpinionsByProcess(@PathVariable("idProcess") Long idProcess){
+        List<UserSystemProcess> userSystemProcesses = processesService.getOpinionsByProcess(idProcess);
+        return ResponseEntity.ok(userSystemProcesses);
     }
 
 }

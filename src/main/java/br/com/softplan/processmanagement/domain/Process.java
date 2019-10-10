@@ -28,6 +28,17 @@ public class Process implements Serializable {
     @JoinTable(name = "app_usersystem_process", joinColumns = @JoinColumn(name = "id_process"), inverseJoinColumns = @JoinColumn(name = "id_user"))
     private List<UserSystem> userSystems;
 
+    public Process() {
+    }
+
+    public Process(String code, String description, LocalDateTime createdAt, UserSystem creator, List<UserSystem> userSystems) {
+        this.code = code;
+        this.description = description;
+        this.createdAt = createdAt;
+        this.creator = creator;
+        this.userSystems = userSystems;
+    }
+
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }

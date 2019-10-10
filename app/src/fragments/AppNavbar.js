@@ -18,30 +18,27 @@ class AppNavbar extends Component {
     render() {
         const { isAuthenticated, currentUser } = this.props;
 
-        return <Navbar color="dark" dark expand="md">
-            <NavbarBrand href="/">Gerenciamento de Processos</NavbarBrand>
+        return <Navbar color="light" dark expand="md">
+            <NavbarBrand href="/" className="text-black-50">
+                { !isAuthenticated && <span>Gerenciamento de Processos</span> }
+                { currentUser && currentUser.name }
+            </NavbarBrand>
             <NavbarToggler onClick={this.toggle}/>
             <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
-                    { isAuthenticated && currentUser && currentUser.type == 'ADMIN' &&
+                    { isAuthenticated && currentUser && currentUser.type === 'ADMIN' &&
                         <NavItem>
-                            <Link className="nav-link text-white" tag={Link} to={"/users"}>Usuários</Link>
+                            <Link className="nav-link text-black-50" tag={Link} to={"/users"}>Usuários</Link>
                         </NavItem>
                     }
                     { isAuthenticated && currentUser &&
                         <NavItem>
-                            <Link className="nav-link text-white" tag={Link} to={"/process"}>Processos</Link>
+                            <Link className="nav-link text-black-50" tag={Link} to={"/process"}>Processos</Link>
                         </NavItem>
                     }
-                    <NavItem>
-                        <NavLink className="text-white" target="_blank" href="https://www.linkedin.com/in/antonio-rafael-ortega/">LinkedIn</NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink className="text-white" target="_blank" href="https://github.com/antrafa/antonio-rafael-ortega">GitHub</NavLink>
-                    </NavItem>
                     { isAuthenticated &&
                     <NavItem>
-                        <NavLink className="text-white" href="#" onClick={this.props.handleLogout}>Sair</NavLink>
+                        <NavLink className="text-black-50" href="#" onClick={this.props.handleLogout}>Sair</NavLink>
                     </NavItem>
                     }
                 </Nav>

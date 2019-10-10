@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link, withRouter, Redirect} from 'react-router-dom';
 import {Button, Container, Form, FormGroup, Input, Label} from 'reactstrap';
+import {manipulateData} from "../utils/api";
 
 class UserEdit extends Component {
 
@@ -18,10 +19,13 @@ class UserEdit extends Component {
         };
     }
 
-    async componentDidMount() {
+    componentDidMount() {
         if (this.props.match.params.id !== 'new') {
-            const user = await (await fetch(`/api/users/${this.props.match.params.id}`)).json();
-            this.setState({item: user});
+            let data = {
+                url: "/api/users/" + this.props.match.params.id,
+                method: 'GET'
+            };
+            manipulateData(data).then(data => this.setState({item: data, isLoading: false}));
         }
     }
 
@@ -47,28 +51,28 @@ class UserEdit extends Component {
             item.type = item.type.toUpperCase();
         }
 
-        await fetch(endpoint, {
+        let data = {
+            url: endpoint,
             method: (item.id) ? 'PUT' : 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(item),
-        });
-        this.props.history.push('/users');
+            body: JSON.stringify(item)
+        }
+
+        manipulateData(data);
+        this.setState({redirect: "/users"});
     }
 
     render() {
         const {item, currentUser} = this.state;
 
-        if(!currentUser || !currentUser.type || currentUser.type !== 'ADMIN'){
-            return <Redirect to="/" />
+        if (!currentUser || !currentUser.type || currentUser.type !== 'ADMIN') {
+            return <Redirect to="/"/>
         }
 
         const title = <h2>{item.id ? 'Editar Usuário' : 'Adicionar Usuário'}</h2>;
 
         return (
             <div>
+                {this.state.redirect && <Redirect rerender={true} to={this.state.redirect}/>}
                 <Container>
                     {title}
                     <Form onSubmit={this.handleSubmit}>
@@ -84,10 +88,10 @@ class UserEdit extends Component {
                         </FormGroup>
                         <FormGroup>
                             <Label for="type">Tipo</Label>
-                            <Input type="select" defaultValue={item.type} name="type" id="type" onChange={this.handleChange}>
-                                <option>Triador</option>
-                                <option>Finalizador</option>
-                            </Input>
+                            <select name="type" id="type" className="form-control" onChange={this.handleChange}>
+                                <option selected={item.type === 'TRIADOR'?'selected':''}>TRIADOR</option>
+                                <option selected={item.type === 'FINALIZADOR'?'selected':''}>FINALIZADOR</option>
+                            </select>
                         </FormGroup>
                         <FormGroup>
                             <Button color="primary" type="submit">Salvar</Button>{' '}

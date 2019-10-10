@@ -1,7 +1,10 @@
 package br.com.softplan.processmanagement.services;
 
+import br.com.softplan.processmanagement.domain.Process;
 import br.com.softplan.processmanagement.domain.UserSystem;
+import br.com.softplan.processmanagement.domain.UserSystemProcess;
 import br.com.softplan.processmanagement.domain.UserType;
+import br.com.softplan.processmanagement.repositories.UserSystemProcessRepository;
 import br.com.softplan.processmanagement.repositories.UsersSystemRepository;
 import br.com.softplan.processmanagement.security.SignUpRequest;
 import br.com.softplan.processmanagement.services.exceptions.EmailAlreadyUsedException;
@@ -11,6 +14,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +23,9 @@ public class UsersService {
 
     @Autowired
     private UsersSystemRepository usersSystemRepository;
+
+    @Autowired
+    private UserSystemProcessRepository userSystemProcessRepository;
 
     @Autowired
     private PasswordEncoder bcryptEncoder;
@@ -77,6 +84,16 @@ public class UsersService {
 
     public Boolean verifyExistence(String email) {
         return usersSystemRepository.existsByEmail(email);
+    }
+
+    public List<UserSystemProcess> getOpinionsByUser(Long idUser) {
+        Optional<UserSystem> user = Optional.of(this.searchById(idUser));
+
+        if (user.isPresent()) {
+            List<UserSystemProcess> userSystemProcesses = userSystemProcessRepository.findAllByUserSystemProcessIdUserSystemAndTextNotNull(user.get());
+            return userSystemProcesses;
+        }
+        return new ArrayList<UserSystemProcess>();
     }
 
 }
