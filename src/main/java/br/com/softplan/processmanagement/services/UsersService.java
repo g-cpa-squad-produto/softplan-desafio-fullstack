@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,12 @@ public class UsersService {
         if(userByEmail.isPresent()){
             throw new EmailAlreadyUsedException("Email already used.");
         }
+
+        String password = userSystem.getPassword();
+        if(password != null && StringUtils.hasText(password)){
+            userSystem.setPassword(bcryptEncoder.encode(password));
+        }
+
         return usersSystemRepository.save(userSystem);
     }
 
@@ -67,6 +74,12 @@ public class UsersService {
 
     public UserSystem update(UserSystem userSystem) {
         checkExistence(userSystem);
+
+        String password = userSystem.getPassword();
+        if(password != null && StringUtils.hasText(password)){
+            userSystem.setPassword(bcryptEncoder.encode(password));
+        }
+
         return usersSystemRepository.save(userSystem);
     }
 

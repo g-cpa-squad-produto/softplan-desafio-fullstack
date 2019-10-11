@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Alert, Button, ButtonGroup, Container, Table } from 'reactstrap';
 import { Link, Redirect } from 'react-router-dom';
-import {manipulateData} from "../utils/api";
+import {manipulateData} from "../../utils/api";
 import queryString from "query-string";
 
 class UserList extends Component {
@@ -71,6 +71,10 @@ class UserList extends Component {
                 {
                     params && params.edit && params.edit === 'success' &&
                     <Alert color="success">Alteração registrada com sucesso!</Alert>
+                }
+                {
+                    params && params.edit && params.edit === 'error' &&
+                    <Alert color="danger">Problemas ao alterar registro!</Alert>
                 }
                 <Container fluid>
                     <div className="float-right">

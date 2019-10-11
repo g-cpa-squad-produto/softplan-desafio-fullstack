@@ -10,6 +10,8 @@ import br.com.softplan.processmanagement.repositories.UserSystemProcessRepositor
 import br.com.softplan.processmanagement.repositories.UsersSystemRepository;
 import br.com.softplan.processmanagement.services.exceptions.ProcessNotFoundException;
 import br.com.softplan.processmanagement.services.exceptions.UserProcessNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,8 @@ import java.util.Optional;
 
 @Service
 public class ProcessesService {
+
+    public static final Logger logger = LoggerFactory.getLogger(ProcessesService.class);
 
     @Autowired
     private ProcessesRepository processesRepository;
@@ -67,6 +71,17 @@ public class ProcessesService {
 
     public Process update(Process process) {
         checkExistence(process);
+
+        List<UserSystem> users = process.getUserSystems();
+        List<UserSystem> newUsers = new ArrayList<>();
+
+        for (UserSystem user: users) {
+            Optional<UserSystemProcess> relationByUserAndProcess = userSystemProcessRepository.findRelationByUserAndProcess(user, process);
+            if(!relationByUserAndProcess.isPresent()){
+                newUsers.add(user);
+            }
+        }
+        process.setUserSystems(newUsers);
         return processesRepository.save(process);
     }
 

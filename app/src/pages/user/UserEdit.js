@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import {Link, withRouter, Redirect} from 'react-router-dom';
 import {Button, Container, Form, FormGroup, Input, Label} from 'reactstrap';
-import {manipulateData} from "../utils/api";
+import {manipulateData} from "../../utils/api";
 
 class UserEdit extends Component {
 
     emptyItem = {
         name: '',
         email: '',
+        password: '',
         type: ''
     };
 
@@ -15,7 +16,8 @@ class UserEdit extends Component {
         super(props);
         this.state = {
             item: this.emptyItem,
-            currentUser: this.props.currentUser
+            currentUser: this.props.currentUser,
+            messageResult: "success"
         };
     }
 
@@ -51,14 +53,22 @@ class UserEdit extends Component {
             item.type = item.type.toUpperCase();
         }
 
+        if(!item.password || item.password === ""){
+            delete(item.password);
+        }
+
         let data = {
             url: endpoint,
             method: (item.id) ? 'PUT' : 'POST',
             body: JSON.stringify(item)
         }
 
-        manipulateData(data);
-        this.setState({redirect: "/users"});
+        manipulateData(data)
+            .then(data => { console.log(data) })
+            .catch(error => this.setState({messageResult: "error"}))
+            .finally(() => {
+                this.setState({redirect: "/process?edit="+this.state.messageResult});
+            });
     }
 
     render() {
@@ -78,17 +88,23 @@ class UserEdit extends Component {
                     <Form onSubmit={this.handleSubmit}>
                         <FormGroup>
                             <Label for="name">Nome</Label>
-                            <Input type="text" name="name" id="name" value={item.name || ''}
+                            <Input type="text" name="name" required id="name" value={item.name || ''}
                                    onChange={this.handleChange} autoComplete="name"/>
                         </FormGroup>
                         <FormGroup>
                             <Label for="email">Email</Label>
-                            <Input type="email" name="email" id="email" value={item.email || ''}
+                            <Input type="email" name="email" required id="email" value={item.email || ''}
                                    onChange={this.handleChange} autoComplete="email"/>
                         </FormGroup>
                         <FormGroup>
+                            <Label for="password">Senha</Label>
+                            <Input type="password" name="password" id="password"
+                                   onChange={this.handleChange} />
+                        </FormGroup>
+                        <FormGroup>
                             <Label for="type">Tipo</Label>
-                            <select name="type" id="type" className="form-control" onChange={this.handleChange}>
+                            <select name="type" id="type" required className="form-control" onChange={this.handleChange}>
+                                <option></option>
                                 <option selected={item.type === 'TRIADOR'?'selected':''}>TRIADOR</option>
                                 <option selected={item.type === 'FINALIZADOR'?'selected':''}>FINALIZADOR</option>
                             </select>

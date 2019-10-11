@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Jumbotron, Container } from 'reactstrap';
-import './App.css';
+import '../App.css';
 
 class Home extends Component {
     render() {

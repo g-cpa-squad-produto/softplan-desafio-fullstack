@@ -45,10 +45,10 @@ public class UsersController {
 
     @ApiOperation(value = "Salvando um novo usuário")
     @PostMapping
-    ResponseEntity<Void> save(@RequestBody @Valid UserSystem userSystem) {
+    ResponseEntity<ApiResponse> save(@RequestBody @Valid UserSystem userSystem) {
         userSystem = usersService.save(userSystem);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(userSystem.getId()).toUri();
-        return ResponseEntity.created(uri).build();
+        return ResponseEntity.ok(new ApiResponse(true, "User created"));
     }
 
     @ApiOperation(value = "Buscar um usuário cadastrado")

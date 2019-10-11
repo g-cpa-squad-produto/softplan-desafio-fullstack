@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import './App.css';
-import Home from './Home';
+import Home from './pages/Home';
 import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
-import UserList from './user/UserList';
-import UserEdit from "./user/UserEdit";
-import ProcessList from "./process/ProcessList";
-import ProcessEdit from "./process/ProcessEdit";
-import ProcessUsers from "./process/ProcessUsers";
+import UserList from './pages/user/UserList';
+import UserEdit from "./pages/user/UserEdit";
+import ProcessList from "./pages/process/ProcessList";
+import ProcessEdit from "./pages/process/ProcessEdit";
+import ProcessUsers from "./pages/process/ProcessUsers";
 import Login from "./auth/Login";
 import AppNavbar from "./fragments/AppNavbar";
 import PrivateRoute from "./utils/PrivateRoute";
@@ -79,48 +79,50 @@ class App extends Component {
                     isAuthenticated={this.state.isAuthenticated}
                     currentUser={this.state.currentUser}
                     handleLogout={this.handleLogout} />
-                <Switch>
-                    <Route
-                        path='/'
-                        exact={true}
-                        render={
-                            (props) => <Home isAuthenticated={this.state.isAuthenticated}
-                                             currentUser={this.state.currentUser}
-                                             handleLogout={this.handleLogout} {...props} />}/>
-                    <PrivateRoute
-                        authenticated={this.state.isAuthenticated}
-                        currentUser={this.state.currentUser}
-                        path="/users"
-                        exact={true}
-                        component={UserList} />
-                    <PrivateRoute
-                        authenticated={this.state.isAuthenticated}
-                        currentUser={this.state.currentUser}
-                        path="/users/:id"
-                        exact={true}
-                        component={UserEdit} />
-                    <PrivateRoute
-                        authenticated={this.state.isAuthenticated}
-                        currentUser={this.state.currentUser}
-                        path="/process"
-                        exact={true}
-                        component={ProcessList} />
-                    <PrivateRoute
-                        authenticated={this.state.isAuthenticated}
-                        currentUser={this.state.currentUser}
-                        path="/process/:id"
-                        exact={true}
-                        component={ProcessEdit} />
-                    <PrivateRoute
-                        authenticated={this.state.isAuthenticated}
-                        currentUser={this.state.currentUser}
-                        path="/process/users/:id"
-                        exact={true}
-                        component={ProcessUsers} />
-                    <Route
-                        path="/login"
-                        render={(props) => <Login onLogin={this.handleLogin} {...props} />}/>
-                </Switch>
+                <div className="mb-5 pb-5">
+                    <Switch>
+                        <Route
+                            path='/'
+                            exact={true}
+                            render={
+                                (props) => <Home isAuthenticated={this.state.isAuthenticated}
+                                                 currentUser={this.state.currentUser}
+                                                 handleLogout={this.handleLogout} {...props} />}/>
+                        <PrivateRoute
+                            authenticated={this.state.isAuthenticated}
+                            currentUser={this.state.currentUser}
+                            path="/users"
+                            exact={true}
+                            component={UserList} />
+                        <PrivateRoute
+                            authenticated={this.state.isAuthenticated}
+                            currentUser={this.state.currentUser}
+                            path="/users/:id"
+                            exact={true}
+                            component={UserEdit} />
+                        <PrivateRoute
+                            authenticated={this.state.isAuthenticated}
+                            currentUser={this.state.currentUser}
+                            path="/process"
+                            exact={true}
+                            component={ProcessList} />
+                        <PrivateRoute
+                            authenticated={this.state.isAuthenticated}
+                            currentUser={this.state.currentUser}
+                            path="/process/:id"
+                            exact={true}
+                            component={ProcessEdit} />
+                        <PrivateRoute
+                            authenticated={this.state.isAuthenticated}
+                            currentUser={this.state.currentUser}
+                            path="/process/users/:id"
+                            exact={true}
+                            component={ProcessUsers} />
+                        <Route
+                            path="/login"
+                            render={(props) => <Login onLogin={this.handleLogin} {...props} />}/>
+                    </Switch>
+                </div>
                 <Footer />
             </Router>
         )

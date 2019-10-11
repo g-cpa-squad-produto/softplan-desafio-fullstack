@@ -2,6 +2,8 @@ package br.com.softplan.processmanagement.repositories.helpers;
 
 import br.com.softplan.processmanagement.domain.Process;
 import br.com.softplan.processmanagement.domain.UserSystem;
+import br.com.softplan.processmanagement.domain.UserSystemProcess;
+import br.com.softplan.processmanagement.services.exceptions.ProcessNotFoundException;
 import br.com.softplan.processmanagement.services.exceptions.UserNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Optional;
 
 public class UsersSystemRepositoryImpl implements UsersSystemRepositoryQueries {
 
@@ -24,8 +27,6 @@ public class UsersSystemRepositoryImpl implements UsersSystemRepositoryQueries {
 
         List<Process> processes = manager.createQuery("SELECT p.userSystemProcessId.process FROM UserSystemProcess p WHERE p.userSystemProcessId.userSystem.id = :userId", Process.class)
                 .setParameter("userId", userId).getResultList();
-
-        logger.info(String.valueOf(processes));
 
         return processes;
     }

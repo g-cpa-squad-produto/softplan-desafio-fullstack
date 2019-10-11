@@ -8,4 +8,5 @@ import java.util.Optional;
 
 public interface UserSystemProcessRepositoryQueries {
     Optional<UserSystemProcess> findUserProcessByUserUserAndProcess(UserSystem userSystem, Process process);
+    Optional<UserSystemProcess> findRelationByUserAndProcess(UserSystem userSystem, Process process);
 }

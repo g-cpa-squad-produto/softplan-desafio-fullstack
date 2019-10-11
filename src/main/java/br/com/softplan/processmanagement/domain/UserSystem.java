@@ -20,7 +20,6 @@ public class UserSystem implements Serializable {
 
     private String email;
 
-    @JsonIgnore
     private String password;
 
     @Enumerated(EnumType.STRING)

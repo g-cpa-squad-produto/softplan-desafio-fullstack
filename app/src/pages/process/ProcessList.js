@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import {Button, ButtonGroup, Container, Table, Alert} from 'reactstrap';
 import {Link, Redirect} from 'react-router-dom';
-import {manipulateData} from "../utils/api";
+import {manipulateData} from "../../utils/api";
 import queryString from "query-string";
 
 class ProcessList extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -40,9 +41,6 @@ class ProcessList extends Component {
             method: "GET"
         };
         manipulateData(dataOpinion).then(data => pareceres = data);
-
-        console.log("pareceres", pareceres);
-
         return [
             {text: idProcess},
             {text: "teste2"},
@@ -89,9 +87,9 @@ class ProcessList extends Component {
                 })}</td>
                 <td>{process.description}</td>
                 <td>
-                    {pareceres && Array.isArray(pareceres) && pareceres.map(parecer => {
+                    {pareceres && Array.isArray(pareceres) && pareceres.map((parecer,index) => {
                         return (
-                            <div key={parecer.text}>
+                            <div key={index}>
                                 {parecer.text}
                             </div>
                         )
@@ -126,6 +124,10 @@ class ProcessList extends Component {
                     {
                         params && params.edit && params.edit === 'success' &&
                         <Alert color="success">Alteração registrada com sucesso!</Alert>
+                    }
+                    {
+                        params && params.edit && params.edit === 'error' &&
+                        <Alert color="danger">Problemas ao alterar registro!</Alert>
                     }
                     {currentUser.type &&
                     (currentUser.type === 'ADMIN' || currentUser.type === 'TRIADOR') &&

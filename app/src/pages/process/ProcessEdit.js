@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link, withRouter, Redirect} from 'react-router-dom';
 import {Button, CustomInput, Container, Form, FormGroup, Input, Label, Card, CardHeader, CardBody} from 'reactstrap';
-import {manipulateData} from "../utils/api";
+import {manipulateData} from "../../utils/api";
 
 class ProcessEdit extends Component {
 
@@ -22,7 +22,8 @@ class ProcessEdit extends Component {
             redirect: false,
             opinions: [],
             opinionText: "",
-            editando: props.match.params.id !== 'new'
+            editando: props.match.params.id !== 'new',
+            messageResult: "success"
         };
     }
 
@@ -135,8 +136,12 @@ class ProcessEdit extends Component {
             body: JSON.stringify(item)
         }
 
-        manipulateData(data);
-        this.setState({redirect: "/process?edit=success"});
+        manipulateData(data)
+            .then(data => { console.log(data) })
+            .catch(error => this.setState({messageResult: "error"}))
+            .finally(() => {
+                this.setState({redirect: "/process?edit="+this.state.messageResult});
+            });
     }
 
     handleSubmitOpinion = async (event) => {
@@ -152,8 +157,12 @@ class ProcessEdit extends Component {
                 idUser: this.state.currentUser.id
             })
         }
-        manipulateData(data);
-        this.props.history.push('/process?edit=success');
+        manipulateData(data)
+            .then(data => { console.log(data) })
+            .catch(error => this.setState({messageResult: "error"}))
+            .finally(() => {
+                this.setState({redirect: "/process?edit="+this.state.messageResult});
+            });
     }
 
     render() {
@@ -184,10 +193,10 @@ class ProcessEdit extends Component {
                 className="ml-4"/>);
         });
 
-        const pareceres = opinions.map(opinion => {
+        const pareceres = opinions.map((opinion,index) => {
             return(
-                <Card className="mt-4">
-                    <CardHeader for="opinion">Parecer de {opinion.userSystemProcessId.userSystem.name}</CardHeader>
+                <Card key={index} className="mt-4">
+                    <CardHeader>Parecer de {opinion.userSystemProcessId.userSystem.name}</CardHeader>
                     <CardBody>{opinion.text || ''}</CardBody>
                 </Card>
             );
