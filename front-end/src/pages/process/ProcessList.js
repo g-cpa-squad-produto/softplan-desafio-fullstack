@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Button, ButtonGroup, Container, Table, Alert} from 'reactstrap';
 import {Link, Redirect} from 'react-router-dom';
 import queryString from "query-string";
-import {removeProcess,getProcessesByUser} from "../../utils/processFunctions";
+import {removeProcess, getProcessesByUser} from "../../utils/processFunctions";
 
 class ProcessList extends Component {
 
@@ -27,7 +27,7 @@ class ProcessList extends Component {
 
     remove = async (id) => {
         if (window.confirm("Deseja realmente apagar este processo?")) {
-            removeProcess(id,this);
+            removeProcess(id, this);
         }
     };
 
@@ -48,14 +48,14 @@ class ProcessList extends Component {
 
             let description = process.description;
             let sizeDescription = 200;
-            if(description.length > sizeDescription){
-                description = description.substring(0,sizeDescription)+"...";
+            if (description.length > sizeDescription) {
+                description = description.substring(0, sizeDescription) + "...";
             }
 
             const opinions = process.opinions;
             let countSentOpinions = 0;
             opinions.map(opinion => {
-                if(opinion.text && opinion.text.length > 0){
+                if (opinion.text && opinion.text.length > 0) {
                     countSentOpinions++;
                 }
             });
@@ -67,7 +67,9 @@ class ProcessList extends Component {
                     Array.isArray(opinions) &&
                     <ul>
                         {
-                            opinions.map(opinion => { return (<li key={opinion.userSystem.id}>{opinion.userSystem.name}</li>)})
+                            opinions.map(opinion => {
+                                return (<li key={opinion.userSystem.id}>{opinion.userSystem.name}</li>)
+                            })
                         }
                     </ul>
                 }</td>
@@ -80,9 +82,14 @@ class ProcessList extends Component {
                         <ButtonGroup>
                             <Button size="sm" color="primary"><Link className="text-white" tag={Link}
                                                                     to={"/process/" + process.id}>Editar</Link></Button>
-                            <Button size="sm" color="danger" onClick={() => this.remove(process.id)}>Remover</Button>
-                            <Button size="sm" color="info"><Link className="text-white" tag={Link}
-                                                                    to={"/opinions/process/" + process.id}>Ver pareceres</Link></Button>
+                            <Button size="sm" color="danger"
+                                    onClick={() => this.remove(process.id)}>Remover</Button>
+                            {countSentOpinions > 0 &&
+                            <Button size="sm" color="info">
+                                <Link className="text-white" tag={Link}
+                                      to={"/opinions/process/" + process.id}>Pareceres</Link>
+                            </Button>
+                            }
                         </ButtonGroup>
                     }
                     {

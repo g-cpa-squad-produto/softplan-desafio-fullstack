@@ -2,8 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f7e7b4a3-c8aa-490e-8337-f0bce23487b0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../README.MD" beforeDir="false" afterPath="$PROJECT_DIR$/../README.MD" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.MD" beforeDir="false" afterPath="$PROJECT_DIR$/README.MD" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/process/ProcessList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/process/ProcessList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/user/UserEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/user/UserEdit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/user/UserList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/user/UserList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -68,6 +75,9 @@
       <workItem from="1570547401874" duration="334000" />
       <workItem from="1570548074730" duration="54450000" />
       <workItem from="1570803158680" duration="26022000" />
+      <workItem from="1570898186737" duration="687000" />
+      <workItem from="1570902611869" duration="348000" />
+      <workItem from="1570905563229" duration="1078000" />
     </task>
     <servers />
   </component>

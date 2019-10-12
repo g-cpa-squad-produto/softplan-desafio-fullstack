@@ -85,6 +85,7 @@ class UserEdit extends Component {
                             <Label for="type">Tipo</Label>
                             <select value={item.type} name="type" id="type" required className="form-control" onChange={this.handleChange}>
                                 <option></option>
+                                <option>ADMIN</option>
                                 <option>TRIADOR</option>
                                 <option>FINALIZADOR</option>
                             </select>

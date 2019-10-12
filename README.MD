@@ -37,4 +37,18 @@
 	- Aplicação back-end responderá na porta 8080
 	- Aplicação front-end responderá na porta 9090
 	- Comando "docker-compose down" encerra.
+
+## Executando aplicação
+- Usuário ADMIN
+    - login: admin@email.com
+    - senha: 123456
+- Imagens estão disponíveis em https://hub.docker.com/u/antonioiae
+	- antonioiae/fullstack-app-server
+		- Imagem do servidor:
+		- Para rodar, executar o comando "docker run -p 127.0.0.1:8080:8080 antonioiae/fullstack-app-server"
+		- http://127.0.0.1:8080
+	-antonioiae/fullstack-app-client
+		- Imagem do cliente:
+		- Para rodar, executar o comando "docker run -d --restart=always -p 9090:80 antonioiae/fullstack-app-client"
+		- http://127.0.0.1:9090
 	

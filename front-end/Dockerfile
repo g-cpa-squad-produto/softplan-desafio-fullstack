@@ -10,8 +10,8 @@ WORKDIR /app
 # the dependencies. This is a separate step so the dependencies
 # will be cached unless changes to one of those two files
 # are made.
-#package-lock.json
-COPY package.json ./
+
+COPY package.json package-lock.json ./
 RUN npm install --registry https://registry.npmjs.org
 
 # Copy the main application

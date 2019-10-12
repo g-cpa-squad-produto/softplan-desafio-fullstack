@@ -41,7 +41,7 @@ class UserList extends Component {
         }
 
         const userList = Array.isArray(users) && users.map(user => {
-            if(user.type === 'ADMIN') return null;
+            if(user.id === 1) return null;
             return (<tr key={user.id}>
                 <td>{user.id}</td>
                 <td style={{whiteSpace: 'nowrap'}}>{user.name}</td>
