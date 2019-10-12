@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link, withRouter, Redirect} from 'react-router-dom';
 import {Button, Container, Form, FormGroup, Input, Label} from 'reactstrap';
-import {manipulateData} from "../../utils/api";
+import {getUser,saveUser} from "../../utils/userFunctions";
 
 class UserEdit extends Component {
 
@@ -24,11 +24,7 @@ class UserEdit extends Component {
 
     componentDidMount() {
         if (this.props.match.params.id !== 'new') {
-            let data = {
-                url: "/users/" + this.props.match.params.id,
-                method: 'GET'
-            };
-            manipulateData(data).then(data => this.setState({item: data, isLoading: false}));
+            getUser(this);
         }else{
             this.setState({isLoading: false});
         }
@@ -46,32 +42,7 @@ class UserEdit extends Component {
     handleSubmit = async (event) => {
         event.preventDefault();
         const {item} = this.state;
-
-        let endpoint = '/users';
-        if (item && item.id) {
-            endpoint += "/" + item.id;
-        }
-
-        if (item.type) {
-            item.type = item.type.toUpperCase();
-        }
-
-        if(!item.password || item.password === ""){
-            delete(item.password);
-        }
-
-        let data = {
-            url: endpoint,
-            method: (item.id) ? 'PUT' : 'POST',
-            body: JSON.stringify(item)
-        }
-
-        manipulateData(data)
-            .then(data => { console.log(data) })
-            .catch(error => this.setState({messageResult: "error"}))
-            .finally(() => {
-                this.setState({redirect: "/users?edit="+this.state.messageResult});
-            });
+        saveUser(item, this);
     }
 
     render() {
@@ -112,10 +83,10 @@ class UserEdit extends Component {
                         </FormGroup>
                         <FormGroup>
                             <Label for="type">Tipo</Label>
-                            <select name="type" id="type" required className="form-control" onChange={this.handleChange}>
+                            <select value={item.type} name="type" id="type" required className="form-control" onChange={this.handleChange}>
                                 <option></option>
-                                <option selected={item.type === 'TRIADOR'?'selected':''}>TRIADOR</option>
-                                <option selected={item.type === 'FINALIZADOR'?'selected':''}>FINALIZADOR</option>
+                                <option>TRIADOR</option>
+                                <option>FINALIZADOR</option>
                             </select>
                         </FormGroup>
                         <FormGroup>

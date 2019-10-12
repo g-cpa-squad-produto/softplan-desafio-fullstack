@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Button, ButtonGroup, Container, Table, Alert} from 'reactstrap';
 import {Link, Redirect} from 'react-router-dom';
-import {manipulateData} from "../../utils/api";
 import queryString from "query-string";
+import {removeProcess,getProcessesByUser} from "../../utils/processFunctions";
 
 class ProcessList extends Component {
 
@@ -21,27 +21,13 @@ class ProcessList extends Component {
         if (this.state.currentUser) {
             this.setState({isLoading: true});
             let userId = this.state.currentUser.id;
-            let data = {
-                url: '/processes/user/' + userId,
-                method: 'GET'
-            };
-            manipulateData(data).then(data => {
-                return this.setState({process: data, isLoading: false})
-            });
+            getProcessesByUser(userId, this);
         }
     }
 
     remove = async (id) => {
         if (window.confirm("Deseja realmente apagar este processo?")) {
-            let data = {
-                url: '/processes/' + id,
-                method: 'DELETE'
-            };
-            manipulateData(data).then(response => {
-                console.log(response);
-                let updatedProcess = [...this.state.process].filter(i => i.id !== id);
-                this.setState({process: updatedProcess});
-            });
+            removeProcess(id,this);
         }
     };
 
@@ -59,21 +45,34 @@ class ProcessList extends Component {
         }
 
         const processList = Array.isArray(process) && process.map(process => {
-            const opinions = process.opinions;
+
             let description = process.description;
             let sizeDescription = 200;
             if(description.length > sizeDescription){
                 description = description.substring(0,sizeDescription)+"...";
             }
 
+            const opinions = process.opinions;
+            let countSentOpinions = 0;
+            opinions.map(opinion => {
+                if(opinion.text && opinion.text.length > 0){
+                    countSentOpinions++;
+                }
+            });
+
             return (<tr key={process.id}>
                 <td>{process.code}</td>
                 <td style={{whiteSpace: 'nowrap'}}>{process.creator.name}</td>
-                <td>{Array.isArray(opinions) && opinions.map(opinion => {
-                    return (<div key={opinion.userSystem.id}>- {opinion.userSystem.name}</div>);
-                })}</td>
+                <td>{
+                    Array.isArray(opinions) &&
+                    <ul>
+                        {
+                            opinions.map(opinion => { return (<li key={opinion.userSystem.id}>{opinion.userSystem.name}</li>)})
+                        }
+                    </ul>
+                }</td>
                 <td>{description}</td>
-                <td>{opinions.length}</td>
+                <td>{countSentOpinions}</td>
                 <td>
                     {
                         currentUser.type &&

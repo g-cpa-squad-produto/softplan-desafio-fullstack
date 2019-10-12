@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {Link, withRouter, Redirect} from 'react-router-dom';
 import {Button, CustomInput, Container, Form, FormGroup, Input, Label, Card, CardHeader, CardBody} from 'reactstrap';
-import {manipulateData} from "../../utils/api";
+import {getInfoAboutProcess, saveProcess, saveOpinion} from "../../utils/processFunctions";
+import {getUsersFinalizing} from "../../utils/userFunctions";
 
 class ProcessEdit extends Component {
 
@@ -28,35 +29,9 @@ class ProcessEdit extends Component {
     componentDidMount() {
         if (this.state.editing) {
             let idProcess = this.props.match.params.id;
-
-            //PEGANDO INFORMAÇÕES DO PRCESSO
-            let data = {
-                url: "/processes/" + idProcess,
-                method: "GET"
-            };
-            manipulateData(data).then(data => {
-                data.opinions.map(opinion => {
-                    //CASO FINZALIZADOR, COLOCAR PARECER DELE NO TEXTAREA
-                    if (this.state.currentUser.type === 'FINALIZADOR') {
-                        let idUsuario = opinion.userSystem.id;
-                        if (idUsuario === this.state.currentUser.id) {
-                            return this.setState({opinionText: opinion.text})
-                        }
-                    }
-                    return null;
-                });
-                return this.setState({item: data})
-            });
-
+            getInfoAboutProcess(idProcess, this);
         }
-
-        //PEGANDO USUÁRIOS FINALIZADORES PARA MOSTRAR OS CHECKBOXES
-        let data = {
-            url: "/users/finalizadores",
-            method: "GET"
-        };
-        manipulateData(data).then(data => this.setState({usersInitials: data, isLoading: false}));
-
+        getUsersFinalizing(this);
     }
 
     verifyCheck = (id) => {
@@ -99,38 +74,7 @@ class ProcessEdit extends Component {
     handleSubmit = async (event) => {
         event.preventDefault();
         const {item} = this.state;
-
-        if (!item.creator) item.creator = {};
-
-        let endpoint = '/processes';
-        if (item && item.id) {
-            endpoint += "/" + item.id;
-        }
-
-        if (item.type) {
-            item.type = item.type.toUpperCase();
-        }
-
-        if (!this.state.editando) {
-            item.creator.id = this.state.currentUser.id;
-        }
-
-        let data = {
-            url: endpoint,
-            method: (item.id) ? 'PUT' : 'POST',
-            body: JSON.stringify(item)
-        }
-
-        manipulateData(data)
-            .then(data => {
-                if(!data.success){
-                    this.setState({messageResult: "error"});
-                }
-            })
-            .catch(error => this.setState({messageResult: "error"}))
-            .finally(() => {
-                this.setState({redirect: "/process?edit=" + this.state.messageResult});
-            });
+        saveProcess(item,this);
     }
 
     handleSubmitOpinion = async (event) => {
@@ -147,20 +91,7 @@ class ProcessEdit extends Component {
         let opinionToSave = theOpinion[0];
         opinionToSave.text = this.state.opinionText;
 
-        const data = {
-            url: '/opinions/' + opinionToSave.id + '/process/' + idProcess,
-            method: 'PUT',
-            body: JSON.stringify(opinionToSave)
-        }
-
-        manipulateData(data)
-            .then(data => {
-                console.log(data)
-            })
-            .catch(error => this.setState({messageResult: "error"}))
-            .finally(() => {
-                this.setState({redirect: "/process?edit=" + this.state.messageResult});
-            });
+        saveOpinion(opinionToSave, idProcess, this);
     }
 
     render() {

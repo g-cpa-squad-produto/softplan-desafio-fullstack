@@ -2,45 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f7e7b4a3-c8aa-490e-8337-f0bce23487b0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../back-end/src/main/java/br/com/softplan/processmanagement/domain/Opinion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../back-end/src/main/java/br/com/softplan/processmanagement/repositories/helpers/OpinionRepositoryImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../back-end/src/main/java/br/com/softplan/processmanagement/repositories/helpers/OpinionRepositoryQueries.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/br/com/softplan/processmanagement/config/Initializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/src/main/java/br/com/softplan/processmanagement/config/Initializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/br/com/softplan/processmanagement/controllers/ProcessesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/src/main/java/br/com/softplan/processmanagement/controllers/ProcessesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/br/com/softplan/processmanagement/controllers/UsersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/src/main/java/br/com/softplan/processmanagement/controllers/UsersController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/br/com/softplan/processmanagement/domain/Process.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/src/main/java/br/com/softplan/processmanagement/domain/Process.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/br/com/softplan/processmanagement/domain/UserSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/src/main/java/br/com/softplan/processmanagement/domain/UserSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/br/com/softplan/processmanagement/domain/UserSystemProcess.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/br/com/softplan/processmanagement/domain/UserSystemProcessId.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/br/com/softplan/processmanagement/dto/OpinionDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/br/com/softplan/processmanagement/handlers/ControllerExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/src/main/java/br/com/softplan/processmanagement/handlers/ControllerExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/br/com/softplan/processmanagement/repositories/ProcessesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/src/main/java/br/com/softplan/processmanagement/repositories/ProcessesRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/br/com/softplan/processmanagement/repositories/UserSystemProcessRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/src/main/java/br/com/softplan/processmanagement/repositories/OpinionRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/br/com/softplan/processmanagement/repositories/helpers/UserSystemProcessRepositoryImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/br/com/softplan/processmanagement/repositories/helpers/UserSystemProcessRepositoryQueries.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/br/com/softplan/processmanagement/repositories/helpers/UsersSystemRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/src/main/java/br/com/softplan/processmanagement/repositories/helpers/UsersSystemRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/br/com/softplan/processmanagement/repositories/helpers/UsersSystemRepositoryQueries.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/src/main/java/br/com/softplan/processmanagement/repositories/helpers/UsersSystemRepositoryQueries.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/br/com/softplan/processmanagement/security/CustomUserDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/src/main/java/br/com/softplan/processmanagement/security/CustomUserDetailsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/br/com/softplan/processmanagement/services/ProcessesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/src/main/java/br/com/softplan/processmanagement/services/ProcessesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/br/com/softplan/processmanagement/services/UsersService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/src/main/java/br/com/softplan/processmanagement/services/UsersService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/src/test/java/br/com/softplan/processmanagement/UserSystemRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/src/test/java/br/com/softplan/processmanagement/UserSystemRepositoryTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/src/test/java/br/com/softplan/processmanagement/UsersControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/src/test/java/br/com/softplan/processmanagement/UsersControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToDo" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/auth/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/auth/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/auth/Signup.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fragments/AppNavbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/fragments/AppNavbar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fragments/Footer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/fragments/Footer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/auth/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/auth/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/opinions/OpinionList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/opinions/OpinionList.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/process/ProcessEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/process/ProcessEdit.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/process/ProcessList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/process/ProcessList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/process/ProcessUsers.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/user/UserEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/user/UserEdit.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/user/UserList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/user/UserList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/constants.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -104,7 +72,7 @@
       <updated>1570547400647</updated>
       <workItem from="1570547401874" duration="334000" />
       <workItem from="1570548074730" duration="54450000" />
-      <workItem from="1570803158680" duration="21383000" />
+      <workItem from="1570803158680" duration="24704000" />
     </task>
     <servers />
   </component>

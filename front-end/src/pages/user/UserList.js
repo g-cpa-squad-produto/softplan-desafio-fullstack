@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Alert, Button, ButtonGroup, Container, Table } from 'reactstrap';
 import { Link, Redirect } from 'react-router-dom';
-import {manipulateData} from "../../utils/api";
 import queryString from "query-string";
+import {getAllUsers,removeUser} from "../../utils/userFunctions";
 
 class UserList extends Component {
 
@@ -18,25 +18,12 @@ class UserList extends Component {
 
     componentDidMount() {
         this.setState({isLoading: true});
-        let data = {
-            url: '/users',
-            method: "GET"
-        }
-        manipulateData(data).then(data => {
-            this.setState({users: data, isLoading: false})
-        });
+        getAllUsers(this);
     }
 
     remove = async (id) => {
         if (window.confirm("Deseja realmente apagar o usuário "+id+" :")) {
-            let data = {
-                url: '/users/' + id,
-                method: 'DELETE'
-            }
-            manipulateData(data).then(() => {
-                let updatedUsers = [...this.state.users].filter(i => i.id !== id);
-                this.setState({users: updatedUsers});
-            });
+            removeUser(id,this);
         }
     };
 

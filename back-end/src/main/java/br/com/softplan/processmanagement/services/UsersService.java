@@ -85,12 +85,17 @@ public class UsersService {
     public UserSystem update(UserSystem userSystem) {
         checkExistence(userSystem);
 
-        String password = userSystem.getPassword();
-        if(password != null && StringUtils.hasText(password)){
-            userSystem.setPassword(bcryptEncoder.encode(password));
+        Long id = userSystem.getId();
+        UserSystem userSystemTemp = this.searchById(id);
+
+        userSystemTemp.setName(userSystem.getName());
+        userSystemTemp.setEmail(userSystem.getEmail());
+        userSystemTemp.setType(userSystem.getType());
+        if(userSystem.getPassword() != null && StringUtils.hasText(userSystem.getPassword())) {
+            userSystemTemp.setPassword(bcryptEncoder.encode(userSystem.getPassword()));
         }
 
-        return usersSystemRepository.save(userSystem);
+        return usersSystemRepository.save(userSystemTemp);
     }
 
     @Transactional

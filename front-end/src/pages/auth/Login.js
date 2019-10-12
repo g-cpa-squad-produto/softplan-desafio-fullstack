@@ -42,6 +42,12 @@ class Login extends Component {
         return (
             <Container>
                 <Row className="justify-content-center">
+
+                    <div className="col-12 text-center mb-4">
+                        <h3>Sistema de Gerenciamento de Processos</h3>
+                        <h4>Softplan</h4>
+                    </div>
+
                     <Card className="col-4 p-0">
                         <CardHeader>
                             <h2>Login</h2>

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link, withRouter, Redirect} from 'react-router-dom';
-import {Button, CustomInput, Container, Form, FormGroup, Input, Label, Card, CardHeader, CardBody} from 'reactstrap';
-import {manipulateData} from "../../utils/api";
+import { Container, Card, CardHeader, CardBody} from 'reactstrap';
+import {getInfoAboutProcess} from "../../utils/processFunctions";
 
 class OpinionList extends Component {
 
@@ -16,7 +16,6 @@ class OpinionList extends Component {
         this.state = {
             isLoading: true,
             item: this.emptyItem,
-            usersInitials: [],
             currentUser: this.props.currentUser,
             redirect: false,
             opinionText: "",
@@ -28,40 +27,12 @@ class OpinionList extends Component {
     componentDidMount() {
         if (this.state.editing) {
             let idProcess = this.props.match.params.id;
-
-            //PEGANDO INFORMAÇÕES DO PRCESSO
-            let data = {
-                url: "/processes/" + idProcess,
-                method: "GET"
-            };
-            manipulateData(data).then(data => {
-                data.opinions.map(opinion => {
-                    //CASO FINZALIZADOR, COLOCAR PARECER DELE NO TEXTAREA
-                    if (this.state.currentUser.type === 'FINALIZADOR') {
-                        let idUsuario = opinion.userSystem.id;
-                        if (idUsuario === this.state.currentUser.id) {
-                            return this.setState({opinionText: opinion.text})
-                        }
-                    }
-                    return null;
-                });
-                let opinions = data.opinions;
-                return this.setState({item: data})
-            });
-
+            getInfoAboutProcess(idProcess, this);
         }
-
-        //PEGANDO USUÁRIOS FINALIZADORES PARA MOSTRAR OS CHECKBOXES
-        let data = {
-            url: "/users/finalizadores",
-            method: "GET"
-        };
-        manipulateData(data).then(data => this.setState({usersInitials: data, isLoading: false}));
-
     }
 
     render() {
-        const {isLoading, item, currentUser } = this.state;
+        const {isLoading, item, currentUser} = this.state;
 
         if (!currentUser || !currentUser.type) {
             return <Redirect to="/"/>
@@ -89,7 +60,7 @@ class OpinionList extends Component {
                 <Container>
                     <h2 className="float-left">Pareceres do processo {item.code || ''}</h2>
                     <Link className="btn btn-secondary float-right" to="/process">Voltar</Link>
-                    <div className="clearfix" />
+                    <div className="clearfix"/>
                     <div className="mt-3">
                         <p>{item.description || ''}</p>
                         <div className="border-top mt-5 pt-3">
