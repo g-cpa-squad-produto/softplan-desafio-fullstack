@@ -1,18 +1,5 @@
 # Desafio implementador fullstack
 
-Seja parte da jornada de transformação digital no Brasil.
-
-Esse é o nosso desafio para a vaga de implementador fullstack na [Softplan](https://www.softplan.com.br/carreira/). Serão testadas as habilidades e qualidade de código ao transformar requisitos limitados em uma aplicação web.
-
-Seja parte da jornada de transformação digital no Brasil.
-Procuramos desenvolvedor versátil para resolver os mais diversos problemas, que impactam no negócio do cliente, utilizando conhecimento em tecnologias back-end e front-end como meio para isso. Sinta-se confortável com ambas responsabilidades e seja engajado com o que há de melhor no mercado e boas práticas para trabalhar com inovação, tecnologias modernas e emergentes na Softplan, empresa no Top 10 dos melhores lugares para se trabalhar em Santa Catarina (GPTW 2017).
-
-### Instruções para o desafio
-
-- **Fork** esse repositório e faça o desafio numa branch com o seu nome (exemplo: `nome-sobrenome`);
-- Assim que concluir o seu desafio, abra um **pull request** com suas alterações.
-
-
 ### Desafio
 - Desenvolver uma aplicação web responsável por gerenciar processos.
 - *Soluções parcias serão aceitas.*
@@ -26,33 +13,36 @@ Procuramos desenvolvedor versátil para resolver os mais diversos problemas, que
 	- Incluir o parecer sobre o processo.
 
 
-### Escopo do desafio
-- Documentar todas suposições realizadas.
-- Desenvolver os módulos de frontend e backend de forma separada.
-- O desenvolvimento do backend deve ser feito em Java.
-- O desenvolvimento do frontend pode utilizar JavaScript e qualquer framework ou ferramenta que suportem ou utilizem estas tecnologias.
-- Preferencialmente utilizar Spring Boot 1.5+ com toda sua stack para o desenvolvimento do backend.
-- Preferencialmente utilizar React para o desenvolvimento do frontend.
-- É aceitável utilizar algumas respostas estáticas em determinadas porções da aplicação.
-- Não é necessário submeter uma aplicação que cumpra cada um dos requisitos descritos, mas o que for submetido deve funcionar.
-
-
-### O que será avaliado
-- O código será avaliado seguindo os seguintes critérios: manutenabilidade, clareza e limpeza de código; resultado funcional; entre outros fatores. 
-- O histórico no `git` também está avaliado.
-- Não esqueça de documentar o processo necessário para rodar a aplicação.
-- Se necessário explique as decisões técnicas tomadas, as escolhas por bibliotecas e ferrramentas, o uso de patterns etc.
-
-
-### Diferenciais
-- Adaptar a página para dispositivos móveis (torná-la responsiva).
-- Liberação da aplicação utilizando Docker.
-- Utilização de boas práticas de UX na solução.
-- Boa documentação de código e de serviços.
-- Testes do código.
-
 # Desenvolvimento
-### Recursos Utilizados
-- Swagger (/swagger-ui.html)
-- H2 como base de dados (/h2-console)
-- Carga inicial do administrador na inicialização da aplicação
+### Bibliotecas Utilizadas
+- React Router
+- React Dom
+- Query String para parse de buscas via url
+- Bootstrap e Reactstrap para layout
+- Autenticação via JWT
+
+### Funcionalidades implementadas
+- Administrador pode:
+    - Incluir, excluir, atualizar e visualizar usuários
+    - Incluir, excluir, atualizar e visualizar processos
+- Usuário Triador pode:
+    - Incluir processos
+    - Excluir, atualizar e visualizar processos criados por ele
+    - Vincular de inúmeros usuários finalizadores a um processo criado
+    - Visualizar pareceres sobre seus processos
+- Usuário Finalizador pode:
+    - Visualizar processos aos quais está vinculado
+    - Escrever pareceres sobre os processos aos quais está vinculado
+
+### Recursos
+- Para consulta da api do back-end, foi utilizada a api Fecth do React
+- O Token (criado no login) fica armazenado utilizando localStorage
+- Foi utilizao recurso de private route para controle de autenticação para acesso às páginas 
+- Foi criado um Dockerfile, que está na raiz da aplicação front-end, que é chamada pelo docker-compose, que inicia a aplicação como um todo (front e back-end). Este Dockerfile utiliza o arquivo nginx.conf para configuração de um servidor nginx para rodas a aplicação no container.
+- Se desejar rodar a aplicação manualmente a partir da raiz do front-end, executar os comandos
+    - Se utilizar o yarn:
+        - yarn install
+        - yarn start
+    - Ou então:
+        - npm install
+        - npm start 

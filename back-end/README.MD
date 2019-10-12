@@ -1,18 +1,5 @@
 # Desafio implementador fullstack
 
-Seja parte da jornada de transformação digital no Brasil.
-
-Esse é o nosso desafio para a vaga de implementador fullstack na [Softplan](https://www.softplan.com.br/carreira/). Serão testadas as habilidades e qualidade de código ao transformar requisitos limitados em uma aplicação web.
-
-Seja parte da jornada de transformação digital no Brasil.
-Procuramos desenvolvedor versátil para resolver os mais diversos problemas, que impactam no negócio do cliente, utilizando conhecimento em tecnologias back-end e front-end como meio para isso. Sinta-se confortável com ambas responsabilidades e seja engajado com o que há de melhor no mercado e boas práticas para trabalhar com inovação, tecnologias modernas e emergentes na Softplan, empresa no Top 10 dos melhores lugares para se trabalhar em Santa Catarina (GPTW 2017).
-
-### Instruções para o desafio
-
-- **Fork** esse repositório e faça o desafio numa branch com o seu nome (exemplo: `nome-sobrenome`);
-- Assim que concluir o seu desafio, abra um **pull request** com suas alterações.
-
-
 ### Desafio
 - Desenvolver uma aplicação web responsável por gerenciar processos.
 - *Soluções parcias serão aceitas.*
@@ -25,34 +12,25 @@ Procuramos desenvolvedor versátil para resolver os mais diversos problemas, que
 	- Visualizar processos pendentes de parecer.
 	- Incluir o parecer sobre o processo.
 
-
-### Escopo do desafio
-- Documentar todas suposições realizadas.
-- Desenvolver os módulos de frontend e backend de forma separada.
-- O desenvolvimento do backend deve ser feito em Java.
-- O desenvolvimento do frontend pode utilizar JavaScript e qualquer framework ou ferramenta que suportem ou utilizem estas tecnologias.
-- Preferencialmente utilizar Spring Boot 1.5+ com toda sua stack para o desenvolvimento do backend.
-- Preferencialmente utilizar React para o desenvolvimento do frontend.
-- É aceitável utilizar algumas respostas estáticas em determinadas porções da aplicação.
-- Não é necessário submeter uma aplicação que cumpra cada um dos requisitos descritos, mas o que for submetido deve funcionar.
-
-
-### O que será avaliado
-- O código será avaliado seguindo os seguintes critérios: manutenabilidade, clareza e limpeza de código; resultado funcional; entre outros fatores. 
-- O histórico no `git` também está avaliado.
-- Não esqueça de documentar o processo necessário para rodar a aplicação.
-- Se necessário explique as decisões técnicas tomadas, as escolhas por bibliotecas e ferrramentas, o uso de patterns etc.
-
-
-### Diferenciais
-- Adaptar a página para dispositivos móveis (torná-la responsiva).
-- Liberação da aplicação utilizando Docker.
-- Utilização de boas práticas de UX na solução.
-- Boa documentação de código e de serviços.
-- Testes do código.
-
 # Desenvolvimento
-### Recursos Utilizados
-- Swagger (/swagger-ui.html)
-- H2 como base de dados (/h2-console)
-- Carga inicial do administrador na inicialização da aplicação
+### Bibliotecas Utilizadas
+- Spring Boot 2.1.9
+- Spring Data Jpa
+- Spring Security
+- Json Web Token (JWT)
+- Swagger. Habilitado para acompanhamento e testes (/swagger-ui.html), mas as requisições precisam ser autenticadas, então deve-se adicionar o token.
+- H2. H2 console habilitado para acompanhamento da avaliação. (/h2-console). Url do banco: jdbc:h2:mem:processmanagement
+- slf4j para logs, a principio configurado a nível DEBUG para os controllers, repositories e services
+- Obs: Foi utilizado o banco H2 por não haver a necessidade de uma permanencia constante dos dados. O driver do MySql está presendo no pom.xml, e as configurações no application.properties, o que tornaria fácil a mudança caso precisasse. 
+
+### Funcionalidades implementadas
+- Endpoints para cadastro de Usuários, Processos, Pareceres e para autenticação
+- Os endpoints completos podem ser consultados via Swagger (ainda habilitado)
+- Na inicialização da aplicação back-end é feita uma carga inicial de usuários, processos e opiniões, para facilitar análise e testes
+- Existe apenas um usuário administrador
+- No desenvolvimento foi optado por não permitir o cadastro de mais administradores, mas facilmente modificado
+- Visando a simplicidade, neste desenvolvimento, foi optado por não utilizar roles para controle de autorização, mas sim um enum no cadastro do usuário
+- Foi criado um Dockerfile, que está na raiz da aplicação back-end, que é chamado pelo docker-compose e inicia a aplicação como um todo (front e back-end)
+- A aplicação pode ser iniciada através do jar (java -jar target/processmanagement-0.0.1-SNAPSHOT.jar), mas não comitado por questões de tamanho da pasta, ou utilizando o docker-compose
+
+

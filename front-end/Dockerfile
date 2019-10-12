@@ -12,7 +12,7 @@ WORKDIR /app
 # are made.
 #package-lock.json
 COPY package.json ./
-RUN npm install
+RUN npm install --registry https://registry.npmjs.org
 
 # Copy the main application
 COPY . ./
