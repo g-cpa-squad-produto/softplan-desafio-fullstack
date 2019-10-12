@@ -2,9 +2,10 @@ package br.com.softplan.processmanagement.services;
 
 import br.com.softplan.processmanagement.domain.Process;
 import br.com.softplan.processmanagement.domain.UserSystem;
-import br.com.softplan.processmanagement.domain.UserSystemProcess;
+import br.com.softplan.processmanagement.domain.Opinion;
 import br.com.softplan.processmanagement.domain.UserType;
-import br.com.softplan.processmanagement.repositories.UserSystemProcessRepository;
+import br.com.softplan.processmanagement.repositories.ProcessesRepository;
+import br.com.softplan.processmanagement.repositories.OpinionRepository;
 import br.com.softplan.processmanagement.repositories.UsersSystemRepository;
 import br.com.softplan.processmanagement.security.SignUpRequest;
 import br.com.softplan.processmanagement.services.exceptions.EmailAlreadyUsedException;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
@@ -26,12 +28,18 @@ public class UsersService {
     private UsersSystemRepository usersSystemRepository;
 
     @Autowired
-    private UserSystemProcessRepository userSystemProcessRepository;
+    private OpinionRepository userSystemProcessRepository;
+
+    @Autowired
+    private ProcessesService processesService;
+
+    @Autowired
+    private ProcessesRepository processesRepository;
 
     @Autowired
     private PasswordEncoder bcryptEncoder;
 
-    //CRUD
+    @Transactional
     public UserSystem save(UserSystem userSystem) {
         userSystem.setId(null);
         Optional<UserSystem> userByEmail = usersSystemRepository.findByEmail(userSystem.getEmail());
@@ -47,6 +55,7 @@ public class UsersService {
         return usersSystemRepository.save(userSystem);
     }
 
+    @Transactional
     public UserSystem saveUserFromRequest(SignUpRequest signUpRequest) {
         UserSystem newUser = new UserSystem();
         newUser.setName(signUpRequest.getName());
@@ -72,6 +81,7 @@ public class UsersService {
         return user.get();
     }
 
+    @Transactional
     public UserSystem update(UserSystem userSystem) {
         checkExistence(userSystem);
 
@@ -83,6 +93,7 @@ public class UsersService {
         return usersSystemRepository.save(userSystem);
     }
 
+    @Transactional
     public void delete(Long id) {
         try {
             usersSystemRepository.deleteById(id);
@@ -99,14 +110,18 @@ public class UsersService {
         return usersSystemRepository.existsByEmail(email);
     }
 
-    public List<UserSystemProcess> getOpinionsByUser(Long idUser) {
+    public List<Opinion> getOpinionsByUser(Long idUser) {
         Optional<UserSystem> user = Optional.of(this.searchById(idUser));
 
         if (user.isPresent()) {
-            List<UserSystemProcess> userSystemProcesses = userSystemProcessRepository.findAllByUserSystemProcessIdUserSystemAndTextNotNull(user.get());
-            return userSystemProcesses;
+            List<Opinion> opinions = userSystemProcessRepository.findAllByUserSystemAndTextNotNull(user.get());
+            return opinions;
         }
-        return new ArrayList<UserSystemProcess>();
+        return new ArrayList<Opinion>();
     }
 
+    public List<UserSystem> listByProcess(Long idProcess) {
+        Process process = processesService.searchById(idProcess);
+        return processesRepository.findUsersByProcess(process);
+    }
 }

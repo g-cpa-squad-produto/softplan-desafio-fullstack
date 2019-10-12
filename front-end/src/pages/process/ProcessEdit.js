@@ -6,10 +6,9 @@ import {manipulateData} from "../../utils/api";
 class ProcessEdit extends Component {
 
     emptyItem = {
-        name: '',
+        code: '',
         description: '',
-        opinion: '',
-        userSystems: []
+        opinions: []
     };
 
     constructor(props) {
@@ -20,50 +19,40 @@ class ProcessEdit extends Component {
             usersInitials: [],
             currentUser: this.props.currentUser,
             redirect: false,
-            opinions: [],
             opinionText: "",
-            editando: props.match.params.id !== 'new',
+            editing: props.match.params.id !== 'new',
             messageResult: "success"
         };
     }
 
     componentDidMount() {
-        if (this.state.editando) {
+        if (this.state.editing) {
             let idProcess = this.props.match.params.id;
 
             //PEGANDO INFORMAÇÕES DO PRCESSO
             let data = {
-                url: "/api/processes/" + idProcess,
+                url: "/processes/" + idProcess,
                 method: "GET"
             };
-            manipulateData(data).then(data => this.setState({item: data}));
-
-            //PEGANDO PARECERES SOBRE ESTE PROCESSO
-            let dataOpinion = {
-                url: "/api/processes/" + idProcess + "/opinions",
-                method: "GET"
-            };
-            manipulateData(dataOpinion).then(data => {
-                let opinionText = "";
-                data.map(opinion => {
-                    if(this.state.currentUser.type === 'FINALIZADOR'){
-                        let idUsuario = opinion.userSystemProcessId.userSystem.id;
-                        if(idUsuario === this.state.currentUser.id) {
-                            opinionText = opinion.text;
+            manipulateData(data).then(data => {
+                data.opinions.map(opinion => {
+                    //CASO FINZALIZADOR, COLOCAR PARECER DELE NO TEXTAREA
+                    if (this.state.currentUser.type === 'FINALIZADOR') {
+                        let idUsuario = opinion.userSystem.id;
+                        if (idUsuario === this.state.currentUser.id) {
+                            return this.setState({opinionText: opinion.text})
                         }
                     }
                     return null;
                 });
-                this.setState({
-                    opinions: data,
-                    opinionText: opinionText
-                })
+                return this.setState({item: data})
             });
+
         }
 
-        //PEGANDO USUÁRIOS FINALIZADORES FINALIZADORES
+        //PEGANDO USUÁRIOS FINALIZADORES PARA MOSTRAR OS CHECKBOXES
         let data = {
-            url: "/api/users/finalizadores",
+            url: "/users/finalizadores",
             method: "GET"
         };
         manipulateData(data).then(data => this.setState({usersInitials: data, isLoading: false}));
@@ -72,10 +61,9 @@ class ProcessEdit extends Component {
 
     verifyCheck = (id) => {
         let founded = false;
-        if (this.state.item.userSystems) {
-            this.state.item.userSystems.map(user => {
-                if (founded) return null;
-                if (user.id && user.id == id) {
+        if (this.state.item.opinions) {
+            this.state.item.opinions.map(opinion => {
+                if (opinion.userSystem.id && opinion.userSystem.id === parseInt(id)) {
                     founded = true;
                 }
             });
@@ -86,11 +74,11 @@ class ProcessEdit extends Component {
     handleCheckboxChange = (event) => {
         const target = event.target;
         const value = target.value;
-        let item = {...this.state.item};
+        let {item} = this.state;
         if (!this.verifyCheck(value)) {
-            item.userSystems.push({id: value});
+            item.opinions.push({userSystem: {id: parseInt(value)}});
         } else {
-            item.userSystems = item.userSystems.filter(u => u.id != value);
+            item.opinions = item.opinions.filter(o => o.userSystem.id !== parseInt(value));
         }
         this.setState({item});
     }
@@ -99,9 +87,9 @@ class ProcessEdit extends Component {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-        if(name === 'opinion'){
+        if (name === 'opinion') {
             this.setState({opinionText: value});
-        }else{
+        } else {
             let item = {...this.state.item};
             item[name] = value;
             this.setState({item});
@@ -114,7 +102,7 @@ class ProcessEdit extends Component {
 
         if (!item.creator) item.creator = {};
 
-        let endpoint = '/api/processes';
+        let endpoint = '/processes';
         if (item && item.id) {
             endpoint += "/" + item.id;
         }
@@ -123,12 +111,9 @@ class ProcessEdit extends Component {
             item.type = item.type.toUpperCase();
         }
 
-        if(!this.state.editando) {
+        if (!this.state.editando) {
             item.creator.id = this.state.currentUser.id;
         }
-
-        let now = new Date();
-        item.creationAt = now;
 
         let data = {
             url: endpoint,
@@ -137,36 +122,49 @@ class ProcessEdit extends Component {
         }
 
         manipulateData(data)
-            .then(data => { console.log(data) })
+            .then(data => {
+                if(!data.success){
+                    this.setState({messageResult: "error"});
+                }
+            })
             .catch(error => this.setState({messageResult: "error"}))
             .finally(() => {
-                this.setState({redirect: "/process?edit="+this.state.messageResult});
+                this.setState({redirect: "/process?edit=" + this.state.messageResult});
             });
     }
 
     handleSubmitOpinion = async (event) => {
         event.preventDefault();
         const idProcess = this.props.match.params.id;
-        const data = {
-            url: '/api/processes/' + idProcess + '/opinions',
-            method: 'POST',
-            body: JSON.stringify({
-                text: this.state.opinionText,
-                createdAt: new Date(),
-                idProcess: idProcess,
-                idUser: this.state.currentUser.id
-            })
+
+        let theOpinion = this.state.item.opinions.filter(opinion => opinion.userSystem.id === this.state.currentUser.id);
+
+        if(!theOpinion || !Array.isArray(theOpinion)){
+            this.setState({redirect: "/process?edit=error"});
+            return;
         }
+
+        let opinionToSave = theOpinion[0];
+        opinionToSave.text = this.state.opinionText;
+
+        const data = {
+            url: '/opinions/' + opinionToSave.id + '/process/' + idProcess,
+            method: 'PUT',
+            body: JSON.stringify(opinionToSave)
+        }
+
         manipulateData(data)
-            .then(data => { console.log(data) })
+            .then(data => {
+                console.log(data)
+            })
             .catch(error => this.setState({messageResult: "error"}))
             .finally(() => {
-                this.setState({redirect: "/process?edit="+this.state.messageResult});
+                this.setState({redirect: "/process?edit=" + this.state.messageResult});
             });
     }
 
     render() {
-        const {isLoading, item, usersInitials, currentUser, opinions, opinionText} = this.state;
+        const {isLoading, item, usersInitials, currentUser, opinionText} = this.state;
 
         if (!currentUser || !currentUser.type) {
             return <Redirect to="/"/>
@@ -193,19 +191,10 @@ class ProcessEdit extends Component {
                 className="ml-4"/>);
         });
 
-        const pareceres = opinions.map((opinion,index) => {
-            return(
-                <Card key={index} className="mt-4">
-                    <CardHeader>Parecer de {opinion.userSystemProcessId.userSystem.name}</CardHeader>
-                    <CardBody>{opinion.text || ''}</CardBody>
-                </Card>
-            );
-        })
-
         if (currentUser && currentUser.type === 'FINALIZADOR') {
             return (
                 <div>
-                    {this.state.redirect && <Redirect rerender={true} to={this.state.redirect}/>}
+                    {this.state.redirect && <Redirect to={this.state.redirect}/>}
                     <Container>
                         {title}
                         <br/>
@@ -239,7 +228,7 @@ class ProcessEdit extends Component {
 
         return (
             <div>
-                {this.state.redirect && <Redirect rerender={true} to={this.state.redirect}/>}
+                {this.state.redirect && <Redirect to={this.state.redirect}/>}
                 <Container>
                     {title}
                     <div>
@@ -266,7 +255,6 @@ class ProcessEdit extends Component {
                                 <Link className="btn btn-secondary" to="/process">Cancelar</Link>
                             </FormGroup>
                         </Form>
-                        <div className="mb-4">{pareceres}</div>
                     </div>
                 </Container>
             </div>

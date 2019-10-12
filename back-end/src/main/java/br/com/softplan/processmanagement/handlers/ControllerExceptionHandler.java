@@ -1,10 +1,7 @@
 package br.com.softplan.processmanagement.handlers;
 
 import br.com.softplan.processmanagement.domain.ErrorDetail;
-import br.com.softplan.processmanagement.services.exceptions.EmailAlreadyUsedException;
-import br.com.softplan.processmanagement.services.exceptions.ProcessNotFoundException;
-import br.com.softplan.processmanagement.services.exceptions.UserNotFoundException;
-import br.com.softplan.processmanagement.services.exceptions.UserProcessNotFoundException;
+import br.com.softplan.processmanagement.services.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -35,6 +32,12 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(UserProcessNotFoundException.class)
     public ResponseEntity<ErrorDetail> handleUserProcessNotFoundException(UserProcessNotFoundException e, HttpServletRequest request){
+        ErrorDetail error = new ErrorDetail(e.getMessage(), 404l, System.currentTimeMillis(), "");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+
+    @ExceptionHandler(OpinionNotFoundException.class)
+    public ResponseEntity<ErrorDetail> handleOpinionNotFoundException(OpinionNotFoundException e, HttpServletRequest request){
         ErrorDetail error = new ErrorDetail(e.getMessage(), 404l, System.currentTimeMillis(), "");
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }

@@ -19,16 +19,18 @@ class UserList extends Component {
     componentDidMount() {
         this.setState({isLoading: true});
         let data = {
-            url: '/api/users',
+            url: '/users',
             method: "GET"
         }
-        manipulateData(data).then(data => this.setState({users: data, isLoading: false}));
+        manipulateData(data).then(data => {
+            this.setState({users: data, isLoading: false})
+        });
     }
 
     remove = async (id) => {
         if (window.confirm("Deseja realmente apagar o usuário "+id+" :")) {
             let data = {
-                url: '/api/users/' + id,
+                url: '/users/' + id,
                 method: 'DELETE'
             }
             manipulateData(data).then(() => {
@@ -42,7 +44,7 @@ class UserList extends Component {
         const {users, isLoading, currentUser, params} = this.state;
 
         if(!currentUser || !currentUser.type || currentUser.type !== 'ADMIN'){
-            return <Redirect rerender={true} to="/" />
+            return <Redirect to="/" />
         }
 
         if (isLoading) {

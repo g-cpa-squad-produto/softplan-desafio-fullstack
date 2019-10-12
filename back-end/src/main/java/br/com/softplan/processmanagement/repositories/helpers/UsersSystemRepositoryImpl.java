@@ -2,8 +2,6 @@ package br.com.softplan.processmanagement.repositories.helpers;
 
 import br.com.softplan.processmanagement.domain.Process;
 import br.com.softplan.processmanagement.domain.UserSystem;
-import br.com.softplan.processmanagement.domain.UserSystemProcess;
-import br.com.softplan.processmanagement.services.exceptions.ProcessNotFoundException;
 import br.com.softplan.processmanagement.services.exceptions.UserNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
-import java.util.Optional;
 
 public class UsersSystemRepositoryImpl implements UsersSystemRepositoryQueries {
 
@@ -23,10 +20,10 @@ public class UsersSystemRepositoryImpl implements UsersSystemRepositoryQueries {
     @Override
     public List<Process> findProcessByUser(UserSystem userSystem) {
         Long userId = userSystem.getId();
-        if(userId == null) throw new UserNotFoundException("User not found");
+        if (userId == null)
+            throw new UserNotFoundException("User not found");
 
-        List<Process> processes = manager.createQuery("SELECT p.userSystemProcessId.process FROM UserSystemProcess p WHERE p.userSystemProcessId.userSystem.id = :userId", Process.class)
-                .setParameter("userId", userId).getResultList();
+        List<Process> processes = manager.createQuery("SELECT p.process FROM Opinion p WHERE p.userSystem.id = :userId", Process.class).setParameter("userId", userId).getResultList();
 
         return processes;
     }

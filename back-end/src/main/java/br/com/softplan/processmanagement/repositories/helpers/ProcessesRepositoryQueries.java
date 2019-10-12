@@ -5,6 +5,6 @@ import br.com.softplan.processmanagement.domain.UserSystem;
 
 import java.util.List;
 
-public interface UsersSystemRepositoryQueries {
-    List<Process> findProcessByUser(UserSystem userSystem);
+public interface ProcessesRepositoryQueries {
+    List<UserSystem> findUsersByProcess(Process process);
 }

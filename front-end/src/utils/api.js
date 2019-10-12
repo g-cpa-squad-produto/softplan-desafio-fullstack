@@ -1,4 +1,4 @@
-import {ACCESS_TOKEN} from "./constants";
+import {API_BASE_URL,ACCESS_TOKEN} from "./constants";
 
 const request = async (options) => {
 
@@ -13,7 +13,7 @@ const request = async (options) => {
     const defaults = {headers: headers};
     options = Object.assign({}, defaults, options);
 
-    return await fetch(options.url, options)
+    return await fetch(API_BASE_URL + options.url, options)
         .then(response => {
                 if(!response) return;
                 return response.json().then(json => {
@@ -28,7 +28,7 @@ const request = async (options) => {
 
 export function login(loginData) {
     return request({
-        url: "/api/auth/signin",
+        url: "/auth/signin",
         method: 'POST',
         body: JSON.stringify(loginData)
     });
@@ -39,7 +39,7 @@ export function getCurrentUser() {
         return Promise.reject("Token não encontrado.");
     }
     return request({
-        url: "/api/users/me",
+        url: "/users/me",
         method: 'GET'
     });
 }

@@ -1,57 +1,39 @@
 package br.com.softplan.processmanagement.controllers;
 
 import br.com.softplan.processmanagement.domain.Process;
-import br.com.softplan.processmanagement.domain.UserSystemProcess;
-import br.com.softplan.processmanagement.dto.OpinionDTO;
 import br.com.softplan.processmanagement.security.ApiResponse;
 import br.com.softplan.processmanagement.services.ProcessesService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
-import java.net.URI;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/processes")
-@Api(value = "Gerenciamento de processos")
 public class ProcessesController {
 
     @Autowired
     private ProcessesService processesService;
 
-    @ApiOperation(value = "Visualizar a lista de processos cadastrados")
     @GetMapping
     ResponseEntity<List<Process>> list() {
         return ResponseEntity.ok(processesService.list());
     }
 
-    @ApiOperation(value = "Visualizar a lista de processos por usuário")
-    @GetMapping(value = "/user/{id}")
-    ResponseEntity<List<Process>> listByUser(@PathVariable("id") Long idUser) {
-        return ResponseEntity.ok(processesService.listByUser(idUser));
-    }
-
-    @ApiOperation(value = "Salvando um novo processo")
     @PostMapping
-    ResponseEntity<Void> save(@RequestBody @Valid Process process) {
+    ResponseEntity<ApiResponse> save(@RequestBody @Valid Process process) {
         process = processesService.save(process);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(process.getId()).toUri();
-        return ResponseEntity.created(uri).build();
+        return ResponseEntity.ok(new ApiResponse(true, "Process created"));
     }
 
-    @ApiOperation(value = "Buscar um processo cadastrado")
     @GetMapping("/{id}")
     public ResponseEntity<Process> searchById(@PathVariable("id") Long id) {
         Process process = processesService.searchById(id);
         return ResponseEntity.ok(process);
     }
 
-    @ApiOperation(value = "Atualizar dados do processo")
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse> update(@RequestBody @Valid Process process, @PathVariable("id") Long id) {
         process.setId(id);
@@ -59,25 +41,15 @@ public class ProcessesController {
         return ResponseEntity.ok(new ApiResponse(true, "Process updated"));
     }
 
-    @ApiOperation(value = "Apagando o processo")
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse> delete(@PathVariable("id") Long id) {
         processesService.delete(id);
         return ResponseEntity.ok(new ApiResponse(true, "Process removed"));
     }
 
-    @ApiOperation(value = "Gravando parecer do processo")
-    @PostMapping(value = "/{id}/opinions")
-    public ResponseEntity<UserSystemProcess> saveOpinion(@PathVariable("id") Long id, @RequestBody OpinionDTO opinionDTO) {
-        UserSystemProcess userSystemProcess = processesService.saveOpinion(id, opinionDTO);
-        return ResponseEntity.ok(userSystemProcess);
-    }
-
-    @ApiOperation(value = "Buscando parecer do processo")
-    @GetMapping(value = "/{idProcess}/opinions")
-    public ResponseEntity<List<UserSystemProcess>> getOpinionsByProcess(@PathVariable("idProcess") Long idProcess){
-        List<UserSystemProcess> userSystemProcesses = processesService.getOpinionsByProcess(idProcess);
-        return ResponseEntity.ok(userSystemProcesses);
+    @GetMapping(value = "/user/{id}")
+    ResponseEntity<List<Process>> listByUser(@PathVariable("id") Long idUser) {
+        return ResponseEntity.ok(processesService.listByUser(idUser));
     }
 
 }

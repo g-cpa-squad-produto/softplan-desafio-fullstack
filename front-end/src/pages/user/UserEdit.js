@@ -15,6 +15,7 @@ class UserEdit extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            isLoading: true,
             item: this.emptyItem,
             currentUser: this.props.currentUser,
             messageResult: "success"
@@ -24,10 +25,12 @@ class UserEdit extends Component {
     componentDidMount() {
         if (this.props.match.params.id !== 'new') {
             let data = {
-                url: "/api/users/" + this.props.match.params.id,
+                url: "/users/" + this.props.match.params.id,
                 method: 'GET'
             };
             manipulateData(data).then(data => this.setState({item: data, isLoading: false}));
+        }else{
+            this.setState({isLoading: false});
         }
     }
 
@@ -44,7 +47,7 @@ class UserEdit extends Component {
         event.preventDefault();
         const {item} = this.state;
 
-        let endpoint = '/api/users';
+        let endpoint = '/users';
         if (item && item.id) {
             endpoint += "/" + item.id;
         }
@@ -67,22 +70,28 @@ class UserEdit extends Component {
             .then(data => { console.log(data) })
             .catch(error => this.setState({messageResult: "error"}))
             .finally(() => {
-                this.setState({redirect: "/process?edit="+this.state.messageResult});
+                this.setState({redirect: "/users?edit="+this.state.messageResult});
             });
     }
 
     render() {
-        const {item, currentUser} = this.state;
+        const {item, currentUser, isLoading} = this.state;
 
         if (!currentUser || !currentUser.type || currentUser.type !== 'ADMIN') {
             return <Redirect to="/"/>
+        }
+
+        if (isLoading) {
+            return <div className="text-center m-4">
+                <p>Carregando...</p>
+            </div>
         }
 
         const title = <h2>{item.id ? 'Editar Usuário' : 'Adicionar Usuário'}</h2>;
 
         return (
             <div>
-                {this.state.redirect && <Redirect rerender={true} to={this.state.redirect}/>}
+                {this.state.redirect && <Redirect to={this.state.redirect}/>}
                 <Container>
                     {title}
                     <Form onSubmit={this.handleSubmit}>

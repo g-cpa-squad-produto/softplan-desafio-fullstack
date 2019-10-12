@@ -12,7 +12,8 @@ class ProcessList extends Component {
             process: [],
             isLoading: true,
             currentUser: this.props.currentUser,
-            params: queryString.parse(this.props.location.search)
+            params: queryString.parse(this.props.location.search),
+            opinions: []
         };
     }
 
@@ -21,41 +22,23 @@ class ProcessList extends Component {
             this.setState({isLoading: true});
             let userId = this.state.currentUser.id;
             let data = {
-                url: '/api/processes/user/' + userId,
+                url: '/processes/user/' + userId,
                 method: 'GET'
             };
             manipulateData(data).then(data => {
-                let response = data;
-                response.map(process => {
-                    console.log(process);
-                });
                 return this.setState({process: data, isLoading: false})
             });
         }
     }
 
-    getOpinion = (idProcess) => {
-        let pareceres = [];
-        let dataOpinion = {
-            url: "/api/processes/" + idProcess + "/opinions",
-            method: "GET"
-        };
-        manipulateData(dataOpinion).then(data => pareceres = data);
-        return [
-            {text: idProcess},
-            {text: "teste2"},
-            {text: "teste3"},
-            {text: "teste4"}
-        ];
-    };
-
     remove = async (id) => {
         if (window.confirm("Deseja realmente apagar este processo?")) {
             let data = {
-                url: '/api/processes/' + id,
+                url: '/processes/' + id,
                 method: 'DELETE'
-            }
-            manipulateData(data).then(() => {
+            };
+            manipulateData(data).then(response => {
+                console.log(response);
                 let updatedProcess = [...this.state.process].filter(i => i.id !== id);
                 this.setState({process: updatedProcess});
             });
@@ -76,25 +59,21 @@ class ProcessList extends Component {
         }
 
         const processList = Array.isArray(process) && process.map(process => {
-            const usuarios = process.userSystems;
-            const pareceres = this.getOpinion(process.id);
+            const opinions = process.opinions;
+            let description = process.description;
+            let sizeDescription = 200;
+            if(description.length > sizeDescription){
+                description = description.substring(0,sizeDescription)+"...";
+            }
 
             return (<tr key={process.id}>
                 <td>{process.code}</td>
                 <td style={{whiteSpace: 'nowrap'}}>{process.creator.name}</td>
-                <td>{Array.isArray(usuarios) && usuarios.map(user => {
-                    return (<div key={user.id}>{user.name}</div>);
+                <td>{Array.isArray(opinions) && opinions.map(opinion => {
+                    return (<div key={opinion.userSystem.id}>- {opinion.userSystem.name}</div>);
                 })}</td>
-                <td>{process.description}</td>
-                <td>
-                    {pareceres && Array.isArray(pareceres) && pareceres.map((parecer,index) => {
-                        return (
-                            <div key={index}>
-                                {parecer.text}
-                            </div>
-                        )
-                    })}
-                </td>
+                <td>{description}</td>
+                <td>{opinions.length}</td>
                 <td>
                     {
                         currentUser.type &&
@@ -103,6 +82,8 @@ class ProcessList extends Component {
                             <Button size="sm" color="primary"><Link className="text-white" tag={Link}
                                                                     to={"/process/" + process.id}>Editar</Link></Button>
                             <Button size="sm" color="danger" onClick={() => this.remove(process.id)}>Remover</Button>
+                            <Button size="sm" color="info"><Link className="text-white" tag={Link}
+                                                                    to={"/opinions/process/" + process.id}>Ver pareceres</Link></Button>
                         </ButtonGroup>
                     }
                     {
@@ -145,7 +126,7 @@ class ProcessList extends Component {
                             <th width="20%">Criador</th>
                             <th width="20%">Usuários</th>
                             <th width="20%">Descrição</th>
-                            <th width="20%">Parecer</th>
+                            <th width="20%">Pareceres</th>
                             <th width="10%">Ações</th>
                         </tr>
                         </thead>

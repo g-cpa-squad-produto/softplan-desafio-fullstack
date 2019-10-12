@@ -11,7 +11,7 @@
 	<groupId>br.com.softplan</groupId>
 	<artifactId>processmanagement</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>processmanagement</name>
 	<description>Desafio Softplan FullStack</description>
 

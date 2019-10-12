@@ -18,10 +18,10 @@ class AppNavbar extends Component {
     render() {
         const { isAuthenticated, currentUser } = this.props;
 
-        return <Navbar color="light" dark expand="md">
+        return <Navbar color="light" light expand="md">
             <NavbarBrand href="/" className="text-black-50">
-                { !isAuthenticated && <span>Gerenciamento de Processos</span> }
-                { currentUser && currentUser.name }
+                { !isAuthenticated && <span className="text-white">.</span> }
+                { currentUser && <span>Bem-vindo {currentUser.name}</span> }
             </NavbarBrand>
             <NavbarToggler onClick={this.toggle}/>
             <Collapse isOpen={this.state.isOpen} navbar>

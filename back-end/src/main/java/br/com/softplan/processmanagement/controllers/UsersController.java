@@ -1,12 +1,10 @@
 package br.com.softplan.processmanagement.controllers;
 
+import br.com.softplan.processmanagement.domain.Opinion;
 import br.com.softplan.processmanagement.domain.UserAuthentication;
 import br.com.softplan.processmanagement.domain.UserSystem;
-import br.com.softplan.processmanagement.domain.UserSystemProcess;
 import br.com.softplan.processmanagement.security.ApiResponse;
 import br.com.softplan.processmanagement.services.UsersService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -19,22 +17,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
-@Api(value = "Gerenciamento de Usuários")
 public class UsersController {
 
     @Autowired
     private UsersService usersService;
 
-    @ApiOperation(value = "Visualizar a lista de usuários cadastrados")
     @GetMapping
     ResponseEntity<List<UserSystem>> list() {
         return ResponseEntity.ok(usersService.list());
-    }
-
-    @ApiOperation(value = "Visualizar a lista de usuários finalizadores")
-    @GetMapping(value="/finalizadores")
-    ResponseEntity<List<UserSystem>> listFinalizadores() {
-        return ResponseEntity.ok(usersService.listFinalizadores());
     }
 
     @GetMapping("/me")
@@ -43,22 +33,18 @@ public class UsersController {
         return ResponseEntity.ok(userSystem);
     }
 
-    @ApiOperation(value = "Salvando um novo usuário")
     @PostMapping
     ResponseEntity<ApiResponse> save(@RequestBody @Valid UserSystem userSystem) {
         userSystem = usersService.save(userSystem);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(userSystem.getId()).toUri();
         return ResponseEntity.ok(new ApiResponse(true, "User created"));
     }
 
-    @ApiOperation(value = "Buscar um usuário cadastrado")
     @GetMapping("/{id}")
     public ResponseEntity<UserSystem> searchById(@PathVariable("id") Long id) {
         UserSystem userSystem = usersService.searchById(id);
         return ResponseEntity.ok(userSystem);
     }
 
-    @ApiOperation(value = "Atualizar dados do usuário")
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse> update(@RequestBody @Valid UserSystem userSystem, @PathVariable("id") Long id) {
         userSystem.setId(id);
@@ -66,18 +52,26 @@ public class UsersController {
         return ResponseEntity.ok(new ApiResponse(true, "User updated"));
     }
 
-    @ApiOperation(value = "Apagando o usuário")
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse> delete(@PathVariable("id") Long id) {
         usersService.delete(id);
         return ResponseEntity.ok(new ApiResponse(true, "User removed"));
     }
 
-    @ApiOperation(value = "Buscando parecer do processo")
+    @GetMapping(value = "/finalizadores")
+    ResponseEntity<List<UserSystem>> listFinalizadores() {
+        return ResponseEntity.ok(usersService.listFinalizadores());
+    }
+
     @GetMapping(value = "/{idUser}/opinions")
-    public ResponseEntity<List<UserSystemProcess>> getOpinionsByProcess(@PathVariable("idUser") Long idUser){
-        List<UserSystemProcess> userSystemProcesses = usersService.getOpinionsByUser(idUser);
-        return ResponseEntity.ok(userSystemProcesses);
+    public ResponseEntity<List<Opinion>> getOpinionsByProcess(@PathVariable("idUser") Long idUser) {
+        List<Opinion> opinions = usersService.getOpinionsByUser(idUser);
+        return ResponseEntity.ok(opinions);
+    }
+
+    @GetMapping(value = "/process/{id}")
+    ResponseEntity<List<UserSystem>> listByProcess(@PathVariable("id") Long idProcess) {
+        return ResponseEntity.ok(usersService.listByProcess(idProcess));
     }
 
 }

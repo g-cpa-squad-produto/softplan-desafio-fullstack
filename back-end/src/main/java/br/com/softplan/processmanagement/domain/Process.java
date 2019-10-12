@@ -1,5 +1,9 @@
 package br.com.softplan.processmanagement.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -21,22 +25,21 @@ public class Process implements Serializable {
     private String description;
     private LocalDateTime createdAt;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @ManyToOne(fetch = FetchType.LAZY)
     private UserSystem creator;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "app_usersystem_process", joinColumns = @JoinColumn(name = "id_process"), inverseJoinColumns = @JoinColumn(name = "id_user"))
-    private List<UserSystem> userSystems;
+    @OneToMany(mappedBy = "process", fetch = FetchType.EAGER, orphanRemoval = true)
+    private List<Opinion> opinions;
 
     public Process() {
     }
 
-    public Process(String code, String description, LocalDateTime createdAt, UserSystem creator, List<UserSystem> userSystems) {
+    public Process(String code, String description, LocalDateTime createdAt, UserSystem creator) {
         this.code = code;
         this.description = description;
         this.createdAt = createdAt;
         this.creator = creator;
-        this.userSystems = userSystems;
     }
 
     public static long getSerialVersionUID() {
@@ -83,12 +86,16 @@ public class Process implements Serializable {
         this.creator = creator;
     }
 
-    public List<UserSystem> getUserSystems() {
-        return userSystems;
+    public List<Opinion> getOpinions() {
+        return opinions;
     }
 
-    public void setUserSystems(List<UserSystem> userSystems) {
-        this.userSystems = userSystems;
+    public void setOpinions(List<Opinion> opinions) {
+        this.opinions = opinions;
     }
 
+    @Override
+    public String toString() {
+        return "Process{" + "id=" + id + ", code='" + code + '\'' + ", description='" + description + '\'' + ", createdAt=" + createdAt + ", creator=" + creator + ", opinions=" + opinions + '}';
+    }
 }

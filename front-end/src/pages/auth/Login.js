@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import {Button, Container, Row, Form, FormGroup, Label, Card, CardHeader, CardBody} from 'reactstrap';
-import {ACCESS_TOKEN} from '../utils/constants';
-import {login} from "../utils/api";
+import {ACCESS_TOKEN} from '../../utils/constants';
+import {login} from "../../utils/api";
 
 class Login extends Component {
 

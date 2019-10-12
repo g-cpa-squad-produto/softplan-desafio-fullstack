@@ -1,24 +1,24 @@
 package br.com.softplan.processmanagement.services;
 
+import br.com.softplan.processmanagement.domain.Opinion;
 import br.com.softplan.processmanagement.domain.Process;
 import br.com.softplan.processmanagement.domain.UserSystem;
-import br.com.softplan.processmanagement.domain.UserSystemProcess;
 import br.com.softplan.processmanagement.domain.UserType;
-import br.com.softplan.processmanagement.dto.OpinionDTO;
+import br.com.softplan.processmanagement.repositories.OpinionRepository;
 import br.com.softplan.processmanagement.repositories.ProcessesRepository;
-import br.com.softplan.processmanagement.repositories.UserSystemProcessRepository;
 import br.com.softplan.processmanagement.repositories.UsersSystemRepository;
 import br.com.softplan.processmanagement.services.exceptions.ProcessNotFoundException;
-import br.com.softplan.processmanagement.services.exceptions.UserProcessNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProcessesService {
@@ -32,26 +32,41 @@ public class ProcessesService {
     private UsersSystemRepository usersSystemRepository;
 
     @Autowired
-    private UserSystemProcessRepository userSystemProcessRepository;
+    private OpinionService opinionService;
 
     @Autowired
     private UsersService usersService;
 
-    //CRUD
+    @Transactional
     public Process save(Process process) {
         process.setId(null);
-        return processesRepository.save(process);
+        process.setCreatedAt(LocalDateTime.now());
+
+        Process processSaved = processesRepository.saveAndFlush(process);
+
+        Optional<List<Opinion>> opinions = Optional.of(process.getOpinions());
+        if(opinions.isPresent()){
+            for (Opinion opinion: opinions.get()){
+                UserSystem userSystem = usersService.searchById(opinion.getUserSystem().getId());
+                opinion.setUserSystem(userSystem);
+                opinion.setProcess(processSaved);
+                opinionService.save(opinion);
+            }
+        }
+        logger.info(String.valueOf(process));
+
+        return processSaved;
     }
 
     public List<Process> list() {
-        return processesRepository.findAll();
+        List<Process> processes = processesRepository.findAll();
+
+        return processes;
     }
 
     public List<Process> listByUser(Long idUser) {
-
         UserSystem userSystem = usersService.searchById(idUser);
         UserType type = userSystem.getType();
-
         if (type == UserType.FINALIZADOR) {//FINALIZADOR VE APENAS PROCESSOS ATRIBUIDOS A ELE.
             return usersSystemRepository.findProcessByUser(userSystem);
         } else if (type == UserType.TRIADOR) {//TRIADOR VE APENAS SEUS PROCESSOS.
@@ -62,29 +77,44 @@ public class ProcessesService {
     }
 
     public Process searchById(Long id) {
-        Optional<Process> user = processesRepository.findById(id);
-        if (!user.isPresent()) {
+        Optional<Process> process = processesRepository.findById(id);
+        if (!process.isPresent()) {
             throw new ProcessNotFoundException("Process not found");
         }
-        return user.get();
+        return process.get();
     }
 
+    @Transactional
     public Process update(Process process) {
         checkExistence(process);
+        Process processSaved = processesRepository.saveAndFlush(process);
 
-        List<UserSystem> users = process.getUserSystems();
-        List<UserSystem> newUsers = new ArrayList<>();
+        List<Opinion> actualOpinions = opinionService.findAllByProcess(process);
 
-        for (UserSystem user: users) {
-            Optional<UserSystemProcess> relationByUserAndProcess = userSystemProcessRepository.findRelationByUserAndProcess(user, process);
-            if(!relationByUserAndProcess.isPresent()){
-                newUsers.add(user);
+        //SAVE NEW SENT OPINION
+        Optional<List<Opinion>> sentOpinions = Optional.of(process.getOpinions());
+        if(sentOpinions.isPresent()){
+            List<Opinion> sentOpinionsList = sentOpinions.get();
+            for (Opinion opinion: sentOpinionsList){
+                UserSystem userSystem = usersService.searchById(opinion.getUserSystem().getId());
+                opinion.setUserSystem(userSystem);
+                opinion.setProcess(processSaved);
+                Optional<Opinion> byUserAndProcess = opinionService.findByUserAndProcess(userSystem, processSaved);
+                if(!byUserAndProcess.isPresent()) {
+                    opinionService.save(opinion);
+                }
             }
+            //REMOVE NOT SENT OPINION
+            List<Opinion> collect = actualOpinions.stream().filter(opinion -> {
+                return !sentOpinionsList.contains(opinion);
+            }).collect(Collectors.toList());
+            opinionService.removeAll(collect);
         }
-        process.setUserSystems(newUsers);
-        return processesRepository.save(process);
+
+        return processSaved;
     }
 
+    @Transactional
     public void delete(Long id) {
         try {
             processesRepository.deleteById(id);
@@ -97,32 +127,4 @@ public class ProcessesService {
         searchById(process.getId());
     }
 
-    public UserSystemProcess saveOpinion(Long id, OpinionDTO opinionDTO) {
-        Optional<Process> process = Optional.of(this.searchById(id));
-        Optional<UserSystem> user = Optional.of(usersService.searchById(opinionDTO.getIdUser()));
-
-        if (process.isPresent() && user.isPresent()) {
-
-            Optional<UserSystemProcess> userProcessOptional = userSystemProcessRepository.findUserProcessByUserUserAndProcess(user.get(), process.get());
-
-            if (userProcessOptional.isPresent()) {
-                UserSystemProcess userSystemProcess = userProcessOptional.get();
-                userSystemProcess.setText(opinionDTO.getText());
-                userSystemProcess.setCreatedAt(opinionDTO.getCreatedAt());
-                return userSystemProcessRepository.save(userSystemProcess);
-            }
-
-        }
-        throw new UserProcessNotFoundException("Problem finding user link with process");
-    }
-
-    public List<UserSystemProcess> getOpinionsByProcess(Long idProcess) {
-        Optional<Process> process = Optional.of(this.searchById(idProcess));
-
-        if (process.isPresent()) {
-            List<UserSystemProcess> userSystemProcesses = userSystemProcessRepository.findAllByUserSystemProcessIdProcessAndTextNotNull(process.get());
-            return userSystemProcesses;
-        }
-        return new ArrayList<UserSystemProcess>();
-    }
 }

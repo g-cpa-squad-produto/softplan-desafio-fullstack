@@ -1,18 +1,20 @@
 import React, {Component} from 'react';
 import './App.css';
-import Home from './pages/Home';
+import {getCurrentUser} from "./utils/api";
 import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
+import {ACCESS_TOKEN} from "./utils/constants";
+
+import AppNavbar from "./fragments/AppNavbar";
+import Footer from "./fragments/Footer";
+
+import PrivateRoute from "./utils/PrivateRoute";
+import Login from "./pages/auth/Login";
+import Home from './pages/Home';
 import UserList from './pages/user/UserList';
 import UserEdit from "./pages/user/UserEdit";
 import ProcessList from "./pages/process/ProcessList";
 import ProcessEdit from "./pages/process/ProcessEdit";
-import ProcessUsers from "./pages/process/ProcessUsers";
-import Login from "./auth/Login";
-import AppNavbar from "./fragments/AppNavbar";
-import PrivateRoute from "./utils/PrivateRoute";
-import { ACCESS_TOKEN } from "./utils/constants";
-import { getCurrentUser } from "./utils/api";
-import Footer from "./fragments/Footer";
+import OpinionList from "./pages/opinions/OpinionList";
 
 class App extends Component {
 
@@ -34,17 +36,13 @@ class App extends Component {
                     isAuthenticated: true,
                     isLoading: false
                 });
-            }).catch(error => {
-            this.setState({
-                isLoading: false
-            });
+            }).finally(() => {
+            this.setState({isLoading: false, redirect: '/'});
         });
     };
 
     loadCurrentUser = () => {
-        this.setState({
-            isLoading: true
-        });
+        this.setState({isLoading: true});
         this.getCurrentUser();
     }
 
@@ -52,18 +50,17 @@ class App extends Component {
         this.loadCurrentUser();
     }
 
-    handleLogout = (redirectTo = "/login", notificationType = "success", description = "Logout efetuado.") => {
+    handleLogout = () => {
         localStorage.removeItem(ACCESS_TOKEN);
         this.setState({
             currentUser: null,
-            isAuthenticated: false
+            isAuthenticated: false,
+            redirect: "/login"
         });
-        this.setState({redirect: redirectTo});
     }
 
     handleLogin = () => {
         this.loadCurrentUser();
-        this.setState({redirect: '/'});
     }
 
     render() {
@@ -74,56 +71,55 @@ class App extends Component {
         }
         return (
             <Router>
-                { this.state.redirect && <Redirect to={this.state.redirect}/> }
+                {this.state.redirect && <Redirect to={this.state.redirect}/>}
                 <AppNavbar
                     isAuthenticated={this.state.isAuthenticated}
                     currentUser={this.state.currentUser}
-                    handleLogout={this.handleLogout} />
+                    handleLogout={this.handleLogout}/>
                 <div className="mb-5 pb-5">
                     <Switch>
-                        <Route
-                            path='/'
+                        <PrivateRoute
+                            authenticated={this.state.isAuthenticated}
+                            currentUser={this.state.currentUser}
+                            path="/"
                             exact={true}
-                            render={
-                                (props) => <Home isAuthenticated={this.state.isAuthenticated}
-                                                 currentUser={this.state.currentUser}
-                                                 handleLogout={this.handleLogout} {...props} />}/>
+                            component={Home}/>
                         <PrivateRoute
                             authenticated={this.state.isAuthenticated}
                             currentUser={this.state.currentUser}
                             path="/users"
                             exact={true}
-                            component={UserList} />
+                            component={UserList}/>
                         <PrivateRoute
                             authenticated={this.state.isAuthenticated}
                             currentUser={this.state.currentUser}
                             path="/users/:id"
                             exact={true}
-                            component={UserEdit} />
+                            component={UserEdit}/>
                         <PrivateRoute
                             authenticated={this.state.isAuthenticated}
                             currentUser={this.state.currentUser}
                             path="/process"
                             exact={true}
-                            component={ProcessList} />
+                            component={ProcessList}/>
                         <PrivateRoute
                             authenticated={this.state.isAuthenticated}
                             currentUser={this.state.currentUser}
                             path="/process/:id"
                             exact={true}
-                            component={ProcessEdit} />
+                            component={ProcessEdit}/>
                         <PrivateRoute
                             authenticated={this.state.isAuthenticated}
                             currentUser={this.state.currentUser}
-                            path="/process/users/:id"
+                            path="/opinions/process/:id"
                             exact={true}
-                            component={ProcessUsers} />
+                            component={OpinionList}/>
                         <Route
                             path="/login"
                             render={(props) => <Login onLogin={this.handleLogin} {...props} />}/>
                     </Switch>
                 </div>
-                <Footer />
+                <Footer/>
             </Router>
         )
     }

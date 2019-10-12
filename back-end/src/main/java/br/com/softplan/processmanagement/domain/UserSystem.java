@@ -1,6 +1,7 @@
 package br.com.softplan.processmanagement.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -30,9 +31,8 @@ public class UserSystem implements Serializable {
     private List<Process> processesCreated;
 
     @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "app_usersystem_process", joinColumns = @JoinColumn(name = "id_user"), inverseJoinColumns = @JoinColumn(name = "id_process"))
-    private List<Process> processes;
+    @OneToMany(mappedBy = "userSystem", fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Opinion> opinions;
 
     public UserSystem() {
     }
@@ -80,12 +80,12 @@ public class UserSystem implements Serializable {
         this.type = type;
     }
 
-    public List<Process> getProcesses() {
-        return processes;
+    public List<Opinion> getOpinions() {
+        return opinions;
     }
 
-    public void setProcesses(List<Process> processes) {
-        this.processes = processes;
+    public void setOpinions(List<Opinion> opinions) {
+        this.opinions = opinions;
     }
 
     public List<Process> getProcessesCreated() {
@@ -103,4 +103,6 @@ public class UserSystem implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
+
 }
