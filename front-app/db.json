@@ -1,0 +1,67 @@
+{
+  "usuario": [
+    {
+      "nome": "teste3",
+      "email": "watching",
+      "senha": "Drama",
+      "tipo": " sasassok",
+      "id": 2
+    },
+    {
+      "nome": "sasa",
+      "email": "sasa",
+      "senha": "sasas",
+      "tipo": "triador",
+      "id": 3
+    }
+  ],
+  "series": [
+    {
+      "name": "teste3",
+      "status": "watching",
+      "genre": "Drama",
+      "comments": " sasassok",
+      "id": 2
+    },
+    {
+      "id": 3,
+      "name": "Acaookokokoko",
+      "status": "watching",
+      "genre": "Drama",
+      "comments": " sasajjjj"
+    },
+    {
+      "name": "teste3",
+      "status": "watched",
+      "genre": "Comédia",
+      "comments": "Very",
+      "id": 4
+    },
+    {
+      "name": "teste3",
+      "status": "watching",
+      "genre": "Comédia",
+      "comments": "great",
+      "id": 5
+    },
+    {
+      "name": "teste3",
+      "status": "watching",
+      "genre": "Drama",
+      "comments": " sasassok",
+      "id": 6
+    },
+    {
+      "name": "teste 4",
+      "status": "watched",
+      "genre": "Comédia",
+      "comments": " sasa",
+      "id": 7
+    }
+  ],
+  "genres": [
+    "Comédia",
+    "Drama",
+    "Ação"
+  ]
+}
