@@ -13,6 +13,7 @@ export const loadUsuarios = () => api.get('usuarios')
 export const saveUsuario = (newUsuario) => api.post('usuarios', newUsuario)
 export const updateUsuario= (usuario) => api.put('usuarios/'+usuario.id, usuario)
 export const deleteUsuario = (id) => api.delete('usuarios/' + id)
+export const loginByUserAndPass = (email,senha) => api.get('usuarios?email=' + email+'&?senha='+senha)
 export const saveProcesso = (newProcesso) => api.post('processos', newProcesso)
 export const loadProcessos = () => api.get('processos')
 export const loadProcessoById = (id) => api.get('processos/'+id)
@@ -35,6 +36,7 @@ const apis = {
     saveUsuario,
     updateUsuario,
     deleteUsuario,
+    loginByUserAndPass,
     saveProcesso,
     loadProcessos,
     loadProcessoById,

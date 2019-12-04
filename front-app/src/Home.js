@@ -128,6 +128,8 @@ const useStyles = makeStyles(theme => ({
 export default function Dashboad() {
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
+    const [logado, setLogado] = React.useState(false);
+
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -137,6 +139,7 @@ export default function Dashboad() {
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
     return (
+        { logado:true &&
         <div className={classes.root}>
             <CssBaseline />
             <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
@@ -194,5 +197,8 @@ export default function Dashboad() {
                 </Container>
             </main>
         </div>
+        }
+        
+
     );
 }

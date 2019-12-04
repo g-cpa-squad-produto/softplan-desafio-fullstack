@@ -28,6 +28,7 @@ import Processos from './Processos'
 import Dashboard from './Dashboad';
 import Parecer from './Parecer';
 import NewProcesso from './NewProcesso';
+import SignIn from './SignIn';
 
 
 function Copyright() {
@@ -35,7 +36,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+        Gerenciador de processos online
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -125,7 +126,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-export default function App() {
+
+function LayoutPrincipal(){
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -196,4 +198,21 @@ export default function App() {
       </main>
     </div>
   );
+}
+
+export default function App() {
+  console.log('app'+ localStorage.getItem('gerenciador-processo-online/isLogado'))
+  if (localStorage.getItem('gerenciador-processo-online/isLogado')==='true'){
+    console.log('true')
+    return (
+      <LayoutPrincipal />
+      )
+  } else if (localStorage.getItem('gerenciador-processo-online/isLogado')==='false') {
+    console.log('false')
+
+    return (
+      <SignIn />
+      )
+  }
+
 }
