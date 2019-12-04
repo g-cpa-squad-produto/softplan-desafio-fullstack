@@ -9,7 +9,7 @@ const statuses = {
     'toWatch': 'Assistir'
 }
 
-class Series extends Component {
+class Usuarios extends Component {
     constructor(props) {
         super(props)
 
@@ -92,4 +92,4 @@ class Series extends Component {
     }
 }
 
-export default Series
+export default Usuarios

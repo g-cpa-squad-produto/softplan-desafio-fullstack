@@ -21,11 +21,14 @@ import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems } from './listItems';
+import { mainListItems } from './ListItems';
 import EditUsuario from './EditUsuario'
-import Series from './Series'
+import Usuarios from './Usuarios'
+import Processos from './Processos'
 import Dashboard from './Dashboad';
-import NewUsuario from './NewUsuario';
+import Parecer from './Parecer';
+import NewProcesso from './NewProcesso';
+
 
 function Copyright() {
   return (
@@ -42,7 +45,7 @@ function Copyright() {
 
 const drawerWidth = 240;
 
- const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
   },
@@ -179,9 +182,11 @@ export default function App() {
           <Router>
             <Route exact path='/' component={Dashboard} />
             <Route path='/series-edit/:id' component={EditUsuario} />
-            <Route path='/series/:genre' component={Series} />
-            <Route exact path='/new' component={NewUsuario} />
 
+            <Route path='/usuarios' component={Usuarios} />
+            <Route path='/processos' component={Processos} />
+            <Route path='/new-processo' component={NewProcesso} />
+            <Route path='/realizar-parecer/:idProcesso' component={Parecer} />
           </Router>
 
           <Box pt={4}>
