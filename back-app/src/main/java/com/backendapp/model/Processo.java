@@ -22,7 +22,7 @@ public class Processo {
     @Column(name="data_criacao")
     private Date dataCriacao;
     @OneToOne
-    private Parecer Parecer;
+    private Parecer parecer;
     @ManyToMany(mappedBy = "processosAptoParecer")
     private List<Usuario> usuariosAptoParecer;
 

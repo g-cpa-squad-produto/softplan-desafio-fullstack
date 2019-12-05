@@ -197,7 +197,7 @@ export default function SignIn() {
                 setNaoEncontrado(true)
             } else if (usuario.data.id !== null){
                 console.log('logou')
-                localStorage.setItem('gerenciador-processo-online/usuario', usuario)
+                localStorage.setItem('gerenciador-processo-online/idUsuario', usuario.data.id)
                 localStorage.setItem('gerenciador-processo-online/isLogado', 'true')
             }
 

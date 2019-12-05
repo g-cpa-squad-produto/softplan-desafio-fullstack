@@ -12,4 +12,5 @@ public class ParecerDTO {
 
     private String texto;
     private Long idProcesso;
+    private Long idUsuario;
 }

@@ -36,7 +36,14 @@ class Parecer extends Component {
 
     saveParecer = (e) => {
         e.preventDefault();
-        let parecer = { texto: this.state.texto };
+        
+        console.log(localStorage.getItem('gerenciador-processo-online/idUsuario'))
+        
+        
+        let parecer = { texto: this.state.texto, 
+            idProcesso: this.state.processo.id,
+            idUsuario: localStorage.getItem('gerenciador-processo-online/idUsuario')
+        };
         api.saveParecer(parecer).then(
             (res) => {
                 this.setState({

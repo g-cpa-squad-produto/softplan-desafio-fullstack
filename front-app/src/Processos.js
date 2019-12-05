@@ -94,23 +94,24 @@ class Processos extends Component {
                                 <TableCell >{row.data}</TableCell>
                                 <TableCell component="th" scope="row">{row.descricao}</TableCell>
                                 {
-                                 row.idParecer !== undefined &&
-                                 <TableCell component="th" scope="row">Parecer realizado</TableCell>
+                                    JSON.stringify(row.parecer.id) !== undefined &&
+                                    <TableCell component="th" scope="row">Parecer realizado</TableCell>
 
                                 }
-                                                                {
-                                 row.idParecer === undefined &&
-                                 <TableCell component="th" scope="row">Parecer pendente</TableCell>
-
-                                }
-                               
                                 {
-                                    row.idParecer === undefined &&
+                                    JSON.stringify(row.parecer.id) === undefined &&
+                                    <TableCell component="th" scope="row">Parecer pendente</TableCell>
+
+                                }
+
+                                {
+
+                                    JSON.stringify(row.parecer.id) === undefined &&
                                     <div className="col-xs-12 col-md-12">
                                         {/* Criar lógica para aparecer somente quando não tiver parecer, se tiver mostra opção para ver o texto */}
                                         <Link className="btn btn-success" to={'/realizar-parecer/' + row.id}>Realizar parecer</Link>
                                         {/* Sumir essa opção quando tiver um parecer*/}
-                                        <Link className="btn btn-warning" to={'/realizar-parecer/' + row.id}>Atribuir usuário</Link>
+                                        <Link className="btn btn-warning" to={''}>Atribuir usuário</Link>
                                     </div>
                                 }
 
