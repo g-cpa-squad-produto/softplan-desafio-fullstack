@@ -1,0 +1,1 @@
+insert into usuario values (1,'geo@email', 'geo','123','administrador');

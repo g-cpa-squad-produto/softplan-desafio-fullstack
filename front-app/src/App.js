@@ -127,7 +127,7 @@ const useStyles = makeStyles(theme => ({
 
 
 
-function LayoutPrincipal(){
+function LayoutPrincipal() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -201,18 +201,22 @@ function LayoutPrincipal(){
 }
 
 export default function App() {
-  console.log('app'+ localStorage.getItem('gerenciador-processo-online/isLogado'))
-  if (localStorage.getItem('gerenciador-processo-online/isLogado')==='true'){
+  if (localStorage.getItem('gerenciador-processo-online/isLogado') === null ||
+    localStorage.getItem('gerenciador-processo-online/isLogado') === undefined
+  ) {
+    localStorage.setItem('gerenciador-processo-online/isLogado', 'false')
+  }
+  if (localStorage.getItem('gerenciador-processo-online/isLogado') === 'true') {
     console.log('true')
     return (
       <LayoutPrincipal />
-      )
-  } else if (localStorage.getItem('gerenciador-processo-online/isLogado')==='false') {
+    )
+  } else if (localStorage.getItem('gerenciador-processo-online/isLogado') === 'false') {
     console.log('false')
 
     return (
       <SignIn />
-      )
+    )
   }
 
 }

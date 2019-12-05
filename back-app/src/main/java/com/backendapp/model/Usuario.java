@@ -4,10 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,5 +19,12 @@ public class Usuario {
     private String email;
     private String senha;
     private String tipo;
+    @ManyToMany
+    @JoinTable(name="Usuario_Parecer_Processo",
+    joinColumns = @JoinColumn(name="usuario_id"),
+            inverseJoinColumns = @JoinColumn(name="processo_id")
+    )
+    private List<Processo> processosAptoParecer;
+
 
 }
