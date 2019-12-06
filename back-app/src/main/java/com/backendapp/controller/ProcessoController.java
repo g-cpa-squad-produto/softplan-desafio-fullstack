@@ -5,6 +5,7 @@ import com.backendapp.repository.ProcessoRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -30,6 +31,7 @@ public class ProcessoController {
 
     @PostMapping
     public Processo create(@RequestBody Processo processo){
+        processo.setDataCriacao(LocalDate.now());
         return repository.save(processo);
     }
 

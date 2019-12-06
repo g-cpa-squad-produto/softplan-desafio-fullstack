@@ -189,15 +189,12 @@ export default function SignIn() {
     function login() {  
 
         api.loginByUserAndPass(email, senha).then((res) => {
-            console.log('requisitou ')
             const usuario = JSON.parse(JSON.stringify(res))
-            console.log('usuario '+usuario)
             if (usuario.data.id === null ){
-                console.log('nao logou')
                 setNaoEncontrado(true)
             } else if (usuario.data.id !== null){
-                console.log('logou')
                 localStorage.setItem('gerenciador-processo-online/idUsuario', usuario.data.id)
+                localStorage.setItem('gerenciador-processo-online/tipoUsuario', usuario.data.tipo)
                 localStorage.setItem('gerenciador-processo-online/isLogado', 'true')
             }
 

@@ -20,15 +20,15 @@ import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { mainListItems } from './ListItems';
-import EditUsuario from './EditUsuario'
-import Usuarios from './Usuarios'
-import Processos from './Processos'
-import Dashboard from './Dashboad';
-import Parecer from './Parecer';
-import NewProcesso from './NewProcesso';
+import Usuarios from './usuario/Usuarios'
+import Processos from './processo/Processos'
+import Dashboard from './dashboard/Dashboad';
+import Parecer from './processo/Parecer';
+import NewProcesso from './processo/NewProcesso';
 import SignIn from './SignIn';
+import AtribuirUsuario from './processo/AtribuirUsuario';
 
 
 function Copyright() {
@@ -136,6 +136,15 @@ function LayoutPrincipal() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const sair = () => {
+    console.log('saiiir')
+    localStorage.setItem('gerenciador-processo-online/tipoUsuario', '')
+    localStorage.setItem('gerenciador-processo-online/isLogado', 'false')
+    localStorage.setItem('gerenciador-processo-online/idUsuario', '')
+    window.location.reload();
+
+  };
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
@@ -155,10 +164,12 @@ function LayoutPrincipal() {
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
             Gerenciador de processos
           </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
+          <IconButton color="inherit" onClick={sair}>
+            Sair&nbsp;
+          <ExitToAppIcon />
+
+            {/*             <Badge badgeContent={4} color="secondary">
+            </Badge> */}
           </IconButton>
         </Toolbar>
       </AppBar>
@@ -182,14 +193,18 @@ function LayoutPrincipal() {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Router>
-            <Route exact path='/' component={Dashboard} />
-            <Route path='/series-edit/:id' component={EditUsuario} />
+            {localStorage.getItem('gerenciador-processo-online/tipoUsuario') === 'administrador' &&
+              <div>
+                <Route exact path='/' component={Dashboard} />
+                <Route path='/usuarios' component={Usuarios} />
+              </div>
 
-            <Route path='/usuarios' component={Usuarios} />
+            }
             <Route path='/processos' component={Processos} />
             <Route path='/new-processo' component={NewProcesso} />
-            <Route path='/realizar-parecer/:idProcesso' component={Parecer} />
-          </Router>
+            <Route path='/parecer/:idProcesso' component={Parecer} />
+            {/*             <Route path='/atribuir-usuario/:idProcesso' component={AtribuirUsuario} />
+ */}          </Router>
 
           <Box pt={4}>
             <Copyright />
@@ -207,13 +222,10 @@ export default function App() {
     localStorage.setItem('gerenciador-processo-online/isLogado', 'false')
   }
   if (localStorage.getItem('gerenciador-processo-online/isLogado') === 'true') {
-    console.log('true')
     return (
       <LayoutPrincipal />
     )
   } else if (localStorage.getItem('gerenciador-processo-online/isLogado') === 'false') {
-    console.log('false')
-
     return (
       <SignIn />
     )

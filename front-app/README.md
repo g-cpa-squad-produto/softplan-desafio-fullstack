@@ -1,68 +1,61 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Desafio implementador fullstack
 
-## Available Scripts
+### Desafio
+- Desenvolver uma aplicação web responsável por gerenciar processos.
+- *Soluções parcias serão aceitas.*
+- Visão de administrador
+	- Incluir, excluir, atualizar e visualizar usuários,
+- Visão de usuário-triador
+	- Incluir e visualizar processos,
+	- Atribuir um ou mais usuários a realizar um parecer sobre um processo,
+- Visão de usuário-finalizador
+	- Visualizar processos pendentes de parecer.
+	- Incluir o parecer sobre o processo.
 
-In the project directory, you can run:
 
-### `yarn start`
+### Escopo do desafio
+- Documentar todas suposições realizadas.
+- Desenvolver os módulos de frontend e backend de forma separada.
+- O desenvolvimento do backend deve ser feito em Java.
+- O desenvolvimento do frontend pode utilizar JavaScript e qualquer framework ou ferramenta que suportem ou utilizem estas tecnologias.
+- Preferencialmente utilizar Spring Boot 1.5+ com toda sua stack para o desenvolvimento do backend.
+- Preferencialmente utilizar React para o desenvolvimento do frontend.
+- É aceitável utilizar algumas respostas estáticas em determinadas porções da aplicação.
+- Não é necessário submeter uma aplicação que cumpra cada um dos requisitos descritos, mas o que for submetido deve funcionar.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# Desenvolvimento
+### Bibliotecas Utilizadas
+- Material-ui
+- Axios
+- Material-table
+- React
+- React-dom
+- React-router-dom
+- React-scripts
+- Recharts
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### Funcionalidades implementadas
+- Administrador pode:
+	- Incluir, excluir, atualizar e visualizar usuários
+	- Incluir e visualizar processos
+	- Visualizar a descrição do parecer do processo e qual o usuário que fez o parecer
+	- Visualizar um dashboard que mostra um gráfico com número de processos incluidos por hora e os processos adicionados recentemente (TODOS ESSES DADOS DO DASHBOAD SÃO MOCKS)
+- Usuário Triador pode:
+	- Incluir processos
+- Usuário finalizador pode:
+	- Visualizar os processos;
+	- Escrever pareceres sobre os processos
+	- Visualizar a descrição do parecer do processo e qual o usuário que fez o parecer
 
-### `yarn test`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Recursos
+- Para consulta da api do back-end, foi utilizada a api Axios
+- Para rodar a aplicação manualmente a partir da raiz do front-end, executar os comandos
+ - Se utilizar o yarn:
+	- yarn install
+	- yarn start
+ - Ou então:
+	- npm install
+	- npm start
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify

@@ -1,6 +1,8 @@
 package com.backendapp.controller;
 
+import com.backendapp.model.Parecer;
 import com.backendapp.model.Usuario;
+import com.backendapp.repository.ParecerRepository;
 import com.backendapp.repository.UsuarioRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +13,7 @@ import java.util.List;
 @RequestMapping({"/usuarios"})
 public class UsuarioController {
     private UsuarioRepository repository;
+
 
     UsuarioController(UsuarioRepository usuarioRepository) {
         this.repository = usuarioRepository;
@@ -56,4 +59,5 @@ public class UsuarioController {
                     return ResponseEntity.ok().build();
                 }).orElse(ResponseEntity.notFound().build());
     }
+
 }

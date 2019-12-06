@@ -21,15 +21,8 @@ import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { mainListItems, secondaryListItems } from './listItems';
-//import Chart from './Chart';
-import Deposits from './Deposits';
-import Orders from './Orders';
-import Home from './Home'
-import NewSeries from './NewSeries'
-import EditSeries from './EditSeries'
-import Series from './Series'
 
 function Copyright() {
     return (

@@ -9,6 +9,7 @@ import com.backendapp.repository.UsuarioRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +38,7 @@ public class ParecerController {
                 .map(record -> {
 
                     Parecer parecer = new Parecer();
+                    parecer.setDataCriacao(LocalDate.now());
                     parecer.setTexto(parecerDTO.getTexto());
                     parecer.setUsuario(usuarioRepository.findById(parecerDTO.getIdUsuario()).get());
                     repository.save(parecer);

@@ -8,7 +8,7 @@ import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import Box from '@material-ui/core/Box';
 
 
-import api from './Api'
+import api from './../Api'
 
 
 class NewProcesso extends Component {
@@ -19,9 +19,29 @@ class NewProcesso extends Component {
             codigo: '',
             descricao: '',
             message: null,
-            redirect: false
+            redirect: false,
+            errors: {}
         }
         this.saveProcesso = this.saveProcesso.bind(this);
+    }
+
+
+    handleValidation() {
+        let errors = {};
+        let formIsValid = true;
+
+        //Codigo
+        if (!this.state.codigo) {
+            formIsValid = false;
+            errors["codigo"] = "Não pode ser vazio";
+        }
+        if (!this.state.descricao) {
+            formIsValid = false;
+            errors["descricao"] = "Não pode ser vazio";
+        }
+
+        this.setState({ errors: errors });
+        return formIsValid;
     }
 
     onChange = (e) =>
@@ -29,22 +49,22 @@ class NewProcesso extends Component {
 
     saveProcesso = (e) => {
         e.preventDefault();
-        let processo = {
-            codigo: this.state.codigo,
-            descricao: this.state.descricao
-        };
-        console.log('processo' + processo.codigo)
+        if (this.handleValidation()) {
+            let processo = {
+                codigo: this.state.codigo,
+                descricao: this.state.descricao
+            };
+            api.saveProcesso(processo).then(
+                (res) => {
+                    this.setState({
+                        message: 'Processo criado com sucesso!',
+                        redirect: '/processos'
+                    })
+                }
 
+            )
+        }
 
-        api.saveProcesso(processo).then(
-            (res) => {
-                this.setState({
-                    message: 'Processo criado com sucesso!',
-                    redirect: '/processos'
-                })
-            }
-
-        )
     }
 
     render() {
@@ -54,20 +74,26 @@ class NewProcesso extends Component {
                     <Redirect to={this.state.redirect} />
                 }
                 <Typography variant="h4" style={style}>Criação de processo</Typography>
-                <form>
+                <form noValidate>
                     <TextField placeholder="Código do processo"
+                        required={true}
                         fullWidth
                         margin="normal"
                         name="codigo"
+                        type="number"
                         value={this.state.codigo}
                         onChange={this.onChange} />
-
+                    <span style={{ color: "red" }}>{this.state.errors["codigo"]}</span>
+                    <br />
                     <TextField placeholder="Descrição"
+                        required
                         fullWidth
                         margin="normal"
                         name="descricao"
                         value={this.state.descricao}
                         onChange={this.onChange} />
+                    <span style={{ color: "red" }}>{this.state.errors["descricao"]}</span>
+                    <br />
                     <Box display="flex" justifyContent="center" m={1} p={1} bgcolor="background.paper">
                         <Button justifyContent="center" style={{ width: '70%' }} variant="contained" color="primary" onClick={this.saveProcesso}>Salvar</Button>
                     </Box>

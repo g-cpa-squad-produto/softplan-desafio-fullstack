@@ -4,9 +4,9 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 
-//import Chart from './Chart';
-import Deposits from './Deposits';
-import Orders from './Orders';
+import Chart from './Chart';
+import ProcessosRecentes from './ProcessosRecentes';
+import ListaProcessosRecentes from './ListaProcessosRecentes';
 
 const drawerWidth = 240;
 
@@ -99,19 +99,19 @@ export default function Dashboard() {
             {/* Chart */}
             <Grid item xs={12} md={8} lg={9}>
                 <Paper className={fixedHeightPaper}>
-                    {/* <Chart /> */}
+                <Chart />
                 </Paper>
             </Grid>
-            {/* Recent Deposits */}
+            {/* Processos ProcessosRecentes */}
             <Grid item xs={12} md={4} lg={3}>
                 <Paper className={fixedHeightPaper}>
-                    <Deposits />
+                    <ProcessosRecentes />
                 </Paper>
             </Grid>
-            {/* Recent Orders */}
+            {/* Lista de Processos ProcessosRecentes */}
             <Grid item xs={12}>
                 <Paper className={classes.paper}>
-                    <Orders />
+                    <ListaProcessosRecentes />
                 </Paper>
             </Grid>
         </Grid>

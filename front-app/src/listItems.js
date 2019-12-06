@@ -12,18 +12,24 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 
 export const mainListItems = (
   <div>
-    <ListItem button component="a" href="/">
-      <ListItemIcon >
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText primary="Dashboard" />
-    </ListItem>
-    <ListItem button component="a" href="/usuarios">
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Usuários" />
-    </ListItem>
+    {localStorage.getItem('gerenciador-processo-online/tipoUsuario') === 'administrador' &&
+      <div>
+        <ListItem button component="a" href="/">
+          <ListItemIcon >
+            <DashboardIcon />
+          </ListItemIcon>
+          <ListItemText primary="Dashboard" />
+        </ListItem>
+        <ListItem button component="a" href="/usuarios">
+          <ListItemIcon>
+            <PeopleIcon />
+          </ListItemIcon>
+          <ListItemText primary="Usuários" />
+        </ListItem>
+      </div>
+    }
+
+
     <ListItem button component="a" href="/processos">
       <ListItemIcon>
         <LayersIcon />

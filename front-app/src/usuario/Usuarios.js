@@ -1,7 +1,7 @@
 import React from 'react';
 import MaterialTable from 'material-table';
 
-import api from './Api'
+import api from './../Api'
 
 
 export default function Usuarios() {
@@ -104,14 +104,14 @@ export default function Usuarios() {
             });
 
 
-            setTimeout(() => {
+/*             setTimeout(() => {
               resolve();
               setState(prevState => {
                 const data = [...prevState.data];
                 data.splice(data.indexOf(oldData), 1);
                 return { ...prevState, data };
               });
-            }, 600);
+            }, 600); */
           }),
       }}
     />
