@@ -1,0 +1,20 @@
+spring:
+  flyway:
+    enabled: false
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${URL_DATABASE}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+    hikari:
+      maximum-pool-size: 20
+      idle-timeout: 30000
+      connection-timeout: 30000
+      max-lifetime: 1800000
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        temp.use_jdbc_metadata_defaults: false
+    hibernate:
+      ddl-auto: none

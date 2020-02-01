@@ -1,0 +1,14 @@
+logging:
+  level:
+    springfox.documentation.*: warn
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: 
+  flyway:
+    enabled: false
+    out-of-order: true
+  h2:
+    console:
+      enabled: true

@@ -1,0 +1,33 @@
+logging:
+  level:
+    br.com.sofplan.processos: debug
+spring:
+  flyway:
+    enabled: false
+  datasource:
+    url: ${URL_DATABASE:jdbc:postgresql://localhost:5432/processos}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+    hikari:
+      maximum-pool-size: 10
+      idle-timeout: 30000
+      connection-timeout: 30000
+      max-lifetime: 1800000
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        temp.use_jdbc_metadata_defaults: false
+
+
+#        format_sql: true
+#      javax:
+#        persistence:
+#          schema-generation:
+#            create-source: metadata
+#            scripts:
+#              action: create
+#              create-target: create.sql
