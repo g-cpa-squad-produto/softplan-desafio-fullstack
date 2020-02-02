@@ -3,7 +3,7 @@ logging:
     br.com.sofplan.processos: debug
 spring:
   flyway:
-    enabled: false
+    enabled: true
   datasource:
     url: ${URL_DATABASE:jdbc:postgresql://localhost:5432/processos}
     username: ${DATABASE_USERNAME}
