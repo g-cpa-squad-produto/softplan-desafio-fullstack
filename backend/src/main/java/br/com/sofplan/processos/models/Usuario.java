@@ -25,6 +25,9 @@ public class Usuario implements Serializable {
 	
     @Column(length = 100, unique = true, nullable = false)
     private String email;
+
+    @Column(length = 50, nullable = false)
+    private String senha;
     
     @Column(length = 100, nullable = false)
     private String primeiroNome;
@@ -50,6 +53,14 @@ public class Usuario implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	public String getPrimeiroNome() {
