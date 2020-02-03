@@ -20,6 +20,15 @@ public class ProcessoUsuarioID implements Serializable {
 	@JoinColumn(name = "usuario_id")
 	private Usuario responsavel;
 
+	public ProcessoUsuarioID() {
+		super();
+	}
+	
+	public ProcessoUsuarioID(Processo processo, Usuario responsavel) {
+		this.processo = processo;
+		this.responsavel = responsavel;
+	}
+
 	public Processo getProcesso() {
 		return processo;
 	}

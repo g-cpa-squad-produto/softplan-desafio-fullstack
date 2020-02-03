@@ -24,6 +24,17 @@ public class ProcessoUsuario implements Serializable {
 	
 	private OffsetDateTime dataCriacao;
 
+	public ProcessoUsuario() {
+		super();
+	}
+	
+	public ProcessoUsuario(ProcessoUsuarioID id, Usuario criadoPor, OffsetDateTime dataCriacao) {
+		super();
+		this.id = id;
+		this.criadoPor = criadoPor;
+		this.dataCriacao = dataCriacao;
+	}
+
 	public ProcessoUsuarioID getId() {
 		return id;
 	}
