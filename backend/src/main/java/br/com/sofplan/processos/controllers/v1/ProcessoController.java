@@ -32,7 +32,7 @@ public class ProcessoController {
 	public List<ProcessoDTO> find() {
 		return processoService.find();
 	}
-	
+
 	@GetMapping("/{id}")
 	public ProcessoDTO findById(@PathVariable Long id) {
 		return processoService.findById(id);
@@ -51,5 +51,15 @@ public class ProcessoController {
 	@DeleteMapping("/{id}")
 	public ProcessoDTO delete(@PathVariable Long id) {
 		return processoService.delete(id);
+	}
+
+	@PostMapping("/{processoId}/responsaveis/{usuarioId}")
+	public void addResponsavel(@PathVariable Long processoId, @PathVariable Long usuarioId) {
+		processoService.addResponsavel(processoId, usuarioId);
+	}
+
+	@DeleteMapping("/{processoId}/responsaveis/{usuarioId}")
+	public void deleteResponsavel(@PathVariable Long processoId, @PathVariable Long usuarioId) {
+		processoService.deleteResponsavel(processoId, usuarioId);
 	}
 }

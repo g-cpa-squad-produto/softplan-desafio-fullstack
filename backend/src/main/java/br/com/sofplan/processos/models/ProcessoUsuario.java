@@ -17,19 +17,24 @@ public class ProcessoUsuario implements Serializable {
 
 	@EmbeddedId
 	private ProcessoUsuarioID id;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "criado_por")
 	private Usuario criadoPor;
-	
+
 	private OffsetDateTime dataCriacao;
 
 	public ProcessoUsuario() {
 		super();
 	}
-	
+
+	public ProcessoUsuario(Processo processo, Usuario responsavel, Usuario criadoPor, OffsetDateTime dataCriacao) {
+		this.id = new ProcessoUsuarioID(processo, responsavel);
+		this.criadoPor = criadoPor;
+		this.dataCriacao = dataCriacao;
+	}
+
 	public ProcessoUsuario(ProcessoUsuarioID id, Usuario criadoPor, OffsetDateTime dataCriacao) {
-		super();
 		this.id = id;
 		this.criadoPor = criadoPor;
 		this.dataCriacao = dataCriacao;
@@ -58,5 +63,5 @@ public class ProcessoUsuario implements Serializable {
 	public void setDataCriacao(OffsetDateTime dataCriacao) {
 		this.dataCriacao = dataCriacao;
 	}
-	
+
 }
