@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,9 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.sofplan.processos.dto.v1.ParecerDTO;
 import br.com.sofplan.processos.dto.v1.ProcessoDTO;
+import br.com.sofplan.processos.services.ParecerService;
 import br.com.sofplan.processos.services.ProcessoService;
 import io.swagger.annotations.Api;
 
@@ -23,9 +27,11 @@ import io.swagger.annotations.Api;
 public class ProcessoController {
 
 	private final ProcessoService processoService;
+	private final ParecerService parecerService;
 
-	public ProcessoController(ProcessoService processoService) {
+	public ProcessoController(ProcessoService processoService, ParecerService parecerService) {
 		this.processoService = processoService;
+		this.parecerService = parecerService;
 	}
 
 	@GetMapping
@@ -39,6 +45,7 @@ public class ProcessoController {
 	}
 
 	@PostMapping
+	@ResponseStatus(code = HttpStatus.CREATED)
 	public ProcessoDTO create(@RequestBody @Valid ProcessoDTO request) {
 		return processoService.create(request);
 	}
@@ -49,17 +56,44 @@ public class ProcessoController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ProcessoDTO delete(@PathVariable Long id) {
-		return processoService.delete(id);
+	@ResponseStatus(code = HttpStatus.NO_CONTENT)
+	public void delete(@PathVariable Long id) {
+		processoService.delete(id);
 	}
 
-	@PostMapping("/{processoId}/responsaveis/{usuarioId}")
-	public void addResponsavel(@PathVariable Long processoId, @PathVariable Long usuarioId) {
+	@PostMapping("/{id}/responsaveis/{usuarioId}")
+	@ResponseStatus(code = HttpStatus.NO_CONTENT)
+	public void addResponsavel(@PathVariable("id") Long processoId, @PathVariable Long usuarioId) {
 		processoService.addResponsavel(processoId, usuarioId);
 	}
 
-	@DeleteMapping("/{processoId}/responsaveis/{usuarioId}")
-	public void deleteResponsavel(@PathVariable Long processoId, @PathVariable Long usuarioId) {
+	@DeleteMapping("/{id}/responsaveis/{usuarioId}")
+	@ResponseStatus(code = HttpStatus.NO_CONTENT)
+	public void deleteResponsavel(@PathVariable("id") Long processoId, @PathVariable Long usuarioId) {
 		processoService.deleteResponsavel(processoId, usuarioId);
 	}
+	
+	@GetMapping("/{id}/parecer")
+	public ParecerDTO findParecer(@PathVariable Long id) {
+		return parecerService.findById(id);
+	}
+	
+	@PostMapping("/{id}/parecer")
+	@ResponseStatus(code = HttpStatus.CREATED)
+	public ParecerDTO createParecer(@PathVariable Long id, ParecerDTO request) {
+		request.setId(id);
+		return parecerService.create(request);
+	}
+
+	@PutMapping("/{id}/parecer")
+	public ParecerDTO updateParecer(@PathVariable Long id, ParecerDTO request) {
+		return parecerService.update(id, request);
+	}
+
+	@DeleteMapping("/{id}/parecer")
+	@ResponseStatus(code = HttpStatus.NO_CONTENT)
+	public void deleteParecer(@PathVariable Long id) {
+		parecerService.delete(id);
+	}
+	
 }
