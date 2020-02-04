@@ -2,10 +2,13 @@ package br.com.sofplan.processos.enums;
 
 import java.util.Arrays;
 
+import org.springframework.security.core.GrantedAuthority;
 
-public enum Role {
 
-    USER("USER"),
+public enum Role implements GrantedAuthority {
+
+    TRIADOR("TRIADOR"),
+    FINALIZADOR("FINALIZADOR"),
     ADMIN("ADMIN");
 
     private String authority;
@@ -19,7 +22,7 @@ public enum Role {
                 .findAny().orElseThrow(IllegalArgumentException::new);
     }
 
-//    @Override
+    @Override
     public String getAuthority() {
         return this.authority;
     }
