@@ -6,6 +6,8 @@ import java.util.Set;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Null;
 
+import br.com.sofplan.processos.enums.Situacao;
+
 public class ProcessoDTO {
 
 	@Null
@@ -27,6 +29,9 @@ public class ProcessoDTO {
 
 	@Null
 	private OffsetDateTime dataCriacao;
+	
+	@Null
+	private Situacao situacao;
 
 	public Long getId() {
 		return id;
@@ -82,6 +87,14 @@ public class ProcessoDTO {
 
 	public void setDataCriacao(OffsetDateTime dataCriacao) {
 		this.dataCriacao = dataCriacao;
+	}
+
+	public Situacao getSituacao() {
+		return situacao == null ? Situacao.PENDENTE : situacao;
+	}
+
+	public void setSituacao(Situacao situacao) {
+		this.situacao = situacao;
 	}
 	
 }
