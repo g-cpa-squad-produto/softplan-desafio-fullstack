@@ -2,7 +2,6 @@ package br.com.sofplan.processos.dto.v1;
 
 import java.time.OffsetDateTime;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
@@ -17,10 +16,6 @@ public class ParecerDTO {
 
 	@NotBlank
 	private String texto;
-
-	@NotNull
-	@Min(1)
-	private Long processoId;
 
 	@NotNull
 	private Situacao situacao;
@@ -46,14 +41,6 @@ public class ParecerDTO {
 
 	public void setTexto(String texto) {
 		this.texto = texto;
-	}
-
-	public Long getProcessoId() {
-		return processoId;
-	}
-
-	public void setProcessoId(Long processoId) {
-		this.processoId = processoId;
 	}
 
 	public Situacao getSituacao() {
