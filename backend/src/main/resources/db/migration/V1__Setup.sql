@@ -28,7 +28,7 @@
     create table tb_usuario (
        id  bigserial not null,
         email varchar(100) not null,
-        senha varchar(50) not null,
+        senha varchar(100) not null,
         perfil varchar(50),
         primeiro_nome varchar(100) not null,
         sobrenome varchar(100) not null,
