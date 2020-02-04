@@ -14,6 +14,7 @@ import br.com.sofplan.processos.models.Processo;
 public interface ProcessoMapper {
 
 	@Mapping(target = "responsaveis", ignore = true)
+	@Mapping(target = "situacao", source = "parecer.situacao")
 	ProcessoDTO toDTO(Processo processo);
 	
 	@Mapping(target = "responsaveis", ignore = true)
