@@ -14,3 +14,8 @@ spring:
   h2:
     console:
       enabled: true
+security:
+  jwt:
+    token:
+      secret-key: ${JWT_SECRET:90964ab7-bfe5-4f20-97d8-10178f188bd7}
+      expire-length: 3600000      
