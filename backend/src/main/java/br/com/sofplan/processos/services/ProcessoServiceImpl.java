@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.sofplan.processos.dto.v1.ProcessoDTO;
+import br.com.sofplan.processos.dto.v1.UsuarioDTO;
 import br.com.sofplan.processos.exceptions.NotFoundException;
 import br.com.sofplan.processos.mappers.ProcessoMapper;
 import br.com.sofplan.processos.mappers.UsuarioMapper;
@@ -54,14 +55,14 @@ public class ProcessoServiceImpl implements ProcessoService {
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public ProcessoDTO create(ProcessoDTO request) {
+	public ProcessoDTO create(ProcessoDTO request, UsuarioDTO usuarioJwt) {
 		// persist o processo
 		final Processo processo = processoMapper.fromDTO(request);
 		processoRepository.save(processo);
 
 		// cria os relacionamentos
 		if (request.getResponsaveis() != null) {
-			List<ProcessoUsuario> responsaveis = mapProcessoUsuario(request, processo);
+			List<ProcessoUsuario> responsaveis = mapProcessoUsuario(request, processo, usuarioJwt);
 			processoUsuarioRepository.saveAll(responsaveis);
 		}
 
@@ -96,12 +97,12 @@ public class ProcessoServiceImpl implements ProcessoService {
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void addResponsavel(Long processoId, Long responsavelId) {
+	public void addResponsavel(Long processoId, Long responsavelId, UsuarioDTO usuarioJwt) {
 		Processo processo = getProcessoById(processoId);
 		Usuario usuario = getUsuarioById(responsavelId);
 
-		// TODO: adicionar usuário da requisição (JWT)
-		ProcessoUsuario processoUsuario = new ProcessoUsuario(processo, usuario, null, OffsetDateTime.now());
+		ProcessoUsuario processoUsuario = new ProcessoUsuario(processo, usuario, usuarioMapper.fromDTO(usuarioJwt),
+				OffsetDateTime.now());
 
 		processoUsuarioRepository.save(processoUsuario);
 	}
@@ -112,8 +113,9 @@ public class ProcessoServiceImpl implements ProcessoService {
 		Processo processo = getProcessoById(processoId);
 		Usuario usuario = getUsuarioById(responsavelId);
 
-		ProcessoUsuario processoUsuario = processoUsuarioRepository.findById(new ProcessoUsuarioID(processo, usuario)).orElseThrow(NotFoundException::new);
-		
+		ProcessoUsuario processoUsuario = processoUsuarioRepository.findById(new ProcessoUsuarioID(processo, usuario))
+				.orElseThrow(NotFoundException::new);
+
 		processoUsuarioRepository.delete(processoUsuario);
 	}
 
@@ -125,12 +127,14 @@ public class ProcessoServiceImpl implements ProcessoService {
 		return usuarioRepository.findById(responsavelId).orElseThrow(NotFoundException::new);
 	}
 
-	private List<ProcessoUsuario> mapProcessoUsuario(ProcessoDTO request, final Processo processo) {
+	private List<ProcessoUsuario> mapProcessoUsuario(ProcessoDTO request, final Processo processo,
+			UsuarioDTO usuarioJwt) {
 		final OffsetDateTime dateTime = OffsetDateTime.now();
 
-		// TODO: adicionar usuário da requisição (JWT)
-		return request.getResponsaveis().stream().map(usuarioDTO -> new ProcessoUsuario(
-				processo, usuarioMapper.fromDTO(usuarioDTO), null, dateTime)).collect(Collectors.toList());
+		return request
+				.getResponsaveis().stream().map(usuarioDTO -> new ProcessoUsuario(processo,
+						usuarioMapper.fromDTO(usuarioDTO), usuarioMapper.fromDTO(usuarioJwt), dateTime))
+				.collect(Collectors.toList());
 	}
 
 }
