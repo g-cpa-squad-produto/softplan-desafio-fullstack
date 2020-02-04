@@ -42,8 +42,8 @@ public class ProcessoServiceImpl implements ProcessoService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<ProcessoDTO> find() {
-		// TODO: adicionar filtro e paginação
+	public List<ProcessoDTO> find(UsuarioDTO usuarioJwt) {
+		// TODO: filtrar por associações ao usuário do jwt
 		return processoRepository.findAll().stream().map(processoMapper::toDTO).collect(Collectors.toList());
 	}
 

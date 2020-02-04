@@ -7,7 +7,7 @@ import br.com.sofplan.processos.dto.v1.UsuarioDTO;
 
 public interface ProcessoService {
 
-	List<ProcessoDTO> find();
+	List<ProcessoDTO> find(UsuarioDTO usuarioJwt);
 	
 	ProcessoDTO findById(Long id);
 	

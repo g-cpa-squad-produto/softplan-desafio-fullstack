@@ -39,7 +39,8 @@ public class ProcessoController {
 
 	@GetMapping
 	public List<ProcessoDTO> find() {
-		return processoService.find();
+		UsuarioDTO usuarioJwt = (UsuarioDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return processoService.find(usuarioJwt);
 	}
 
 	@GetMapping("/{id}")
