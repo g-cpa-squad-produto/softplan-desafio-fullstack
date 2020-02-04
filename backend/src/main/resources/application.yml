@@ -2,6 +2,8 @@ logging:
   level:
     springfox.documentation.*: warn
 spring:
+  jpa:
+    open-in-view: false
   datasource:
     url: jdbc:h2:mem:testdb
     username: sa
