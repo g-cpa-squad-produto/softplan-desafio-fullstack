@@ -4,9 +4,8 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.transaction.Transactional;
-
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.sofplan.processos.dto.v1.ProcessoDTO;
 import br.com.sofplan.processos.exceptions.NotFoundException;
@@ -41,18 +40,20 @@ public class ProcessoServiceImpl implements ProcessoService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<ProcessoDTO> find() {
 		// TODO: adicionar filtro e paginação
 		return processoRepository.findAll().stream().map(processoMapper::toDTO).collect(Collectors.toList());
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public ProcessoDTO findById(Long id) {
 		return processoRepository.findById(id).map(processoMapper::toDTO).orElseThrow(NotFoundException::new);
 	}
 
 	@Override
-	@Transactional(rollbackOn = Exception.class)
+	@Transactional(rollbackFor = Exception.class)
 	public ProcessoDTO create(ProcessoDTO request) {
 		// persist o processo
 		final Processo processo = processoMapper.fromDTO(request);
@@ -68,6 +69,7 @@ public class ProcessoServiceImpl implements ProcessoService {
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public ProcessoDTO update(Long id, ProcessoDTO request) {
 		Processo processo = getProcessoById(id);
 
@@ -84,16 +86,16 @@ public class ProcessoServiceImpl implements ProcessoService {
 	}
 
 	@Override
-	public ProcessoDTO delete(Long id) {
+	@Transactional(rollbackFor = Exception.class)
+	public void delete(Long id) {
 		Processo processo = getProcessoById(id);
 
 		// remove o processo
 		processoRepository.delete(processo);
-
-		return processoMapper.toDTO(processo);
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public void addResponsavel(Long processoId, Long responsavelId) {
 		Processo processo = getProcessoById(processoId);
 		Usuario usuario = getUsuarioById(responsavelId);
@@ -105,6 +107,7 @@ public class ProcessoServiceImpl implements ProcessoService {
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public void deleteResponsavel(Long processoId, Long responsavelId) {
 		Processo processo = getProcessoById(processoId);
 		Usuario usuario = getUsuarioById(responsavelId);
