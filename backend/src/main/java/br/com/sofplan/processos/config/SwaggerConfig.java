@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 
+import br.com.sofplan.processos.security.JwtTokenProvider;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
@@ -55,7 +56,7 @@ public class SwaggerConfig {
     }
 
     private ApiKey apiKey() {
-        return new ApiKey("JWT", "Authorization", "header");
+        return new ApiKey("JWT", JwtTokenProvider.HEADER_STRING, "header");
     }
 
     private SecurityContext securityContext() {
