@@ -14,7 +14,7 @@ public interface ProcessoService {
 	
 	ProcessoDTO update(Long id, ProcessoDTO request);
 	
-	ProcessoDTO delete(Long id);
+	void delete(Long id);
 	
 	void addResponsavel(Long processoId, Long responsavelId);
 	
