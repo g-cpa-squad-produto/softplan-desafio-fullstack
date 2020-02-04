@@ -21,10 +21,11 @@ public class ParecerDTO {
 	private Situacao situacao;
 
 	@Null
-	@ApiModelProperty(notes = "campo somente leitura", required = false)
+	@ApiModelProperty(hidden = true)
 	private UsuarioDTO criadoPor;
 
 	@Null
+	@ApiModelProperty(hidden = true)
 	private OffsetDateTime dataCriacao;
 
 	public Long getId() {
