@@ -38,7 +38,7 @@ public class Processo implements Serializable {
 	@JoinColumn(name = "criado_por")
 	private Usuario criadoPor;
 	
-	@OneToMany(mappedBy = "id.responsavel")
+	@OneToMany(mappedBy = "id.processo")
 	private Set<ProcessoUsuario> responsaveis;
 	
 	private OffsetDateTime dataCriacao;
