@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.sofplan.processos.dto.v1.ProcessoDTO;
 import br.com.sofplan.processos.dto.v1.UsuarioDTO;
+import br.com.sofplan.processos.enums.Role;
+import br.com.sofplan.processos.enums.Situacao;
 import br.com.sofplan.processos.exceptions.NotFoundException;
 import br.com.sofplan.processos.mappers.ProcessoMapper;
 import br.com.sofplan.processos.mappers.UsuarioMapper;
@@ -43,8 +45,28 @@ public class ProcessoServiceImpl implements ProcessoService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<ProcessoDTO> find(UsuarioDTO usuarioJwt) {
-		// TODO: filtrar por associações ao usuário do jwt
-		return processoRepository.findAll().stream().map(processoMapper::toDTO).collect(Collectors.toList());
+		List<Processo> processos;
+
+		// consulta os processos pendentes que estão associados ao FINALIZADOR
+		if (usuarioJwt.getPerfil().equals(Role.FINALIZADOR)) {
+			processos = processoRepository.findBySituacaoAndResponsavel(Situacao.PENDENTE, usuarioJwt.getId());
+		}
+		// consulta todos os processos caso não seja um FINALIZADOR
+		else {
+			processos = processoRepository.findAll();
+		}
+
+		return processos.stream().map(processo -> {
+			ProcessoDTO dto = processoMapper.toDTO(processo);
+			dto.setResponsaveis(//
+					processo.getResponsaveis()//
+							.stream()//
+							.map(processoUsuario -> usuarioMapper.toDTO(processoUsuario.getId().getResponsavel()))
+							.collect(Collectors.toSet())//
+			);
+
+			return dto;
+		}).collect(Collectors.toList());
 	}
 
 	@Override
@@ -56,13 +78,17 @@ public class ProcessoServiceImpl implements ProcessoService {
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public ProcessoDTO create(ProcessoDTO request, UsuarioDTO usuarioJwt) {
+		Usuario usuario = usuarioMapper.fromDTO(usuarioJwt);
+
 		// persist o processo
 		final Processo processo = processoMapper.fromDTO(request);
+		processo.setCriadoPor(usuario);
+		processo.setDataCriacao(OffsetDateTime.now());
 		processoRepository.save(processo);
 
 		// cria os relacionamentos
 		if (request.getResponsaveis() != null) {
-			List<ProcessoUsuario> responsaveis = mapProcessoUsuario(request, processo, usuarioJwt);
+			List<ProcessoUsuario> responsaveis = mapProcessoUsuario(request, processo, usuario);
 			processoUsuarioRepository.saveAll(responsaveis);
 		}
 
@@ -127,13 +153,11 @@ public class ProcessoServiceImpl implements ProcessoService {
 		return usuarioRepository.findById(responsavelId).orElseThrow(NotFoundException::new);
 	}
 
-	private List<ProcessoUsuario> mapProcessoUsuario(ProcessoDTO request, final Processo processo,
-			UsuarioDTO usuarioJwt) {
+	private List<ProcessoUsuario> mapProcessoUsuario(ProcessoDTO request, final Processo processo, Usuario usuarioJwt) {
 		final OffsetDateTime dateTime = OffsetDateTime.now();
 
-		return request
-				.getResponsaveis().stream().map(usuarioDTO -> new ProcessoUsuario(processo,
-						usuarioMapper.fromDTO(usuarioDTO), usuarioMapper.fromDTO(usuarioJwt), dateTime))
+		return request.getResponsaveis().stream().map(
+				usuarioDTO -> new ProcessoUsuario(processo, usuarioMapper.fromDTO(usuarioDTO), usuarioJwt, dateTime))
 				.collect(Collectors.toList());
 	}
 
