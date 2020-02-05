@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+
+  db_postgres:
+    image: postgres
+    volumes: 
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: processos
+      POSTGRES_PASSWORD: softplan
+#    ports:
+#      - 5432:5432
+
+  backend:
+    image: softplan/processos
+    environment:
+      SPRING_PROFILES_ACTIVE: hml
+      URL_DATABASE: jdbc:postgresql://db_postgres:5432/processos
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: softplan
+    depends_on:
+      - db_postgres
+    ports:
+      - 8080:8080
+
+volumes: 
+  pgdata:
