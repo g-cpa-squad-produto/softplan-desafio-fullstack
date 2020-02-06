@@ -1,0 +1,62 @@
+.is-bg-snow {
+    background-color: $color-snow;
+}
+
+.is-color-blue {
+    color: $color-blue;
+}
+
+.is-color-blue-light {
+    color: $color-blue-light;
+}
+
+.is-color-blue-dark {
+    color: $color-blue-dark;
+}
+
+.is-color-pink {
+    color: $color-pink;
+}
+
+.is-color-yellow-light {
+    color: $color-yellow-light;
+}
+
+.is-margin-auto {
+    display: table;
+    margin: 0 auto;
+}
+
+.is-color-dark {
+    columns: #151f33;
+}
+
+.is-text-bold {
+    font-weight: 700;
+}
+
+.is-text-semi-bold {
+    font-weight: 400;
+}
+
+.has-shadow {
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.24), 0 0 4px 0 rgba(0, 0, 0, 0.12) !important;
+}
+
+.has-paddind-15 {
+    padding: 15px;
+}
+
+.has-margin-top {
+    margin-top: 30px;
+}
+
+.has-margin-bottom {
+    margin-bottom: 71px;
+}
+
+@media print {
+    .no-print {
+        display: none;
+    }
+}
