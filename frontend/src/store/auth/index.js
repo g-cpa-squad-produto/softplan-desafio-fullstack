@@ -1,3 +1,4 @@
+import auth from "../../services/auth";
 import {
     AUTH_LOGIN,
     AUTH_LOGIN_FAILURE,
@@ -5,17 +6,17 @@ import {
     AUTH_RESET
 } from "./authTypes";
 
-const initialState = {
-    error: false,
-    isLoading: false,
-    user: null // { email: "", token: "", expiresIn: 0, role: "TRIADOR | FINALIZADOR | ADMIN"}
-};
+const initialState = () => ({
+        error: false,
+        isLoading: false,
+        user: auth.getUser() // { email: "", token: "", expiresIn: 0, role: "TRIADOR | FINALIZADOR | ADMIN"}
+    });
 
-export const authReducer = (store = initialState, action) => {
+export const authReducer = (store = initialState(), action) => {
     switch (action.type) {
         case AUTH_RESET:
             return {
-                ...initialState
+                ...initialState()
             };
 
         case AUTH_LOGIN:
