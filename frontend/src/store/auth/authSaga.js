@@ -32,7 +32,7 @@ function* handleLogin(action) {
 
 function* handleLogout() {
     try {
-        
+        auth.clear();
         yield put(reset());
     } catch (error) {
         toast.error("Ops, ocorreu um erro inesperado");
