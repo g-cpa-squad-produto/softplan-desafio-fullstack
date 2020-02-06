@@ -1,8 +1,8 @@
 import { put, takeLatest} from "redux-saga/effects";
 import { toast } from "react-toastify";
-import axios from "axios";
 
-import { api, errorHandler } from "../../api";
+import auth from "../../services/auth";
+import { api, errorHandler } from "../../services/api";
 import {
     AUTH_LOGIN,
     AUTH_LOGOUT,
@@ -10,15 +10,22 @@ import {
 
 import {
     loginFailure,
+    loginSuccess,
     reset,
 } from "./authActions";
 
 function* handleLogin(action) {
     try {
         const { email, password } = action.payload;
+        
+        const response = yield api.post("/api/v1/auth/login", {
+            email, senha: password
+        });
+        auth.saveUser(response.data);
 
+        yield put(loginSuccess(response.data));
     } catch (error) {
-        toast.error("Dados incorretos");
+        errorHandler(error, { 401: "Acesso não autorizado." });
         yield put(loginFailure(error));
     }
 }
