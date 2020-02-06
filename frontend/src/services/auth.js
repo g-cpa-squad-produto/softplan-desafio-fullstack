@@ -13,6 +13,10 @@ class Auth {
         return !!base64 ? JSON.parse(atob(base64)) : null;
     }
 
+    clear() {
+        sessionStorage.removeItem("auth")
+    }
+
 }
 
 export default new Auth();
