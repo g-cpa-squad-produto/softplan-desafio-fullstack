@@ -1,12 +1,16 @@
 package br.com.sofplan.processos.dto.v1;
 
+import br.com.sofplan.processos.enums.Role;
+
 public class LoginResponseDTO {
 
 	private String email;
+	
+	private Role role;
 
 	private String token;
 
-	private String expiresIn;
+	private Long expiresIn;
 
 	public String getEmail() {
 		return email;
@@ -24,11 +28,19 @@ public class LoginResponseDTO {
 		this.token = token;
 	}
 
-	public String getExpiresIn() {
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	public Long getExpiresIn() {
 		return expiresIn;
 	}
 
-	public void setExpiresIn(String expiresIn) {
+	public void setExpiresIn(Long expiresIn) {
 		this.expiresIn = expiresIn;
 	}
 

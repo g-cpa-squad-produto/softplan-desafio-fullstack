@@ -38,12 +38,13 @@ public class AuthServiceImpl implements AuthService {
 		
 		String token = jwtTokenProvider.createToken(usuarioMapper.toDTO(usuario));
 		
-		var loginResponseDTO = new LoginResponseDTO();
-		loginResponseDTO.setEmail(request.getEmail());
-		loginResponseDTO.setToken(token);
-		loginResponseDTO.setExpiresIn(String.valueOf(jwtTokenProvider.getValidityInMilliseconds()));
+		var response = new LoginResponseDTO();
+		response.setEmail(request.getEmail());
+		response.setRole(usuario.getPerfil());
+		response.setToken(token);
+		response.setExpiresIn(jwtTokenProvider.getValidityInMilliseconds());
 		
-		return loginResponseDTO;
+		return response;
 	}
 
 }
