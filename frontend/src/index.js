@@ -4,6 +4,9 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import * as serviceWorker from './serviceWorker';
 
+import "bulma/css/bulma.css";
+import "./assets/styles/index.scss";
+
 import App from './App';
 import { Provider } from "react-redux";
 import { store } from "./store";
