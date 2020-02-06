@@ -1,0 +1,23 @@
+@import "variables.scss";
+
+.login-container {
+    height: 100vh;    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 100px;
+    
+    @media screen and (max-width: 1023px) {
+        padding-top: 50px;
+    }
+
+    .form-box {
+        margin: 10px;
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .pink-button {
+        width: 100%;
+    }
+}
