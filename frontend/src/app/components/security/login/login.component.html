@@ -1,0 +1,104 @@
+<div class="login-box">
+  <div class="login-logo">
+    <a href="../../index2.html"><b>Admin</b>LTE</a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body login-card-body">
+      <p class="login-box-msg">Faça o login para iniciar a sessão</p>
+
+      <form method="post" (ngSubmit)="login()">
+
+        <div class="alert-danger alert-danger" role="alert" *ngIf="message">
+          <strong>Email ou senha inválido</strong>
+        </div>
+
+        <div class="input-group mb-3">
+          <input
+            id="username"
+            type="text"
+            class="form-control"
+            placeholder="Usuario"
+            [(ngModel)]="loginUser.username"
+            required="true"
+            name="username">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group mb-3">
+          <input
+            id="password"
+            type="password"
+            class="form-control"
+            placeholder="Senha"
+            [(ngModel)]="loginUser.password"
+            required="true"
+            name="password">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-8">
+          </div>
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">Lista de usuários mockados na aplicação</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body p-0">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Login</th>
+          <th>Senha</th>
+          <th>Role</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>admin</td>
+          <td>admin</td>
+          <td><span class="badge bg-danger">Administrador</span></td>
+        </tr>
+        <tr>
+          <td>triador1</td>
+          <td>triador1</td>
+          <td><span class="badge bg-primary">triador</span></td>
+        </tr>
+        <tr>
+          <td>triador2</td>
+          <td>triador2</td>
+          <td><span class="badge bg-primary">triador</span></td>
+        </tr>
+        <tr>
+          <td>triador3</td>
+          <td>triador3</td>
+          <td><span class="badge bg-primary">triador</span></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- /.card-body -->
+  </div>
+  <!-- /.card -->
+
+</div>
+

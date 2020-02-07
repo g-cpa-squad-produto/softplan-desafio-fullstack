@@ -1,0 +1,7 @@
+<app-header *ngIf="showTemplate"></app-header>
+<app-sidebar [hidden]="!showTemplate"></app-sidebar>
+
+<router-outlet></router-outlet>
+
+<app-footer *ngIf="showTemplate"></app-footer>
+
