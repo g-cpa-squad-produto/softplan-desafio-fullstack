@@ -6,8 +6,8 @@
         "start": "ng serve --proxy-config proxy-config.json",
         "build": "ng build",
         "postbuild": "npm run deploy",
-        "predeploy": "rimraf ../static && mkdirp ../static",
-        "deploy": "copyfiles -f dist/** ../static",
+        "predeploy": "rimraf ../backend/src/main/resources/static && mkdirp ../backend/src/main/resources/static",
+        "deploy": "copyfiles -u 1 dist/static/** ../backend/src/main/resources/",
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e"
