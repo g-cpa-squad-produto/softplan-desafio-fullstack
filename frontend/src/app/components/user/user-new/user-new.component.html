@@ -1,0 +1,147 @@
+<div class="content-wrapper">
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Salvar/Editar Usuário</h1>
+        </div>
+
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Usuário</a></li>
+            <li class="breadcrumb-item active">Salvar/Editar Usuário</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="content">
+    <div class="container-fluid">
+
+      <div class="row">
+        <section class="col-lg-7 connectedSortable ui-sortable">
+          <div class="card">
+
+            <div class="card-header">
+              <h3 class="card-title">
+                <i class="fa fa-fw fa-user"></i>
+                Usuário
+              </h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+<!--                <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>-->
+              </div>
+            </div>
+
+            <div class="card-body">
+              <div class="tab-content p-0">
+
+
+                <form name="editForm" role="form" (ngSubmit)="register()" [formGroup]="editForm">
+                  <div>
+
+                    <div [ngClass]="classCss" role="alert" *ngIf="message">
+                      {{message.text}}
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+
+                    <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                      <label for="id">ID</label>
+                      <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                             readonly />
+                    </div>
+                    <div class="form-group">
+                      <label class="form-control-label" for="field_login">Login</label>
+                      <input type="text" class="form-control" name="login" id="field_login"
+                             formControlName="login"/>
+                      <div
+                        *ngIf="editForm.get('login')!.invalid && (editForm.get('login')!.dirty || editForm.get('login')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('login')?.errors?.required">
+                          This field is required.
+                        </small>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-control-label" for="field_password">Password</label>
+                      <input type="text" class="form-control" name="password" id="field_password"
+                             formControlName="password"/>
+                      <div
+                        *ngIf="editForm.get('password')!.invalid && (editForm.get('password')!.dirty || editForm.get('password')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('password')?.errors?.required">
+                          This field is required.
+                        </small>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-control-label" for="field_firstName">First Name</label>
+                      <input type="text" class="form-control" name="firstName" id="field_firstName"
+                             formControlName="firstName"/>
+                      <div
+                        *ngIf="editForm.get('firstName')!.invalid && (editForm.get('firstName')!.dirty || editForm.get('firstName')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('firstName')?.errors?.required">
+                          This field is required.
+                        </small>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-control-label" for="field_lastName">Last Name</label>
+                      <input type="text" class="form-control" name="lastName" id="field_lastName"
+                             formControlName="lastName"/>
+                      <div
+                        *ngIf="editForm.get('lastName')!.invalid && (editForm.get('lastName')!.dirty || editForm.get('lastName')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('lastName')?.errors?.required">
+                          This field is required.
+                        </small>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-control-label" for="field_email">Email</label>
+                      <input type="text" class="form-control" name="email" id="field_email"
+                             formControlName="email"/>
+                      <div
+                        *ngIf="editForm.get('email')!.invalid && (editForm.get('email')!.dirty || editForm.get('email')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('email')?.errors?.required">
+                          This field is required.
+                        </small>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-control-label" for="field_role">Role</label>
+                      <select class="form-control" name="role" formControlName="role" id="field_role">
+                        <option value="ADM">ADM</option>
+                        <option value="TRIADOR">TRIADOR</option>
+                        <option value="FINALIZADOR">FINALIZADOR</option>
+                      </select>
+                    </div>
+
+                  </div>
+                  <div>
+                    <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                      <span class="fa fa-fw fa-ban"></span>&nbsp;<span>Cancel</span>
+                    </button>
+                    <button type="submit" id="save-entity" [disabled]="editForm.invalid" class="btn btn-primary">
+                      <span class="fa fa-fw fa-save"></span>&nbsp;<span>Save</span>
+                    </button>
+                  </div>
+                </form>
+
+
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+</div>
+

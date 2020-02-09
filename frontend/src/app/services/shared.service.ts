@@ -1,32 +1,25 @@
-import {EventEmitter, Injectable} from '@angular/core';
-import {User} from "../shared/model/user.model";
+import {EventEmitter, Injectable, OnInit} from '@angular/core';
+import {User} from '../shared/model/user.model';
+import {LocalStorageService} from "ngx-webstorage";
 
 @Injectable({
   providedIn: 'root'
 })
 export class SharedService {
 
-  public static instance: SharedService = null;
-
-  user: User;
-  token: string;
   showTemplate = new EventEmitter<boolean>();
 
-  constructor() {
-    return SharedService.instance = SharedService.instance || this;
+  constructor(
+    private $localStorage: LocalStorageService) {
+    this.showTemplate.emit(this.isLoogegIn());
   }
 
-  public static getInstance(){
-    if(this.instance == null){
-      this.instance = new SharedService();
-    }
-    return this.instance;
+
+  isLoogegIn(): boolean {
+    return this.getJwtToken() !== undefined;
   }
 
-  isLoogegIn():boolean{
-    if(this.user==null){
-      return false;
-    }
-    return this.user.login != '';
+  getJwtToken(): string {
+    return this.$localStorage.retrieve('authenticationToken');
   }
 }

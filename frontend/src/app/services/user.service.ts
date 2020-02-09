@@ -1,14 +1,17 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {User} from "../shared/model/user.model";
-import {Login} from "../shared/model/login.model";
-import {flatMap, map, tap} from "rxjs/operators";
-import {LocalStorageService} from "ngx-webstorage";
+import {HttpClient, HttpResponse} from '@angular/common/http';
+import {User} from '../shared/model/user.model';
+import {Login} from '../shared/model/login.model';
+import {flatMap, map, tap} from 'rxjs/operators';
+import {LocalStorageService} from 'ngx-webstorage';
 import {Observable} from "rxjs";
 
-type JwtToken = {
+interface JwtToken {
   id_token: string;
-};
+}
+
+
+type EntityResponseType = HttpResponse<User>;
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +25,7 @@ export class UserService {
     private $localStorage: LocalStorageService
   ) { }
 
-  login(user:Login){
+  login(user: Login) {
     return this.http
       .post<JwtToken>('/api/authenticate', user)
       .pipe(map(response => this.authenticateSuccess(response)))
@@ -35,27 +38,27 @@ export class UserService {
     this.$localStorage.store('authenticationToken', jwt);
   }
 
-  fetch(){
+  fetch() {
     return this.http.get<User>('api/account');
   }
 
-  create(usuario: User){
+  create(usuario: User) {
     return this.http.post<User>(this.resourceUrl, usuario);
   }
 
-  update(usuario: User){
+  update(usuario: User) {
     return this.http.put<User>(this.resourceUrl, usuario);
   }
 
-  find(id: number){
+  find(id: number) {
     return this.http.get<User>(`${this.resourceUrl}/${id}`);
   }
 
-  findAll(){
+  findAll() {
     return this.http.get<User>(this.resourceUrl);
   }
 
-  delete(id: number){
+  delete(id: number) {
     return this.http.delete(`${this.resourceUrl}/${id}`);
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Process} from "../shared/model/process.model";
+import {HttpClient} from '@angular/common/http';
+import {Process} from '../shared/model/process.model';
 
 @Injectable({
   providedIn: 'root'
