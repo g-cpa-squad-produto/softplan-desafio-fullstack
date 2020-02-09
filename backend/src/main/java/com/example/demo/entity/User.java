@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import com.example.demo.entity.enumeration.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -43,6 +44,7 @@ public class User implements Serializable {
     @Column(name = "login", nullable = false)
     private String login;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @NotNull
     @Column(name = "password", nullable = false)
     private String password;
