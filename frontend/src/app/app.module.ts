@@ -14,8 +14,10 @@ import {UserService} from './services/user.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthInterceptor} from './components/security/auth.interceptor';
 import {AuthGuard} from './components/security/auth.guard';
-import { UserComponent } from './components/user/user.component';
-import { UserNewComponent } from './components/user/user-new/user-new.component';
+import {UserComponent} from './components/user/user.component';
+import {UserNewComponent} from './components/user/user-new/user-new.component';
+import {UserListComponent} from './components/user/user-list/user-list.component';
+import {DialogService} from './dialog.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { UserNewComponent } from './components/user/user-new/user-new.component'
     HomeComponent,
     LoginComponent,
     UserComponent,
-    UserNewComponent
+    UserNewComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,
@@ -34,11 +37,12 @@ import { UserNewComponent } from './components/user/user-new/user-new.component'
     FormsModule,
     NgxWebstorageModule.forRoot(),
     routes,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [
     UserService,
     AuthGuard,
+    DialogService,
     {
       provide : HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

@@ -7,7 +7,7 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">Faça o login para iniciar a sessão</p>
 
-      <form method="post" (ngSubmit)="login()">
+      <form method="post">
 
         <div class="alert alert-danger" role="alert" *ngIf="message">
           Email ou senha inválido
@@ -52,7 +52,7 @@
           <div class="col-8">
           </div>
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            <button type="submit" class="btn btn-primary btn-block" (click)="login()">Sign In</button>
           </div>
         </div>
 

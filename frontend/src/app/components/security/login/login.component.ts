@@ -3,9 +3,7 @@ import {SharedService} from '../../../services/shared.service';
 import {UserService} from '../../../services/user.service';
 import {Router} from '@angular/router';
 import {Login} from '../../../shared/model/login.model';
-import {Observable} from 'rxjs';
 import {User} from '../../../shared/model/user.model';
-import {LocalStorageService} from 'ngx-webstorage';
 
 @Component({
   selector: 'app-login',
@@ -19,9 +17,12 @@ export class LoginComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router,
-    private shared: SharedService,
-    private $localStorage: LocalStorageService
-  ) { }
+    private shared: SharedService
+  ) {
+    if (shared.isLoogegIn()) {
+      this.router.navigate(['/dashboard']);
+    }
+  }
 
   ngOnInit() {
   }
@@ -32,22 +33,13 @@ export class LoginComponent implements OnInit {
     this.userService.login(this.loginUser)
       .subscribe(
         (user: User) => {
-          this.message = ''
+          this.message = '';
           this.shared.showTemplate.emit(true);
+          this.shared.storeUserName(`${user.firstName} ${user.lastName}`);
 
           this.router.navigate(['/dashboard']);
         },
         () => (this.message = 'Login ou senha inválido')
       );
-
-    // this.loginService.login(this.loginUser)
-    //   .pipe(flatMap(() => this.loginService.identity()));
-  }
-
-  logout(): Observable<void> {
-    return new Observable(observer => {
-      this.$localStorage.clear('authenticationToken');
-      observer.complete();
-    });
   }
 }

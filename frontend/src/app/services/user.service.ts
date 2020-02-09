@@ -2,9 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {User} from '../shared/model/user.model';
 import {Login} from '../shared/model/login.model';
-import {flatMap, map, tap} from 'rxjs/operators';
-import {LocalStorageService} from 'ngx-webstorage';
-import {Observable} from "rxjs";
+import {flatMap, map} from 'rxjs/operators';
+import {SharedService} from './shared.service';
 
 interface JwtToken {
   id_token: string;
@@ -22,7 +21,7 @@ export class UserService {
 
   constructor(
     private http: HttpClient,
-    private $localStorage: LocalStorageService
+    private sharedService: SharedService
   ) { }
 
   login(user: Login) {
@@ -34,8 +33,7 @@ export class UserService {
 
 
   private authenticateSuccess(response: JwtToken): void {
-    const jwt = response.id_token;
-    this.$localStorage.store('authenticationToken', jwt);
+    this.sharedService.storeJwtToken(response.id_token);
   }
 
   fetch() {
@@ -55,7 +53,7 @@ export class UserService {
   }
 
   findAll() {
-    return this.http.get<User>(this.resourceUrl);
+    return this.http.get<User[]>(this.resourceUrl);
   }
 
   delete(id: number) {

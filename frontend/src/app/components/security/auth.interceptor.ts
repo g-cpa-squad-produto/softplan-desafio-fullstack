@@ -1,28 +1,38 @@
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {SharedService} from '../../services/shared.service';
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {LocalStorageService} from "ngx-webstorage";
+import {Observable, throwError} from 'rxjs';
+import {LoginComponent} from './login/login.component';
+import {catchError} from 'rxjs/operators';
+import {SharedService} from '../../services/shared.service';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class AuthInterceptor implements HttpInterceptor {
 
 
-  constructor( private $localStorage: LocalStorageService) {
+  constructor(
+    private sharedService: SharedService) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    let authRequest: any;
-    const jwt = this.$localStorage.retrieve('authenticationToken');
+    const jwt = this.sharedService.getJwtToken();
+
     if (jwt !== undefined) {
-      authRequest = req.clone({
+      req = req.clone({
         setHeaders: {
-          Authorization : `Bearer ${jwt}`
+          Authorization: `Bearer ${jwt}`
         }
       });
-      return next.handle(authRequest);
-    }
-    return next.handle(req);
-  }
 
+      return next.handle(req).pipe(catchError(err => {
+        if (err.status === 401) {
+          // auto logout if 401 response returned from api
+          this.sharedService.removeJwtToken();
+          location.reload();
+        }
+
+        const error = err.error.message || err.statusText;
+        return throwError(error);
+      }));
+    }
+  }
 }

@@ -41,7 +41,7 @@ export class UserNewComponent implements OnInit {
 
   findById(id: number) {
     this.userService.find(id).subscribe((user: User) => {
-      this.user = user;
+      this.editForm.patchValue(user);
     }, error => {
       this.showMessage({
         type: 'error',

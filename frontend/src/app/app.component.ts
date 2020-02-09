@@ -8,7 +8,6 @@ import {SharedService} from './services/shared.service';
 export class AppComponent implements OnInit {
 
   showTemplate = false;
-
   constructor( private shared: SharedService) {
     this.showTemplate = shared.isLoogegIn();
   }

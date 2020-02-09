@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {SharedService} from '../../services/shared.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -6,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  public userName: string;
+
+  constructor(private sharedService: SharedService) {
+    this.userName = this.sharedService.getUserName();
+  }
 
   ngOnInit() {
   }
