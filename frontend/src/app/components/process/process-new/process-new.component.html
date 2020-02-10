@@ -1,0 +1,96 @@
+<div class="content-wrapper">
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Salvar/Editar Usuário</h1>
+        </div>
+
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Usuário</a></li>
+            <li class="breadcrumb-item active">Salvar/Editar Usuário</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="content">
+    <div class="container-fluid">
+
+      <div class="row">
+        <section class="col-lg-7 connectedSortable ui-sortable">
+          <div class="card">
+
+            <div class="card-header">
+              <h3 class="card-title">
+                <i class="fa fa-fw fa-user"></i>
+                Usuário
+              </h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+                <!--                <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>-->
+              </div>
+            </div>
+
+            <div class="card-body">
+              <div class="tab-content p-0">
+
+                <form name="editForm" role="form" novalidate (ngSubmit)="register()" [formGroup]="editForm">
+                  <h2 id="jhi-process-heading">Create or edit a Process</h2>
+                  <div>
+                    <div [ngClass]="classCss" role="alert" *ngIf="message">
+                      {{message.text}}
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-control-label" for="field_title">Título</label>
+                      <input type="text" class="form-control" name="title" id="field_title"
+                             formControlName="title"/>
+                      <div
+                        *ngIf="editForm.get('title')!.invalid && (editForm.get('title')!.dirty || editForm.get('title')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('title')?.errors?.required">
+                          This field is required.
+                        </small>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-control-label" for="field_description">Descrição</label>
+                      <textarea  rows="4" class="form-control" name="description" id="field_description"
+                                 formControlName="description"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-control-label" for="field_finalizador">Finalizadores</label>
+                      <select multiple  class="form-control" id="field_finalizador" name="finalizador" formControlName="finalizador">
+                        <option
+                          [ngValue]="userOption.id"
+                          *ngFor="let userOption of users; trackBy: trackById">{{userOption.firstName}} {{userOption.lastName}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div>
+                    <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                      <span class="fa fa-fw fa-undo"></span>&nbsp;<span>Voltar</span>
+                    </button>
+                    <button type="submit" id="save-entity" [disabled]="editForm.invalid" class="btn btn-primary">
+                      <span class="fa fa-fw fa-save"></span>&nbsp;<span>Salvar</span>
+                    </button>
+                  </div>
+                </form>
+
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+</div>

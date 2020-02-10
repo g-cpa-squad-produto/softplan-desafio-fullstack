@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Lista de Usuários</h3>
+
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="collapse">
+            <i class="fas fa-minus"></i>
+          </button>
+        </div>
+      </div>
+      <!-- /.card-header -->
+      <div class="alert alert-info" *ngIf="processes?.length === 0">
+        <span>lista vazia</span>
+      </div>
+      <div *ngIf="processes?.length > 0" class="card-body table-responsive p-0">
+        <table class="table table-hover text-nowrap">
+          <thead>
+          <tr>
+            <th>Titulo</th>
+            <th>Descrição</th>
+            <th>Finalizadores</th>
+            <th>Andamento</th>
+            <th>Status</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let process of processes; let i = index">
+            <td>{{process.title}}</td>
+            <td>{{process.description}}</td>
+            <td>
+              <ul class="list-inline">
+                <li *ngFor="let reports of process.reports" class="list-inline-item">{{reports.autor.firstName}}</li>
+              </ul>
+            </td>
+
+            <td class="project_progress">
+              <div class="progress progress-sm">
+                <div class="progress-bar bg-green" role="progressbar" aria-volumemin="0" aria-volumemax="100" [ngStyle]="{'width': percent[i] | percent}">
+                </div>
+              </div>
+              <small>
+                {{percent[i] | percent}} Complete
+              </small>
+            </td>
+            <td>
+              <span class="badge bg-success" *ngIf="process.complete">Finalizado</span>
+              <span class="badge bg-warning" *ngIf="!process.complete">Pendente</span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+  </div>
+</div>
+
