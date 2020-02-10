@@ -2,6 +2,7 @@ package com.example.demo.web.rest;
 
 
 import com.example.demo.entity.User;
+import com.example.demo.entity.enumeration.Role;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.web.rest.errors.BadRequestAlertException;
 import lombok.extern.log4j.Log4j2;
@@ -83,5 +84,11 @@ public class UserResource {
                 .noContent()
                 .header("id", id.toString())
                 .build();
+    }
+
+    @GetMapping("/usuarios/finalizador/")
+    public ResponseEntity<List<User>> getUsuarioFinalizador() {
+        log.debug("REST request to get all Usuarios by role finalizador");
+        return ResponseEntity.ok().body( userRepository.findAllByRole(Role.FINALIZADOR) );
     }
 }

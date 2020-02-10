@@ -5,7 +5,6 @@ import com.example.demo.entity.enumeration.Status;
 import com.example.demo.repository.ReportRepository;
 import com.example.demo.web.rest.errors.BadRequestAlertException;
 import lombok.extern.log4j.Log4j2;
-import org.apache.tomcat.util.http.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +23,6 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -61,9 +59,9 @@ public class ReportResource {
     }
 
     @GetMapping("/reports")
-    public List<Report> getAllReports() {
+    public ResponseEntity<List<Report>> getAllReports() {
         log.debug("REST request to get all Reports");
-        return reportRepository.findAll();
+        return ResponseEntity.ok().body(reportRepository.findAll());
     }
 
 

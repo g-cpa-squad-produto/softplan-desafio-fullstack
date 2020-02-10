@@ -1,26 +1,17 @@
 package com.example.demo.web.rest;
 
 import com.example.demo.entity.Process;
-import com.example.demo.entity.Report;
 import com.example.demo.repository.ProcessRepository;
-import com.example.demo.repository.ReportRepository;
-import com.example.demo.repository.UserRepository;
+import com.example.demo.security.CurrentUserService;
 import com.example.demo.web.rest.errors.BadRequestAlertException;
 import lombok.extern.log4j.Log4j2;
-import org.apache.tomcat.util.http.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,8 +21,6 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/api")
@@ -43,16 +32,14 @@ public class ProcessResource {
     private ProcessRepository processRepository;
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private ReportRepository reportRepository;
+    private CurrentUserService currentUserService;
 
     @PostMapping("/processes")
     public ResponseEntity<Process> createProcess(@Valid @RequestBody Process process) throws URISyntaxException {
         log.debug("REST request to save Process : {}", process);
         validate(process);
         setAutor(process);
+        process.getReports().forEach( report -> report.setProcess(process));
         Process result = processRepository.save(process);
 
         return ResponseEntity.created(new URI("/api/processes/" + result.getId()))
@@ -71,9 +58,15 @@ public class ProcessResource {
     }
 
     @GetMapping("/processes")
-    public List<Process> getAllProcesses() {
+    public ResponseEntity<List<Process>> getAllProcesses() {
         log.debug("REST request to get all Processes");
-        return processRepository.findAll();
+        return ResponseEntity.ok().body(processRepository.findAll());
+    }
+
+    @GetMapping("/processes/author/")
+    public ResponseEntity<List<Process>> getAllProcessesByAuthor() {
+        log.debug("REST request to get all Processes by author");
+        return ResponseEntity.ok().body(processRepository.findAllByAutorId(currentUserService.getCurrentUser().getId()));
     }
 
     @GetMapping("/processes/{id}")
@@ -93,17 +86,6 @@ public class ProcessResource {
     }
 
     private void setAutor(@RequestBody @Valid Process process) {
-        SecurityContext securityContext = SecurityContextHolder.getContext();
-        User currentUser = (User) securityContext.getAuthentication().getPrincipal();
-
-        com.example.demo.entity.User user = userRepository.findByLogin(currentUser.getUsername()).get();
-        process.setAutor(user);
-    }
-
-
-    private void setReports(Process process) {
-        Process p = new Process();
-        p.setId(process.getId());
-        process.getReports().forEach(report -> report.setProcess(p));
+        process.setAutor(currentUserService.getCurrentUser());
     }
 }
