@@ -1,10 +1,9 @@
 package com.example.demo.entity;
 
 import com.example.demo.entity.enumeration.Status;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonView;
-import lombok.EqualsAndHashCode;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Cache;
@@ -20,7 +19,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -29,6 +27,9 @@ import java.util.Set;
  */
 @Entity
 @Getter @Setter
+@JsonIdentityInfo(
+        generator= ObjectIdGenerators.PropertyGenerator.class,
+        property="id")
 public class Process implements Serializable {
     private static final long serialVersionUID = 7094656677576873348L;
 

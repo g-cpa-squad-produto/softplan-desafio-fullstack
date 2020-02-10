@@ -1,9 +1,8 @@
 package com.example.demo.entity;
 
 import com.example.demo.entity.enumeration.Status;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,6 +23,9 @@ import java.io.Serializable;
  */
 @Entity
 @Getter @Setter
+@JsonIdentityInfo(
+        generator= ObjectIdGenerators.PropertyGenerator.class,
+        property="id")
 public class Report implements Serializable {
 
     private static final long serialVersionUID = -785243798829838703L;
@@ -41,7 +43,6 @@ public class Report implements Serializable {
 
     @ManyToOne
     private User autor;
-
 
     @ManyToOne(cascade = {CascadeType.ALL})
     private Process process;
