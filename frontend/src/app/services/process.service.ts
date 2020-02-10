@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Process} from '../shared/model/process.model';
 
@@ -23,7 +23,11 @@ export class ProcessService {
   }
 
   findAll() {
-    return this.http.get<Process>(this.resourceUrl);
+    return this.http.get<Process[]>(this.resourceUrl);
+  }
+
+  findAllByAuthor() {
+    return this.http.get<Process[]>(this.resourceUrl + '/author/');
   }
 
   delete(id: number){

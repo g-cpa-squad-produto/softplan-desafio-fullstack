@@ -56,6 +56,10 @@ export class UserService {
     return this.http.get<User[]>(this.resourceUrl);
   }
 
+  findAllFinalizador() {
+    return this.http.get<User[]>(this.resourceUrl + '/finalizador/');
+  }
+
   delete(id: number) {
     return this.http.delete(`${this.resourceUrl}/${id}`);
   }

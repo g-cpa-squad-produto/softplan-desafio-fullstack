@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Report} from '../shared/model/report.model';
 
@@ -22,11 +22,11 @@ export class ReportService {
     return this.http.get<Report>(`${this.resourceUrl}/${id}`);
   }
 
-  findAll(){
-    return this.http.get<Report>(this.resourceUrl);
+  findAll() {
+    return this.http.get(this.resourceUrl);
   }
 
-  delete(id: number){
+  delete(id: number) {
     return this.http.delete(`${this.resourceUrl}/${id}`);
   }
 }
