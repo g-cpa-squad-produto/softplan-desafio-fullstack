@@ -41,7 +41,7 @@ public class User implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "login", nullable = false)
+    @Column(name = "login", nullable = false, unique = true)
     private String login;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

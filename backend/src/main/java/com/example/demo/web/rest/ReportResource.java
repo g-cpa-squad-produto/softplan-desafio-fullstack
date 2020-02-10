@@ -1,8 +1,8 @@
 package com.example.demo.web.rest;
 
 import com.example.demo.entity.Report;
-import com.example.demo.entity.enumeration.Status;
 import com.example.demo.repository.ReportRepository;
+import com.example.demo.security.CurrentUserService;
 import com.example.demo.web.rest.errors.BadRequestAlertException;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +33,10 @@ public class ReportResource {
     @Autowired
     private ReportRepository reportRepository;
 
+    @Autowired
+    private CurrentUserService currentUserService;
+
+
     @PostMapping("/reports")
     public ResponseEntity<Report> createReport(@Valid @RequestBody Report report) throws URISyntaxException {
         log.debug("REST request to save Report : {}", report);
@@ -51,8 +55,10 @@ public class ReportResource {
         if (report.getId() == null) {
             throw new BadRequestAlertException("Id inválido", "reports", "idNull");
         }
-        report.setStatus(Status.CONCLUIDO);
-        Report result = reportRepository.save(report);
+        Report getReport = reportRepository.findById(report.getId()).get();
+        getReport.setStatus(report.getStatus());
+        getReport.setDescription(report.getDescription());
+        Report result = reportRepository.save(getReport);
         return ResponseEntity.ok()
                 .header("id", result.getId().toString())
                 .body(result);
@@ -62,6 +68,12 @@ public class ReportResource {
     public ResponseEntity<List<Report>> getAllReports() {
         log.debug("REST request to get all Reports");
         return ResponseEntity.ok().body(reportRepository.findAll());
+    }
+
+    @GetMapping("/reports/author/")
+    public ResponseEntity<List<Report>> getAllReportsByAuthor() {
+        log.debug("REST request to get all Reports");
+        return ResponseEntity.ok().body(reportRepository.findAllByAutorId(currentUserService.getCurrentUser().getId()));
     }
 
 

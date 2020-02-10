@@ -4,6 +4,7 @@ import com.example.demo.entity.enumeration.Status;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Cache;
@@ -27,6 +28,7 @@ import java.util.Set;
  */
 @Entity
 @Getter @Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @JsonIdentityInfo(
         generator= ObjectIdGenerators.PropertyGenerator.class,
         property="id")
@@ -34,6 +36,7 @@ public class Process implements Serializable {
     private static final long serialVersionUID = 7094656677576873348L;
 
     @Id
+    @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

@@ -9,6 +9,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,12 +38,16 @@ public class UserResource {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @PostMapping("/usuarios")
     public ResponseEntity<User> createUsuario(@Valid @RequestBody User user) throws URISyntaxException {
         log.debug("REST request to save User : {}", user);
         if (user.getId() != null) {
             throw new BadRequestAlertException("Um novo usuario nao pode ter um ID", "usuario", "idExists");
         }
+        user.setPassword( passwordEncoder.encode(user.getPassword()));
         User result = userRepository.save(user);
         return ResponseEntity.created(new URI("/api/usuarios/" + result.getId()))
                 .header("id", result.getId().toString())
@@ -55,6 +60,7 @@ public class UserResource {
         if (user.getId() == null) {
             throw new BadRequestAlertException("Id inválido", "usuario", "idNull");
         }
+        user.setPassword( passwordEncoder.encode(user.getPassword()));
         User result = userRepository.save(user);
         return ResponseEntity.ok()
                 .header("id", result.getId().toString())

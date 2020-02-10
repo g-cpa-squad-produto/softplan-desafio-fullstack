@@ -3,6 +3,7 @@ package com.example.demo.entity;
 import com.example.demo.entity.enumeration.Status;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,6 +24,7 @@ import java.io.Serializable;
  */
 @Entity
 @Getter @Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @JsonIdentityInfo(
         generator= ObjectIdGenerators.PropertyGenerator.class,
         property="id")
@@ -31,6 +33,7 @@ public class Report implements Serializable {
     private static final long serialVersionUID = -785243798829838703L;
 
     @Id
+    @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
