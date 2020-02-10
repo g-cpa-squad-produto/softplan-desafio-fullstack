@@ -7,6 +7,8 @@ import {UserNewComponent} from './components/user/user-new/user-new.component';
 import {UserComponent} from './components/user/user.component';
 import {ProcessComponent} from './components/process/process.component';
 import {ProcessNewComponent} from './components/process/process-new/process-new.component';
+import {ReportComponent} from './components/report/report.component';
+import {ReportNewComponent} from './components/report/report-new/report-new.component';
 
 export const ROUTES: Routes = [
   {path: '', component: LoginComponent},
@@ -15,7 +17,9 @@ export const ROUTES: Routes = [
   {path: 'user-new/:id', component: UserNewComponent, canActivate: [AuthGuard]},
   {path: 'user', component: UserComponent, canActivate: [AuthGuard]},
   {path: 'process', component: ProcessComponent, canActivate: [AuthGuard]},
-  {path: 'process-new', component: ProcessNewComponent, canActivate: [AuthGuard]}
+  {path: 'process-new', component: ProcessNewComponent, canActivate: [AuthGuard]},
+  {path: 'report', component: ReportComponent, canActivate: [AuthGuard]},
+  {path: 'report-new/:id', component: ReportNewComponent, canActivate: [AuthGuard]}
 ];
 
 export const routes: ModuleWithProviders = RouterModule.forRoot(ROUTES);

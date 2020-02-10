@@ -21,6 +21,9 @@ import {DialogService} from './dialog.service';
 import {ProcessComponent} from './components/process/process.component';
 import {ProcessListComponent} from './components/process/process-list/process-list.component';
 import {ProcessNewComponent} from './components/process/process-new/process-new.component';
+import {ReportComponent} from './components/report/report.component';
+import {ReportListComponent} from './components/report/report-list/report-list.component';
+import {ReportNewComponent} from './components/report/report-new/report-new.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,10 @@ import {ProcessNewComponent} from './components/process/process-new/process-new.
     UserListComponent,
     ProcessComponent,
     ProcessListComponent,
-    ProcessNewComponent
+    ProcessNewComponent,
+    ReportComponent,
+    ReportListComponent,
+    ReportNewComponent
   ],
   imports: [
     BrowserModule,

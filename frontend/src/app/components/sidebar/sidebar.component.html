@@ -15,7 +15,7 @@
         <img src="assets/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a href="#" class="d-block">{{userName}}</a>
+        <a href="#" class="d-block">{{user.firstName}} {{user.lastName}}</a>
       </div>
     </div>
 
@@ -33,7 +33,7 @@
             </p>
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="user.role == 'ADM'">
           <a href="#" class="nav-link" [routerLink]="['/user']">
             <i class="nav-icon far fa-circle text-danger"></i>
             <p>
@@ -41,7 +41,8 @@
             </p>
           </a>
         </li>
-        <li class="nav-item">
+
+        <li class="nav-item" *ngIf="user.role == 'TRIADOR'">
           <a href="#" class="nav-link" [routerLink]="['/process']">
             <i class="nav-icon far fa-circle text-primary"></i>
             <p>
@@ -49,8 +50,8 @@
             </p>
           </a>
         </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">
+        <li class="nav-item" *ngIf="user.role == 'FINALIZADOR'">
+          <a href="#" class="nav-link" [routerLink]="['/report']">
             <i class="nav-icon far fa-circle text-fuchsia"></i>
             <p>
               Parecer

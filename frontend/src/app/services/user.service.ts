@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {User} from '../shared/model/user.model';
 import {Login} from '../shared/model/login.model';
@@ -18,6 +18,7 @@ type EntityResponseType = HttpResponse<User>;
 export class UserService {
 
   public resourceUrl = 'api/usuarios';
+  currentUserEmmiter = new EventEmitter<User>();
 
   constructor(
     private http: HttpClient,

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, NgForm, Validators} from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 import {User} from '../../../shared/model/user.model';
 import {SharedService} from '../../../services/shared.service';
 import {UserService} from '../../../services/user.service';
@@ -61,7 +61,7 @@ export class UserNewComponent implements OnInit {
   }
 
   private update(userForm: User) {
-    this.userService.update(this.createFromForm()).subscribe((user: User) => {
+    this.userService.update(userForm).subscribe((user: User) => {
       this.user = new User();
       this.showMessage({
         type: 'success',

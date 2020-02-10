@@ -10,20 +10,24 @@ export class ReportService {
 
   constructor(protected http: HttpClient) {}
 
-  create(report: Report){
+  create(report: Report) {
     return this.http.post<Report>(this.resourceUrl, report);
   }
 
-  update(report: Report){
+  update(report: Report) {
     return this.http.put<Report>(this.resourceUrl, report);
   }
 
-  find(id: number){
+  find(id: number) {
     return this.http.get<Report>(`${this.resourceUrl}/${id}`);
   }
 
   findAll() {
     return this.http.get(this.resourceUrl);
+  }
+
+  findAllByAuthor() {
+    return this.http.get(this.resourceUrl + '/author/');
   }
 
   delete(id: number) {

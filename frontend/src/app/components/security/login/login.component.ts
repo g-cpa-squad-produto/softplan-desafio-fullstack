@@ -36,8 +36,8 @@ export class LoginComponent implements OnInit {
           this.message = '';
           this.shared.showTemplate.emit(true);
           this.shared.storeUserName(`${user.firstName} ${user.lastName}`);
-
           this.router.navigate(['/dashboard']);
+          this.userService.currentUserEmmiter.emit(user);
         },
         () => (this.message = 'Login ou senha inválido')
       );

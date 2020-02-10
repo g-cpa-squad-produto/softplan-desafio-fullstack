@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {SharedService} from '../../services/shared.service';
+import {Component, OnInit} from '@angular/core';
+import {UserService} from '../../services/user.service';
+import {User} from '../../shared/model/user.model';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,13 +8,15 @@ import {SharedService} from '../../services/shared.service';
 })
 export class SidebarComponent implements OnInit {
 
-  public userName: string;
+  public user: User;
 
-  constructor(private sharedService: SharedService) {
-    this.userName = this.sharedService.getUserName();
+  constructor(private userService: UserService) {
   }
 
   ngOnInit() {
+    this.userService.currentUserEmmiter.subscribe(
+        (user: User) => this.user = user
+    );
   }
 
 }

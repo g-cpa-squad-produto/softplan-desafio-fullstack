@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
 import {ProcessService} from '../../../services/process.service';
 import {Process} from '../../../shared/model/process.model';
 
@@ -14,10 +13,7 @@ export class ProcessListComponent implements OnInit {
   message: {};
   classCss: {};
 
-  constructor(
-    private processService: ProcessService,
-    private router: Router
-  ) {
+  constructor(private processService: ProcessService) {
   }
 
   ngOnInit() {
