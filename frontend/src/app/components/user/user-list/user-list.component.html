@@ -11,7 +11,10 @@
         </div>
       </div>
       <!-- /.card-header -->
-      <div class="card-body table-responsive p-0">
+      <div class="alert alert-info" *ngIf="users?.length === 0">
+        <span>lista vazia</span>
+      </div>
+      <div *ngIf="users?.length > 0" class="card-body table-responsive p-0">
         <table class="table table-hover text-nowrap">
           <thead>
           <tr>
@@ -20,7 +23,7 @@
             <th>Sobrenome</th>
             <th>Email</th>
             <th>Perfil</th>
-            <th>Ações</th>
+            <th></th>
           </tr>
           </thead>
           <tbody>
@@ -29,14 +32,20 @@
             <td>{{user.firstName}}</td>
             <td>{{user.lastName}}</td>
             <td>{{user.email}}</td>
-            <td>{{user.role}}</td>
             <td>
-              <button class="btn btn-sm btn-primary" (click)="edit(user.id)">
-                <span class="fa fa-pencil-alt"></span>Editar
-              </button>
-              <button class="btn btn-sm btn-danger" (click)="delete(user.id)">
-                <span class="fa fa-trash-alt"></span>Deletar
-              </button>
+              <span *ngIf="user.role == 'ADM'" class="badge bg-danger">Administrador</span>
+              <span *ngIf="user.role == 'TRIADOR'" class="badge bg-primary">Triador</span>
+              <span *ngIf="user.role == 'FINALIZADOR'" class="badge bg-success">Finalizador</span>
+            </td>
+            <td class="text-right py-0 align-middle">
+              <div class="btn-group btn-group-sm">
+                <button class="btn btn-sm btn-primary" (click)="edit(user.id)">
+                  <span class="fa fa-pencil-alt"></span>
+                </button>
+                <button class="btn btn-sm btn-danger" (click)="delete(user.id)">
+                  <span class="fa fa-trash-alt"></span>
+                </button>
+              </div>
             </td>
           </tr>
           </tbody>
