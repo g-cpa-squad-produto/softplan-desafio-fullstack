@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Lista de Relatórios</h3>
+
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="collapse">
+            <i class="fas fa-minus"></i>
+          </button>
+        </div>
+      </div>
+      <!-- /.card-header -->
+      <div class="alert alert-warning" *ngIf="reports?.length === 0">
+        <span>lista vazia</span>
+      </div>
+      <div class="table-responsive" *ngIf="reports?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+          <thead>
+          <tr>
+            <th scope="col"><span>Description</span></th>
+            <th scope="col"><span>Status</span></th>
+            <th scope="col"><span>Requisitante</span></th>
+            <th scope="col"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let report of reports">
+            <td>{{report.description}}</td>
+            <td>{{report.status}}</td>
+            <td>({{report.process.autor.login}}) {{report.process.autor.firstName}} {{report.process.autor.lastName}}</td>
+            <td class="text-right py-0 align-middle">
+              <div class="btn-group btn-group-sm">
+                <button class="btn btn-sm btn-primary" [routerLink]="['/report-new', report.id]">
+                  <span class="fa fa-pencil-alt"></span>
+                </button>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,95 @@
+<div class="content-wrapper">
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Salvar/Editar Relatórios</h1>
+        </div>
+
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Report</a></li>
+            <li class="breadcrumb-item active">Criar relatório</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="content">
+    <div class="container-fluid">
+
+      <div class="row">
+        <section class="col-lg-7 connectedSortable ui-sortable">
+          <div class="card">
+
+            <div class="card-header">
+              <h3 class="card-title">
+                <i class="fa fa-fw fa-comment"></i>
+                Relatório
+              </h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <div class="tab-content p-0">
+
+                <form name="editForm" role="form" novalidate (ngSubmit)="register()" [formGroup]="editForm">
+                  <h2 id="jhi-report-heading">Create or edit a Report</h2>
+                  <div>
+
+                    <div [ngClass]="classCss" role="alert" *ngIf="message">
+                      {{message.text}}
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+
+                    <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                      <label for="id">ID</label>
+                      <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                             readonly />
+                    </div>
+                    <div class="form-group">
+                      <label class="form-control-label" for="field_description">Descrição</label>
+                      <textarea rows="4" class="form-control" name="description" id="field_description"
+                                formControlName="description"></textarea>
+                      <div *ngIf="editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('description')?.errors?.required">
+                          This field is required.
+                        </small>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-control-label" for="field_status">Status</label>
+                      <select class="form-control" name="status" formControlName="status" id="field_status">
+                        <option value="PENDENTE">PENDENTE</option>
+                        <option value="CONCLUIDO">CONCLUIDO</option>
+                      </select>
+                    </div>
+
+                  </div>
+                  <div>
+                    <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                      <span class="fa fa-fw fa-undo"></span>&nbsp;<span>Voltar</span>
+                    </button>
+                    <button type="submit" id="save-entity" [disabled]="editForm.invalid" class="btn btn-primary">
+                      <span class="fa fa-fw fa-save"></span>&nbsp;<span>Salvar</span>
+                    </button>
+                  </div>
+                </form>
+
+
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+</div>
