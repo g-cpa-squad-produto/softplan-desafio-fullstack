@@ -5,7 +5,6 @@ import java.io.IOException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 import javax.servlet.http.HttpServletResponse;
@@ -46,7 +45,6 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException {
         final String token = request.getHeader(ApplicationConstants.HEADER_AUTHENTICATION);
-//        final String token = this.getCookeiToken(request.getCookies());
 
         if (StringUtils.isNotBlank(token)) {
             SecurityContextHolder.getContext().setAuthentication(this.getAuthentication(token));
@@ -55,22 +53,6 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         filterChain.doFilter(request, response);
     }
     
-    /**
-     * Search for the token
-     * 
-     * @param cookies to search
-     * @return the token
-     */
-    private String getCookeiToken(final Cookie[] cookies) {
-        for (final Cookie cookie : cookies) {
-            if (ApplicationConstants.HEADER_AUTHENTICATION.equals(cookie.getValue())) {
-                return cookie.getValue();
-            }
-        }
-        
-        return null;
-    }
-
     /**
      * Process the token
      *

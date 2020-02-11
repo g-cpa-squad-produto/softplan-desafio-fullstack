@@ -4,3 +4,8 @@
 /pmanagement-backend/nb-configuration.xml
 /pmanagement-backend/nbactions.xml
 /pmanagement-backend/nbactions-alpha.xml
+.vscode/
+package-lock.json
+.project
+code-workspace.code-workspace
+pmanagement-app/package-lock.json

@@ -12,7 +12,7 @@ code {
     monospace;
 }
 
-.App {
+.app {
   font-family: sans-serif;
 }
 
@@ -45,11 +45,11 @@ input {
 }
 
 input.error {
-  border-color: red;
+  border-color: #ff0000;
 }
 
 .input-feedback {
-  color: rgb(235, 54, 54);
+  color: #eb3636;
   margin-top: -15px;
   font-size: 14px;
   margin-bottom: 20px;
@@ -57,18 +57,175 @@ input.error {
 
 button {
   padding: 10px 15px;
-  background-color: rgb(70, 153, 179);
-  color: white;
-  border: 1px solid rgb(70, 153, 179);
+  background-color: #4699b3;
+  color: #ffffff;
+  border: 1px solid #4699b3;
   background-color: 250ms;
 }
 
 button:hover {
   cursor: pointer;
   background-color: white;
-  color: rgb(70, 153, 179);
+  color: #4699b3;
 }
 
-.align-center {
-  text-align: center
+.pull-left {
+  float: left;
+}
+
+.pull-right {
+  float: right;
+}
+
+.main-footer {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  border-top: 1px #e1e5eb solid;
+  text-align: right;
+  padding: 1rem 2rem;
+  background-color: #ffffff;
+}
+
+.main-header {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  border-bottom: 1px #e1e5eb solid;
+  text-align: center;
+  padding: 1rem 2rem;
+  background-color: #ffffff;
+}
+
+.main-header .container {
+  height: auto;
+}
+
+.main-header span a {
+  text-decoration: none;
+  color: #777;
+}
+
+.main-header span a:hover {
+  color: #007bff;
+}
+
+.main-header span img {
+  height: 3rem;
+}
+
+.main-header span {
+  vertical-align: middle;
+}
+
+.main-header span {
+  padding: 0 0.5rem;
+}
+
+.main-content {
+  padding: 1rem 3rem;
+  padding-top: 7rem;
+  background-color: #f5f6f8;
+}
+
+body {
+  background-color: #f5f6f8;
+  color: #777;
+}
+
+.error-message {
+  text-align: center !important;
+  color: #ff0000 !important;
+}
+
+.page-header .page-title {
+  font-size: 1.625rem;
+  font-weight: 500;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+  text-align: left !important;
+}
+
+.page-header .page-subtitle {
+  letter-spacing: 0.125rem;
+  color: #818ea3;
+  font-size: 0.625rem;
+  text-align: left !important;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.text-lowercase {
+  text-transform: lowercase;
+}
+
+.card-small {
+  box-shadow: 0 2px 0 #5a61691c, 0 4px 8px #5a61691f, 0 10px 10px #5a61690f,
+    0 7px 70px #5a61691a;
+}
+
+.card-small .card-body,
+.card-small .card-footer,
+.card-small .card-header {
+  padding: 1rem 1rem;
+}
+
+.card-small .card-body {
+  padding: 0 0 1rem 0;
+}
+
+.card {
+  background-color: #fff;
+  border: none;
+  margin: 1rem 0;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.5rem 2rem #5a61691a, 0 1rem 1.5rem #5a61691a,
+    0 0 0.5rem #5a61691f, 0 0 0 #5a61691a;
+}
+
+.card-header *{
+  font-weight: 500;
+  margin: 0;
+}
+
+.card-header {
+  padding: 1.09375rem 1.875rem;
+  background-color: #fff;
+  border-bottom: none;
+}
+
+.card-header:first-child {
+  border-radius: 0.625rem 0.625rem 0 0;
+}
+
+table thead {
+  background-color: #f8f9fa!important;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table td, table th, table thead th {
+  border-top: 1px solid #dee2e6;
+  text-align: left;
+  padding: 1rem;
+}
+
+.btn {
+  border-radius: 0.5rem;
+  padding: 1rem!important;
+  text-decoration: none;
+  vertical-align: middle;
+}
+
+.btn-primary {
+  background-color: #007bff!important;
+  color: #fff;
 }

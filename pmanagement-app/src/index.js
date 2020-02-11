@@ -2,17 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import * as serviceWorker from './serviceWorker';
-import Index from './views/Index';
-import { CookiesProvider } from 'react-cookie';
+import Index from './views/App';
 
 export default axios.create({
     baseURL: 'http://localhost:8080/'
 });
 
 ReactDOM.render(
-    <CookiesProvider>
-        <Index />
-    </CookiesProvider>,
+    <Index />,
     document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

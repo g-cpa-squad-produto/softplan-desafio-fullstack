@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Home from './Index';
 
-import '../index.css';
-
-export class NotFoundComponent extends Component {
+export default class NotFoundComponent extends Component {
   render() {
     return (
       <div className="app">
@@ -12,7 +9,7 @@ export class NotFoundComponent extends Component {
           <h1>404 - Sorry this page is not found</h1>
           <br />
           <div className="align-center">
-            <Link to="/">Back to Home</Link>
+            <Link to="/home">Back to Home</Link>
           </div>
         </header>
       </div>

@@ -10,10 +10,13 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import lombok.Data;
+
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -25,45 +28,60 @@ import org.springframework.security.core.userdetails.UserDetails;
  * @version 1.0.0
  * @since 1.0.0, Jun 2, 2019
  */
-@Data
 @Entity
 @Table(name = "user")
 @NoArgsConstructor
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class User extends PersistentEntity implements UserDetails{
+public class User extends PersistentEntity implements UserDetails {
 
     /**
      * The max of attempts to login
      */
     private static final int MAX_ATTEMPTS = 5;
 
+    @Getter
+    @Setter
     @NotBlank
     @Column(nullable = false)
     private String name;
 
+    @Getter
+    @Setter
     @NotBlank
     @Column(nullable = false, unique = true)
     private String email;
 
+    @Getter
+    @Setter
     @NotBlank
     @Column(nullable = false, unique = true)
     private String username;
 
+    @Getter
+    @Setter
     @NotNull
     @Column(nullable = false)
     private boolean status;
 
+    @Getter
+    @Setter
     @Column
     @JsonIgnore
     private String password;
 
+    @Getter
+    @Setter
     @Column
     private Integer loginAttemps;
 
+    @Getter
+    @Setter
     @Column
     private LocalDateTime lastLoginAttemp;
 
+    @Getter
+    @Setter
     @Column
     private LocalDateTime lastAcess;
 
@@ -74,11 +92,11 @@ public class User extends PersistentEntity implements UserDetails{
         this.loginAttemps = this.loginAttemps != null ? this.loginAttemps + 1 : 1;
         this.lastLoginAttemp = LocalDateTime.now();
     }
-    
+
     /**
      * {@inheritDoc }
      * 
-     * @return 
+     * @return
      */
     @Override
     @Transient
@@ -102,17 +120,17 @@ public class User extends PersistentEntity implements UserDetails{
     /**
      * {@inheritDoc }
      * 
-     * @return 
+     * @return
      */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.EMPTY_LIST;
+        return Collections.emptyList();
     }
 
     /**
      * {@inheritDoc }
      * 
-     * @return 
+     * @return
      */
     @Override
     public boolean isAccountNonExpired() {
@@ -122,7 +140,7 @@ public class User extends PersistentEntity implements UserDetails{
     /**
      * {@inheritDoc }
      * 
-     * @return 
+     * @return
      */
     @Override
     public boolean isCredentialsNonExpired() {
@@ -132,7 +150,7 @@ public class User extends PersistentEntity implements UserDetails{
     /**
      * {@inheritDoc }
      * 
-     * @return 
+     * @return
      */
     @Override
     public boolean isEnabled() {

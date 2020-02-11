@@ -3,17 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "axios": "^0.18.0",
-    "formik": "^1.5.7",
-    "react": "^16.8.6",
-    "react-cookie": "^4.0.0",
-    "react-dom": "^16.8.6",
-    "react-materialize": "^3.3.1",
-    "react-router-dom": "^5.0.0",
-    "react-scripts": "3.0.1"
+    "axios": "^0.19.2",
+    "bootstrap": "^4.4.1",
+    "formik": "^2.1.3",
+    "ng": "0.0.0",
+    "react": "^16.12.0",
+    "react-cookie": "^4.0.3",
+    "react-dom": "^16.12.0",
+    "react-materialize": "^3.5.9",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "^3.3.1",
+    "shards-react": "^1.0.3",
+    "styled-components": "^5.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts start --inspect 9222",
+    "debug": "react-scripts test --inspect 9222 --debug-brk index.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
