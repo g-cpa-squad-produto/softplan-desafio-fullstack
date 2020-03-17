@@ -1,0 +1,18 @@
+<form [formGroup]="formReport" (ngSubmit)="save()">
+  <div class="modal-header">
+    <h4 class="modal-title">Meu parecer</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div class="form-group">
+      <textarea formControlName="text" rows="4" class="form-control"></textarea>
+    </div> 
+  </div>
+
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary" [disabled]="formReport.invalid">Salvar</button>
+  </div>
+</form>

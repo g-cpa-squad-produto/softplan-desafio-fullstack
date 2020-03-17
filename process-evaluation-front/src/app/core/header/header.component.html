@@ -1,0 +1,13 @@
+<header>
+  <nav class="navbar navbar-fixed-top bg-primary">    
+    <a class="navbar-brand text-light col-md-6 offset-3 text-center" [routerLink]="['/home']">
+      <img src="https://www.softplan.com.br/wp-content/themes/softplan-2019/imagens/logo-softplan.svg" 
+        width="200" height="40">
+    </a>    
+  </nav>
+  <div *ngIf="(user$ | async) as user" class="bg-primary">
+    <div class="col-md-6 offset-md-3 text-center">
+      <a href="javascript:;" (click)="logout()" class="text-light text-center">Bem vind@, {{ user }}</a>
+    </div>
+  </div>
+</header>

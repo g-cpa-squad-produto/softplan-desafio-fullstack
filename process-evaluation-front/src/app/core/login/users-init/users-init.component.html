@@ -1,0 +1,24 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="modal-basic-title">Primeiro login? Utilize um dos usuários abaixo</h5>
+</div>
+<div class="modal-body">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th class="border-top-0">Nome</th>
+        <th class="border-top-0">Login</th>
+        <th class="border-top-0">Senha</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.name }}</td>
+        <td>{{ user.login }}</td>
+        <td>{{ user.password }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" (click)="activeModal.close('Ok')">Ok, entendi!</button>
+</div>

@@ -1,0 +1,11 @@
+<div *ngIf="isAdmin()">
+  <process-home-admin></process-home-admin>
+</div>
+
+<div *ngIf="isScreening()">
+  <process-home-screening></process-home-screening>
+</div>
+
+<div *ngIf="isCloser()">
+  <process-home-closer></process-home-closer>
+</div>

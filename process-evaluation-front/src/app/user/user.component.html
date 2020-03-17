@@ -1,0 +1,53 @@
+<div class="mt-2">
+  <div class="row mt-2">
+    <div class="col-6">
+      <h3>Cadastro de Usuário</h3>
+    </div>
+  </div>
+  <div class="mt-3">
+    <form [formGroup]="formUser" (ngSubmit)="save()" autocomplete="off">
+      <div>
+        <div class="form-group">
+          <input type="hidden" id="idUser" name="idUser" formControlName="idUser">
+          <label for="name">Nome</label>
+          <input type="text" id="name" name="name" formControlName="name" class="form-control">
+        </div>
+        <div class="form-row">
+          <div class="form-group col-6">
+            <label for="login">Login</label>
+            <input type="text" id="login" name="login" formControlName="login" class="form-control">
+          </div>
+          <div class="form-group col-6">
+            <label for="password">Senha</label>
+            <input type="password" id="password" formControlName="password" class="form-control">
+            <div *ngIf="isUpdate()">
+              <small class="text-danger d-block mt-2">
+                Se o campo ficar em branco, a senha não será alterada.
+              </small>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-12">
+            <div class="form-check form-check-inline">
+              <input type="radio" id="admin" name="role" formControlName="role" value="ROLE_ADMIN" class="form-check-input">
+              <label class="form-check-label" for="admin">Administrador</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="radio" id="screning" name="role" formControlName="role" value="ROLE_SCREENING" class="form-check-input">
+              <label class="form-check-label" for="screning">Triador</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="radio" id="closer" name="role" formControlName="role" value="ROLE_CLOSER" class="form-check-input">
+              <label class="form-check-label" for="closer">Finalizador</label>
+            </div>
+          </div>          
+        </div>        
+      </div>
+      <div class="pt-2">
+        <button type="button" [routerLink]="['/home']" class="btn btn-warning mr-2">Cancelar</button>
+        <button type="submit" [disabled]="disabled()" class="btn btn-primary">Salvar</button>
+      </div>
+    </form>
+  </div>
+</div>

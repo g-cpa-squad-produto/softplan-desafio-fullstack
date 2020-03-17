@@ -1,0 +1,25 @@
+<div class="container text-center mt-5 py-4 px-4" style="width: 45em;">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <form [formGroup]="formLogin" class="form-signin" (ngSubmit)="login()" autocomplete="off">
+        <img src="https://www.softplan.com.br/wp-content/themes/softplan-2019/imagens/logo-softplan-blue.svg" 
+          width="200" height="100">
+        
+        <input type="text" id="username" name="username" formControlName="username"
+          placeholder="Insira o seu login" class="form-control rounded-0">
+
+        <input type="password" id="password" name="password" formControlName="password"
+          placeholder="Insira a sua senha" class="form-control rounded-0">
+
+        <button type="submit" class="btn btn-lg btn-dark btn-block mb-3 mt-3"
+          [disabled]="formLogin.invalid">Entrar</button>
+
+        <div class="mb-3 mt-3">
+          <a id="showUsers" href="javascript:;" (click)="showUsers()" class="text-dark float-center">
+            Usuários pré-fixados
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
