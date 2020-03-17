@@ -42,7 +42,8 @@ export class ProcessComponent implements OnInit {
     this.processService.findById(id).subscribe(
       res => {     
         this.update = true;   
-        this.reports = [...res.reports];
+        this.reports = this.reports.concat(res.reports);
+        this.reports.map(r => r.name = r.author.toString());
         this.formProcess.patchValue(res);
         console.log(this.reports);
         this.formProcess.disable();
