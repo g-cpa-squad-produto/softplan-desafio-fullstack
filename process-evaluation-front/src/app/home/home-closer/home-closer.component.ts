@@ -37,7 +37,7 @@ export class HomeCloserComponent {
         this.toastService.showSuccess('Parecer submetido com sucesso!');
         this.findProcessList();
       },
-      reason => this.toastService.showError(reason)
+      reason => console.log(reason)
     )
   }
 
