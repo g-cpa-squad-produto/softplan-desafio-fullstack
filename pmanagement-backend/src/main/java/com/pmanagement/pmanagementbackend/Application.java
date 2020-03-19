@@ -62,7 +62,7 @@ public class Application extends SpringBootServletInitializer {
         final User user = new User();
 
         user.setName("Administrator");
-        user.setEmail("mail@mai.com");
+        user.setEmail("mail@mail.com");
         user.setUsername(ApplicationConstants.DEFAULT_USERNAME);
         user.setPassword(ApplicationConstants.DEFAULT_PASSWORD);
         user.setStatus(Boolean.TRUE);

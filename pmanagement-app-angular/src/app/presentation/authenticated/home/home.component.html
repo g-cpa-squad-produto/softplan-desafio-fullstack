@@ -1,0 +1,29 @@
+<mat-toolbar color='primary'>
+    <div layout='row'>
+        <h1>home works!</h1>
+    </div>
+    <div layout="row">
+        <div [matMenuTriggerFor]='menu' layout='row' style='cursor: pointer; color: #ffffff' layout-margin
+            layout-align='end center'>
+            <button *ngIf="currentUser" mat-button class='header-button' color='primary' style="color: #ffffff;">
+                {{currentUser?.name ? currentUser?.name : currentUser?.email}}
+                <mat-icon>keyboard_arrow_down</mat-icon>
+            </button>
+        </div>
+        <button *ngIf="!currentUser" mat-button class='header-button' color='primary' style="color: #ffffff;" routerLink="/login">Login</button>
+    </div>
+    <mat-menu #menu='matMenu'>
+        <button mat-menu-item routerLink="/logout" color='warn' style='color: #4C4C4C'>
+            <mat-icon>power_settings_new</mat-icon>
+            <span>Sair</span>
+        </button>
+    </mat-menu>
+</mat-toolbar>
+
+<mat-card  *ngIf="currentUser">
+    <mat-card-title>Bem vindo {{currentUser.name}}</mat-card-title>
+    <!-- <mat-card-subtitle>Subtítulo do Card</mat-card-subtitle>
+    <mat-card-content>Conteúdo do card!</mat-card-content> -->
+</mat-card>
+
+<router-outlet></router-outlet>

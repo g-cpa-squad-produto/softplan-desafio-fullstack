@@ -16,7 +16,7 @@ api.interceptors.request.use(async config => {
 api.interceptors.response.use(async response => {
     return response;
 }, async error => {
-    if (error.response.status === 403) {
+        if (error.response !== undefined && error.response.status === 403) {
         logout();
         this.props.history.push("/");
         return null;

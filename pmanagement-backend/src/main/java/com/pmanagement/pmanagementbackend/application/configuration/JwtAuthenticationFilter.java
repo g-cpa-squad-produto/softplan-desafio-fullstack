@@ -1,5 +1,7 @@
 package com.pmanagement.pmanagementbackend.application.configuration;
 
+import com.google.gson.Gson;
+import com.pmanagement.pmanagementbackend.domain.dto.UserDTO;
 import com.pmanagement.pmanagementbackend.domain.entity.User;
 import com.pmanagement.pmanagementbackend.domain.service.TokenService;
 import java.io.IOException;
@@ -54,9 +56,15 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         final User user = (User) authentication.getPrincipal();
         final String token = TokenService.createAuthentication(user);
 
+        final UserDTO userDTO = new UserDTO();
+        userDTO.toDto(user);
+        userDTO.setToken(token);
+
         PrintWriter out = response.getWriter();
-        out.print(token);
+        out.print(new Gson().toJson(userDTO));
         out.flush();
+
+        response.setHeader(ApplicationConstants.HEADER_AUTHORIZATION, token);
 
         getSuccessHandler().onAuthenticationSuccess(request, response, authentication);
     }

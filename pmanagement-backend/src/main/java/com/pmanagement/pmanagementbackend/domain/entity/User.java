@@ -1,6 +1,9 @@
 package com.pmanagement.pmanagementbackend.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
@@ -68,6 +71,7 @@ public class User extends PersistentEntity implements UserDetails {
     @Setter
     @Column
     @JsonIgnore
+    @JsonProperty(access = Access.WRITE_ONLY)
     private String password;
 
     @Getter

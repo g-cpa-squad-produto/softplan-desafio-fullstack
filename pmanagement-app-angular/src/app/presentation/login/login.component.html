@@ -1,0 +1,31 @@
+<div class="main-div">
+    <mat-card class="z-depth center" flex="50">
+        <mat-card-header class="card-center">
+            <mat-card-title>Login</mat-card-title>
+            <mat-card-subtitle class="alert alert-info">
+                Username: admin<br />
+                Password: password
+            </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <form class="example-form" [formGroup]="loginForm">
+                <div layout="row">
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Username" formControlName="username" name="username" required>
+                    </mat-form-field>
+                </div>
+                <div layout="row">
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Password" formControlName="password" type="password"
+                            name="password" required>
+                    </mat-form-field>
+                </div>
+            </form>
+            <!-- <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner> -->
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button routerLink="/">Voltar</button>
+            <button mat-raised-button (click)="onSubmit()" color="primary">Login</button>
+        </mat-card-actions>
+    </mat-card>
+</div>
