@@ -79,3 +79,27 @@ Em caso de dúvidas, envie um email para [g_cpa_squad_produto@softplan.com.br](m
 
 
 **Até breve**
+
+/*URLS da api*/
+
+http://localhost:5000/api/auth/signup
+
+http://localhost:5000/api/auth/signin
+
+http://localhost:5000/api/auth/signup
+
+http://localhost:5000/api/process
+http://localhost:5000/api/process/3 **delete
+http://localhost:5000/api/users
+http://localhost:5000/api/auth/signin
+http://localhost:5000/api/users/edit/3
+http://localhost:5000/api/process
+http://localhost:5000/api/process/6/finish
+http://localhost:5000/api/process/pending
+http://localhost:5000/api/process/5/reviews
+
+Incluir na tabela de ROLES
+INSERT INTO roles(name) VALUES('ROLE_USER');
+INSERT INTO roles(name) VALUES('ROLE_ADMIN');
+INSERT INTO roles(name) VALUES('ROLE_TRIAGE_OFFICER');
+INSERT INTO roles(name) VALUES('ROLE_FINISHER');
