@@ -1,10 +1,10 @@
-package com.example.sotfplanprocesses;
+package com.softplan.processesapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SotfplanProcessesApplicationTests {
+class ProcessesapiApplicationTests {
 
 	@Test
 	void contextLoads() {

@@ -1,0 +1,3 @@
+
+# mvn -Dflyway.url=jdbc:mysql://localhost:3444/softplan-processes -Dflyway.user=root -Dflyway.password=password -Dflyway\
+#   .locations=filesystem:db/migration
