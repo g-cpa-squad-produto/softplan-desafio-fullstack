@@ -2,35 +2,64 @@ version: "3.7"
 
 # Define services
 services:
-  processesapi:
-    image: processesapi:latest
-    network_mode: bridge
+  api:
+    # image: processesapi:latest
+    build:
+      context: processesapi
+      dockerfile: Dockerfile
     container_name: processes-api
-    expose:
-      - 8080
+    environment:
+      - 'spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect'
+      - 'spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect'
+      - 'spring.jpa.hibernate.ddl-auto=validate'
+      - 'spring.jpa.show-sql=true'
+      - 'spring.datasource.hikari.connectionTimeout=20000'
+      - 'spring.datasource.hikari.maximumPoolSize=5'
+      - 'spring.datasource.initialization-mode=always'
+      - 'spring.datasource.driver-class-name=org.postgresql.Driver'
+      - 'spring.datasource.platform=postgres'
+      - 'spring.datasource.url=jdbc:postgresql://processes-database:5432/processes'
+      - 'spring.datasource.username=postgres'
+      - 'spring.datasource.password=password'
+      - 'spring.datasource.schema=processes'
+      - 'flyway.locations=filesystem:db/migrations'
+      - 'flyway.user=postgres'
+      - 'flyway.password=password'
+      - 'flyway.schemas=processes'
+      - 'flyway.url=jdbc:postgresql://processes-database:5432/processes'
     ports:
       - 8080:8080
+    expose: 
+      - 8080
     restart: unless-stopped
     depends_on:
       - database
-    links:
-      - database
+    networks: 
+      - backend
 
   database:
-    image: postgres:latest
-    network_mode: bridge
+    # image: postgres:latest
+    build:
+      context: processesapi
+      dockerfile: Dockerfile
     container_name: processes-database
     volumes:
       - postgres-data:/var/lib/postgresql/data
-    expose:
-    - 5432
+    expose: 
+      - 5432
     ports:
       - 5432:5432
     environment:
          - POSTGRES_PASSWORD=password
          - POSTGRES_USER=postgres
          - POSTGRES_DB=processes
+         - POSTGRES_SCHEMA=processes
     restart: unless-stopped
+    networks: 
+      - backend
+
+networks: 
+  backend:
 
 volumes:
   postgres-data:
