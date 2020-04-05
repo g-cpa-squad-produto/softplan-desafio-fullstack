@@ -25,4 +25,9 @@ public class GetUserService implements IGetUserService {
     public Optional<User> getOne(Long userId) {
         return userRepository.findById(userId);
     }
+
+    @Override
+    public Optional<User> getByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
 }

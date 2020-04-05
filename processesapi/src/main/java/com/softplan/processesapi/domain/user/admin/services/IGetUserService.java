@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface IGetUserService {
     List<User> getAll();
     Optional<User> getOne(Long userId);
+    Optional<User> getByEmail(String email);
 }

@@ -35,4 +35,11 @@ class GetUserServiceTest {
         getUserService.getOne(userId);
         verify(userRepository, times(1)).findById(userId);
     }
+
+    @Test
+    void getByEmail() {
+        String email = new String("teste@teste.com.br");
+        getUserService.getByEmail(email);
+        verify(userRepository, times(1)).findByEmail(email);
+    }
 }

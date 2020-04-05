@@ -1,5 +1,7 @@
 package com.softplan.processesapi.application.controllers.publiccontrollers;
 
+import com.softplan.processesapi.application.controllers.responsestatus.ResourceNotFoundException;
+import com.softplan.processesapi.application.controllers.responsestatus.WrongCredentialsException;
 import com.softplan.processesapi.domain.user.admin.models.Admin;
 import com.softplan.processesapi.domain.user.admin.services.ICreateUserService;
 import com.softplan.processesapi.domain.user.admin.services.IGetUserService;
@@ -22,7 +24,25 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public User post(@RequestBody Admin user) {
-        return this.createUserService.post(user);
+    public User register(@RequestBody Admin admin) {
+        return this.createUserService.post(admin);
+    }
+
+    @PostMapping("/login")
+    public User login(@RequestBody Admin admin) throws ResourceNotFoundException, WrongCredentialsException {
+
+        if (admin.getPassword() == null || admin.getPassword().isEmpty() || admin.getEmail() == null ||
+                admin.getEmail().isEmpty()) {
+            throw new WrongCredentialsException("E-mail and password are required fields!");
+        }
+
+        User user = getUserService.getByEmail(admin.getEmail()).orElseThrow(
+                () -> new ResourceNotFoundException("Admin not found with email " + admin.getEmail()));
+
+        if (!user.getPassword().equals(admin.getPassword())) {
+            throw new WrongCredentialsException("Wrong password!");
+        }
+
+        return user;
     }
 }
