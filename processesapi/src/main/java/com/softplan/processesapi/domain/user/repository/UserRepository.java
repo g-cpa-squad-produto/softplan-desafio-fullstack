@@ -1,4 +1,4 @@
-package com.softplan.processesapi.repository;
+package com.softplan.processesapi.domain.user.repository;
 
 import com.softplan.processesapi.domain.user.models.User;
 import org.springframework.data.repository.CrudRepository;

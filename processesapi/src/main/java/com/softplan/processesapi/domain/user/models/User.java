@@ -2,6 +2,7 @@ package com.softplan.processesapi.domain.user.models;
 
 import com.softplan.processesapi.domain.user.enums.UserType;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
@@ -10,12 +11,14 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "users")
 @DiscriminatorColumn(name="type", discriminatorType = DiscriminatorType.STRING)
-public class User {
+public abstract class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +29,8 @@ public class User {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    private UserType type;
+    @Column(name = "type", updatable = false, insertable = false)
+    private UserType type = UserType.ADMIN;
 
     public long getId() {
         return id;

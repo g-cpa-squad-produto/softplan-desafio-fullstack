@@ -1,6 +1,6 @@
 package com.softplan.processesapi.domain.user.admin.services;
 
-import com.softplan.processesapi.repository.UserRepository;
+import com.softplan.processesapi.domain.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 @Service

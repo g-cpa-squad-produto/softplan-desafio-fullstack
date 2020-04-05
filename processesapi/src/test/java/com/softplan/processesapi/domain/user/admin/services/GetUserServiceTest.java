@@ -1,6 +1,6 @@
 package com.softplan.processesapi.domain.user.admin.services;
 
-import com.softplan.processesapi.repository.UserRepository;
+import com.softplan.processesapi.domain.user.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
@@ -9,7 +9,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
