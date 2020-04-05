@@ -1,7 +1,7 @@
 package com.softplan.processesapi.application.controllers.publiccontrollers;
 
-import com.softplan.processesapi.application.controllers.responsestatus.ResourceNotFoundException;
-import com.softplan.processesapi.application.controllers.responsestatus.WrongCredentialsException;
+import com.softplan.processesapi.infrastructure.responsestatus.ResourceNotFoundException;
+import com.softplan.processesapi.infrastructure.responsestatus.WrongCredentialsException;
 import com.softplan.processesapi.domain.user.admin.models.Admin;
 import com.softplan.processesapi.domain.user.admin.services.ICreateUserService;
 import com.softplan.processesapi.domain.user.admin.services.IGetUserService;
