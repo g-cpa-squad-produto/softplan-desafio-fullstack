@@ -1,5 +1,6 @@
 package com.softplan.processesapi.domain.user.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.softplan.processesapi.domain.process.models.ProcessUser;
 import com.softplan.processesapi.domain.user.enums.UserType;
 
@@ -37,6 +38,7 @@ public class User {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
+    @JsonIgnoreProperties("user")
     private List<ProcessUser> processUsers;
 
     public long getId() {

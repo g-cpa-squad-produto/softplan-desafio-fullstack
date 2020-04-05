@@ -1,5 +1,6 @@
 package com.softplan.processesapi.domain.process.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.softplan.processesapi.domain.user.models.User;
 
 import javax.persistence.CascadeType;
@@ -20,7 +21,7 @@ public class ProcessUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "processid")
     private Process process;
 
