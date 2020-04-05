@@ -12,11 +12,11 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
         String auth = request.getHeader("Authorization");
         String uri = request.getRequestURI();
 
-        if ((uri == null || uri.contains("auth")) && (auth == null || auth.isEmpty())) {
+        if ((uri == null || !uri.contains("auth")) && (auth == null || auth.isEmpty())) {
             response.setStatus(401);
             return false;
         }
 
-        return false;
+        return true;
     }
 }

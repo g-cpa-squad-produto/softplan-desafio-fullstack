@@ -10,6 +10,16 @@ import javax.persistence.Entity;
 @DiscriminatorValue("ADMIN")
 public class Admin extends User {
 
+    public Admin() {
+    }
+
+    public Admin(User user) {
+        this.setId(user.getId());
+        this.setName(user.getName());
+        this.setPassword(user.getPassword());
+        this.setEmail(user.getEmail());
+    }
+
     @Override
     public UserType getType() {
         return UserType.ADMIN;

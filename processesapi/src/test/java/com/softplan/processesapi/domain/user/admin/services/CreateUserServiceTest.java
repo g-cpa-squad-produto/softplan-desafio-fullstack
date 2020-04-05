@@ -1,7 +1,10 @@
 package com.softplan.processesapi.domain.user.admin.services;
 
+import com.softplan.processesapi.domain.user.admin.models.Admin;
+import com.softplan.processesapi.domain.user.finisher.models.Finisher;
 import com.softplan.processesapi.domain.user.models.User;
 import com.softplan.processesapi.domain.user.repository.UserRepository;
+import com.softplan.processesapi.domain.user.triator.models.Triator;
 import org.junit.jupiter.api.Test;
 
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,8 +30,20 @@ class CreateUserServiceTest {
     private UserRepository userRepository;
 
     @Test
-    void post() {
-        createUserService.post(mock(User.class));
-        verify(userRepository, times(1)).save(any(User.class));
+    void shouldCallUserRepositoryWithAdminWithParameter() {
+        createUserService.createAdmin(mock(Admin.class));
+        verify(userRepository, times(1)).save(any(Admin.class));
+    }
+
+    @Test
+    void shouldCallUserRepositoryWithTriatorWithParameter() {
+        createUserService.createTriator(mock(Triator.class));
+        verify(userRepository, times(1)).save(any(Triator.class));
+    }
+
+    @Test
+    void shouldCallUserRepositoryWithFinisherWithParameter() {
+        createUserService.createFinisher(mock(Finisher.class));
+        verify(userRepository, times(1)).save(any(Finisher.class));
     }
 }

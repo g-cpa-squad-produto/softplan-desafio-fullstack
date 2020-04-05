@@ -10,6 +10,16 @@ import javax.persistence.Entity;
 @DiscriminatorValue("TRIATOR")
 public class Triator extends User {
 
+    public Triator() {
+    }
+
+    public Triator(User user) {
+        this.setId(user.getId());
+        this.setName(user.getName());
+        this.setPassword(user.getPassword());
+        this.setEmail(user.getEmail());
+    }
+
     @Override
     public UserType getType() {
         return UserType.TRIATOR;

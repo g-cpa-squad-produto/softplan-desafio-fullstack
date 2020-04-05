@@ -27,7 +27,7 @@ public class AuthController {
 
     @PostMapping("/register")
     public User register(@RequestBody Admin admin) {
-        return this.createUserService.post(admin);
+        return this.createUserService.createAdmin(admin);
     }
 
     @PostMapping("/login")

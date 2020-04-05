@@ -10,6 +10,16 @@ import javax.persistence.Entity;
 @DiscriminatorValue("FINISHER")
 public class Finisher extends User {
 
+    public Finisher() {
+    }
+
+    public Finisher(User user) {
+        this.setId(user.getId());
+        this.setName(user.getName());
+        this.setPassword(user.getPassword());
+        this.setEmail(user.getEmail());
+    }
+
     @Override
     public UserType getType() {
         return UserType.FINISHER;
