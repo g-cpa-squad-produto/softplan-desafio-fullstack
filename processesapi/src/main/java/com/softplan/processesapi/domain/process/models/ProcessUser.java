@@ -24,6 +24,14 @@ public class ProcessUser {
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public Process getProcess() {
         return process;
     }
