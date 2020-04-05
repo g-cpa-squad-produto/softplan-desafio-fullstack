@@ -2,9 +2,8 @@ package com.softplan.processesapi.application.controllers.publiccontrollers;
 
 import com.softplan.processesapi.infrastructure.responsestatus.ResourceNotFoundException;
 import com.softplan.processesapi.infrastructure.responsestatus.WrongCredentialsException;
-import com.softplan.processesapi.domain.user.admin.models.Admin;
-import com.softplan.processesapi.domain.user.admin.services.ICreateUserService;
-import com.softplan.processesapi.domain.user.admin.services.IGetUserService;
+import com.softplan.processesapi.domain.user.subdomains.admin.services.ICreateUserService;
+import com.softplan.processesapi.domain.user.subdomains.admin.services.IGetUserService;
 import com.softplan.processesapi.domain.user.models.User;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,23 +25,24 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public User register(@RequestBody Admin admin) {
-        return this.createUserService.createAdmin(admin);
+    public User register(@RequestBody User user) {
+        return this.createUserService.createUser(user);
     }
 
     @PostMapping("/login")
-    public User login(HttpServletResponse response, @RequestBody Admin admin) throws ResourceNotFoundException,
+    public User login(HttpServletResponse response, @RequestBody User user) throws ResourceNotFoundException,
             WrongCredentialsException {
 
-        if (admin.getPassword() == null || admin.getPassword().isEmpty() || admin.getEmail() == null ||
-                admin.getEmail().isEmpty()) {
+        if (user.getPassword() == null || user.getPassword().isEmpty() || user.getEmail() == null ||
+                user.getEmail().isEmpty()) {
             throw new WrongCredentialsException("E-mail and password are required fields!");
         }
 
-        User user = getUserService.getByEmail(admin.getEmail()).orElseThrow(
-                () -> new ResourceNotFoundException("Admin not found with email " + admin.getEmail()));
+        User finalUser = user;
+        user = getUserService.getByEmail(user.getEmail()).orElseThrow(
+                () -> new ResourceNotFoundException("Admin not found with email " + finalUser.getEmail()));
 
-        if (!user.getPassword().equals(admin.getPassword())) {
+        if (!user.getPassword().equals(user.getPassword())) {
             throw new WrongCredentialsException("Wrong password!");
         }
 

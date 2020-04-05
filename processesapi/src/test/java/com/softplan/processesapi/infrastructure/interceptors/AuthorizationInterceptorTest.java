@@ -1,6 +1,6 @@
 package com.softplan.processesapi.infrastructure.interceptors;
 
-import com.softplan.processesapi.domain.user.admin.services.aux.CustomHttpServletRequest;
+import com.softplan.processesapi.domain.user.subdomains.admin.services.aux.CustomHttpServletRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;

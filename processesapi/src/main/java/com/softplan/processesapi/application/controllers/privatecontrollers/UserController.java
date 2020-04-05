@@ -1,15 +1,11 @@
 package com.softplan.processesapi.application.controllers.privatecontrollers;
 
 import com.softplan.processesapi.application.controllers.IRestController;
-import com.softplan.processesapi.domain.user.admin.models.Admin;
-import com.softplan.processesapi.domain.user.admin.services.ICreateUserService;
-import com.softplan.processesapi.domain.user.admin.services.IDeleteUserService;
-import com.softplan.processesapi.domain.user.admin.services.IGetUserService;
-import com.softplan.processesapi.domain.user.admin.services.IUpdateUserService;
-import com.softplan.processesapi.domain.user.enums.UserType;
-import com.softplan.processesapi.domain.user.finisher.models.Finisher;
+import com.softplan.processesapi.domain.user.subdomains.admin.services.ICreateUserService;
+import com.softplan.processesapi.domain.user.subdomains.admin.services.IDeleteUserService;
+import com.softplan.processesapi.domain.user.subdomains.admin.services.IGetUserService;
+import com.softplan.processesapi.domain.user.subdomains.admin.services.IUpdateUserService;
 import com.softplan.processesapi.domain.user.models.User;
-import com.softplan.processesapi.domain.user.triator.models.Triator;
 import com.softplan.processesapi.infrastructure.responsestatus.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,22 +51,22 @@ public class UserController implements IRestController<User> {
     @Override
     @PostMapping()
     public User post(@RequestBody User user) {
-        if (user.getType() == UserType.ADMIN) {
-            Admin newUser = new Admin(user);
-            return createUserService.createAdmin(newUser);
-        } else if (user.getType() == UserType.TRIATOR) {
-            Triator newUser = new Triator(user);
-            return createUserService.createTriator(newUser);
-        } else {
-            Finisher newUser = new Finisher(user);
-            return createUserService.createFinisher(newUser);
-        }
+        return createUserService.createUser(user);
     }
 
     @Override
     @PutMapping()
-    public User put(@RequestBody User user) {
-        return updateUserService.put(user);
+    public User put(@RequestBody User user) throws ResourceNotFoundException {
+        User newUser = getUserService.getOne(user.getId()).orElseThrow(
+                () -> new ResourceNotFoundException("Doesn't exist any user with id " + user.getId()));
+
+        newUser.setName(user.getName() != null && !user.getName().isEmpty() ? user.getName() : newUser.getName());
+        newUser.setEmail(user.getEmail() != null && !user.getEmail().isEmpty() ? user.getEmail() : newUser.getEmail());
+        newUser.setPassword(user.getPassword() != null && !user.getPassword().isEmpty() ? user.getPassword() :
+                newUser.getPassword());
+        newUser.setType(user.getType() != null ? user.getType() : newUser.getType());
+
+        return updateUserService.put(newUser);
     }
 
     @Override

@@ -28,7 +28,7 @@ public interface IRestController<T> {
             throws IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException;
 
     @PutMapping()
-    public T put(@RequestBody T t);
+    public T put(@RequestBody T t) throws ResourceNotFoundException;
 
     @DeleteMapping()
     public void delete(@PathVariable Long id);

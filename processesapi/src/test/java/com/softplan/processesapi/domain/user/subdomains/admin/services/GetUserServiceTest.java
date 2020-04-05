@@ -1,4 +1,4 @@
-package com.softplan.processesapi.domain.user.admin.services;
+package com.softplan.processesapi.domain.user.subdomains.admin.services;
 
 import com.softplan.processesapi.domain.user.repository.UserRepository;
 import org.junit.jupiter.api.Test;
@@ -9,23 +9,37 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 @RunWith(PowerMockRunner.class)
-class DeleteUserServiceTest {
+class GetUserServiceTest {
 
     @InjectMocks
-    private DeleteUserService deleteUserService;
+    private GetUserService getUserService;
 
     @Mock
     private UserRepository userRepository;
 
     @Test
-    void delete() {
+    void getAll() {
+        getUserService.getAll();
+        verify(userRepository, times(1)).findAll();
+    }
+
+    @Test
+    void getOne() {
         Long userId = Long.MAX_VALUE;
-        deleteUserService.delete(userId);
-        verify(userRepository, times(1)).deleteById(userId);
+        getUserService.getOne(userId);
+        verify(userRepository, times(1)).findById(userId);
+    }
+
+    @Test
+    void getByEmail() {
+        String email = new String("teste@teste.com.br");
+        getUserService.getByEmail(email);
+        verify(userRepository, times(1)).findByEmail(email);
     }
 }

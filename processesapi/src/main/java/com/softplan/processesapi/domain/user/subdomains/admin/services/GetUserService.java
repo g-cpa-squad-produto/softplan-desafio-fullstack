@@ -1,4 +1,4 @@
-package com.softplan.processesapi.domain.user.admin.services;
+package com.softplan.processesapi.domain.user.subdomains.admin.services;
 
 import com.softplan.processesapi.domain.user.models.User;
 import com.softplan.processesapi.domain.user.repository.UserRepository;

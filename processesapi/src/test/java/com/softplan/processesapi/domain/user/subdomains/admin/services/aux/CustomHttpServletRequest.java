@@ -1,4 +1,4 @@
-package com.softplan.processesapi.domain.user.admin.services.aux;
+package com.softplan.processesapi.domain.user.subdomains.admin.services.aux;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;

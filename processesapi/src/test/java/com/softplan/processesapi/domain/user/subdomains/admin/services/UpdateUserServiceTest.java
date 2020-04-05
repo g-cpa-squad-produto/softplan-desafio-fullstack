@@ -1,6 +1,8 @@
-package com.softplan.processesapi.domain.user.admin.services;
+package com.softplan.processesapi.domain.user.subdomains.admin.services;
 
+import com.softplan.processesapi.domain.user.models.User;
 import com.softplan.processesapi.domain.user.repository.UserRepository;
+import com.softplan.processesapi.infrastructure.responsestatus.ResourceNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
@@ -9,37 +11,24 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 @RunWith(PowerMockRunner.class)
-class GetUserServiceTest {
+class UpdateUserServiceTest {
 
     @InjectMocks
-    private GetUserService getUserService;
+    private UpdateUserService updateUserService;
 
     @Mock
     private UserRepository userRepository;
 
     @Test
-    void getAll() {
-        getUserService.getAll();
-        verify(userRepository, times(1)).findAll();
-    }
-
-    @Test
-    void getOne() {
-        Long userId = Long.MAX_VALUE;
-        getUserService.getOne(userId);
-        verify(userRepository, times(1)).findById(userId);
-    }
-
-    @Test
-    void getByEmail() {
-        String email = new String("teste@teste.com.br");
-        getUserService.getByEmail(email);
-        verify(userRepository, times(1)).findByEmail(email);
+    void put() throws ResourceNotFoundException {
+        updateUserService.put(mock(User.class));
+        verify(userRepository, times(1)).save(any(User.class));
     }
 }
