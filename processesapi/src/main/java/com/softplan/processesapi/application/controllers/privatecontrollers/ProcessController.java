@@ -2,6 +2,9 @@ package com.softplan.processesapi.application.controllers.privatecontrollers;
 
 import com.softplan.processesapi.domain.process.models.Process;
 import com.softplan.processesapi.domain.process.models.ProcessUser;
+import com.softplan.processesapi.domain.user.enums.UserType;
+import com.softplan.processesapi.domain.user.models.User;
+import com.softplan.processesapi.domain.user.subdomains.admin.services.IGetUserService;
 import com.softplan.processesapi.domain.user.subdomains.finisher.services.IFinishProcessService;
 import com.softplan.processesapi.domain.user.subdomains.triator.services.IAddFinisherService;
 import com.softplan.processesapi.domain.user.subdomains.triator.services.ICreateProcessService;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/processes")
@@ -26,28 +30,54 @@ public class ProcessController {
     private IAddFinisherService addFinisherService;
     private ICreateProcessService createProcessService;
     private IFinishProcessService finishProcessService;
+    private IGetUserService getUserService;
 
     public ProcessController(IGetProcessService getProcessService, IAddFinisherService addFinisherService,
-                             ICreateProcessService createProcessService, IFinishProcessService finishProcessService) {
+                             ICreateProcessService createProcessService, IFinishProcessService finishProcessService,
+                             IGetUserService getUserService) {
         this.getProcessService = getProcessService;
         this.addFinisherService = addFinisherService;
         this.createProcessService = createProcessService;
         this.finishProcessService = finishProcessService;
+        this.getUserService = getUserService;
     }
 
-    @GetMapping("/")
+    @GetMapping()
     public List<Process> getAll() {
         return getProcessService.getAll();
     }
 
-    @PostMapping("/")
+    @PostMapping()
     public Process post(@RequestBody Process process) {
         return createProcessService.createProcess(process);
     }
 
     @PatchMapping("/addFinisher")
-    public ProcessUser addFinisher(@RequestBody ProcessUser processUser) {
-        return addFinisherService.addFinisher(processUser);
+    public Process addFinisher(@RequestBody ProcessUser processUser) throws WrongCredentialsException {
+
+        Optional<User> finisher = getUserService.getOne(processUser.getUser().getId());
+        Optional<Process> process = getProcessService.getOne(processUser.getProcess().getId());
+
+        if (!process.isPresent()) {
+            throw new WrongCredentialsException("This process not exists");
+        }
+
+        if (process.get().getDescription() != null && !process.get().getDescription().isEmpty()) {
+            throw new WrongCredentialsException("This process is finished");
+        }
+
+        if (!finisher.isPresent() || finisher.get().getType() != UserType.FINISHER) {
+            throw new WrongCredentialsException("This user not is a finisher");
+        }
+
+        Optional<ProcessUser> sameProcessUser =
+                getProcessService.getOneByUserAndProcess(process.get(), finisher.get());
+
+        if (sameProcessUser.isPresent()) {
+            throw new WrongCredentialsException("This finisher is already in the process");
+        }
+
+        return addFinisherService.addFinisher(process.get(), finisher.get());
     }
 
     @PatchMapping("/finish/{processId}")

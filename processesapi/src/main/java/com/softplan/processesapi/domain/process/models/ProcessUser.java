@@ -2,11 +2,13 @@ package com.softplan.processesapi.domain.process.models;
 
 import com.softplan.processesapi.domain.user.models.User;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -19,9 +21,11 @@ public class ProcessUser {
     private long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "processid")
     private Process process;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userid")
     private User user;
 
     public long getId() {

@@ -17,7 +17,7 @@ import java.util.Optional;
 @RequestMapping("/anything")
 public interface IRestController<T> {
 
-    @GetMapping("/")
+    @GetMapping()
     public List<T> getAll();
 
     @GetMapping("/{id}")
