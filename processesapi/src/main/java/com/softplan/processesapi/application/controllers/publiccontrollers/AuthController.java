@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
+
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -29,7 +31,8 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public User login(@RequestBody Admin admin) throws ResourceNotFoundException, WrongCredentialsException {
+    public User login(HttpServletResponse response, @RequestBody Admin admin) throws ResourceNotFoundException,
+            WrongCredentialsException {
 
         if (admin.getPassword() == null || admin.getPassword().isEmpty() || admin.getEmail() == null ||
                 admin.getEmail().isEmpty()) {
@@ -42,6 +45,8 @@ public class AuthController {
         if (!user.getPassword().equals(admin.getPassword())) {
             throw new WrongCredentialsException("Wrong password!");
         }
+
+        response.addHeader("Authorization", "token");
 
         return user;
     }
