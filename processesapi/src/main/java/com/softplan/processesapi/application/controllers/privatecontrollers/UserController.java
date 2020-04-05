@@ -37,7 +37,7 @@ public class UserController implements IRestController<User> {
 
     @Override
     @GetMapping("/")
-    public List getAll() {
+    public List<User> getAll() {
         return getUserService.getAll();
     }
 
