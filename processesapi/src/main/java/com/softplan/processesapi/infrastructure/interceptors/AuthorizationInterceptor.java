@@ -10,11 +10,13 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
 
         String auth = request.getHeader("Authorization");
-        if (auth == null || auth.isEmpty()) {
+        String uri = request.getRequestURI();
+
+        if ((uri == null || uri.contains("auth")) && (auth == null || auth.isEmpty())) {
             response.setStatus(401);
             return false;
         }
 
-        return true;
+        return false;
     }
 }
