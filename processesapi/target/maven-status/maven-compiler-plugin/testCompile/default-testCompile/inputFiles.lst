@@ -5,8 +5,6 @@
 /home/reginaldo/projects/softplan/softplan-desafio-fullstack/processesapi/src/test/java/com/softplan/processesapi/domain/user/subdomains/admin/services/UpdateUserServiceTest.java
 /home/reginaldo/projects/softplan/softplan-desafio-fullstack/processesapi/src/test/java/com/softplan/processesapi/domain/user/subdomains/admin/services/DeleteUserServiceTest.java
 /home/reginaldo/projects/softplan/softplan-desafio-fullstack/processesapi/src/test/java/com/softplan/processesapi/domain/user/subdomains/triator/services/GetProcessServiceTest.java
-/home/reginaldo/projects/softplan/softplan-desafio-fullstack/processesapi/src/test/java/com/softplan/processesapi/application/controllers/privatecontrollers/UserControllerTest.java
 /home/reginaldo/projects/softplan/softplan-desafio-fullstack/processesapi/src/test/java/com/softplan/processesapi/domain/user/subdomains/admin/services/aux/CustomHttpServletRequest.java
 /home/reginaldo/projects/softplan/softplan-desafio-fullstack/processesapi/src/test/java/com/softplan/processesapi/domain/user/subdomains/admin/services/GetUserServiceTest.java
-/home/reginaldo/projects/softplan/softplan-desafio-fullstack/processesapi/src/test/java/com/softplan/processesapi/ProcessesapiApplicationTests.java
 /home/reginaldo/projects/softplan/softplan-desafio-fullstack/processesapi/src/test/java/com/softplan/processesapi/domain/user/subdomains/triator/services/CreateProcessServiceTest.java

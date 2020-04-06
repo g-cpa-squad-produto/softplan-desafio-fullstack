@@ -1,81 +1,125 @@
-# Desafio implementador fullstack
+# Teste softplan-desafio-fullstack
+[![Sofplan](https://www.softplan.com.br/wp-content/themes/softplan-2019/imagens/logo-softplan-blue.svg)](https://www.softplan.com.br/en/solucoes/)
 
-Seja parte da jornada de transformação digital no Brasil.
+##### Como rodar o projeto
+  - Faça o clone do repositório
+- Usando Docker
+  - Libere as portas 8080 e 5432 do seu sistema.
+  - rode o commando ```docker-compose up --build``` na pasta raiz do projeto
+- Usando apenas o Maven + Postgres
+  - Abra o arquivo ```src/main/resources/application.properties```
+  - Coloque as suas configurações no dataSource, 
+  - Trocar o host ```processes-database``` para ```localhost``` ou outro de sua preferência.
+  - entre na pasta processesapi
+  - rode o comando ```mvn spring-boot:run``` 
+ 
+- Configuração do postman
+  - Abra a pasta raíz do projeto e importe o arquivo ```processes.postman_collection.json``` no cli do postman.
 
-Esse é o nosso desafio para a vaga de implementador fullstack na [Softplan](https://www.softplan.com.br/carreira/). Serão testadas as habilidades e qualidade de código ao transformar requisitos limitados em uma aplicação web.
+- Procedimento para testar end-points no Postman
+  - abra a pasta public e altere o body para colocar seus dados
+  - após um registro bem sucedido, a response virá com um header ```Authorization``` crie um header Authorization em seu request e adicione o valor que veio da api.
+  - As rotas privadas podém ser acessadas somente de tiver esse token
+  - dentro das pastas ```users``` e ```processes```, vão ter as rotas que você irá utilizar.
 
-Seja parte da jornada de transformação digital no Brasil.
-Procuramos desenvolvedor versátil para resolver os mais diversos problemas, que impactam no negócio do cliente, utilizando conhecimento em tecnologias back-end e front-end como meio para isso. Sinta-se confortável com ambas responsabilidades e seja engajado com o que há de melhor no mercado e boas práticas para trabalhar com inovação, tecnologias modernas e emergentes na Softplan, empresa no Top 10 dos melhores lugares para se trabalhar em Santa Catarina (GPTW 2017).
-
-
-### O que você traz?
-- Perfil proativo, saber trabalhar em equipe , raciocínio lógico, responsabilidade e comprometimento são imprescindíveis para essa oportunidade.
-- Fácil adaptação em projetos experimentais e complexos;
-- Aprendizado rápido no uso de tecnologias de desenvolvimento de software
-- Experiência em Desenvolvimento de software Web.
-
-
-### O que oferecemos
-- Oportunidade de desenvolvimento profissional, meet ups, capacitação e treinamento in-company
-- Apoio no seu crescimento e aprendizado com bolsas de graduação, pós-graduação e verba para cursos e eventos de aprendizado externos
-- Plano de bonificação por atingimento de metas
-- Biblioteca colaborativa
-- Ginástica laboral
-- No dress code
-- Parcerias com desconto em academias, restaurantes, salão de beleza, etc.
-- Espaço para refeições, com geladeira e microondas
-- Vale alimentação/refeição, auxílio transporte, assistência médica e odontológica
-
-
-### Instruções para o desafio
-
-- **Fork** esse repositório e faça o desafio numa branch com o seu nome (exemplo: `nome-sobrenome`);
-- Assim que concluir o seu desafio, abra um **pull request** com suas alterações.
+##### Como rodar os testes
+  - Entre na pasta processesapi
+  - rode o comando mvn test
 
 
-### Desafio
-- Desenvolver uma aplicação web responsável por gerenciar processos.
-- *Soluções parcias serão aceitas.*
-- Visão de administrador
-	- Incluir, excluir, atualizar e visualizar usuários,
-- Visão de usuário-triador
-	- Incluir e visualizar processos,
-	- Atribuir um ou mais usuários a realizar um parecer sobre um processo,
-- Visão de usuário-finalizador
-	- Visualizar processos pendentes de parecer.
-	- Incluir o parecer sobre o processo.
+Obs: Três dias é pouco tempo para fazer todo o ambiente, comecei o teste na sexta as 18 e terminei agora, faltou adicionar uma configuração mais robusta no docker, onde tivesse os environments para cada caso, "dev", "test", "release" por exemplo, os testes da camada de aplicação acabou ficando de fora para que desse tempo de entregar algo usável.
 
+##### Como eu construiria os projetos
 
-### Escopo do desafio
-- Documentar todas suposições realizadas.
-- Desenvolver os módulos de frontend e backend de forma separada.
-- O desenvolvimento do backend deve ser feito em Java.
-- O desenvolvimento do frontend pode utilizar JavaScript e qualquer framework ou ferramenta que suportem ou utilizem estas tecnologias.
-- Preferencialmente utilizar Spring Boot 1.5+ com toda sua stack para o desenvolvimento do backend.
-- Preferencialmente utilizar React para o desenvolvimento do frontend.
-- É aceitável utilizar algumas respostas estáticas em determinadas porções da aplicação.
-- Não é necessário submeter uma aplicação que cumpra cada um dos requisitos descritos, mas o que for submetido deve funcionar.
+No back-end, na porta 5000, criaria todos os environments, "dev", "test" e "release", organizaria a estrutura em DDD, services, MVC usando rest, flyway nos migrations, Basic Auth para authenticar a Api com outros serviços, utilizaria OAuth2 Bearer Token para authenticar o usuário deixando o usuário e o token salvos em uma thread no sistema, permitiria o acesso aos dominios de acordo com o type do usuário que estiver logado, liberar o cors somente para os domínios que são cadastrados, configuração essa que ficaria no arquivo environment e seria usado pelo WebConfig que implementa o WebMvcConfigurer, podendo. Separaria as authenticações em um arquivo para cada, com poucas ou somente uma responsabilidade cada arquivo. Por exemplo:
+AuthWebService.java e AuthUserToken.java, WebConfig.java, PermissionMiddleware.java e  UserSession.java para os arquivos de configuração.
 
+demoraria 40 horas, para construir todo o projeto, com os migrations rodando com flyway, dockerizar e implementar o circle ci, rodando o build e testes, além do versionamento de imagens no dockerHub, incrementaria mais 16 horas para implementar o deploy automatico para produção, se estiver usando uma VPS linux.
 
-### O que será avaliado
-- O código será avaliado seguindo os seguintes critérios: manutenabilidade, clareza e limpeza de código; resultado funcional; entre outros fatores. 
-- O histórico no `git` também está avaliado.
-- Não esqueça de documentar o processo necessário para rodar a aplicação.
-- Se necessário explique as decisões técnicas tomadas, as escolhas por bibliotecas e ferrramentas, o uso de patterns etc.
+A organização das pastas ficaria assim:
+```
+src/
+resources/
+    environments/
+        dev.properties
+        test.properties
+        release.properties
+    main/
+        application/
+            controllers/
+                public_controllers/ # A palava public é reservada.
+                    AuthController.java
+                private__controllers/
+                    UserController.java
+                    ProcessesController.java
+        domain/
+            user/
+                models/
+                    User.java
+                admin/
+                    services/
+                triator/
+                    services/
+                finisher/
+                    services/
+        repository/
+            UserRepository.java
+            ProcessRepository.java
+        configs/
+            UserSession.java
+            WebConfig.java
+            AuthUserToken.java
+            AuthWebService.java
+            PermissionMiddleware.java
+        Application.java
+```
 
+No banco, postgres na porta 5432 com o padrão
+  - nome da tabela em snake_case
+  - nome da coluna em camelCase
 
-### Diferenciais
-- Adaptar a página para dispositivos móveis (torná-la responsiva).
-- Liberação da aplicação utilizando Docker.
-- Utilização de boas práticas de UX na solução.
-- Boa documentação de código e de serviços.
-- Testes do código.
+No front-end, na porta 80 servindo com o nginx, criaria todos os environments, "dev", "test" e "release", utilizaria o react mesmo, e contruíria num padrão com arquivos de configuração [singleton-pattern](https://nandovieira.com.br/design-patterns-no-javascript-singleton), para o axios, router, redux, etc...
+Impletar o cypress para testes e2e e jest + sinon para testes unitários.
+Implementaria um estrutura em camadas de permissões nas Views, o que facilita o roteamento pelas permissões de acesso do usuário, que ficariam salvas nos cookies, junto da authenticação, mostrando assim somente as telas que ele tem acesso de acordo com o type do usuário que está salvo nos cookies.
 
----
-Em caso de dúvidas, envie um email para [g_cpa_squad_produto@softplan.com.br](mailto:g_cpa_squad_produto@softplan.com.br).
+Demoraria 40 horas, para entregar todo o sistema nos 3 environments, dockerizado + docker-compose com a api e banco rodando e circle-ci para os testes e o build. Adicionaria mais 16 horas para o deploy automatico em produção, se estiver usando uma VPS Linux.
 
-
-**Um dos nossos pilares é a valorização das pessoas e temos orgulho de dizer que somos uma empresa que apoia a diversidade e inclusão. Sendo assim, consideramos todos os candidatos para as nossas oportunidades, independente de raça, cor, religião, gênero, identidade de gênero, nacionalidade, deficiência, ascendência ou idade.**
-
-
-**Até breve**
+A organização das pastas ficaria assim:
+```
+envs/
+    .env.dev
+    .env.test
+    .env.release
+src/
+    __tests__/
+        e2e/
+        unit/
+    public/
+        Login/
+            index.js
+            ...
+            ...
+    privated/
+        Admin/
+            Store/
+            Users/
+                index.js
+                styles.js
+                UserAdd/
+                    index.js
+                    ...
+        Triator/
+            Store/
+            Processes/
+                index.js
+                ...
+                FinishProcess/
+                    index.js
+                    ...
+                    ...
+    configs/
+    services/
+        showToastError.js
+        showToastSuccess.js
+        ...
+```

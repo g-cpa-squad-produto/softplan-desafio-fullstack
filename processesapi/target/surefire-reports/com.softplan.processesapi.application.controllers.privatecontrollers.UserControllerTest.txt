@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: com.softplan.processesapi.application.controllers.privatecontrollers.UserControllerTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.001 s <<< FAILURE! - in com.softplan.processesapi.application.controllers.privatecontrollers.UserControllerTest
+post  Time elapsed: 0 s  <<< ERROR!
+java.lang.NullPointerException
+	at com.softplan.processesapi.application.controllers.privatecontrollers.UserControllerTest.post(UserControllerTest.java:28)
+

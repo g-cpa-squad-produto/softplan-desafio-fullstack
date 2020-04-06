@@ -3,10 +3,8 @@ com/softplan/processesapi/domain/user/subdomains/triator/services/AddFinisherSer
 com/softplan/processesapi/domain/user/subdomains/triator/services/CreateProcessServiceTest.class
 com/softplan/processesapi/domain/user/subdomains/triator/services/GetProcessServiceTest.class
 com/softplan/processesapi/domain/user/subdomains/admin/services/UpdateUserServiceTest.class
-com/softplan/processesapi/ProcessesapiApplicationTests.class
 com/softplan/processesapi/domain/user/subdomains/admin/services/DeleteUserServiceTest.class
 com/softplan/processesapi/domain/user/subdomains/finisher/services/FinishProcessServiceTest.class
 com/softplan/processesapi/domain/user/subdomains/admin/services/CreateUserServiceTest.class
 com/softplan/processesapi/domain/user/subdomains/admin/services/aux/CustomHttpServletRequest.class
-com/softplan/processesapi/application/controllers/privatecontrollers/UserControllerTest.class
 com/softplan/processesapi/domain/user/subdomains/admin/services/GetUserServiceTest.class
