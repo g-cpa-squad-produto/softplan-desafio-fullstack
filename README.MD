@@ -31,10 +31,10 @@ Obs: Três dias é pouco tempo para fazer todo o ambiente, comecei o teste na se
 
 ##### Como eu construiria os projetos
 
-No back-end, na porta 5000, criaria todos os environments, "dev", "test" e "release", organizaria a estrutura em DDD, services, MVC usando rest, flyway nos migrations, Basic Auth para authenticar a Api com outros serviços, utilizaria OAuth2 Bearer Token para authenticar o usuário deixando o usuário e o token salvos em uma thread no sistema, permitiria o acesso aos dominios de acordo com o type do usuário que estiver logado, liberar o cors somente para os domínios que são cadastrados, configuração essa que ficaria no arquivo environment e seria usado pelo WebConfig que implementa o WebMvcConfigurer, podendo. Separaria as authenticações em um arquivo para cada, com poucas ou somente uma responsabilidade cada arquivo. Por exemplo:
+No back-end, na porta 5000, criaria todos os environments, "dev", "test" e "release", Swagger, organizaria a estrutura em DDD, services, MVC usando rest, flyway nos migrations, Basic Auth para authenticar a Api com outros serviços, utilizaria OAuth2 Bearer Token para authenticar o usuário deixando o usuário e o token salvos em uma thread no sistema, permitiria o acesso aos dominios de acordo com o type do usuário que estiver logado, liberar o cors somente para os domínios que são cadastrados, configuração essa que ficaria no arquivo environment e seria usado pelo WebConfig que implementa o WebMvcConfigurer, podendo. Separaria as authenticações em um arquivo para cada, com poucas ou somente uma responsabilidade cada arquivo. Por exemplo:
 AuthWebService.java e AuthUserToken.java, WebConfig.java, PermissionMiddleware.java e  UserSession.java para os arquivos de configuração.
 
-demoraria 40 horas, para construir todo o projeto, com os migrations rodando com flyway, dockerizar e implementar o circle ci, rodando o build e testes, além do versionamento de imagens no dockerHub, incrementaria mais 16 horas para implementar o deploy automatico para produção, se estiver usando uma VPS linux.
+demoraria 48 horas, para construir todo o projeto, com os migrations rodando com flyway, Swagger para testar os end-points, dockerizar e implementar o circle ci, rodando o build e testes, além do versionamento de imagens no dockerHub, incrementaria mais 16 horas para implementar o deploy automatico para produção, se estiver usando uma VPS linux.
 
 A organização das pastas ficaria assim:
 ```
