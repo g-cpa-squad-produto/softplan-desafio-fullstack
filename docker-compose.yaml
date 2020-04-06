@@ -12,7 +12,7 @@ services:
       - 'spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect'
       - 'spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect'
       - 'spring.jpa.hibernate.ddl-auto=none'
-      - 'spring.jpa.show-sql=false'
+      - 'spring.jpa.show-sql=true'
       - 'spring.datasource.initialization-mode=never'
       - 'spring.datasource.hikari.connectionTimeout=20000'
       - 'spring.datasource.hikari.maximumPoolSize=5'

@@ -1,9 +1,7 @@
 package com.softplan.processesapi.domain.process.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.softplan.processesapi.domain.user.models.User;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -14,7 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "processes_users")
+@Table(name = "processes_process_users")
 public class ProcessUser {
 
     @Id
