@@ -10,6 +10,7 @@ export default class RouterConfig extends Component {
     const token = cookies.get("token");
     const userLoged = token != null && token !== "";
     const PermissionTag = new PermissionConfig();
-    return <div>{userLoged ? <PermissionTag /> : <PublicRoutes />}</div>;
+
+    return userLoged ? <PermissionTag /> : <PublicRoutes />;
   }
 }
