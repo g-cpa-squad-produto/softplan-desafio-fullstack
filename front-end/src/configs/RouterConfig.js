@@ -17,9 +17,9 @@ export default class RouterConfig extends Component {
           userType === "ADMIN" ? (
             <AdminRoutes />
           ) : userType === "TRIATOR" ? (
-            <div>TRIATOR</div>
+            <TriatorRoutes />
           ) : (
-            <div>FINISHER</div>
+            <FinisherRoutes />
           )
         ) : (
           <Router class="RouterConfig" path="/">

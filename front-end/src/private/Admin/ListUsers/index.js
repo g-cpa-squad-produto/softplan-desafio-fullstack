@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 export default class AdminUsers extends Component {
   render() {
-    console.log('adminusers')
     return (
       <div class="AdminUsers">
         AdminUsers
