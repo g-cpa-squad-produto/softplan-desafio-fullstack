@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Cookies from "universal-cookie";
 import PublicRoutes from "../public";
-import PermissionConfig from "./permissions/PermissionConfig";
+import PermissionConfig from "./PermissionConfig";
 
 const cookies = new Cookies();
 
