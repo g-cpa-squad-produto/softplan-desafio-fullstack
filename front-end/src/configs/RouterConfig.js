@@ -4,6 +4,8 @@ import Login from "../public/Login";
 import Register from "../public/Register";
 import Cookies from "universal-cookie";
 import AdminRoutes from "../private/Admin";
+import TriatorRoutes from "../private/Triator";
+import FinisherRoutes from "../private/Finisher";
 
 const cookies = new Cookies();
 
