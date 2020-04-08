@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Cookies from "universal-cookie";
 import { TextField, Button } from "@material-ui/core";
-import "../Login/login.css";
-import AxiosConfig from '../../configs/AxiosConfig';
+import "./login.css";
+import AxiosConfig from '../../../configs/AxiosConfig';
 
-export default class Register extends Component {
+export default class Login extends Component {
   state = {
     user: {
-      name: "",
       email: "",
       password: "",
       type: "ADMIN"
@@ -18,13 +18,18 @@ export default class Register extends Component {
     this.setState({ user: { ...this.state.user, [e.target.name]: e.target.value } });
   };
 
-  register = async () => {
+  login = async () => {
     try {
-      await new AxiosConfig().post("auth/register", this.state.user);
-      alert('Usuário cadastrado com sucesso!');
-      this.props.history.push('/login') 
+      const cookies = new Cookies();
+      const { data: user } = await new AxiosConfig().post("auth/login", this.state.user);
+
+      cookies.set("Authorization", "token");
+      cookies.set("userType", user.type);
+
+      this.props.history.go('/') 
+      alert('logou com sucesso!');
     } catch (error) {
-      alert('Ocorreu um erro salvar o usuário!');
+      alert('Não foi possível fazer o login!')
     }
   }
 
@@ -34,18 +39,9 @@ export default class Register extends Component {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            this.register();
+            this.login();
           }}
         >
-          <TextField
-            required
-            className="input"
-            name="name"
-            onChange={(e) => this.onChange(e)}
-            value={this.state.name}
-            label="Name"
-            variant="outlined"
-          />
           <TextField
             required
             className="input"
@@ -73,10 +69,10 @@ export default class Register extends Component {
             variant="contained"
             color="primary"
           >
-            Cadastrar
+            Login
           </Button>
         </form>
-        <Link to="/login">Já sou cadastrado!</Link>
+        <Link to="/register">Ainda não é cadastrado?</Link>
       </div>
     );
   }

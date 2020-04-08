@@ -7,7 +7,7 @@ import AdminEditUser from "./EditUser";
 export default class AdminRoutes extends Component {
   render() {
     return (
-      <Router class="AdminRoutes" path="/">
+      <Router className="AdminRoutes" path="/">
         <Switch>
           <Route exact={true} path="/" component={AdminUsers} />
           <Route path="/add" component={AdminAddUser} />

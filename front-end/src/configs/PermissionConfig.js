@@ -1,7 +1,7 @@
 import Cookies from "universal-cookie";
-import AdminRoutes from "../private/Admin";
-import TriatorRoutes from "../private/Triator";
-import FinisherRoutes from "../private/Finisher";
+import AdminRoutes from "../domain/private/Admin";
+import TriatorRoutes from "../domain/private/Triator";
+import FinisherRoutes from "../domain/private/Finisher";
 
 const cookies = new Cookies();
 
