@@ -23,6 +23,7 @@ com/softplan/processesapi/domain/user/subdomains/finisher/services/IFinishProces
 com/softplan/processesapi/domain/user/subdomains/finisher/services/FinishProcessService.class
 com/softplan/processesapi/domain/user/subdomains/triator/services/IGetProcessService.class
 com/softplan/processesapi/application/controllers/IRestController.class
+com/softplan/processesapi/infrastructure/configs/WebSecurityConfig.class
 com/softplan/processesapi/domain/user/subdomains/admin/services/UpdateUserService.class
 com/softplan/processesapi/domain/user/subdomains/admin/services/IDeleteUserService.class
 com/softplan/processesapi/domain/user/subdomains/triator/services/IAddFinisherService.class

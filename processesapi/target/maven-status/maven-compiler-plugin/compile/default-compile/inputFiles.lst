@@ -9,6 +9,7 @@
 /home/reginaldo/projects/softplan/softplan-desafio-fullstack/processesapi/src/main/java/com/softplan/processesapi/domain/user/subdomains/triator/services/GetProcessService.java
 /home/reginaldo/projects/softplan/softplan-desafio-fullstack/processesapi/src/main/java/com/softplan/processesapi/domain/user/subdomains/admin/services/DeleteUserService.java
 /home/reginaldo/projects/softplan/softplan-desafio-fullstack/processesapi/src/main/java/com/softplan/processesapi/infrastructure/configs/WebConfig.java
+/home/reginaldo/projects/softplan/softplan-desafio-fullstack/processesapi/src/main/java/com/softplan/processesapi/infrastructure/configs/WebSecurityConfig.java
 /home/reginaldo/projects/softplan/softplan-desafio-fullstack/processesapi/src/main/java/com/softplan/processesapi/infrastructure/interceptors/AuthorizationInterceptor.java
 /home/reginaldo/projects/softplan/softplan-desafio-fullstack/processesapi/src/main/java/com/softplan/processesapi/domain/user/subdomains/admin/services/GetUserService.java
 /home/reginaldo/projects/softplan/softplan-desafio-fullstack/processesapi/src/main/java/com/softplan/processesapi/domain/user/subdomains/admin/services/CreateUserService.java

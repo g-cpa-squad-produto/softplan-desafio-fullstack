@@ -22,14 +22,14 @@ export default class Login extends Component {
     try {
       const cookies = new Cookies();
       const { data: user } = await new AxiosConfig().post("auth/login", this.state.user);
-      
+
       cookies.set("Authorization", "token");
       cookies.set("userType", user.type);
 
+      this.props.history.go('/') 
       alert('logou com sucesso!');
     } catch (error) {
       alert('Não foi possível fazer o login!')
-      console.error(error);
     }
   }
 
