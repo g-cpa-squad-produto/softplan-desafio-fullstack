@@ -7,7 +7,7 @@ const cookies = new Cookies();
 
 export default class RouterConfig extends Component {
   render() {
-    const token = cookies.get("token");
+    const token = cookies.get("Authorization");
     const userLoged = token != null && token !== "";
     const PermissionTag = new PermissionConfig();
 

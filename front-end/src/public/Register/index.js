@@ -18,9 +18,14 @@ export default class Register extends Component {
     this.setState({ user: { ...this.state.user, [e.target.name]: e.target.value } });
   };
 
-  register = () => {
-    new AxiosConfig().post("auth/register", this.state.user);
-    console.log(this.state.user);
+  register = async () => {
+    try {
+      await new AxiosConfig().post("auth/register", this.state.user);
+      alert('Usuário cadastrado com sucesso!');
+      this.props.history.push('/login') 
+    } catch (error) {
+      alert('Ocorreu um erro salvar o usuário!');
+    }
   }
 
   render() {

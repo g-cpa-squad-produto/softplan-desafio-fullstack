@@ -1,6 +1,9 @@
 import axios from "axios";
+import Cookies from "universal-cookie";
 
 let instance = false;
+
+const cookies = new Cookies();
 
 export default class AxiosConfig {
   constructor() {
@@ -13,6 +16,8 @@ export default class AxiosConfig {
         }
       });
     }
+
+    instance.defaults.headers.common.Authorization = cookies.get("Authorization");
 
     return instance;
   }
