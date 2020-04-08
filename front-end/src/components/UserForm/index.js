@@ -21,7 +21,7 @@ export default class UserForm extends Component {
 
   saveUser = async () => {
     try {
-      await new AxiosConfig()[!this.props.user.id ? "post" : "put"](
+      await new AxiosConfig()[!this.props.user ? "post" : "put"](
         "users",
         this.state.user
       );
