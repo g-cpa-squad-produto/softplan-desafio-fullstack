@@ -1,0 +1,14 @@
+version: '3.5'
+services:
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=process_manager
+      - MYSQL_USER=manager
+      - MYSQL_PASSWORD=pass
+    expose:
+      - 3306
+    ports:
+      - 3306:3306
