@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import {
   Table,
   TableBody,
@@ -10,14 +9,18 @@ import {
   Paper,
   Typography,
   Button,
+  Modal,
 } from "@material-ui/core";
 import AxiosConfig from "../../../../configs/AxiosConfig";
 import { Edit, Add } from "@material-ui/icons";
 import "./listUsers.css";
+import UserForm from "../../../../components/UserForm";
 
 export default class AdminUsers extends Component {
   state = {
+    modalOpen: false,
     users: [],
+    user: {},
   };
 
   getUsers = async () => {
@@ -29,12 +32,17 @@ export default class AdminUsers extends Component {
     }
   };
 
-  componentWillMount = () => {
-    this.getUsers();
+  editUser = (user) => {
+    this.setState({ user });
+    this.handleModal(true);
   };
+
+  componentDidMount = () => this.getUsers();
 
   changeRoute = (id) =>
     this.props.history.push((id && `/edit/${id}`) || "/add");
+
+  handleModal = (modalOpen) => this.setState({ modalOpen });
 
   render() {
     return (
@@ -47,7 +55,7 @@ export default class AdminUsers extends Component {
             variant="contained"
             color="primary"
             startIcon={<Add />}
-            onClick={() => this.props.history.push("/add")}
+            onClick={() => this.editUser()}
           >
             Usuário
           </Button>
@@ -75,9 +83,7 @@ export default class AdminUsers extends Component {
                   <TableCell align="center">
                     <Edit
                       className="icon"
-                      onClick={(row) =>
-                        this.props.history.push(`/edit/${user.id}`)
-                      }
+                      onClick={() => this.editUser(user)}
                     />
                   </TableCell>
                 </TableRow>
@@ -85,9 +91,15 @@ export default class AdminUsers extends Component {
             </TableBody>
           </Table>
         </TableContainer>
-        AdminUsers
-        <Link to="/add">AddUser</Link>
-        <Link to="/edit">EditUser</Link>
+        <Modal
+          className="Modal"
+          open={this.state.modalOpen}
+          onClose={() => this.handleModal(false)}
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
+        >
+          <UserForm user={this.state.user} />
+        </Modal>
       </div>
     );
   }
