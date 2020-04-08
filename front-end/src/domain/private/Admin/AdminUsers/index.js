@@ -102,8 +102,8 @@ export default class AdminUsers extends Component {
           className="Modal"
           open={this.state.modalOpen}
           onClose={() => this.handleModal(false)}
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
+          aria-labelledby="simple-modal-user"
+          aria-describedby="simple-modal-user-description"
         >
           <UserForm user={this.state.user} />
         </Modal>

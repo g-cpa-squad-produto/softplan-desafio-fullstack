@@ -26,6 +26,8 @@ export default class UserForm extends Component {
         this.state.user
       );
       alert("Usuário salvo com sucesso!");
+      // eslint-disable-next-line no-restricted-globals
+      location.replace("/");
     } catch (error) {
       alert(error.message);
     }
