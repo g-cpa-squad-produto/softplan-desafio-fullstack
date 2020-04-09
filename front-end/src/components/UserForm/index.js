@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { TextField, Button, Typography } from "@material-ui/core";
+import {
+  TextField,
+  Button,
+  Typography,
+  MenuItem,
+  InputLabel,
+  FormControl,
+  Select,
+} from "@material-ui/core";
 import AxiosConfig from "../../configs/AxiosConfig";
 import "./UserForm.css";
 
@@ -9,7 +17,7 @@ export default class UserForm extends Component {
       name: "",
       email: "",
       password: "",
-      type: "ADMIN",
+      type: "",
     },
   };
 
@@ -29,7 +37,7 @@ export default class UserForm extends Component {
       // eslint-disable-next-line no-restricted-globals
       location.replace("/");
     } catch (error) {
-      alert(error.message);
+      alert("Não foi possível salvar o usuário");
     }
   };
 
@@ -75,6 +83,19 @@ export default class UserForm extends Component {
             autoComplete="current-password"
             variant="outlined"
           />
+          <FormControl className="input" variant="outlined">
+            <InputLabel>Permissão</InputLabel>
+            <Select
+              name="type"
+              value={this.state.user.type}
+              onChange={(e) => this.onChange(e)}
+              label="Permissão"
+            >
+              <MenuItem value={"ADMIN"}>Administrador</MenuItem>
+              <MenuItem value={"TRIATOR"}>Triador</MenuItem>
+              <MenuItem value={"FINISHER"}>Finalizador</MenuItem>
+            </Select>
+          </FormControl>
           <Button
             type="submit"
             className="buttonSave"
