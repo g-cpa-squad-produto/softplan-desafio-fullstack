@@ -5,7 +5,7 @@ import ProcessesList from './ProcessesList';
 export default class FinisherRoutes extends Component {
   render() {
     return (
-      <Router class="FinisherRoutes" path="/">
+      <Router className="FinisherRoutes" path="/">
         <Switch>
           <Route exact={true} path="/" component={ProcessesList} />
           <Route exact={true} path="*" component={ProcessesList} />
