@@ -5,12 +5,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -33,9 +35,23 @@ public class ReviewController {
 
 		return ResponseEntity.created(uri).build();
 	}
+	
+	@PutMapping("/review/{reviewId}")
+	public ResponseEntity<Review> updateReview(@PathVariable Long reviewId, @RequestBody Review review ){
+		Review reviewUpdated = reviewRepository.save(review);
+		
+		return new ResponseEntity<Review>(reviewUpdated, HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/review/{reviewId}")
+	public ResponseEntity<Void> deleteReview(@PathVariable Long reviewId) {
+		reviewRepository.deleteById(reviewId);
+
+		return ResponseEntity.noContent().build();
+	}
 
 	@GetMapping("/review/{reviewId}")
-	public Review getReviewById(Long processId, @PathVariable Long reviewId) {
+	public Review getReviewById(@PathVariable Long reviewId) {
 		Optional<Review> op = reviewRepository.findById(reviewId);
 
 		if (op.isPresent()) {
@@ -48,12 +64,5 @@ public class ReviewController {
 	@GetMapping(path = "/review")
 	public List<Review> getAllReviews(){
 		return reviewRepository.findAll();
-	}
-	
-	@DeleteMapping("/review/{id}")
-	public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-		reviewRepository.deleteById(id);
-
-		return ResponseEntity.noContent().build();
 	}
 }

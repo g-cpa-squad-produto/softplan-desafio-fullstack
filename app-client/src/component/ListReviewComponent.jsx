@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import ReviewDataService from '../service/ReviewDataService';
 
 class ListReviewComponent extends Component {
 
@@ -11,6 +12,7 @@ class ListReviewComponent extends Component {
         this.refreshReviews = this.refreshReviews.bind(this)
         this.updateReviewClicked = this.updateReviewClicked.bind(this)
         this.addReviewClicked = this.addReviewClicked.bind(this)
+        this.deleteReviewClicked = this.deleteReviewClicked.bind(this)
     }
 
     componentDidMount() {
@@ -29,13 +31,22 @@ class ListReviewComponent extends Component {
     }
 
     updateReviewClicked(id) {
-        console.log('update review ' + id)
-        // this.props.history.push(`/review/${id}`)
+        console.log('update review ' + id + " - review list")
+        this.props.history.push(`/review/${id}`)
     }
 
     addReviewClicked() {
-        console.log('add review')
-        // this.props.history.push(`process/-1/review/-1`)
+        console.log('add review - review list')
+        this.props.history.push(`/review/-1`)
+    }
+
+    deleteReviewClicked(id) {
+        ReviewDataService.deleteReview(id).then(
+            response => {
+                this.setState({message: `Remoção do parecer ${id} bem sucedida`})
+                this.refreshReviews()
+            }
+        )
     }
 
     render() {
@@ -43,7 +54,7 @@ class ListReviewComponent extends Component {
             <div className="container">
                 <p>Pareceres:</p>
                 {/* <button className="btn btn-primary" onClick={this.addReviewClicked}>Novo Parecer</button> */}
-                {this.state.message && <div class="alert alert-success">{this.state.message}</div>}
+                {this.state.message && <div className="alert alert-success">{this.state.message}</div>}
                 <div className="container">
                     <table className="table"> 
                         <thead>
@@ -60,19 +71,20 @@ class ListReviewComponent extends Component {
                                     review => 
                                         <tr key={review.id}>
                                             <td>{review.id}</td>
-                                            <td>{review.user}</td>
-                                            <td>{review.review}</td>
+                                            <td>{review.reviewer}</td>
+                                            <td>{review.text}</td>
                                             <td>
                                                 <button className="btn btn-warning" onClick={() => this.updateReviewClicked(review.id)}>Visualizar</button>
+                                                <button className="btn btn-danger" onClick={() => this.deleteReviewClicked(review.id)}>Apagar</button>
                                             </td>
                                         </tr>
                                 )
                             }
                         </tbody>
                     </table>
-                    {/* <div className="row">
+                    <div className="row">
                         <button className="btn btn-primary" onClick={this.addReviewClicked}>Novo Parecer</button>
-                    </div> */}
+                    </div>
                 </div>
             </div>
         )

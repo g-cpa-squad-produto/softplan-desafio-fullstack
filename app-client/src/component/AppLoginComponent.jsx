@@ -19,7 +19,7 @@ class AppLoginComponent extends Component {
     }
 
     finalizadorClicked(){
-        this.props.history.push('/')
+        this.props.history.push('/review')
     }
 
     render() {

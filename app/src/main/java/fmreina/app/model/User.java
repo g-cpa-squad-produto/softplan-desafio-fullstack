@@ -27,7 +27,6 @@ public class User implements Serializable {
 
 	private String name;
 
-	// @OneToOne( targetEntity=UserRole.class )
 	private UserRole role;
 
 	@Override

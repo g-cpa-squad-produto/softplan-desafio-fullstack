@@ -9,8 +9,8 @@ class ReviewComponent extends Component {
         
         this.state = {
             id: this.props.match.params.id,
-            review: '',
-            user: ''
+            text: '',
+            reviewer: ''
         }
 
         this.onSubmit = this.onSubmit.bind(this)
@@ -19,8 +19,7 @@ class ReviewComponent extends Component {
     }
 
     componentDidMount() {
-        console.log('did mount review '+this.state.id + " - ReviewComponent")
-        // console.log(this.state.id)
+        console.log('did mount review ' + this.state.id + " - ReviewComponent")
 
         // eslint-disable-next-line
         if (this.state.id == -1) {
@@ -30,8 +29,9 @@ class ReviewComponent extends Component {
         ReviewDataService.retrieveReviewById(this.state.id).then(
             response => this.setState(
                 {
-                    review: response.data.review,
-                    user: response.data.user
+                    text: response.data.text,
+                    reviewer: response.data.reviewer
+                    // reviewer: 'Jake' // TODO: corrigir relacionamento. Carregar valor correto
                 }
             )
         )
@@ -39,39 +39,49 @@ class ReviewComponent extends Component {
 
     exitClicked(){
         console.log('exit clicked - ReviewComponent')
-        this.props.history.push('/process')
+        this.props.history.push('/review')
         // window.history.back(-1)
     }
 
     onSubmit(values){
         console.log('submit review  - ReviewComponent')
 
-        // let review = {
-        //     id: this.state.id,
-        //     review: values.review,
-        //     user: values.user,
-        //     
-        // }
+        let review = {
+            id: this.state.id,
+            reviewer: values.reviewer, // TODO: corrigir referência user
+            text: values.text
+            
+        }
 
-        // if(this.state.id === -1){
-        //     ReviewDataService.createReview(review)
-        //         .then(() => this.props.history.push('/process')) // TODO: navegar para o processo aberto
-        // } else {
-        //     ReviewDataService.updateReview(this.state.id, review)
-        //         .then(() => this.props.history.push('/process')) // TODO: navegar para o processo aberto
-        // }
+        if(this.state.id === -1){
+            ReviewDataService.createReview(review)
+                .then(() => this.props.history.push('/review')) // TODO: navegar para o processo aberto
+        } else {
+            ReviewDataService.updateReview(this.state.id, review)
+                .then(() => this.props.history.push('/review')) // TODO: navegar para o processo aberto
+        }
 
-        // // console.log(values);   
+        // console.log(values);   
     }
 
     validate(values) {
         console.log('validate review - ReviewComponent')
-        // let errors = {}
-        // return errors
+
+        let errors = {}
+
+        if(!values.reviewer){
+            errors.reviewer = 'Informe o parecerista'
+        } 
+        
+        if(!values.text){
+            errors.text = 'Informe um parecer'
+        } 
+
+        return errors
     }
 
     render() {
-        let { id, review, user } = this.state
+        let { id, reviewer, text } = this.state
 
         return (
             <div className="container">
@@ -79,7 +89,7 @@ class ReviewComponent extends Component {
                 <hr/>
                 <div className="container">
                     <Formik 
-                        initialValues={{ id, review, user }}
+                        initialValues={{ id, reviewer, text }}
                         onSubmit={this.onSubmit}
                         validateOnChange={false}
                         validateOnBlur={false}
@@ -89,19 +99,19 @@ class ReviewComponent extends Component {
                         {
                             (props) => (
                                 <Form>
-                                    <ErrorMessage name="review" component="div" className="alert alert-warning" />
-                                    <ErrorMessage name="user" component="div" className="alert alert-warning" />
-                                    {/* <fieldset className="form-group">
+                                    <ErrorMessage name="reviewer" component="div" className="alert alert-warning" />
+                                    <ErrorMessage name="text" component="div" className="alert alert-warning" />
+                                    <fieldset className="form-group">
                                         <label>Id:</label>
                                         <Field className="form-control" type="text" name="id" disabled />
-                                    </fieldset> */}
+                                    </fieldset>
                                     <fieldset className="form-group">
                                         <label>Parecerista:</label>
-                                        <Field className="form-control" type="text" name="user" />
+                                        <Field className="form-control" type="text" name="reviewer" />
                                     </fieldset>
                                     <fieldset className="form-group">
                                         <label>Parecer:</label>
-                                        <Field className="form-control" type="text" name="review" />
+                                        <Field className="form-control" type="text" name="text" />
                                     </fieldset>
                                     <button className="btn btn-success" type="submit">Salvar</button>
                                     <button className="btn btn-default" onClick={this.exitClicked}>Voltar</button>

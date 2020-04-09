@@ -26,11 +26,13 @@ public class Process implements Serializable {
 
 	private String description;
 
-	@ManyToMany
-	private List<User> reviewers;
+//	@ManyToMany
+//	private List<User> reviewers;
+	private String reviewers;
 
-	@OneToMany
-	private List<Review> review;
+//	@OneToMany
+//	private List<Review> review;
+	private String review;
 	
 	@Override
 	public int hashCode() {

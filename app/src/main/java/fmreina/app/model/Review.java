@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -23,7 +24,9 @@ public class Review implements Serializable{
 	
 	private String text;
 	
-	private User reviewer;
+//	@ManyToOne
+//	private User reviewer;
+	private String reviewer;
 
 	@Override
 	public int hashCode() {

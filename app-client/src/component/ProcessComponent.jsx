@@ -11,8 +11,8 @@ class ProcessComponent extends Component {
         this.state = {
             id: this.props.match.params.id,
             description: '',
-            users: '',
-            reviews: ''
+            reviewers: '',
+            review: ''
         }
 
         this.onSubmit = this.onSubmit.bind(this)
@@ -32,15 +32,15 @@ class ProcessComponent extends Component {
             response => this.setState(
                 {
                     description: response.data.description,
-                    // users: response.data.users,
-                    // reviews: response.data.reviews
+                    reviewers: response.data.reviewers,
+                    review: response.data.review
                     // TODO: apresentar/capturar tipo list. Dados abaixo para teste    
-                    users: ['Jake', 'Ian'],
-                    reviews: ['Good', 'Bad']            
+                    // reviewers: ['Jake', 'Ian'],
+                    // review: ['Good', 'Bad']            
                 }
             )
         )
-        console.log(this.state.users.values)
+        // console.log(this.state.reviewers.values)
     }
 
     exitClicked(){
@@ -54,8 +54,8 @@ class ProcessComponent extends Component {
         let process = {
             id: this.state.id,
             description: values.description,
-            users: values.users.values,
-            reviews: values.reviews
+            reviewers: values.reviewers,
+            review: values.review
         }
 
         if(this.state.id === -1){
@@ -80,7 +80,7 @@ class ProcessComponent extends Component {
     }
 
     render() {
-        let { id, description, users, reviews } = this.state
+        let { id, description, reviewers, review } = this.state
 
         return (
             <div>
@@ -88,7 +88,7 @@ class ProcessComponent extends Component {
                 <hr/>
                 <div className="container">
                     <Formik 
-                        initialValues={{ id, description, users, reviews }}
+                        initialValues={{ id, description, reviewers, review }}
                         onSubmit={this.onSubmit}
                         validateOnChange={false}
                         validateOnBlur={false}
@@ -108,11 +108,11 @@ class ProcessComponent extends Component {
                                     </fieldset>
                                     <fieldset className="form-group">
                                         <label>Pareceristas:</label>
-                                        <Field className="form-control" name="users" />
+                                        <Field className="form-control" name="reviewers" />
                                     </fieldset>
                                     <fieldset className="form-group">
                                         <label>Novo Parecer:</label>
-                                        <Field className="form-control" name="reviews" />
+                                        <Field className="form-control" name="review" />
                                     </fieldset>
                                     {/* TODO: apresentar dados tipo list */}
                                     {/* <fieldset className="form-group">

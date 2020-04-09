@@ -53,14 +53,14 @@ public class ProcessController {
 	}
 	
 	@PutMapping("/process/{processId}")
-	public ResponseEntity<Process> updateprocess(@PathVariable Long processId, @RequestBody Process process ){
+	public ResponseEntity<Process> updateProcess(@PathVariable Long processId, @RequestBody Process process ){
 		Process processUpdated = processRepository.save(process);
 		
 		return new ResponseEntity<Process>(processUpdated, HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/process/{processId}")
-	public ResponseEntity<Void> deleteUser(@PathVariable Long processId) {
+	public ResponseEntity<Void> deleteProcess(@PathVariable Long processId) {
 		processRepository.deleteById(processId);
 
 		return ResponseEntity.noContent().build();
