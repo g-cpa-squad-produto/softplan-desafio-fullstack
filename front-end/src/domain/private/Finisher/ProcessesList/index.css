@@ -1,0 +1,19 @@
+.icon {
+  cursor: pointer;
+}
+
+.Header {
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  max-height: 40px;
+  font-weight: bold !important;
+}
+
+@media only screen and (min-width: 600px) {
+  .BreadCrumb {
+    margin-bottom: 20px !important;
+  }
+}
