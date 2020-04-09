@@ -15,17 +15,17 @@ class ListUsersComponent extends Component {
         this.deleteUserClicked = this.deleteUserClicked.bind(this)
         this.updateUserClicked = this.updateUserClicked.bind(this)
         this.addUserClicked = this.addUserClicked.bind(this)
-        this.exitClicked = this.exitClicked.bind(this)
+        // this.exitClicked = this.exitClicked.bind(this)
     }
 
     componentDidMount() {
         this.refreshUsers();
     }
 
-    exitClicked(){
-        console.log('exit clicked')
-        this.props.history.push('/')
-    }
+    // exitClicked(){
+    //     // console.log('exit clicked')
+    //     this.props.history.push('/')
+    // }
     
     refreshUsers() {
         UserDataService.retrieveAllUsers(USERNAME).then(
@@ -58,8 +58,8 @@ class ListUsersComponent extends Component {
         console.log('render')
         return (
             <div className="container">
-                <h2>Todos os Usuários</h2> 
-                {this.state.message && <div class="alert alert-success">{this.state.message}</div>}
+                <h2>Usuários</h2> 
+                {this.state.message && <div className="alert alert-success">{this.state.message}</div>}
                 <div className="container">
                     <table className="table"> 
                         <thead>
@@ -91,7 +91,7 @@ class ListUsersComponent extends Component {
                     </table>
                     <div className="row">
                         <button className="btn btn-primary" onClick={this.addUserClicked}>Novo Usuário</button>
-                        <button className="btn btn-default" onClick={this.exitClicked}>Sair</button>
+                        {/* <button className="btn btn-default" onClick={this.exitClicked}>Sair</button> */}
                     </div>
                 </div>
             </div>

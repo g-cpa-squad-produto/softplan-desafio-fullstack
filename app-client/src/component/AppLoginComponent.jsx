@@ -1,17 +1,25 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 
 
 class AppLoginComponent extends Component {
-
     constructor(props) {
         super(props)
-
+        
         this.admUserClicked = this.admUserClicked.bind(this)
+        this.triadorClicked = this.triadorClicked.bind(this)
+        this.finalizadorClicked = this.finalizadorClicked.bind(this)
+    }
+    
+    admUserClicked(){
+        this.props.history.push('/users')
     }
 
-    admUserClicked(){
-        // console.log('admUser clicked')
-        this.props.history.push('/users')
+    triadorClicked(){
+        this.props.history.push('/process')
+    }
+
+    finalizadorClicked(){
+        this.props.history.push('/')
     }
 
     render() {
@@ -27,7 +35,10 @@ class AppLoginComponent extends Component {
                     <p>Escolha um dos perfis abaixo:</p>
                     
                     <button className="btn btn-info" onClick={this.admUserClicked}>Administrador</button>
-
+                    <br/><br/>
+                    <button className="btn btn-info" onClick={this.triadorClicked}>Triador</button>
+                    <br/><br/>
+                    <button className="btn btn-info" onClick={this.finalizadorClicked}>Finalizador</button> 
                     <hr/>
                 </center>
                

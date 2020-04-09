@@ -40,13 +40,13 @@ public class UserController {
 	}
 
 	@GetMapping("/users/{username}/users/{id}")
-	public User getUser(@PathVariable String username, @PathVariable Long id){
+	public User getUser(@PathVariable String username, @PathVariable Long id) {
 		Optional<User> op = userRepository.findById(id);
-		
-		if(op.isPresent()){
+
+		if (op.isPresent()) {
 			return op.get();
 		}
-		
+
 		return null;
 	}
 
@@ -63,10 +63,9 @@ public class UserController {
 		User userCreated = userRepository.save(user);
 
 		// Pega a url do recurso
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(userCreated.getId())
-				.toUri();
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(userCreated.getId()).toUri();
 
 		return ResponseEntity.created(uri).build();
 	}
-	
+
 }

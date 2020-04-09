@@ -6,38 +6,32 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
-import fmreina.app.type.UserRole;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
-public class User implements Serializable {
-
+public class Review implements Serializable{
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-
-	private String username;
-
-	private String name;
-
-	// @OneToOne( targetEntity=UserRole.class )
-	private UserRole role;
+	
+	private String text;
+	
+	private User reviewer;
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((role == null) ? 0 : role.hashCode());
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		result = prime * result + ((reviewer == null) ? 0 : reviewer.hashCode());
+		result = prime * result + ((text == null) ? 0 : text.hashCode());
 		return result;
 	}
 
@@ -49,24 +43,23 @@ public class User implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Review other = (Review) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (name == null) {
-			if (other.name != null)
+		if (reviewer == null) {
+			if (other.reviewer != null)
 				return false;
-		} else if (!name.equals(other.name))
+		} else if (!reviewer.equals(other.reviewer))
 			return false;
-		if (role != other.role)
-			return false;
-		if (username == null) {
-			if (other.username != null)
+		if (text == null) {
+			if (other.text != null)
 				return false;
-		} else if (!username.equals(other.username))
+		} else if (!text.equals(other.text))
 			return false;
 		return true;
 	}
+
 }

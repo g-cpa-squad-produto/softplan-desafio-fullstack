@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from 'axios';
 
 const USERNAME = 'username'
 const USER_API_URL = 'http://localhost:8080'
