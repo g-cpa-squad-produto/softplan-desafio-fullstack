@@ -20,11 +20,11 @@ public class ProcessUser {
     private long id;
 
     @ManyToOne()
-    @JsonBackReference
+    @JsonBackReference(value="process")
     private Process process;
 
     @ManyToOne()
-    @JsonBackReference
+    @JsonBackReference(value="user")
     private User user;
 
     public long getId() {

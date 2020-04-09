@@ -22,7 +22,7 @@ public class Process {
     private String description;
 
     @OneToMany(mappedBy = "process", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonManagedReference(value="process")
     private List<ProcessUser> processUsers = new ArrayList<>();
 
     public long getId() {
