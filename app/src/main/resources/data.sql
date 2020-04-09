@@ -1,0 +1,3 @@
+--INSERT INTO user_role(id, role) values (1, "Administrador");
+--INSERT INTO user_role(id, role) values (2, "Triador");
+--INSERT INTO user_role(id, role) values (3, "Finalizador");
