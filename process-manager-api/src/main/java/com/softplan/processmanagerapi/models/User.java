@@ -1,6 +1,6 @@
 package com.softplan.processmanagerapi.models;
 
-import com.softplan.processmanagerapi.models.audit.DateAudit;
+import com.softplan.processmanagerapi.models.audit.UserDateAudit;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
@@ -19,7 +19,7 @@ import java.util.Set;
                 "email"
         })
 })
-public class User extends DateAudit {
+public class User extends UserDateAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
