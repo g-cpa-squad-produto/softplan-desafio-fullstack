@@ -36,6 +36,7 @@ public class User {
     private UserType type = UserType.ADMIN;
 
     @OneToMany(
+            mappedBy = "user",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
