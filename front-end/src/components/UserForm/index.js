@@ -17,7 +17,7 @@ export default class UserForm extends Component {
       name: "",
       email: "",
       password: "",
-      type: "",
+      type: "TRIATOR",
     },
   };
 
@@ -83,7 +83,7 @@ export default class UserForm extends Component {
             autoComplete="current-password"
             variant="outlined"
           />
-          <FormControl className="input" variant="outlined">
+          <FormControl required className="input" variant="outlined">
             <InputLabel>Permissão</InputLabel>
             <Select
               name="type"
