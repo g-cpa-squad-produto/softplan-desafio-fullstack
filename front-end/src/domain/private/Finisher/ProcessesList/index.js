@@ -8,21 +8,24 @@ import {
   TableRow,
   Paper,
   Typography,
+  Modal,
 } from "@material-ui/core";
 import AxiosConfig from "../../../../configs/AxiosConfig";
 import { AddCircleOutlineRounded } from "@material-ui/icons";
 import "./index.css";
+import ProcessForm from "../../../../components/ProcessForm";
 
 export default class ProcessesList extends Component {
   state = {
     modalOpen: false,
     processes: [],
+    processId: null,
   };
 
   getProcesses = async () => {
     try {
       let { data: processes } = await new AxiosConfig().get("processes");
-      processes = processes.filter(process => !process.description);
+      processes = processes.filter((process) => !process.description);
       this.setState({ processes });
     } catch (error) {
       alert("Não foi possível listar os processos!");
@@ -31,6 +34,15 @@ export default class ProcessesList extends Component {
 
   componentDidMount = () => {
     this.getProcesses();
+  };
+
+  finishProcess = (processId) => {
+    this.setState({ processId });
+    this.handleModal(true);
+  };
+
+  handleModal = (modalOpen) => {
+    this.setState({ modalOpen });
   };
 
   render() {
@@ -74,7 +86,7 @@ export default class ProcessesList extends Component {
                   <TableCell align="center">
                     <AddCircleOutlineRounded
                       className="icon"
-                      onClick={() => this.finishProcess()}
+                      onClick={() => this.finishProcess(process.id)}
                     />
                   </TableCell>
                 </TableRow>
@@ -82,6 +94,15 @@ export default class ProcessesList extends Component {
             </TableBody>
           </Table>
         </TableContainer>
+        <Modal
+          className="Modal"
+          open={this.state.modalOpen}
+          onClose={() => this.handleModal(false)}
+          aria-labelledby="simple-modal-user"
+          aria-describedby="simple-modal-user-description"
+        >
+          <ProcessForm processId={this.state.processId} />
+        </Modal>
       </div>
     );
   }

@@ -46,9 +46,6 @@ export default class AdminUsers extends Component {
 
   handleModal = (modalOpen) => { 
     this.setState({ modalOpen });
-    if (!modalOpen) {
-      this.getUsers()
-    }
   };
 
   render() {
