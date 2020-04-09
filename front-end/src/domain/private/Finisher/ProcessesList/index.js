@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import AxiosConfig from "../../../../configs/AxiosConfig";
-import { AddCircleIcon } from "@material-ui/icons";
+import { AddCircleOutlineRounded } from "@material-ui/icons";
 import "./index.css";
 
 export default class ProcessesList extends Component {
@@ -21,10 +21,11 @@ export default class ProcessesList extends Component {
 
   getProcesses = async () => {
     try {
-      const { data: processes } = await new AxiosConfig().get("processes");
+      let { data: processes } = await new AxiosConfig().get("processes");
+      processes = processes.filter(process => !process.description);
       this.setState({ processes });
     } catch (error) {
-      alert("Não foi possível pegar os processos!");
+      alert("Não foi possível listar os processos!");
     }
   };
 
@@ -47,6 +48,13 @@ export default class ProcessesList extends Component {
                 <TableCell>Id</TableCell>
                 <TableCell align="right">Descrição</TableCell>
                 <TableCell align="right"></TableCell>
+                <TableCell align="right"></TableCell>
+                <TableCell align="right"></TableCell>
+                <TableCell align="right"></TableCell>
+                <TableCell align="right"></TableCell>
+                <TableCell align="right"></TableCell>
+                <TableCell align="right"></TableCell>
+                <TableCell align="center">Finalizar Processo</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -56,10 +64,17 @@ export default class ProcessesList extends Component {
                     {process.id}
                   </TableCell>
                   <TableCell align="right">{process.description}</TableCell>
-                  <TableCell align="right">
-                  <AddCircleIcon
+                  <TableCell align="right"></TableCell>
+                  <TableCell align="right"></TableCell>
+                  <TableCell align="right"></TableCell>
+                  <TableCell align="right"></TableCell>
+                  <TableCell align="right"></TableCell>
+                  <TableCell align="right"></TableCell>
+                  <TableCell align="right"></TableCell>
+                  <TableCell align="center">
+                    <AddCircleOutlineRounded
                       className="icon"
-                      onClick={() => this.editUser(user)}
+                      onClick={() => this.finishProcess()}
                     />
                   </TableCell>
                 </TableRow>
