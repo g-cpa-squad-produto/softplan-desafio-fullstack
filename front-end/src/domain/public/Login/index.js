@@ -27,7 +27,6 @@ export default class Login extends Component {
       cookies.set("userType", user.type);
 
       this.props.history.go('/') 
-      alert('logou com sucesso!');
     } catch (error) {
       alert('Não foi possível fazer o login!')
     }

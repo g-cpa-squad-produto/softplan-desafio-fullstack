@@ -3,7 +3,6 @@ version: "3.7"
 # Define services
 services:
   api:
-    # image: processesapi:latest
     build:
       context: processesapi
       dockerfile: Dockerfile
@@ -32,7 +31,20 @@ services:
     depends_on:
       - database
     networks: 
+      - frontend
       - backend
+
+  frontend:
+    build:
+      context: front-end
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    restart: always
+    depends_on:
+      - api
+    networks:
+      - frontend  
 
   database:
     image: postgres:latest
@@ -53,6 +65,7 @@ services:
 
 networks: 
   backend:
+  frontend:
 
 volumes:
   postgres-data:
