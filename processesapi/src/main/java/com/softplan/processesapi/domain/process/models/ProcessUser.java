@@ -1,9 +1,9 @@
 package com.softplan.processesapi.domain.process.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.softplan.processesapi.domain.user.models.User;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,12 +19,12 @@ public class ProcessUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "processid")
+    @ManyToOne()
+    @JsonBackReference
     private Process process;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userid")
+    @ManyToOne()
+    @JsonBackReference
     private User user;
 
     public long getId() {
