@@ -40,10 +40,12 @@
   - rode o comando mvn test
 
 
-Obs: 6 dias é pouco tempo para fazer todo o ambiente, comecei o teste na sexta 03/04/2020 as 18 e terminei Quinta 09/03/2020 as 03:48, faltou adicionar uma configuração mais robusta no docker, onde tivesse os environments para cada caso, "dev", "test", "release" por exemplo, os testes da camada de aplicação acabou ficando de fora para que desse tempo de entregar algo usável. O end-point ```finish``` ficou faltando, precisaria resolver o problema de bidirecionamento com recursividade infinita sem usar a lib json do jackson, faria isso criando as DTO's e fazendo um Map da model para a DTO em algum service na camada de domain, e de DTO para model na camada de applicação.
+Obs: 6 dias é pouco tempo para fazer todo o ambiente, comecei o teste na sexta 03/04/2020 as 18 e terminei Quinta 09/03/2020 as 03:48, faltou adicionar uma configuração mais robusta no docker, onde tivesse os environments para cada caso, "dev", "test", "release" por exemplo, os testes da camada de aplicação acabou ficando de fora para que desse tempo de entregar algo usável. O end-point ```finish``` ficou faltando, precisaria resolver o problema de bidirecionamento com recursividade infinita sem usar a lib json do jackson, faria isso criando as DTO's e fazendo um Map da model para a DTO, quando navegace entre as camadas appliacation e domain do projeto.
 Essa foi a primeira vez que utilizei o docker-compose e o react, então algumas coisas não ficaram muito bem estruturadas.
 
-Ao todo trabalhei por volta de 56h nesse teste.
+Ao todo trabalhei por volta de 56h nesse teste, portanto algumas coisas realmente ficaram faltando, testes e2e e unit no front-end assim como os testes da camada de aplicação, verificando os throws, chamadas de serviços etc... Não faço isso no dia a dia, porém como se trata de um teste, e eu estou desesperado pra conseguir um emprego, preferi entregar algo usavel demonstrando um pouco de minhas habilidades, porém logo abaixo eu defino como eu construíria esse projeto, e o tempo que eu demoraria para entrega-lo.
+
+Somente lembrando, que sempre trabalhei com metas de test-coverage acima de 90%, tanto no front como no back.
 
 ##### Como eu construiria os projetos
 
@@ -68,6 +70,10 @@ resources/
                 private__controllers/
                     UserController.java
                     ProcessesController.java
+            DTOS/
+                UserDTO.java
+                ProcessDTO.java
+                ...
         domain/
             user/
                 models/
