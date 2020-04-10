@@ -53,7 +53,10 @@ class ListProcessComponent extends Component {
     render() {
         return (
             <div className="container">
-                <h2>Processos</h2>
+                <h2 className="list-title">Processos</h2>
+                <div className="row div-add">
+                    <button className="btn btn-primary" onClick={this.addProcessClicked}>Novo Processo</button>
+                </div>
                 {this.state.message && <div className="alert alert-success">{this.state.message}</div>}
                 <div className="container">
                     <table className="table"> 
@@ -61,7 +64,7 @@ class ListProcessComponent extends Component {
                             <tr>
                                 <th>Id</th>
                                 <th>Descrição</th>
-                                <th>Ação</th>
+                                <th className="column-actio">Ação</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -71,7 +74,7 @@ class ListProcessComponent extends Component {
                                         <tr key={process.id}>
                                             <td>{process.id}</td>
                                             <td>{process.description}</td>
-                                            <td>
+                                            <td className="column-actio">
                                                 <button className="btn btn-warning" onClick={() => this.updateProcessClicked(process.id)}>Visualizar</button>
                                                 {/* <button className="btn btn-danger" onClick={() => this.deleteProcessClicked(process.id)}>Apagar</button> */}
                                             </td>
@@ -80,9 +83,7 @@ class ListProcessComponent extends Component {
                             }
                         </tbody>
                     </table>
-                    <div className="row">
-                        <button className="btn btn-primary" onClick={this.addProcessClicked}>Novo Processo</button>
-                    </div>
+                    
                 </div>
             </div>
         )

@@ -1,0 +1,67 @@
+.btn {
+    margin: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+}
+
+.btn-login {
+    height: 5em;
+    width: 10em;
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+    font-weight: bolder;
+}
+
+.btn-login:hover {
+    height: 5em;
+    width: 10em;
+    color: #fff;
+    background-color: #138496;
+    border-color: #17a2b8;
+}
+
+.btn-warning, .btn-danger{
+    height: 3em;
+    width: 6em;
+}
+
+.div-add {
+    width: 28%;
+    float: right;
+}
+
+.btn-exit {
+    height: 35px;
+    width: 100px;
+    background-color: #DDDDDD;
+    border-color: #DDDDDD;
+}
+
+.btn-exit:hover {
+    height: 35px;
+    width: 100px;
+    background-color: rgb(189, 189, 189);
+    border-color: rgb(189, 189, 189);
+}
+
+.list-title {
+    width: 70%;
+    float: left;
+}
+
+.div-exit {
+    width: 10%;
+    float: right;
+}
+
+.title-profile {
+    width: 70%;
+    float: left;
+}
+
+.column-actio{
+    text-align: center;
+}

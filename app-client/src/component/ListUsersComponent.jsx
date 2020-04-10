@@ -58,7 +58,10 @@ class ListUsersComponent extends Component {
         console.log('render')
         return (
             <div className="container">
-                <h2>Usuários</h2> 
+                <h2 className="list-title">Usuários</h2> 
+                <div className="row div-add">
+                    <button className="btn btn-primary" onClick={this.addUserClicked}>Novo Usuário</button>
+                </div>
                 {this.state.message && <div className="alert alert-success">{this.state.message}</div>}
                 <div className="container">
                     <table className="table"> 
@@ -68,7 +71,7 @@ class ListUsersComponent extends Component {
                                 <th>Nome de Usuário</th>
                                 <th>Nome</th>
                                 <th>Privilégio</th>
-                                <th>Ação</th>
+                                <th className="column-actio">Ação</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -80,7 +83,7 @@ class ListUsersComponent extends Component {
                                             <td>{user.username}</td>
                                             <td>{user.name}</td>
                                             <td>{user.role}</td>
-                                            <td>
+                                            <td className="column-actio">
                                                 <button className="btn btn-warning" onClick={() => this.updateUserClicked(user.id)}>Visualizar</button>
                                                 <button className="btn btn-danger" onClick={() => this.deleteUserClicked(user.id, user.name)}>Apagar</button>
                                             </td>
@@ -89,10 +92,6 @@ class ListUsersComponent extends Component {
                             }
                         </tbody>
                     </table>
-                    <div className="row">
-                        <button className="btn btn-primary" onClick={this.addUserClicked}>Novo Usuário</button>
-                        {/* <button className="btn btn-default" onClick={this.exitClicked}>Sair</button> */}
-                    </div>
                 </div>
             </div>
         )

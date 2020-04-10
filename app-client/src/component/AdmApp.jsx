@@ -26,7 +26,9 @@ class UserApp extends Component {
                         <Route path="/users" exact component={ListUsersComponent}/>
                         <Route path="/users/:id" component={UserComponent}/>
                     </Switch>
-                    <button className="btn btn-default" onClick={this.exitClicked}>Sair</button>
+                    {/* <div className="div-exit"> */}
+                        <button className="btn btn-default btn-exit" onClick={this.exitClicked}>Sair</button>
+                    {/* </div> */}
                 </div>
             </Router>
         )

@@ -52,7 +52,10 @@ class ListReviewComponent extends Component {
     render() {
         return (
             <div className="container">
-                <p>Pareceres:</p>
+                <h2 className="list-title">Pareceres:</h2>
+                <div className="row div-add">
+                    <button className="btn btn-primary" onClick={this.addReviewClicked}>Novo Parecer</button>
+                </div>
                 {/* <button className="btn btn-primary" onClick={this.addReviewClicked}>Novo Parecer</button> */}
                 {this.state.message && <div className="alert alert-success">{this.state.message}</div>}
                 <div className="container">
@@ -62,7 +65,7 @@ class ListReviewComponent extends Component {
                                 <th>Id</th>
                                 <th>Autor</th>
                                 <th>Parecer</th>
-                                <th>Ação</th>
+                                <th className="column-actio">Ação</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -73,18 +76,16 @@ class ListReviewComponent extends Component {
                                             <td>{review.id}</td>
                                             <td>{review.reviewer}</td>
                                             <td>{review.text}</td>
-                                            <td>
+                                            <td className="column-actio">
                                                 <button className="btn btn-warning" onClick={() => this.updateReviewClicked(review.id)}>Visualizar</button>
-                                                <button className="btn btn-danger" onClick={() => this.deleteReviewClicked(review.id)}>Apagar</button>
+                                                {/* <button className="btn btn-danger" onClick={() => this.deleteReviewClicked(review.id)}>Apagar</button> */}
                                             </td>
                                         </tr>
                                 )
                             }
                         </tbody>
                     </table>
-                    <div className="row">
-                        <button className="btn btn-primary" onClick={this.addReviewClicked}>Novo Parecer</button>
-                    </div>
+                    
                 </div>
             </div>
         )

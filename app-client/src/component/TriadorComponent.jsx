@@ -32,7 +32,9 @@ class TriadorComponent extends Component {
                     </Switch>
                 </div>  
             </Router>
-            <button className="btn btn-default" onClick={this.exitClicked}>Sair</button>
+            {/* <div className="div-exit"> */}
+                <button className="btn btn-default btn-exit" onClick={this.exitClicked}>Sair</button>
+            {/* </div> */}
             </div>
         ) 
     }

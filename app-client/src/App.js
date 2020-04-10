@@ -1,6 +1,7 @@
 
 import React, {Component} from 'react';
 import './App.css';
+import './Common.css'
 import AppLoginComponent from './component/AppLoginComponent';
 import AdmApp from './component/AdmApp';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';

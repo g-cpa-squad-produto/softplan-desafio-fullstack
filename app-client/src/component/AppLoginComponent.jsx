@@ -34,11 +34,9 @@ class AppLoginComponent extends Component {
                     
                     <p>Escolha um dos perfis abaixo:</p>
                     
-                    <button className="btn btn-info" onClick={this.admUserClicked}>Administrador</button>
-                    <br/><br/>
-                    <button className="btn btn-info" onClick={this.triadorClicked}>Triador</button>
-                    <br/><br/>
-                    <button className="btn btn-info" onClick={this.finalizadorClicked}>Finalizador</button> 
+                    <button className="btn btn-login" onClick={this.admUserClicked}>Administrador</button>
+                    <button className="btn btn-login" onClick={this.triadorClicked}>Triador</button>
+                    <button className="btn btn-login" onClick={this.finalizadorClicked}>Finalizador</button> 
                     <hr/>
                 </center>
                
