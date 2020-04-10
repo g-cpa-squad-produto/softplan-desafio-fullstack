@@ -1,0 +1,16 @@
+<div class="card">
+  <div class="card-header">
+    <h2>Incluir Usuários</h2>
+    <div>
+      <form [formGroup]="usuariosForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label title="Selecione os usuário para serem vinculados ao processo." for="inputUsuariosVinculados">Usuários vinculados(*)</label>
+          <select multiple formControlName="usuariosVinculados" class="form-control" id="inputUsuariosVinculados">
+            <option *ngFor="let usuario of usuariosVinculados">{{usuario.nome}}/ {{usuario.cpf}}</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-warning">Salvar</button>
+      </form>
+    </div>
+  </div>
+</div>

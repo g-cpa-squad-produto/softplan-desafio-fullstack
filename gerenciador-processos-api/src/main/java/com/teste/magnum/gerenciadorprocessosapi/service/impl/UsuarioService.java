@@ -51,11 +51,8 @@ public class UsuarioService implements IUsuarioService {
     }
 
     @Override
-    public UsuarioDTO edit(Long id) throws UsuarioException {
-        Optional<Usuario> usuario = usuarioRepository.getUsuarioById(id);
-        return usuario.map(
-                value -> buildUsuarioDTO(usuarioRepository.save(value))).orElseThrow(
-                        () -> new UsuarioException(MessageFormat.format("Erro ao tentar editar usuário.", null)));
+    public UsuarioDTO getUsuario(Long id) {
+        return buildUsuarioDTO(usuarioRepository.getOne(id));
     }
 
     @Override

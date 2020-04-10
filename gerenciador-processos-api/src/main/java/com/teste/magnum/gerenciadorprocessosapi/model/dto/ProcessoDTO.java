@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Collection;
 
 @Data
 @Builder
@@ -18,7 +18,7 @@ public class ProcessoDTO implements Serializable {
 
     private Long id;
     private String descricao;
-    private List<UsuarioProcessoDTO> usuariosVinculados;
+    private Collection<String> usuariosVinculados;
     private LocalDateTime dataRegistro;
     private ParecerDTO parecer;
     private StatusProcessoEnum statusProcesso;

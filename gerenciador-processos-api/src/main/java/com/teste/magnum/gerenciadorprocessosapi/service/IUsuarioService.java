@@ -10,8 +10,8 @@ public interface IUsuarioService {
 
     List<UsuarioDTO> findAll() throws NotFoundException;
     UsuarioDTO save(UsuarioDTO usuarioDTO) throws UsuarioException;
-    UsuarioDTO edit(Long id) throws UsuarioException;
     UsuarioDTO findById(Long id) throws NotFoundException;
     void delete(UsuarioDTO usuarioDTO);
     void deleteById(Long id) throws UsuarioException;
+    UsuarioDTO getUsuario(Long id);
 }

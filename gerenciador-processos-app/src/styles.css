@@ -1,0 +1,75 @@
+h1 {
+  color: #369;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 250%;
+}
+h2, h3 {
+  color: #444;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: lighter;
+}
+body {
+  margin: 2em;
+}
+body, input[type="text"], button {
+  color: #888;
+  font-family: Cambria, Georgia;
+}
+/* everywhere else */
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: .5rem 1rem;
+  background-color: #336699;
+  margin-bottom: 10px;
+  height: 50px;
+}
+
+.footer {
+  margin-top: 5px;
+  background-color: #336699;
+  color: #ffffff;
+  position:absolute;
+  bottom:0;
+  width:100%;
+}
+
+.footer-copyright.text-center.py-3 {
+  padding-top: 10px !important;
+}
+
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: 0 !important;
+}
+
+.divider{
+  width:5px;
+  height:auto;
+  display:inline-block;
+}
+
+tr:nth-of-type(odd) {
+  background-color: #efa847;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: lightblue;
+}
+
+.img-login {
+  vertical-align: middle;
+  border-style: none;
+  text-align: center;
+
+}

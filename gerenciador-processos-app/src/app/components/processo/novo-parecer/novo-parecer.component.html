@@ -1,0 +1,16 @@
+<div class="card">
+  <div class="card-header">
+    <h2>Novo Parecer</h2>
+    <div>
+      <form [formGroup]="parecerForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="inputDescricao">Descrição</label>
+          <input formControlName="descricao" type="text" placeholder="Descrição do parecer" class="form-control" id="inputDescricao">
+          <br/>
+        </div>
+        <button type="submit" class="btn btn-warning">Salvar</button>
+      </form>
+    </div>
+  </div>
+</div>
+

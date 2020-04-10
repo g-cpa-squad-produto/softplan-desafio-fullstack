@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/processo")
 public class ProcessoResource {
@@ -43,6 +44,11 @@ public class ProcessoResource {
     @PutMapping(value = "/parecer/{numero}")
     public ResponseEntity<ProcessoDTO> addParecer(@PathVariable("numero") Long numero, @RequestBody ParecerDTO parecerDTO) throws ProcessoException {
         return ResponseEntity.ok(processoService.addParecer(numero, parecerDTO));
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<ProcessoDTO> getProcesso(@PathVariable("id") Long id) throws NotFoundException, ProcessoException {
+        return ResponseEntity.ok(processoService.getProcesso(id));
     }
 
 

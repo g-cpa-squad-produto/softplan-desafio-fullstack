@@ -1,0 +1,38 @@
+<div class="card">
+  <div class="card-header">
+    <h2>Detalhes do Processo</h2>
+    <div *ngIf="processo">
+      <form>
+        <div class="form-group">
+          <label>Número</label>
+          <label class="form-control">{{processo.id}}</label>
+        </div>
+        <div class="form-group">
+          <label>Descrição</label>
+          <label class="form-control">{{processo.descricao}}</label>
+        </div>
+        <div class="form-group">
+          <label>Status do processo</label>
+          <label class="form-control">{{processo.statusProcesso}}</label>
+        </div>
+        <div class="form-group">
+          <label>Data Registro</label>
+          <label class="form-control">{{processo.dataRegistro | date:'dd/MM/yyyy HH:mm:ss'}}</label>
+        </div>
+        <h5>Usuários Vinculados</h5>
+        <div class="form-group">
+          <ul *ngFor="let usuario of processo.usuariosVinculados">
+            <li class="form-control">{{usuario}}</li>
+          </ul>
+        </div>
+        <h5>Parecer</h5>
+        <div class="form-group">
+          <label>Descrição</label>
+          <label class="form-control">{{processo.parecer.descricao}}</label>
+          <label >Data Registro</label>
+          <label class="form-control">{{processo.parecer.dataRegistro | date:'dd/MM/yyyy HH:mm:ss'}}</label>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

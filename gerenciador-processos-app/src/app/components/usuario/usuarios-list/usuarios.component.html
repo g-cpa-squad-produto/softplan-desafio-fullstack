@@ -1,0 +1,38 @@
+<div class="card" style="margin-bottom: 5px">
+  <div class="card-header">
+    <button title="Adicionar novo usuário" [routerLink]="['usuario']" type="button" class="btn btn-warning"><strong>Novo</strong></button>
+  </div>
+</div>
+<div class="card" aria-modal="true">
+  <div class="card-header">
+    <div style="text-align: center">
+      <table id="example" class="table table-striped table-bordered" cellspacing="0" style="width:100%">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>CPF</th>
+          <th>E-mail</th>
+          <th>Tipo de Usuário</th>
+          <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let usuario of usuarios | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+          <td>{{usuario.id}}</td>
+          <td>{{usuario.nome}}</td>
+          <td>{{usuario.cpf}}</td>
+          <td>{{usuario.email}}</td>
+          <td>{{usuario.tipoUsuario}}</td>
+          <td>
+            <button routerLink="/usuarios/usuario/{{usuario.id}}" title="Editar" class="btn btn-info"><i class="fa fa-edit"></i></button>
+            <div class="divider"></div>
+            <button title="Remover" (click)="open(usuario)" class="btn badge-danger"><i class="fa fa-trash"></i></button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <pagination-controls previousLabel="Anterior" nextLabel="Próximo" (pageChange)="p = $event"></pagination-controls>
+    </div>
+  </div>
+</div>

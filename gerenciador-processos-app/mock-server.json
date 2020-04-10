@@ -1,0 +1,111 @@
+{
+  "usuarios": [
+    {
+      "id": 1,
+      "nome": "Magnum Adelano",
+      "cpf": "09747576678",
+      "email": "magnum.adelano@gmail.com",
+      "senha": null,
+      "tipoUsuario": "ADMINISTRADOR"
+    },
+    {
+      "nome": "Lousane Rodrigues",
+      "cpf": "02602813362",
+      "email": "lousane.avelar@gmail.com",
+      "tipoUsuario": "TRIADOR",
+      "id": 2
+    }
+  ],
+  "processos": [
+    {
+      "id": 1,
+      "descricao": "Processo teste",
+      "usuariosVinculados": [
+        {
+          "nome": "Magnum Adelano",
+          "cpf": "09747576678"
+        },
+        {
+          "nome": "Lousane Rodrigues",
+          "cpf": "02602813362"
+        }
+      ],
+      "dataRegistro": "2020-04-08T20:10:41.18",
+      "parecer": {
+        "id": 1,
+        "descricao": "Teste parecer",
+        "dataRegistro": "2020-04-08T20:10:47.186"
+      },
+      "statusProcesso": "PARECER_ADICIONADO"
+    },
+    {
+      "id": 2,
+      "descricao": "Processo teste",
+      "usuariosVinculados": [
+        {
+          "nome": "Magnum Adelano",
+          "cpf": "09747576678"
+        }
+      ],
+      "dataRegistro": "2020-04-08T20:10:52.541",
+      "parecer": {
+        "id": 2,
+        "descricao": "Teste parecer processo 2",
+        "dataRegistro": "2020-04-08T20:13:15.789"
+      },
+      "statusProcesso": "PARECER_ADICIONADO"
+    },
+    {
+      "id": 3,
+      "descricao": "Processo teste",
+      "usuariosVinculados": [
+        {
+          "nome": "Magnum Adelano",
+          "cpf": "09747576678"
+        }
+      ],
+      "dataRegistro": "2020-04-08T20:11:01.31",
+      "parecer": null,
+      "statusProcesso": "PENDENTE_PARECER"
+    },
+    {
+      "descricao": "Processo Angular",
+      "usuariosVinculados": [
+        "Magnum Adelano / 09747576678"
+      ],
+      "id": 4
+    },
+    {
+      "descricao": "Processo Angular 2",
+      "usuariosVinculados": [
+        "Lousane Rodrigues/554544454",
+        "Magnum Adelano/09747576678"
+      ],
+      "id": 5
+    },
+    {
+      "descricao": "Processo Angular 3",
+      "usuariosVinculados": [
+        "Lousane Rodrigues/554544454",
+        "Magnum Adelano/09747576678"
+      ],
+      "id": 6
+    },
+    {
+      "descricao": "aasassaas",
+      "usuariosVinculados": [
+        "Lousane Rodrigues/554544454",
+        "Magnum Adelano/ 09747576678"
+      ],
+      "id": 7
+    },
+    {
+      "descricao": "assasasasasassa",
+      "usuariosVinculados": [
+        "554544454",
+        "09747576678"
+      ],
+      "id": 8
+    }
+  ]
+}

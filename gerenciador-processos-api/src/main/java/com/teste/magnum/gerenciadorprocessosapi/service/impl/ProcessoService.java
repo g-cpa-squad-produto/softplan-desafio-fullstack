@@ -49,22 +49,18 @@ public class ProcessoService implements IProcessoService {
     }
 
     @Override
-    public void addUsers(NovoUsuarioProcessoDTO novoUsuarioProcessoDTO) throws ProcessoException, UsuarioException {
+    public NovoUsuarioProcessoDTO addUsers(NovoUsuarioProcessoDTO novoUsuarioProcessoDTO) throws ProcessoException, UsuarioException {
         validaUsuariosParecer(novoUsuarioProcessoDTO);
         Optional<Processo> processo = processoRepository.getById(novoUsuarioProcessoDTO.getIdProcesso());
         if(processo.isPresent()) {
             novoUsuarioProcessoDTO.getUsuariosVinculados().forEach(
-                    u -> processo.get().getUsuariosVinculados().add(u.getCpf()));
+                    u -> processo.get().getUsuariosVinculados().add(u));
             processoRepository.save(processo.get());
+            return novoUsuarioProcessoDTO;
         } else {
             throw new ProcessoException(MessageFormat.format("Erro ao tentar incluir um novo usuário ao processo {0}.",
                     novoUsuarioProcessoDTO.getIdProcesso()));
         }
-    }
-
-    @Override
-    public ProcessoDTO viewProcess(Long id) {
-        return null;
     }
 
     @Override
@@ -79,6 +75,11 @@ public class ProcessoService implements IProcessoService {
                 idProcesso));
     }
 
+    @Override
+    public ProcessoDTO getProcesso(Long idProcesso) throws ProcessoException, NotFoundException {
+        return buildProcessoDTO(processoRepository.getById(idProcesso).orElseThrow(() -> new NotFoundException(MessageFormat.format("Nenhum processo encontrado.", null))));
+    }
+
 //    public UsuarioProcessoDTO getUsuarioProcessoByCPF(String cpf) {
 //        Optional<Usuario> usuario = usuarioRepository.getUsuarioByCpf(cpf);
 //        if(usuario.isPresent()) {
@@ -88,29 +89,27 @@ public class ProcessoService implements IProcessoService {
 //    }
 
     private Processo buildNovoProcesso(ProcessoDTO processoDTO) {
-        Collection<String> usuariosVinculados = processoDTO.getUsuariosVinculados()
-                .stream().map(UsuarioProcessoDTO::getCpf).collect(Collectors.toList());
         return Processo.builder()
                 .descricao(processoDTO.getDescricao())
-                .usuariosVinculados(usuariosVinculados)
+                .usuariosVinculados(processoDTO.getUsuariosVinculados())
                 .dataRegistro(LocalDateTime.now())
                 .statusProcesso(StatusProcessoEnum.PENDENTE_PARECER)
                 .build();
     }
 
     private void validaUsuariosParecer(NovoUsuarioProcessoDTO novoUsuarioProcessoDTO) throws UsuarioException {
-        for (UsuarioProcessoDTO u : novoUsuarioProcessoDTO.getUsuariosVinculados()) {
-            if(!usuarioRepository.getUsuarioByCpf(u.getCpf()).isPresent()) {
-                throw new UsuarioException(MessageFormat.format("Usuario {0} não cadastrado no sistema.", u.getNome()));
+        for (String u : novoUsuarioProcessoDTO.getUsuariosVinculados()) {
+            if(!usuarioRepository.getUsuarioByCpf(u).isPresent()) {
+                throw new UsuarioException(MessageFormat.format("Usuario não cadastrado no sistema.", null));
             }
         }
     }
 
     private ProcessoDTO buildProcessoDTO(Processo processo) {
         List<Usuario> usuarios = new ArrayList<>();
-        List<UsuarioProcessoDTO> usuariosProcesso = new ArrayList<>();
+        Collection<String> usuariosProcesso = new ArrayList<>();
         processo.getUsuariosVinculados().forEach(s -> usuarioRepository.getUsuarioByCpf(s).ifPresent(usuarios::add));
-        usuarios.forEach(usuario -> usuariosProcesso.add(UsuarioProcessoDTO.builder().nome(usuario.getNome()).cpf(usuario.getCpf()).build()));
+        usuarios.forEach(usuario -> usuariosProcesso.add(usuario.getNome()));
         return ProcessoDTO.builder()
                 .id(processo.getId())
                 .descricao(processo.getDescricao())

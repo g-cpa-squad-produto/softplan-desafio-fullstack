@@ -13,8 +13,8 @@ public interface IProcessoService {
 
     List<ProcessoDTO> findAll() throws NotFoundException;
     ProcessoDTO save(ProcessoDTO processoDTO);
-    void addUsers(NovoUsuarioProcessoDTO novoUsuarioProcessoDTO) throws ProcessoException, UsuarioException;
-    ProcessoDTO viewProcess(Long id);
+    NovoUsuarioProcessoDTO addUsers(NovoUsuarioProcessoDTO novoUsuarioProcessoDTO) throws ProcessoException, UsuarioException;
     ProcessoDTO addParecer(Long idProcesso, ParecerDTO parecerDTO) throws ProcessoException;
+    ProcessoDTO getProcesso(Long idProcesso) throws ProcessoException, NotFoundException;
 
 }

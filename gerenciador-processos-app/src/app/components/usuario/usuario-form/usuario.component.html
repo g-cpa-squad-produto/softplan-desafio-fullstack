@@ -1,0 +1,30 @@
+<div class="card">
+  <div class="card-header">
+    <h2>Novo Usuário</h2>
+    <div>
+      <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="inputNome">Nome</label>
+          <input formControlName="nome" type="text" placeholder="Nome do usuário" class="form-control" id="inputNome">
+          <br/>
+          <label for="inputCpf">CPF (Somente números)</label>
+          <input formControlName="cpf" type="text" placeholder="CPF do usuário" class="form-control" id="inputCpf">
+          <br/>
+          <label for="inputNome">E-mail</label>
+          <input formControlName="email" type="text" placeholder="E-mail do usuário" class="form-control" id="inputEmail">
+          <br/>
+          <label for="inputsenha">Senha</label>
+          <input formControlName="senha" type="password" placeholder="Senha do usuário" class="form-control" id="inputSenha">
+          <br/>
+          <label title="Selecione os usuário para serem vinculados ao processo." for="inputNome">Tipo do Usuário</label>
+          <select formControlName="tipoUsuario" class="form-control" id="inputUsuarios">
+            <option>Seleciona um papel para o usuário</option>
+            <option *ngFor="let tipoUsuario of tiposUsuario">{{tipoUsuario}}</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-warning">Salvar</button>
+      </form>
+    </div>
+  </div>
+</div>
+

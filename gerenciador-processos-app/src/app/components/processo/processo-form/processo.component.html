@@ -1,0 +1,19 @@
+<div class="card">
+  <div class="card-header">
+    <h2>Novo Processo</h2>
+    <div>
+      <form [formGroup]="processoForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="inputDescricao">Descrição</label>
+          <input formControlName="descricao" type="text" placeholder="Descrição do processo" class="form-control" id="inputDescricao">
+          <br/>
+          <label title="Selecione os usuário para serem vinculados ao processo." for="inputDescricao">Usuários vinculados(*)</label>
+          <select multiple formControlName="usuariosVinculados" class="form-control" id="inputUsuarios">
+            <option *ngFor="let usuario of usuariosVinculados">{{usuario.nome}}/ {{usuario.cpf}}</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-warning">Salvar</button>
+      </form>
+    </div>
+  </div>
+</div>
