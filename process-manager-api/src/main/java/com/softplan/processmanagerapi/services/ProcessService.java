@@ -1,6 +1,7 @@
 package com.softplan.processmanagerapi.services;
 
 import com.softplan.processmanagerapi.excpetion.BadRequestException;
+import com.softplan.processmanagerapi.excpetion.ResourceNotFoundException;
 import com.softplan.processmanagerapi.factory.ProcessFactory;
 import com.softplan.processmanagerapi.models.Opinion;
 import com.softplan.processmanagerapi.models.Process;
@@ -46,7 +47,9 @@ public class ProcessService {
         }
 
         List<ProcessResponse> processResponseList = processes.map(process -> {
-            User creator = userRepository.getOne(process.getCreatedBy());
+            User creator = userRepository.findById(process.getCreatedBy())
+                    .orElseThrow(() ->
+                            new ResourceNotFoundException("User", "getCreatedBy",process.getCreatedBy()));
             return processFactory.getProcessResponse(process, creator);
         }).getContent();
 
@@ -75,7 +78,9 @@ public class ProcessService {
         process.setOpinions(opinions);
         Set<User> users = new HashSet<>();
         processRequest.getAssignedUsersIds().forEach(userId -> {
-            users.add(userRepository.getOne(userId));
+            users.add(userRepository.findById(userId)
+                    .orElseThrow(() ->
+                            new ResourceNotFoundException("User", "ProcessRequest.AssignedUser.Id",process.getCreatedBy())));
         });
         process.setAssignedUsers(users);
         return processRepository.save(process);
@@ -84,7 +89,9 @@ public class ProcessService {
     private Opinion mapOpinionRequestToOpinion(OpinionRequest opinionRequest, Process process){
         Opinion opinion = new Opinion();
         opinion.setOpinion(opinionRequest.getOpinion());
-        opinion.setUser(userRepository.getOne(opinionRequest.getUserId()));
+        opinion.setUser(userRepository.findById(opinionRequest.getUserId())
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("User", "OpinionRequest.User.id",process.getCreatedBy())));
         opinion.setProcess(process);
         return opinion;
     }

@@ -1,5 +1,7 @@
 package com.softplan.processmanagerapi.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.softplan.processmanagerapi.models.audit.DateAudit;
 
 import javax.persistence.*;
@@ -12,12 +14,13 @@ public class Opinion extends DateAudit {
     @GeneratedValue
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "process_id", nullable = false)
+    @JsonBackReference
     private Process process;
 
     private String opinion;

@@ -1,5 +1,8 @@
 package com.softplan.processmanagerapi.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.softplan.processmanagerapi.models.audit.DateAudit;
 import com.softplan.processmanagerapi.models.audit.UserDateAudit;
 import org.hibernate.annotations.NaturalId;
 
@@ -19,7 +22,7 @@ import java.util.Set;
                 "email"
         })
 })
-public class User extends UserDateAudit {
+public class User extends DateAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -47,6 +50,13 @@ public class User extends UserDateAudit {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name="user_process",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "process_id"))
+    @JsonBackReference
+    private Set<Process> process;
 
     public User() {
 
@@ -105,5 +115,13 @@ public class User extends UserDateAudit {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Set<Process> getProcess() {
+        return process;
+    }
+
+    public void setProcess(Set<Process> process) {
+        this.process = process;
     }
 }

@@ -1,6 +1,6 @@
 package com.softplan.processmanagerapi.payload;
 
-import com.softplan.processmanagerapi.models.enums.RoleName;
+import com.softplan.processmanagerapi.models.enums.RoleType;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -21,10 +21,10 @@ public class SignUpRequest {
     @Email
     private String email;
 
-    private List<RoleName> role;
+    private List<RoleType> role;
 
     @NotBlank
-    @Size(min = 6, max = 20)
+    @Size(min = 5, max = 20)
     private String password;
 
     public String getName() {
@@ -59,11 +59,11 @@ public class SignUpRequest {
         this.password = password;
     }
 
-    public List<RoleName> getRole() {
+    public List<RoleType> getRole() {
         return role;
     }
 
-    public void setRole(List<RoleName> role) {
+    public void setRole(List<RoleType> role) {
         this.role = role;
     }
 }

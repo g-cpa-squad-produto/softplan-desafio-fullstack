@@ -26,14 +26,14 @@ public class ProcessController {
     ProcessService processService;
 
     @GetMapping
-    public PagedResponse<ProcessResponse> getProcess(@CurrentUser UserPrincipal currentUser,
+    public ResponseEntity<PagedResponse<ProcessResponse>> getProcess(@CurrentUser UserPrincipal currentUser,
                                                      @RequestParam(value = "page", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) int page,
                                                      @RequestParam(value = "size", defaultValue = AppConstants.DEFAULT_PAGE_SIZE) int size) {
-        return processService.getAllProcess(currentUser, page, size);
+        return ResponseEntity.ok(processService.getAllProcess(currentUser, page, size));
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('USER_SCREENER')")
+    @PreAuthorize("hasAnyRole('USER_SCREENER','USER_FINISHER')")
     public ResponseEntity<?> createProcess(@CurrentUser UserPrincipal currentUser,
                                            @Valid @RequestBody ProcessRequest processRequest) {
         Process process = processService.createProcess(processRequest);

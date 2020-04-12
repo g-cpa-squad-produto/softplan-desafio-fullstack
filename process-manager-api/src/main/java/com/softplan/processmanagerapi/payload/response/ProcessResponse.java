@@ -10,7 +10,9 @@ import java.util.List;
 import java.util.Set;
 
 public class ProcessResponse {
+
     private Long id;
+    private String title;
     private StatusType status;
     private UserSummary userSummary;
     private Instant creationDateTime;
@@ -72,5 +74,13 @@ public class ProcessResponse {
 
     public void setSubstantiation(String substantiation) {
         this.substantiation = substantiation;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

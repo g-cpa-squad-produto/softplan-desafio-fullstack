@@ -19,6 +19,7 @@ public class ProcessFactory {
 
     public ProcessResponse getProcessResponse(Process process, User creator) {
         ProcessResponse processResponse = new ProcessResponse();
+        processResponse.setTitle(process.getTitle());
         processResponse.setAssignedUsers(process.getAssignedUsers());
         processResponse.setCreationDateTime(process.getCreatedAt());
         processResponse.setStatus(process.getStatus());
