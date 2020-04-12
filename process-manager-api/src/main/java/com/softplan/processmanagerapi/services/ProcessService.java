@@ -69,6 +69,7 @@ public class ProcessService {
 
     public Process createProcess(ProcessRequest processRequest) {
         Process process = new Process();
+        process.setTitle(processRequest.getTitle());
         process.setSubstantiation(processRequest.getSubstantiation());
         process.setStatus(processRequest.getStatus());
         List<Opinion> opinions = new ArrayList<>();

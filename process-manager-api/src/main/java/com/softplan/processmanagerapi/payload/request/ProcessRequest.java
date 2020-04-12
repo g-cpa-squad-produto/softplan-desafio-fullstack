@@ -11,6 +11,8 @@ import java.util.Set;
 
 public class ProcessRequest {
     @NotNull
+    private String title;
+    @NotNull
     private Set<Long> assignedUsersIds;
     @NotBlank
     private String substantiation;
@@ -48,5 +50,13 @@ public class ProcessRequest {
 
     public void setOpinions(List<OpinionRequest> opinions) {
         this.opinions = opinions;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }
