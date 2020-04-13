@@ -1,0 +1,6 @@
+com\ldutra\processos\api\resource\UsuarioResourceTest.class
+com\ldutra\processos\ProcessosApplicationTests.class
+com\ldutra\processos\service\ProcessoServiceTest.class
+com\ldutra\processos\model\repository\UsuarioRepositoryTest.class
+com\ldutra\processos\service\UsuarioServiceTest.class
+com\ldutra\processos\model\repository\ProcessoRepositoryTest.class
