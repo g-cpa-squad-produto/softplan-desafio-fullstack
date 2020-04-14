@@ -1,0 +1,130 @@
+"user" 
+{
+  "idUser": 1
+  "name": "Bárbara"
+  "cpf": "04778862996"
+  "birthdate":"2000-10-10"
+}
+
+"users" 
+[
+{
+  "idUser": 1
+  "name": "Bárbara"
+  "cpf": "04778862996"
+  "birthdate":"1987-01-01"
+},
+{
+  "idUser": 2
+  "name": "Tiago"
+  "cpf": "31229866809"
+  "birthdate":"1985-08-17"
+},
+{
+  "idUser": 3
+  "name": "Heleno"
+  "cpf": "006987444562"
+  "birthdate":"2019-03-08"
+},
+{
+  "idUser": 4
+  "name": "Haru"
+  "cpf": "566998415236"
+  "birthdate":"2021-01-10"
+}
+]
+
+"process"
+{
+  "idProcess": 1,
+  "name": "hero Process",
+  "sku": "0002297272"
+	"description": "Lorem ipsum dolor sit amet",
+	"price": "99",
+  "amount": 10,
+}
+
+
+"processes"
+[
+{
+  "idProcess": 1,
+  "name": "hero Process",
+  "sku": "0002297272"
+	"description": "Lorem ipsum dolor sit amet",
+	"price": "99",
+  "amount": 10,
+},
+{
+  "idProcess": 2,
+  "name": "trumbler Process",
+  "sku": "00033397272"
+	"description": "Lorem ipsum dolor sit amet",
+	"price": "9",
+  "amount": 23,
+},
+{
+  "idProcess": 3,
+  "name": "picanha Process",
+  "sku": "0002297272"
+	"description": "Lorem ipsum dolor sit amet",
+	"price": "23",
+  "amount": 60,
+},
+{
+  "idProcess": 4,
+  "name": "hero Process",
+  "sku": "0002297272"
+	"description": "Lorem ipsum dolor sit amet",
+	"price": "99",
+  "amount": 10,
+}
+]
+
+Orders: 
+[
+  {
+    idOrder: "1",
+    amt_purchase: 200,
+    dt_purchase: 2020-04-04,
+    idUser: "1",
+    orderProcess: {
+      idProcess: "1",
+      amt_purchase_process: 5,
+      value_process: 10
+    }
+  },
+  {
+    idOrder: "2",
+    amt_purchase: 2400,
+    dt_purchase: 2020-03-03,
+    idUser: "2",
+    orderProcess: {
+      idProcess: "2",
+      amt_purchase_process: 1,
+      value_process: 2400
+    }
+  },
+  {
+    idOrder: "3",
+    amt_purchase: 80,
+    dt_purchase: 2020-04-04,
+    idUser: "3",
+    orderProcess: {
+      idProcess: "3",
+      amt_purchase_process: 20,
+      value_process: 4
+    }
+  },
+  {
+    idOrder: "2",
+    amt_purchase: 220,
+    dt_purchase: 2020-01-01,
+    idUser: "2",
+    orderProcess: {
+      idProcess: "2",
+      amt_purchase_process: 10,
+      value_process: 22
+    }
+  }
+]

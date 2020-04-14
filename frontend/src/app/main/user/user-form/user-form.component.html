@@ -1,0 +1,60 @@
+<div id="user-form" class="user">
+  <header class="top-bg mat-accent-bg" fxlayout="row" fxLayoutAlign="center center">
+    <h2 fxFlex>
+      <mat-icon class="mr-16">people</mat-icon>
+      <span class="text"> Usuários</span>
+    </h2>
+  </header>
+  <main class="container mat-elevation-z0">
+    <div fxLayout="column" fxLayoutAlign="start start" style="flex-direction: column !important;">
+      <form class="mat-white-bg mat-elevation-z4" fxLayout="column" id="userForm" [formGroup]="userForm">
+        <div class="requester pb-24">
+          <div class="h2 mb-24">
+            <mat-icon class="mr-16">person</mat-icon>
+            <span class="text"> Usuário</span>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field fxFlex="50" style="margin-right: 10px">
+              <input formControlName="name" placeholder="Nome completo" type="text" matInput>
+              <mat-error>Informe o nome completo.</mat-error>
+            </mat-form-field>
+            <mat-form-field fxFlex="50">
+              <input matInput formControlName="email" placeholder="E-mail: exemplo@gmail.com" />
+              <mat-error>Informe o e-mail.</mat-error>
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field fxFlex="50" style="margin-right: 10px">
+              <input formControlName="password" placeholder="Senha" type="password" matInput>
+              <mat-error>Informe uma senha</mat-error>
+            </mat-form-field>
+            <mat-form-field fxFlex="50" style="margin-right: 10px">
+              <mat-select placeholder="Perfil" formControlName="roles" required>
+                 <mat-option *ngFor="let item of roles" [value]="item.name">
+                     {{item.label}}
+                 </mat-option>
+             </mat-select>
+             <mat-error>Associe um perfil ao usuário.</mat-error>
+         </mat-form-field>
+          </div>
+        </div>
+      </form>
+      <mat-progress-bar *ngIf="showLoadingBar" class="loading-bar" color="accent" mode="indeterminate">
+      </mat-progress-bar>
+      <div fxLayout="row" fxFlex="1 0 auto" class="actions-buttons">
+        <button mat-raised-button type="button" color="warn" (click)="removeUser()" [disabled]="showLoadingBar">
+          Excluir
+        </button>
+        <div fxLayout="row" fxLayoutAlign="end" fxFlex="1 0 auto">
+          <button mat-button color="primary" type="button" class="mr-8" (click)="goBack()" [disabled]="showLoadingBar">
+            Voltar
+          </button>
+          <button mat-raised-button color="primary" class="mat-accent" type="submit"
+            [disabled]="userForm.invalid || showLoadingBar" aria-label="Salvar" (click)="save()">
+            Salvar
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

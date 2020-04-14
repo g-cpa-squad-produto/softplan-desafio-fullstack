@@ -1,0 +1,36 @@
+:host {
+    #dashboard {
+        width: 100%;
+        header {
+            .mat-icon {
+                vertical-align: middle;
+            }
+            h2 {
+                margin: 0px 10px auto;
+                padding: 25px 25px;
+                height: 10%;
+            }
+
+            .text {
+                vertical-align: middle;
+            }
+        }
+        .dashboard-list-cards {
+            margin: 20px;
+            .dashboard-card {
+                padding: 50px;
+                .h3 {
+                    line-height: 72px;
+                    font-size: 72px;
+                    color: rgb(3, 169, 244) !important;
+                }
+                .h4 {
+                    color: rgba(0, 0, 0, 0.54) !important;
+                    font-weight: 500;
+                    font-size: 16px;
+                    text-align: center;
+                }
+            }
+        }
+    }
+}

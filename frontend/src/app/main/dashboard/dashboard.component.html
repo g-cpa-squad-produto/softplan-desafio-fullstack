@@ -1,0 +1,27 @@
+<div id="dashboard">
+    <header>
+        <h2>
+            <mat-icon>dashboard</mat-icon>
+            <span class="text"> Dashboard</span>
+        </h2>
+    </header>
+    <div fxLayoutGap="20px" class="dashboard-list-cards" fxLayout="row wrap" fxLayoutAlign="center">
+        <div fxLayoutAlign="center center" fxFlex class="mat-white-bg mat-elevation-z2">
+            <div class="dashboard-card" fxLayout="column" fxLayoutAlign="center center">
+                <div class="h3">{{user.length}}
+                </div>
+                <div class="h4">
+                    Usuários
+                </div>
+            </div>
+        </div>
+        <div fxLayoutAlign="center center" fxFlex class="mat-white-bg mat-elevation-z2">
+            <div class="dashboard-card" fxLayout="column" fxLayoutAlign="center center">
+                <div class="h3">{{process.length}}
+                </div>
+                <div class="h4">
+                    Processos
+                </div>
+            </div>
+        </div>
+</div>

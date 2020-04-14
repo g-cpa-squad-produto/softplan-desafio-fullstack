@@ -1,0 +1,68 @@
+<section id="users" class="users" fxlayout="row">
+  <header class="top-bg mat-accent-bg" fxlayout="column" fxlayout="column">
+    <h2>
+      <mat-icon class="mr-16">
+        people
+      </mat-icon>
+      <span class="mr-16 text">
+        Usuários
+      </span>
+    </h2>
+  </header>
+  <main class="container mat-elevation-z8">
+
+    <div class="loading-shade" *ngIf="isLoadingResults">
+      <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+    </div>
+
+    <div class="table-container">
+
+      <table mat-table [dataSource]="data" class="table" matSort matSortActive="id" matSortDisableClear
+        matSortDirection="asc">
+
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>ID</th>
+          <td mat-cell *matCellDef="let row">
+            <a [routerLink]="['/users', row.userId]">
+              {{row.userId || json}}
+            </a>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Nome</th>
+          <td mat-cell *matCellDef="let row">
+            <a [routerLink]="['/users', row.userId]">
+              {{row.name}}
+            </a>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef>E-mail</th>
+          <td mat-cell *matCellDef="let row">
+            <a [routerLink]="['/users', row.userId]">
+              {{row.email}}
+            </a>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="roles">
+          <th mat-header-cell *matHeaderCellDef>Tipo</th>
+          <td mat-cell *matCellDef="let row">
+            {{row.roles}}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </main>
+  <div class="fab-user" fxLayoutAlign="end">
+    <button mat-fab color="primary" id="add-user" aria-label="Adicionar novo usuário"
+      [routerLink]="['/users', 'novo']">
+      <strong>+</strong>
+    </button>
+  </div>
+</section>

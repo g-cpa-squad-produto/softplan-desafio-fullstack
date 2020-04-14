@@ -1,0 +1,41 @@
+<section class="login" fxLayoutAlign="center center">
+    <div id="login-form-wrapper" fxLayoutAlign="center center">
+        <div id="login-form">
+            <div class="logo">
+                <img src="../../../assets/logo.jpg">
+            </div>
+            <h3 class="title">Identifique-se</h3>
+            <form name="loginForm" [formGroup]="loginForm">
+                <mat-form-field>
+                    <input matInput placeholder="Email" formControlName="email">
+                    <mat-error *ngIf="loginFormErrors.email.required">
+                        Preencha com seu email de identificação.
+                    </mat-error>
+                    <mat-error *ngIf="!loginFormErrors.email.required && loginFormErrors.email.email">
+                        Este email é inválido.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput type="password" placeholder="Senha" formControlName="password">
+                    <mat-error *ngIf="loginFormErrors.password.required">
+                        Digite sua senha.
+                    </mat-error>
+                </mat-form-field>
+                <mat-error *ngIf="error">
+                        <span class="mat-red-bg">{{error.error.message}}</span>
+                </mat-error>
+
+                <button mat-raised-button
+                    class="submit-button"
+                    aria-label="Entrar"
+                    [disabled]="!loginForm.valid"
+                    (click)="onAuthenticate()"
+                >
+                    Entrar
+                    <mat-icon>chevron_right</mat-icon>
+                </button>
+            </form>
+        </div>
+    </div>
+</section>

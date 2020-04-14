@@ -1,0 +1,86 @@
+:host {
+  width: 100%;
+  height: 100%;
+
+  header {
+    .text {
+      vertical-align: text-bottom;
+    }
+  }
+
+  .processes {
+    width: 100%;
+  }
+
+  .processes header,
+  .processes footer {
+    margin: 0 0 auto;
+  }
+
+  .processes header h2 {
+    margin: 0px 10px auto;
+    padding: 25px 25px;
+    height: 10%;
+  }
+
+  .container {
+    position: relative;
+    margin: 25px;
+  }
+
+  .table-container {
+    position: relative;
+    max-height: 90%;
+    overflow: auto;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  .loading-shade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 56px;
+    right: 0;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Column Widths */
+
+  .mat-column-created_at {
+    width: 160px;
+  }
+
+  .mat-column-status,
+  .mat-column-number {
+    max-width: 64px;
+  }
+
+  .fab-process {
+    position: fixed;
+    z-index: 9999;
+    bottom: 30px;
+    right: 40px;
+    zoom: 1.2;
+
+    button {
+      font-size: 1.5em;
+    }
+  }
+
+  .mat-spinner {
+    top: 200px;
+  }
+
+  a {
+    color: black !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+  }
+}

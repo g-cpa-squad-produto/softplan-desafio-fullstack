@@ -1,0 +1,71 @@
+<section id="processes" class="processes" fxlayout="row">
+  <header class="top-bg mat-accent-bg" fxlayout="column" fxlayout="column">
+    <h2>
+      <mat-icon class="mr-16">
+        all_inbox
+      </mat-icon>
+      <span class="mr-16 text">
+        Processos
+      </span>
+    </h2>
+  </header>
+  <main class="container mat-elevation-z8">
+
+    <div class="loading-shade" *ngIf="isLoadingResults">
+      <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+    </div>
+
+    <div class="table-container">
+
+      <table mat-table [dataSource]="data" class="table" matSort matSortActive="id" matSortDisableClear
+        matSortDirection="asc">
+
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>ID</th>
+          <td mat-cell *matCellDef="let row">
+            <a [routerLink]="['/processes', row.processId]">
+              {{row.processId}}
+            </a>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="number">
+          <th mat-header-cell *matHeaderCellDef>Número</th>
+          <td mat-cell *matCellDef="let row">
+            <a [routerLink]="['/processes', row.processId]">
+              {{row.number}}
+            </a>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="users">
+          <th mat-header-cell *matHeaderCellDef>Usuários Vinculados</th>
+          <td mat-cell *matCellDef="let row">
+            <a [routerLink]="['/processes', row.processId]">
+              {{row.users?.length}}
+            </a>
+          </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="report">
+          <th mat-header-cell *matHeaderCellDef>Possui Parecer</th>
+          <td mat-cell *matCellDef="let row">
+            <a [routerLink]="['/processes', row.processId]">
+              {{!row.report ? "Não" : "Sim"}}
+            </a>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </main>
+  <div class="fab-process" fxLayoutAlign="end" *ngIf="user && user.roles === 'TRIADOR'">
+    <button mat-fab color="primary" id="add-process" aria-label="Adicionar novo processo"
+      [routerLink]="['/processes', 'novo']">
+      <strong>+</strong>
+    </button>
+  </div>
+</section>

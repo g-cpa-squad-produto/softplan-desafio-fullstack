@@ -1,0 +1,54 @@
+  <mat-toolbar id="mainToolbar" color="primary">
+    <mat-icon (click)="onToolbarMenuToggle()" id="toolbarMenu">subject</mat-icon>
+    Gestão de Processos
+    <span class="toolbar-spacer"></span>
+  </mat-toolbar>
+
+  <mat-sidenav-container id="sidenavContainer" fullscreen>
+    <mat-sidenav mode="side" #sidenav id="sidenav" [class.menu-open]="isMenuOpen" [class.menu-close]="!isMenuOpen"
+      opened>
+
+      <mat-list id="menus" *ngIf="user">
+        <mat-card>
+          <mat-card-header>
+            <div mat-card-avatar class="avatar"></div>
+
+            <mat-card-title>{{this.user.name}}</mat-card-title>
+            <mat-card-subtitle>{{this.user.roles}}</mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
+        <mat-list-item>
+          <button [routerLink]="['/dashboard']" class="menu-item" mat-flat-button>
+            <mat-icon>dashboard</mat-icon>
+            Dashboard
+          </button>
+        </mat-list-item>
+
+        <mat-list-item *ngIf="user && user.roles === 'ADMIN'">
+          <button [routerLink]="['/users']" class="menu-item" mat-flat-button>
+            <mat-icon>people</mat-icon>
+            Usuários
+          </button>
+        </mat-list-item>
+
+        <mat-list-item *ngIf="user && (user.roles === 'TRIADOR' || user.roles === 'FINALIZADOR')">
+          <button [routerLink]="['/processes']" class="menu-item" mat-flat-button>
+            <mat-icon>all_inbox</mat-icon>
+            Processos
+          </button>
+        </mat-list-item>
+
+        <mat-list-item *ngIf="user">
+          <button [routerLink]="['/login']" class="menu-item" mat-flat-button (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            Logout
+          </button>
+        </mat-list-item>
+
+      </mat-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>

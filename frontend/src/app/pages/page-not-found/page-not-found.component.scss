@@ -1,0 +1,34 @@
+:host {
+  #page-not-found {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: #ffffff;
+    background-size: cover;
+
+    .page-not-found-wrapper {
+      flex: 1 0 auto;
+
+      .page-not-found-div {
+        padding: 48px;
+        background: #ffffff;
+        text-align: center;
+
+        .page-not-found-wrap {
+          text-align: center !important;
+
+          h2 {
+            font-size: 30px;
+            margin: 10px auto;
+            line-height: 26px;
+          }
+
+          img {
+            width: 40%;
+            margin-top: 20px;
+          }
+        }
+      }
+    }
+  }
+}
