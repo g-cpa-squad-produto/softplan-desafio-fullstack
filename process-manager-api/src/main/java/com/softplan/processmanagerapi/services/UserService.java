@@ -51,7 +51,7 @@ public class UserService {
         return userRepository.findAll().stream().map(userFactory::getUserResponse).collect(Collectors.toList());
     }
 
-    public URI registerUser(SignUpRequest signUpRequest) {
+    public User registerUser(SignUpRequest signUpRequest) {
         User user = new User(signUpRequest.getName(), signUpRequest.getUsername(),
                 signUpRequest.getEmail(), signUpRequest.getPassword());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -62,9 +62,7 @@ public class UserService {
         }
         user.setRoles(roleNames);
         User result = userRepository.save(user);
-        return ServletUriComponentsBuilder
-                .fromCurrentContextPath().path("/api/users/{username}")
-                .buildAndExpand(result.getUsername()).toUri();
+        return result;
     }
 
 }
