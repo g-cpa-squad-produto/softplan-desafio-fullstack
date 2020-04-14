@@ -2,12 +2,16 @@ package com.softplan.processmanagerapi.services;
 
 import com.softplan.processmanagerapi.excpetion.BadRequestException;
 import com.softplan.processmanagerapi.excpetion.ResourceNotFoundException;
+import com.softplan.processmanagerapi.factory.OpinionFactory;
 import com.softplan.processmanagerapi.factory.ProcessFactory;
+import com.softplan.processmanagerapi.factory.UserFactory;
 import com.softplan.processmanagerapi.models.Opinion;
 import com.softplan.processmanagerapi.models.Process;
 import com.softplan.processmanagerapi.models.User;
+import com.softplan.processmanagerapi.payload.UserSummary;
 import com.softplan.processmanagerapi.payload.request.OpinionRequest;
 import com.softplan.processmanagerapi.payload.request.ProcessRequest;
+import com.softplan.processmanagerapi.payload.response.OpinionResponse;
 import com.softplan.processmanagerapi.payload.response.PagedResponse;
 import com.softplan.processmanagerapi.payload.response.ProcessResponse;
 import com.softplan.processmanagerapi.repository.ProcessRepository;
@@ -21,38 +25,40 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 
 @Service
 public class ProcessService {
 
     @Autowired
-    ProcessRepository processRepository;
+    private ProcessRepository processRepository;
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    ProcessFactory processFactory;
+    private ProcessFactory processFactory;
+
+    @Autowired
+    private OpinionFactory opinionFactory;
+
+    @Autowired
+    private UserFactory userFactory;
 
     public PagedResponse<ProcessResponse> getAllProcess(UserPrincipal currentUser, int page, int size) {
         validatePageNumberAndSize(page,size);
-
         Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, "createdAt");
         Page<Process> processes  = processRepository.findAll(pageable);
-
         if(processes.getNumberOfElements() == 0) {
             return new PagedResponse<>(Collections.emptyList(), processes.getNumber(),
                     processes.getSize(), processes.getTotalElements(), processes.getTotalPages(), processes.isLast());
         }
-
-        List<ProcessResponse> processResponseList = processes.map(process -> {
-            User creator = userRepository.findById(process.getCreatedBy())
-                    .orElseThrow(() ->
-                            new ResourceNotFoundException("User", "getCreatedBy",process.getCreatedBy()));
-            return processFactory.getProcessResponse(process, creator);
-        }).getContent();
-
+        List<ProcessResponse> processResponseList = processes.map(this::mapProcessToProcessResponse).getContent();
         return new PagedResponse<>(processResponseList,processes.getNumber(),
                 processes.getSize(), processes.getTotalElements(), processes.getTotalPages(), processes.isLast());
     }
@@ -68,32 +74,50 @@ public class ProcessService {
     }
 
     public Process createProcess(ProcessRequest processRequest) {
-        Process process = new Process();
-        process.setTitle(processRequest.getTitle());
-        process.setSubstantiation(processRequest.getSubstantiation());
-        process.setStatus(processRequest.getStatus());
+        Process process = processFactory.getEntity(processRequest);
+        process.setOpinions(getOpinions(processRequest.getOpinions(), process));
+        process.setAssignedUsers(getAssignedUsers(processRequest.getAssignedUsersIds(), process));
+        return processRepository.save(process);
+    }
+
+    private List<Opinion> getOpinions(List<OpinionRequest> opinionRequests, Process process) {
         List<Opinion> opinions = new ArrayList<>();
-        processRequest.getOpinions().forEach(opinionRequest -> {
-            opinions.add(mapOpinionRequestToOpinion(opinionRequest, process));
+        opinionRequests.forEach(opinionRequest -> {
+            Opinion opinion = opinionFactory.getEntity(opinionRequest);
+            opinion.setUser(userRepository.findById(opinionRequest.getUserId()).orElseThrow(() ->
+                    new ResourceNotFoundException("User", "OpinionRequest.User.id",opinionRequest.getUserId())));
+            opinion.setProcess(process);
+            opinions.add(opinion);
+
         });
-        process.setOpinions(opinions);
+        return opinions;
+    }
+
+    private Set<User> getAssignedUsers(Set<Long> assignedUsersIds, Process process) {
         Set<User> users = new HashSet<>();
-        processRequest.getAssignedUsersIds().forEach(userId -> {
+        assignedUsersIds.forEach(userId -> {
             users.add(userRepository.findById(userId)
                     .orElseThrow(() ->
                             new ResourceNotFoundException("User", "ProcessRequest.AssignedUser.Id",process.getCreatedBy())));
         });
-        process.setAssignedUsers(users);
-        return processRepository.save(process);
+        return users;
     }
 
-    private Opinion mapOpinionRequestToOpinion(OpinionRequest opinionRequest, Process process){
-        Opinion opinion = new Opinion();
-        opinion.setOpinion(opinionRequest.getOpinion());
-        opinion.setUser(userRepository.findById(opinionRequest.getUserId())
+    private ProcessResponse mapProcessToProcessResponse(Process process) {
+        ProcessResponse processResponse = processFactory.getProcessResponse(process);
+        User creator = userRepository.findById(process.getCreatedBy())
                 .orElseThrow(() ->
-                        new ResourceNotFoundException("User", "OpinionRequest.User.id",process.getCreatedBy())));
-        opinion.setProcess(process);
-        return opinion;
+                        new ResourceNotFoundException("User", "getCreatedBy",process.getCreatedBy()));
+        processResponse.setUserSummary(new UserSummary(creator.getId(),creator.getUsername(), creator.getName()));
+        List<OpinionResponse> opinionResponses = new ArrayList<>();
+        process.getOpinions().stream().forEach(opinion -> {
+            OpinionResponse opinionResponse = opinionFactory.getOpinionResponse(opinion);
+            opinionResponse.setUser(userFactory.getUserResponse(opinion.getUser()));
+            opinionResponses.add(opinionResponse);
+        });
+        processResponse.setOpinions(opinionResponses);
+
+        return processResponse;
     }
+
 }

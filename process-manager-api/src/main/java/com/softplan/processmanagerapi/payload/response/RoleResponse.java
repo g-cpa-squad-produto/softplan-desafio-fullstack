@@ -1,10 +1,6 @@
 package com.softplan.processmanagerapi.payload.response;
 
-import com.softplan.processmanagerapi.models.Role;
 import com.softplan.processmanagerapi.models.enums.RoleType;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class RoleResponse {
     private RoleType role;

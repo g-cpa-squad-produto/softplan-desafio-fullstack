@@ -41,7 +41,6 @@ public class UserService {
         if(userRepository.existsByUsername(signUpRequest.getUsername())) {
             throw new BadRequestException("Nome de usuário já existe na aplicação!");
         }
-
         if(userRepository.existsByEmail(signUpRequest.getEmail())) {
             throw new BadRequestException( "Email já existe na aplicação!");
         }
@@ -56,17 +55,13 @@ public class UserService {
         User user = new User(signUpRequest.getName(), signUpRequest.getUsername(),
                 signUpRequest.getEmail(), signUpRequest.getPassword());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-
         Set<Role> roleNames = new HashSet<>();
         for (RoleType roleName: signUpRequest.getRole()) {
             roleNames.add(roleRepository.findByName(roleName)
                     .orElseThrow(() -> new AppException("Papel do usuário não definido.")));
         }
-
         user.setRoles(roleNames);
-
         User result = userRepository.save(user);
-
         return ServletUriComponentsBuilder
                 .fromCurrentContextPath().path("/api/users/{username}")
                 .buildAndExpand(result.getUsername()).toUri();

@@ -1,7 +1,5 @@
 package com.softplan.processmanagerapi.payload.response;
 
-import com.softplan.processmanagerapi.models.Opinion;
-import com.softplan.processmanagerapi.models.User;
 import com.softplan.processmanagerapi.models.enums.StatusType;
 import com.softplan.processmanagerapi.payload.UserSummary;
 
@@ -16,8 +14,8 @@ public class ProcessResponse {
     private StatusType status;
     private UserSummary userSummary;
     private Instant creationDateTime;
-    private Set<User> assignedUsers;
-    private List<Opinion> opinions;
+    private Set<UserResponse> assignedUsers;
+    private List<OpinionResponse> opinions;
     private String substantiation;
 
     public Long getId() {
@@ -52,20 +50,20 @@ public class ProcessResponse {
         this.creationDateTime = creationDateTime;
     }
 
-    public Set<User> getAssignedUsers() {
+    public Set<UserResponse> getAssignedUsers() {
         return assignedUsers;
     }
 
-    public void setAssignedUsers(Set<User> assignedUsers) {
+    public void setAssignedUsers(Set<UserResponse> assignedUsers) {
         this.assignedUsers = assignedUsers;
     }
 
-    public List<Opinion> getOpinions() {
+    public List<OpinionResponse> getOpinions() {
         return opinions;
     }
 
-    public void setOpinions(List<Opinion> opinions) {
-        this.opinions = opinions;
+    public void setOpinions(List<OpinionResponse> OpinionResponse) {
+        this.opinions = OpinionResponse;
     }
 
     public String getSubstantiation() {

@@ -1,7 +1,5 @@
 package com.softplan.processmanagerapi.payload.request;
 
-import com.softplan.processmanagerapi.models.Opinion;
-import com.softplan.processmanagerapi.models.User;
 import com.softplan.processmanagerapi.models.enums.StatusType;
 
 import javax.validation.constraints.NotBlank;

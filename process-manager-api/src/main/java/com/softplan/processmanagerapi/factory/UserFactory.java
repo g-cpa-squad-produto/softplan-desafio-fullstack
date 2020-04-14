@@ -6,7 +6,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UserFactory {
+    public User getEntity(UserResponse userResponse) {
+        return new User();
+    }
+
     public UserResponse getUserResponse(User user) {
         return new UserResponse(user.getId(), user.getName());
     }
+
 }
