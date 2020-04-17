@@ -1,6 +1,7 @@
 package com.softplan.backend.resource;
 
 import com.softplan.backend.entity.Process;
+import com.softplan.backend.enumeration.Status;
 import com.softplan.backend.service.ProcessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,35 +13,58 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping(path = "/api/process")
+@RequestMapping(path = "/api")
 public class ProcessResource {
 
     @Autowired
     private ProcessService processService;
 
-    @GetMapping("/")
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'TRIADOR, FINALIZADOR')")
+    @GetMapping("/process/")
+    @PreAuthorize("hasAnyAuthority('TRIADOR', 'FINALIZADOR')")
     public ResponseEntity<Page<Process>> getAllProcesses(Pageable pageable) {
         return ResponseEntity.ok(processService.findAllProcesses(pageable));
     }
 
-    @PostMapping(value = "/")
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'TRIADOR')")
-    public ResponseEntity<Process> newUser(@Valid @RequestBody Process process) throws Exception {
+    @GetMapping("/process-assign/")
+    @PreAuthorize("hasAnyAuthority('FINALIZADOR')")
+    public ResponseEntity<Page<Process>> getAllProcessByCurrentUser(Pageable pageable) {
+        return ResponseEntity.ok(processService.findAllProcessByCurrentUser(pageable));
+    }
+
+    @GetMapping("/process/{id}")
+    @PreAuthorize("hasAnyAuthority('TRIADOR', 'FINALIZADOR')")
+    public ResponseEntity<Process> getProcessById(@PathVariable Long id) {
+        return ResponseEntity.ok(processService.findProcessById(id));
+    }
+
+    @PostMapping(value = "/process/")
+    @PreAuthorize("hasAnyAuthority('TRIADOR')")
+    public ResponseEntity<Process> newProcess(@Valid @RequestBody Process process) throws Exception {
         return ResponseEntity.ok(this.processService.newProcess(process));
     }
 
-    @PutMapping(value = "/")
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'TRIADOR, FINALIZADOR')")
-    public ResponseEntity<Process> updateUser(@RequestBody Process process) throws Exception {
+    @PutMapping(value = "/process/")
+    @PreAuthorize("hasAnyAuthority('TRIADOR')")
+    public ResponseEntity<Process> updateProcess(@RequestBody Process process) throws Exception {
         return ResponseEntity.ok(this.processService.updateProcess(process));
     }
 
-    @DeleteMapping(value = "/")
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'TRIADOR')")
-    public ResponseEntity<?> deleteUser(@RequestBody Process process) throws Exception {
-        this.processService.deleteProcess(process.getId());
-        return ResponseEntity.noContent().header("id", process.getId().toString()).build();
+    @DeleteMapping(value = "/process/{id}")
+    @PreAuthorize("hasAnyAuthority('TRIADOR')")
+    public void deleteProcess(@PathVariable Long id) throws Exception {
+        this.processService.deleteProcess(id);
+    }
+
+    @PutMapping(value = "/process/{id}/accept")
+    @PreAuthorize("hasAnyAuthority('FINALIZADOR')")
+    public ResponseEntity<Process> acceptProcessById(@PathVariable Long id) throws Exception {
+        return ResponseEntity.ok(processService.changeStatuProcessById(id, Status.APPROVED));
+    }
+
+    @PutMapping(value = "/process/{id}/deny")
+    @PreAuthorize("hasAnyAuthority('FINALIZADOR')")
+    public ResponseEntity<Process> denyProcessById(@PathVariable Long id) throws Exception {
+        return ResponseEntity.ok(processService.changeStatuProcessById(id, Status.DENIED));
     }
 
 }

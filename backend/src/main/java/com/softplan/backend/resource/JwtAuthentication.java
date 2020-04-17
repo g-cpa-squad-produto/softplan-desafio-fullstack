@@ -28,12 +28,12 @@ public class JwtAuthentication {
     private JwtUserDetailsService userDetailsService;
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public ResponseEntity<?> createAuthenticationToken(@RequestParam String username, String password) throws Exception {
+    public ResponseEntity<JwtResponseDTO> createAuthenticationToken(@RequestParam String username, String password) throws Exception {
         JwtRequestDTO request = new JwtRequestDTO(username, password);
         authenticate(request.getUsername(), request.getPassword());
         final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
         final String token = jwtTokenUtil.generateToken(userDetails);
-        return ResponseEntity.ok(new JwtResponseDTO(token));
+        return ResponseEntity.ok(new JwtResponseDTO(token, username, jwtTokenUtil.mapAuthorities(userDetails)));
     }
 
     private void authenticate(String username, String password) throws Exception {
