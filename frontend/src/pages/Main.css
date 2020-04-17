@@ -1,0 +1,17 @@
+.content-container {
+    margin-top: 70px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+    background-color: white;
+}
+
+.main {
+    background-color: white;
+    width: 50%;
+    min-height: 200px;
+    padding: 40px;
+    border-radius: 5px;
+    margin-top: 80px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height: 100vh;
+}
