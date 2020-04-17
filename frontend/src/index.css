@@ -1,10 +1,8 @@
 body {
-  /* display: flex; */
   height: 100vh;
-  /* justify-content: center; */
-  /* align-items: center; */
-  /* text-align: center; */
   color: #fff;
   background: linear-gradient(to right, rgb(255, 255, 255), rgb(200, 200, 200));
 }
+
+.hidden { display:none; }
 

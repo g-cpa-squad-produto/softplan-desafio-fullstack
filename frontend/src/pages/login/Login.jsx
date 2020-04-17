@@ -1,14 +1,18 @@
 import React, { Component } from 'react'
-import './Login.css'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import { login } from '../services/service'
+import { login } from '../../services/service'
+import './Login.css'
 
 export default class Login extends Component {
 
     state = {
-        username: 'admin',
-        password: 'admin'
+        username: '',
+        password: ''
+    }
+
+    componentDidMount() {
+        sessionStorage.clear();
     }
 
     handleSubmit = event => {
@@ -20,9 +24,11 @@ export default class Login extends Component {
             response => {
                 const sessionData = response.data
                 sessionStorage.setItem("session_data", JSON.stringify(sessionData))
-                this.props.history.push('api/user')
-            }, error => {
-                console.log(error.response)
+                if(response.data.role.includes('ADMIN')) {
+                    this.props.history.push('api/user')
+                } else {
+                    this.props.history.push('api/process')
+                }
             })
     }
 
@@ -36,7 +42,6 @@ export default class Login extends Component {
 
     render() {
         return (
-
             <div className="container">
                 <div className="row justify-content-md-center">
                     <div className="col-md-6">

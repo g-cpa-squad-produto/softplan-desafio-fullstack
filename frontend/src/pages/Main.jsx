@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import Header from './Header'
+import Header from './header/Header'
 import User from './user/User'
 import EditUser from './user/EditUser'
+import Process from './process/Process'
+import EditProcess from './process/EditProcess'
 import { Switch, Route } from 'react-router-dom'
 import './Main.css'
 import Container from 'react-bootstrap/Container'
@@ -22,6 +24,8 @@ export default class Main extends Component {
                                 <Switch>
                                     <Route path={`${this.props.match.path}/user`} exact={true} component={User} />
                                     <Route path={`${this.props.match.path}/user/:userId`} exact={true} component={EditUser} />
+                                    <Route path={`${this.props.match.path}/process`} exact={true} component={Process} />
+                                    <Route path={`${this.props.match.path}/process/:processId`} exact={true} component={EditProcess} />
                                     <Redirect from="*" to="login" />
                                 </Switch>
                             </div>

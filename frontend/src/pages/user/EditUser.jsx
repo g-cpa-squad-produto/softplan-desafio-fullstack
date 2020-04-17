@@ -30,12 +30,9 @@ export default class EditUser extends Component {
       }
 
     getUser = (userId) => {
-        getAnUserById(userId).then(
-            response => {
-                this.setState(response.data)
-            }, error => {
-                console.log(error.response)
-            })
+        getAnUserById(userId).then(response => {
+            this.setState(response.data)
+        })
     }
 
     backToUserList = () => {
@@ -47,12 +44,9 @@ export default class EditUser extends Component {
     }
 
     saveUser = () => {
-        saveUser(this.state).then(
-            response => {
-                this.backToUserList()
-            }, error => {
-                console.log(error.response)
-            })
+        saveUser(this.state).then(() => {
+            this.backToUserList()
+        })
     }
 
     render() {
@@ -70,13 +64,13 @@ export default class EditUser extends Component {
                             <Col>
                                 <Form.Group>
                                     <Form.Label>Usuário</Form.Label>
-                                    <Form.Control type="text" id="editUser" name="username" onChange={this.onChange} value={this.state.username}/>
+                                    <Form.Control type="text" name="username" onChange={this.onChange} value={this.state.username}/>
                                 </Form.Group>
                             </Col>
                             <Col>
                                 <Form.Group>
                                     <Form.Label>Senha</Form.Label>
-                                    <Form.Control type="password" name="password" defaultValue=""/>
+                                    <Form.Control type="password" name="password" onChange={this.onChange} value={this.state.password}/>
                                 </Form.Group>
                             </Col>
                         </Row>

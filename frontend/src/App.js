@@ -1,18 +1,34 @@
 import React from 'react';
-import './index.css';
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import Main from './pages/Main'
-import Login from './pages/Login'
+import Login from './pages/login/Login'
+import { Provider }  from 'react-redux'
+import ReduxToastr from 'react-redux-toastr'
+import store from "./store";
+import './index.css';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Switch>
-          <Route path="/" exact={true} component={Main} />
-          <Route path="/api" component={Main} />
-          <Route path="/login" component={Login} />
-      </Switch>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Switch>
+            <Route path="/api" component={Main} />
+            <Route path="/login" component={Login} />
+            <Redirect from="/" exact={true} to="login" />
+        </Switch>
+      </BrowserRouter>
+
+      <ReduxToastr
+        timeOut={4000}
+        newestOnTop={false}
+        preventDuplicates
+        position="top-left"
+        getState={(state) => state.toastr}
+        transitionIn="fadeIn"
+        transitionOut="fadeOut"
+        progressBar
+        closeOnToastrClick/>
+    </Provider>
   );
 }
 
