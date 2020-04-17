@@ -1,13 +1,19 @@
 
-A aplicação foi desenvolvida utilizando os frameworks React e Spring Boot, e pode ser inicialmente acessada com as credenciais abaixo (username, password, role):
-admin : admin (ADMIN)
-triador : 1234 (TRIADOR)
-finalizador1 : 1234 (FINALIZADOR)
-finalizador2 : 123 (FINALIZADOR)
+## Users
 
-O usuário do tipo ADMIN, possui permissões para visualizar, criar, editar e excluir usuários.
-O usuário do tipo TRIADOR, possui permissões para visualizar, criar, editar e excluir processos.
-O usuário do tipo FINALIZADOR, possui permissões para visualizar processos atribuidos a ele e inserir pareceres.
+A aplicação foi desenvolvida utilizando os frameworks React e Spring Boot, e pode ser inicialmente acessada com as credenciais abaixo (username, password, role):
+ - admin : admin (ADMIN)
+ - triador : 1234 (TRIADOR)
+ - finalizador1 : 1234 (FINALIZADOR)
+ - finalizador2 : 123 (FINALIZADOR)
+ 
+ Cada usuário pode:
+
+ - ADMIN, possui permissões para visualizar, criar, editar e excluir usuários.
+ - TRIADOR, possui permissões para visualizar, criar, editar e excluir processos.
+ - FINALIZADOR, possui permissões para visualizar processos atribuidos a ele e inserir pareceres.
+
+## Usage
 
 Para iniciar o frontend, basta rodar "npm install" e "npm start" na origem no projeto frontend.
 Para iniciar o backend, basta rodar "mvn spring-boot:run" na origem no projeto backend.
