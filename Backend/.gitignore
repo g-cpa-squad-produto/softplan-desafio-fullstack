@@ -1,0 +1,29 @@
+### JAVA ###
+
+# Class
+*.class
+
+# Package file
+*.jar
+*.war
+
+### MAVEN ###
+.mvn/
+target/
+target-deploy/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+dependency-reduced-pom.xml
+buildNumber.properties
+release.properties
+
+### Intellij ###
+.idea/
+*.iws
+*.iml
+*.ipr
+modules.xml
+out/
+
