@@ -1,6 +1,7 @@
 package br.com.softplan.backend.administrador.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -45,5 +46,9 @@ public class UsuarioService {
 
 	public List<UsuarioModel> findAll() {
 		return usuarioRepository.findAll();
+	}
+
+	public Optional<UsuarioModel> findById(String usuarioId) {
+		return usuarioRepository.findById(usuarioId);
 	}
 }

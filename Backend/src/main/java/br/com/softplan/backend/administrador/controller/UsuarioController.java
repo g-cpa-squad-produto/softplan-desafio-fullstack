@@ -1,6 +1,7 @@
 package br.com.softplan.backend.administrador.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -50,5 +51,10 @@ public class UsuarioController {
 	@GetMapping("/usuarios")
 	public List<UsuarioModel> getAllUsuario() {
 		return usuarioService.findAll();
+	}
+
+	@GetMapping("/usuario/{usuarioId}")
+	public Optional<UsuarioModel> getUsuarioById(@PathVariable String usuarioId) {
+		return usuarioService.findById(usuarioId);
 	}
 }
