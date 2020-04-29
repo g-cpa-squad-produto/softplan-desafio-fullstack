@@ -1,0 +1,14 @@
+version: "3"
+services:
+  api-database:
+    image: mongo:3.2.4
+    container_name: "api-database"
+    ports:
+      - 27017:27017
+    command: --smallfiles
+  api:
+    image: api-docker-image
+    ports:
+      - 9091:8080
+    links:
+      - api-database
