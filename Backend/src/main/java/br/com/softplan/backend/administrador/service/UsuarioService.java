@@ -37,6 +37,12 @@ public class UsuarioService {
 		return mongoTemplate.findAndModify(query, usuario, UsuarioModel.class);
 	}
 
+	public void deleteUsuario(String usuarioId) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("_id").is(usuarioId));
+		mongoTemplate.remove(query, UsuarioModel.class);
+	}
+
 	public List<UsuarioModel> findAll() {
 		return usuarioRepository.findAll();
 	}
