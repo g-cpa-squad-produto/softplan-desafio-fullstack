@@ -1,4 +1,4 @@
-package br.com.softplan.backend.administrador.controller;
+package br.com.softplan.backend.usuario;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,10 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import br.com.softplan.backend.administrador.model.UsuarioModel;
-import br.com.softplan.backend.administrador.request.UsuarioRequest;
-import br.com.softplan.backend.administrador.service.UsuarioService;
 
 @RestController
 @Slf4j

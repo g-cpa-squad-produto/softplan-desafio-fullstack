@@ -1,4 +1,4 @@
-package br.com.softplan.backend.administrador.model;
+package br.com.softplan.backend.usuario;
 
 import lombok.Builder;
 import lombok.Data;

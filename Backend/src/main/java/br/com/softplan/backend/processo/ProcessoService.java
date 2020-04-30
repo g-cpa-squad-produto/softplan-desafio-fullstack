@@ -1,12 +1,9 @@
-package br.com.softplan.backend.triador.service;
+package br.com.softplan.backend.processo;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
-
-import br.com.softplan.backend.triador.model.ProcessoModel;
-import br.com.softplan.backend.triador.repository.ProcessoRepository;
 
 @Service
 public class ProcessoService {

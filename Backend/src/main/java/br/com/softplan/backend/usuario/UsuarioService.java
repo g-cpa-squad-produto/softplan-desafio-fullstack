@@ -1,4 +1,4 @@
-package br.com.softplan.backend.administrador.service;
+package br.com.softplan.backend.usuario;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,9 +8,6 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
-
-import br.com.softplan.backend.administrador.model.UsuarioModel;
-import br.com.softplan.backend.administrador.repository.UsuarioRepository;
 
 @Service
 public class UsuarioService {

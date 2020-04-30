@@ -1,4 +1,4 @@
-package br.com.softplan.backend.finalizador.controller;
+package br.com.softplan.backend.parecer;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,10 +13,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
-
-import br.com.softplan.backend.finalizador.model.ParecerModel;
-import br.com.softplan.backend.finalizador.request.ParecerRequest;
-import br.com.softplan.backend.finalizador.service.ParecerService;
 
 @RestController
 @Slf4j

@@ -1,8 +1,6 @@
-package br.com.softplan.backend.administrador.request;
+package br.com.softplan.backend.usuario;
 
 import lombok.Data;
-
-import br.com.softplan.backend.administrador.model.UsuarioModel;
 
 @Data
 public class UsuarioRequest {

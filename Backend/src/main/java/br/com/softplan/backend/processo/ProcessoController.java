@@ -1,4 +1,4 @@
-package br.com.softplan.backend.triador.controller;
+package br.com.softplan.backend.processo;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,10 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import br.com.softplan.backend.triador.model.ProcessoModel;
-import br.com.softplan.backend.triador.request.ProcessoRequest;
-import br.com.softplan.backend.triador.service.ProcessoService;
 
 @RestController
 @Slf4j

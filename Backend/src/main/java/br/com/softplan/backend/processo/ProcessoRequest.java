@@ -1,8 +1,6 @@
-package br.com.softplan.backend.triador.request;
+package br.com.softplan.backend.processo;
 
 import lombok.Data;
-
-import br.com.softplan.backend.triador.model.ProcessoModel;
 
 @Data
 public class ProcessoRequest {

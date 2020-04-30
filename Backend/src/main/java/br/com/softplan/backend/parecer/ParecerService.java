@@ -1,4 +1,4 @@
-package br.com.softplan.backend.finalizador.service;
+package br.com.softplan.backend.parecer;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,9 +8,6 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
-
-import br.com.softplan.backend.finalizador.model.ParecerModel;
-import br.com.softplan.backend.finalizador.repository.ParecerRepository;
 
 @Service
 public class ParecerService {

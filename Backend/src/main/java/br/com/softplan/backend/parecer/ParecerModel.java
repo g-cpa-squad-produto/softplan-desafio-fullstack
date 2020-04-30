@@ -1,4 +1,4 @@
-package br.com.softplan.backend.finalizador.model;
+package br.com.softplan.backend.parecer;
 
 import lombok.Builder;
 import lombok.Data;

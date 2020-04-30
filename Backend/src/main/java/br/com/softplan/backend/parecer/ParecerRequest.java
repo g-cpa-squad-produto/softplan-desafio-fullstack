@@ -1,8 +1,6 @@
-package br.com.softplan.backend.finalizador.request;
+package br.com.softplan.backend.parecer;
 
 import lombok.Data;
-
-import br.com.softplan.backend.finalizador.model.ParecerModel;
 
 @Data
 public class ParecerRequest {

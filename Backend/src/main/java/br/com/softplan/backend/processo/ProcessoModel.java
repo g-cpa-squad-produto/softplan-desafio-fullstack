@@ -1,4 +1,4 @@
-package br.com.softplan.backend.triador.model;
+package br.com.softplan.backend.processo;
 
 import lombok.Builder;
 import lombok.Data;
