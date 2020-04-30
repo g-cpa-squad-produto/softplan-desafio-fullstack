@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.softplan.backend.administrador.model.UsuarioModel;
-import br.com.softplan.backend.administrador.request.UsuarioRequest;
 import br.com.softplan.backend.finalizador.model.ParecerModel;
 import br.com.softplan.backend.finalizador.request.ParecerRequest;
 import br.com.softplan.backend.finalizador.service.ParecerService;
