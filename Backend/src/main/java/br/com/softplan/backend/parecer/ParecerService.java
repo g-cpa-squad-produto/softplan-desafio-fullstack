@@ -36,11 +36,18 @@ public class ParecerService {
 	public List<ParecerModel> findAll(String usuarioId) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("usuarioId").is(usuarioId));
-		query.addCriteria(Criteria.where("descricao").exists(false));
 		return mongoTemplate.find(query, ParecerModel.class);
 	}
 
-	public Optional<ParecerModel> findById(String parecerId) {
-		return parecerRepository.findById(parecerId);
+	public ParecerModel findById(String parecerId, String usuarioId) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("usuarioId").is(usuarioId));
+		query.addCriteria(Criteria.where("parecerId").is(parecerId));
+		return mongoTemplate.findOne(query, ParecerModel.class);
+	}
+	public List<ParecerModel> findByProcesso(String processoId) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("processoId").is(processoId));
+		return mongoTemplate.find(query, ParecerModel.class);
 	}
 }

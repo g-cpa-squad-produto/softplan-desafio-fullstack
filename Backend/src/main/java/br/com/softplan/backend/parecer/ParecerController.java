@@ -44,7 +44,12 @@ public class ParecerController {
 	}
 
 	@GetMapping("/parecer/{parecerId}")
-	public Optional<ParecerModel> getParecerById(@PathVariable String parecerId) {
-		return parecerService.findById(parecerId);
+	public ParecerModel getParecerById(@PathVariable String parecerId, @RequestHeader(value="usuarioId") String usuarioId) {
+		return parecerService.findById(parecerId, usuarioId);
+	}
+
+	@GetMapping("/parecer/processo/{processoId}")
+	public List<ParecerModel> getParecerById(@PathVariable String processoId) {
+		return parecerService.findByProcesso(processoId);
 	}
 }
