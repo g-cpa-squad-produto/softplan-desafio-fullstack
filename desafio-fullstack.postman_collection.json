@@ -25,6 +25,8 @@
 			"collectionId": "8935084d-00b4-bf2b-65d3-d2997ef309ce",
 			"order": [
 				"366c4497-21bc-ab9a-9995-bcf3de54de6d",
+				"bac3bcd2-0d57-3fea-396e-068715393de0",
+				"3b9ea149-3f9c-a50f-0e8c-a2759945248f",
 				"e4146708-b998-ae54-fccb-a27426a6be0a"
 			],
 			"owner": "713458",
@@ -110,11 +112,11 @@
 		},
 		{
 			"id": "366c4497-21bc-ab9a-9995-bcf3de54de6d",
-			"headers": "usuarioId: 5eab03b26be2667db10b22a9\n",
+			"headers": "usuarioId: 5eab0b5b32934d28265a85e2\n",
 			"headerData": [
 				{
 					"key": "usuarioId",
-					"value": "5eab03b26be2667db10b22a9",
+					"value": "5eab0b5b32934d28265a85e2",
 					"description": "",
 					"enabled": true
 				}
@@ -132,8 +134,31 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1588266810421,
+			"time": 1588270201475,
 			"name": "buscarPerecerUsuarioId",
+			"description": "",
+			"collectionId": "8935084d-00b4-bf2b-65d3-d2997ef309ce",
+			"responses": []
+		},
+		{
+			"id": "3b9ea149-3f9c-a50f-0e8c-a2759945248f",
+			"headers": "",
+			"headerData": [],
+			"url": "http://localhost:9091/parecer/processo/5eab04176be2667db10b22aa",
+			"folder": "5422f969-5072-453b-f139-bab492abe10e",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1588270196652,
+			"name": "buscarParecerProcessoId",
 			"description": "",
 			"collectionId": "8935084d-00b4-bf2b-65d3-d2997ef309ce",
 			"responses": []
@@ -234,6 +259,36 @@
 			"collectionId": "8935084d-00b4-bf2b-65d3-d2997ef309ce",
 			"responses": [],
 			"rawModeData": "{\n\t\"usuarioId\": \"5eab03b26be2667db10b22a9\",\n\t\"processoId\": \"5eab04176be2667db10b22aa\"\n}"
+		},
+		{
+			"id": "bac3bcd2-0d57-3fea-396e-068715393de0",
+			"headers": "usuarioId: 5eab0b5b32934d28265a85e2\n",
+			"headerData": [
+				{
+					"key": "usuarioId",
+					"value": "5eab0b5b32934d28265a85e2",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:9091/parecer/5eab0c0832934d28265a85e6",
+			"folder": "5422f969-5072-453b-f139-bab492abe10e",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1588270077687,
+			"name": "buscarPerecerId",
+			"description": "",
+			"collectionId": "8935084d-00b4-bf2b-65d3-d2997ef309ce",
+			"responses": []
 		},
 		{
 			"id": "c15cb97d-6e1d-83f4-ec21-5d1b0fabae3b",
