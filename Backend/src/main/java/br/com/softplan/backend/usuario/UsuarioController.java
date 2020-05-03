@@ -33,7 +33,7 @@ public class UsuarioController {
 
 	@PutMapping("/usuario/{usuarioId}")
 	public ResponseEntity editUsuario(@RequestBody UsuarioModel usuarioModel, @PathVariable String usuarioId){
-		usuarioModel.setUsurioId(usuarioId);
+		usuarioModel.setUsuarioId(usuarioId);
 		usuarioService.updateUsuario(usuarioModel);
 		return ResponseEntity.status(HttpStatus.OK).build();
 	}

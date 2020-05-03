@@ -27,7 +27,7 @@ public class UsuarioService {
 
 	public UsuarioModel updateUsuario(UsuarioModel usuarioModel){
 		Query query = new Query();
-		query.addCriteria(Criteria.where("_id").is(usuarioModel.getUsurioId()));
+		query.addCriteria(Criteria.where("_id").is(usuarioModel.getUsuarioId()));
 		Update usuario = new Update();
 		usuario.set("nome", usuarioModel.getNome());
 		usuario.set("email", usuarioModel.getEmail());
