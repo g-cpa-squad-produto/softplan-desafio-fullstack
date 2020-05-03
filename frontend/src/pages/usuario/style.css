@@ -1,0 +1,57 @@
+.usuarios-list {
+    max-width: 700px;
+    margin: 20px auto 0;
+    padding: 0 20px;
+}
+
+.usuarios-list article {
+    background: #FFF;
+    border: 1px solid #DDD;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.usuarios-list article p {
+    font-size: 16px;
+    color: #999;
+    margin-top: 5px;
+    line-height: 2px;
+}
+
+.usuarios-list article a {
+    height: 42px;
+    border-radius: 5px;
+    border: 2px solid blue;
+    background: none;
+    margin-top: 10px;
+    color: blue;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s;
+}
+
+.usuarios-list article a:hover {
+    background: blue;
+    color: white;
+}
+
+.btn-excluir {
+    background: red!important;
+    color: white!important;
+    border: red!important;
+    font-weight: bold!important;
+    height: 20px!important;
+    width: 20px!important;
+    position: absolute;
+
+    float: right!important;
+    width: 100%;
+    display: block;
+    position: relative;
+}

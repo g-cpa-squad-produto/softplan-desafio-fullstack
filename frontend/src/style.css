@@ -1,0 +1,58 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #fafafa;
+    color: #333;
+}
+
+.main a {
+    max-width: 700px;
+    margin: 20px auto 0;
+    padding: 0 20px;
+    height: 42px;
+    border-radius: 5px;
+    border: 2px solid blue;
+    background: none;
+    color: blue;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s;
+}
+
+.main a:hover {
+    background: blue;
+    color: white;
+}
+
+.btn-cadastrar {
+    max-width: 700px;
+    margin: 20px;
+    padding: 0 20px;
+    height: 42px;
+    border-radius: 5px;
+    border: 2px solid green;
+    background: none;
+    color: green;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s;
+}
+
+.btn-cadastrar:hover {
+    background: green;
+    color: white;
+}

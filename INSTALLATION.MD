@@ -1,5 +1,8 @@
 # Instalação para rodar o teste
 
+Caso na execução do frontend, de problema de CORS, instale um COR's disable no navegador.
+Como o frontend não consegui finalizar, ele roda com 'npm start' na pasta frontend, no documento de suposições está detalhado
+
 ## Pré-requisito
 
 - GIT
