@@ -1,0 +1,17 @@
+Crie seu virtualenv python
+
+Instale as dependencias 
+pip install -r requirements.txt 
+
+ # Crie um banco no Postgres e mude as configuracões
+   No settings.py de acordo com o nome e a senha dele
+
+
+ # Fazer as migrações 
+
+ python manage.py makemigrations
+ python manage.py migrate
+
+ # Rodar o server
+ 
+ python manage.py runserver 
