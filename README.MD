@@ -40,21 +40,19 @@
   - rode o comando mvn test
 
 
-Obs: 6 dias é pouco tempo para fazer todo o ambiente, comecei o teste na sexta 03/04/2020 as 18 e terminei Quinta 09/03/2020 as 03:48, faltou adicionar uma configuração mais robusta no docker, onde tivesse os environments para cada caso, "dev", "test", "release" por exemplo, os testes da camada de aplicação acabou ficando de fora para que desse tempo de entregar algo usável. O end-point ```finish``` ficou faltando, precisaria resolver o problema de bidirecionamento com recursividade infinita sem usar a lib json do jackson, faria isso criando as DTO's e fazendo um Map da model para a DTO, quando navegace entre as camadas appliacation e domain do projeto.
+Obs: 6 dias é pouco tempo para fazer todo o ambiente, comecei o teste na sexta 03/04/2020 as 18 e terminei Quinta 09/03/2020 as 03:48, faltou adicionar uma configuração mais robusta no docker, onde tivesse os environments para cada caso, "dev", "test", "release" por exemplo, os testes da camada de aplicação acabou ficando de fora para que desse tempo de entregar algo usável. O end-point ```finish``` ficou faltando, precisaria resolver o problema de bidirecionamento com recursividade infinita sem usar a lib json do jackson, faria isso criando as DTO's e fazendo um Map da model para a DTO, quando navegasse entre as camadas appliacation e domain do projeto.
 Essa foi a primeira vez que utilizei o docker-compose e o react, então algumas coisas não ficaram muito bem estruturadas.
 
 Ao todo trabalhei por volta de 56h nesse teste, portanto algumas coisas realmente ficaram faltando, testes e2e e unit no front-end assim como os testes da camada de aplicação, verificando os throws, chamadas de serviços etc... Não faço isso no dia a dia, porém como se trata de um teste, e eu estou desesperado pra conseguir um emprego, preferi entregar algo usavel demonstrando um pouco de minhas habilidades, porém logo abaixo eu defino como eu construíria esse projeto, e o tempo que eu demoraria para entrega-lo.
 
-Somente lembrando, que sempre trabalhei com metas de test-coverage acima de 90%, tanto no front como no back.
-
 ##### Como eu construiria os projetos
 
-No back-end, na porta 5000, criaria todos os environments, "dev", "test" e "release", Swagger, organizaria a estrutura em DDD, services, MVC usando rest, flyway nos migrations, Basic Auth para authenticar a Api com outros serviços, utilizaria OAuth2 Bearer Token para authenticar o usuário deixando o usuário e o token salvos em uma thread no sistema, permitiria o acesso aos dominios de acordo com o type do usuário que estiver logado, liberar o cors somente para os domínios que são cadastrados, configuração essa que ficaria no arquivo environment e seria usado pelo WebConfig que implementa o WebMvcConfigurer, podendo. Separaria as authenticações em um arquivo para cada, com poucas ou somente uma responsabilidade cada arquivo. Por exemplo:
+No back-end, na porta 5000, criaria todos os environments, dev, test, release e production, organizaria a estrutura em DDD, services, MVC usando rest, flyway nos migrations, Basic Auth para authenticar a Api com outros serviços, utilizaria OAuth2 Bearer Token para authenticar o usuário deixando o usuário e o token salvos em uma thread no sistema, permitiria o acesso aos dominios de acordo com o type do usuário que estiver logado, liberar o cors somente para os domínios que são cadastrados, configuração essa que ficaria no arquivo environment e seria usado pelo WebConfig que implementa o WebMvcConfigurer, podendo. Separaria as authenticações em um arquivo para cada, com poucas ou somente uma responsabilidade cada arquivo. Por exemplo:
 AuthWebService.java e AuthUserToken.java, WebConfig.java, PermissionMiddleware.java e  UserSession.java para os arquivos de configuração.
 
 demoraria 48 horas, para construir todo o projeto, com os migrations rodando com flyway, Swagger para testar os end-points, dockerizar e implementar o circle ci, rodando o build e testes, além do versionamento de imagens no dockerHub, incrementaria mais 16 horas para implementar o deploy automatico para produção, se estiver usando uma VPS linux.
 
-A organização das pastas ficaria assim:
+A organização dos packages ficaria assim:
 ```
 src/
 resources/
@@ -63,42 +61,50 @@ resources/
         test.properties
         release.properties
     main/
-        application/
+        entrypoint/
             controllers/
                 public_controllers/ # A palava public é reservada.
                     AuthController.java
                 private__controllers/
                     UserController.java
                     ProcessesController.java
-            DTOS/
+            dtos/
                 UserDTO.java
                 ProcessDTO.java
                 ...
         domain/
             user/
                 models/
-                    User.java
+                    DomainUser.java
+                    DomainProcess.java
                 admin/
+                    models/
                     services/
                 triator/
+                    models/
                     services/
                 finisher/
+                    models/
                     services/
         repository/
-            UserRepository.java
-            ProcessRepository.java
-        configs/
-            UserSession.java
-            WebConfig.java
-            AuthUserToken.java
-            AuthWebService.java
-            PermissionMiddleware.java
+            entities/
+                User.java
+            repositories/
+                UserRepository.java
+                ProcessRepository.java
+        application/
+            configs/
+                UserSession.java
+                WebConfig.java
+                AuthUserToken.java
+                AuthWebService.java
+                PermissionMiddleware.java
         Application.java
 ```
 
 No banco, postgres na porta 5432 com o padrão
   - nome da tabela em snake_case
-  - nome da coluna em camelCase
+  - nome da coluna em snake_case
 
 No front-end, na porta 80 servindo com o nginx, criaria todos os environments, "dev", "test" e "release", utilizaria o react mesmo, e contruíria num padrão com arquivos de configuração [singleton-pattern](https://nandovieira.com.br/design-patterns-no-javascript-singleton), para o axios, router, redux, etc...
 Impletar o cypress para testes e2e e jest + sinon para testes unitários.
