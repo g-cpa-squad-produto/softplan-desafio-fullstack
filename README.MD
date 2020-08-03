@@ -29,8 +29,9 @@ Procuramos desenvolvedor versátil para resolver os mais diversos problemas, que
 
 ### Instruções para o desafio
 
-- **Fork** esse repositório e faça o desafio numa branch com o seu nome (exemplo: `nome-sobrenome`);
-- Assim que concluir o seu desafio, abra um **pull request** com suas alterações.
+- Faça o **Fork** desse repositório e responda o desafio em um projeto com o seguinte nome: softplan-desafio-fullstack-`nome-sobrenome`;
+- Assim que concluir o seu desafio, **publique o mesmo em seu github próprio** e mande o link do projeto para o recrutador, informando que finalizou.
+- Atenção: Não se esqueça de deixar o projeto como público para que possamos baixar e dar uma olhada, ok? =)
 
 
 ### Desafio
